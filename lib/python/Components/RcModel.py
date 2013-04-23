@@ -8,6 +8,10 @@ class RcModel:
 	RCTYPE_VU = 4
 	RCTYPE_ET4X00 = 5
 	RCTYPE_XP1000 = 6
+	RCTYPE_ODINM7 = 17
+	RCTYPE_ODINM9 = 18
+	RCTYPE_AZHD = 50
+	RCTYPE_AZMe = 51
 
 	def __init__(self):
 		self.currentRcType = self.RCTYPE_DMM
@@ -45,9 +49,21 @@ class RcModel:
 					self.currentRcType = self.RCTYPE_ET4X00
 				elif rc == '14':
 					self.currentRcType = self.RCTYPE_XP1000
+			elif model == 'odinm7':
+				self.currentRcType = self.RCTYPE_ODINM7
+			elif model == 'odinm9':
+				self.currentRcType = self.RCTYPE_ODINM9
 
 		elif os.path.exists('/proc/stb/info/vumodel'):
 			self.currentRcType = self.RCTYPE_VU
+		elif os.path.exists('/proc/stb/info/azmodel'):
+			f = open("/proc/stb/info/model",'r')
+			model = f.readline().strip()
+			f.close()
+			if model == "elite" or model == "premium" or model == "premium+" or model == "ultra":
+				self.currentRcType = self.RCTYPE_AZHD
+			elif model == "me" or model == "minime":
+				self.currentRcType = self.RCTYPE_AZMe
 
 	def getRcLocation(self):
 		if self.currentRcType == self.RCTYPE_ET9X00:
@@ -62,5 +78,13 @@ class RcModel:
 			return '/usr/share/enigma2/rc_models/xp1000/'
 		elif self.currentRcType == self.RCTYPE_VU:
 			return '/usr/share/enigma2/rc_models/vu/'
+		elif self.currentRcType == self.RCTYPE_AZHD:
+			return '/usr/share/enigma2/rc_models/azhd/'
+		elif self.currentRcType == self.RCTYPE_AZMe:
+			return '/usr/share/enigma2/rc_models/azme/'
+		elif self.currentRcType == self.RCTYPE_ODINM7:
+			return '/usr/share/enigma2/rc_models/odinm7/'
+		elif self.currentRcType == self.RCTYPE_ODINM9:
+			return '/usr/share/enigma2/rc_models/odinm9/'
 
 rc_model = RcModel()
