@@ -10,6 +10,7 @@ from os import path
 # available and preferred modes, as well as handling the currently
 # selected mode. No other strict checking is done.
 class VideoHardware:
+	hw_type = HardwareInfo().get_device_name()
 	rates = { } # high-level, use selectable modes.
 
 	modes = { }  # a list of (high-level) modes for a certain port.
@@ -42,6 +43,15 @@ class VideoHardware:
 								"60Hz":		{ 60: "1080p" },
 								"multi":	{ 50: "1080p50", 60: "1080p" } }
 
+	if hw_type == 'elite' or hw_type == 'premium' or hw_type == 'premium+' or hw_type == 'ultra' or hw_type == "me" or hw_type == "minime" :
+		rates["1080p"] =		{ "50Hz":	{ 50: "1080p50" },
+									"60Hz":		{ 60: "1080p" },
+									"23Hz":		{ 23: "1080p" },
+									"24Hz":		{ 24: "1080p" },
+									"25Hz":		{ 25: "1080p" },
+									"30Hz":		{ 30: "1080p" },
+									"multi":	{ 50: "1080p50", 60: "1080p" } }
+
 	rates["PC"] = {
 		"1024x768": { 60: "1024x768" }, # not possible on DM7025
 		"800x600" : { 60: "800x600" },  # also not possible
@@ -62,6 +72,7 @@ class VideoHardware:
 	modes["YPbPr"] = ["720p", "1080i", "576p", "480p", "576i", "480i"]
 	modes["DVI"] = ["720p", "1080p", "1080i", "576p", "480p", "576i", "480i"]
 	modes["DVI-PC"] = ["PC"]
+	if hw_type == 'elite' or hw_type == 'premium' or hw_type == 'premium+' or hw_type == 'ultra' or hw_type == "me" or hw_type == "minime" : config.av.edid_override = True
 
 	def getOutputAspect(self):
 		ret = (16,9)
@@ -99,9 +110,12 @@ class VideoHardware:
 
 		self.readAvailableModes()
 
+		if self.hw_type == 'ultra' or self.hw_type == "me" or self.hw_type == "minime" : del self.modes["Scart"]
+
 		if self.modes.has_key("DVI-PC") and not self.getModeList("DVI-PC"):
 			print "remove DVI-PC because of not existing modes"
 			del self.modes["DVI-PC"]
+		if self.hw_type == 'elite' or self.hw_type == 'premium' or self.hw_type == 'premium+' or self.hw_type == 'ultra' or self.hw_type == "me" or self.hw_type == "minime" : self.readPreferredModes()
 
 		self.createConfig()
 		self.readPreferredModes()
@@ -156,6 +170,13 @@ class VideoHardware:
 	def isModeAvailable(self, port, mode, rate):
 		rate = self.rates[mode][rate]
 		for mode in rate.values():
+			##### Only for test #####
+			if port == "DVI":
+				if self.hw_type == 'elite' or self.hw_type == 'premium' or self.hw_type == 'premium+' or self.hw_type == 'ultra' or self.hw_type == "me" or self.hw_type == "minime" :
+					if mode not in self.modes_preferred and not config.av.edid_override.value:
+						print "no, not preferred"
+						return False
+			##### Only for test #####
 			if mode not in self.modes_available:
 				return False
 		return True
@@ -174,6 +195,14 @@ class VideoHardware:
 		mode_60 = modes.get(60)
 		if mode_50 is None or force == 60:
 			mode_50 = mode_60
+		if mode_50 is None:
+			mode_50 = modes.get(30)
+		if mode_50 is None:
+			mode_50 = modes.get(23)
+		if mode_50 is None:
+			mode_50 = modes.get(24)
+		if mode_50 is None:
+			mode_50 = modes.get(25)
 		if mode_60 is None or force == 50:
 			mode_60 = mode_50
 
