@@ -214,6 +214,9 @@ lib/python/Plugins/Extensions/SocketMMI/src/Makefile
 lib/python/Plugins/Extensions/TuxboxPlugins/Makefile
 lib/python/Plugins/Extensions/TuxboxPlugins/meta/Makefile
 lib/python/Plugins/PLi/Makefile
+lib/python/Plugins/SystemPlugins/3GModemManager/Makefile
+lib/python/Plugins/SystemPlugins/3GModemManager/meta/Makefile
+lib/python/Plugins/SystemPlugins/3GModemManager/script/Makefile
 lib/python/Plugins/SystemPlugins/CommonInterfaceAssignment/Makefile
 lib/python/Plugins/SystemPlugins/CommonInterfaceAssignment/meta/Makefile
 lib/python/Plugins/SystemPlugins/DefaultServicesScanner/Makefile
