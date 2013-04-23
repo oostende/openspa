@@ -18,7 +18,7 @@
 
 /************************************************/
 
-#define CRASH_EMAILADDR "forum at www.openpli.org"
+#define CRASH_EMAILADDR "forum at www.openspa.info"
 #define INFOFILE "/maintainer.info"
 
 #define RINGBUFFER_SIZE 16384
