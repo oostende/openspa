@@ -165,6 +165,7 @@ data/rc_models/et6x00/Makefile
 data/rc_models/et9500/Makefile
 data/rc_models/et9x00/Makefile
 data/rc_models/vu/Makefile
+data/rc_models/vu2/Makefile
 data/rc_models/xp1000/Makefile
 data/rc_models/azhd/Makefile
 data/rc_models/azme/Makefile

@@ -6,6 +6,7 @@ class RcModel:
 	RCTYPE_ET6X00 = 2
 	RCTYPE_ET9500 = 3
 	RCTYPE_VU = 4
+	RCTYPE_VU2 = 20
 	RCTYPE_ET4X00 = 5
 	RCTYPE_XP1000 = 6
 	RCTYPE_ODINM7 = 17
@@ -55,7 +56,11 @@ class RcModel:
 				self.currentRcType = self.RCTYPE_ODINM9
 
 		elif os.path.exists('/proc/stb/info/vumodel'):
-			self.currentRcType = self.RCTYPE_VU
+			model = self.readFile('/proc/stb/info/vumodel')
+			if model == 'ultimo':
+				self.currentRcType = self.RCTYPE_VU
+			else:
+				self.currentRcType = self.RCTYPE_VU
 		elif os.path.exists('/proc/stb/info/azmodel'):
 			f = open("/proc/stb/info/model",'r')
 			model = f.readline().strip()
@@ -78,6 +83,8 @@ class RcModel:
 			return '/usr/share/enigma2/rc_models/xp1000/'
 		elif self.currentRcType == self.RCTYPE_VU:
 			return '/usr/share/enigma2/rc_models/vu/'
+		elif self.currentRcType == self.RCTYPE_VU2:
+			return '/usr/share/enigma2/rc_models/vu2/'
 		elif self.currentRcType == self.RCTYPE_AZHD:
 			return '/usr/share/enigma2/rc_models/azhd/'
 		elif self.currentRcType == self.RCTYPE_AZMe:
