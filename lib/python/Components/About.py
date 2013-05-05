@@ -31,6 +31,15 @@ def getKernelVersionString():
 	except:
 		return _("unknown")
 
+def getChipSetString():
+	try:
+		f = open('/proc/stb/info/chipset', 'r')
+		chipset = f.read()
+		f.close()
+		return chipset
+	except:
+		return "unavailable"
+
 def getHardwareTypeString():
 	try:
 		if os.path.isfile("/proc/stb/info/boxtype"):
