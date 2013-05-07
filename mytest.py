@@ -536,6 +536,10 @@ def runScreenTest():
 	from Tools.StbHardware import setFPWakeuptime, getFPWakeuptime, setRTCtime
 	#get currentTime
 	nowTime = time()
+	if not config.misc.SyncTimeUsing.getValue() == "0":
+		print "dvb time sync disabled... so set RTC now to current linux time!", strftime("%Y/%m/%d %H:%M", localtime(nowTime))
+		setRTCtime(nowTime)
+
 	wakeupList = [
 		x for x in ((session.nav.RecordTimer.getNextRecordingTime(), 0, session.nav.RecordTimer.isNextRecordAfterEventActionAuto()),
 					(session.nav.RecordTimer.getNextZapTime(), 1),
@@ -551,9 +555,9 @@ def runScreenTest():
 			wptime = nowTime + 30  # so switch back on in 30 seconds
 		else:
 			wptime = startTime[0] - 240
-		if not config.misc.useTransponderTime.value:
-			print "dvb time sync disabled... so set RTC now to current linux time!", strftime("%Y/%m/%d %H:%M", localtime(nowTime))
-			setRTCtime(nowTime)
+#		if not config.misc.useTransponderTime.value:
+#			print "dvb time sync disabled... so set RTC now to current linux time!", strftime("%Y/%m/%d %H:%M", localtime(nowTime))
+#			setRTCtime(nowTime)
 		print "set wakeup time to", strftime("%Y/%m/%d %H:%M", localtime(wptime))
 		setFPWakeuptime(wptime)
 		recordTimerWakeupAuto = startTime[1] == 0 and startTime[2]
