@@ -43,9 +43,10 @@ def profile(id):
 			try:
 				if getBoxType() == "odinm7":
 					f = open("/dev/dbox/oled0", "w")
+					f.write("%d" % perc)
 				else:
 					f = open("/proc/progress", "w")
-				f.write("%d \n" % perc)
+					f.write("%d \n" % perc)
 				f.close()
 			except IOError:
 				pass
