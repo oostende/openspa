@@ -3017,6 +3017,9 @@ msgstr "NIM"
 msgid "NOW"
 msgstr "NOW"
 
+msgid "NTP"
+msgstr "NTP"
+
 msgid "NTSC"
 msgstr "NTSC"
 
@@ -5031,6 +5034,15 @@ msgstr "Switchable tuner types:"
 
 msgid "Symbol rate"
 msgstr "Symbol rate"
+
+msgid "Sync NTP every (minutes)"
+msgstr "Sync NTP every (minutes)"
+
+msgid "Sync time using"
+msgstr "Sync time using"
+
+msgid "Synchronize systemtime using transponder or internet."
+msgstr "Synchronize systemtime using transponder or internet."
 
 msgid "Sync failure moving back to origin !"
 msgstr "Sync failure moving back to origin !"

@@ -42,11 +42,13 @@ profile("config.misc")
 config.misc.radiopic = ConfigText(default = resolveFilename(SCOPE_CURRENT_SKIN, "radio.mvi"))
 config.misc.blackradiopic = ConfigText(default = resolveFilename(SCOPE_CURRENT_SKIN, "black.mvi"))
 config.misc.isNextRecordTimerAfterEventActionAuto = ConfigYesNo(default=False)
-config.misc.useTransponderTime = ConfigYesNo(default=True)
+#config.misc.useTransponderTime = ConfigYesNo(default=True)
 config.misc.startCounter = ConfigInteger(default=0) # number of e2 starts...
 config.misc.standbyCounter = NoSave(ConfigInteger(default=0)) # number of standby
 config.misc.DeepStandby = NoSave(ConfigYesNo(default=False)) # detect deepstandby
 config.misc.epgcache_filename = ConfigText(default = "/hdd/epg.dat")
+config.misc.SyncTimeUsing = ConfigSelection(default = "0", choices = [("0", "Transponder Time"), ("1", _("NTP"))])
+config.misc.NTPserver = ConfigText(default = 'pool.ntp.org', fixed_size=False)
 
 def setEPGCachePath(configElement):
 	enigma.eEPGCache.getInstance().setCacheFile(configElement.value)
@@ -63,9 +65,37 @@ def setEPGCachePath(configElement):
 #config.misc.standbyCounter.addNotifier(standbyCountChanged, initial_call = False)
 ####################################################
 
-def useTransponderTimeChanged(configElement):
-	enigma.eDVBLocalTimeHandler.getInstance().setUseDVBTime(configElement.value)
-config.misc.useTransponderTime.addNotifier(useTransponderTimeChanged)
+#def useTransponderTimeChanged(configElement):
+#	enigma.eDVBLocalTimeHandler.getInstance().setUseDVBTime(configElement.value)
+#config.misc.useTransponderTime.addNotifier(useTransponderTimeChanged)
+
+def useSyncUsingChanged(configElement):
+	if config.misc.SyncTimeUsing.getValue() == "0":
+		print "[Time By]: Transponder"
+		value = True
+		enigma.eDVBLocalTimeHandler.getInstance().setUseDVBTime(value)
+	else:
+		print "[Time By]: NTP"
+		value = False
+		enigma.eDVBLocalTimeHandler.getInstance().setUseDVBTime(value)
+		from Components.Console import Console
+		Console = Console()
+		Console.ePopen('/usr/bin/ntpdate ' + config.misc.NTPserver.getValue())
+config.misc.SyncTimeUsing.addNotifier(useSyncUsingChanged)
+
+def NTPserverChanged(configElement):
+	if config.misc.NTPserver.getValue() == "pool.ntp.org":
+		return
+	print "[NTPDATE] save /etc/default/ntpdate"
+	file = "/etc/default/ntpdate"
+	f = open(file, "w")
+	f.write('NTPSERVERS="' + config.misc.NTPserver.getValue() + '"')
+	f.close()
+	os.chmod(file, 0755)
+	from Components.Console import Console
+	Console = Console()
+	Console.ePopen('/usr/bin/ntpdate ' + config.misc.NTPserver.getValue())
+config.misc.NTPserver.addNotifier(NTPserverChanged, immediate_feedback = True)
 
 profile("Twisted")
 try:
@@ -566,6 +596,10 @@ Components.RecordingConfig.InitRecordingConfig()
 profile("UsageConfig")
 import Components.UsageConfig
 Components.UsageConfig.InitUsageConfig()
+
+profile("Init:NTPSync")
+import Components.NetworkTime
+Components.NetworkTime.AutoNTPSync()
 
 profile("keymapparser")
 import keymapparser
