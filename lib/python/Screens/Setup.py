@@ -90,6 +90,8 @@ class Setup(ConfigListScreen, Screen):
 		self.setup = setup
 		list = []
 		self.refill(list)
+		ConfigListScreen.__init__(self, list, session = session, on_change = self.changedEntry)
+		self.createSetup()
 
 		#check for list.entries > 0 else self.close
 		self["key_red"] = StaticText(_("Cancel"))
@@ -103,10 +105,13 @@ class Setup(ConfigListScreen, Screen):
 				"menu": self.closeRecursive,
 			}, -2)
 
-		ConfigListScreen.__init__(self, list, session = session, on_change = self.changedEntry)
-
 		self.changedEntry()
 		self.onLayoutFinish.append(self.layoutFinished)
+
+	def createSetup(self):
+		list = []
+		self.refill(list)
+		self["config"].setList(list)
 
 	def layoutFinished(self):
 		self.setTitle(_(self.setup_title))
@@ -115,6 +120,7 @@ class Setup(ConfigListScreen, Screen):
 	def changedEntry(self):
 		for x in self.onChangedEntry:
 			x()
+		self.createSetup() 
 
 	def getCurrentEntry(self):
 		return self["config"].getCurrent() and self["config"].getCurrent()[0] or ""
@@ -142,10 +148,6 @@ class Setup(ConfigListScreen, Screen):
 				if item_level > config.usage.setup_level.index:
 					continue
 
-				requires = x.get("requires")
-				if requires and not SystemInfo.get(requires, False):
-					continue;
-
 				item_text = _(x.get("text", "??").encode("UTF-8"))
 				item_description = _(x.get("description", " ").encode("UTF-8"))
 				b = eval(x.text or "");
@@ -153,6 +155,15 @@ class Setup(ConfigListScreen, Screen):
 					continue
 				#add to configlist
 				item = b
+
+				requires = x.get("requires") 
+				if item.value and not item.value == "0":
+					SystemInfo[x.text] = True
+				else:
+					SystemInfo[x.text] = False
+
+				if requires and not SystemInfo.get(requires, False):
+					continue;
 				# the first b is the item itself, ignored by the configList.
 				# the second one is converted to string.
 				if not isinstance(item, ConfigNothing):
