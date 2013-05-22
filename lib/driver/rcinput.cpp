@@ -19,6 +19,8 @@ void eRCDeviceInputDev::handleCode(long rccode)
 	if (ev->type!=EV_KEY)
 		return;
 
+	eDebug("%x %x %x", ev->value, ev->code, ev->type);
+
 	if (ev->type!=EV_KEY)
 		return;
 
