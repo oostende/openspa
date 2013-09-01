@@ -1,7 +1,6 @@
 from Tools.HardwareInfo import HardwareInfo
 from Tools.BoundFunction import boundFunction
 
-from Components.About import about
 from config import config, ConfigSubsection, ConfigSelection, ConfigFloat, \
 	ConfigSatlist, ConfigYesNo, ConfigInteger, ConfigSubList, ConfigNothing, \
 	ConfigSubDict, ConfigOnOff, ConfigDateTime
@@ -112,10 +111,7 @@ class SecConfigure:
 
 	def linkNIMs(self, sec, nim1, nim2):
 		print "link tuner", nim1, "to tuner", nim2
-		# for internally connect tuner A to B
-		if about.getChipSetString().find('7356') == -1 and nim2 == (nim1 - 1):
-			self.linkInternally(nim1)
-		elif about.getChipSetString().find('7356') != -1:
+		if nim2 == (nim1 - 1):
 			self.linkInternally(nim1)
 		sec.setTunerLinked(nim1, nim2)
 
@@ -152,7 +148,13 @@ class SecConfigure:
 
 		for slot in nim_slots:
 			if slot.frontend_id is not None:
-				types = [type for type in ["DVB-T", "DVB-C", "DVB-S", "ATSC"] if eDVBResourceManager.getInstance().frontendIsCompatible(slot.frontend_id, type)]
+				types = [type for type in ["DVB-T2", "DVB-T", "DVB-C", "DVB-S2", "DVB-S", "ATSC"] if eDVBResourceManager.getInstance().frontendIsCompatible(slot.frontend_id, type)]
+				if "DVB-T2" in types:
+					# DVB-T2 implies DVB-T support
+					types.remove("DVB-T")
+				if "DVB-S2" in types:
+					# DVB-S2 implies DVB-S support
+					types.remove("DVB-S")
 				if len(types) > 1:
 					slot.multi_type = {}
 					for type in types:
