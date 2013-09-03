@@ -14,7 +14,7 @@
 		"exec"s code
 -->
 		<item level="0" text="Timer" entryID="timer_edit"><screen module="TimerEdit" screen="TimerEditList" /></item>
-		<item level="1" text="VCR scart" entryID="scart_switch" configcondition="config.usage.show_vcr_scart" requires="ScartSwitch"><code>self.session.scart.VCRSbChanged(3)</code></item>
+		<item level="1" text="VCR scart" entryID="scart_switch" configcondition="config.av.show_vcr_scart" requires="ScartSwitch"><code>self.session.scart.VCRSbChanged(3)</code></item>
 
 		<menu level="0" text="Information" entryID="info_screen">
 			<id val="information" />
@@ -54,7 +54,7 @@
 				<item text="Keyboard"><setup id="keyboard" /></item>
 				<item level="2" text="Recording paths" entryID="RecordPaths"><screen module="RecordPaths" screen="RecordPathsSettings" /></item>
 				<item level="0" text="Language" entryID="language_setup"><screen module="LanguageSelection" /></item>
-				<item level="0" entryID="timezone_setup"><setup id="timezone"/></item>
+				<item level="0" entryID="time_setup"><setup id="time"/></item>
 			</menu>
 			<menu weight="10" text="SoftCam / CI" entryID="cam_setup">
 				<id val="cam" />
