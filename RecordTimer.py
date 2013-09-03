@@ -107,7 +107,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 			# other timers start in a few seconds
 			RecordTimerEntry.staticGotRecordEvent(None, iRecordableService.evEnd)
 			# send normal notification for the case the user leave the standby now..
-			Notifications.AddNotification(Screens.Standby.TryQuitMainloop, 1, onSessionOpenCallback=RecordTimerEntry.stopTryQuitMainloop, default_yes = default_yes)
+			Notifications.AddNotificationWithID("RecordTimerQuitMainloop", Screens.Standby.TryQuitMainloop, 1, onSessionOpenCallback=RecordTimerEntry.stopTryQuitMainloop, default_yes = default_yes)
 #################################################################
 
 	def __init__(self, serviceref, begin, end, name, description, eit, disabled = False, justplay = False, afterEvent = AFTEREVENT.AUTO, checkOldTimers = False, dirname = None, tags = None, descramble = True, record_ecm = False, always_zap = False):
@@ -769,8 +769,10 @@ class RecordTimer(timer.Timer):
 							break
 			if check:
 				timer_end = x.end
-				if x.justplay and (timer_end - x.begin) <= 1:
-					timer_end += 60
+				if x.justplay:
+					type = 4
+					if (timer_end - x.begin) <= 1:
+						timer_end += 60
 				if x.repeated != 0:
 					if bt is None:
 						bt = localtime(begin)
@@ -788,33 +790,33 @@ class RecordTimer(timer.Timer):
 						if begin2 < xbegin <= end2:
 							if xend < end2: # recording within event
 								time_match = (xend - xbegin) * 60
-								type = 3
+								type += 3
 							else:           # recording last part of event
 								time_match = (end2 - xbegin) * 60
-								type = 1
+								type += 1
 						elif xbegin <= begin2 <= xend:
 							if xend < end2: # recording first part of event
 								time_match = (xend - begin2) * 60
-								type = 4
+								type += 4
 							else:           # recording whole event
 								time_match = (end2 - begin2) * 60
-								type = 2
+								type += 2
 				else:
 					if begin < x.begin <= end:
 						if timer_end < end: # recording within event
 							time_match = timer_end - x.begin
-							type = 3
+							type += 3
 						else:           # recording last part of event
 							time_match = end - x.begin
-							type = 1
+							type += 1
 					elif x.begin <= begin <= timer_end:
 						if timer_end < end: # recording first part of event
 							time_match = timer_end - begin
-							type = 4
+							type += 4
 						else:           # recording whole event
 							time_match = end - begin
-							type = 2
-				if type == 2: # stop searching if a full recording is found
+							type += 2
+				if type == 2 or type == 6: # stop searching if a full recording is found
 					break
 		if time_match:
 			return (time_match, type)
