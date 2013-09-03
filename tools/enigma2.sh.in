@@ -4,11 +4,6 @@ prefix=@prefix@
 exec_prefix=@exec_prefix@
 datarootdir=@datarootdir@
 
-# update NTP time if NTP Time Enabled
-if [ "$(grep config.misc.SyncTimeUsing /etc/enigma2/settings)" == "config.misc.SyncTimeUsing=1" ]; then
-	/usr/bin/ntpdate -s -u pool.ntp.org &
-fi
-
 if [ -x @bindir@/showiframe ]; then
 	if [ -f @sysconfdir@/enigma2/backdrop.mvi ]; then
 		@bindir@/showiframe @sysconfdir@/enigma2/backdrop.mvi
@@ -29,11 +24,6 @@ if [ -d /home/root ]; then
 fi
 
 LIBS=@libdir@/libopen.so.0.0.0
-
-#check for receiver specific passthrough helper lib
-if [ -e @libdir@/libpassthrough.so ]; then
-	LIBS="$LIBS @libdir@/libpassthrough.so"
-fi
 
 sync
 LD_PRELOAD=$LIBS @bindir@/enigma2
