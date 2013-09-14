@@ -58,7 +58,7 @@ class RcModel:
 		elif os.path.exists('/proc/stb/info/vumodel'):
 			model = self.readFile('/proc/stb/info/vumodel')
 			if model == 'ultimo':
-				self.currentRcType = self.RCTYPE_VU
+				self.currentRcType = self.RCTYPE_VU2
 			else:
 				self.currentRcType = self.RCTYPE_VU
 		elif os.path.exists('/proc/stb/info/azmodel'):
