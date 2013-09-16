@@ -18,7 +18,11 @@ class ConfigList(HTMLComponent, GUIComponent, object):
 
 	def execBegin(self):
 		rcinput = eRCInput.getInstance()
-		rcinput.setKeyboardMode(rcinput.kmAscii)
+		#### Fix number edit in setting menu when firm is in Meoboot
+		from Tools.Directories import fileExists
+		if not fileExists("/.meoinfo"):
+			rcinput.setKeyboardMode(rcinput.kmAll)
+		############################################################
 		self.timer.callback.append(self.timeout)
 
 	def execEnd(self):
