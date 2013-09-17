@@ -72,8 +72,8 @@ if test x"$withnolcd" != xno ; then
 fi
 AM_CONDITIONAL(NO_LCD, test x"$withnolcd" != xno)
 
-if test "$BOXTYPE" == "vusolo2"; then
-	AC_DEFINE(VUPLUS_RC_WORKAROUND, 1, [workaround for problem with vusolo2 event/rc driver])
+if test "$BOXTYPE" == "vusolo2" -o "$BOXTYPE" == "vuduo2"; then
+	AC_DEFINE(VUPLUS_RC_WORKAROUND, 1, [workaround for problem with vusolo2/vuduo2 event/rc driver])
 fi
 
 AC_ARG_WITH(textlcd,
