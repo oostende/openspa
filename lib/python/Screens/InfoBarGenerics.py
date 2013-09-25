@@ -1088,8 +1088,8 @@ class InfoBarSeek:
 				"seekFwdManual": (self.seekFwdManual, _("Seek forward (enter time)")),
 				"seekBack": (self.seekBack, _("Seek backward")),
 				"seekBackManual": (self.seekBackManual, _("Seek backward (enter time)")),
-				"jumpPreviousMark": (self.jumpPreviousMark, _("Jump to previous marked position")),
-				"jumpNextMark": (self.jumpNextMark, _("Jump to next marked position")),
+				"jumpPreviousMark": (self.seekPreviousMark, _("Jump to previous marked position")),
+				"jumpNextMark": (self.seekNextMark, _("Jump to next marked position")),
 			}, prio=-1)
 			# give them a little more priority to win over color buttons
 
@@ -1417,6 +1417,15 @@ class InfoBarSeek:
 	def __evSOF(self):
 		self.setSeekState(self.SEEK_STATE_PLAY)
 		self.doSeek(0)
+
+	# This is needed, because some Mediaplayer use InfoBarSeek but not InfoBarCueSheetSupport
+	def seekPreviousMark(self):
+		if isinstance(self, InfoBarCueSheetSupport):
+			self.jumpPreviousMark()
+
+	def seekNextMark(self):
+		if isinstance(self, InfoBarCueSheetSupport):
+			self.jumpNextMark()
 
 from Screens.PVRState import PVRState, TimeshiftState
 
