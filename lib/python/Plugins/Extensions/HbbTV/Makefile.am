@@ -1,6 +1,6 @@
 installdir = $(libdir)/enigma2/python/Plugins/Extensions/HbbTV
 
-SUBDIRS = meta img locale
+SUBDIRS = meta locale
 
 install_PYTHON = \
 	__init__.py \
@@ -8,4 +8,5 @@ install_PYTHON = \
 	aitreader.py \
 	plugin.py
 
-install_DATA = keymap.xml
+install_DATA = keymap.xml \
+	       opera_wb.png

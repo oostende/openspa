@@ -1770,7 +1770,7 @@ class OperaBrowser(Screen):
 			<widget name="submenulist" position="%d,%d" size="%d,150" backgroundColor="#000000" zPosition="10" scrollbarMode="showOnDemand" />
 			<widget name="bottomArea" position="0,640" size="1280,80" font="Regular;20" valign="center" halign="center" backgroundColor="#000000" />
 			<!-- added by openspa -->
-			<ePixmap name="helppix" position="650,96" size="602,502" alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HbbTV/img/opera_wb.png" />
+			<ePixmap name="helppix" position="650,96" size="602,502" alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HbbTV/opera_wb.png" />
 		</screen>
 		""" % (MENUBAR_ITEM_HEIGHT+30, SUBMENULIST_WIDTH, SUBMENULIST_WIDTH+50+SUBMENULIST_NEXT, MENUBAR_ITEM_HEIGHT+30, SUBMENULIST_WIDTH)# modify menu
 
