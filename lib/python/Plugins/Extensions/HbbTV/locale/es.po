@@ -1,0 +1,303 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 - hbbtv\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-02-21 18:02+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: morser\n"
+"Language-Team: www.azboxhd.es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: /home/mpiero/Plugins/hbbtv\n"
+"X-Poedit-Language: Spanish\n"
+"X-Poedit-Country: Spain\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: /home/mpiero/Plugins/hbbtv\n"
+
+msgid "Please enter URL here"
+msgstr "Por favor, introduzca una URL"
+
+msgid ""
+"HbbTV Browser was not running.\n"
+"Please running browser before start HbbTV Application."
+msgstr ""
+"El servicio HbbTV no está en ejecución.\n"
+"Por favor inicie el sercicio en Extensiones o desde el Navegador Opera antes de iniciar la aplicación HbbTV."
+
+msgid "No detected HbbTV applications."
+msgstr "No se han detectado apliaciones HbbTV."
+
+msgid "Please choose an HbbTV application."
+msgstr "Por favor seleccione una aplicación HbbTV."
+
+msgid "Stop"
+msgstr "Parar"
+
+msgid "Start"
+msgstr "Iniciar"
+
+msgid "Preference"
+msgstr "Preferencias"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Save"
+msgstr "Guardar"
+
+msgid ""
+"Invalid URL!!(Empty)\n"
+"Please, Input to the URL."
+msgstr ""
+"URL inválida!! (Vacía)\n"
+"Por favor, introduzca una URL válida."
+
+msgid "Start Page"
+msgstr "Página de inicio"
+
+msgid "Current Page"
+msgstr "Página actual"
+
+msgid "Direct Input"
+msgstr "Especificar texto"
+
+msgid "Startpage"
+msgstr "PaginaInicio"
+
+msgid "Bookmark Edit"
+msgstr "Editor de Marcadores"
+
+msgid "Bookmark"
+msgstr "Marcadores"
+
+msgid "Name"
+msgstr "Nombre"
+
+msgid "Title"
+msgstr "Título"
+
+msgid "Url"
+msgstr "Url"
+
+msgid "Invalid "
+msgstr "Inválido "
+
+msgid ""
+"!!(Empty)\n"
+"Please, Input to the "
+msgstr ""
+"!!(Vacío)\n"
+"Por favor, introduce "
+
+msgid "Category Name"
+msgstr "Nombre Categoría"
+
+msgid "Bookmark Title"
+msgstr "Título Marcador"
+
+msgid "Bookmark URL"
+msgstr "URL Marcardor"
+
+msgid "Exit"
+msgstr "Salir"
+
+msgid "Add"
+msgstr "Añadir"
+
+msgid "Edit"
+msgstr "Editar"
+
+msgid "Delete"
+msgstr "Borrar"
+
+msgid "Set as Startpage"
+msgstr "Establecer como Página de Inicio"
+
+msgid "Invalid URL. Please check again!!"
+msgstr "URL inválida. Por favor, introduzca de nuevo!!"
+
+msgid "Do you want to set selected url to the Startpage?"
+msgstr "Quieres establecer la URL seleccionada como Página de Inicio"
+
+msgid "Current page is already exist."
+msgstr "La página ya existe."
+
+msgid "Direct Input(Bookmark)"
+msgstr "Introducir texto (Marcador)"
+
+msgid "Direct Input(Category)"
+msgstr "Introducir texto (Categoría)"
+
+msgid "Currentpage(Bookmark)"
+msgstr "Página Actual (Marcador)"
+
+msgid "Please choose one."
+msgstr "Por favor, seleccione una opción:"
+
+msgid "Please choose."
+msgstr "Por favor, seleccione."
+
+msgid "Do you want to delete the category and the bookmarks?"
+msgstr "Quieres borrar la categoría y los marcadores?"
+
+msgid "Do you want to delete the bookmark?"
+msgstr "Quieres borrar el Marcador?"
+
+msgid ""
+"Can't open selected bookmark.\n"
+"   - URL data is empty!!"
+msgstr ""
+"No se puede abrir el Marcador.\n"
+"   - La URL está vacía!!"
+
+msgid "Browser Help"
+msgstr "Ayuda Navegador WEB"
+
+msgid "Global"
+msgstr "Globales"
+
+msgid "Mouse"
+msgstr "Ratón"
+
+msgid "Keyboard"
+msgstr "Teclado"
+
+msgid "Exit the Opera browser."
+msgstr "Salir del Navegador WEB Opera"
+
+msgid "Show the Menu window."
+msgstr "Mostrar el Menú."
+
+msgid "Enter Key"
+msgstr "Introducir tecla"
+
+msgid "Show the Virtual keyboard window."
+msgstr "Mostrar el teclado virtual"
+
+msgid "Backspace Key"
+msgstr "Tecla Backspace"
+
+msgid "Switch to keyboard/mouse mode."
+msgstr "Alternar modo Teclado/Ratón."
+
+msgid "It will move the mouse pointer up."
+msgstr "Mover el puntero del ratón Arriba."
+
+msgid "It will move the mouse pointer down."
+msgstr "Mover el puntero del ratón Abajo."
+
+msgid "It will move the mouse pointer left."
+msgstr "Mover el puntero del ratón a la Izquierda."
+
+msgid "It will move the mouse pointer right."
+msgstr "Mover el puntero del ratón a la Derecha."
+
+msgid "Left Mouse Button"
+msgstr "Botón izquierdo del ratón."
+
+msgid "Right Mouse Button"
+msgstr "Botón derecho del ratón."
+
+msgid "Left Key"
+msgstr "Tecla izquierda"
+
+msgid "Up Key"
+msgstr "Tecla arriba"
+
+msgid "Down Key"
+msgstr "Tecla abajo"
+
+msgid "Right Key"
+msgstr "Tecla derecha"
+
+msgid "PageUp Key"
+msgstr "Tecla Página Arriba"
+
+msgid "PageDown Key"
+msgstr "Tecla Página Abajo"
+
+msgid "Go to previous page."
+msgstr "Ir a la página anterior."
+
+msgid "Go to next page."
+msgstr "Ir a la siguiente página."
+
+msgid "Opera Browser"
+msgstr "Navegador Opera"
+
+msgid "Open Startpage"
+msgstr "Página de Inicio"
+
+msgid "Open URL"
+msgstr "Abrir URL"
+
+msgid "Start/Stop"
+msgstr "Iniciar/Detener"
+
+msgid "About"
+msgstr "Acerca de"
+
+msgid "Help"
+msgstr "Ayuda"
+
+msgid "File"
+msgstr "Archivo"
+
+msgid "Tools"
+msgstr "Utilidades"
+
+msgid "Opera Web Browser Plugin v1.0"
+msgstr "Navegador Web Opera v1.0"
+
+msgid "BrowserMain"
+msgstr "Navegador - Menú Principal"
+
+msgid ""
+"Opera Browser was not running.\n"
+"Please running browser using [File]>[Start/Stop] menu."
+msgstr ""
+"El servicio del Navegador Opera no está en ejecución.\n"
+"Por favor inicie el navegador desde Extensiones o desde el programa en el menú [Archivo]>[Iniciar/Detener]."
+
+msgid "Return"
+msgstr "Volver"
+
+msgid "HbbTV Applications"
+msgstr "Aplicaciones HbbTV"
+
+msgid "Browser Start/Stop"
+msgstr "·Iniciar/Detener servicio Navegador-HbbTV"
+
+msgid "Opera Web Browser"
+msgstr "Navegador WEB Opera"
+
+msgid "start opera web browser"
+msgstr "iniciar navegador web opera"
+
+msgid "and AutoRestart service when restart GUI"
+msgstr "y activar inicio automático al reiniciar GUI"
+
+msgid "and not AutoRestart service"
+msgstr "y no iniciar automáticamente el servicio"
+
+msgid "Service stopped"
+msgstr "Servicio Detenido"
+
+msgid "Service Running"
+msgstr "Servicio en ejecución"
+
+msgid "Autostart Enabled"
+msgstr "AutoInicio Activado"
+
+msgid "Autostart Disabled"
+msgstr "AutoInicio Desactivado"
+
+msgid ""
+"Starting web browser Service.\n"
+"Please Wait..."
+msgstr ""
+"Iniciando el servicio de Navegador Web.\n"
+"Por favor espere..."
+
