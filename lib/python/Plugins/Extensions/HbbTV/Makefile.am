@@ -1,6 +1,6 @@
 installdir = $(libdir)/enigma2/python/Plugins/Extensions/HbbTV
 
-SUBDIRS = meta locale
+SUBDIRS = meta
 
 install_PYTHON = \
 	__init__.py \
