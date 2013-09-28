@@ -44,6 +44,8 @@ def getHardwareTypeString():
 	try:
 		if os.path.isfile("/proc/stb/info/boxtype"):
 			return open("/proc/stb/info/boxtype").read().strip().upper() + " (" + open("/proc/stb/info/board_revision").read().strip() + "-" + open("/proc/stb/info/version").read().strip() + ")"
+		if os.path.isfile("/proc/stb/info/azmodel"):
+			return "AZBOX " + open("/proc/stb/info/azmodel").read().strip().upper() + "(" + open("/proc/stb/info/version").read().strip().upper() + ")" 
 		if os.path.isfile("/proc/stb/info/vumodel"):
 			return "VU+" + open("/proc/stb/info/vumodel").read().strip().upper() + "(" + open("/proc/stb/info/version").read().strip().upper() + ")" 
 		if os.path.isfile("/proc/stb/info/model"):
