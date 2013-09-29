@@ -55,12 +55,6 @@ class RcModel:
 			elif model == 'odinm9':
 				self.currentRcType = self.RCTYPE_ODINM9
 
-		elif os.path.exists('/proc/stb/info/vumodel'):
-			model = self.readFile('/proc/stb/info/vumodel')
-			if model == 'ultimo':
-				self.currentRcType = self.RCTYPE_VU2
-			else:
-				self.currentRcType = self.RCTYPE_VU
 		elif os.path.exists('/proc/stb/info/azmodel'):
 			f = open("/proc/stb/info/model",'r')
 			model = f.readline().strip()
@@ -69,6 +63,12 @@ class RcModel:
 				self.currentRcType = self.RCTYPE_AZHD
 			elif model == "me" or model == "minime":
 				self.currentRcType = self.RCTYPE_AZMe
+		elif os.path.exists('/proc/stb/info/vumodel'):
+			model = self.readFile('/proc/stb/info/vumodel')
+			if model == 'ultimo':
+				self.currentRcType = self.RCTYPE_VU2
+			else:
+				self.currentRcType = self.RCTYPE_VU
 
 	def getRcLocation(self):
 		if self.currentRcType == self.RCTYPE_ET9X00:
