@@ -21,7 +21,7 @@ class ConfigList(HTMLComponent, GUIComponent, object):
 		#### Fix number edit in setting menu when firm is in Meoboot
 		from Tools.Directories import fileExists
 		if not fileExists("/.meoinfo"):
-			rcinput.setKeyboardMode(rcinput.kmAll)
+			rcinput.setKeyboardMode(rcinput.kmAscii)
 		############################################################
 		self.timer.callback.append(self.timeout)
 
