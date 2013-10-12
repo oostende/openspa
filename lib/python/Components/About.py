@@ -40,10 +40,43 @@ def getChipSetString():
 	except:
 		return "unavailable"
 
+def getCPUString():
+	try:
+		file = open('/proc/cpuinfo', 'r')
+		lines = file.readlines()
+		for x in lines:
+			splitted = x.split(': ')
+			if len(splitted) > 1:
+				splitted[1] = splitted[1].replace('\n','')
+				if splitted[0].startswith("system type"):
+					system = splitted[1].split(' ')[0]
+		file.close()
+		return system 
+	except IOError:
+		return "unavailable"
+
+def getCpuCoresString():
+	try:
+		file = open('/proc/cpuinfo', 'r')
+		lines = file.readlines()
+		for x in lines:
+			splitted = x.split(': ')
+			if len(splitted) > 1:
+				splitted[1] = splitted[1].replace('\n','')
+				if splitted[0].startswith("processor"):
+					if int(splitted[1]) > 0:
+						cores = 2
+					else:
+						cores = 1
+		file.close()
+		return cores
+	except IOError:
+		return "unavailable"
+
 def getHardwareTypeString():
 	try:
 		if os.path.isfile("/proc/stb/info/boxtype"):
-			return open("/proc/stb/info/boxtype").read().strip().upper() + " (" + open("/proc/stb/info/board_revision").read().strip() + "-" + open("/proc/stb/info/version").read().strip() + ")"
+			return open("/proc/stb/info/boxtype").read().strip().upper()
 		if os.path.isfile("/proc/stb/info/azmodel"):
 			return "AZBOX " + open("/proc/stb/info/azmodel").read().strip().upper() + "(" + open("/proc/stb/info/version").read().strip().upper() + ")" 
 		if os.path.isfile("/proc/stb/info/vumodel"):
