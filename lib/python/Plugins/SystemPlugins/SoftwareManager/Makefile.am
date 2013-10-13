@@ -6,6 +6,7 @@ install_PYTHON =	\
 	__init__.py \
 	plugin.py \
 	BackupRestore.py \
+	Flash_online.py \
 	ImageBackup.py \
 	ImageWizard.py \
 	SoftwareTools.py
