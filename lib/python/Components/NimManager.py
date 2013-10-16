@@ -1,6 +1,7 @@
 from Tools.HardwareInfo import HardwareInfo
 from Tools.BoundFunction import boundFunction
 
+from Components.About import about
 from config import config, ConfigSubsection, ConfigSelection, ConfigFloat, \
 	ConfigSatlist, ConfigYesNo, ConfigInteger, ConfigSubList, ConfigNothing, \
 	ConfigSubDict, ConfigOnOff, ConfigDateTime
@@ -111,7 +112,10 @@ class SecConfigure:
 
 	def linkNIMs(self, sec, nim1, nim2):
 		print "link tuner", nim1, "to tuner", nim2
-		if nim2 == (nim1 - 1):
+		# for internally connect tuner A to B
+		if about.getChipSetString().find('7356') == -1 and nim2 == (nim1 - 1):
+			self.linkInternally(nim1)
+		elif about.getChipSetString().find('7356') != -1:
 			self.linkInternally(nim1)
 		sec.setTunerLinked(nim1, nim2)
 
