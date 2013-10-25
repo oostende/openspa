@@ -65,6 +65,15 @@ class picshow(Screen):
 		if not pathExists(currDir):
 			currDir = "/"
 
+		self.oldService = self.session.nav.getCurrentlyPlayingServiceReference()
+		self.session.nav.stopService()
+		# Show Background MVI
+		import os
+		try:
+			os.system("/usr/bin/showiframe /usr/share/enigma2/black.mvi &")
+		except:
+			pass
+
 		self.filelist = FileList(currDir, matchingPattern = "(?i)^.*\.(jpeg|jpg|jpe|png|bmp|gif)")
 		self["filelist"] = self.filelist
 		self["filelist"].onSelectionChanged.append(self.selectionChanged)
@@ -137,6 +146,7 @@ class picshow(Screen):
 			config.pic.lastDir.value = self.filelist.getCurrentDirectory()
 
 		config.pic.save()
+		self.session.nav.playService(self.oldService)
 		self.close()
 
 #------------------------------------------------------------------------------------------
