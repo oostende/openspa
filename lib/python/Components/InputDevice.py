@@ -2,6 +2,7 @@ from config import config, ConfigSlider, ConfigSubsection, ConfigYesNo, ConfigTe
 from os import listdir, open as os_open, close as os_close, write as os_write, O_RDWR, O_NONBLOCK
 from Tools.Directories import pathExists
 from fcntl import ioctl
+from enigma import getBoxType
 import struct
 
 # asm-generic/ioctl.h
@@ -170,7 +171,10 @@ class InitInputDevices:
 	def setupConfigEntries(self,device):
 		cmd = "config.inputDevices." + device + " = ConfigSubsection()"
 		exec (cmd)
-		cmd = "config.inputDevices." + device + ".enabled = ConfigYesNo(default = False)"
+		if getBoxType() == 'odinm7' or getBoxType() == 'odinm9' or getBoxType() == 'azboxhd':
+			cmd = "config.inputDevices." + device + ".enabled = ConfigYesNo(default = False)"
+		else:
+			cmd = "config.inputDevices." + device + ".enabled = ConfigYesNo(default = False)"
 		exec (cmd)
 		cmd = "config.inputDevices." + device + ".enabled.addNotifier(self.inputDevicesEnabledChanged,config.inputDevices." + device + ".enabled)"
 		exec (cmd)
@@ -178,11 +182,19 @@ class InitInputDevices:
 		exec (cmd)
 		cmd = "config.inputDevices." + device + ".name.addNotifier(self.inputDevicesNameChanged,config.inputDevices." + device + ".name)"
 		exec (cmd)
-		cmd = "config.inputDevices." + device + ".repeat = ConfigSlider(default=100, increment = 10, limits=(0, 500))"
+		if getBoxType() == 'odinm7' or getBoxType() == 'odinm9':
+			cmd = "config.inputDevices." + device + ".repeat = ConfigSlider(default=400, increment = 10, limits=(0, 500))"
+		elif getBoxType() == 'azboxhd':
+			cmd = "config.inputDevices." + device + ".repeat = ConfigSlider(default=150, increment = 10, limits=(0, 500))"
+		else:
+			cmd = "config.inputDevices." + device + ".repeat = ConfigSlider(default=100, increment = 10, limits=(0, 500))"
 		exec (cmd)
 		cmd = "config.inputDevices." + device + ".repeat.addNotifier(self.inputDevicesRepeatChanged,config.inputDevices." + device + ".repeat)"
 		exec (cmd)
-		cmd = "config.inputDevices." + device + ".delay = ConfigSlider(default=700, increment = 100, limits=(0, 5000))"
+		if getBoxType() == 'odinm7' or getBoxType() == 'odinm9':
+			cmd = "config.inputDevices." + device + ".delay = ConfigSlider(default=200, increment = 100, limits=(0, 5000))"
+		else:
+			cmd = "config.inputDevices." + device + ".delay = ConfigSlider(default=700, increment = 100, limits=(0, 5000))"
 		exec (cmd)
 		cmd = "config.inputDevices." + device + ".delay.addNotifier(self.inputDevicesDelayChanged,config.inputDevices." + device + ".delay)"
 		exec (cmd)
