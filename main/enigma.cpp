@@ -127,6 +127,10 @@ int exit_code;
 
 int main(int argc, char **argv)
 {
+	printf("Distro:  %s\n", DISTRO);
+	printf("Brand:   %s\n", MACHINE_BRAND);
+	printf("Machine: %s\n", MACHINE_NAME);
+
 #ifdef MEMLEAK_CHECK
 	atexit(DumpUnfreed);
 #endif
@@ -323,7 +327,17 @@ const char *getBoxType()
 
 const char *getDistro()
 {
-        return DISTRO;
+	return DISTRO;
+}
+
+const char *getMachineBrand()
+{
+	return MACHINE_BRAND;
+}
+
+const char *getMachineName()
+{
+	return MACHINE_NAME;
 }
 
 #include <malloc.h>
