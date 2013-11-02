@@ -321,6 +321,11 @@ const char *getBoxType()
 	return BOXTYPE;
 }
 
+const char *getDistro()
+{
+        return DISTRO;
+}
+
 #include <malloc.h>
 
 void dump_malloc_stats(void)

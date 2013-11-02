@@ -76,6 +76,12 @@ if test "$BOXTYPE" == "vusolo2" -o "$BOXTYPE" == "vuduo2"; then
 	AC_DEFINE(VUPLUS_RC_WORKAROUND, 1, [workaround for problem with vusolo2/vuduo2 event/rc driver])
 fi
 
+AC_ARG_WITH(distro,
+        [--with-distro=NAME distro name [[openvix,openatv,...]]],
+        [DISTRO="$withval"],[DISTRO="openspa"])
+AC_SUBST(DISTRO)
+AC_DEFINE_UNQUOTED(DISTRO,"$DISTRO",[distro name])
+
 AC_ARG_WITH(textlcd,
 	AC_HELP_STRING([--with-textlcd], [use ascii based lcd, yes or no]),
 	[[withtextlcd=$withval]],
