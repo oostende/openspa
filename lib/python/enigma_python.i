@@ -407,6 +407,8 @@ extern void addFont(const char *filename, const char *alias, int scale_factor, i
 extern const char *getEnigmaVersionString();
 extern const char *getBoxType();
 extern const char *getDistro();
+extern const char *getImageVersionString();
+extern const char *getBuildVersionString();
 extern void dump_malloc_stats(void);
 %}
 
@@ -418,6 +420,8 @@ extern eApplication *getApplication();
 extern const char *getEnigmaVersionString();
 extern const char *getBoxType();
 extern const char *getDistro();
+extern const char *getImageVersionString();
+extern const char *getBuildVersionString();
 extern void dump_malloc_stats(void);
 
 %include <lib/python/python_console.i>

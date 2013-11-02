@@ -128,6 +128,8 @@ int exit_code;
 int main(int argc, char **argv)
 {
 	printf("Distro:  %s\n", DISTRO);
+	printf("Version: %s\n", IMAGEVERSION);
+	printf("Build:   %s\n", IMAGEBUILD);
 	printf("Brand:   %s\n", MACHINE_BRAND);
 	printf("Machine: %s\n", MACHINE_NAME);
 
@@ -338,6 +340,16 @@ const char *getMachineBrand()
 const char *getMachineName()
 {
 	return MACHINE_NAME;
+}
+
+const char *getImageVersionString()
+{
+	return IMAGEVERSION;
+}
+
+const char *getBuildVersionString()
+{
+	return IMAGEBUILD;
 }
 
 #include <malloc.h>
