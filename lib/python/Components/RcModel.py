@@ -10,6 +10,7 @@ class RcModel:
 	RCTYPE_VU3 = 21
 	RCTYPE_ET4X00 = 5
 	RCTYPE_XP1000 = 6
+	RCTYPE_E3HD = 7
 	RCTYPE_ODINM7 = 17
 	RCTYPE_ODINM9 = 18
 	RCTYPE_AZHD = 50
@@ -55,6 +56,8 @@ class RcModel:
 				self.currentRcType = self.RCTYPE_ODINM7
 			elif model == 'odinm9':
 				self.currentRcType = self.RCTYPE_ODINM9
+			elif model == 'e3hd':
+                                self.currentRcType = self.RCTYPE_E3HD
 
 		elif os.path.exists('/proc/stb/info/azmodel'):
 			f = open("/proc/stb/info/model",'r')
@@ -98,5 +101,7 @@ class RcModel:
 			return '/usr/share/enigma2/rc_models/odinm7/'
 		elif self.currentRcType == self.RCTYPE_ODINM9:
 			return '/usr/share/enigma2/rc_models/odinm9/'
+		elif self.currentRcType == self.RCTYPE_E3HD:
+			return '/usr/share/enigma2/rc_models/e3hd/'
 
 rc_model = RcModel()
