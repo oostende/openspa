@@ -57,7 +57,7 @@ class RcModel:
 			elif model == 'odinm9':
 				self.currentRcType = self.RCTYPE_ODINM9
 			elif model == 'e3hd':
-                                self.currentRcType = self.RCTYPE_E3HD
+				self.currentRcType = self.RCTYPE_E3HD
 
 		elif os.path.exists('/proc/stb/info/azmodel'):
 			f = open("/proc/stb/info/model",'r')
