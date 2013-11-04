@@ -132,6 +132,7 @@ int main(int argc, char **argv)
 	printf("Build:   %s\n", IMAGEBUILD);
 	printf("Brand:   %s\n", MACHINE_BRAND);
 	printf("Machine: %s\n", MACHINE_NAME);
+	printf("Drivers: %s\n", DRIVERDATE);
 
 #ifdef MEMLEAK_CHECK
 	atexit(DumpUnfreed);
@@ -350,6 +351,11 @@ const char *getImageVersionString()
 const char *getBuildVersionString()
 {
 	return IMAGEBUILD;
+}
+
+const char *getDriverDateString()
+{
+	return DRIVERDATE;
 }
 
 #include <malloc.h>

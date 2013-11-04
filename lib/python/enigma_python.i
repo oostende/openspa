@@ -409,6 +409,7 @@ extern const char *getBoxType();
 extern const char *getDistro();
 extern const char *getImageVersionString();
 extern const char *getBuildVersionString();
+extern const char *getDriverDateString();
 extern void dump_malloc_stats(void);
 %}
 
@@ -422,6 +423,7 @@ extern const char *getBoxType();
 extern const char *getDistro();
 extern const char *getImageVersionString();
 extern const char *getBuildVersionString();
+extern const char *getDriverDateString();
 extern void dump_malloc_stats(void);
 
 %include <lib/python/python_console.i>

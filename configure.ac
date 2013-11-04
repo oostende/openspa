@@ -77,7 +77,7 @@ if test "$BOXTYPE" == "vusolo2" -o "$BOXTYPE" == "vuduo2"; then
 fi
 
 AC_ARG_WITH(distro,
-        [--with-distro=NAME distro name [[openvix,openatv,...]]],
+        [  --with-distro=NAME distro name [[openvix,openatv,...]]],
         [DISTRO="$withval"],[DISTRO="openspa"])
 AC_SUBST(DISTRO)
 AC_DEFINE_UNQUOTED(DISTRO,"$DISTRO",[distro name])
@@ -105,6 +105,12 @@ AC_ARG_WITH(imagebuild,
 	[IMAGEBUILD="$withval"],[IMAGEBUILD=""])
 AC_SUBST(IMAGEBUILD)
 AC_DEFINE_UNQUOTED(IMAGEBUILD,"$IMAGEBUILD",[build number])
+
+AC_ARG_WITH(driverdate,
+	[  --with-driverdate=NAME driver date [[5]]],
+	[DRIVERDATE="$withval"],[DRIVERDATE=""])
+AC_SUBST(DRIVERDATE)
+AC_DEFINE_UNQUOTED(DRIVERDATE,"$DRIVERDATE",[driver date])
 
 AC_ARG_WITH(textlcd,
 	AC_HELP_STRING([--with-textlcd], [use ascii based lcd, yes or no]),
