@@ -34,7 +34,7 @@ from Screens.UnhandledKey import UnhandledKey
 from ServiceReference import ServiceReference, isPlayableForCur
 
 from Tools import Notifications, ASCIItranslit
-from Tools.Directories import fileExists, getRecordingFilename, moveFiles
+from Tools.Directories import pathExists, fileExists, getRecordingFilename, moveFiles
 
 from enigma import eTimer, eServiceCenter, eDVBServicePMTHandler, iServiceInformation, \
 	iPlayableService, eServiceReference, eEPGCache, eActionMap
@@ -1744,6 +1744,33 @@ class InfoBarExtensions:
 				"extensions": (self.showExtensionSelection, _("Show extensions...")),
 			}, 1) # lower priority
 
+		self.addExtension(extension = self.getCCcamInfo, type = InfoBarExtensions.EXTENSION_LIST)
+		self.addExtension(extension = self.getOScamInfo, type = InfoBarExtensions.EXTENSION_LIST)
+
+	def getCCname(self):
+		return _("CCcam Info")
+
+	def getCCcamInfo(self):
+		if pathExists('/usr/bin/'):
+			softcams = os.listdir('/usr/bin/')
+		for softcam in softcams:
+			if softcam.startswith('CCcam') or softcam.startswith('cccam') and config.cccaminfo.showInExtensions.getValue():
+				return [((boundFunction(self.getCCname), boundFunction(self.openCCcamInfo), lambda: True), None)] or []
+		else:
+			return []
+
+	def getOSname(self):
+		return _("OScam Info")
+
+	def getOScamInfo(self):
+		if pathExists('/usr/bin/'):
+			softcams = os.listdir('/usr/bin/')
+		for softcam in softcams:
+			if softcam.startswith('OScam') or softcam.startswith('oscam') and config.oscaminfo.showInExtensions.getValue():
+				return [((boundFunction(self.getOSname), boundFunction(self.openOScamInfo), lambda: True), None)] or []
+		else:
+			return []
+
 	def addExtension(self, extension, key = None, type = EXTENSION_SINGLE):
 		self.list.append((type, extension, key))
 
@@ -1798,6 +1825,14 @@ class InfoBarExtensions:
 	def extensionCallback(self, answer):
 		if answer is not None:
 			answer[1][1]()
+
+	def openCCcamInfo(self):
+		from Screens.CCcamInfo import CCcamInfoMain
+		self.session.open(CCcamInfoMain)
+
+	def openOScamInfo(self):
+		from Screens.OScamInfo import OscamInfoMenu
+		self.session.open(OscamInfoMenu)
 
 from Tools.BoundFunction import boundFunction
 import inspect
