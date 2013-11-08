@@ -1243,4 +1243,109 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y() + (or
 		<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 		<widget name="filelist" position="5,50" size="510,370" scrollbarMode="showOnDemand" />
 	</screen>
+	<!-- CCcam Info -->
+	<screen name="CCcamInfoMain" position="center,center" size="560,550">
+		<widget name="menu" position="0,0" size="560,450" foregroundColor="window-fg" backgroundColor="window-bg" transparent="0" />
+	</screen>
+	<screen name="CCcamInfoEcmInfoSelection" position="center,center" size="560,550">
+		<widget name="list" position="0,0" size="560,450" foregroundColor="window-fg" backgroundColor="window-bg" transparent="0" />
+	</screen>
+	<screen name="CCcamInfoInfoScreen" position="center,center" size="560,550">
+		<widget name="text" position="0,0" size="560,450" font="Console;17" foregroundColor="window-fg" backgroundColor="window-bg" transparent="0" />
+	</screen>
+	<screen name="CCcamShareViewMenu" position="center,center" size="560,550">
+		<widget name="list" position="0,0" size="560,370" foregroundColor="window-fg" backgroundColor="window-bg" transparent="0" />
+		<eLabel text="" position="10,522" size="503,2" font="Regular;14" backgroundColor="white" />
+		<widget name="uphops" position="10,540" size="240,25" font="Regular;20" />
+		<widget name="cards" position="270,540" size="220,25" halign="right" font="Regular;20" />
+		<widget name="providers" position="10,570" size="240,25" font="Regular;20" />
+		<widget name="reshare" position="270,570" size="220,25" halign="right" font="Regular;20" />
+		<widget name="title" position="10,600" size="480,20" halign="center" font="Regular;20" />
+	</screen>
+	<screen name="CCcamInfoSubMenu" position="center,center" size="560,550">
+		<widget name="list" position="0,0" size="560,250" foregroundColor="window-fg" backgroundColor="window-bg" transparent="0" />
+		<eLabel text="" position="10,387" size="503,2" font="Regular;14" backgroundColor="white" />
+		<widget name="info" position="10,395" size="503,165" font="Regular;16" transparent="0" />
+	</screen>
+	<screen name="CCcamInfoServerMenu" position="center,center" size="560,550">
+		<widget name="list" position="0,0" size="560,250" foregroundColor="window-fg" backgroundColor="window-bg" transparent="0" />
+		<eLabel text="" position="10,387" size="503,2" font="Regular;14" backgroundColor="white" />
+		<widget name="info" position="10,395" size="503,165" font="Regular;16" transparent="0" />
+	</screen>
+	<screen name="CCcamInfoConfigMenu" position="center,center" size="560,550">
+		<widget name="config" position="0,0" size="560,150" foregroundColor="window-fg" backgroundColor="window-bg" transparent="0" />
+	</screen>
+	<screen name="CCcamInfoRemoteBoxMenu" position="center,center" size="560,550">
+		<widget name="list" position="0,0" size="560,450" foregroundColor="window-fg" backgroundColor="window-bg" transparent="0" />
+		<panel name="MenuRed1Panel" />
+		<panel name="MenuGreen1Panel" />
+		<panel name="MenuYellow1Panel" />
+		<panel name="MenuBlue1Panel" />
+	</screen>
+	<screen name="CCcamInfoShareInfo" position="center,center" size="560,550">
+		<widget name="list" position="0,0" size="560,450" foregroundColor="window-fg" backgroundColor="window-bg" transparent="0" />
+		<panel name="MenuRed1Panel" />
+		<panel name="MenuGreen1Panel" />
+		<panel name="MenuYellow1Panel" />
+		<panel name="MenuBlue1Panel" />
+	</screen>
+	<screen name="CCcamInfoConfigSwitcher" position="center,center" size="560,550">
+		<widget name="list" position="0,0" size="560,450" foregroundColor="window-fg" backgroundColor="window-bg" transparent="0" />
+		<panel name="MenuRed1Panel" />
+		<panel name="MenuGreen1Panel" />
+		<panel name="MenuYellow1Panel" />
+		<panel name="MenuBlue1Panel" />
+	</screen>
+	<screen name="CCcamInfoMenuConfig" position="center,center" size="560,550">
+		<widget name="list" position="0,0" size="560,450" foregroundColor="window-fg" backgroundColor="window-bg" transparent="0" />
+		<panel name="MenuRed1Panel" />
+		<panel name="MenuGreen1Panel" />
+		<panel name="MenuYellow1Panel" />
+	</screen>
+	<!-- Oscam Info -->
+	<screen name="OscamInfoMenu" position="center,center" size="560,550">
+		<widget name="mainmenu" position="0,0" size="560,450" foregroundColor="window-fg" backgroundColor="window-bg" transparent="0" />
+	</screen>
+	<screen name="oscECMInfo" position="center,center" size="560,550">
+		<widget name="output" position="0,0" size="560,450" foregroundColor="window-fg" backgroundColor="window-bg" transparent="0" />
+	</screen>
+	<screen name="OscamInfoConfigScreen" position="center,center" size="560,550">
+		<widget name="config" position="0,0" size="560,250" foregroundColor="window-fg" backgroundColor="window-bg" scrollbarMode="showOnDemand" transparent="0" />
+		<widget name="status" position="10,390" size="503,240" foregroundColor="window-fg" backgroundColor="window-bg" transparent="0" />
+		<panel name="MenuRed2Panel" />
+		<panel name="MenuGreen2Panel" />
+	</screen>
+	<!-- Menu Panels -->
+		<screen name="MenuRed1Panel">
+		<ePixmap pixmap="skin_default/buttons/red.png" position="0,e-40" size="140,40" alphatest="on" />
+		<widget name="key_red" position="0,e-40" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
+	</screen>
+	<screen name="MenuGreen1Panel">
+		<ePixmap pixmap="skin_default/buttons/green.png" position="140,e-40" size="140,40" alphatest="on" />
+		<widget name="key_green" position="140,e-40" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
+	</screen>
+	<screen name="MenuYellow1Panel">
+		<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,e-40" size="140,40" alphatest="on" />
+		<widget name="key_yellow" position="280,e-40" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
+	</screen>
+	<screen name="MenuBlue1Panel">
+		<ePixmap pixmap="skin_default/buttons/blue.png" position="420,e-40" size="140,40" alphatest="on" />
+		<widget name="key_blue" position="420,e-40" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#141484" transparent="1" />
+	</screen>
+	<screen name="MenuRed2Panel">
+		<ePixmap pixmap="skin_default/buttons/red.png" position="0,e-40" size="140,40" alphatest="on" />
+		<widget source="key_red" render="Label" position="0,e-40" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
+	</screen>
+	<screen name="MenuGreen2Panel">
+		<ePixmap pixmap="skin_default/buttons/green.png" position="140,e-40" size="140,40" alphatest="on" />
+		<widget source="key_green" render="Label"  position="140,e-40" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
+	</screen>
+	<screen name="MenuYellow2Panel">
+		<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,e-40" size="140,40" alphatest="on" />
+		<widget source="key_yellow" render="Label" position="280,e-40" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
+	</screen>
+	<screen name="MenuBlue2Panel">
+		<ePixmap pixmap="skin_default/buttons/blue.png" position="420,e-40" size="140,40" alphatest="on" />
+		<widget source="key_blue" render="Label" position="420,e-40" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#141484" transparent="1" />
+	</screen>
 </skin>
