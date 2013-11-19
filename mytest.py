@@ -11,7 +11,6 @@ if os.path.exists('/dev/lcd2'): # VuDuo2 lcd
 	if pngutilconnect:
 		pngutil.send("/usr/share/enigma2/distro-lcd-logo.png")
 
-import sys, os
 if os.path.isfile("/usr/lib/enigma2/python/enigma.zip"):
 	sys.path.append("/usr/lib/enigma2/python/enigma.zip")
 
