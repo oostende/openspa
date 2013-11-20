@@ -11,7 +11,8 @@ lastPiconPath = None
 def initPiconPaths():
 	global searchPaths
 	searchPaths = []
-	for mp in ('/usr/share/enigma2/', '/'):
+	path = str(config.misc.picon_path.value)
+	for mp in ('/usr/share/enigma2/', '/', path):
 		onMountpointAdded(mp)
 	for part in harddiskmanager.getMountedPartitions():
 		onMountpointAdded(part.mountpoint)
@@ -20,6 +21,13 @@ def onMountpointAdded(mountpoint):
 	global searchPaths
 	try:
 		path = os.path.join(mountpoint, 'picon') + '/'
+		if os.path.isdir(path) and path not in searchPaths:
+			for fn in os.listdir(path):
+				if fn.endswith('.png'):
+					print "[Picon] adding path:", path
+					searchPaths.append(path)
+					break
+		path = mountpoint
 		if os.path.isdir(path) and path not in searchPaths:
 			for fn in os.listdir(path):
 				if fn.endswith('.png'):
@@ -121,6 +129,11 @@ class Picon(Renderer):
 				else:
 					self.instance.hide()
 				self.pngname = pngname
+
+def setPiconPath():
+	global lastPiconPath
+	lastPiconPath = None
+	initPiconPaths()
 
 harddiskmanager.on_partition_list_change.append(onPartitionChange)
 initPiconPaths()

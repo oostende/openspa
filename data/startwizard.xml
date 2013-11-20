@@ -128,12 +128,12 @@ self.condition = nimmanager.somethingConnected() and not config.misc.installwiza
 self.hideRc()
 			</code>
 			<list>
-				<listentry caption="No" step="softcam" />
+				<listentry caption="No" step="end" />
 				<listentry caption="Yes, do an automatic scan now" step="scan" />
 				<listentry caption="Yes, do a manual scan now" step="manualscan" />
 			</list>
 		</step>
-		<step id="scan" nextstep="softcam">
+		<step id="scan" nextstep="end">
 			<condition>
 from Components.NimManager import nimmanager
 self.condition = nimmanager.somethingConnected() and not config.misc.installwizard.channellistdownloaded.value
