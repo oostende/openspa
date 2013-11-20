@@ -1315,37 +1315,92 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y() + (or
 		<panel name="MenuRed2Panel" />
 		<panel name="MenuGreen2Panel" />
 	</screen>
+	<!-- CronTimers -->
+	<screen name="CronTimers" position="center,center" size="590,460" title="Cron Manager">
+		<panel name="BasicTemplate" />
+		<panel name="Red1Panel" />
+		<panel name="Green1Panel" />
+		<panel name="Yellow1Panel" />
+		<panel name="Blue1Panel" />
+		<widget name="lab1" position="10,100" size="100,24" font="Regular;20" valign="center" transparent="0" />
+		<widget name="labdisabled" position="110,100" size="100,24" font="Regular;20" valign="center" halign="center" backgroundColor="red" zPosition="1" />
+		<widget name="labactive" position="110,100" size="100,24" font="Regular;20" valign="center" halign="center" backgroundColor="green" zPosition="2" />
+		<widget name="lab2" position="290,100" size="150,24" font="Regular;20" valign="center" transparent="0" />
+		<widget name="labstop" position="440,100" size="100,24" font="Regular;20" valign="center" halign="center" backgroundColor="red" zPosition="1" />
+		<widget name="labrun" position="440,100" size="100,24" font="Regular;20" valign="center" halign="center" backgroundColor="green" zPosition="2"/>
+		<widget source="list" render="Listbox" position="10,115" size="540,325" scrollbarMode="showOnDemand" >
+			<convert type="StringList" />
+		</widget>
+		<widget name="key" position="520,182" size="755,25" font="Regular;20" halign="center" transparent="1" valign="center" backgroundColor="background" />
+	</screen>
 	<!-- Menu Panels -->
-		<screen name="MenuRed1Panel">
+	<screen name="BasicTemplate">
+		<eLabel backgroundColor="background" position="0,0" size="560,460" zPosition="-1" />
+		<widget source="title" render="Label" position="10,5" size="280,35" valign="center" font="Enigma;30" halign="center" />
+		<eLabel backgroundColor="darkgrey" position="0,430" size="560,2" zPosition="1"/>
+		<widget source="global.CurrentTime" render="Label" position="500,435" size="55,22" font="Enigma;18" halign="right" transparent="1" valign="center" zPosition="3">
+			<convert type="ClockToText">Default</convert>
+		</widget>
+		<ePixmap pixmap="skin_default/logos/logo.png" position="2,435" size="210,25" alphatest="on" />
+	</screen>
+
+	<screen name="MenuRed1Panel">
 		<ePixmap pixmap="skin_default/buttons/red.png" position="0,e-40" size="140,40" alphatest="on" />
 		<widget name="key_red" position="0,e-40" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
 	</screen>
+
 	<screen name="MenuGreen1Panel">
 		<ePixmap pixmap="skin_default/buttons/green.png" position="140,e-40" size="140,40" alphatest="on" />
 		<widget name="key_green" position="140,e-40" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 	</screen>
+
 	<screen name="MenuYellow1Panel">
 		<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,e-40" size="140,40" alphatest="on" />
 		<widget name="key_yellow" position="280,e-40" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
 	</screen>
+
 	<screen name="MenuBlue1Panel">
 		<ePixmap pixmap="skin_default/buttons/blue.png" position="420,e-40" size="140,40" alphatest="on" />
 		<widget name="key_blue" position="420,e-40" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#141484" transparent="1" />
 	</screen>
+
 	<screen name="MenuRed2Panel">
 		<ePixmap pixmap="skin_default/buttons/red.png" position="0,e-40" size="140,40" alphatest="on" />
 		<widget source="key_red" render="Label" position="0,e-40" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
 	</screen>
+
 	<screen name="MenuGreen2Panel">
 		<ePixmap pixmap="skin_default/buttons/green.png" position="140,e-40" size="140,40" alphatest="on" />
 		<widget source="key_green" render="Label"  position="140,e-40" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
 	</screen>
+
 	<screen name="MenuYellow2Panel">
 		<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,e-40" size="140,40" alphatest="on" />
 		<widget source="key_yellow" render="Label" position="280,e-40" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
 	</screen>
+
 	<screen name="MenuBlue2Panel">
 		<ePixmap pixmap="skin_default/buttons/blue.png" position="420,e-40" size="140,40" alphatest="on" />
 		<widget source="key_blue" render="Label" position="420,e-40" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#141484" transparent="1" />
+	</screen>
+
+	<screen name="Red1Panel">
+		<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+		<widget name="key_red" font="Regular;20" halign="center" position="-2,1" size="140,40" transparent="1" valign="center" zPosition="10" />
+	</screen>
+
+	<screen name="Green1Panel">
+		<ePixmap pixmap="skin_default/buttons/green.png" position="140,0" size="140,40" alphatest="on" />
+		<widget name="key_green" font="Regular;20" halign="center" position="140,0" size="140,40" transparent="1" valign="center" zPosition="10" />
+	</screen>
+
+	<screen name="Yellow1Panel">
+		<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,0" size="140,40" alphatest="on" />
+		<widget name="key_yellow" font="Regular;20" halign="center" position="280,1" size="140,40" transparent="1" valign="center" zPosition="10" />
+	</screen>
+
+	<screen name="Blue1Panel">
+		<ePixmap pixmap="skin_default/buttons/blue.png" position="420,0" size="140,40" alphatest="on" />
+		<widget name="blue" font="Regular;20" halign="center" position="420,0" size="140,40" transparent="1" valign="center" zPosition="10" />
 	</screen>
 </skin>
