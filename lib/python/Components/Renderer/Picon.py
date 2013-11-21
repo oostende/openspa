@@ -4,6 +4,9 @@ from enigma import ePixmap
 from Tools.Alternatives import GetWithAlternative
 from Tools.Directories import pathExists, SCOPE_SKIN_IMAGE, SCOPE_CURRENT_SKIN, resolveFilename
 from Components.Harddisk import harddiskmanager
+from Components.config import config, ConfigText
+
+config.misc.picon_path = ConfigText(default = "/usr/share/enigma2/picon/")
 
 searchPaths = []
 lastPiconPath = None
