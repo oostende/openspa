@@ -32,13 +32,13 @@
 			</menu>
 			<menu weight="5" level="0" text="System" entryID="system_selection">
 				<id val="system" />
+				<item weight="10" text="A/V settings" entryID="av_setup"><screen module="VideoMode" screen="VideoSetup" /></item>
 				<item level="0" entryID="usage_setup"><setup id="usage" /></item>
 				<item level="0" entryID="user_interface"><setup id="userinterface" /></item>
 				<item level="0" entryID="epg_settings"><setup id="epgsettings" /></item>
 				<item level="0" entryID="recording_setup"><setup id="recording" /></item>
 				<item level="2" entryID="subtitle_setup"><setup id="subtitlesetup" /></item>
 				<item level="1" entryID="autolanguage_setup"><setup id="autolanguagesetup" /></item>
-				<item level="0" entryID="av_setup"><setup id="avsetup"/></item>
 				<item level="1" entryID="rfmod_setup" requires="RfModulator"><setup id="RFmod"/></item>
 				<menu level="0" text="Harddisk" entryID="hardisk_selection" requires="Harddisk">
 					<id val="harddisk" />
