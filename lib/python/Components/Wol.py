@@ -13,6 +13,7 @@ class WOL:
 		f.close()
 
 def Init():
+	config.network = ConfigSubsection()
 	if SystemInfo["WOL"]:
 		def setWOLmode(value):
 			iwol.setWolState(config.network.wol.value);
