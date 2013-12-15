@@ -2232,7 +2232,9 @@ void eServiceMP3::pullSubtitle(GstBuffer *buffer)
 				line[len] = 0;
 				eDebug("got new text subtitle @ buf_pos = %lld ns (in pts=%lld), dur=%lld: '%s' ", buf_pos, buf_pos/11111, duration_ns, line);
 
-				start_ms = ((buf_pos / 1000000ULL) * convert_fps) + delay;
+				long start1 = buf_pos / 1000000ULL;
+				double start2 = (double)start1 * convert_fps;
+				start_ms = (long)start2 + delay;
 				end_ms = start_ms + (duration_ns / 1000000ULL);
 				m_subtitle_pages.insert(subtitle_pages_map_pair_t(end_ms, subtitle_page_t(start_ms, end_ms, (const char *)line)));
 				m_subtitle_sync_timer->start(1, true);
