@@ -4,25 +4,28 @@ from Screens.InputBox import InputBox
 from Screens.Standby import *
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Screens.HelpMenu import HelpableScreen
+from Components.Console import Console
 from Components.Network import iNetwork
 from Components.Sources.StaticText import StaticText
 from Components.Sources.Boolean import Boolean
 from Components.Sources.List import List
 from Components.SystemInfo import SystemInfo
 from Components.Label import Label,MultiColorLabel
+from Components.ScrollLabel import ScrollLabel
 from Components.Pixmap import Pixmap,MultiPixmap
 from Components.MenuList import MenuList
-from Components.config import config, ConfigYesNo, ConfigIP, NoSave, ConfigText, ConfigPassword, ConfigSelection, getConfigListEntry, ConfigNothing, ConfigBoolean
+from Components.config import config, ConfigYesNo, ConfigIP, NoSave, ConfigText, ConfigPassword, ConfigSelection, getConfigListEntry, ConfigNothing, ConfigBoolean, ConfigNumber
 from Components.ConfigList import ConfigListScreen
 from Components.PluginComponent import plugins
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
 from Components.ActionMap import ActionMap, NumberActionMap, HelpableActionMap
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_CURRENT_SKIN
+from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS, SCOPE_CURRENT_SKIN
 from Tools.LoadPixmap import LoadPixmap
 from Plugins.Plugin import PluginDescriptor
-from enigma import eTimer, ePoint, eSize, RT_HALIGN_LEFT, eListboxPythonMultiContent, gFont
-from os import path as os_path, system as os_system, unlink
+from enigma import eTimer, ePoint, eSize, RT_HALIGN_LEFT, eListboxPythonMultiContent, gFont, getMachineBrand, getMachineName
+from os import remove, symlink, unlink, rename, chmod
 from re import compile as re_compile, search as re_search
+import time
 
 
 class NetworkAdapterSelection(Screen,HelpableScreen):
@@ -127,10 +130,10 @@ class NetworkAdapterSelection(Screen,HelpableScreen):
 			self["introduction"].setText(self.edittext)
 			self["DefaultInterfaceAction"].setEnabled(False)
 
-		if num_configured_if < 2 and os_path.exists("/etc/default_gw"):
+		if num_configured_if < 2 and fileExists("/etc/default_gw"):
 			unlink("/etc/default_gw")
 			
-		if os_path.exists("/etc/default_gw"):
+		if fileExists("/etc/default_gw"):
 			fp = file('/etc/default_gw', 'r')
 			result = fp.read()
 			fp.close()
@@ -147,7 +150,7 @@ class NetworkAdapterSelection(Screen,HelpableScreen):
 				active_int = False
 			self.list.append(self.buildInterfaceList(x[1],_(x[0]),default_int,active_int ))
 		
-		if os_path.exists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkWizard/networkwizard.xml")):
+		if fileExists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkWizard/networkwizard.xml")):
 			self["key_blue"].setText(_("Network wizard"))
 		self["list"].setList(self.list)
 
@@ -156,7 +159,7 @@ class NetworkAdapterSelection(Screen,HelpableScreen):
 		num_if = len(self.list)
 		old_default_gw = None
 		num_configured_if = len(iNetwork.getConfiguredAdapters())
-		if os_path.exists("/etc/default_gw"):
+		if fileExists("/etc/default_gw"):
 			fp = open('/etc/default_gw', 'r')
 			old_default_gw = fp.read()
 			fp.close()
@@ -203,7 +206,7 @@ class NetworkAdapterSelection(Screen,HelpableScreen):
 			self.session.open(MessageBox, _("Finished configuring your network"), type = MessageBox.TYPE_INFO, timeout = 10, default = False)
 
 	def openNetworkWizard(self):
-		if os_path.exists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkWizard/networkwizard.xml")):
+		if fileExists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkWizard/networkwizard.xml")):
 			try:
 				from Plugins.SystemPlugins.NetworkWizard.NetworkWizard import NetworkWizard
 			except ImportError:
@@ -869,7 +872,7 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 					self.extendedSetup = ('extendedSetup',menuEntryDescription, self.extended)
 					menu.append((menuEntryName,self.extendedSetup))					
 			
-		if os_path.exists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkWizard/networkwizard.xml")):
+		if fileExists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkWizard/networkwizard.xml")):
 			menu.append((_("Network wizard"), "openwizard"))
 
 		return menu
@@ -1402,3 +1405,402 @@ class NetworkAdapterTest(Screen):
 		else:
 			iStatus.stopWlanConsole()
 
+class NetworkInadyn(Screen):
+	skin = """
+		<screen position="center,center" size="590,410" >
+			<widget name="autostart" position="10,0" size="100,24" font="Regular;20" valign="center" transparent="0" />
+			<widget name="labdisabled" position="110,0" size="100,24" font="Regular;20" valign="center" halign="center" backgroundColor="red" zPosition="1" />
+			<widget name="labactive" position="110,0" size="100,24" font="Regular;20" valign="center" halign="center" backgroundColor="green" zPosition="2" />
+			<widget name="status" position="240,0" size="150,24" font="Regular;20" valign="center" transparent="0" />
+			<widget name="labstop" position="390,0" size="100,24" font="Regular;20" valign="center" halign="center" backgroundColor="red" zPosition="1" />
+			<widget name="labrun" position="390,0" size="100,24" font="Regular;20" valign="center" halign="center" backgroundColor="green" zPosition="2"/>
+			<widget name="time" position="10,50" size="230,30" font="Regular;20" valign="center" transparent="1"/>
+			<widget name="labtime" position="240,50" size="100,30" font="Regular;20" valign="center" backgroundColor="#4D5375"/>
+			<widget name="username" position="10,100" size="150,30" font="Regular;20" valign="center" transparent="1"/>
+			<widget name="labuser" position="160,100" size="310,30" font="Regular;20" valign="center" backgroundColor="#4D5375"/>
+			<widget name="password" position="10,150" size="150,30" font="Regular;20" valign="center" transparent="1"/>
+			<widget name="labpass" position="160,150" size="310,30" font="Regular;20" valign="center" backgroundColor="#4D5375"/>
+			<widget name="alias" position="10,200" size="150,30" font="Regular;20" valign="center" transparent="1"/>
+			<widget name="labalias" position="160,200" size="310,30" font="Regular;20" valign="center" backgroundColor="#4D5375"/>
+			<widget name="sinactive" position="10,250" zPosition="1" pixmap="skin_default/icons/lock_off.png" size="32,32"  alphatest="on" />
+			<widget name="sactive" position="10,250" zPosition="2" pixmap="skin_default/icons/lock_on.png" size="32,32"  alphatest="on" />
+			<widget name="system" position="50,250" size="100,30" font="Regular;20" valign="center" transparent="1"/>
+			<widget name="labsys" position="160,250" size="310,30" font="Regular;20" valign="center" backgroundColor="#4D5375"/>
+			<ePixmap pixmap="skin_default/buttons/red.png" position="0,360" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/green.png" position="150,360" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/yellow.png" position="300,360" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/blue.png" position="450,360" size="140,40" alphatest="on" />
+			<widget name="key_red" position="0,360" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
+			<widget name="key_green" position="150,360" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
+			<widget name="key_yellow" position="300,360" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
+			<widget name="key_blue" position="450,360" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#18188b" transparent="1" />
+		</screen>"""
+
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		Screen.setTitle(self, _("Inadyn Setup"))
+		self.onChangedEntry = [ ]
+		self['autostart'] = Label(_("Autostart:"))
+		self['labactive'] = Label(_(_("Active")))
+		self['labdisabled'] = Label(_(_("Disabled")))
+		self['status'] = Label(_("Current Status:"))
+		self['labstop'] = Label(_("Stopped"))
+		self['labrun'] = Label(_("Running"))
+		self['time'] = Label(_("Time Update in Minutes:"))
+		self['labtime'] = Label()
+		self['username'] = Label(_("Username") + ":")
+		self['labuser'] = Label()
+		self['password'] = Label(_("Password") + ":")
+		self['labpass'] = Label()
+		self['alias'] = Label(_("Alias") + ":")
+		self['labalias'] = Label()
+		self['sactive'] = Pixmap()
+		self['sinactive'] = Pixmap()
+		self['system'] = Label(_("System") + ":")
+		self['labsys'] = Label()
+		self['key_red'] = Label(_("Remove Service"))
+		self['key_green'] = Label(_("Start"))
+		self['key_yellow'] = Label(_("Autostart"))
+		self['key_blue'] = Label(_("Show Log"))
+		self['actions'] = ActionMap(['WizardActions', 'ColorActions', 'SetupActions'], {'ok': self.setupinadyn, 'back': self.close, 'menu': self.setupinadyn, 'red': self.UninstallCheck, 'green': self.InadynStartStop, 'yellow': self.autostart, 'blue': self.inaLog})
+		self.Console = Console()
+		self.service_name = 'inadyn-mt'
+		self.onLayoutFinish.append(self.InstallCheck)
+
+	def InstallCheck(self):
+		self.Console.ePopen('/usr/bin/opkg list_installed ' + self.service_name, self.checkNetworkState)
+
+	def checkNetworkState(self, str, retval, extra_args):
+		if 'Collected errors' in str:
+			self.session.openWithCallback(self.close, MessageBox, _("A background update check is in progress, please wait a few minutes and try again."), type=MessageBox.TYPE_INFO, timeout=10, close_on_any_key=True)
+		elif not str:
+			self.feedscheck = self.session.open(MessageBox,_('Please wait whilst feeds state is checked.'), MessageBox.TYPE_INFO, enable_input = False)
+			self.feedscheck.setTitle(_('Checking Feeds'))
+			cmd1 = "opkg update"
+			self.CheckConsole = Console()
+			self.CheckConsole.ePopen(cmd1, self.checkNetworkStateFinished)
+		else:
+			self.updateService()
+
+	def checkNetworkStateFinished(self, result, retval,extra_args=None):
+		if 'bad address' in result:
+			self.session.openWithCallback(self.InstallPackageFailed, MessageBox, _("Your %s %s is not connected to the internet, please check your network settings and try again.") % (getMachineBrand(), getMachineName()), type=MessageBox.TYPE_INFO, timeout=10, close_on_any_key=True)
+		elif ('wget returned 1' or 'wget returned 255' or '404 Not Found') in result:
+			self.session.openWithCallback(self.InstallPackageFailed, MessageBox, _("Sorry feeds are down for maintenance, please try again later."), type=MessageBox.TYPE_INFO, timeout=10, close_on_any_key=True)
+		else:
+			self.session.openWithCallback(self.InstallPackage, MessageBox, _('Ready to install %s ?') % self.service_name, MessageBox.TYPE_YESNO)
+
+	def InstallPackage(self, val):
+		if val:
+			self.doInstall(self.installComplete, self.service_name)
+		else:
+			self.feedscheck.close()
+			self.close()
+
+	def InstallPackageFailed(self, val):
+		self.feedscheck.close()
+		self.close()
+
+	def doInstall(self, callback, pkgname):
+		self.message = self.session.open(MessageBox,_("please wait..."), MessageBox.TYPE_INFO, enable_input = False)
+		self.message.setTitle(_('Installing Service'))
+		self.Console.ePopen('/usr/bin/opkg install ' + pkgname, callback)
+
+	def installComplete(self,result = None, retval = None, extra_args = None):
+		self.message.close()
+		self.feedscheck.close()
+		self.updateService()
+
+	def UninstallCheck(self):
+		self.Console.ePopen('/usr/bin/opkg list_installed ' + self.service_name, self.RemovedataAvail)
+
+	def RemovedataAvail(self, str, retval, extra_args):
+		if str:
+			self.session.openWithCallback(self.RemovePackage, MessageBox, _('Ready to remove %s ?') % self.service_name, MessageBox.TYPE_YESNO)
+		else:
+			self.updateService()
+
+	def RemovePackage(self, val):
+		if val:
+			self.doRemove(self.removeComplete, self.service_name)
+
+	def doRemove(self, callback, pkgname):
+		self.message = self.session.open(MessageBox,_("please wait..."), MessageBox.TYPE_INFO, enable_input = False)
+		self.message.setTitle(_('Removing Service'))
+		self.Console.ePopen('/usr/bin/opkg remove ' + pkgname + ' --force-remove --autoremove', callback)
+
+	def removeComplete(self,result = None, retval = None, extra_args = None):
+		self.message.close()
+		self.close()
+
+	def createSummary(self):
+		return NetworkServicesSummary
+
+	def InadynStartStop(self):
+		if self.my_inadyn_run == False:
+			self.Console.ePopen('/etc/init.d/inadyn-mt start', self.StartStopCallback)
+		elif self.my_inadyn_run == True:
+			self.Console.ePopen('/etc/init.d/inadyn-mt stop', self.StartStopCallback)
+
+	def StartStopCallback(self, result = None, retval = None, extra_args = None):
+		time.sleep(3)
+		self.updateService()
+
+	def autostart(self):
+		if fileExists('/etc/rc2.d/S20inadyn-mt'):
+			self.Console.ePopen('update-rc.d -f inadyn-mt remove', self.StartStopCallback)
+		else:
+			self.Console.ePopen('update-rc.d -f inadyn-mt defaults', self.StartStopCallback)
+
+	def updateService(self):
+		import process
+		p = process.ProcessList()
+		inadyn_process = str(p.named('inadyn-mt')).strip('[]')
+		self['labrun'].hide()
+		self['labstop'].hide()
+		self['labactive'].hide()
+		self['labdisabled'].hide()
+		self['sactive'].hide()
+		self.my_inadyn_active = False
+		self.my_inadyn_run = False
+		if fileExists('/etc/rc2.d/S20inadyn-mt'):
+			self['labdisabled'].hide()
+			self['labactive'].show()
+			self.my_inadyn_active = True
+			autostartstatus_summary = self['autostart'].text + ' ' + self['labactive'].text
+		else:
+			self['labactive'].hide()
+			self['labdisabled'].show()
+			autostartstatus_summary = self['autostart'].text + ' ' + self['labdisabled'].text
+		if inadyn_process:
+			self.my_inadyn_run = True
+		if self.my_inadyn_run == True:
+			self['labstop'].hide()
+			self['labrun'].show()
+			self['key_green'].setText(_("Stop"))
+			status_summary = self['status'].text + ' ' + self['labrun'].text
+		else:
+			self['labstop'].show()
+			self['labrun'].hide()
+			self['key_green'].setText(_("Start"))
+			status_summary = self['status'].text + ' ' + self['labstop'].text
+
+		#self.my_nabina_state = False
+		if fileExists('/etc/inadyn.conf'):
+			f = open('/etc/inadyn.conf', 'r')
+			for line in f.readlines():
+				line = line.strip()
+				if line.startswith('username '):
+					line = line[9:]
+					self['labuser'].setText(line)
+				elif line.startswith('password '):
+					line = line[9:]
+					self['labpass'].setText(line)
+				elif line.startswith('alias '):
+					line = line[6:]
+					self['labalias'].setText(line)
+				elif line.startswith('update_period_sec '):
+					line = line[18:]
+					line = (int(line) / 60)
+					self['labtime'].setText(str(line))
+				elif line.startswith('dyndns_system ') or line.startswith('#dyndns_system '):
+					if line.startswith('#'):
+						line = line[15:]
+						self['sactive'].hide()
+					else:
+						line = line[14:]
+						self['sactive'].show()
+					self['labsys'].setText(line)
+			f.close()
+		title = _("Inadyn Setup")
+
+		for cb in self.onChangedEntry:
+			cb(title, status_summary, autostartstatus_summary)
+
+	def setupinadyn(self):
+		self.session.openWithCallback(self.updateService, NetworkInadynSetup)
+
+	def inaLog(self):
+		self.session.open(NetworkInadynLog)
+
+class NetworkInadynSetup(Screen, ConfigListScreen):
+	skin = """
+		<screen name="InadynSetup" position="center,center" size="440,350" >
+			<widget name="config" position="10,10" size="420,240" scrollbarMode="showOnDemand" />
+			<widget name="HelpWindow" pixmap="skin_default/vkey_icon.png" position="170,300" zPosition="1" size="440,350" transparent="1" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/red.png" position="130,310" size="140,40" alphatest="on" />
+			<widget name="key_red" position="130,310" size="140,40" zPosition="1" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
+			<ePixmap pixmap="skin_default/buttons/key_text.png" position="300,313" zPosition="4" size="35,25" alphatest="on" transparent="1" />
+		</screen>"""
+
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		self.onChangedEntry = [ ]
+		self.list = []
+		ConfigListScreen.__init__(self, self.list, session = self.session, on_change = self.selectionChanged)
+		Screen.setTitle(self, _("Inadyn Setup"))
+		self['key_red'] = Label(_("Save"))
+		self['actions'] = ActionMap(['WizardActions', 'ColorActions', 'VirtualKeyboardActions'], {'red': self.saveIna, 'back': self.close, 'showVirtualKeyboard': self.KeyText})
+		self["HelpWindow"] = Pixmap()
+		self["HelpWindow"].hide()
+		self.updateList()
+		if not self.selectionChanged in self["config"].onSelectionChanged:
+			self["config"].onSelectionChanged.append(self.selectionChanged)
+
+	def createSummary(self):
+		from Screens.PluginBrowser import PluginBrowserSummary
+		return PluginBrowserSummary
+
+	def selectionChanged(self):
+		item = self["config"].getCurrent()
+		if item:
+			name = str(item[0])
+			desc = str(item[1].getValue())
+		else:
+			name = ""
+			desc = ""
+		for cb in self.onChangedEntry:
+			cb(name, desc)
+
+	def updateList(self):
+		self.ina_user = NoSave(ConfigText(fixed_size=False))
+		self.ina_pass = NoSave(ConfigText(fixed_size=False))
+		self.ina_alias = NoSave(ConfigText(fixed_size=False))
+		self.ina_period = NoSave(ConfigNumber())
+		self.ina_sysactive = NoSave(ConfigYesNo(default='False'))
+		self.ina_system = NoSave(ConfigSelection(default = "dyndns@dyndns.org", choices = [("dyndns@dyndns.org", "dyndns@dyndns.org"), ("statdns@dyndns.org", "statdns@dyndns.org"), ("custom@dyndns.org", "custom@dyndns.org"), ("default@no-ip.com", "default@no-ip.com")]))
+
+		if fileExists('/etc/inadyn.conf'):
+			f = open('/etc/inadyn.conf', 'r')
+			for line in f.readlines():
+				line = line.strip()
+				if line.startswith('username '):
+					line = line[9:]
+					self.ina_user.value = line
+					ina_user1 = getConfigListEntry(_("Username") + ":", self.ina_user)
+					self.list.append(ina_user1)
+				elif line.startswith('password '):
+					line = line[9:]
+					self.ina_pass.value = line
+					ina_pass1 = getConfigListEntry(_("Password") + ":", self.ina_pass)
+					self.list.append(ina_pass1)
+				elif line.startswith('alias '):
+					line = line[6:]
+					self.ina_alias.value = line
+					ina_alias1 = getConfigListEntry(_("Alias") + ":", self.ina_alias)
+					self.list.append(ina_alias1)
+				elif line.startswith('update_period_sec '):
+					line = line[18:]
+					line = (int(line) / 60)
+					self.ina_sysactive.value = True
+					ina_period1 = getConfigListEntry(_("Time Update in Minutes") + ":", self.ina_period)
+					self.list.append(ina_period1)
+				elif line.startswith('dyndns_system ') or line.startswith('#dyndns_system '):
+					if not line.startswith('#'):
+						self.ina_sysactive.value = True
+						line = line[14:]
+					else:
+						self.ina_sysactive.value = False
+						line = line[15:]
+					ina_sysactive1 = getConfigListEntry(_("Set System") + ":", self.ina_sysactive)
+					self.list.append(ina_sysactive1)
+					self.ina_system.value = line
+					ina_system1 = getConfigListEntry(_("System") + ":", self.ina_system)
+					self.list.append(ina_system1)
+
+			f.close()
+		self['config'].list = self.list
+		self['config'].l.setList(self.list)
+
+	def KeyText(self):
+		sel = self['config'].getCurrent()
+		if sel:
+			if isinstance(self["config"].getCurrent()[1], ConfigText) or isinstance(self["config"].getCurrent()[1], ConfigPassword):
+				if self["config"].getCurrent()[1].help_window.instance is not None:
+					self["config"].getCurrent()[1].help_window.hide()
+			self.vkvar = sel[0]
+			if self.vkvar == _("Username") + ':' or self.vkvar == _("Password") + ':' or self.vkvar == _("Alias") + ':' or self.vkvar == _("System") + ':':
+				from Screens.VirtualKeyBoard import VirtualKeyBoard
+				self.session.openWithCallback(self.VirtualKeyBoardCallback, VirtualKeyBoard, title = self["config"].getCurrent()[0], text = self["config"].getCurrent()[1].getValue())
+
+	def VirtualKeyBoardCallback(self, callback = None):
+		if callback is not None and len(callback):
+			self["config"].getCurrent()[1].setValue(callback)
+			self["config"].invalidate(self["config"].getCurrent())
+
+	def saveIna(self):
+		if fileExists('/etc/inadyn.conf'):
+			inme = open('/etc/inadyn.conf', 'r')
+			out = open('/etc/inadyn.conf.tmp', 'w')
+			for line in inme.readlines():
+				line = line.replace('\n', '')
+				if line.startswith('username '):
+					line = ('username ' + self.ina_user.value.strip())
+				elif line.startswith('password '):
+					line = ('password ' + self.ina_pass.value.strip())
+				elif line.startswith('alias '):
+					line = ('alias ' + self.ina_alias.value.strip())
+				elif line.startswith('update_period_sec '):
+					strview = (self.ina_period.getValue() * 60)
+					strview = str(strview)
+					line = ('update_period_sec ' + strview)
+				elif line.startswith('dyndns_system ') or line.startswith('#dyndns_system '):
+					if self.ina_sysactive.getValue() == True:
+						line = ('dyndns_system ' + self.ina_system.value.strip())
+					else:
+						line = ('#dyndns_system ' + self.ina_system.value.strip())
+				out.write((line + '\n'))
+			out.close()
+			inme.close()
+		else:
+			self.session.open(MessageBox, _("Sorry Inadyn Config is Missing"), MessageBox.TYPE_INFO)
+			self.close()
+		if fileExists('/etc/inadyn.conf.tmp'):
+			rename('/etc/inadyn.conf.tmp', '/etc/inadyn.conf')
+		self.myStop()
+
+	def myStop(self):
+		self.close()
+
+class NetworkInadynLog(Screen):
+	skin = """
+		<screen name="InadynLog" position="center,center" size="590,410" >
+			<widget name="infotext" position="10,10" size="590,410" font="Console;16" />
+		</screen>"""
+
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		Screen.setTitle(self, _("Inadyn Log"))
+		self['infotext'] = ScrollLabel('')
+		self['actions'] = ActionMap(['WizardActions', 'DirectionActions', 'ColorActions'], {'ok': self.close,
+		 'back': self.close,
+		 'up': self['infotext'].pageUp,
+		 'down': self['infotext'].pageDown})
+		strview = ''
+		if fileExists('/var/log/inadyn.log'):
+			f = open('/var/log/inadyn.log', 'r')
+			for line in f.readlines():
+				strview += line
+			f.close()
+		self['infotext'].setText(strview)
+
+class NetworkServicesSummary(Screen):
+	def __init__(self, session, parent):
+		Screen.__init__(self, session, parent = parent)
+		self["title"] = StaticText("")
+		self["status_summary"] = StaticText("")
+		self["autostartstatus_summary"] = StaticText("")
+		self.onShow.append(self.addWatcher)
+		self.onHide.append(self.removeWatcher)
+
+	def addWatcher(self):
+		self.parent.onChangedEntry.append(self.selectionChanged)
+		self.parent.updateService()
+
+	def removeWatcher(self):
+		self.parent.onChangedEntry.remove(self.selectionChanged)
+
+	def selectionChanged(self, title, status_summary, autostartstatus_summary):
+		self["title"].text = title
+		self["status_summary"].text = status_summary
+		self["autostartstatus_summary"].text = autostartstatus_summary
