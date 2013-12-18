@@ -3,8 +3,10 @@ from Screens.Setup import getConfigMenuItem, Setup
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.ActionMap import NumberActionMap
 from Components.ConfigList import ConfigListScreen
+from Components.ChoiceList import ChoiceList, ChoiceEntryComponent
 from Components.config import config, ConfigSubsection, getConfigListEntry, ConfigNothing, ConfigSelection, ConfigOnOff
 from Components.Label import Label
+from Components.MultiContent import MultiContentEntryText
 from Components.Sources.List import List
 from Components.Sources.Boolean import Boolean
 from Components.SystemInfo import SystemInfo
@@ -23,7 +25,7 @@ class AudioSelection(Screen, ConfigListScreen):
 		self["streams"] = List([], enableWrapAround=True)
 		self["key_red"] = Boolean(False)
 		self["key_green"] = Boolean(False)
-		self["key_yellow"] = Boolean(False)
+		self["key_yellow"] = Boolean(True)
 		self["key_blue"] = Boolean(False)
 
 		ConfigListScreen.__init__(self, [])
@@ -36,13 +38,11 @@ class AudioSelection(Screen, ConfigListScreen):
 		self.cached_subtitle_checked = False
 		self.__selected_subtitle = None
 
-		self["actions"] = NumberActionMap(["ColorActions", "OkCancelActions", "DirectionActions", "MenuActions", "InfobarAudioSelectionActions", "InfobarSubtitleSelectionActions"],
+		self["actions"] = NumberActionMap(["AudioSelectionActions", "SetupActions", "DirectionActions", "MenuActions"],
 		{
 			"red": self.keyRed,
 			"green": self.keyGreen,
 			"yellow": self.keyYellow,
-			"subtitleSelection": self.keySubtitle,
-			"audioSelection": self.keyAudio,
 			"blue": self.keyBlue,
 			"ok": self.keyOk,
 			"cancel": self.cancel,
@@ -124,8 +124,8 @@ class AudioSelection(Screen, ConfigListScreen):
 							language += ' / '
 						if LanguageCodes.has_key(lang):
 							language += LanguageCodes[lang][0]
-# 						elif lang == "und":
-# 							""
+ 						elif lang == "und":
+ 							""
 						else:
 							language += lang
 						cnt += 1
@@ -396,13 +396,6 @@ class AudioSelection(Screen, ConfigListScreen):
 
 	def openAutoLanguageSetup(self):
 		self.session.open(Setup, "autolanguagesetup")
-		
-	def keySubtitle(self):
-		if self.settings.menupage.getValue() == PAGE_SUBTITLES:
-			self.cancel()
-
-	def keyAudio(self):
-		pass
 
 	def cancel(self):
 		self.close(0)
