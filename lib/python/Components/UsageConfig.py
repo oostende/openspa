@@ -311,6 +311,9 @@ def InitUsageConfig():
 
 	config.usage.keymap = ConfigText(default = eEnv.resolve("${datadir}/enigma2/keymap.xml"))
 
+	config.network = ConfigSubsection()
+	config.network.Inadyn_autostart = ConfigYesNo(default = False)
+
 	config.seek = ConfigSubsection()
 	config.seek.selfdefined_13 = ConfigNumber(default=15)
 	config.seek.selfdefined_46 = ConfigNumber(default=60)
