@@ -107,4 +107,12 @@ dist_install_DATA = \
 	zaprecclock_add.png \
 	zaprecclock_post.png \
 	zaprecclock_pre.png \
-	zaprecclock_prepost.png
+	zaprecclock_prepost.png \
+	DVI.png \
+	HDMI.png \
+	Scart.png \
+	YPbPr.png \
+	lcd_DVI.png \
+	lcd_HDMI.png \
+	lcd_Scart.png \
+	lcd_YPbPr.png 
