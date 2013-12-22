@@ -1147,26 +1147,28 @@ RESULT eDVBScan::processSDT(eDVBNamespace dvbnamespace, const ServiceDescription
 		unsigned short service_id = (*s)->getServiceId();
 		SCAN_eDebugNoNewLine("SID %04x: ", service_id);
 		bool add = true;
+		bool crypted = false;
 
-		if (m_flags & scanOnlyFree)
+		std::map<unsigned short, service>::iterator it =
+			m_pmts_to_read.find(service_id);
+		if (it != m_pmts_to_read.end())
 		{
-			std::map<unsigned short, service>::iterator it =
-				m_pmts_to_read.find(service_id);
-			if (it != m_pmts_to_read.end())
+			if (it->second.scrambled)
 			{
-				if (it->second.scrambled)
-				{
-					SCAN_eDebug("is scrambled!");
-					add = false;
-				}
-				else
-					SCAN_eDebug("is free");
+				SCAN_eDebug("is scrambled!");
+				crypted = true;
 			}
-			else {
-				SCAN_eDebug("not found in PAT.. so we assume it is scrambled!!");
-				add = false;
-			}
+			else
+				SCAN_eDebug("is free");
 		}
+		else {
+			SCAN_eDebug("not found in PAT.. so we assume it is scrambled!!");
+			crypted = true;
+		}
+
+		if (m_flags & scanOnlyFree && crypted)
+			add = false;
+		
 
 		if (add)
 		{
@@ -1233,6 +1235,8 @@ RESULT eDVBScan::processSDT(eDVBNamespace dvbnamespace, const ServiceDescription
 					break;
 				}
 			}
+			if (crypted && !service->m_ca.size())
+				service->m_ca.push_front(0);
 
 			std::pair<std::map<eServiceReferenceDVB, ePtr<eDVBService> >::iterator, bool> i =
 				m_new_services.insert(std::pair<eServiceReferenceDVB, ePtr<eDVBService> >(ref, service));

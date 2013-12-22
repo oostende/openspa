@@ -1,5 +1,7 @@
 #include <lib/service/listboxservice.h>
 #include <lib/service/service.h>
+#include <lib/dvb/dvb.h>
+#include <lib/dvb/db.h>
 #include <lib/gdi/font.h>
 #include <lib/gdi/epng.h>
 #include <lib/dvb/epgcache.h>
@@ -274,7 +276,7 @@ void eListboxServiceContent::sort()
 DEFINE_REF(eListboxServiceContent);
 
 eListboxServiceContent::eListboxServiceContent()
-	:m_visual_mode(visModeSimple), m_size(0), m_current_marked(false), m_itemheight(25), m_hide_number_marker(false), m_servicetype_icon_mode(0)
+	:m_visual_mode(visModeSimple), m_size(0), m_current_marked(false), m_itemheight(25), m_hide_number_marker(false), m_servicetype_icon_mode(0), m_icon_crypt(false)
 {
 	memset(m_color_set, 0, sizeof(m_color_set));
 	cursorHome();
@@ -505,6 +507,11 @@ void eListboxServiceContent::setSize(const eSize &size)
 void eListboxServiceContent::setHideNumberMarker(bool doHide)
 {
 	m_hide_number_marker = doHide;
+}
+
+void eListboxServiceContent::setServiceCryptIcon(bool doCrypt)
+{
+	m_icon_crypt = doCrypt;
 }
 
 void eListboxServiceContent::setServiceTypeIconMode(int mode)
@@ -755,6 +762,44 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 							}
 						}
 
+						//service crypt icon
+						if (m_icon_crypt)
+						{
+							ePtr<eDVBResourceManager> res_mgr;
+							if (!eDVBResourceManager::getInstance(res_mgr))
+							{
+								ePtr<iDVBChannelList> db;
+								if (!res_mgr->getChannelList(db))
+								{
+									eServiceReferenceDVB &reference = (eServiceReferenceDVB&) ref;
+									ePtr<eDVBService> origService;
+									if (!db->getService(reference, origService))
+									{
+										ePtr<gPixmap> &pixmap = m_pixmaps[picCrypt];
+										if (pixmap)
+										{
+											eSize pixmap_size = pixmap->size();
+											eRect area = m_element_position[celServiceInfo];
+											m_element_position[celServiceInfo].setLeft(area.left() + pixmap_size.width() + 8);
+											m_element_position[celServiceInfo].setWidth(area.width() - pixmap_size.width() - 8);
+											int offs = 0;
+											area = m_element_position[celServiceName];
+											offs = xoffs;
+											xoffs += pixmap_size.width() + 8;
+
+											if (origService->m_ca.size())
+											{
+												int correction = (area.height() - pixmap_size.height()) / 2;
+												area.moveBy(offset);
+												painter.clip(area);
+												painter.blit(pixmap, offset+ePoint(area.left() + offs, correction), area, gPainter::BT_ALPHATEST);
+												painter.clippop();
+											}
+										}
+									}
+								}
+							}
+						}
 						//service type marker stuff
 						if (m_servicetype_icon_mode)
 						{

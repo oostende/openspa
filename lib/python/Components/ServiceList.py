@@ -55,6 +55,14 @@ class ServiceList(HTMLComponent, GUIComponent):
 		if pic:
 			self.l.setPixmap(self.l.picServiceGroup, pic)
 
+		pic = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/icon_crypt.png"))
+		if pic:
+			self.l.setPixmap(self.l.picCrypt, pic)
+
+		pic = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/icon_cryptd.png"))
+		if pic:
+			self.l.setPixmap(self.l.picCryptd, pic)
+
 		self.root = None
 		self.mode = self.MODE_NORMAL
 		self.ItemHeight = 28
@@ -319,3 +327,4 @@ class ServiceList(HTMLComponent, GUIComponent):
 			self.l.setElementFont(self.l.celServiceEventProgressbar, self.ServiceInfoFont)
 		self.l.setHideNumberMarker(config.usage.hide_number_markers.value)
 		self.l.setServiceTypeIconMode(int(config.usage.servicetype_icon_mode.value))
+		self.l.setServiceCryptIcon(config.usage.icon_crypt.value)
