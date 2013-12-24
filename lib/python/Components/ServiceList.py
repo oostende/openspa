@@ -59,9 +59,6 @@ class ServiceList(HTMLComponent, GUIComponent):
 		if pic:
 			self.l.setPixmap(self.l.picCrypt, pic)
 
-		pic = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/icon_cryptd.png"))
-		if pic:
-			self.l.setPixmap(self.l.picCryptd, pic)
 
 		self.root = None
 		self.mode = self.MODE_NORMAL
