@@ -26,6 +26,9 @@ def InitUsageConfig():
 	config.usage.hide_number_markers = ConfigYesNo(default = False)
 	config.usage.hide_number_markers.addNotifier(refreshServiceList)
 
+	config.usage.icon_crypt = ConfigYesNo(default = False)
+	config.usage.icon_crypt.addNotifier(refreshServiceList)
+
 	config.usage.servicetype_icon_mode = ConfigSelection(default = "0", choices = [("0", _("None")), ("1", _("Left from servicename")), ("2", _("Right from servicename"))])  
 	config.usage.servicetype_icon_mode.addNotifier(refreshServiceList)
 	

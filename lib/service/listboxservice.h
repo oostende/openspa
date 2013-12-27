@@ -55,6 +55,7 @@ public:
 		celServiceName,
 		celServiceInfo, // "now" event
 		celServiceTypePixmap,
+		celCryptPixmap,
 		celElements
 	};
 
@@ -67,6 +68,7 @@ public:
 		picFolder,
 		picMarker,
 		picServiceEventProgressbar,
+		picCrypt,
 		picElements
 	};
 
@@ -82,6 +84,7 @@ public:
 	void setItemHeight(int height);
 	void setHideNumberMarker(bool doHide);
 	void setServiceTypeIconMode(int mode);
+	void setServiceCryptIcon(bool doCrypt);
 	static void setGetPiconNameFunc(SWIG_PYOBJECT(ePyObject) func);
 
 	enum {
@@ -157,6 +160,7 @@ private:
 	int m_itemheight;
 	bool m_hide_number_marker;
 	int m_servicetype_icon_mode;
+	bool m_icon_crypt;
 };
 
 #endif
