@@ -1286,8 +1286,8 @@ class OperaBrowserSetting:
 				if len(tmp) > 1:
 					self._type = int(tmp[1])
 				else:	self._type = 0
-				elif line.startswith('keymap='):
-					self._keymap = line[7:len(line)-1]
+			elif line.startswith('keymap='):
+				self._keymap = line[7:len(line)-1]
 		f.close()
 	def _write(self):
 		tmpstr = []
