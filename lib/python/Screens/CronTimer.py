@@ -13,27 +13,6 @@ from time import sleep
 from enigma import getMachineBrand, getMachineName
 
 class CronTimers(Screen):
-		skin = """
-		<screen position="center,center" size="590,400" title="Cron Manager">
-			<widget name="lab1" position="10,0" size="100,24" font="Regular;20" valign="center" transparent="0" />
-			<widget name="labdisabled" position="110,0" size="100,24" font="Regular;20" valign="center" halign="center" backgroundColor="red" zPosition="1" />
-			<widget name="labactive" position="110,0" size="100,24" font="Regular;20" valign="center" halign="center" backgroundColor="green" zPosition="2" />
-			<widget name="lab2" position="240,0" size="150,24" font="Regular;20" valign="center" transparent="0" />
-			<widget name="labstop" position="390,0" size="100,24" font="Regular;20" valign="center" halign="center" backgroundColor="red" zPosition="1" />
-			<widget name="labrun" position="390,0" size="100,24" font="Regular;20" valign="center" halign="center" backgroundColor="green" zPosition="2"/>
-			<widget source="list" render="Listbox" position="10,35" size="540,325" scrollbarMode="showOnDemand" >
-				<convert type="StringList" />
-			</widget>
-			<ePixmap pixmap="skin_default/buttons/red.png" position="0,350" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/yellow.png" position="150,350" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/green.png" position="300,350" size="140,40" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/blue.png" position="450,350" size="140,40" alphatest="on" />
-			<widget name="key_red" position="0,350" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
-			<widget name="key_yellow" position="150,350" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
-			<widget name="key_green" position="300,350" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
-			<widget name="key_blue" position="450,350" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
-		</screen>"""
-
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		if not path.exists('/usr/scripts'):
@@ -330,15 +309,6 @@ config.crontimers.dayofweek = NoSave(ConfigSelection(default='Monday', choices =
 config.crontimers.dayofmonth = NoSave(ConfigInteger(default=1, limits=(1, 31)))
 
 class CronTimersConfig(Screen, ConfigListScreen):
-	skin = """
-		<screen position="center,center" size="560,400" title="Cron Manager">
-			<widget name="config" position="10,20" size="540,400" scrollbarMode="showOnDemand" />
-			<ePixmap pixmap="skin_default/buttons/red.png" position="90,350" size="140,40" alphatest="on" />
-			<widget name="key_red" position="90,350" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
-			<widget name="HelpWindow" pixmap="skin_default/vkey_icon.png" position="450,320" zPosition="1" size="1,1" transparent="1" alphatest="on" />
-			<ePixmap pixmap="skin_default/buttons/key_text.png" position="250,353" zPosition="4" size="35,25" alphatest="on" transparent="1" />
-		</screen>"""
-
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		Screen.setTitle(self, _("Cron Manager"))
