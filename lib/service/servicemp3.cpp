@@ -377,7 +377,7 @@ int eServiceMP3::ac3_delay = 0,
 eServiceMP3::eServiceMP3(eServiceReference ref):
 	m_nownext_timer(eTimer::create(eApp)),
 	m_ref(ref),
-	m_pump(eApp, 1),
+	m_pump(eApp, 1)
 {
 	m_subtitle_sync_timer = eTimer::create(eApp);
 	m_streamingsrc_timeout = 0;
