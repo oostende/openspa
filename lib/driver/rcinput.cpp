@@ -88,6 +88,19 @@ void eRCDeviceInputDev::handleCode(long rccode)
 		}
 	}
 
+#if KEY_TEXT_TO_KEY_AUDIO
+	if (ev->code == KEY_AUDIO)
+	{
+		/* AZBOX rc has a KEY aux key, which sends KEY_TEXT events. Correct this, so we do not have to place hacks in the keymaps. */
+		ev->code = KEY_TEXT;
+	}
+	else if (ev->code == KEY_AUDIO)
+	{
+		/* AZBOX rc has a KEY Check key, which sends KEY_AUDIO events. Correct this, so we do not have to place hacks in the keymaps. */
+		ev->code = KEY_TEXT;
+	}
+#endif
+
 #if KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE
 	if (ev->code == KEY_PLAY)
 	{

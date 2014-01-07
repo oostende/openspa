@@ -413,7 +413,6 @@ void gPixmap::blit(const gPixmap &src, const eRect &_pos, const gRegion &clip, i
 #ifdef FORCE_NO_ACCELNEVER
 		accel = false;
 #else
-
 		if (accel)
 		{
 			/* we have hardware acceleration for this blit operation */
