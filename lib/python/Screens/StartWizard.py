@@ -1,5 +1,6 @@
 from Wizard import wizardManager
 from Screens.WizardLanguage import WizardLanguage
+from Screens.WizardUserInterfacePositioner import UserInterfacePositionerWizard
 from Screens.VideoWizard import VideoWizard
 from Screens.Rc import Rc
 
@@ -38,4 +39,5 @@ class StartWizard(WizardLanguage, Rc):
 
 wizardManager.registerWizard(VideoWizard, config.misc.videowizardenabled.getValue(), priority = 0)
 wizardManager.registerWizard(LanguageWizard, config.misc.languageselected.getValue(), priority = 5)
+wizardManager.registerWizard(UserInterfacePositionerWizard, config.misc.firstrun.getValue(), priority = 4)
 wizardManager.registerWizard(StartWizard, config.misc.firstrun.getValue(), priority = 20)

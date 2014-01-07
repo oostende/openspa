@@ -1744,8 +1744,18 @@ class InfoBarExtensions:
 				"extensions": (self.showExtensionSelection, _("Show extensions...")),
 			}, 1) # lower priority
 
+		self.addExtension(extension = self.getOsd3DSetup, type = InfoBarExtensions.EXTENSION_LIST)
 		self.addExtension(extension = self.getCCcamInfo, type = InfoBarExtensions.EXTENSION_LIST)
 		self.addExtension(extension = self.getOScamInfo, type = InfoBarExtensions.EXTENSION_LIST)
+
+	def get3DSetupname(self):
+		return _("OSD 3D Setup")
+
+	def getOsd3DSetup(self):
+		if config.osd.show3dextensions.getValue():
+			return [((boundFunction(self.get3DSetupname), boundFunction(self.open3DSetup), lambda: True), None)]
+		else:
+			return []
 
 	def getCCname(self):
 		return _("CCcam Info")
@@ -1825,6 +1835,10 @@ class InfoBarExtensions:
 	def extensionCallback(self, answer):
 		if answer is not None:
 			answer[1][1]()
+
+	def open3DSetup(self):
+		from Screens.UserInterfacePositioner import OSD3DSetupScreen
+		self.session.open(OSD3DSetupScreen)
 
 	def openCCcamInfo(self):
 		from Screens.CCcamInfo import CCcamInfoMain
@@ -1932,18 +1946,14 @@ class InfoBarPiP:
 		slist = self.servicelist
 		if slist:
 			slist.togglePipzap()
-			currentServicePath = self.servicelist.getCurrentServicePath()
-			self.servicelist.setCurrentServicePath(self.session.pip.servicePath, doZap=False)
-			self.session.pip.servicePath = currentServicePath
 
 	def showPiP(self):
 		if self.session.pipshown:
 			slist = self.servicelist
 			if slist and slist.dopipzap:
-				self.togglePipzap()
-			if self.session.pipshown:
-				del self.session.pip
-				self.session.pipshown = False
+				slist.togglePipzap()
+			del self.session.pip
+			self.session.pipshown = False
 		else:
 			self.session.pip = self.session.instantiateDialog(PictureInPicture)
 			self.session.pip.show()
@@ -1960,9 +1970,9 @@ class InfoBarPiP:
 		pipref = self.session.pip.getCurrentService()
 		if swapservice and pipref and pipref.toString() != swapservice.toString():
 			currentServicePath = self.servicelist.getCurrentServicePath()
-			self.servicelist.setCurrentServicePath(self.session.pip.servicePath, doZap=False)
+			self.servicelist.setCurrentServicePath(self.session.pip.servicePath)	
 			self.session.pip.playService(swapservice)
-			self.session.nav.playService(pipref, checkParentalControl=False, adjust=False)
+			self.session.nav.playService(pipref) # start subservice
 			self.session.pip.servicePath = currentServicePath
 			if self.servicelist.dopipzap:
 				# This unfortunately won't work with subservices

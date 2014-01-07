@@ -557,8 +557,8 @@ def runScreenTest():
 		setRTCtime(nowTime)
 
 	wakeupList = [
-		x for x in ((session.nav.RecordTimer.getNextRecordingTime(), 0),
-					(session.nav.RecordTimer.getNextZapTime(isWakeup=True), 1),
+		x for x in ((session.nav.RecordTimer.getNextRecordingTime(), 0, session.nav.RecordTimer.isNextRecordAfterEventActionAuto()),
+					(session.nav.RecordTimer.getNextZapTime(), 1),
 					(plugins.getNextWakeupTime(), 2))
 		if x[0] != -1
 	]
@@ -630,6 +630,10 @@ Components.Network.InitNetwork()
 profile("LCD")
 import Components.Lcd
 Components.Lcd.InitLcd()
+
+profile("UserInterface")
+import Screens.UserInterfacePositioner
+Screens.UserInterfacePositioner.InitOsd()
 
 profile("RFMod")
 import Components.RFmod

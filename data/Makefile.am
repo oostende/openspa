@@ -7,12 +7,14 @@ dist_pkgdata_DATA = \
 	prev.png \
 	radio.mvi \
 	black.mvi \
+	hd-testcard.mvi \
 	rcpositions.xml \
 	setup.xml \
 	skin_default.xml \
 	skin_subtitles.xml \
 	skin.xml \
 	startwizard.xml \
+	userinterfacepositionerwizard.xml \
 	freesat.t1 \
 	freesat.t2 \
 	unicable.xml \

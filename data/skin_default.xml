@@ -1333,6 +1333,19 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y() + (or
 		</widget>
 		<widget name="key" position="520,182" size="755,25" font="Regular;20" halign="center" transparent="1" valign="center" backgroundColor="background" />
 	</screen>
+	<!-- UserInterfacePositioner -->
+	<screen name="UserInterfacePositioner" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="blue">
+		<eLabel position="center,80" size="664,580" zPosition="0" backgroundColor="blue" />
+		<widget name="config" position="center,82" size="660,516" zPosition="1" scrollbarMode="ShowOnDemand" foregroundColor="white" backgroundColor="blue" transparent="0" enableWrapAround="1" />
+		<ePixmap pixmap="skin_default/div-h.png" position="center,600" size="660,2" zPosition="2" />
+		<widget source="status" render="Label" position="center,598" size="660,60" zPosition="1" font="Regular;18" foregroundColor="white" backgroundColor="blue" halign="center" valign="center" />
+		<ePixmap pixmap="skin_default/buttons/red.png" position="325,652" size="140,40" alphatest="blend" transparent="0" />
+		<widget source="key_red" render="Label" position="330,659" size="128,25" zPosition="1" font="Regular;20" halign="center" transparent="1" valign="center" noWrap="1" foregroundColor="white" backgroundColor="transparent" />
+		<ePixmap pixmap="skin_default/buttons/green.png" position="580,652" size="140,40" alphatest="blend" transparent="0" />
+		<widget source="key_green" render="Label" position="585,659" size="128,25" zPosition="1" font="Regular;20" halign="center" transparent="1" valign="center" noWrap="1" foregroundColor="white" backgroundColor="transparent" />
+		<ePixmap pixmap="skin_default/buttons/yellow.png" position="820,652" size="140,40" alphatest="blend" transparent="0" />
+		<widget source="key_yellow" render="Label" position="825,659" size="128,25" zPosition="1" font="Regular;20" halign="center" transparent="1" valign="center" noWrap="1" foregroundColor="white" backgroundColor="transparent" />
+	</screen>
 	<!-- Menu Panels -->
 	<screen name="BasicTemplate">
 		<eLabel backgroundColor="background" position="0,0" size="560,460" zPosition="-1" />

@@ -1,5 +1,5 @@
 from Components.Harddisk import harddiskmanager
-from config import ConfigSubsection, ConfigYesNo, config, ConfigSelection, ConfigText, ConfigNumber, ConfigSet, ConfigLocations, ConfigSelectionNumber, ConfigInteger, ConfigPassword, ConfigIP, ConfigClock
+from config import ConfigSubsection, ConfigYesNo, config, ConfigSelection, ConfigText, ConfigNumber, ConfigSet, ConfigLocations, ConfigSelectionNumber, ConfigInteger, ConfigPassword, ConfigIP, ConfigClock, ConfigSlider, NoSave
 from Tools.Directories import resolveFilename, SCOPE_HDD, defaultRecordingLocation
 from enigma import setTunerTypePriorityOrder, setPreferredTuner, setSpinnerOnOff, setEnableTtCachingOnOff;
 from enigma import Misc_Options, eEnv;
@@ -506,6 +506,19 @@ def InitUsageConfig():
 	config.streaming.descramble = ConfigYesNo(default = True)
 	config.streaming.stream_eit = ConfigYesNo(default = True)
 	config.streaming.stream_ait = ConfigYesNo(default = True)
+
+	config.osd = ConfigSubsection()
+	config.osd.dst_left = ConfigSelectionNumber(default = 0, stepwidth = 1, min = 0, max = 720, wraparound = False)
+	config.osd.dst_width = ConfigSelectionNumber(default = 720, stepwidth = 1, min = 0, max = 720, wraparound = False)
+	config.osd.dst_top = ConfigSelectionNumber(default = 0, stepwidth = 1, min = 0, max = 576, wraparound = False)
+	config.osd.dst_height = ConfigSelectionNumber(default = 576, stepwidth = 1, min = 0, max = 576, wraparound = False)
+	config.osd.alpha = ConfigSelectionNumber(default = 255, stepwidth = 1, min = 0, max = 255, wraparound = False)
+	config.av.osd_alpha = NoSave(ConfigNumber(default = 255))
+	config.osd.threeDmode = ConfigSelection([("off", _("Off")), ("auto", _("Auto")), ("sidebyside", _("Side by Side")),("topandbottom", _("Top and Bottom"))], "auto")
+	config.osd.threeDznorm = ConfigSlider(default = 50, increment = 1, limits = (0, 100))
+	config.osd.show3dextensions = ConfigYesNo(default = False)
+	choiceoptions = [("mode1", _("Mode 1")), ("mode2", _("Mode 2"))]
+	config.osd.threeDsetmode = ConfigSelection(default = 'mode1' , choices = choiceoptions )
 
 def updateChoices(sel, choices):
 	if choices:
