@@ -1,3 +1,4 @@
+from enigma import getBoxType, getMachineName
 import os
 
 class RcModel:
@@ -11,6 +12,7 @@ class RcModel:
 	RCTYPE_ET4X00 = 5
 	RCTYPE_XP1000 = 6
 	RCTYPE_E3HD = 7
+	RCTYPE_ODINM6 = 16
 	RCTYPE_ODINM7 = 17
 	RCTYPE_ODINM9 = 18
 	RCTYPE_AZHD = 50
@@ -52,6 +54,8 @@ class RcModel:
 					self.currentRcType = self.RCTYPE_ET4X00
 				elif rc == '14':
 					self.currentRcType = self.RCTYPE_XP1000
+			elif getBoxType() == 'odinm6' or getMachineName() == 'AX-Odin':
+				self.currentRcType = self.RCTYPE_ODINM6
 			elif model == 'odinm7':
 				self.currentRcType = self.RCTYPE_ODINM7
 			elif model == 'odinm9':
@@ -97,6 +101,8 @@ class RcModel:
 			return '/usr/share/enigma2/rc_models/azhd/'
 		elif self.currentRcType == self.RCTYPE_AZMe:
 			return '/usr/share/enigma2/rc_models/azme/'
+		elif self.currentRcType == self.RCTYPE_ODINM6:
+			return '/usr/share/enigma2/rc_models/odinm6/'
 		elif self.currentRcType == self.RCTYPE_ODINM7:
 			return '/usr/share/enigma2/rc_models/odinm7/'
 		elif self.currentRcType == self.RCTYPE_ODINM9:
