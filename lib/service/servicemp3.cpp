@@ -2223,7 +2223,12 @@ void eServiceMP3::pullSubtitle(GstBuffer *buffer)
 #endif
 				eDebug("got new text subtitle @ buf_pos = %lld ns (in pts=%lld), dur=%lld: '%s' ", buf_pos, buf_pos/11111, duration_ns, line.c_str());
 
-				uint32_t start_ms = ((buf_pos / 1000000ULL) * convert_fps) + delay;
+				// Fix by morser for show subtitles
+				//uint32_t start_ms = ((buf_pos / 1000000ULL) * convert_fps) + delay;
+				long start1 = buf_pos / 1000000ULL;
+				double start2 = (double)start1 * convert_fps;
+				uint32_t start_ms = (long)start2 + delay;
+				// Fix end
 				uint32_t end_ms = start_ms + (duration_ns / 1000000ULL);
 				m_subtitle_pages.insert(subtitle_pages_map_pair_t(end_ms, subtitle_page_t(start_ms, end_ms, line)));
 				m_subtitle_sync_timer->start(1, true);
