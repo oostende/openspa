@@ -9,7 +9,8 @@ from Components.Sources.List import List
 from Components.Sources.Boolean import Boolean
 from Components.SystemInfo import SystemInfo
 
-from enigma import iPlayableService, eTimer, getBoxType, getMachineBrand
+from enigma import iPlayableService, eTimer
+from boxbranding import getBoxType, getMachineBrand
 
 from Tools.ISO639 import LanguageCodes
 from Tools.BoundFunction import boundFunction

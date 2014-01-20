@@ -13,7 +13,7 @@ from Screens.Console import Console
 from Screens.HelpMenu import HelpableScreen
 from Screens.TaskView import JobView
 from Tools.Downloader import downloadWithProgress
-from enigma import getBoxType
+from boxbranding import getBoxType
 import urllib2
 import os
 import shutil

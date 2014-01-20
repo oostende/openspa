@@ -4,7 +4,7 @@
 #					MAKES A FULLBACK-UP READY FOR FLASHING.						#
 #																				#
 #################################################################################
-from enigma import getBoxType, getEnigmaVersionString
+from enigma import getEnigmaVersionString
 from Screens.Screen import Screen
 from Components.Button import Button
 from Components.Label import Label
@@ -16,6 +16,7 @@ from time import time, strftime, localtime
 from os import path, system, makedirs, listdir, walk, statvfs
 import commands
 import datetime
+from boxbranding import getBoxType
 
 VERSION = "Version 2.0 openSPA"
 

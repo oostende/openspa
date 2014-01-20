@@ -1,4 +1,4 @@
-from enigma import getBoxType, getMachineName
+from boxbranding import getBoxType, getMachineName
 import os
 
 class RcModel:

@@ -19,6 +19,7 @@ profile("PYTHON_START")
 
 import Tools.RedirectOutput
 import enigma
+from boxbranding import getBoxType
 import eConsoleImpl
 import eBaseImpl
 enigma.eTimer = eBaseImpl.eTimer
@@ -51,7 +52,7 @@ from Components.config import config, configfile, ConfigText, ConfigYesNo, Confi
 InitFallbackFiles()
 
 profile("config.misc")
-config.misc.boxtype = ConfigText(default = enigma.getBoxType())
+config.misc.boxtype = ConfigText(default = getBoxType())
 config.misc.radiopic = ConfigText(default = resolveFilename(SCOPE_CURRENT_SKIN, "radio.mvi"))
 config.misc.blackradiopic = ConfigText(default = resolveFilename(SCOPE_CURRENT_SKIN, "black.mvi"))
 #config.misc.useTransponderTime = ConfigYesNo(default=True)
@@ -538,7 +539,7 @@ def runScreenTest():
 	profile("RunReactor")
 	profile_final()
 
-	if enigma.getBoxType() == 'odinm7':
+	if getBoxType() == 'odinm7':
 		f = open("/dev/dbox/oled0", "w")
 		f.write('-E2-')
 		f.close()
