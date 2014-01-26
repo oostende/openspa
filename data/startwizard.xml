@@ -105,7 +105,7 @@ self.selectKey("LEFT")
 self.selectKey("RIGHT")
 			</code>
 		</step>
-		<step id="channels">
+<!--		<step id="channels">
 			<condition>
 from Components.NimManager import nimmanager
 self.condition = nimmanager.somethingConnected() and config.misc.installwizard.hasnetwork.value and config.misc.installwizard.ipkgloaded.value
@@ -117,7 +117,7 @@ self.clearSelectedKeys()
 self.selectKey("LEFT")
 self.selectKey("RIGHT")
 			</code>
-		</step>
+		</step>-->
 		<step id="scanquestion">
 			<text value="Do you want to do a service scan?" />
 			<condition>
@@ -156,11 +156,11 @@ self.condition = nimmanager.somethingConnected() and not config.misc.installwiza
 			</condition>
 			<text value="Do you want to do another manual service scan?" />
 			<list>
-				<listentry caption="No" step="softcam" />
+				<listentry caption="No, scan later manually" step="end" />
 				<listentry caption="Yes, do another manual scan now" step="manualscan" />
 			</list>
 		</step>
-		<step id="softcam">
+<!--		<step id="softcam">
 			<condition>
 self.condition = config.misc.installwizard.hasnetwork.value and config.misc.installwizard.ipkgloaded.value
 			</condition>
@@ -171,7 +171,7 @@ self.clearSelectedKeys()
 self.selectKey("LEFT")
 self.selectKey("RIGHT")
 			</code>
-		</step>
+		</step>-->
 		<step id="end" laststep="true">
 			<text value="Thank you for using the wizard. Your receiver is now ready for use.\nPress OK to start using your receiver." />
 			<code>
