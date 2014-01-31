@@ -23,7 +23,7 @@ from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS, SCOPE_
 from Tools.LoadPixmap import LoadPixmap
 from Plugins.Plugin import PluginDescriptor
 from enigma import eTimer, ePoint, eSize, RT_HALIGN_LEFT, eListboxPythonMultiContent, gFont
-from boxbranding import getMachineBrand, getMachineName
+from boxbranding import getBoxType, getMachineBrand, getMachineName
 from os import remove, symlink, unlink, rename, chmod
 from re import compile as re_compile, search as re_search
 import time
@@ -464,8 +464,10 @@ class AdapterSetup(Screen, ConfigListScreen, HelpableScreen):
 				if self.hasGatewayConfigEntry.value:
 					self.list.append(getConfigListEntry(_('Gateway'), self.gatewayConfigEntry))
 			if SystemInfo["WOL"] and self.iface == 'eth0':
-				self.wakeonlan = getConfigListEntry(_('Use WOL'), config.network.wol)
-				self.list.append(self.wakeonlan)
+				self.BoxType = getBoxType()
+				if not self.BoxType == 'gbquad' :
+					self.wakeonlan = getConfigListEntry(_('Use WOL'), config.network.wol)
+					self.list.append(self.wakeonlan)
 
 			self.extended = None
 			self.configStrings = None
