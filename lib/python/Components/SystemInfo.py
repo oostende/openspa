@@ -30,3 +30,6 @@ SystemInfo["FrontpanelDisplay"] = fileExists("/dev/dbox/oled0") or fileExists("/
 SystemInfo["FrontpanelDisplayGrayscale"] = fileExists("/dev/dbox/oled0")
 SystemInfo["DeepstandbySupport"] = HardwareInfo().get_device_name() != "dm800"
 SystemInfo["WOL"] = fileExists("/proc/stb/fp/wol")
+SystemInfo["HDMICEC"] = (path.exists("/dev/hdmi_cec") or path.exists("/dev/misc/hdmi_cec0")) and fileExists("/usr/lib/enigma2/python/Plugins/SystemPlugins/HdmiCEC/plugin.pyo")
+SystemInfo["Satfinder"] = fileExists("/usr/lib/enigma2/python/Plugins/SystemPlugins/Satfinder/plugin.pyo")
+SystemInfo["GBWOL"] = fileExists("/usr/bin/gigablue_wol")
