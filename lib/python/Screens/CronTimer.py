@@ -15,8 +15,8 @@ from boxbranding import getMachineBrand, getMachineName
 class CronTimers(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		if not path.exists('/usr/scripts'):
-			mkdir('/usr/scripts', 0755)
+		if not path.exists('/etc/cron/scripts'):
+			mkdir('/etc/cron/scripts', 0755)
 		Screen.setTitle(self, _("Cron Manager"))
 		self.onChangedEntry = [ ]
 		self['lab1'] = Label(_("Autostart:"))
@@ -325,11 +325,11 @@ class CronTimersConfig(Screen, ConfigListScreen):
 
 	def createSetup(self):
 		predefinedlist = []
-		f = listdir('/usr/scripts')
+		f = listdir('/etc/cron/scripts')
 		if f:
 			for line in f:
 				parts = line.split()
-				path = "/usr/scripts/"
+				path = "/etc/cron/scripts/"
 				pkg = parts[0]
 				description = path + parts[0]
 				if pkg.find('.sh') >= 0:
