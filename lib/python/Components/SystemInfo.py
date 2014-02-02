@@ -1,6 +1,7 @@
 from enigma import eDVBResourceManager
 from Tools.Directories import fileExists
 from Tools.HardwareInfo import HardwareInfo
+from os import path
 
 SystemInfo = { }
 
