@@ -1081,6 +1081,10 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y() + (or
 	<screen name="StartWizard" position="fill" title="Welcome..." flags="wfNoBorder">
 		<panel name="DefaultWizard" />
 	</screen>
+	<!-- NetworkWizard screen... -->
+	<screen name="NetworkWizard" position="fill" title="Welcome..." flags="wfNoBorder">
+		<panel name="DefaultWizard" />
+	</screen>
 	<!-- Subservice quickzap -->
 	<screen name="SubservicesQuickzap" position="center,center" size="512,200" title="Subservices" backgroundColor="transparent" flags="wfNoBorder">
 		<widget source="session.RecordState" render="Pixmap" pixmap="skin_default/icons/record.png" position="450,0" zPosition="2" size="14,14" alphatest="on" >
