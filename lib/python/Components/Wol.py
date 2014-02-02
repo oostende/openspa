@@ -16,8 +16,7 @@ class WOL:
 def Init():
 	config.network = ConfigSubsection()
 	if SystemInfo["WOL"]:
-		self.BoxType = getBoxType()
-		if not self.BoxType == 'gbquad' :
+		if not getBoxType() == 'gbquad' :
 			def setWOLmode(value):
 				iwol.setWolState(config.network.wol.value);
 			iwol = WOL()
