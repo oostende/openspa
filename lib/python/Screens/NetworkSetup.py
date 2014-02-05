@@ -464,8 +464,7 @@ class AdapterSetup(Screen, ConfigListScreen, HelpableScreen):
 				if self.hasGatewayConfigEntry.value:
 					self.list.append(getConfigListEntry(_('Gateway'), self.gatewayConfigEntry))
 			if SystemInfo["WOL"] and self.iface == 'eth0':
-				self.BoxType = getBoxType()
-				if not self.BoxType == 'gbquad' :
+				if not getBoxType() == 'gbquad' :
 					self.wakeonlan = getConfigListEntry(_('Use WOL'), config.network.wol)
 					self.list.append(self.wakeonlan)
 
