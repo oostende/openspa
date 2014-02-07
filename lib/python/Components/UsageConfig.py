@@ -4,7 +4,6 @@ from Tools.Directories import resolveFilename, SCOPE_HDD, defaultRecordingLocati
 from enigma import setTunerTypePriorityOrder, setPreferredTuner, setSpinnerOnOff, setEnableTtCachingOnOff;
 from enigma import Misc_Options, eEnv;
 from Components.NimManager import nimmanager
-from Components.Harddisk import harddiskmanager
 from Components.ServiceList import refreshServiceList
 from SystemInfo import SystemInfo
 import os
@@ -337,6 +336,20 @@ def InitUsageConfig():
 
 	config.crash = ConfigSubsection()
 	config.crash.details = ConfigYesNo(default = False)
+
+	debugpath = [('/home/root/logs/', '/home/root/')]
+	for p in harddiskmanager.getMountedPartitions():
+			if os.path.exists(p.mountpoint):
+				d = os.path.normpath(p.mountpoint)
+				if p.mountpoint != '/':
+					debugpath.append((p.mountpoint + 'logs/', d))
+	config.crash.debug_path = ConfigSelection(default = "/home/root/logs/", choices = debugpath)
+
+	def updatedebug_path(configElement):
+		if not os.path.exists(config.crash.debug_path.getValue()):
+			os.mkdir(config.crash.debug_path.getValue(),0755)
+	config.crash.debug_path.addNotifier(updatedebug_path, immediate_feedback = False)
+
 	config.usage.timerlist_finished_timer_position = ConfigSelection(default = "end", choices = [("beginning", _("At beginning")), ("end", _("At end"))])
 
 	def updateEnterForward(configElement):
