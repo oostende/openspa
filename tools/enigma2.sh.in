@@ -4,6 +4,12 @@ prefix=@prefix@
 exec_prefix=@exec_prefix@
 datarootdir=@datarootdir@
 
+# workaround for corrupt ssl files
+if [ ! "$(grep config.misc.firstrun /etc/enigma2/settings)" == "config.misc.firstrun=false" ]; then
+	rm -rf /etc/enigma2/cert.pem &
+	rm -rf /etc/enigma2/key.pem &
+fi
+
 # update NTP time if NTP Time Enabled
 if [ "$(grep config.misc.SyncTimeUsing /etc/enigma2/settings)" == "config.misc.SyncTimeUsing=1" ]; then
 	/usr/bin/ntpdate -s -u pool.ntp.org &
@@ -28,7 +34,26 @@ if [ -d /home/root ]; then
 	cd /home/root
 fi
 
-LIBS=@libdir@/libopen.so.0.0.0
+#check for sundtek tuner helper lib
+if [ -e /opt/lib/libmediaclient.so ]; then
+	LIBS="/opt/lib/libmediaclient.so /usr/lib/libopen.so.0.0.0"
+else
+	LIBS="/usr/lib/libopen.so.0.0.0"
+fi
+
+#check for specific pagecache helper lib
+if [ -e /usr/lib/libpagecache.so ]; then
+	LIBS="$LIBS /usr/lib/libpagecache.so"
+fi
+
+#check for receiver specific passthrough helper lib
+if [ -e @libdir@/libpassthrough.so ]; then
+	LIBS="$LIBS @libdir@/libpassthrough.so"
+fi
+
+if [ ! -e /etc/enigma2/settings ]; then
+	touch /etc/enigma2/settings
+fi
 
 sync
 LD_PRELOAD=$LIBS @bindir@/enigma2
@@ -51,6 +76,7 @@ case $ret in
 		;;
 	3)
 		rm -fR /home/root/.gstreamer-0.10
+		rm -f /tmp/.listen.camd.socket.ignore
 		;;
 	4)
 		/sbin/rmmod lcd
@@ -66,6 +92,14 @@ case $ret in
 		opkg upgrade 2>&1 | tee /home/root/ipkgupgrade.log
 		/sbin/reboot
 		;;
+	43)
+		init 1
+		;;
+	44)
+		echo "    " > /dev/lcd0
+		/usr/bin/gigablue_wol
+		;;
 	*)
+		rm -f /tmp/.listen.camd.socket.ignore
 		;;
 esac
