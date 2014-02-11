@@ -1,6 +1,6 @@
 from HTMLComponent import HTMLComponent
 from GUIComponent import GUIComponent
-from config import KEY_LEFT, KEY_RIGHT, KEY_HOME, KEY_END, KEY_0, KEY_DELETE, KEY_BACKSPACE, KEY_OK, KEY_TOGGLEOW, KEY_ASCII, KEY_TIMEOUT, KEY_NUMBERS, config, configfile, ConfigElement, ConfigText, ConfigPassword
+from config import KEY_LEFT, KEY_RIGHT, KEY_HOME, KEY_END, KEY_0, KEY_DELETE, KEY_BACKSPACE, KEY_OK, KEY_TOGGLEOW, KEY_ASCII, KEY_TIMEOUT, KEY_NUMBERS, KEY_FILE, ConfigElement, ConfigText, ConfigPassword
 from Components.ActionMap import NumberActionMap, ActionMap
 from enigma import eListbox, eListboxPythonConfigContent, eRCInput, eTimer, quitMainloop
 from Screens.MessageBox import MessageBox
@@ -35,10 +35,10 @@ class ConfigList(HTMLComponent, GUIComponent, object):
 		selection[1].toggle()
 		self.invalidateCurrent()
 
-	def handleKey(self, key, session=None)
+	def handleKey(self, key):
 		selection = self.getCurrent()
 		if selection and selection[1].enabled:
-			selection[1].handleKey(key, session, selection[0])
+			selection[1].handleKey(key, self.session, selection[0])
 			self.invalidateCurrent()
 			if key in KEY_NUMBERS:
 				self.timer.start(1000, 1)
@@ -142,7 +142,8 @@ class ConfigListScreen:
 			"7": self.keyNumberGlobal,
 			"8": self.keyNumberGlobal,
 			"9": self.keyNumberGlobal,
-			"0": self.keyNumberGlobal
+			"0": self.keyNumberGlobal,
+			"file" : self.keyFile
 		}, -1) # to prevent left/right overriding the listbox
 
 		self["VirtualKB"] = ActionMap(["VirtualKeyboardActions"],
@@ -196,7 +197,7 @@ class ConfigListScreen:
 			self["config"].invalidate(self["config"].getCurrent())
 
 	def keyOK(self):
-		self["config"].handleKey(KEY_OK, session=self.session)
+		self["config"].handleKey(KEY_OK)
 
 	def keyLeft(self):
 		self["config"].handleKey(KEY_LEFT)
@@ -239,6 +240,9 @@ class ConfigListScreen:
 
 	def keyPageUp(self):
 		self["config"].pageUp()
+
+	def keyFile(self):
+		self["config"].handleKey(KEY_FILE)
 
 	def saveAll(self):
 		restartgui = False
