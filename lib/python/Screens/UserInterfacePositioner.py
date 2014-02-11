@@ -8,6 +8,7 @@ from Components.Pixmap import Pixmap
 from Components.Console import Console
 from enigma import getDesktop
 from os import access, R_OK
+from boxbranding import getBoxType
 
 def InitOsd():
 	try:
@@ -58,11 +59,12 @@ def InitOsd():
 	print 'Setting OSD position: %s %s %s %s' %  (config.osd.dst_left.getValue(), config.osd.dst_width.getValue(), config.osd.dst_top.getValue(), config.osd.dst_height.getValue())
 
 	def setOSDAlpha(configElement):
-		print 'Setting OSD alpha:', str(configElement.getValue())
-		config.av.osd_alpha.setValue(configElement.getValue())
-		f = open("/proc/stb/video/alpha", "w")
-		f.write(str(configElement.getValue()))
-		f.close()
+		if SystemInfo["CanChangeOsdAlpha"]:
+			print 'Setting OSD alpha:', str(configElement.getValue())
+			config.av.osd_alpha.setValue(configElement.getValue())
+			f = open("/proc/stb/video/alpha", "w")
+			f.write(str(configElement.getValue()))
+			f.close()
 	config.osd.alpha.addNotifier(setOSDAlpha)
 
 	def set3DMode(configElement):
@@ -119,7 +121,10 @@ class UserInterfacePositioner(Screen, ConfigListScreen):
 		self.selectionChanged()
 
 	def selectionChanged(self):
-		self["status"].setText(self["config"].getCurrent()[2])
+		if getBoxType().startswith('azbox'):
+			pass
+		else:
+			self["status"].setText(self["config"].getCurrent()[2])
 
 	def layoutFinished(self):
 		self.setTitle(_(self.setup_title))
