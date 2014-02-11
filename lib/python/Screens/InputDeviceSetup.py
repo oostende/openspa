@@ -9,6 +9,7 @@ from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import ActionMap, HelpableActionMap
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
 from Tools.LoadPixmap import LoadPixmap
+from boxbranding import getMachineBrand, getMachineName
 
 class InputDeviceSelection(Screen,HelpableScreen):
 	skin = """
@@ -85,7 +86,7 @@ class InputDeviceSelection(Screen,HelpableScreen):
 		enabled = iInputDevices.getDeviceAttribute(device, 'enabled')
 
 		if type == 'remote':
-			if config.misc.rcused.value == 0:
+			if config.misc.rcused.getValue() == 0:
 				if enabled:
 					devicepng = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/input_rcnew-configured.png"))
 				else:
@@ -181,6 +182,9 @@ class InputDeviceSetup(Screen, ConfigListScreen):
 		self["key_blue"] = StaticText()
 		self["introduction"] = StaticText()
 
+		# for generating strings into .po only
+		devicenames = [_("%s %s front panel") % (getMachineBrand(), getMachineName()),_("%s %s front panel") % (getMachineBrand(), getMachineName()),_("%s %s remote control (native)") % (getMachineBrand(), getMachineName()),_("%s %s advanced remote control (native)") % (getMachineBrand(), getMachineName()),_("%s %s ir keyboard") % (getMachineBrand(), getMachineName()),_("%s %s ir mouse") % (getMachineBrand(), getMachineName())]
+
 		self.createSetup()
 		self.onLayoutFinish.append(self.layoutFinished)
 		self.onClose.append(self.cleanup)
@@ -214,7 +218,7 @@ class InputDeviceSetup(Screen, ConfigListScreen):
 
 		self.list.append(self.enableEntry)
 		if self.enableConfigEntry:
-			if self.enableConfigEntry.value is True:
+			if self.enableConfigEntry.getValue() is True:
 				self.list.append(self.repeatEntry)
 				self.list.append(self.delayEntry)
 			else:
@@ -273,7 +277,7 @@ class InputDeviceSetup(Screen, ConfigListScreen):
 
 	def keyCancel(self):
 		if self["config"].isChanged():
-			self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Really close without saving settings?"), MessageBox.TYPE_YESNO, timeout = 20, default = True)
+			self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Really close without saving settings?"), MessageBox.TYPE_YESNO, timeout = 20, default = False)
 		else:
 			self.close()
 	# for summary:
@@ -286,7 +290,7 @@ class InputDeviceSetup(Screen, ConfigListScreen):
 		return self["config"].getCurrent()[0]
 
 	def getCurrentValue(self):
-		return str(self["config"].getCurrent()[1].value)
+		return str(self["config"].getCurrent()[1].getValue())
 
 	def createSummary(self):
 		from Screens.Setup import SetupSummary
@@ -296,10 +300,13 @@ class InputDeviceSetup(Screen, ConfigListScreen):
 class RemoteControlType(Screen, ConfigListScreen):
 	rcList = [
 			("0", _("Default")),
-			("4", _("DMM normal")), ("6", _("DMM advanced")),
-			("11", "et9x00/6500"), ("7", "et5000/6000"), ("13", "et4000"),
-			("14", "xp1000"),
+			("4", _("DMM normal")),
+			("6", _("DMM advanced")),
+			("7", "et5000/6000"),
 			("8", "VU+"),
+			("11", "et9x00/6500"),
+			("13", "et4000"),
+			("14", "xp1000"),
 		]
 
 	defaultRcList = [
@@ -329,7 +336,7 @@ class RemoteControlType(Screen, ConfigListScreen):
 		self.list = []
 		ConfigListScreen.__init__(self, self.list, session = self.session)
 
-		rctype = config.plugins.remotecontroltype.rctype.value
+		rctype = config.plugins.remotecontroltype.rctype.getValue()
 		self.rctype = ConfigSelection(choices = self.rcList, default = str(rctype))
 		self.list.append(getConfigListEntry(_("Remote control type"), self.rctype))
 		self["config"].list = self.list
@@ -345,28 +352,28 @@ class RemoteControlType(Screen, ConfigListScreen):
 				break
 
 	def setDefaultRcType(self):
-		iRcTypeControl.writeRcType(self.defaultRcType)
+		iRcTypeControl.writeRcType(config.plugins.remotecontroltype.rctype.getValue())
 
 	def keySave(self):
-		if config.plugins.remotecontroltype.rctype.value == int(self.rctype.value):
+		if config.plugins.remotecontroltype.rctype.getValue() == int(self.rctype.getValue()):
 			self.close()
 		else:
 			self.setNewSetting()
-			self.session.openWithCallback(self.keySaveCallback, MessageBox, _("Is this setting ok?"), MessageBox.TYPE_YESNO, timeout = 20, default = False)
+			self.session.openWithCallback(self.keySaveCallback, MessageBox, _("Is this setting ok?"), MessageBox.TYPE_YESNO, timeout = 20, default = True)
 
 	def keySaveCallback(self, answer):
 		if answer is False:
 			self.restoreOldSetting()
 		else:
-			config.plugins.remotecontroltype.rctype.value = int(self.rctype.value)
+			config.plugins.remotecontroltype.rctype.value = int(self.rctype.getValue())
 			config.plugins.remotecontroltype.save()
 			self.close()
 
 	def restoreOldSetting(self):
-		if config.plugins.remotecontroltype.rctype.value == 0:
+		if config.plugins.remotecontroltype.rctype.getValue() == 0:
 			self.setDefaultRcType()
 		else:
-			iRcTypeControl.writeRcType(config.plugins.remotecontroltype.rctype.value)
+			iRcTypeControl.writeRcType(config.plugins.remotecontroltype.rctype.getValue())
 
 	def setNewSetting(self):
 		if int(self.rctype.value) == 0:

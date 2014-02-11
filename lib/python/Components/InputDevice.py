@@ -38,6 +38,8 @@ class inputDevices:
 				self.fd = os_open("/dev/input/" + evdev, O_RDWR | O_NONBLOCK)
 				self.name = ioctl(self.fd, EVIOCGNAME(256), buffer)
 				self.name = self.name[:self.name.find("\0")]
+				if str(self.name).find("Keyboard") != -1:
+					self.name = 'keyboard'
 				os_close(self.fd)
 			except (IOError,OSError), err:
 				print '[iInputDevices] getInputDevices  <ERROR: ioctl(EVIOCGNAME): ' + str(err) + ' >'
@@ -107,7 +109,7 @@ class inputDevices:
 		os_close(fd)
 
 	def setRepeat(self, device, value): #REP_PERIOD
-		if self.getDeviceAttribute(device, 'enabled') == True:
+		if self.getDeviceAttribute(device, 'enabled'):
 			print "[iInputDevices] setRepeat for device %s to %d ms" % (device,value)
 			event = struct.pack('iihhi', 0, 0, 0x14, 0x01, int(value))
 			fd = os_open("/dev/input/" + device, O_RDWR)
@@ -115,7 +117,7 @@ class inputDevices:
 			os_close(fd)
 
 	def setDelay(self, device, value): #REP_DELAY
-		if self.getDeviceAttribute(device, 'enabled') == True:
+		if self.getDeviceAttribute(device, 'enabled'):
 			print "[iInputDevices] setDelay for device %s to %d ms" % (device,value)
 			event = struct.pack('iihhi', 0, 0, 0x14, 0x00, int(value))
 			fd = os_open("/dev/input/" + device, O_RDWR)
@@ -171,8 +173,8 @@ class InitInputDevices:
 	def setupConfigEntries(self,device):
 		cmd = "config.inputDevices." + device + " = ConfigSubsection()"
 		exec (cmd)
-		if getBoxType() == 'odinm7' or getBoxType() == 'odinm9' or getBoxType() == 'azboxhd':
-			cmd = "config.inputDevices." + device + ".enabled = ConfigYesNo(default = False)"
+		if getBoxType() == 'dm800' or getBoxType() == 'azboxhd':
+			cmd = "config.inputDevices." + device + ".enabled = ConfigYesNo(default = True)"
 		else:
 			cmd = "config.inputDevices." + device + ".enabled = ConfigYesNo(default = False)"
 		exec (cmd)
@@ -182,7 +184,7 @@ class InitInputDevices:
 		exec (cmd)
 		cmd = "config.inputDevices." + device + ".name.addNotifier(self.inputDevicesNameChanged,config.inputDevices." + device + ".name)"
 		exec (cmd)
-		if getBoxType() == 'odinm7' or getBoxType() == 'odinm9':
+		if getBoxType() == 'odinm9' or getBoxType() == 'odinm7' or getBoxType() == 'odinm6':
 			cmd = "config.inputDevices." + device + ".repeat = ConfigSlider(default=400, increment = 10, limits=(0, 500))"
 		elif getBoxType() == 'azboxhd':
 			cmd = "config.inputDevices." + device + ".repeat = ConfigSlider(default=150, increment = 10, limits=(0, 500))"
@@ -191,7 +193,7 @@ class InitInputDevices:
 		exec (cmd)
 		cmd = "config.inputDevices." + device + ".repeat.addNotifier(self.inputDevicesRepeatChanged,config.inputDevices." + device + ".repeat)"
 		exec (cmd)
-		if getBoxType() == 'odinm7' or getBoxType() == 'odinm9':
+		if getBoxType() == 'odinm9' or getBoxType() == 'odinm7' or getBoxType() == 'odinm6':
 			cmd = "config.inputDevices." + device + ".delay = ConfigSlider(default=200, increment = 100, limits=(0, 5000))"
 		else:
 			cmd = "config.inputDevices." + device + ".delay = ConfigSlider(default=700, increment = 100, limits=(0, 5000))"
@@ -208,16 +210,18 @@ config.plugins.remotecontroltype.rctype = ConfigInteger(default = 0)
 
 class RcTypeControl():
 	def __init__(self):
-		if pathExists('/proc/stb/ir/rc/type') and pathExists('/proc/stb/info/boxtype'):
+		if pathExists('/proc/stb/ir/rc/type') and pathExists('/proc/stb/info/boxtype') and not getBoxType().startswith('gb'):
 			self.isSupported = True
 
 			fd = open('/proc/stb/info/boxtype', 'r')
 			self.boxType = fd.read()
 			fd.close()
 
-			if config.plugins.remotecontroltype.rctype.value != 0:
-				self.writeRcType(config.plugins.remotecontroltype.rctype.value)
+			if config.plugins.remotecontroltype.rctype.getValue() != 0:
+				self.writeRcType(config.plugins.remotecontroltype.rctype.getValue())
 		else:
+			self.isSupported = False
+		if getBoxType().startswith('gb'):
 			self.isSupported = False
 
 	def multipleRcSupported(self):
@@ -228,7 +232,7 @@ class RcTypeControl():
 
 	def writeRcType(self, rctype):
 		fd = open('/proc/stb/ir/rc/type', 'w')
-		fd.write('%d' % (rctype))
+		fd.write('%d' % rctype)
 		fd.close()
 
 iRcTypeControl = RcTypeControl()
