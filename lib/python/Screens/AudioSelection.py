@@ -42,8 +42,8 @@ class AudioSelection(Screen, ConfigListScreen):
 			"red": self.keyRed,
 			"green": self.keyGreen,
 			"yellow": self.keyYellow,
-			"subtitleSelection": self.keySubtitle,
-			"audioSelection": self.keyAudio,
+			"subtitleSelection": self.keyAudioSubtitle,
+			"audioSelection": self.keyAudioSubtitle,
 			"blue": self.keyBlue,
 			"ok": self.keyOk,
 			"cancel": self.cancel,
@@ -329,26 +329,11 @@ class AudioSelection(Screen, ConfigListScreen):
 		else:
 			return 0
 
-	def keySubtitle(self):
-		service = self.session.nav.getCurrentService()
-		subtitle = service and service.subtitle()
-		subtitlelist = subtitle and subtitle.getSubtitleList()
-		if self.settings.menupage.getValue() == PAGE_AUDIO and subtitlelist and len(subtitlelist)>0:
-			self.settings.menupage.setValue('subtitles')
-		else:
-			return 0
-
-	def keyAudio(self):
-		if getMachineBrand() == "Vu+" or getBoxType() == "et9500":
-			if self.settings.menupage.getValue() == PAGE_SUBTITLES:
-				self.settings.menupage.setValue('audio')
-			else:
+	def keyAudioSubtitle(self):
+			if self.settings.menupage.getValue() == PAGE_AUDIO:
 				self.settings.menupage.setValue('subtitles')
-		else:
-			if self.settings.menupage.getValue() == PAGE_SUBTITLES:
-				self.settings.menupage.setValue('audio')
 			else:
-				return 0
+				self.settings.menupage.setValue('audio')
 
 	def colorkey(self, idx):
 		self["config"].setCurrentIndex(idx)
