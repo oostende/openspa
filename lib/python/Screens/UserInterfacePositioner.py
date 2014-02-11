@@ -121,7 +121,7 @@ class UserInterfacePositioner(Screen, ConfigListScreen):
 		self.selectionChanged()
 
 	def selectionChanged(self):
-		if getBoxType().startswith('azbox'):
+		if getBoxType() in ('elite', 'premium', 'premium+', 'ultra', "me", "minime"):
 			pass
 		else:
 			self["status"].setText(self["config"].getCurrent()[2])
