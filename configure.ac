@@ -328,7 +328,6 @@ lib/python/Plugins/Extensions/TuxboxPlugins/Makefile
 lib/python/Plugins/Extensions/TuxboxPlugins/meta/Makefile
 lib/python/Plugins/Extensions/HbbTV/Makefile
 lib/python/Plugins/Extensions/HbbTV/meta/Makefile
-lib/python/Plugins/PLi/Makefile
 lib/python/Plugins/SystemPlugins/3GModemManager/Makefile
 lib/python/Plugins/SystemPlugins/3GModemManager/meta/Makefile
 lib/python/Plugins/SystemPlugins/3GModemManager/script/Makefile 
