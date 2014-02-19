@@ -1,5 +1,5 @@
 # for localized messages
-#from . import _
+from . import _
 
 from Plugins.Plugin import PluginDescriptor
 
@@ -19,7 +19,7 @@ from Components.Label import Label, MultiColorLabel
 from Components.ConfigList import ConfigListScreen
 from Components.VolumeControl import VolumeControl
 from Components.Pixmap import Pixmap
-from Components.config import config, getConfigListEntry, ConfigText, ConfigSelection, ConfigYesNo, ConfigSubsection, config
+from Components.config import config, ConfigYesNo, ConfigSubsection, getConfigListEntry, ConfigText, ConfigSelection
 
 from enigma import eTimer, eConsoleAppContainer, getDesktop, eServiceReference, iPlayableService, iServiceInformation, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, RT_VALIGN_CENTER, getPrevAsciiCode, eRCInput, fbClass, eServiceCenter
 
@@ -39,11 +39,6 @@ HBBTVAPP_PATH = "/usr/local/hbb-browser"
 COMMAND_PATH = '/tmp/.sock.hbbtv.cmd'
 
 _g_helper = None
-
-#######################
-config.plugins.hbbtv = ConfigSubsection()
-config.plugins.hbbtv.autostart = ConfigYesNo(default = True)
-#/added by openspa
 
 class GlobalValues:
 	command_util   = None
@@ -78,7 +73,7 @@ class GlobalValues:
 			infobar.doTimerHide()
 			infobar.serviceStarted()
 		except: pass
-
+	
 __gval__ = GlobalValues()
 
 def setDefaultResolution(x, y):
@@ -256,6 +251,7 @@ class OpCodeSet:
 			,0x0313 : "OP_BROWSER_NEED_RELOAD_KEYMAP"
 			,0x0401 : "OP_DVBAPP_VOL_UP"
 			,0x0402 : "OP_DVBAPP_VOL_DOWN"
+			,0x0403 : "OP_DVBAPP_SET_VOL"
 			,0x0501 : "OP_SYSTEM_OUT_OF_MEMORY"
 			,0x0502 : "OP_SYSTEM_NOTIFY_MY_PID"
 			,0x0601 : "OP_VIDEOBACKEND_ENABLE"
@@ -690,7 +686,7 @@ class HandlerHbbTV(Handler):
 		if self._soft_volume > 0:
 			v = int((self._max_volume * self._soft_volume) / 100)
 			VolumeControl.instance.volctrl.setVolume(v, v)
-		else:  VolumeControl.instance.volctrl.setVolume(self._max_volume, self._max_volume)
+		else:	VolumeControl.instance.volctrl.setVolume(self._max_volume, self._max_volume)
 
 	def _cb_handleDVBAppVolUp(self, opcode, data):
 		self._handle_dump(self._cb_handleDVBAppVolUp, opcode, data)
@@ -769,7 +765,6 @@ class HandlerHbbTV(Handler):
 
 		command_util = getCommandUtil()
 		command_util.sendCommand('OP_HBBTV_FULLSCREEN', None)
-
 		if self._videobackend_activate == False:
 			before_service = getBeforeService()
 			if before_service is not None:
@@ -985,11 +980,7 @@ class HbbTVHelper(Screen):
 
 		self._session = session
 
-		#added by openspa
-		if config.plugins.hbbtv.autostart.value:
-			self._restart_opera()
-		else:
-			self._stop_opera()
+		self._restart_opera()
 
 		self._timer_infobar = eTimer()
 		self._timer_infobar.callback.append(self._cb_registrate_infobar)
@@ -1099,13 +1090,11 @@ class HbbTVHelper(Screen):
 			time.sleep(2)
 			setNeedRestart(False)
 
-		#fixed by openspa
-		if self._applicationList:
-			for x in self._applicationList:
-				control_code = int(x["control"])
-				tmp_url = x["url"]
-				if tmp_url == url and control_code == 1:
-					use_ait = True
+		for x in self._applicationList:
+			control_code = int(x["control"])
+			tmp_url = x["url"]
+			if tmp_url == url and control_code == 1:
+				use_ait = True
 		self._excuted_browser = True
 		self._session.open(HbbTVWindow, url, self._cb_closed_browser, use_ait, self._profile)
 
@@ -1129,7 +1118,7 @@ class HbbTVHelper(Screen):
 	def _restart_opera(self):
 		global HBBTVAPP_PATH
 		global __gval__
-		try:  os.system('%s/launcher restart %d %d'%(HBBTVAPP_PATH, __gval__.resX, __gval__.resY))
+		try:	os.system('%s/launcher restart %d %d'%(HBBTVAPP_PATH, __gval__.resX, __gval__.resY))
 		except: pass
 		return True
 
@@ -1150,7 +1139,7 @@ class HbbTVHelper(Screen):
 	def showApplicationSelectionBox(self):
 		applications = []
 
-		if self.getStartHbbTVUrl() and self._applicationList:
+		if self.getStartHbbTVUrl():
 			for x in self._applicationList:
 				applications.append((x["name"], x))
 		else: applications.append((_("No detected HbbTV applications."), None))
@@ -1167,20 +1156,10 @@ class HbbTVHelper(Screen):
 		start_stop_mode = []
 		self._callbackStartStop = callback
 		if self._is_browser_running():
-			#modified by openspa
-			start_stop_mode.append((_('Stop')+" "+_("and AutoRestart service when restart GUI"),'Stop1'))
-			start_stop_mode.append((_('Stop')+" "+_("and not AutoRestart service"),'Stop2'))
-			estado=_("Service Running")
-		else:
-			start_stop_mode.append((_('Start')+" "+_("and AutoRestart service when restart GUI"),'Start1'))
-			start_stop_mode.append((_('Start')+" "+_("and not AutoRestart service"),'Start2'))
-			estado=_("Service stopped")
-		if config.plugins.hbbtv.autostart.value:
-			estado=estado +" ("+_("Autostart Enabled")+")"
-		else:
-			estado=estado +" ("+_("Autostart Disabled")+")"
-			
-		self._session.openWithCallback(self._browser_config_selected, ChoiceBox, title=estado+"\n"+_("Please choose one."), list=start_stop_mode)
+			start_stop_mode.append((_('Stop'),'Stop'))
+		else:	start_stop_mode.append((_('Start'),'Start'))
+		self._session.openWithCallback(self._browser_config_selected, ChoiceBox, title=_("Please choose one."), list=start_stop_mode)
+
 	def _browser_config_selected(self, selected):
 		if selected is None:
 			return
@@ -1188,23 +1167,11 @@ class HbbTVHelper(Screen):
 			self._callbackStartStop()
 		try:
 			mode = selected[1]
-			#modified by openspa
-			if mode == 'Start1':
+			if mode == 'Start':
 				if not self._is_browser_running():
 					self._start_opera()
-				config.plugins.hbbtv.autostart.value=True
-			elif mode == 'Start2':
-				if not self._is_browser_running():
-					self._start_opera()
-				config.plugins.hbbtv.autostart.value=False
-			elif mode == 'Stop1':
-				config.plugins.hbbtv.autostart.value=True
+			elif mode == 'Stop':
 				self._stop_opera()
-			elif mode == 'Stop2':
-				config.plugins.hbbtv.autostart.value=False
-				self._stop_opera()
-			config.plugins.hbbtv.autostart.save()
-			config.plugins.hbbtv.save()
 		except Exception, ErrMsg: print "Config ERR :", ErrMsg
 
 	def _is_browser_running(self):
@@ -1319,7 +1286,6 @@ class OperaBrowserPreferenceWindow(ConfigListScreen, Screen):
 		if self._currentPageUrl is None:
 			self._currentPageUrl = ''
 		self._startPageUrl = None
-
 		self._keymapType = None
 		self.makeMenuEntry()
 		self.onLayoutFinish.append(self.layoutFinished)
@@ -1358,6 +1324,7 @@ class OperaBrowserPreferenceWindow(ConfigListScreen, Screen):
 				return
 			self["url"].setText(data)
 		if self.menuItemStartpage.value == "direct":
+			#added by openspa
 			if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/spazeMenu/spzVirtualKeyboard.pyo"):
 				self.session.openWithCallback(_cb_directInputUrl, spzVirtualKeyboard, titulo = _("Please enter URL here"), texto = "http://")
 			else:
@@ -1397,7 +1364,7 @@ class OperaBrowserPreferenceWindow(ConfigListScreen, Screen):
 			self._startPageUrl = d['start']
 			self._keymapType = d['keymap']
 			#d['type']
-		except: self._startPageUrl = 'http://google.es'
+		except: self._startPageUrl = 'http://vuplus.com'
 		self.updateStartPageUrl()
 
 		if self._keymapType is None or len(self._keymapType) == 0:
@@ -1765,10 +1732,10 @@ class BrowserHelpWindow(Screen, HelpableScreen):
 		self["actions"] = ActionMap(["DirectionActions", "OkCancelActions","ColorActions"], {
 				"ok"    : self.keyRed,
 				"cancel": self.keyRed,
-				"red"   : self.keyRed,
+				"red"	: self.keyRed,
 				"green" : self.keyGreen,
 				"yellow": self.keyYellow,
-				"blue"  : self.keyBlue,
+				"blue"	: self.keyBlue,
 			},-2)
 
 		self.showHelpTimer = eTimer()
@@ -1865,9 +1832,8 @@ class OperaBrowser(Screen):
 	size = getDesktop(0).size()
 	WIDTH  = int(size.width())
 	HEIGHT = int(size.height())
-
-	skin = """
-		<screen name="Opera Browser" position="0,0" size="1280,720" backgroundColor="transparent" flags="wfNoBorder" title="Opera Browser">
+	skin =	"""
+		<screen name="OperaBrowser" position="0,0" size="%(width)d,%(height)d" backgroundColor="transparent" flags="wfNoBorder" title="Opera Browser">
 			<widget name="topArea" zPosition="-1" position="0,0" size="1280,60" font="Regular;20" valign="center" halign="center" backgroundColor="#000000" />
 			<widget name="menuitemFile" position="30,20" size="150,30" font="Regular;20" valign="center" halign="center" backgroundColor="#000000" foregroundColors="#9f1313,#a08500" />
 			<widget name="menuitemTool" position="180,20" size="150,30" font="Regular;20" valign="center" halign="center" backgroundColor="#000000" foregroundColors="#9f1313,#a08500" />
@@ -1900,11 +1866,6 @@ class OperaBrowser(Screen):
 		self.UpdateLanguageCB()
 
 		self._terminatedBrowser = True
-		#added by openspa
-		self.cerrar=False
-		self.dataTemp=None
-		self.modeTemp=None
-		###
 		self._enableKeyEvent = True
 		self._currentPageUrl = None
 		self._currentPageTitle = None
@@ -1919,7 +1880,7 @@ class OperaBrowser(Screen):
 		self["menuitemTool"] = MultiColorLabel()
 		self["menuitemHelp"] = MultiColorLabel()
 
-		self["menulist"]    = MenuList(self.setListOnView())
+		self["menulist"] = MenuList(self.setListOnView())
 		self["submenulist"] = MenuList(self.setSubListOnView())
 
 		self.toggleMainScreenFlag = True
@@ -1953,13 +1914,6 @@ class OperaBrowser(Screen):
 		self.COMMAND_MAP[_('Return')] = self._cmd_on_ReturnToBrowser
 		self.COMMAND_MAP[_('Open Startpage')] = self._cmd_on_OpenStartpage
 
-	#added by openspa
-	def cerrarW(self):
-		global _g_helper
-		if self.cerrar and _g_helper:
-			_g_helper._stop_opera()
-		self.close()
-
 	def enableRCMouse(self, mode): #mode=[0|1]|[False|True]
 		rcmouse_path = "/proc/stb/fp/mouse"
 		if os.path.exists(rcmouse_path):
@@ -1981,7 +1935,7 @@ class OperaBrowser(Screen):
 			self.keyMenu()
 			if self.paramIsWebAppMode:
 				self.cbUrlText(data=self.paramUrl, mode=1, opcode='OP_BROWSER_OPEN_YOUTUBETV')
-			else:  self.cbUrlText(data=self.paramUrl, mode=1)
+			else:	self.cbUrlText(data=self.paramUrl, mode=1)
 
 	def selectMenuitem(self):
 		tmp = [self["menuitemFile"], self["menuitemTool"], self["menuitemHelp"]]# modify menu
@@ -2072,37 +2026,13 @@ class OperaBrowser(Screen):
 			return
 		self.setTitle(title)
 
-	### added by openspa
-	def iniciarServicio(self,data=None,mode=0):
-		self.cerrar=True
-		global _g_helper
-
-		_g_helper._start_opera()
-		self.dataTemp=data
-		self.modeTemp=mode		
-		msg = _("Starting web browser Service.\nPlease Wait...")
-		self.session.openWithCallback(self.iniciarDelay, MessageBox, msg, MessageBox.TYPE_INFO, timeout=6, enable_input = False)
-
-	def iniciarDelay(self,resp=None):
-		self.cbUrlText(self.dataTemp,self.modeTemp)
-
-	########
-
 	def cbUrlText(self, data=None, mode=0, opcode='OP_BROWSER_OPEN_URL'):
-		#added by openspa
 		global _g_helper
-		if _g_helper and not _g_helper._is_browser_running():
-			self.iniciarServicio(data, mode)
+		if not _g_helper._is_browser_running():
 			return
 		print "Inputed Url :", data, mode
 		if strIsEmpty(data):
 			return
-
-		if not _g_helper or not _g_helper._is_browser_running():
-			message = _("Opera Browser was not running.\nPlease running browser using [File]>[Start/Stop] menu.")
-			self.session.open(MessageBox, message, MessageBox.TYPE_INFO)
-			return
-
 		#self.hideSubmenu()
 		command_server = getCommandServer()
 		if self._on_setPageTitle not in command_server.onSetPageTitleCB:
@@ -2111,11 +2041,12 @@ class OperaBrowser(Screen):
 			command_server.onHbbTVCloseCB.append(self._on_close_window)
 		self.toggleMainScreen()
 		self.enableRCMouse(True)
+
 		fbClass.getInstance().lock()
+		eRCInput.getInstance().lock()
 
 		#setResolution(1280, 720)
 
-		eRCInput.getInstance().lock()
 		command_util = getCommandUtil()
 		command_util.sendCommand(opcode, data, mode)
 		self._terminatedBrowser = False
@@ -2131,14 +2062,19 @@ class OperaBrowser(Screen):
 		if data is None:
 			return
 		(url, mode) = data
+		global _g_helper
+		if not _g_helper._is_browser_running():
+			message = _("Opera Browser was not running.\nPlease running browser using [File]>[Start/Stop] menu.")
+			self.session.open(MessageBox, message, MessageBox.TYPE_INFO)
+			return
 		self.cbUrlText(url, mode)
 
 	def _cmd_on_OpenUrl(self):
-		#global _g_helper
-		#if not _g_helper._is_browser_running():
-			#message = _("Opera Browser was not running.\nPlease running browser using [File]>[Start/Stop] menu.")
-			#self.session.open(MessageBox, message, MessageBox.TYPE_INFO)
-			#return
+		global _g_helper
+		if not _g_helper._is_browser_running():
+			message = _("Opera Browser was not running.\nPlease running browser using [File]>[Start/Stop] menu.")
+			self.session.open(MessageBox, message, MessageBox.TYPE_INFO)
+			return
 		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/spazeMenu/spzVirtualKeyboard.pyo"):
 			self.session.openWithCallback(self.cbUrlText, spzVirtualKeyboard, titulo = _("Please enter URL here"), texto = "http://")
 		else:
@@ -2146,14 +2082,15 @@ class OperaBrowser(Screen):
 	def _cmd_on_About(self):
 		self.session.open(MessageBox, _('Opera Web Browser Plugin v1.0'), type = MessageBox.TYPE_INFO)
 	def _cmd_on_Exit(self):
-		self.cerrarW()
+		self.close()
 	def _cb_cmdOnStartSTop(self):
 		self.keyMenu()
 	def _cmd_on_StartStop(self):
 		global _g_helper
-		if _g_helper is None:
+		if _g_helper is None: 
 			return
 		_g_helper.showBrowserConfigBox(self._cb_cmdOnStartSTop)
+
 	def _cmd_on_Bookmark(self):
 		url = self._currentPageUrl
 		if url is None:
@@ -2168,13 +2105,13 @@ class OperaBrowser(Screen):
 			url = ''
 		self.session.open(OperaBrowserPreferenceWindow, url)
 	def _cmd_on_OpenStartpage(self):
-		#global _g_helper
-		#if not _g_helper._is_browser_running():
-			#message = _("Opera Browser was not running.\nPlease running browser using [File]>[Start/Stop] menu.")
-			#self.session.open(MessageBox, message, MessageBox.TYPE_INFO)
-			#return
+		global _g_helper
+		if not _g_helper._is_browser_running():
+			message = _("Opera Browser was not running.\nPlease running browser using [File]>[Start/Stop] menu.")
+			self.session.open(MessageBox, message, MessageBox.TYPE_INFO)
+			return
 		mode = 0
-		start = 'http://openspa.info'
+		start = 'http://google.com'
 		try:
 			d = OperaBrowserSetting().getData()
 			start = d['start']
@@ -2278,8 +2215,8 @@ class OperaBrowser(Screen):
 		if not self._terminatedBrowser:
 			#self._session.openWithCallback(self._cb_virtualKeyboardClosed, VirtualKeyBoard, title=("Please enter URL here"), text="")
 			fbClass.getInstance().lock()
-			#setResolution(1280, 720)
 			eRCInput.getInstance().lock()
+			#setResolution(1280, 720)
 			if self.toggleListViewFlag:
 				self.toggleMainScreen()
 			self._currentPageUrl   = None
@@ -2287,7 +2224,7 @@ class OperaBrowser(Screen):
 			command_util = getCommandUtil()
 			command_util.sendCommand('OP_BROWSER_MENU_RES')
 			return
-		self.cerrarW()
+		self.close()
 
 	def keyMenu(self):
 		self.toggleMainScreen()
@@ -2454,7 +2391,6 @@ class YoutubeTVSettings(ConfigListScreen, Screen):
 
 	self["config"].list = self.menulist
 	self["config"].l.setList(self.menulist)
-
 
 def auto_start_main(reason, **kwargs):
 	if reason:
