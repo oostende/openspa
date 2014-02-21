@@ -32,6 +32,9 @@ if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/spazeMenu/spzVirtualKe
 	from Plugins.Extensions.spazeMenu.spzVirtualKeyboard import spzVirtualKeyboard
 else:
 	from Screens.VirtualKeyBoard import VirtualKeyBoard
+config.plugins.hbbtv = ConfigSubsection()
+config.plugins.hbbtv.autostart = ConfigYesNo(default = True)
+
 
 strIsEmpty = lambda x: x is None or len(x) == 0
 
@@ -980,7 +983,11 @@ class HbbTVHelper(Screen):
 
 		self._session = session
 
-		self._restart_opera()
+		#added by openspa
+		if config.plugins.hbbtv.autostart.value:
+			self._restart_opera()
+		else:
+			self._stop_opera()
 
 		self._timer_infobar = eTimer()
 		self._timer_infobar.callback.append(self._cb_registrate_infobar)
@@ -1156,9 +1163,20 @@ class HbbTVHelper(Screen):
 		start_stop_mode = []
 		self._callbackStartStop = callback
 		if self._is_browser_running():
-			start_stop_mode.append((_('Stop'),'Stop'))
-		else:	start_stop_mode.append((_('Start'),'Start'))
-		self._session.openWithCallback(self._browser_config_selected, ChoiceBox, title=_("Please choose one."), list=start_stop_mode)
+			#modified by openspa
+			start_stop_mode.append((_('Stop')+" "+_("and AutoRestart service when restart GUI"),'Stop1'))
+			start_stop_mode.append((_('Stop')+" "+_("and not AutoRestart service"),'Stop2'))
+			estado=_("Service Running")
+		else:
+			start_stop_mode.append((_('Start')+" "+_("and AutoRestart service when restart GUI"),'Start1'))
+			start_stop_mode.append((_('Start')+" "+_("and not AutoRestart service"),'Start2'))
+			estado=_("Service stopped")
+		if config.plugins.hbbtv.autostart.value:
+			estado=estado +" ("+_("Autostart Enabled")+")"
+		else:
+			estado=estado +" ("+_("Autostart Disabled")+")"
+
+		self._session.openWithCallback(self._browser_config_selected, ChoiceBox, title=estado+"\n"+_("Please choose one."), list=start_stop_mode)
 
 	def _browser_config_selected(self, selected):
 		if selected is None:
@@ -1167,11 +1185,23 @@ class HbbTVHelper(Screen):
 			self._callbackStartStop()
 		try:
 			mode = selected[1]
-			if mode == 'Start':
+			#modified by openspa
+			if mode == 'Start1':
 				if not self._is_browser_running():
 					self._start_opera()
-			elif mode == 'Stop':
+				config.plugins.hbbtv.autostart.value=True
+			elif mode == 'Start2':
+				if not self._is_browser_running():
+					self._start_opera()
+				config.plugins.hbbtv.autostart.value=False
+			elif mode == 'Stop1':
+				config.plugins.hbbtv.autostart.value=True
 				self._stop_opera()
+			elif mode == 'Stop2':
+				config.plugins.hbbtv.autostart.value=False
+				self._stop_opera()
+			config.plugins.hbbtv.autostart.save()
+			config.plugins.hbbtv.save()
 		except Exception, ErrMsg: print "Config ERR :", ErrMsg
 
 	def _is_browser_running(self):
