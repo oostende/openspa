@@ -304,6 +304,7 @@ class RemoteControlType(Screen, ConfigListScreen):
 			("6", _("DMM advanced")),
 			("7", "et5000/6000"),
 			("8", "VU+"),
+			("9", "et8000/et10000"),
 			("11", "et9x00/6500"),
 			("13", "et4000"),
 			("14", "xp1000"),
@@ -314,9 +315,11 @@ class RemoteControlType(Screen, ConfigListScreen):
 			("et5000", 7),
 			("et6000", 7),
 			("et6500", 11),
+			("et8000", 9),
 			("et9000", 11),
 			("et9200", 11),
 			("et9500", 11),
+			("et10000", 9),
 			("xp1000", 14),
 		]
 
