@@ -1435,6 +1435,115 @@ class NetworkAdapterTest(Screen):
 		else:
 			iStatus.stopWlanConsole()
 
+class NetworkMountsMenu(Screen,HelpableScreen):
+	skin = """
+	<screen name="NetworkMountsMenu" position="center,center" size="560,400" >
+		<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />
+		<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
+		<ePixmap pixmap="skin_default/border_menu.png" position="5,45" zPosition="1" size="250,300" transparent="1" alphatest="on" />
+		<widget name="menulist" position="15,55" size="230,260" zPosition="10" scrollbarMode="showOnDemand" />
+		<widget source="introduction" render="Label" position="305,50" size="230,300" font="Regular;19" halign="center" valign="center" backgroundColor="#25062748" transparent="1" />
+	</screen>"""
+
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		HelpableScreen.__init__(self)
+		Screen.setTitle(self, _("Mounts Setup"))
+		self.session = session
+		self.onChangedEntry = [ ]
+		self.mainmenu = self.genMainMenu()
+		self["menulist"] = MenuList(self.mainmenu)
+		self["key_red"] = StaticText(_("Close"))
+		self["introduction"] = StaticText()
+
+		self["WizardActions"] = HelpableActionMap(self, "WizardActions",
+			{
+			"up": (self.up, _("move up to previous entry")),
+			"down": (self.down, _("move down to next entry")),
+			"left": (self.left, _("move up to first entry")),
+			"right": (self.right, _("move down to last entry")),
+			})
+
+		self["OkCancelActions"] = HelpableActionMap(self, "OkCancelActions",
+			{
+			"cancel": (self.close, _("exit mounts setup menu")),
+			"ok": (self.ok, _("select menu entry")),
+			})
+
+		self["ColorActions"] = HelpableActionMap(self, "ColorActions",
+			{
+			"red": (self.close, _("exit networkadapter setup menu")),
+			})
+
+		self["actions"] = NumberActionMap(["WizardActions","ShortcutActions"],
+		{
+			"ok": self.ok,
+			"back": self.close,
+			"up": self.up,
+			"down": self.down,
+			"red": self.close,
+			"left": self.left,
+			"right": self.right,
+		}, -2)
+
+		if not self.selectionChanged in self["menulist"].onSelectionChanged:
+			self["menulist"].onSelectionChanged.append(self.selectionChanged)
+		self.selectionChanged()
+
+	def createSummary(self):
+		from Screens.PluginBrowser import PluginBrowserSummary
+		return PluginBrowserSummary
+
+	def selectionChanged(self):
+		item = self["menulist"].getCurrent()
+		if item:
+			if item[1][0] == 'extendedSetup':
+				self["introduction"].setText(_(item[1][1]))
+			name = str(self["menulist"].getCurrent()[0])
+			desc = self["introduction"].text
+		else:
+			name = ""
+			desc = ""
+		for cb in self.onChangedEntry:
+			cb(name, desc)
+
+	def ok(self):
+		if self["menulist"].getCurrent()[1][0] == 'extendedSetup':
+			self.extended = self["menulist"].getCurrent()[1][2]
+			self.extended(self.session)
+
+	def up(self):
+		self["menulist"].up()
+
+	def down(self):
+		self["menulist"].down()
+
+	def left(self):
+		self["menulist"].pageUp()
+
+	def right(self):
+		self["menulist"].pageDown()
+
+	def genMainMenu(self):
+		menu = []
+		self.extended = None
+		self.extendedSetup = None
+		for p in plugins.getPlugins(PluginDescriptor.WHERE_NETWORKMOUNTS):
+			callFnc = p.__call__["ifaceSupported"](self)
+			if callFnc is not None:
+				self.extended = callFnc
+				if p.__call__.has_key("menuEntryName"):
+					menuEntryName = p.__call__["menuEntryName"](self)
+				else:
+					menuEntryName = _('Extended Setup...')
+				if p.__call__.has_key("menuEntryDescription"):
+					menuEntryDescription = p.__call__["menuEntryDescription"](self)
+				else:
+					menuEntryDescription = _('Extended Networksetup Plugin...')
+				self.extendedSetup = ('extendedSetup',menuEntryDescription, self.extended)
+				menu.append((menuEntryName,self.extendedSetup))
+		return menu
+
 class NetworkInadyn(Screen):
 	skin = """
 		<screen position="center,center" size="590,410" >

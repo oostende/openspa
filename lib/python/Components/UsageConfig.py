@@ -54,6 +54,8 @@ def InitUsageConfig():
 	config.usage.show_second_infobar = ConfigSelection(default = "11", choices = [(None, _("None")), ("0", _("No timeout"))] + choicelist + [("EPG",_("EPG"))]) 
 	config.usage.show_spinner = ConfigYesNo(default = True)
 	config.usage.enable_tt_caching = ConfigYesNo(default = True)
+	config.usage.sort_settings = ConfigYesNo(default = False)
+	config.usage.sort_menus = ConfigYesNo(default = False)
 	choicelist = []
 	for i in (10, 30):
 		choicelist.append(("%d" % i, ngettext("%d second", "%d seconds", i) % i))
