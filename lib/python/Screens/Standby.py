@@ -169,7 +169,7 @@ class TryQuitMainloop(MessageBox):
 				4: _("Really upgrade the frontprocessor and reboot now?"),
 				42: _("Really upgrade your receiver and reboot now?"),
 				43: _("Really reflash your receiver and reboot now?"),
-				45: _("Really WOL now?")}.get(retvalue)
+				44: _("Really WOL now?")}.get(retvalue)
 			if text:
 				MessageBox.__init__(self, session, reason+text, type = MessageBox.TYPE_YESNO, timeout = timeout, default = default_yes)
 				self.skinName = "MessageBoxSimple"
