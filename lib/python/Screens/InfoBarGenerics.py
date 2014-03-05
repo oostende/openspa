@@ -3064,9 +3064,8 @@ class InfoBarHDMI:
 
 	def HDMIIn(self):
 		curref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
-		print "     ",curref,curref.toString()
 		if curref and curref.toString().split(":")[0] != '8192':
-			self.preHDMIRef = self.session.nav.getCurrentlyPlayingServiceOrGroup()
+			self.preHDMIRef = curref
 			self.session.nav.playService(eServiceReference('8192:0:1:0:0:0:0:0:0:0:'))
-		else:
-			self.session.nav.playService(self.preHDMIRef)
+		elif self.preHDMIRef:
+			self.preHDMIRef = None
