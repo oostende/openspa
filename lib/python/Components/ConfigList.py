@@ -179,6 +179,10 @@ class ConfigListScreen:
 	def getCurrentDescription(self):
 		return self["config"].getCurrent() and len(self["config"].getCurrent()) > 2 and self["config"].getCurrent()[2] or ""
 
+	def changedEntry(self):
+		for x in self.onChangedEntry:
+			x()
+
 	def handleInputHelpers(self):
 		if self["config"].getCurrent() is not None:
 			try:
@@ -273,22 +277,8 @@ class ConfigListScreen:
 			self.__changed()
 
 	def saveAll(self):
-		restartgui = False
 		for x in self["config"].list:
-			if x[1].isChanged():
-				if x[0] == _('Show on Display'): 
-					restartgui = True
 			x[1].save()
-		configfile.save()	
-		self.doRestartGui(restartgui)
-			
-	def doRestartGui(self, restart):
-		if restart:
-			self.session.openWithCallback(self.ExecuteRestart, MessageBox, _("Restart GUI now?"), MessageBox.TYPE_YESNO)
-
-	def ExecuteRestart(self, result):
-		if result:
-			quitMainloop(3)
 
 	# keySave and keyCancel are just provided in case you need them.
 	# you have to call them by yourself.
@@ -306,7 +296,7 @@ class ConfigListScreen:
 
 	def closeMenuList(self, recursive = False):
 		if self["config"].isChanged():
-			self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Really close without saving settings?"), default = False)
+			self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Really close without saving settings?"), default = True)
 		else:
 			try:
 				self.close(recursive)
