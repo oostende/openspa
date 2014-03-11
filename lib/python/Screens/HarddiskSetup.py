@@ -32,8 +32,8 @@ class HarddiskSetup(Screen):
 		})
 
 	def hddQuestion(self, answer=False):
-			message = self.question + "\n" + _("You can continue watching TV etc. while this is running.")
-			self.session.openWithCallback(self.hddConfirmed, MessageBox, message)
+		message = self.question + "\n" + _("You can continue watching TV etc. while this is running.")
+		self.session.openWithCallback(self.hddConfirmed, MessageBox, message)
 
 	def hddConfirmed(self, confirmed):
 		if not confirmed:
