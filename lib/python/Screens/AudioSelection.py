@@ -90,9 +90,9 @@ class AudioSelection(Screen, ConfigListScreen):
 			self.audioTracks = audio = service and service.audioTracks()
 			n = audio and audio.getNumberOfTracks() or 0
 			if SystemInfo["CanDownmixAC3"]:
-				self.settings.downmix = ConfigOnOff(default=config.av.downmix_ac3.value)
-				self.settings.downmix.addNotifier(self.changeAC3Downmix, initial_call = False)
-				conflist.append(getConfigListEntry(_("AC3/DTS downmix"), self.settings.downmix))
+				self.settings.downmix_ac3 = ConfigOnOff(default=config.av.downmix_ac3.getValue())
+				self.settings.downmix_ac3.addNotifier(self.changeAC3Downmix, initial_call = False)
+				conflist.append(getConfigListEntry(_("AC3 downmix"), self.settings.downmix_ac3))
 				self["key_red"].setBoolean(True)
 
 			if n > 0:
@@ -165,8 +165,25 @@ class AudioSelection(Screen, ConfigListScreen):
 				if len(Plugins) > 1:
 					print "plugin(s) installed but not displayed in the dialog box:", Plugins[1:]
 
+			if SystemInfo["CanDownmixAAC"]:
+				self.settings.downmix_aac = ConfigOnOff(default=config.av.downmix_aac.getValue())
+				self.settings.downmix_aac.addNotifier(self.changeAACDownmix, initial_call = False)
+				conflist.append(getConfigListEntry(_("AAC downmix"), self.settings.downmix_aac))
+
+			if SystemInfo["Can3DSurround"]:
+				surround_choicelist = [("none", _("off")), ("hdmi", _("HDMI")), ("spdif", _("SPDIF")), ("dac", _("DAC"))]
+				self.settings.surround_3d = ConfigSelection(choices = surround_choicelist, default = config.av.surround_3d.getValue())
+				self.settings.surround_3d.addNotifier(self.change3DSurround, initial_call = False)
+				conflist.append(getConfigListEntry(_("3D Surround"), self.settings.surround_3d))
+
+			if SystemInfo["Canedidchecking"]:
+				edid_bypass_choicelist = [("00000000", _("off")), ("00000001", _("on"))]
+				self.settings.edid_bypass = ConfigSelection(choices = edid_bypass_choicelist, default = config.av.bypass_edid_checking.getValue())
+				self.settings.edid_bypass.addNotifier(self.changeEDIDBypass, initial_call = False)
+				conflist.append(getConfigListEntry(_("Bypass HDMI EDID Check"), self.settings.edid_bypass))
+
 		elif self.settings.menupage.getValue() == PAGE_SUBTITLES:
-	
+
 			self.setTitle(_("Subtitle selection"))
 			conflist.append(('',))
 			conflist.append(('',))
@@ -252,12 +269,29 @@ class AudioSelection(Screen, ConfigListScreen):
 		if self.infobar.selected_subtitle != subtitle:
 			self.infobar.enableSubtitle(subtitle)
 
-	def changeAC3Downmix(self, downmix):
-		if downmix.getValue() == True:
+	def changeEDIDBypass(self, edid_bypass):
+		if edid_bypass.getValue():
+			config.av.bypass_edid_checking.value = edid_bypass.getValue()
+		config.av.bypass_edid_checking.save()
+
+	def change3DSurround(self, surround_3d):
+		if surround_3d.getValue():
+			config.av.surround_3d.value = surround_3d.getValue(
+		config.av.surround_3d.save()
+
+	def changeAC3Downmix(self, downmix_ac3):
+		if downmix_ac3.getValue() == True:
 			config.av.downmix_ac3.value = True
 		else:
 			config.av.downmix_ac3.value = False
 		config.av.downmix_ac3.save()
+
+	def changeAACDownmix(self, downmix_aac):
+		if downmix_aac.getValue() == True:
+			config.av.downmix_aac.value = True
+		else:
+			config.av.downmix_aac.value = False
+		config.av.downmix_aac.save()
 
 	def changeMode(self, mode):
 		if mode is not None and self.audioChannel:
