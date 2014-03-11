@@ -176,6 +176,11 @@ class AudioSelection(Screen, ConfigListScreen):
 				self.settings.surround_3d.addNotifier(self.change3DSurround, initial_call = False)
 				conflist.append(getConfigListEntry(_("3D Surround"), self.settings.surround_3d))
 
+			if SystemInfo["CanPcmMultichannel"]:
+				self.settings.pcm_multichannel = ConfigOnOff(default=config.av.pcm_multichannel.getValue())
+				self.settings.pcm_multichannel.addNotifier(self.changePCMMultichannel, initial_call = False)
+				conflist.append(getConfigListEntry(_("PCM Multichannel"), self.settings.pcm_multichannel, None))
+
 			if SystemInfo["Canedidchecking"]:
 				edid_bypass_choicelist = [("00000000", _("off")), ("00000001", _("on"))]
 				self.settings.edid_bypass = ConfigSelection(choices = edid_bypass_choicelist, default = config.av.bypass_edid_checking.getValue())
@@ -281,16 +286,29 @@ class AudioSelection(Screen, ConfigListScreen):
 
 	def changeAC3Downmix(self, downmix_ac3):
 		if downmix_ac3.getValue() == True:
-			config.av.downmix_ac3.value = True
+			config.av.downmix_ac3.setValue(True)
+			if SystemInfo["supportPcmMultichannel"]:
+				config.av.pcm_multichannel.setValue(False)
 		else:
-			config.av.downmix_ac3.value = False
+			config.av.downmix_ac3.setValue(False)
 		config.av.downmix_ac3.save()
+		if SystemInfo["supportPcmMultichannel"]:
+			config.av.pcm_multichannel.save()
+		self.fillList()
+
+	def changePCMMultichannel(self, multichan):
+		if multichan.getValue():
+			config.av.pcm_multichannel.setValue(True)
+		else:
+			config.av.pcm_multichannel.setValue(False)
+		config.av.pcm_multichannel.save()
+		self.fillList()
 
 	def changeAACDownmix(self, downmix_aac):
 		if downmix_aac.getValue() == True:
-			config.av.downmix_aac.value = True
+			config.av.downmix_aac.setValue(True)
 		else:
-			config.av.downmix_aac.value = False
+			config.av.downmix_aac.setValue(False)
 		config.av.downmix_aac.save()
 
 	def changeMode(self, mode):
