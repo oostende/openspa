@@ -58,6 +58,7 @@ config.misc.blackradiopic = ConfigText(default = resolveFilename(SCOPE_CURRENT_S
 config.misc.startCounter = ConfigInteger(default=0) # number of e2 starts...
 config.misc.standbyCounter = NoSave(ConfigInteger(default=0)) # number of standby
 config.misc.DeepStandby = NoSave(ConfigYesNo(default=False)) # detect deepstandby
+config.misc.RestartUI = ConfigYesNo(default=False) # detect user interface restart
 config.misc.epgcache_filename = ConfigText(default = "/hdd/epg.dat")
 config.misc.SyncTimeUsing = ConfigSelection(default = "0", choices = [("0", "Transponder Time"), ("1", _("NTP"))])
 config.misc.NTPserver = ConfigText(default = 'pool.ntp.org', fixed_size=False)

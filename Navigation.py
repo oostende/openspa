@@ -36,7 +36,10 @@ class Navigation:
 		self.__wasTimerWakeup = getFPWasTimerWakeup()
 		if self.__wasTimerWakeup:
 			RecordTimer.RecordTimerEntry.setWasInDeepStandby()
-		if config.usage.startup_to_standby.value:
+		if config.misc.RestartUI.value:
+			config.misc.RestartUI.value = False
+			config.misc.RestartUI.save()
+		elif config.usage.startup_to_standby.value:
 			Notifications.AddNotification(Screens.Standby.Standby)
 
 	def wasTimerWakeup(self):
