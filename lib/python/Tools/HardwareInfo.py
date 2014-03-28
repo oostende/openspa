@@ -1,3 +1,6 @@
+from boxbranding import getBoxType
+from Components.About import about
+
 class HardwareInfo:
 	device_name = None
 	device_version = None
@@ -12,6 +15,8 @@ class HardwareInfo:
 			file = open("/proc/stb/info/model", "r")
 			HardwareInfo.device_name = file.readline().strip()
 			file.close()
+				if getBoxType().startswith('tm') or getBoxType().startswith('iqon') or getBoxType().startswith('media') or getBoxType().startswith('opti'):
+					HardwareInfo.device_name = "dm800se"
 			try:
 				file = open("/proc/stb/info/version", "r")
 				HardwareInfo.device_version = file.readline().strip()
@@ -44,4 +49,18 @@ class HardwareInfo:
 		return HardwareInfo.device_version
 
 	def has_hdmi(self):
-		return (HardwareInfo.device_name == 'me' or HardwareInfo.device_name == 'minime' or HardwareInfo.device_name == 'elite' or HardwareInfo.device_name == 'premium' or HardwareInfo.device_name == 'premium+' or HardwareInfo.device_name == 'ultra' or HardwareInfo.device_name == 'dm800se' or HardwareInfo.device_name == 'dm500hd' or (HardwareInfo.device_name == 'dm8000' and HardwareInfo.device_version != None))
+		return not (HardwareInfo.device_name == 'dm800' or (HardwareInfo.device_name == 'dm8000' and HardwareInfo.device_version == None))
+
+	def linux_kernel(self):
+		try:
+			return open("/proc/version","r").read().split(' ', 4)[2].split('-',2)[0]
+		except:
+			return "unknown"
+
+	def has_deepstandby(self):
+		return getBoxType() != 'dm800'
+
+	def is_nextgen(self):
+		if about.getCPUString() in ('BCM7346B2', 'BCM7425B2', 'BCM7429B0'):
+			return True
+		return False
