@@ -273,7 +273,7 @@ class SecConfigure:
 			pass
 
 		lnbSat = {}
-		for x in range(1,37):
+		for x in range(1,69):
 			lnbSat[x] = []
 
 		#wildcard for all satellites ( for rotor )
