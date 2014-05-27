@@ -1149,8 +1149,7 @@ RESULT eDVBScan::processSDT(eDVBNamespace dvbnamespace, const ServiceDescription
 		bool add = true;
 		bool crypted = false;
 
-		std::map<unsigned short, service>::iterator it =
-			m_pmts_to_read.find(service_id);
+		std::map<unsigned short, service>::iterator it = m_pmts_to_read.find(service_id);
 		if (it != m_pmts_to_read.end())
 		{
 			if (it->second.scrambled)
@@ -1160,10 +1159,6 @@ RESULT eDVBScan::processSDT(eDVBNamespace dvbnamespace, const ServiceDescription
 			}
 			else
 				SCAN_eDebug("is free");
-		}
-		else {
-			SCAN_eDebug("not found in PAT.. so we assume it is scrambled!!");
-			crypted = true;
 		}
 
 		if (m_flags & scanOnlyFree && crypted)
