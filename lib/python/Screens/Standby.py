@@ -6,7 +6,7 @@ from Components.SystemInfo import SystemInfo
 from Tools import Notifications
 from GlobalActions import globalActionMap
 import RecordTimer
-from enigma import eDVBVolumecontrol, eTimer, eDVBResourceManager
+from enigma import eDVBVolumecontrol, eTimer
 from time import time, localtime
 from boxbranding import getMachineBrand, getMachineName
 
@@ -82,9 +82,6 @@ class Standby(Screen):
 		if gotoShutdownTime:
 			self.standbyTimeoutTimer.callback.append(self.standbyTimeout)
 			self.standbyTimeoutTimer.startLongTimer(gotoShutdownTime)
-		self.DVBResourceManager = eDVBResourceManager.getInstance()
-		if self.DVBResourceManager:
-			self.DVBResourceManager.frontendUseMaskChanged.get().append(self.tunerUseMaskChanged)
 
 		self.onFirstExecBegin.append(self.__onFirstExecBegin)
 		self.onClose.append(self.__onClose)
@@ -102,8 +99,6 @@ class Standby(Screen):
 		globalActionMap.setEnabled(True)
 		if RecordTimer.RecordTimerEntry.receiveRecordEvents:
 			RecordTimer.RecordTimerEntry.stopTryQuitMainloop()
-		if self.DVBResourceManager:
-			self.DVBResourceManager.frontendUseMaskChanged.get().remove(self.tunerUseMaskChanged)
 
 	def __onFirstExecBegin(self):
 		global inStandby
@@ -115,11 +110,8 @@ class Standby(Screen):
 	def createSummary(self):
 		return StandbySummary
 
-	def tunerUseMaskChanged(self, mask):
-		self.tunerMask = mask
-
 	def standbyTimeout(self):
-		if hasattr(self, "tunerMask") and self.tunerMask:
+		if self.session.screen["TunerInfo"].tuner_use_mask:
 			self.standbyTimeoutTimer.startLongTimer(600)
 		else:
 			from RecordTimer import RecordTimerEntry
