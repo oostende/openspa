@@ -6,7 +6,7 @@ from Components.ConfigList import ConfigListScreen
 from Components.MenuList import MenuList
 from Components.NimManager import nimmanager
 from Components.config import getConfigListEntry, config, ConfigNothing, ConfigSelection, updateConfigElement,\
-	ConfigSatlist
+	ConfigSatlist, ConfigYesNo
 from Components.Sources.List import List
 from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
