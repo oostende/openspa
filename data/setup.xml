@@ -37,6 +37,7 @@
 		<item level="1" text="Show service type icons" description="Configure if and how service type icons will be shown in the channel selection list.">config.usage.servicetype_icon_mode</item>
 		<item level="1" text="Show picons in channel list" description="Configure if service picons will be shown in the channel selection list.">config.usage.service_icon_enable</item>
 		<item level="1" text="Show Scrambled Channel Icon in channel list" description="When enabled, show a icon to the left of the name on scrambled channels.">config.usage.icon_crypt</item>
+		<item level="1" text="Show columns" description="Configure if and how wide columns will be shown in the channel selection list.">config.usage.servicelist_column</item>
 		<item level="1" text="Customize channel list cursor behavior" description="Configure the cursor behaviour in the channel selection list. When opening the channel selection list you can keep on the current service or already select up/down and you are able to revert the B+/B- buttons.">config.usage.servicelist_cursor_behavior</item>
 		<item level="2" text="Enable old style zap controlling" description="When enabled the arrow buttons around the OK button will follow the old style zap controls instead of the enigma2 style.">config.usage.oldstyle_zap_controls</item>
 		<item level="1" text="Change bouquets in quickzap" description="When enabled, continue to the next bouquet when the last channel of the current bouquet is reached while changing channels.">config.usage.quickzap_bouquet_change</item>

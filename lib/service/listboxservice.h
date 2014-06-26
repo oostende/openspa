@@ -85,6 +85,8 @@ public:
 	void setHideNumberMarker(bool doHide);
 	void setServiceTypeIconMode(int mode);
 	void setServiceCryptIcon(bool doCrypt);
+	void setColumnWidth(int value);
+
 	static void setGetPiconNameFunc(SWIG_PYOBJECT(ePyObject) func);
 
 	enum {
@@ -161,6 +163,7 @@ private:
 	bool m_hide_number_marker;
 	int m_servicetype_icon_mode;
 	bool m_icon_crypt;
+	int m_column_width;
 };
 
 #endif
