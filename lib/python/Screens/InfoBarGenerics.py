@@ -1301,6 +1301,9 @@ class InfoBarSeek:
 			return False
 		return True
 
+	def callServiceStarted(self):
+		self.__serviceStarted()
+
 	def __seekableStatusChanged(self):
 #		print "seekable status changed!"
 		if not self.isSeekable():
