@@ -153,7 +153,9 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 				"InfoButtonPressedLong": (self.showEventInfoPlugins, _("select Info...")),
 				"EPGButtonPressedLong": (self.showEventGuidePlugins,  _("select EPG...")),
 				"leavePlayer": (self.leavePlayer, _("leave movie player...")),
-				"leavePlayerOnExit": (self.leavePlayerOnExit, _("leave movie player..."))
+				"leavePlayerOnExit": (self.leavePlayerOnExit, _("leave movie player...")),
+				"channelUp": (self.channelUp, _("when PiPzap enabled zap channel up...")),
+				"channelDown": (self.channelDown, _("when PiPzap enabled zap channel down...")),
 			})
 
 		self["DirectionActions"] = HelpableActionMap(self, "DirectionActions",
@@ -368,6 +370,18 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 				self.zapUp()
 		else:
 			InfoBarSeek.seekBack(self)
+
+	def channelUp(self):
+		if config.usage.zap_with_ch_buttons.value and self.servicelist.dopipzap:
+			self.zapDown()
+		else:
+			return 0
+
+	def channelDown(self):
+		if config.usage.zap_with_ch_buttons.value and self.servicelist.dopipzap:
+			self.zapUp()
+		else:
+			return 0
 
 	def switchChannelDown(self):
 		if "keep" not in config.usage.servicelist_cursor_behavior.value:
