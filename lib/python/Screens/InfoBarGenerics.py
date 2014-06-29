@@ -1218,10 +1218,11 @@ class InfoBarSeek:
 
 		self["SeekActions"] = InfoBarSeekActionMap(self, actionmap,
 			{
-				"playpauseService": self.playpauseService,
+				"playpauseService": (self.playpauseService, _("Pause/Continue playback")),
 				"pauseService": (self.pauseService, _("Pause playback")),
 				"unPauseService": (self.unPauseService, _("Continue playback")),
 
+				"okButton": (self.okButton, _("Continue playback")),
 				"seekFwd": (self.seekFwd, _("Seek forward")),
 				"seekFwdManual": (self.seekFwdManual, _("Seek forward (enter time)")),
 				"seekBack": (self.seekBack, _("Seek backward")),
@@ -1372,6 +1373,12 @@ class InfoBarSeek:
 			self.unPauseService()
 		else:
 			self.pauseService()
+
+	def okButton(self):
+		if self.seekstate == self.SEEK_STATE_PAUSE:
+			self.pauseService()
+		else:
+			return 0
 
 	def pauseService(self):
 		if self.seekstate == self.SEEK_STATE_PAUSE:
