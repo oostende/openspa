@@ -5,6 +5,7 @@ from enigma import setTunerTypePriorityOrder, setPreferredTuner, setSpinnerOnOff
 from Components.NimManager import nimmanager
 from Components.ServiceList import refreshServiceList
 from SystemInfo import SystemInfo
+from boxbranding import getBoxType
 import os
 import time
 
@@ -348,6 +349,15 @@ def InitUsageConfig():
 	config.usage.keymap = ConfigText(default = eEnv.resolve("${datadir}/enigma2/keymap.xml"))
 
 	config.network = ConfigSubsection()
+	if SystemInfo["WakeOnLAN"]:
+		def wakeOnLANChanged(configElement):
+			if getBoxType() == 'et10000':
+				open(SystemInfo["WakeOnLAN"], "w").write(configElement.value and "on" or "off")
+			else:
+				open(SystemInfo["WakeOnLAN"], "w").write(configElement.value and "enable" or "disable")	
+		config.network.wol = ConfigYesNo(default = False)
+		config.network.wol.addNotifier(wakeOnLANChanged)
+
 	config.network.Inadyn_autostart = ConfigYesNo(default = False)
 
 	config.seek = ConfigSubsection()
