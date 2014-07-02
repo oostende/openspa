@@ -21,7 +21,7 @@ def InitUsageConfig():
 		refreshServiceList()
 	config.usage.alternative_number_mode.addNotifier(alternativeNumberModeChange)
 
-	config.usage.hide_number_markers = ConfigYesNo(default = False)
+	config.usage.hide_number_markers = ConfigYesNo(default = True)
 	config.usage.hide_number_markers.addNotifier(refreshServiceList)
 
 	config.usage.icon_crypt = ConfigYesNo(default = False)
