@@ -161,7 +161,7 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 				# SATs
 				self.advancedSatsEntry = getConfigListEntry(_("Satellite"), self.nimConfig.advanced.sats)
 				self.list.append(self.advancedSatsEntry)
-			current_config_sats = self.nimConfig.advanced.sats.value
+				current_config_sats = self.nimConfig.advanced.sats.value
 				if current_config_sats in ("3605", "3606"):
 					self.advancedSelectSatsEntry = getConfigListEntry(_("Press OK to select satellites"), self.nimConfig.pressOKtoList)
 					self.list.append(self.advancedSelectSatsEntry)
