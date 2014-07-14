@@ -504,24 +504,9 @@ void eListboxServiceContent::setSize(const eSize &size)
 		setVisualMode(m_visual_mode);
 }
 
-void eListboxServiceContent::setHideNumberMarker(bool doHide)
-{
-	m_hide_number_marker = doHide;
-}
-
 void eListboxServiceContent::setServiceCryptIcon(bool doCrypt)
 {
 	m_icon_crypt = doCrypt;
-}
-
-void eListboxServiceContent::setColumnWidth(int value)
-{
-	m_column_width = value;
-}
-
-void eListboxServiceContent::setServiceTypeIconMode(int mode)
-{
-	m_servicetype_icon_mode = mode;
 }
 
 void eListboxServiceContent::setGetPiconNameFunc(ePyObject func)
@@ -533,14 +518,18 @@ void eListboxServiceContent::setGetPiconNameFunc(ePyObject func)
 		Py_INCREF(m_GetPiconNameFunc);
 }
 
-void eListboxServiceContent::setProgressbarHeight(int value)
+void eListboxServiceContent::setIgnoreService( const eServiceReference &service )
 {
-	m_progressbar_height = value;
+	m_is_playable_ignore=service;
+	if (m_listbox && m_listbox->isVisible())
+		m_listbox->invalidate();
 }
 
-void eListboxServiceContent::setProgressbarBorderWidth(int value)
+void eListboxServiceContent::setItemHeight(int height)
 {
-	m_progressbar_border_width = value;
+	m_itemheight = height;
+	if (m_listbox)
+		m_listbox->setItemHeight(height);
 }
 
 void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const ePoint &offset, int selected)
@@ -935,18 +924,4 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 		}
 	}
 	painter.clippop();
-}
-
-void eListboxServiceContent::setIgnoreService( const eServiceReference &service )
-{
-	m_is_playable_ignore=service;
-	if (m_listbox && m_listbox->isVisible())
-		m_listbox->invalidate();
-}
-
-void eListboxServiceContent::setItemHeight(int height)
-{
-	m_itemheight = height;
-	if (m_listbox)
-		m_listbox->setItemHeight(height);
 }

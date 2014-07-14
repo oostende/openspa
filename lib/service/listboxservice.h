@@ -82,12 +82,12 @@ public:
 
 	int getItemHeight() { return m_itemheight; }
 	void setItemHeight(int height);
-	void setHideNumberMarker(bool doHide);
-	void setServiceTypeIconMode(int mode);
+	void setHideNumberMarker(bool doHide) { m_hide_number_marker = doHide; }
+	void setServiceTypeIconMode(int mode) { m_servicetype_icon_mode = mode; }
 	void setServiceCryptIcon(bool doCrypt);
-	void setColumnWidth(int value);
-	void setProgressbarHeight(int value);
-	void setProgressbarBorderWidth(int value);
+	void setColumnWidth(int value) { m_column_width = value; }
+	void setProgressbarHeight(int value) {	m_progressbar_height = value; }
+	void setProgressbarBorderWidth(int value) { m_progressbar_border_width = value; }
 
 	static void setGetPiconNameFunc(SWIG_PYOBJECT(ePyObject) func);
 
