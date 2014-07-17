@@ -533,7 +533,7 @@ class InfoBarChannelSelection:
 		self["ChannelSelectActions"] = HelpableActionMap(self, "InfobarChannelSelection",
 			{
 				"keyUp": (self.keyUpCheck, self.getKeyUpHelptext),
-				"keyDown": (self.keyDownCheck, self.getKeyDownHelpText),
+				"keyDown": (self.keyDownCheck, self.getKeyDownHelptext),
 				"keyLeft": (self.keyLeftCheck, self.getKeyLeftHelptext),
 				"keyRight": (self.keyRightCheck, self.getKeyRightHelptext),
 				"historyBack": (self.historyBack, _("Switch to previous channel in history")),
@@ -617,7 +617,7 @@ class InfoBarChannelSelection:
 				value += " " + _("and select previous channel")
 		return value
 
-	def getKeyDownHelpText(self):
+	def getKeyDownHelptext(self):
 		if config.usage.oldstyle_zap_controls.value:
 			value = _("Switch to previous channel")
 		else:
@@ -645,7 +645,7 @@ class InfoBarChannelSelection:
 		return value
 
 	def getKeyChannelUpHelptext(self):
-		return config.usage.zap_with_ch_buttons.value and _("Switch to previous channel") or _("Open service list")
+		return config.usage.zap_with_ch_buttons.value and _("Switch to next channel") or _("Open service list")
 
 	def getKeyChannelDownHelptext(self):
 		return config.usage.zap_with_ch_buttons.value and _("Switch to previous channel") or _("Open service list")
@@ -677,7 +677,7 @@ class InfoBarChannelSelection:
 						else:
 							isPlayable = isPlayableForCur(cur)
 					if cur and (cur.toString() == prev or isPlayable):
-						break
+							break
 		else:
 			self.servicelist.moveUp()
 		self.servicelist.zap(enable_pipzap = True)
@@ -699,7 +699,7 @@ class InfoBarChannelSelection:
 						else:
 							isPlayable = isPlayableForCur(cur)
 					if cur and (cur.toString() == prev or isPlayable):
-						break
+							break
 		else:
 			self.servicelist.moveDown()
 		self.servicelist.zap(enable_pipzap = True)
@@ -1081,7 +1081,7 @@ class InfoBarEPG:
 			self.defaultGuideType()
 			return
 		pluginlist = self.getEPGPluginList()
-		self.openMultiServiceEPG()		
+		self.openMultiServiceEPG()
 
 	def openEventView(self):
 		from Components.ServiceEventTracker import InfoBarCount
@@ -1221,7 +1221,6 @@ class InfoBarSeek:
 				"playpauseService": (self.playpauseService, _("Pause/Continue playback")),
 				"pauseService": (self.pauseService, _("Pause playback")),
 				"unPauseService": (self.unPauseService, _("Continue playback")),
-
 				"okButton": (self.okButton, _("Continue playback")),
 				"seekFwd": (self.seekFwd, _("Seek forward")),
 				"seekFwdManual": (self.seekFwdManual, _("Seek forward (enter time)")),
@@ -1301,9 +1300,6 @@ class InfoBarSeek:
 		if self.getSeek() is None or (isStandardInfoBar(self) and not self.timeshiftEnabled()):
 			return False
 		return True
-
-	def callServiceStarted(self):
-		self.__serviceStarted()
 
 	def __seekableStatusChanged(self):
 #		print "seekable status changed!"
@@ -1835,6 +1831,9 @@ class InfoBarTimeshift:
 		print "activateTimeshiftEndAndPause"
 		#state = self.seekstate
 		self.activateTimeshiftEnd(False)
+
+	def callServiceStarted(self):
+		self.__serviceStarted()
 
 	def __seekableStatusChanged(self):
 		self["TimeshiftActivateActions"].setEnabled(not self.isSeekable() and self.timeshiftEnabled())
