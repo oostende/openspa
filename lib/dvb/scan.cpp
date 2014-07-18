@@ -1270,6 +1270,10 @@ RESULT eDVBScan::processSDT(eDVBNamespace dvbnamespace, const ServiceDescription
 			else
 				SCAN_eDebug("is free");
 		}
+		else {
+			SCAN_eDebug("not found in PAT.. so we assume it is scrambled!!");
+			crypted = true;
+		}
 
 		if (m_flags & scanOnlyFree && crypted)
 			add = false;
@@ -1340,7 +1344,7 @@ RESULT eDVBScan::processSDT(eDVBNamespace dvbnamespace, const ServiceDescription
 				}
 			}
 
-			if (crypted and !service->m_ca.size())
+			if (crypted && !service->m_ca.size())
 				service->m_ca.push_front(0);
 
 			std::pair<std::map<eServiceReferenceDVB, ePtr<eDVBService> >::iterator, bool> i =
