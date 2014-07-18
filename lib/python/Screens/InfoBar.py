@@ -335,7 +335,6 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 		self.handleLeave(config.usage.on_movie_eof.value)
 
 	def up(self):
-		slist = self.servicelist
 		if self.servicelist and self.servicelist.dopipzap:
 			if config.usage.oldstyle_zap_controls.value:
 				self.zapDown()
