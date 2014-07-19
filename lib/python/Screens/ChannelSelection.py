@@ -1,6 +1,6 @@
 from Tools.Profile import profile
 
-from Screen import Screen
+from Screens.Screen import Screen
 import Screens.InfoBar
 import Components.ParentalControl
 from Components.Button import Button
