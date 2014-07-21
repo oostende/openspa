@@ -59,8 +59,11 @@ def InitUsageConfig():
 	config.usage.show_infobar_on_event_change = ConfigYesNo(default = False)
 	config.usage.show_second_infobar = ConfigSelection(default = "11", choices = [(None, _("None"))] + choicelist + [("EPG",_("EPG"))])
 	config.usage.infobar_frontend_source = ConfigSelection(default = "tuner", choices = [("settings", _("Settings")), ("tuner", _("Tuner"))])
-	config.usage.oldstyle_zap_controls = ConfigYesNo(default = False)
-	config.usage.oldstyle_channel_select_controls = ConfigYesNo(default = False)
+	config.usage.oldstyle_zap_controls = ConfigSelection(default = "standard", choices = [
+		("standard", _("Standard")),
+		("neutrino", _("Neutrino")),
+		("openspa", _("OpenSPA")) ])
+	config.usage.oldstyle_channel_select_controls =  ConfigYesNo(default = False)
 	config.usage.zap_with_ch_buttons = ConfigYesNo(default = False)
 	config.usage.ok_is_channelselection = ConfigYesNo(default = False)
 	config.usage.show_spinner = ConfigYesNo(default = True)
@@ -147,7 +150,6 @@ def InitUsageConfig():
 		("ask", _("Ask user")), ("movielist", _("Return to movie list")), ("quit", _("Return to previous service")), ("pause", _("Pause movie at end")), ("playlist", _("Play next (return to movie list)")),
 		("playlistquit", _("Play next (return to previous service)")), ("loop", _("Continues play (loop)")), ("repeatcurrent", _("Repeat"))])
 	config.usage.next_movie_msg = ConfigYesNo(default = True)
-	config.usage.last_movie_played = ConfigText()
 	config.usage.leave_movieplayer_onExit = ConfigSelection(default = "popup", choices = [
 		("no", _("No")), ("popup", _("With popup")), ("without popup", _("Without popup")) ])
 

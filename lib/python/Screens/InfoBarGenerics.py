@@ -1,7 +1,6 @@
 from ChannelSelection import ChannelSelection, BouquetSelector, SilentBouquetSelector
 
-from Components.ActionMap import ActionMap, HelpableActionMap
-from Components.ActionMap import NumberActionMap
+from Components.ActionMap import ActionMap, HelpableActionMap, NumberActionMap
 from Components.Harddisk import harddiskmanager
 from Components.Input import Input
 from Components.Label import Label
@@ -573,26 +572,32 @@ class InfoBarChannelSelection:
 			self.servicelist.historyNext()
 
 	def keyUpCheck(self):
-		if config.usage.oldstyle_zap_controls.value:
+		if config.usage.oldstyle_zap_controls.value == "neutrino" or config.usage.oldstyle_zap_controls.value == "openspa":
 			self.zapDown()
 		else:
 			self.switchChannelUp()
 
 	def keyDownCheck(self):
-		if config.usage.oldstyle_zap_controls.value:
+		if config.usage.oldstyle_zap_controls.value == "neutrino" or config.usage.oldstyle_zap_controls.value == "openspa":
 			self.zapUp()
 		else:
 			self.switchChannelDown()
 
 	def keyLeftCheck(self):
-		if config.usage.oldstyle_zap_controls.value:
+		if config.usage.oldstyle_zap_controls.value == "neutrino":
 			self.switchChannelUp()
+		elif config.usage.oldstyle_zap_controls.value == "openspa":
+			from Components.VolumeControl import VolumeControl
+			VolumeControl.instance and VolumeControl.instance.volDown()
 		else:
 			self.zapUp()
 
 	def keyRightCheck(self):
-		if config.usage.oldstyle_zap_controls.value:
+		if config.usage.oldstyle_zap_controls.value == "neutrino":
 			self.switchChannelDown()
+		elif config.usage.oldstyle_zap_controls.value == "openspa":
+			from Components.VolumeControl import VolumeControl
+			VolumeControl.instance and VolumeControl.instance.volUp()
 		else:
 			self.zapDown()
 
@@ -609,7 +614,7 @@ class InfoBarChannelSelection:
 			self.openServiceList()
 
 	def getKeyUpHelptext(self):
-		if config.usage.oldstyle_zap_controls.value:
+		if config.usage.oldstyle_zap_controls.value == "neutrino" or config.usage.oldstyle_zap_controls.value == "openspa":
 			value = _("Switch to next channel")
 		else:
 			value = _("Open service list")
@@ -618,7 +623,7 @@ class InfoBarChannelSelection:
 		return value
 
 	def getKeyDownHelptext(self):
-		if config.usage.oldstyle_zap_controls.value:
+		if config.usage.oldstyle_zap_controls.value == "neutrino" or config.usage.oldstyle_zap_controls.value == "openspa":
 			value = _("Switch to previous channel")
 		else:
 			value = _("Open service list")
@@ -627,19 +632,23 @@ class InfoBarChannelSelection:
 		return value
 
 	def getKeyLeftHelptext(self):
-		if config.usage.oldstyle_zap_controls.value:
+		if config.usage.oldstyle_zap_controls.value == "neutrino":
 			value = _("Open service list")
 			if not "keep" in config.usage.servicelist_cursor_behavior.value:
 				value += " " + _("and select previous channel")
+		elif config.usage.oldstyle_zap_controls.value == "openspa":
+			value = _("Volume down")
 		else:
 			value = _("Switch to previous channel")
 		return value
 
 	def getKeyRightHelptext(self):
-		if config.usage.oldstyle_zap_controls.value:
+		if config.usage.oldstyle_zap_controls.value == "nuetrino":
 			value = _("Open service list")
 			if not "keep" in config.usage.servicelist_cursor_behavior.value:
 				value += " " + _("and select next channel")
+		elif config.usage.oldstyle_zap_controls.value == "openspa":
+			value = _("Volume up")
 		else:
 			value = _("Switch to next channel")
 		return value
