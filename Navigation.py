@@ -12,6 +12,12 @@ import ServiceReference
 from Screens.InfoBar import InfoBar
 from sys import maxint
 
+isGBIPBOX = False
+
+if path.isfile("/usr/lib/enigma2/python/gbipbox.so"):
+	isGBIPBOX = True
+	from gbipbox import gbipbox
+
 # TODO: remove pNavgation, eNavigation and rewrite this stuff in python.
 class Navigation:
 	def __init__(self):
@@ -89,6 +95,10 @@ class Navigation:
 				self.currentlyPlayingServiceOrGroup = ref
 				if InfoBarInstance and InfoBarInstance.servicelist.servicelist.setCurrent(ref, adjust):
 					self.currentlyPlayingServiceOrGroup = InfoBarInstance.servicelist.servicelist.getCurrent()
+
+				if ref.toString().find('//') == -1 and isGBIPBOX:
+					playref = gbipbox.gref(ref)
+
 				if self.pnav.playService(playref):
 					print "Failed to start", playref
 					self.currentlyPlayingServiceReference = None
