@@ -1,4 +1,4 @@
-import sys
+from sys import modules
 import os
 import time
 
@@ -36,11 +36,11 @@ def getChipSetString():
 		f = open('/proc/stb/info/chipset', 'r')
 		chipset = f.read()
 		f.close()
-		return str(chipset.lower().replace('\n','').replace('bcm',''))
+		return str(chipset.lower().replace('\n','').replace('bcm','').replace('brcm',''))
 	except:
 		return "unavailable"
 
-def getModelString():	
+def getModelString():
 	try:
 		file = open("/proc/stb/info/boxtype", "r")
 		model = file.readline().strip()
@@ -106,4 +106,4 @@ def getImageTypeString():
 	return _("undefined")
 
 # For modules that do "from About import about"
-about = sys.modules[__name__]
+about = modules[__name__]
