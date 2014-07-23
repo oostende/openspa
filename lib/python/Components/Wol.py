@@ -20,7 +20,7 @@ class WOL:
 
 def Init():
 	config.network = ConfigSubsection()
-	if SystemInfo["WakeOnLAN"] and not getBoxType() == 'gbquad':
+	if SystemInfo["WakeOnLAN"] and not getBoxType() in ('gbquad', 'gbquadplus'):
 		def setWOLmode(value):
 			iwol.setWolState(config.network.wol.value)
 
