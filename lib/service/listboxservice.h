@@ -107,9 +107,10 @@ public:
 		serviceEventProgressbarColorSelected,
 		serviceEventProgressbarBorderColor,
 		serviceEventProgressbarBorderColorSelected,
+		serviceRecorded,
 		colorElements
 	};
-	
+
 	void setColor(int color, gRGB &col);
 	bool checkServiceIsRecorded(eServiceReference ref);
 protected:
