@@ -59,6 +59,10 @@ class ServiceList(HTMLComponent, GUIComponent):
 		if pic:
 			self.l.setPixmap(self.l.picCrypt, pic)
 
+		pic = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/record.png"))
+		if pic:
+			self.l.setPixmap(self.l.picRecord, pic)
+
 
 		self.root = None
 		self.mode = self.MODE_NORMAL
@@ -329,4 +333,5 @@ class ServiceList(HTMLComponent, GUIComponent):
 		self.l.setHideNumberMarker(config.usage.hide_number_markers.value)
 		self.l.setServiceTypeIconMode(int(config.usage.servicetype_icon_mode.value))
 		self.l.setServiceCryptIcon(config.usage.icon_crypt.value)
+		self.l.setRecordIndicatorMode(int(config.usage.record_indicator_mode.value))
 		self.l.setColumnWidth(int(config.usage.servicelist_column.value))

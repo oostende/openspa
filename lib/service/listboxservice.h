@@ -69,6 +69,7 @@ public:
 		picMarker,
 		picServiceEventProgressbar,
 		picCrypt,
+		picRecord,
 		picElements
 	};
 
@@ -85,6 +86,7 @@ public:
 	void setHideNumberMarker(bool doHide) { m_hide_number_marker = doHide; }
 	void setServiceTypeIconMode(int mode) { m_servicetype_icon_mode = mode; }
 	void setServiceCryptIcon(bool doCrypt);
+	void setRecordIndicatorMode(int mode) { m_record_indicator_mode = mode; }
 	void setColumnWidth(int value) { m_column_width = value; }
 	void setProgressbarHeight(int value) {	m_progressbar_height = value; }
 	void setProgressbarBorderWidth(int value) { m_progressbar_border_width = value; }
@@ -165,6 +167,7 @@ private:
 	bool m_hide_number_marker;
 	int m_servicetype_icon_mode;
 	bool m_icon_crypt;
+	int m_record_indicator_mode;
 	int m_column_width;
 	int m_progressbar_height;
 	int m_progressbar_border_width;
