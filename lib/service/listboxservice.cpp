@@ -1,9 +1,10 @@
 #include <lib/service/listboxservice.h>
 #include <lib/service/service.h>
+#include <lib/dvb/dvb.h>
+#include <lib/dvb/db.h>
 #include <lib/gdi/font.h>
 #include <lib/gdi/epng.h>
 #include <lib/dvb/epgcache.h>
-#include <lib/dvb/db.h>
 #include <lib/dvb/pmt.h>
 #include <lib/nav/core.h>
 #include <lib/python/connections.h>
@@ -278,7 +279,7 @@ void eListboxServiceContent::sort()
 DEFINE_REF(eListboxServiceContent);
 
 eListboxServiceContent::eListboxServiceContent()
-	:m_visual_mode(visModeSimple), m_size(0), m_current_marked(false), m_itemheight(25), m_hide_number_marker(false), m_servicetype_icon_mode(0), m_crypto_icon_mode(0), m_column_width(0), m_progressbar_height(6), m_progressbar_border_width(2), m_record_indicator_mode(0)
+	:m_visual_mode(visModeSimple), m_size(0), m_current_marked(false), m_itemheight(25), m_hide_number_marker(false), m_servicetype_icon_mode(0), m_icon_crypt(false), m_column_width(0), m_progressbar_height(6), m_progressbar_border_width(2), m_record_indicator_mode(0)
 {
 	memset(m_color_set, 0, sizeof(m_color_set));
 	cursorHome();
@@ -506,6 +507,11 @@ void eListboxServiceContent::setSize(const eSize &size)
 		setVisualMode(m_visual_mode);
 }
 
+void eListboxServiceContent::setServiceCryptIcon(bool doCrypt)
+{
+	m_icon_crypt = doCrypt;
+}
+
 void eListboxServiceContent::setGetPiconNameFunc(ePyObject func)
 {
 	if (m_GetPiconNameFunc)
@@ -639,10 +645,11 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 		eServiceReference ref = *m_cursor;
 		bool isMarker = ref.flags & eServiceReference::isMarker;
 		bool isPlayable = !(ref.flags & eServiceReference::isDirectory || isMarker);
+
 		bool isRecorded = m_record_indicator_mode && isPlayable && checkServiceIsRecorded(ref);
 		ePtr<eServiceEvent> evt;
 		bool serviceAvail = true;
-
+#ifndef FORCE_SERVICEAVAIL
 		if (!marked && isPlayable && service_info && m_is_playable_ignore.valid() && !service_info->isPlayable(*m_cursor, m_is_playable_ignore))
 		{
 			if (m_color_set[serviceNotAvail])
@@ -651,6 +658,7 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 				painter.setForegroundColor(gRGB(0xbbbbbb));
 			serviceAvail = false;
 		}
+#endif
 		if (m_record_indicator_mode == 3 && isRecorded)
 		{
 			if (m_color_set[serviceRecorded])
@@ -658,7 +666,6 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 			else
 				painter.setForegroundColor(gRGB(0xb40431));
 		}
-
 		if (selected && local_style && local_style->m_selection)
 			painter.blit(local_style->m_selection, offset, eRect(), gPainter::BT_ALPHATEST);
 
@@ -796,6 +803,45 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 							}
 						}
 
+						//service crypt icon
+						if (m_icon_crypt)
+						{
+							ePtr<eDVBResourceManager> res_mgr;
+							if (!eDVBResourceManager::getInstance(res_mgr))
+							{
+								ePtr<iDVBChannelList> db;
+								if (!res_mgr->getChannelList(db))
+								{
+									eServiceReferenceDVB &reference = (eServiceReferenceDVB&) ref;
+									ePtr<eDVBService> origService;
+									if (!db->getService(reference, origService))
+									{
+										ePtr<gPixmap> &pixmap = m_pixmaps[picCrypt];
+										if (pixmap)
+										{
+											eSize pixmap_size = pixmap->size();
+											eRect area = m_element_position[celServiceInfo];
+											m_element_position[celServiceInfo].setLeft(area.left() + pixmap_size.width() + 8);
+											m_element_position[celServiceInfo].setWidth(area.width() - pixmap_size.width() - 8);
+											int offs = 0;
+											area = m_element_position[celServiceName];
+											offs = xoffs;
+											xoffs += pixmap_size.width() + 8;
+
+											if (origService->m_ca.size())
+											{
+												int correction = (area.height() - pixmap_size.height()) / 2;
+												area.moveBy(offset);
+												painter.clip(area);
+												painter.blit(pixmap, ePoint(area.left() + offs, offset.y() + correction), area, gPainter::BT_ALPHATEST);
+												painter.clippop();
+											}
+										}
+									}
+								}
+							}
+						}
+
 						//service type marker stuff
 						if (m_servicetype_icon_mode)
 						{
@@ -819,41 +865,10 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 									offs = xoffs;
 									xoffs += pixmap_size.width() + 8;
 								}
-								else if (m_crypto_icon_mode == 1 && m_pixmaps[picCrypto])
-									offs = offs + m_pixmaps[picCrypto]->size().width() + 8;
 								int correction = (area.height() - pixmap_size.height()) / 2;
 								area.moveBy(offset);
 								painter.clip(area);
-								painter.blit(pixmap, ePoint(area.left() + offs, offset.y() + correction), area, gPainter::BT_ALPHATEST);
-								painter.clippop();
-							}
-						}
-
-						//crypto icon stuff
-						if (m_crypto_icon_mode && m_pixmaps[picCrypto])
-						{
-							eSize pixmap_size = m_pixmaps[picCrypto]->size();
-							eRect area = m_element_position[celServiceInfo];
-							int offs = 0;
-							if (m_crypto_icon_mode == 1)
-							{
-								m_element_position[celServiceInfo].setLeft(area.left() + pixmap_size.width() + 8);
-								m_element_position[celServiceInfo].setWidth(area.width() - pixmap_size.width() - 8);
-								area = m_element_position[celServiceName];
-								offs = xoffs;
-								xoffs += pixmap_size.width() + 8;
-							}
-							int correction = (area.height() - pixmap_size.height()) / 2;
-							area.moveBy(offset);
-							if (service_info->isCrypted(*m_cursor))
-							{
-								if (m_crypto_icon_mode == 2)
-								{
-									m_element_position[celServiceInfo].setLeft(area.left() + pixmap_size.width() + 8);
-									m_element_position[celServiceInfo].setWidth(area.width() - pixmap_size.width() - 8);
-								}
-								painter.clip(area);
-								painter.blit(m_pixmaps[picCrypto], ePoint(area.left() + offs, offset.y() + correction), area, gPainter::BT_ALPHATEST);
+								painter.blit(pixmap, offset+ePoint(area.left() + offs, correction), area, gPainter::BT_ALPHATEST);
 								painter.clippop();
 							}
 						}
