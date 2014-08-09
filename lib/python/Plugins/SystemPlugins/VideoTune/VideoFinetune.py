@@ -6,7 +6,37 @@ from enigma import gFont, getDesktop, gMainDC, eSize, RT_HALIGN_RIGHT, RT_WRAP
 def RGB(r,g,b):
 	return (r<<16)|(g<<8)|b
 
-class VideoTestScreen(Screen):
+class OverscanTestScreen(Screen):
+	skin = """
+		<screen position="fill">
+			<ePixmap pixmap="skin_default/overscan.png" position="0,0" size="1920,1080" zPosition="1" alphatest="on" />
+		</screen>"""
+
+	def __init__(self, session):
+		Screen.__init__(self, session)
+
+		self["actions"] = NumberActionMap(["InputActions", "OkCancelActions"],
+		{
+			"1": self.keyNumber,
+			"2": self.keyNumber,
+			"3": self.keyNumber,
+			"4": self.keyNumber,
+			"5": self.keyNumber,
+			"7": self.keyNumber,
+			"ok": self.ok,
+			"cancel": self.cancel
+		})
+
+	def ok(self):
+		self.close(True)
+
+	def cancel(self):
+		self.close(False)
+
+	def keyNumber(self, key):
+		self.close(key)
+
+class FullHDTestScreen(Screen):
 	skin = """
 		<screen position="fill">
 			<ePixmap pixmap="skin_default/testscreen.png" position="0,0" size="1920,1080" zPosition="1" alphatest="on" />
@@ -28,6 +58,7 @@ class VideoTestScreen(Screen):
 			"3": self.keyNumber,
 			"4": self.keyNumber,
 			"5": self.keyNumber,
+			"6": self.keyNumber,
 			"ok": self.ok,
 			"cancel": self.cancel
 		})
@@ -69,13 +100,14 @@ class VideoFinetune(Screen):
 			"4": self.keyNumber,
 			"5": self.keyNumber,
 			"6": self.keyNumber,
+			"7": self.keyNumber,
 			"ok": self.callNext,
 			"cancel": self.close,
 		})
 		self.testpic_brightness()
 
 	def keyNumber(self, key):
-		(self.testpic_brightness, self.testpic_contrast, self.testpic_colors, self.testpic_filter, self.testpic_gamma, self.testpic_fullhd)[key-1]()
+		(self.testpic_brightness, self.testpic_contrast, self.testpic_colors, self.testpic_filter, self.testpic_gamma, self.testpic_overscan, self.testpic_fullhd)[key-1]()
 
 	def callNext(self):
 		if self.next:
@@ -90,6 +122,8 @@ class VideoFinetune(Screen):
 
 	def testpic_brightness(self):
 		self.next = self.testpic_contrast
+		self.show()
+
 		c = self["Canvas"]
 
 		xres, yres = getDesktop(0).size().width(), getDesktop(0).size().height()
@@ -111,7 +145,7 @@ class VideoFinetune(Screen):
 			if i < 2:
 				c.writeText(x + width, offset, width, eh, RGB(255, 255, 255), RGB(0,0,0), gFont("Regular", 20), "%d." % (i+1))
 
-		c.writeText(xres / 10, yres / 6 - 40, xres * 3 / 5, 40, RGB(128,255,255), RGB(0,0,0), gFont("Regular", 40), 
+		c.writeText(xres / 10, yres / 6 - 40, xres * 3 / 5, 40, RGB(128,255,255), RGB(0,0,0), gFont("Regular", 40),
 			_("Brightness"))
 		c.writeText(xres / 10, yres / 6, xres * 4 / 7, yres * 4 / 6, RGB(255,255,255), RGB(0,0,0), gFont("Regular", 20),
 			_("If your TV has a brightness or contrast enhancement, disable it. If there is something called \"dynamic\", "
@@ -126,6 +160,7 @@ class VideoFinetune(Screen):
 
 	def testpic_contrast(self):
 		self.next = self.testpic_colors
+		self.show()
 
 		c = self["Canvas"]
 
@@ -148,11 +183,11 @@ class VideoFinetune(Screen):
 
 			c.fill(x, offset, width, eh, RGB(col, col, col))
 			if col == 185 or col == 235 or col == 255:
-				c.fill(x, offset, width, 2, RGB(0,0,0)) 
+				c.fill(x, offset, width, 2, RGB(0,0,0))
 			if i >= 13:
 				c.writeText(x + width, offset, width, eh, RGB(0, 0, 0), RGB(255, 255, 255), gFont("Regular", 20), "%d." % (i-13+1))
 
-		c.writeText(xres / 10, yres / 6 - 40, xres * 3 / 5, 40, RGB(128,0,0), RGB(255,255,255), gFont("Regular", 40), 
+		c.writeText(xres / 10, yres / 6 - 40, xres * 3 / 5, 40, RGB(128,0,0), RGB(255,255,255), gFont("Regular", 40),
 			_("Contrast"))
 		c.writeText(xres / 10, yres / 6, xres / 2, yres * 4 / 6, RGB(0,0,0), RGB(255,255,255), gFont("Regular", 20),
 			_("Now, use the contrast setting to turn up the brightness of the background as much as possible, "
@@ -164,6 +199,7 @@ class VideoFinetune(Screen):
 
 	def testpic_colors(self):
 		self.next = self.testpic_filter
+		self.show()
 
 		c = self["Canvas"]
 
@@ -210,7 +246,7 @@ class VideoFinetune(Screen):
 				if i == 0:
 					self.bbox(x, offset, width, eh, RGB(0,0,0), bbw, bbh)
 
-		c.writeText(xres / 10, yres / 6 - 40, xres * 3 / 5, 40, RGB(128,0,0), RGB(255,255,255), gFont("Regular", 40), 
+		c.writeText(xres / 10, yres / 6 - 40, xres * 3 / 5, 40, RGB(128,0,0), RGB(255,255,255), gFont("Regular", 40),
 			("Color"))
 		c.writeText(xres / 10, yres / 6, xres / 2, yres * 4 / 6, RGB(0,0,0), RGB(255,255,255), gFont("Regular", 20),
 			_("Adjust the color settings so that all the color shades are distinguishable, but appear as saturated as possible. "
@@ -221,6 +257,7 @@ class VideoFinetune(Screen):
 
 	def testpic_filter(self):
 		self.next = self.testpic_gamma
+		self.show()
 
 		c = self["Canvas"]
 
@@ -252,7 +289,8 @@ class VideoFinetune(Screen):
 		c.flush()
 
 	def testpic_gamma(self):
-		self.next = self.testpic_fullhd
+		self.next = self.testpic_overscan
+		self.show()
 
 		c = self["Canvas"]
 
@@ -284,10 +322,15 @@ class VideoFinetune(Screen):
 
 		c.flush()
 
+	def testpic_overscan(self):
+		self.next = self.testpic_fullhd
+		self.hide()
+		self.session.openWithCallback(self.testpicCallback, OverscanTestScreen)
+
 	def testpic_fullhd(self):
 		self.next = self.testpic_brightness
 		self.hide()
-		self.session.openWithCallback(self.testpicCallback, VideoTestScreen)
+		self.session.openWithCallback(self.testpicCallback, FullHDTestScreen)
 
 	def testpicCallback(self, key):
 		if key:
@@ -295,6 +338,5 @@ class VideoFinetune(Screen):
 				self.next()
 			else:
 				self.keyNumber(key)
-			self.show()
 		else:
 			self.close()
