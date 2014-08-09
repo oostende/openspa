@@ -129,7 +129,7 @@ int eListboxServiceContent::getNextBeginningWithChar(char c)
 		while ( idx <= len )
 		{
 			char cc = text[idx++];
-			if ( cc >= 33 && cc < 127)
+			if (isprint(cc))
 			{
 				if (cc == c)
 					return index;
