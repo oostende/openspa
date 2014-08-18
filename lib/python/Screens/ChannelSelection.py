@@ -147,9 +147,9 @@ class ChannelContextMenu(Screen):
 						append_when_current_valid(current, menu, (_("set as startup service"), self.setStartupService), level=0)
 					if self.parentalControlEnabled:
 						if self.parentalControl.getProtectionLevel(csel.getCurrentSelection().toCompareString()) == -1:
-							append_when_current_valid(current, menu, (_("add to parental protection"), boundFunction(self.addParentalProtection, csel.getCurrentSelection())), level=0)
+							append_when_current_valid(current, menu, (_("add bouquet to parental protection"), boundFunction(self.addParentalProtection, csel.getCurrentSelection())), level=0)
 						else:
-							append_when_current_valid(current, menu, (_("remove from parental protection"), boundFunction(self.removeParentalProtection, csel.getCurrentSelection())), level=0)
+							append_when_current_valid(current, menu, (_("remove bouquet from parental protection"), boundFunction(self.removeParentalProtection, csel.getCurrentSelection())), level=0)
 					if haveBouquets:
 						bouquets = self.csel.getBouquetList()
 						if bouquets is None:
@@ -1580,11 +1580,9 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 		if self.movemode:
 			self.toggleMoveMarked()
 		elif (ref.flags & eServiceReference.flagDirectory) == eServiceReference.flagDirectory:
-			if Components.ParentalControl.parentalControl.isServicePlayable(ref, Screens.InfoBar.InfoBar.instance.bouquetSelected):
+			if Components.ParentalControl.parentalControl.isServicePlayable(ref, self.bouquetParentalControlCallback, self.session):
 				self.enterPath(ref)
 				self.gotoCurrentServiceOrProvider(ref)
-			else:
-				self.cancel()
 		elif self.bouquet_mark_edit != OFF:
 			if not (self.bouquet_mark_edit == EDIT_ALTERNATIVES and ref.flags & eServiceReference.isGroup):
 				self.doMark()
@@ -1600,6 +1598,10 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 					self.startRoot = None
 					self.correctChannelNumber()
 					self.close(ref)
+
+	def bouquetParentalControlCallback(self, ref):
+		self.enterPath(ref)
+		self.gotoCurrentServiceOrProvider(ref)
 
 	def togglePipzap(self):
 		assert(self.session.pip)
