@@ -553,7 +553,7 @@ bool eListboxServiceContent::checkServiceIsRecorded(eServiceReference ref)
 			res->getChannelList(db);
 			eBouquet *bouquet=0;
 			db->getBouquet(ref, bouquet);
-			for (std::list<eServiceReference>::iterator i(bouquet->m_services.begin()); i != bouquet->m_services.end(); ++it)
+			for (std::list<eServiceReference>::iterator i(bouquet->m_services.begin()); i != bouquet->m_services.end(); ++i)
 				if (*i == it->second)
 					return true;
 		}
@@ -869,6 +869,13 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 									offs = xoffs;
 									xoffs += pixmap_size.width() + 8;
 								}
+								// correction for service type icon + record icon
+								if (isRecorded && m_record_indicator_mode == 1 && m_pixmaps[picRecord] && m_servicetype_icon_mode == 2)
+								{
+									eSize r_pixmap_size = m_pixmaps[picRecord]->size();
+									offs += r_pixmap_size.width() + 8;
+								}
+								/////
 								int correction = (area.height() - pixmap_size.height()) / 2;
 								area.moveBy(offset);
 								painter.clip(area);
