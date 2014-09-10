@@ -54,7 +54,7 @@ class EPGSelection(Screen):
 		elif isinstance(service, eServiceReference) or isinstance(service, str):
 			self.type = EPG_TYPE_SINGLE
 			self["key_yellow"] = Button()
-			self["key_blue"] = Button()
+			self["key_blue"] = Button(_("Select Channel"))
 			self.currentService=ServiceReference(service)
 			self.zapFunc = zapFunc
 			self.sort_type = 0
@@ -272,6 +272,11 @@ class EPGSelection(Screen):
 	def blueButtonPressed(self):
 		if self.type == EPG_TYPE_MULTI:
 			self["list"].updateMultiEPG(1)
+		if self.type == EPG_TYPE_SINGLE:
+			self.session.openWithCallback(self.channelSelectionCallback, ChannelSelection.SimpleChannelSelection, _("Select channel"))
+
+	def channelSelectionCallback(self, service):
+		service and self.setService(ServiceReference(service))
 
 	def removeTimer(self, timer):
 		timer.afterEvent = AFTEREVENT.NONE
