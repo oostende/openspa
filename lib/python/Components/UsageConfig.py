@@ -68,6 +68,7 @@ def InitUsageConfig():
 	config.usage.oldstyle_channel_select_controls =  ConfigYesNo(default = False)
 	config.usage.zap_with_ch_buttons = ConfigYesNo(default = False)
 	config.usage.ok_is_channelselection = ConfigYesNo(default = False)
+	config.usage.channelselection_preview = ConfigYesNo(default = False)
 	config.usage.show_spinner = ConfigYesNo(default = True)
 	config.usage.enable_tt_caching = ConfigYesNo(default = True)
 	config.usage.sort_settings = ConfigYesNo(default = False)
