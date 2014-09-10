@@ -773,7 +773,7 @@ void eDVBDB::loadBouquet(const char *path)
 	char *line = (char*)malloc(linesize);
 	bool read_descr=false;
 	eServiceReference *e = NULL;
-	while (1)
+	while (fp)
 	{
 		int len;
 		if ((len = getline(&line, &linesize, fp)) < 2) break;
