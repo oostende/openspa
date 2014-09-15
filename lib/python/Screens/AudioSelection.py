@@ -225,7 +225,7 @@ class AudioSelection(Screen, ConfigListScreen):
 					# self["key_blue"].setBoolean(True)
 					conflist.append(getConfigListEntry(Plugins[0][0], ConfigNothing()))
 					self.plugincallfunc = Plugins[0][1]
-					self.nummplugin=len(configlist)-1
+					self.nummplugin=len(conflist)-1
 				
 				if len(Plugins) > 1:
 					print "plugin(s) installed but not displayed in the dialog box:", Plugins[1:]
