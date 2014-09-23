@@ -2198,7 +2198,10 @@ int eDVBServicePlay::selectAudioStream(int i)
 				    the cache contains the correct audio pid and type)
 			*/
 	if (m_dvb_service && ((i != -1) || (program.audioStreams.size() == 1)
-		|| ((m_dvb_service->getCacheEntry(eDVBService::cMPEGAPID) == -1) && (m_dvb_service->getCacheEntry(eDVBService::cAC3PID)==-1) && (m_dvb_service->getCacheEntry(eDVBService::cDDPPID)== -1) && (m_dvb_service->getCacheEntry(eDVBService::cAACHEAPID) == -1))))
+		|| ((m_dvb_service->getCacheEntry(eDVBService::cMPEGAPID) == -1)
+		&& (m_dvb_service->getCacheEntry(eDVBService::cAC3PID)== -1)
+		&& (m_dvb_service->getCacheEntry(eDVBService::cDDPPID)== -1)
+		&& (m_dvb_service->getCacheEntry(eDVBService::cAACHEAPID) == -1))))
 	{
 		if (apidtype == eDVBAudio::aMPEG)
 		{
@@ -2219,8 +2222,8 @@ int eDVBServicePlay::selectAudioStream(int i)
 			m_dvb_service->setCacheEntry(eDVBService::cMPEGAPID, -1);
 			m_dvb_service->setCacheEntry(eDVBService::cAC3PID, -1);
 			m_dvb_service->setCacheEntry(eDVBService::cDDPPID, apid);
- 			m_dvb_service->setCacheEntry(eDVBService::cAACHEAPID, -1);
- 		}
+			m_dvb_service->setCacheEntry(eDVBService::cAACHEAPID, -1);
+		}
 		else if (apidtype == eDVBAudio::aAACHE)
 		{
 			m_dvb_service->setCacheEntry(eDVBService::cMPEGAPID, -1);
@@ -3376,7 +3379,6 @@ void eDVBServicePlay::checkSubtitleTiming()
 			return;
 
 		int diff = show_time - pos;
-
 //		eDebug("Subtitle show %d page.pts=%lld pts=%lld diff=%d", type, show_time, pos, diff);
 
 		if (diff < 20*90 || diff > 1800000)
@@ -3457,7 +3459,7 @@ void eDVBServicePlay::setAC3Delay(int delay)
 {
 	if (m_dvb_service)
 		m_dvb_service->setCacheEntry(eDVBService::cAC3DELAY, delay ? delay : -1);
-	if (m_decoder) 
+	if (m_decoder)
 	{
 		m_decoder->setAC3Delay(delay + eConfigManager::getConfigIntValue("config.av.generalAC3delay"));
 	}
@@ -3467,7 +3469,7 @@ void eDVBServicePlay::setPCMDelay(int delay)
 {
 	if (m_dvb_service)
 		m_dvb_service->setCacheEntry(eDVBService::cPCMDELAY, delay ? delay : -1);
-	if (m_decoder) 
+	if (m_decoder)
 	{
 		m_decoder->setPCMDelay(delay + eConfigManager::getConfigIntValue("config.av.generalPCMdelay"));
 	}

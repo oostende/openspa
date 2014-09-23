@@ -147,9 +147,9 @@ class ChannelContextMenu(Screen):
 						append_when_current_valid(current, menu, (_("set as startup service"), self.setStartupService), level=0)
 					if self.parentalControlEnabled:
 						if self.parentalControl.getProtectionLevel(csel.getCurrentSelection().toCompareString()) == -1:
-							append_when_current_valid(current, menu, (_("add bouquet to parental protection"), boundFunction(self.addParentalProtection, csel.getCurrentSelection())), level=0)
+							append_when_current_valid(current, menu, (_("add to parental protection"), boundFunction(self.addParentalProtection, csel.getCurrentSelection())), level=0)
 						else:
-							append_when_current_valid(current, menu, (_("remove bouquet from parental protection"), boundFunction(self.removeParentalProtection, csel.getCurrentSelection())), level=0)
+							append_when_current_valid(current, menu, (_("remove from parental protection"), boundFunction(self.removeParentalProtection, csel.getCurrentSelection())), level=0)
 					if haveBouquets:
 						bouquets = self.csel.getBouquetList()
 						if bouquets is None:
@@ -197,9 +197,9 @@ class ChannelContextMenu(Screen):
 			else:
 					if self.parentalControlEnabled:
 						if self.parentalControl.getProtectionLevel(csel.getCurrentSelection().toCompareString()) == -1:
-							append_when_current_valid(current, menu, (_("add to parental protection"), boundFunction(self.addParentalProtection, csel.getCurrentSelection())), level=0)
+							append_when_current_valid(current, menu, (_("add bouquet to parental protection"), boundFunction(self.addParentalProtection, csel.getCurrentSelection())), level=0)
 						else:
-							append_when_current_valid(current, menu, (_("remove from parental protection"), boundFunction(self.removeParentalProtection, csel.getCurrentSelection())), level=0)
+							append_when_current_valid(current, menu, (_("remove bouquet from parental protection"), boundFunction(self.removeParentalProtection, csel.getCurrentSelection())), level=0)
 					menu.append(ChoiceEntryComponent(text=(_("add bouquet"), self.showBouquetInputBox)))
 					append_when_current_valid(current, menu, (_("rename entry"), self.renameEntry), level=0, key="2")
 					append_when_current_valid(current, menu, (_("remove entry"), self.removeEntry), level=0, key="8")
@@ -372,13 +372,6 @@ class ChannelContextMenu(Screen):
 		self.bsel = None
 		if recursive:
 			self.close(False)
-
-	def removeSatelliteService(self):
-		current = self.getCurrentSelection()
-		eDVBDB.getInstance().removeService(current)
-		refreshServiceList()
-		if not self.atEnd():
-			self.servicelist.moveUp()
 
 	def removeSatelliteServices(self):
 		self.csel.removeSatelliteServices()
@@ -774,6 +767,13 @@ class ChannelSelectionEdit:
 				remove(filename)
 		except OSError:
 			print "error during remove of", filename
+
+	def removeSatelliteService(self):
+		current = self.getCurrentSelection()
+		eDVBDB.getInstance().removeService(current)
+		refreshServiceList()
+		if not self.atEnd():
+			self.servicelist.moveUp()
 
 	def removeSatelliteServices(self):
 		current = self.getCurrentSelection()

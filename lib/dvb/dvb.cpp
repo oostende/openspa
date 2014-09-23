@@ -275,7 +275,6 @@ eDVBUsbAdapter::eDVBUsbAdapter(int nr)
 	pumpThread = 0;
 
 	int num_fe = 0;
-
 	while (1)
 	{
 		/*

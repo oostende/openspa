@@ -1,4 +1,3 @@
-#include <linux/version.h>
 #include <linux/dvb/version.h>
 
 #include <lib/dvb/dvb.h>
@@ -1184,7 +1183,7 @@ int eDVBFrontend::readInputpower()
 	sprintf(proc_name, "/proc/stb/fp/lnb_sense%d", m_slotid);
 	if (CFile::parseInt(&power, proc_name) == 0)
 		return power;
-	
+
 	// open front processor
 	int fp=::open("/dev/dbox/fp0", O_RDWR);
 	if (fp < 0)
@@ -2406,7 +2405,7 @@ void eDVBFrontend::setDeliverySystemWhitelist(const std::vector<fe_delivery_syst
 
 bool eDVBFrontend::setSlotInfo(int id, const char *descr, bool enabled, bool isDVBS2, int frontendid)
 {
-	if (frontendid < 0 || frontendid != m_dvbid) 
+	if (frontendid < 0 || frontendid != m_dvbid)
 	{
 		return false;
 	}
