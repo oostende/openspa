@@ -76,7 +76,7 @@ eDBoxLCD::eDBoxLCD()
 		fgets(boxtype_name, sizeof(boxtype_name), boxtype_file);
 		fclose(boxtype_file);
 		
-		if((strcmp(boxtype_name, "xp1000s\n") == 0) || (strcmp(boxtype_name, "odinm7\n") == 0) || (strcmp(boxtype_name, "enfinity\n") == 0))
+		if((strcmp(boxtype_name, "xp1000s\n") == 0) || (strcmp(boxtype_name, "odinm7\n") == 0) || (strcmp(boxtype_name, "ew7358\n") == 0) || (strcmp(boxtype_name, "formuler3\n") == 0))
 		{
 			lcdfd = open("/dev/null", O_RDWR);
 		}
@@ -96,11 +96,27 @@ eDBoxLCD::eDBoxLCD()
 					lcdfd = open("/dev/dbox/oled0", O_RDWR);
 				}
 		}
+		else if((strcmp(boxtype_name, "spark\n") == 0))
+		{
+				if((fp_file = fopen("/proc/stb/fp/version", "r")) != NULL)
+				{
+					fgets(fp_version, sizeof(fp_version), fp_file);
+					fclose(fp_file);
+				}
+				if(strcmp(fp_version, "4\n") == 0)
+				{
+					lcdfd = open("/dev/null", O_RDWR);
+				}
+				else
+				{
+					lcdfd = open("/dev/dbox/oled0", O_RDWR);
+				}
+		}
 		else
 		{
 			lcdfd = open("/dev/dbox/oled0", O_RDWR);
-		}		
-	}	
+		}
+	}
 	else
 	{
 		lcdfd = open("/dev/dbox/oled0", O_RDWR);
@@ -108,8 +124,7 @@ eDBoxLCD::eDBoxLCD()
 
 	if (lcdfd < 0)
 	{
-		if (!access("/proc/stb/lcd/oled_brightness", W_OK) ||
-		    !access("/proc/stb/fp/oled_brightness", W_OK) )
+		if (!access("/proc/stb/lcd/oled_brightness", W_OK) || !access("/proc/stb/fp/oled_brightness", W_OK) )
 			is_oled = 2;
 		lcdfd = open("/dev/dbox/lcd0", O_RDWR);
 	} else
@@ -157,6 +172,11 @@ eDBoxLCD::eDBoxLCD()
 		}
 	}
 #endif
+	if (FILE * file = fopen("/proc/stb/lcd/right_half", "w"))
+	{
+		fprintf(file,"skin");
+		fclose(file);
+	}
 	instance=this;
 
 	setSize(xres, yres, bpp);
@@ -229,6 +249,28 @@ int eDBoxLCD::setLCDBrightness(int brightness)
 	}
 #endif
 	return(0);
+}
+
+int eDBoxLCD::setLED(int value, int option)
+{
+	switch(option)
+	{
+		case LED_BRIGHTNESS:
+			eDebug("setLEDNormalState %d", value);
+			if(ioctl(lcdfd, LED_IOCTL_BRIGHTNESS_NORMAL, (unsigned char)value) < 0)
+				eDebug("[LED] can't set led brightness");
+			break;
+		case LED_DEEPSTANDBY:
+			eDebug("setLEDBlinkingTime %d", value);
+			if(ioctl(lcdfd, LED_IOCTL_BRIGHTNESS_DEEPSTANDBY, (unsigned char)value) < 0)
+				eDebug("[LED] can't set led deep standby");
+			break;
+		case LED_BLINKINGTIME:
+			eDebug("setLEDBlinkingTime %d", value);
+			if(ioctl(lcdfd, LED_IOCTL_BLINKING_TIME, (unsigned char)value) < 0)
+				eDebug("[LED] can't set led blinking time");
+			break;
+	}
 }
 
 eDBoxLCD::~eDBoxLCD()
@@ -304,7 +346,21 @@ void eDBoxLCD::update()
 			}
 			else
 			{
-				write(lcdfd, _buffer, _stride * res.height());
+				if (FILE * file = fopen("/proc/stb/info/gbmodel", "r"))
+				{
+					unsigned char gb_buffer[_stride * res.height()];
+					for (int offset = 0; offset < _stride * res.height(); offset += 2)
+					{
+						gb_buffer[offset] = (_buffer[offset] & 0x1F) | ((_buffer[offset + 1] << 3) & 0xE0);
+						gb_buffer[offset + 1] = ((_buffer[offset + 1] >> 5) & 0x03) | ((_buffer[offset] >> 3) & 0x1C) | ((_buffer[offset + 1] << 5) & 0x60);
+					}
+					write(lcdfd, gb_buffer, _stride * res.height());
+					fclose(file);
+				}
+				else
+				{
+					write(lcdfd, _buffer, _stride * res.height());
+				}
 			}
 		}
 		else /* is_oled == 1 */
