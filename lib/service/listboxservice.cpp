@@ -9,6 +9,7 @@
 #include <lib/nav/core.h>
 #include <lib/python/connections.h>
 #include <lib/python/python.h>
+#include <ctype.h>
 
 ePyObject eListboxServiceContent::m_GetPiconNameFunc;
 
@@ -649,7 +650,6 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 		eServiceReference ref = *m_cursor;
 		bool isMarker = ref.flags & eServiceReference::isMarker;
 		bool isPlayable = !(ref.flags & eServiceReference::isDirectory || isMarker);
-
 		bool isRecorded = m_record_indicator_mode && isPlayable && checkServiceIsRecorded(ref);
 		ePtr<eServiceEvent> evt;
 		bool serviceAvail = true;
@@ -670,6 +670,7 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 			else
 				painter.setForegroundColor(gRGB(0xb40431));
 		}
+
 		if (selected && local_style && local_style->m_selection)
 			painter.blit(local_style->m_selection, offset, eRect(), gPainter::BT_ALPHATEST);
 
@@ -682,7 +683,7 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 			{
 				int flags=gPainter::RT_VALIGN_CENTER;
 				int yoffs = 0;
-				eRect &area = m_element_position[e];
+				eRect area = m_element_position[e];
 				std::string text = "<n/a>";
 				switch (e)
 				{
@@ -704,6 +705,14 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 				{
 					if (service_info)
 						service_info->getName(*m_cursor, text);
+					if (!isPlayable)
+					{
+						area.setWidth(area.width() + m_element_position[celServiceEventProgressbar].width() + 10);
+						if (m_element_position[celServiceEventProgressbar].left() == 0)
+							area.setLeft(0);
+						if (m_element_position[celServiceNumber].width() && m_element_position[celServiceEventProgressbar].left() == m_element_position[celServiceNumber].width() + 10)
+							area.setLeft(m_element_position[celServiceNumber].width() + 10);
+					}
 					break;
 				}
 				case celServiceInfo:
@@ -939,6 +948,8 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 					eRect area = m_element_position[e == celFolderPixmap ? celServiceName: celServiceNumber];
 					int correction = (area.height() - pixmap_size.height()) / 2;
 					if (e == celFolderPixmap)
+						if (m_element_position[celServiceEventProgressbar].left() == 0)
+							area.setLeft(0);
 						xoffset = pixmap_size.width() + 8;
 					area.moveBy(offset);
 					painter.clip(area);
