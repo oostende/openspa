@@ -1,7 +1,7 @@
 # the implementation here is a bit crappy.
 import time
 from Directories import resolveFilename, SCOPE_CONFIG
-from boxbranding import getBoxType 
+from boxbranding import getBoxType
 
 boxtype = getBoxType()
 
@@ -43,18 +43,21 @@ def profile(id):
 			else:
 				perc = PERCENTAGE_START
 			try:
-				if boxtype == "odinm7" or boxtype == "odinm6" or boxtype == "xp1000s":
+				if boxtype in ("classm", "axodin", "axodinc", "starsatlx", "evo", "genius", "galaxym6"):
 					f = open("/dev/dbox/oled0", "w")
 					f.write("%d" % perc)
-				elif boxtype == "gb800se" or boxtype == "gb800solo":
+				elif boxtype in ("marvel1", "enfinity"):
 					f = open("/dev/dbox/oled0", "w")
-					f.write("%d  \n" % perc)
-				elif boxtype == "gb800seplus":
+					f.write("  %d " % perc)
+				elif getBoxType() in ('gb800solo', 'gb800se', 'gb800seplus'):
 					f = open("/dev/mcu", "w")
-					f.write("%d  \n" % perc)
-				elif boxtype == "ebox5000":
+					f.write("%d \n" % perc)
+				elif boxtype in ("mixosf5", "gi9196m"):
 					f = open("/proc/progress", "w")
 					f.write("%d" % perc)
+				elif boxtype in ("xpeedlx3", "sezammarvel", "atemionemesis"):
+					f = open("/proc/vfd", "w")
+					f.write("Loading %d %%" % perc)
 				else:
 					f = open("/proc/progress", "w")
 					f.write("%d \n" % perc)
