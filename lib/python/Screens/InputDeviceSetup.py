@@ -367,7 +367,8 @@ class RemoteControlType(Screen, ConfigListScreen):
 				break
 
 	def setDefaultRcType(self):
-		iRcTypeControl.writeRcType(config.plugins.remotecontroltype.rctype.getValue())
+		#iRcTypeControl.writeRcType(config.plugins.remotecontroltype.rctype.getValue())
+		iRcTypeControl.writeRcType(self.defaultRcType)
 
 	def keySave(self):
 		if config.plugins.remotecontroltype.rctype.getValue() == int(self.rctype.getValue()):

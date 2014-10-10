@@ -5,6 +5,8 @@ from fcntl import ioctl
 from boxbranding import getBoxType, getBrandOEM
 import struct
 
+boxtype = getBoxType()
+
 # asm-generic/ioctl.h
 IOC_NRBITS = 8L
 IOC_TYPEBITS = 8L
@@ -184,7 +186,7 @@ class InitInputDevices:
 		exec (cmd)
 		cmd = "config.inputDevices." + device + ".name.addNotifier(self.inputDevicesNameChanged,config.inputDevices." + device + ".name)"
 		exec (cmd)
-		if getBoxType() in ('odinm9', 'odinm7', 'odinm6'):
+		if boxtype in ('maram9', 'classm', 'axodin', 'axodinc', 'starsatlx', 'genius', 'evo', 'galaxym6'):
 			cmd = "config.inputDevices." + device + ".repeat = ConfigSlider(default=400, increment = 10, limits=(0, 500))"
 		elif getBoxType() in ('elite', 'premium', 'premium+', 'ultra'):
 			cmd = "config.inputDevices." + device + ".repeat = ConfigSlider(default=80, increment = 10, limits=(0, 500))"
@@ -193,7 +195,7 @@ class InitInputDevices:
 		exec (cmd)
 		cmd = "config.inputDevices." + device + ".repeat.addNotifier(self.inputDevicesRepeatChanged,config.inputDevices." + device + ".repeat)"
 		exec (cmd)
-		if getBoxType() in ('odinm9', 'odinm7', 'odinm6'):
+		if boxtype in ('maram9', 'classm', 'axodin', 'axodinc', 'starsatlx', 'genius', 'evo', 'galaxym6'):
 			cmd = "config.inputDevices." + device + ".delay = ConfigSlider(default=200, increment = 100, limits=(0, 5000))"
 		elif getBoxType() in ('elite', 'premium', 'premium+', 'ultra'):
 			cmd = "config.inputDevices." + device + ".delay = ConfigSlider(default=800, increment = 100, limits=(0, 5000))"
@@ -212,7 +214,7 @@ config.plugins.remotecontroltype.rctype = ConfigInteger(default = 0)
 
 class RcTypeControl():
 	def __init__(self):
-		if pathExists('/proc/stb/ir/rc/type') and pathExists('/proc/stb/info/boxtype') and getBrandOEM() not in ('gigablue', 'odin', 'ini'):
+		if pathExists('/proc/stb/ir/rc/type') and pathExists('/proc/stb/info/boxtype') and getBrandOEM() not in ('gigablue', 'odin', 'ini', 'entwopia'):
 			self.isSupported = True
 
 			fd = open('/proc/stb/info/boxtype', 'r')
@@ -222,8 +224,6 @@ class RcTypeControl():
 			if config.plugins.remotecontroltype.rctype.getValue() != 0:
 				self.writeRcType(config.plugins.remotecontroltype.rctype.getValue())
 		else:
-			self.isSupported = False
-		if getBoxType().startswith('gb'):
 			self.isSupported = False
 
 	def multipleRcSupported(self):
