@@ -367,7 +367,7 @@ class PluginDownloadBrowser(Screen):
 		if self.check_settings:
 			self.check_settings = False
 			self.remove_settings_name = str.split(' - ')[0].replace(self.PLUGIN_PREFIX, '')
-			self.session.openWithCallback(self.runSettingsRemove, MessageBox, _('You already have a channel list installed,\nwould you like to remove\n"%s"?') % self.remove_settings_name)
+			self.session.openWithCallback(self.runSettingsRemove, MessageBox, _('You already have a channel list installed,\nwould you like to remove\n\"%s\"?') % self.remove_settings_name)
 			return
 
 		if self.run == 1:
