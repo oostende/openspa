@@ -12,6 +12,7 @@ dist_pkgdata_DATA = \
 	setup.xml \
 	skin_default.xml \
 	skin_subtitles.xml \
+	startwizard.xml \
 	skin.xml \
 	userinterfacepositionerwizard.xml \
 	freesat.t1 \
@@ -19,12 +20,6 @@ dist_pkgdata_DATA = \
 	unicable.xml \
 	videowizard.xml \
 	distro-lcd-logo.png
-
-if GBIPBOX
-SUBDIRS += gbipbox
-else
-dist_pkgdata_DATA += startwizard.xml
-endif
 
 if HAVE_TEXTLCD
 dist_pkgdata_DATA += skin_text.xml
