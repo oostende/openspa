@@ -18,8 +18,7 @@ dist_pkgdata_DATA = \
 	freesat.t1 \
 	freesat.t2 \
 	unicable.xml \
-	videowizard.xml \
-	distro-lcd-logo.png
+	videowizard.xml
 
 if HAVE_TEXTLCD
 dist_pkgdata_DATA += skin_text.xml
