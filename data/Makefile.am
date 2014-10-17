@@ -5,7 +5,6 @@ dist_pkgdata_DATA = \
 	keymap.xml \
 	menu.xml \
 	prev.png \
-	radio.mvi \
 	black.mvi \
 	hd-testcard.mvi \
 	rcpositions.xml \
