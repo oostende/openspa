@@ -29,7 +29,9 @@ dist_install_DATA = \
 	epg_more.png \
 	epg_next.png \
 	epg_now.png \
+	expandable.png \
 	expandable-plugins.png \
+	expanded.png \
 	expanded-plugins.png \
 	info-bg_mp.png \
 	info-bg.png \
@@ -55,6 +57,7 @@ dist_install_DATA = \
 	timeline-now.png \
 	timeline.png \
 	unhandled-key.png \
+	verticalline.png \
 	verticalline-plugins.png \
 	vkey_all.png \
 	vkey_backspace.png \
