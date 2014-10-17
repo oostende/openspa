@@ -57,12 +57,11 @@ class ServiceList(HTMLComponent, GUIComponent):
 
 		pic = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/icon_crypt.png"))
 		if pic:
-			self.l.setPixmap(self.l.picCrypt, pic)
+			self.l.setPixmap(self.l.picCrypto, pic)
 
 		pic = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "skin_default/icons/record.png"))
 		if pic:
 			self.l.setPixmap(self.l.picRecord, pic)
-
 
 		self.root = None
 		self.mode = self.MODE_NORMAL
@@ -219,7 +218,7 @@ class ServiceList(HTMLComponent, GUIComponent):
 		return self.instance.getCurrentIndex()
 
 	GUI_WIDGET = eListbox
-	
+
 	def postWidgetCreate(self, instance):
 		instance.setWrapAround(True)
 		instance.setContent(self.l)
@@ -261,7 +260,7 @@ class ServiceList(HTMLComponent, GUIComponent):
 		self.l.setRoot(self.root, False)
 		self.l.sort()
 		self.instance.moveSelectionTo(index)
-	
+
 	def removeCurrent(self):
 		self.l.removeCurrent()
 
@@ -303,7 +302,7 @@ class ServiceList(HTMLComponent, GUIComponent):
 		self.mode = mode
 		self.l.setItemHeight(self.ItemHeight)
 		self.l.setVisualMode(eListboxServiceContent.visModeComplex)
-		
+
 		if config.usage.service_icon_enable.value:
 			self.l.setGetPiconNameFunc(getPiconName)
 		else:
@@ -338,6 +337,6 @@ class ServiceList(HTMLComponent, GUIComponent):
 			self.l.setElementFont(self.l.celServiceEventProgressbar, self.ServiceInfoFont)
 		self.l.setHideNumberMarker(config.usage.hide_number_markers.value)
 		self.l.setServiceTypeIconMode(int(config.usage.servicetype_icon_mode.value))
-		self.l.setServiceCryptIcon(config.usage.icon_crypt.value)
+		self.l.setCryptoIconMode(int(config.usage.crypto_icon_mode.value))
 		self.l.setRecordIndicatorMode(int(config.usage.record_indicator_mode.value))
 		self.l.setColumnWidth(int(config.usage.servicelist_column.value))
