@@ -9,12 +9,13 @@ profile("PYTHON_START")
 
 import Tools.RedirectOutput
 import enigma
-from boxbranding import getBoxType
+from boxbranding import getBoxType, getBrandOEM
 import eConsoleImpl
 import eBaseImpl
 enigma.eTimer = eBaseImpl.eTimer
 enigma.eSocketNotifier = eBaseImpl.eSocketNotifier
 enigma.eConsoleAppContainer = eConsoleImpl.eConsoleAppContainer
+boxtype = getBoxType()
 
 from traceback import print_exc
 profile("SimpleSummary")
@@ -526,17 +527,7 @@ def runScreenTest():
 	profile("RunReactor")
 	profile_final()
 
-	if getBoxType() == 'gb800se' or getBoxType() == 'gb800solo' or getBoxType() == 'gb800seplus':
-		from enigma import evfd, eConsoleAppContainer
-		try:
-			cmd = 'vfdctl "    openspa starting e2"'
-			container = eConsoleAppContainer()
-			container.execute(cmd)
-		except:
-			evfd.getInstance().vfd_write_string("-E2-")
-		evfd.getInstance().vfd_led(str(1))
-		
-	if getBoxType() == 'odinm7' or getBoxType() == 'odinm6' or getBoxType() == 'xp1000s':
+	if boxtype in ('sf8', 'classm', 'axodin', 'axodinc', 'starsatlx', 'genius', 'evo'):
 		f = open("/dev/dbox/oled0", "w")
 		f.write('-E2-')
 		f.close()
@@ -551,7 +542,7 @@ def runScreenTest():
 	from Tools.StbHardware import setFPWakeuptime, getFPWakeuptime, setRTCtime
 	#get currentTime
 	nowTime = time()
-	if not config.misc.SyncTimeUsing.getValue() == "0" or getBoxType().startswith('gb') or getBoxType().startswith('ini'):
+	if not config.misc.SyncTimeUsing.value == "0" or boxtype.startswith('gb') or getBrandOEM().startswith('ini'):
 		print "dvb time sync disabled... so set RTC now to current linux time!", strftime("%Y/%m/%d %H:%M", localtime(nowTime))
 		setRTCtime(nowTime)
 
@@ -568,7 +559,7 @@ def runScreenTest():
 		if (startTime[0] - nowTime) < 270: # no time to switch box back on
 			wptime = nowTime + 30  # so switch back on in 30 seconds
 		else:
-			if getBoxType().startswith("gb"):
+			if boxtype.startswith("gb"):
 				wptime = startTime[0] - 120 # Gigaboxes already starts 2 min. before wakeup time
 			else:
 				wptime = startTime[0] - 240
