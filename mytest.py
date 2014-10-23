@@ -51,6 +51,7 @@ config.misc.RestartUI = ConfigYesNo(default=False) # detect user interface resta
 config.misc.epgcache_filename = ConfigText(default = "/hdd/epg.dat")
 config.misc.SyncTimeUsing = ConfigSelection(default = "0", choices = [("0", "Transponder Time"), ("1", _("NTP"))])
 config.misc.NTPserver = ConfigText(default = 'pool.ntp.org', fixed_size=False)
+config.misc.useNTPminutes = ConfigSelection(default = "30", choices = [("30", "30" + " " +_("minutes")), ("60", _("Hour")), ("1440", _("Once per day"))])
 
 def setEPGCachePath(configElement):
 	enigma.eEPGCache.getInstance().setCacheFile(configElement.value)
@@ -70,29 +71,25 @@ def setEPGCachePath(configElement):
 def useSyncUsingChanged(configElement):
 	if config.misc.SyncTimeUsing.getValue() == "0":
 		print "[Time By]: Transponder"
-		value = True
-		enigma.eDVBLocalTimeHandler.getInstance().setUseDVBTime(value)
+		enigma.eDVBLocalTimeHandler.getInstance().setUseDVBTime(True)
+		enigma.eEPGCache.getInstance().timeUpdated()
 	else:
 		print "[Time By]: NTP"
-		value = False
-		enigma.eDVBLocalTimeHandler.getInstance().setUseDVBTime(value)
-		from Components.Console import Console
-		Console = Console()
-		Console.ePopen('/usr/bin/ntpdate ' + config.misc.NTPserver.getValue())
-config.misc.SyncTimeUsing.addNotifier(useSyncUsingChanged)
+		enigma.eDVBLocalTimeHandler.getInstance().setUseDVBTime(False)
+		enigma.eEPGCache.getInstance().timeUpdated()
+config.misc.SyncTimeUsing.addNotifier(useSyncUsingChanged, immediate_feedback = True)
 
 def NTPserverChanged(configElement):
 	if config.misc.NTPserver.getValue() == "pool.ntp.org":
 		return
 	print "[NTPDATE] save /etc/default/ntpdate"
-	file = "/etc/default/ntpdate"
-	f = open(file, "w")
-	f.write('NTPSERVERS="' + config.misc.NTPserver.getValue() + '"')
+	f = open("/etc/default/ntpdate", "w")
+	f.write('NTPSERVERS="' + config.misc.NTPserver.value + '"')
 	f.close()
-	os.chmod(file, 0755)
+	os.chmod("/etc/default/ntpdate", 0755)
 	from Components.Console import Console
 	Console = Console()
-	Console.ePopen('/usr/bin/ntpdate ' + config.misc.NTPserver.getValue())
+	Console.ePopen('/usr/bin/ntpdate-sync')
 config.misc.NTPserver.addNotifier(NTPserverChanged, immediate_feedback = True)
 
 profile("Twisted")
