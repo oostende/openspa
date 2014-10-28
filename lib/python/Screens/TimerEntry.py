@@ -58,6 +58,7 @@ class TimerEntry(Screen, ConfigListScreen):
 			justplay = self.timer.justplay
 			always_zap = self.timer.always_zap
 			zap_wakeup = self.timer.zap_wakeup
+			rename_repeat = self.timer.rename_repeat
 
 			afterevent = {
 				AFTEREVENT.NONE: "nothing",
@@ -125,8 +126,9 @@ class TimerEntry(Screen, ConfigListScreen):
 			self.timerentry_description = ConfigText(default = self.timer.description, visible_width = 50, fixed_size = False)
 			self.timerentry_tags = self.timer.tags[:]
 			self.timerentry_tagsset = ConfigSelection(choices = [not self.timerentry_tags and "None" or " ".join(self.timerentry_tags)])
-			
+
 			self.timerentry_repeated = ConfigSelection(default = repeated, choices = [("weekly", _("weekly")), ("daily", _("daily")), ("weekdays", _("Mon-Fri")), ("user", _("user defined"))])
+			self.timerentry_renamerepeat = ConfigYesNo(default = rename_repeat)
 
 			self.timerentry_date = ConfigDateTime(default = self.timer.begin, formatstring = _("%d.%B %Y"), increment = 86400)
 			self.timerentry_starttime = ConfigClock(default = self.timer.begin)
@@ -187,14 +189,16 @@ class TimerEntry(Screen, ConfigListScreen):
 				self.list.append(getConfigListEntry(_("Friday"), self.timerentry_day[4]))
 				self.list.append(getConfigListEntry(_("Saturday"), self.timerentry_day[5]))
 				self.list.append(getConfigListEntry(_("Sunday"), self.timerentry_day[6]))
+			if self.timerentry_justplay.value != "zap":
+				self.list.append(getConfigListEntry(_("Rename name and description for new events"), self.timerentry_renamerepeat))
 
 		self.entryDate = getConfigListEntry(_("Date"), self.timerentry_date)
 		if self.timerentry_type.value == "once":
 			self.list.append(self.entryDate)
-		
+
 		self.entryStartTime = getConfigListEntry(_("Start time"), self.timerentry_starttime)
 		self.list.append(self.entryStartTime)
-		
+
 		self.entryShowEndTime = getConfigListEntry(_("Set end time"), self.timerentry_showendtime)
 		self.entryZapWakeup = getConfigListEntry(_("Wakeup receiver for start timer"), self.timerentry_zapwakeup)
 		if self.timerentry_justplay.value == "zap":
@@ -320,6 +324,7 @@ class TimerEntry(Screen, ConfigListScreen):
 		self.timer.justplay = self.timerentry_justplay.value == "zap"
 		self.timer.always_zap = self.timerentry_justplay.value == "zap+record"
 		self.timer.zap_wakeup = self.timerentry_zapwakeup.value
+		self.timer.rename_repeat = self.timerentry_renamerepeat.value
 		if self.timerentry_justplay.value == "zap":
 			if not self.timerentry_showendtime.value:
 				self.timerentry_endtime.value = self.timerentry_starttime.value
