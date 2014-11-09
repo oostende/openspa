@@ -1,9 +1,10 @@
-import os
+import os, re, unicodedata
 from Renderer import Renderer
 from enigma import ePixmap
 from Tools.Alternatives import GetWithAlternative
 from Tools.Directories import pathExists, SCOPE_SKIN_IMAGE, SCOPE_CURRENT_SKIN, resolveFilename
 from Components.Harddisk import harddiskmanager
+from ServiceReference import ServiceReference
 from Components.config import config, ConfigText
 
 config.misc.picon_path = ConfigText(default = "/usr/share/enigma2/picon/")
@@ -81,6 +82,12 @@ def getPiconName(serviceName):
 		if len(fields) > 0 and fields[0] == '4097': #fallback to 1 for IPTV streams
 			fields[0] = '1'
 		pngname = findPicon('_'.join(fields))
+	if not pngname: # picon by channel name
+		name = ServiceReference(serviceName).getServiceName()
+		name = unicodedata.normalize('NFKD', unicode(name, 'utf_8')).encode('ASCII', 'ignore')
+		name = re.sub('[/\'"`? ():<>|.\n]', '', name).replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower()
+		if name:
+			pngname = findPicon(name)
 	return pngname
 
 class Picon(Renderer):
