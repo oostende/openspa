@@ -103,6 +103,15 @@ def getCpuCoresString():
 	except IOError:
 		return "unavailable"
 
+def getCPUTempString():
+	try:
+		if os.path.isfile('/proc/stb/fp/temp_sensor_avs'):
+			temperature = open("/proc/stb/fp/temp_sensor_avs").readline().replace('\n','')
+			return _("%s°C") % temperature
+	except:
+		pass
+	return ""
+
 def getHardwareTypeString():
 	try:
 		if os.path.isfile("/proc/stb/info/boxtype"):
