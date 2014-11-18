@@ -45,6 +45,10 @@ from ImageWizard import ImageWizard
 from BackupRestore import BackupSelection, RestoreMenu, BackupScreen, RestoreScreen, getBackupPath, getBackupFilename
 from SoftwareTools import iSoftwareTools
 from Flash_online import FlashOnline
+from boxbranding import getBoxType, getBrandOEM
+
+boxtype = getBoxType()
+brandoem = getBrandOEM()
 
 config.plugins.configurationbackup = ConfigSubsection()
 config.plugins.configurationbackup.backuplocation = ConfigText(default = '/media/hdd/', visible_width = 50, fixed_size = False)
