@@ -232,7 +232,7 @@ def collectAttributes(skinAttributes, node, context, skin_path_prefix=None, igno
 def morphRcImagePath(value):
 	if rc_model.rcIsDefault() is False:
 		if value == '/usr/share/enigma2/skin_default/rc.png' or value == '/usr/share/enigma2/skin_default/rcold.png':
-			value = rc_model.getRcImg()
+			value = rc_model.getRcLocation() + 'rc.png'
 	return value
 
 def loadPixmap(path, desktop):
@@ -256,8 +256,6 @@ class AttributeParser:
 			print "[Skin] Attribute not implemented:", attrib, "value:", value
 		except SkinError, ex:
 			print "[Skin] Error:", ex
-		except:
-			print "[Skin] Error:", attrib
 	def applyAll(self, attrs):
 		for attrib, value in attrs:
 			self.applyOne(attrib, value)
