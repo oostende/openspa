@@ -48,6 +48,7 @@ def InitUsageConfig():
 		("reverseB", _("Reverse bouquet buttons")),
 		("keep reverseB", _("Keep service") + " + " + _("Reverse bouquet buttons"))])
 
+	config.usage.servicelist_satellite_details = ConfigYesNo(default = False)
 	config.usage.multiepg_ask_bouquet = ConfigYesNo(default = False)
 
 	config.usage.quickzap_bouquet_change = ConfigYesNo(default = False)
