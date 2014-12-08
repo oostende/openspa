@@ -49,7 +49,7 @@ def profile(id):
 				elif boxtype in ("marvel1", "enfinity"):
 					f = open("/dev/dbox/oled0", "w")
 					f.write("  %d " % perc)
-				elif getBoxType() in ('gb800solo', 'gb800se', 'gb800seplus'):
+				elif getBoxType() in ('gb800solo', 'gb800se', 'gb800seplus', 'gbultrase'):
 					f = open("/dev/mcu", "w")
 					f.write("%d \n" % perc)
 				elif boxtype in ("mixosf5", "gi9196m"):
