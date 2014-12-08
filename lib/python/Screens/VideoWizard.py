@@ -13,11 +13,13 @@ from Tools.HardwareInfo import HardwareInfo
 
 config.misc.showtestcard = ConfigBoolean(default = False)
 
+boxtype = getBoxType()
+
 has_rca = False
 has_dvi = False
-if getBoxType() == 'gbquad' or getBoxType() == 'gbquadplus' or getBoxType() == 'et5x00' or getBoxType() == 'et6000' or getBoxType() == 'e3hd' or getBoxType() == 'odinm6' or getMachineName() == 'AX-Odin' or getBoxType() == 'ebox7358' or getBoxType() == 'eboxlumi' or getBoxType() == 'tmnano' or getBoxType() == 'ultra' or getBoxType() == "me" or getBoxType() == "minime" or getBoxType() == 'optimussos1' or getBoxType() == 'optimussos2' or getBoxType() == 'gb800seplus' or getBoxType() == 'gb800ueplus' or getBoxType() == 'ini-1000ru' or getBoxType() == 'ini-1000sv' or getBoxType() == 'ixussone' or getBoxType() == 'ixusszero' or getBoxType() == 'enfinity' or getBoxType() == 'force1':	
+if boxtype in ('zgemmash1', 'zgemmas2s', 'formuler3', 'enibox', 'mago', 'x2plus', 'atemio6000', 'atemio6100', 'atemio6200', 'vp7358ci', 'enibox', 'gbquad', 'gbquadplus', 'et5x00', 'et6000', 'et7000', 'et7500', 'et8500', 'classm', 'axodin', 'axodinc', 'genius', 'evo', 'galaxym6', 'geniuse3hd', 'evoe3hd', 'axase3', 'axase3c', 'starsatlx', 'mixosf7', 'mixoslumi', 'tmnano', 'azboxme', 'azboxminime', 'optimussos1', 'optimussos2', 'gb800seplus', 'gb800ueplus', 'gbultrase', 'gbultraue', 'sezam1000hd', 'ixussone', 'ixusszero', 'enfinity', 'marvel1', 'bre2ze', 'force1', 'force1plus', 'worldvisionf1', 'optimussos1plus', 'optimussos2plus', 'optimussos3plus', 'formuler1', 'tmnano2super', 'vusolose', 'vuzero', 'tyrant'):
 	has_rca = True
-if getBoxType() == 'dm8000' or getBoxType() == 'dm800':
+if boxtype == 'dm8000' or boxtype == 'dm800':
 	has_dvi = True
 
 class VideoWizardSummary(WizardSummary):
@@ -107,7 +109,7 @@ class VideoWizard(WizardLanguage, Rc):
 				if descr == 'HDMI' and has_dvi:
 					descr = 'DVI'
 				if descr == 'Scart' and has_rca:
-					descr = 'RCA'					
+					descr = 'RCA'
 				if port != "DVI-PC":
 					list.append((descr,port))
 		list.sort(key = lambda x: x[0])
