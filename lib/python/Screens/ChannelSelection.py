@@ -685,7 +685,7 @@ class ChannelSelectionEPG:
 				self.enterPath(self.epg_bouquet)
 			self.setCurrentSelection(self.savedService)
 
-def changeBouquetForSingleEPG(self, direction, epg):
+	def changeBouquetForSingleEPG(self, direction, epg):
 		if config.usage.multibouquet.value:
 			inBouquet = self.getMutableList() is not None
 			if inBouquet and len(self.servicePath) > 1:
