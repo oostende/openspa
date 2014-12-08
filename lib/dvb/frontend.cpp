@@ -558,7 +558,7 @@ int eDVBFrontend::openFrontend()
 					}
 					case FE_QAM:
 					{
-+#if DVB_API_VERSION > 5 || DVB_API_VERSION == 5 && DVB_API_VERSION_MINOR >= 6
+#if DVB_API_VERSION > 5 || DVB_API_VERSION == 5 && DVB_API_VERSION_MINOR >= 6
 						m_delsys[SYS_DVBC_ANNEX_A] = true;
 #else
 						m_delsys[SYS_DVBC_ANNEX_AC] = true;
