@@ -65,7 +65,7 @@ class PluginDescriptor:
 	WHERE_NETWORKMOUNTS = 16
 
 	# start as channellist context menu plugin. session, serviceref (currently selected)
-+	WHERE_CHANNEL_CONTEXT_MENU = 17
+	WHERE_CHANNEL_CONTEXT_MENU = 17
 
 	def __init__(self, name = "Plugin", where = [ ], description = "", icon = None, fnc = None, wakeupfnc = None, needsRestart = None, internal = False, weight = 0):
 		self.name = name
