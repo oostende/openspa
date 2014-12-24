@@ -49,7 +49,7 @@ def FileEntryComponent(name, absolute = None, isDir = False):
 			png = None
 	if png is not None:
 		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 10, 2, 20, 20, png))
-	
+
 	return res
 
 class FileList(MenuList):
@@ -68,7 +68,7 @@ class FileList(MenuList):
 		if matchingPattern:
 			self.matchingPattern = re.compile(matchingPattern)
 		else:
-		        self.matchingPattern = None
+			self.matchingPattern = None
 		self.inhibitDirs = inhibitDirs or []
 		self.inhibitMounts = inhibitMounts or []
 
@@ -214,10 +214,10 @@ class FileList(MenuList):
 			self.moveToIndex(0)
 			for x in self.list:
 				p = x[0][0]
-				
+
 				if isinstance(p, eServiceReference):
 					p = p.getPath()
-				
+
 				if p == select:
 					self.moveToIndex(i)
 				i += 1
@@ -265,10 +265,9 @@ class FileList(MenuList):
 		if self.current_directory is None:
 			self.refresh()
 
-
 def MultiFileSelectEntryComponent(name, absolute = None, isDir = False, selected = False):
 	res = [ (absolute, isDir, selected, name) ]
-	res.append((eListboxPythonMultiContent.TYPE_TEXT, 55, 1, 470, 20, 0, RT_HALIGN_LEFT, name))
+	res.append((eListboxPythonMultiContent.TYPE_TEXT, 55, 0, 470, 25, 0, RT_HALIGN_LEFT, name))
 	if isDir:
 		png = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "extensions/directory.png"))
 	else:
@@ -288,15 +287,14 @@ def MultiFileSelectEntryComponent(name, absolute = None, isDir = False, selected
 		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 2, 0, 25, 25, icon))
 	return res
 
-
 class MultiFileSelectList(FileList):
 	def __init__(self, preselectedFiles, directory, showMountpoints = False, matchingPattern = None, showDirectories = True, showFiles = True,  useServiceRef = False, inhibitDirs = False, inhibitMounts = False, isTop = False, enableWrapAround = False, additionalExtensions = None):
 		if preselectedFiles is None:
 			self.selectedFiles = []
 		else:
-		        self.selectedFiles = preselectedFiles
+			self.selectedFiles = preselectedFiles
 		FileList.__init__(self, directory, showMountpoints = showMountpoints, matchingPattern = matchingPattern, showDirectories = showDirectories, showFiles = showFiles,  useServiceRef = useServiceRef, inhibitDirs = inhibitDirs, inhibitMounts = inhibitMounts, isTop = isTop, enableWrapAround = enableWrapAround, additionalExtensions = additionalExtensions)
-		self.changeDir(directory)			
+		self.changeDir(directory)
 		self.l.setItemHeight(25)
 		self.l.setFont(0, gFont("Regular", 20))
 		self.onSelectionChanged = [ ]
@@ -319,10 +317,10 @@ class MultiFileSelectList(FileList):
 				try:
 					self.selectedFiles.remove(realPathname)
 				except:
-				        try:
+					try:
 						self.selectedFiles.remove(os.path.normpath(realPathname))
 					except:
-					        print "Couldn't remove:", realPathname
+						print "Couldn't remove:", realPathname
 			else:
 				SelectState = True
 				if (realPathname not in self.selectedFiles) and (os.path.normpath(realPathname) not in self.selectedFiles):
@@ -330,7 +328,7 @@ class MultiFileSelectList(FileList):
 			newList[idx] = MultiFileSelectEntryComponent(name = x[0][3], absolute = x[0][0], isDir = x[0][1], selected = SelectState)
 		self.list = newList
 		self.l.setList(self.list)
-	
+
 	def getSelectedList(self):
 		return self.selectedFiles
 
@@ -413,7 +411,7 @@ class MultiFileSelectList(FileList):
 					alreadySelected = False
 					for entry in self.selectedFiles:
 						if os.path.basename(entry) == x:
-							alreadySelected = True	
+							alreadySelected = True
 					self.list.append(MultiFileSelectEntryComponent(name = name, absolute = x , isDir = False, selected = alreadySelected))
 
 		self.l.setList(self.list)
@@ -423,10 +421,10 @@ class MultiFileSelectList(FileList):
 			self.moveToIndex(0)
 			for x in self.list:
 				p = x[0][0]
-				
+
 				if isinstance(p, eServiceReference):
 					p = p.getPath()
-				
+
 				if p == select:
 					self.moveToIndex(i)
 				i += 1
