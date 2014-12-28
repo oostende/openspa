@@ -10,7 +10,6 @@
 #include <lib/base/wrappers.h>
 #include <sys/eventfd.h>
 
-
 /**
  * \brief A generic messagepump.
  *
@@ -77,7 +76,6 @@ class eFixedMessagePump: public Object, FD
 				eFatal("[eFixedMessagePump] Got event but queue is empty");
 				break;
 			}
-		{
 			T msg = m_queue.front();
 			m_queue.pop();
 			lock.unlock();
