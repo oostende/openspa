@@ -10,6 +10,10 @@ if HAVE_TEMPFANCONTROL
 SUBDIRS += TempFanControl
 endif
 
+if HAVE_LIBVUGLES2
+SUBDIRS += AnimationSetup
+endif
+
 if DREAMBOX
 SUBDIRS += FrontprocessorUpgrade NFIFlash CableScan
 endif
