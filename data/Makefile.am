@@ -33,5 +33,9 @@ if HAVE_COLORLCD220
 SUBDIRS += display220
 endif
 
+if HAVE_BWLCD140
+SUBDIRS += vfd140
+endif
+
 skin_display.xml: $(srcdir)/skin_display_default.xml
 	test -f $(srcdir)/skin_display_$(BOXTYPE).xml && cp $(srcdir)/skin_display_$(BOXTYPE).xml skin_display.xml || cp $(srcdir)/skin_display_default.xml skin_display.xml

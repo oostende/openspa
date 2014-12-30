@@ -69,6 +69,7 @@ AM_CONDITIONAL(GIGABLUE, test `echo "$BOXTYPE" | cut -b 1-5` == "gb800")
 AM_CONDITIONAL(ODIN, test `echo "$BOXTYPE" | cut -b 1-4` == "odin")
 AM_CONDITIONAL(VENTON, test `echo "$BOXTYPE" | cut -b 1-6` == "venton")
 AM_CONDITIONAL(EBOX, test `echo "$BOXTYPE" | cut -b 1-4` == "ebox")
+AM_CONDITIONAL(IXUSS, test `echo "$BOXTYPE" | cut -b 1-4` == "ixus")
 AM_CONDITIONAL(EDISION, test `echo "$BOXTYPE" | cut -b 1-4` == "opti")
 AM_CONDITIONAL(JEPSSEN, test `echo "$BOXTYPE" | cut -b 1-5` == "media")
 AM_CONDITIONAL(SOGNO, test `echo "$BOXTYPE" | cut -b 1-5` == "sogno")
@@ -84,8 +85,10 @@ AM_CONDITIONAL(DAGS1, test "$BOXTYPE" == dags1)
 AM_CONDITIONAL(DAGS2, test "$BOXTYPE" == dags2)
 AM_CONDITIONAL(DAGS3, test "$BOXTYPE" == dags3)
 AM_CONDITIONAL(DAGS4, test "$BOXTYPE" == dags4)
+AM_CONDITIONAL(DAGS5, test "$BOXTYPE" == dags5)
 AM_CONDITIONAL(DM8000, test "$BOXTYPE" == dm8000)
 AM_CONDITIONAL(DM7080, test "$BOXTYPE" == dm7080)
+AM_CONDITIONAL(DM820, test "$BOXTYPE" == dm820)
 AM_CONDITIONAL(DM7020HD, test "$BOXTYPE" == dm7020hd)
 AM_CONDITIONAL(DM7020HDV2, test "$BOXTYPE" == dm7020hdv2)
 AM_CONDITIONAL(DM800, test "$BOXTYPE" == dm800)
@@ -94,7 +97,8 @@ AM_CONDITIONAL(DM800SEV2, test "$BOXTYPE" == dm800sev2)
 AM_CONDITIONAL(DM500HD, test "$BOXTYPE" == dm500hd)
 AM_CONDITIONAL(DM500HDV2, test "$BOXTYPE" == dm500hdv2)
 AM_CONDITIONAL(E3HD, test "$BOXTYPE" == e3hd)
-AM_CONDITIONAL(KMT3000, test "$BOXTYPE" == kmt3000)
+AM_CONDITIONAL(VG1000, test "$BOXTYPE" == vg1000)
+AM_CONDITIONAL(VG5000, test "$BOXTYPE" == vg5000)
 AM_CONDITIONAL(MIXOSF5, test "$BOXTYPE" == mixosf5)
 AM_CONDITIONAL(MIXOSF5MINI, test "$BOXTYPE" == mixosf5mini)
 AM_CONDITIONAL(MIXOSLUMI, test "$BOXTYPE" == mixoslumi)
@@ -102,6 +106,8 @@ AM_CONDITIONAL(GI9196M, test "$BOXTYPE" == gi9196m)
 AM_CONDITIONAL(GI9196LITE, test "$BOXTYPE" == gi9196lite)
 AM_CONDITIONAL(MIXOSF7, test "$BOXTYPE" == mixosf7)
 AM_CONDITIONAL(ENFINITY, test "$BOXTYPE" == enfinity)
+AM_CONDITIONAL(BRE2ZE, test "$BOXTYPE" == bre2ze)
+AM_CONDITIONAL(X2PLUS, test "$BOXTYPE" == x2plus)
 AM_CONDITIONAL(ET4X00, test "$BOXTYPE" == et4x00)
 AM_CONDITIONAL(ET5X00, test "$BOXTYPE" == et5x00)
 AM_CONDITIONAL(ET6X00, test "$BOXTYPE" == et6x00)
@@ -130,6 +136,7 @@ AM_CONDITIONAL(INIHDX, test "$BOXTYPE" == inihdx)
 AM_CONDITIONAL(IQONIOS100HD, test "$BOXTYPE" == iqonios100hd)
 AM_CONDITIONAL(IQONIOS200HD, test "$BOXTYPE" == iqonios200hd)
 AM_CONDITIONAL(IQONIOS300HD, test "$BOXTYPE" == iqonios300hd)
+AM_CONDITIONAL(IQONIOS300HDV2, test "$BOXTYPE" == iqonios300hdv2)
 AM_CONDITIONAL(IXUSSONE, test "$BOXTYPE" == ixussone)
 AM_CONDITIONAL(IXUSSZERO, test "$BOXTYPE" == ixusszero)
 AM_CONDITIONAL(IXUSSDUO, test "$BOXTYPE" == ixussduo)
@@ -158,8 +165,9 @@ AM_CONDITIONAL(VUDUO2, test "$BOXTYPE" == vuduo2)
 AM_CONDITIONAL(VUZERO, test "$BOXTYPE" == vuzero)
 AM_CONDITIONAL(VENTONHDX, test "$BOXTYPE" == ventonhdx)
 AM_CONDITIONAL(XP1000, test "$BOXTYPE" == xp1000)
-AM_CONDITIONAL(HAVE_COLORLCD2, test "$BOXTYPE" == dm800se -o "$BOXTYPE" == dm800sev2)
-AM_CONDITIONAL(HAVE_COLORLCD1, test "$BOXTYPE" == dm8000 -o "$BOXTYPE" == dm800 -o "$BOXTYPE" == dm7020hd -o "$BOXTYPE" == dm7020hdv2 -o "$BOXTYPE" == dm7080)
+AM_CONDITIONAL(HAVE_COLORLCD3, test "$BOXTYPE" == dm7080)
+AM_CONDITIONAL(HAVE_COLORLCD2, test "$BOXTYPE" == dm800se -o "$BOXTYPE" == dm800sev2 -o "$BOXTYPE" == dm820)
+AM_CONDITIONAL(HAVE_COLORLCD1, test "$BOXTYPE" == dm8000 -o "$BOXTYPE" == dm800 -o "$BOXTYPE" == dm7020hd -o "$BOXTYPE" == dm7020hdv2)
 
 AC_ARG_WITH(libvugles2,
 	AS_HELP_STRING([--with-libvugles2],[use libvugles2, yes or no]),
@@ -206,6 +214,16 @@ if test x"$withcolorlcd" != xno ; then
 fi
 AM_CONDITIONAL(HAVE_COLORLCD, test x"$withcolorlcd" != xno)
 
+AC_ARG_WITH(colorlcd128,
+	AC_HELP_STRING([--with-colorlcd128], [use 128x64 16bpp color display, yes or no]),
+	[[withcolorlcd128=$withval]],
+	[[withcolorlcd128=no]]
+)
+if test x"$withcolorlcd128" != xno ; then
+	AC_DEFINE(HAVE_COLORLCD128, 1,[Define when using a 128x64 color display device])
+fi
+AM_CONDITIONAL(HAVE_COLORLCD128, test x"$withcolorlcd" != xno)
+
 AC_ARG_WITH(colorlcd220,
 	AC_HELP_STRING([--with-colorlcd220], [use 220x176 16bpp color display, yes or no]),
 	[[withcolorlcd220=$withval]],
@@ -215,6 +233,56 @@ if test x"$withcolorlcd220" != xno ; then
 	AC_DEFINE(HAVE_COLORLCD220, 1,[Define when using a 220x176 color display device])
 fi
 AM_CONDITIONAL(HAVE_COLORLCD220, test x"$withcolorlcd220" != xno)
+
+AC_ARG_WITH(colorlcd400,
+	AC_HELP_STRING([--with-colorlcd400], [use 400x176 16bpp color display, yes or no]),
+	[[withcolorlcd400=$withval]],
+	[[withcolorlcd400=no]]
+)
+if test x"$withcolorlcd400" != xno ; then
+	AC_DEFINE(HAVE_COLORLCD400, 1,[Define when using a 400x176 color display device])
+fi
+AM_CONDITIONAL(HAVE_COLORLCD400, test x"$withcolorlcd400" != xno)
+
+AC_ARG_WITH(bwlcd255,
+	AC_HELP_STRING([--with-bwlcd255], [use 255x64 1bpp black and white display, yes or no]),
+	[[withbwlcd255=$withval]],
+	[[withbwlcd255=no]]
+)
+if test x"$withbwlcd255" != xno ; then
+	AC_DEFINE(HAVE_BWLCD255, 1,[Define when using a 255x64 black and white display device])
+fi
+AM_CONDITIONAL(HAVE_BWLCD255, test x"$withbwlcd255" != xno)
+
+AC_ARG_WITH(bwlcd140,
+	AC_HELP_STRING([--with-bwlcd140], [use 140x32 1bpp black and white display, yes or no]),
+	[[withbwlcd140=$withval]],
+	[[withbwlcd140=no]]
+)
+if test x"$withbwlcd140" != xno ; then
+	AC_DEFINE(HAVE_BWLCD140, 1,[Define when using a 140x32 black and white display device])
+fi
+AM_CONDITIONAL(HAVE_BWLCD140, test x"$withbwlcd140" != xno)
+
+AC_ARG_WITH(bwlcd128,
+	AC_HELP_STRING([--with-bwlcd128], [use 128x32 1bpp black and white display, yes or no]),
+	[[withbwlcd128=$withval]],
+	[[withbwlcd128=no]]
+)
+if test x"$withbwlcd128" != xno ; then
+	AC_DEFINE(HAVE_BWLCD128, 1,[Define when using a 128x32 black and white display device])
+fi
+AM_CONDITIONAL(HAVE_BWLCD128, test x"$withbwlcd128" != xno)
+
+AC_ARG_WITH(fullgraphiclcd,
+	AC_HELP_STRING([--with-fullgraphiclcd], [display right_half_vfd_icons from skin(for ultimo), yes or no]),
+	[[withfullgraphiclcd=$withval]],
+	[[withfullgraphiclcd=no]]
+)
+if test x"$withfullgraphiclcd" != xno ; then
+	AC_DEFINE(HAVE_FULLGRAPHICLCD, 1,[Define when display right_half_vfd_icons from skin, for ultimo])
+fi
+AM_CONDITIONAL(HAVE_FULLGRAPHICLCD, test x"$withfullgraphiclcd" != xno)
 
 AC_ARG_WITH(gigabluelcd,
 	AC_HELP_STRING([--with-gigabluelcd], [use fix colour map in color display, yes or no]),
@@ -366,6 +434,7 @@ AC_CONFIG_FILES([
 Makefile
 data/Makefile
 data/display220/Makefile
+data/vfd140/Makefile
 data/fonts/Makefile
 data/countries/Makefile
 data/extensions/Makefile
