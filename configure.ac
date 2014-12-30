@@ -435,6 +435,7 @@ Makefile
 data/Makefile
 data/display220/Makefile
 data/vfd140/Makefile
+data/vfd255/Makefile
 data/fonts/Makefile
 data/countries/Makefile
 data/extensions/Makefile
