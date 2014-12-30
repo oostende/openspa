@@ -206,6 +206,25 @@ if test x"$withcolorlcd" != xno ; then
 fi
 AM_CONDITIONAL(HAVE_COLORLCD, test x"$withcolorlcd" != xno)
 
+AC_ARG_WITH(colorlcd220,
+	AC_HELP_STRING([--with-colorlcd220], [use 220x176 16bpp color display, yes or no]),
+	[[withcolorlcd220=$withval]],
+	[[withcolorlcd220=no]]
+)
+if test x"$withcolorlcd220" != xno ; then
+	AC_DEFINE(HAVE_COLORLCD220, 1,[Define when using a 220x176 color display device])
+fi
+AM_CONDITIONAL(HAVE_COLORLCD220, test x"$withcolorlcd220" != xno)
+
+AC_ARG_WITH(gigabluelcd,
+	AC_HELP_STRING([--with-gigabluelcd], [use fix colour map in color display, yes or no]),
+	[[withgigabluelcd=$withval]],
+	[[withgigabluelcd=no]]
+)
+if test x"$withgigabluelcd" != xno ; then
+	AC_DEFINE(HAVE_GIGABLUELCD, 1,[Define when using a 220x176 color display device])
+fi
+AM_CONDITIONAL(HAVE_GIGABLUELCD, test x"$withgigabluelcd" != xno)
 
 AC_ARG_WITH(oldpvr,
 	AC_HELP_STRING([--with-oldpvr], [use /dev/misc/pvr instead of /dev/dvb/adapterX/dvrX, yes or no]),
@@ -346,6 +365,7 @@ AX_SWIG_PYTHON_OPT="$AX_SWIG_PYTHON_OPT -DSWIG_PYTHON_LEGACY_BOOL"
 AC_CONFIG_FILES([
 Makefile
 data/Makefile
+data/display220/Makefile
 data/fonts/Makefile
 data/countries/Makefile
 data/extensions/Makefile

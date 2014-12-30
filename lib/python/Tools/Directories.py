@@ -33,6 +33,8 @@ SCOPE_CURRENT_SKIN = 12
 SCOPE_METADIR = 16
 SCOPE_CURRENT_PLUGIN = 17
 SCOPE_ACTIVE_SKIN = 18
+SCOPE_LCDSKIN = 19
+SCOPE_ACTIVE_LCDSKIN = 20
 
 PATH_CREATE = 0
 PATH_DONTCREATE = 1
@@ -47,6 +49,7 @@ defaultPaths = {
 		SCOPE_LANGUAGE: (eEnv.resolve("${datadir}/enigma2/po/"), PATH_DONTCREATE),
 
 		SCOPE_SKIN: (eEnv.resolve("${datadir}/enigma2/"), PATH_DONTCREATE),
+		SCOPE_LCDSKIN: (eEnv.resolve("${datadir}/enigma2/display/"), PATH_DONTCREATE),
 		SCOPE_SKIN_IMAGE: (eEnv.resolve("${datadir}/enigma2/"), PATH_DONTCREATE),
 		SCOPE_HDD: ("/hdd/movie/", PATH_DONTCREATE),
 		SCOPE_MEDIA: ("/media/", PATH_DONTCREATE),
@@ -64,7 +67,7 @@ PATH_MOVE = 3 # move the fallback dir to the basedir (can be used for changes in
 fallbackPaths = {
 		SCOPE_CONFIG: [("/home/root/", FILE_MOVE),
 					   (eEnv.resolve("${datadir}/enigma2/defaults/"), FILE_COPY)],
-		SCOPE_HDD: [("/hdd/movies", PATH_MOVE)]
+		SCOPE_HDD: [("/hdd/movie", PATH_MOVE)]
 	}
 
 def resolveFilename(scope, base = "", path_prefix = None):
@@ -102,8 +105,6 @@ def resolveFilename(scope, base = "", path_prefix = None):
 		tmp = defaultPaths[SCOPE_CONFIG][0]
 		if base and pathExists(tmp + base):
 			path = tmp
-		elif base and pathExists(defaultPaths[SCOPE_SKIN][0] + base):
-			path = defaultPaths[SCOPE_SKIN][0]
 		else:
 			tmp = defaultPaths[SCOPE_SKIN][0]
 			pos = config.skin.primary_skin.value.rfind('/')
@@ -122,6 +123,32 @@ def resolveFilename(scope, base = "", path_prefix = None):
 				if pathExists(tmp + base):
 					path = tmp
 				elif 'skin_default' not in tmp:
+					path = tmp + 'skin_default/'
+				else:
+					path = tmp
+
+	elif scope == SCOPE_ACTIVE_LCDSKIN:
+		from Components.config import config
+		# allow files in the config directory to replace skin files
+		tmp = defaultPaths[SCOPE_CONFIG][0]
+		if base and pathExists(tmp + base):
+			path = tmp
+		elif base and pathExists(defaultPaths[SCOPE_LCDSKIN][0] + base):
+			path = defaultPaths[SCOPE_SKIN][0]
+		else:
+			tmp = defaultPaths[SCOPE_LCDSKIN][0]
+			pos = config.skin.display_skin.value.rfind('/')
+			if pos != -1:
+				tmpfile = tmp+config.skin.display_skin.value[:pos+1] + base
+				if pathExists(tmpfile):
+					path = tmp+config.skin.display_skin.value[:pos+1]
+				else:
+					if 'skin_default' not in tmp:
+						path = tmp + 'skin_default/'
+					else:
+						path = tmp
+			else:
+				if 'skin_default' not in tmp:
 					path = tmp + 'skin_default/'
 				else:
 					path = tmp
@@ -225,7 +252,7 @@ def defaultRecordingLocation(candidate=None):
 		if not path.endswith('/'):
 			path += '/' # Bad habits die hard, old code relies on this
 	return path
-	
+
 
 def createDir(path, makeParents = False):
 	try:

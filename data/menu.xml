@@ -60,6 +60,7 @@
 					<!--<item level="1" text="Mounts Setup" entryID="netmounts_setup"><screen module="NetworkSetup" screen="NetworkMountsMenu"/></item>-->
 				</menu>
 				<item level="0" text="Skin Setup" entryID="skin_setup"><screen module="SkinSelector" screen="SkinSelector"/></item>
+				<item level="0" text="LCD Skin setup" entryID="lcd_skin_setup" requires="LCDSKINSetup"><screen module="SkinSelector" screen="LcdSkinSelector"/></item>
 				<item level="1" text="Input devices" entryID="input_device_setup"><screen module="InputDeviceSetup" screen="InputDeviceSelection" /></item>
 				<item requires="Display"><setup level="1" id="lcd" /></item>
 				<item text="Keyboard"><setup id="keyboard" /></item>
