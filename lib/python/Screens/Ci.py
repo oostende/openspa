@@ -22,7 +22,7 @@ def InitCiConfig():
 	config.ci = ConfigSubList()
 	for slot in range(MAX_NUM_CI):
 		config.ci.append(ConfigSubsection())
-		config.ci[slot].canDescrambleMultipleServices = ConfigSelection(choices = [("auto", _("Auto")), ("no", _("No")), ("yes", _("Yes"))], default = "auto")
+		config.ci[slot].canDescrambleMultipleServices = ConfigSelection(choices = [("auto", _("Auto")), ("no", _("No")), ("yes", _("Yes"))], default = "no")
 		if SystemInfo["CommonInterfaceSupportsHighBitrates"]:
 			config.ci[slot].canHandleHighBitrates = ConfigSelection(choices = [("no", _("No")), ("yes", _("Yes"))], default = "yes")
 			config.ci[slot].canHandleHighBitrates.slotid = slot
@@ -82,17 +82,20 @@ class MMIDialog(Screen):
 			list.append( (entry[1], ConfigNothing(), entry[2]) )
 		if entry[0] == "PIN":
 			pinlength = entry[1]
+			pin = config.cipin.pin1.value
+			if len(str(config.cipin.pin1.value)) == 3:
+				pin = "0" + str(config.cipin.pin1.value)
+				pinlength = 4
 			if entry[3] == 1:
 				# masked pins:
-				x = ConfigPIN(0, len = pinlength, censor = "*")
+				x = ConfigPIN(int(pin), len = pinlength, censor = "*")
 			else:
 				# unmasked pins:
-				x = ConfigPIN(0, len = pinlength)
+				x = ConfigPIN(int(pin), len = pinlength)
 			x.addEndNotifier(self.pinEntered)
 			self["subtitle"].setText(entry[2])
 			list.append( getConfigListEntry("", x) )
 			self["bottom"].setText(_("please press OK when ready"))
-
 			if config.cipin.pin1autook.value:
 				self.okbuttonClick()
 
@@ -118,16 +121,21 @@ class MMIDialog(Screen):
 			self.handler.answerMenu(self.slotid, 0)
 			self.showWait()
 		elif self.tag == "ENQ":
+			pin = config.cipin.pin1.value
+			if len(str(config.cipin.pin1.value)) == 3:
+				pin = "0" + str(config.cipin.pin1.value)
 			cur = self["entries"].getCurrent()
 			try:
 				answer = str(cur[1].value)
 			except:
-				answer = str(config.cipin.pin1.value)
+				answer = str(pin)
+
 			length = len(answer)
+			
 			try:
 				pinlen = cur[1].getLength()
 			except:
-				pinlen = len(str(config.cipin.pin1.value))
+				pinlen = len(str(pin))
 			while length < pinlen:
 				answer = '0'+answer
 				length+=1
@@ -188,8 +196,7 @@ class MMIDialog(Screen):
 		self["title"].setText("")
 		self["subtitle"].setText("")
 		self["bottom"].setText("")
-		list = [ ]
-		list.append( (self.wait_text, ConfigNothing()) )
+		list = [(self.wait_text, ConfigNothing())]
 		self.updateList(list)
 
 	def showScreen(self):
@@ -291,6 +298,7 @@ CiHandler = CiMessageHandler()
 class CiSelection(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
+		self.setTitle(_("Common Interface"))
 		self["actions"] = ActionMap(["OkCancelActions", "CiSelectionActions"],
 			{
 				"left": self.keyLeft,
@@ -314,7 +322,7 @@ class CiSelection(Screen):
 		menuList.l.setList(self.list)
 		self["entries"] = menuList
 		self["entries"].onSelectionChanged.append(self.selectionChanged)
-		self["text"] = Label(_("Slot %d")%(1))
+		self["text"] = Label(_("Slot %d")% 1)
 
 	def selectionChanged(self):
 		cur_idx = self["entries"].getCurrentIndex()
