@@ -128,7 +128,7 @@ class AudioSelection(Screen, ConfigListScreen):
 				conflist.append(getConfigListEntry(_("PCM Multichannel"), self.settings.pcm_multichannel, None))
 
 			if SystemInfo["Canedidchecking"]:
-				edid_bypass_choicelist = [("00000000", _("off")), ("00000001", _("on"))]
+				edid_bypass_choicelist = [("00000001", _("on")), ("00000000", _("off"))]
 				self.settings.edid_bypass = ConfigSelection(choices = edid_bypass_choicelist, default = config.av.bypass_edid_checking.getValue())
 				self.settings.edid_bypass.addNotifier(self.changeEDIDBypass, initial_call = False)
 				conflist.append(getConfigListEntry(_("Bypass HDMI EDID Check"), self.settings.edid_bypass))
