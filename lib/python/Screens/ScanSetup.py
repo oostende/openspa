@@ -790,14 +790,14 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport):
 		for slot in nimmanager.nim_slots:
 			if slot.isCompatible("DVB-S"):
 				self.scan_satselection.append(getConfigSatlist(defaultSat["orbpos"], self.satList[slot.slot]))
-		else:
-			self.scan_satselection.append(None)
+			else:
+				self.scan_satselection.append(None)
 
 		self.terrestrial_nims_regions = []
 		for slot in nimmanager.nim_slots:
 			if slot.isCompatible("DVB-T"):
 				self.terrestrial_nims_regions.append(self.getTerrestrialRegionsList(slot.slot))
-		else:
+			else:
 				self.terrestrial_nims_regions.append(None)
 
 		if frontendData is not None and ttype == "DVB-S" and self.predefinedTranspondersList(defaultSat["orbpos"]) is not None:
