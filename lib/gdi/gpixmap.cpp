@@ -180,9 +180,6 @@ void gPixmap::fill(const gRegion &region, const gColor &color)
 			if (surface->clut.data && color < surface->clut.colors)
 				icol=surface->clut.data[color].argb();
 			else
-#if defined(__sh__)
-if ((col&0xFF000000) == 0xFF000000) col = 0xFF000000;
-#endif
 				icol=0x10101*color;
 #if BYTE_ORDER == LITTLE_ENDIAN
 			__u16 col = bswap_16(((icol & 0xFF) >> 3) << 11 | ((icol & 0xFF00) >> 10) << 5 | (icol & 0xFF0000) >> 19);
@@ -203,6 +200,9 @@ if ((col&0xFF000000) == 0xFF000000) col = 0xFF000000;
 			if (surface->clut.data && color < surface->clut.colors)
 				col = surface->clut.data[color].argb();
 			else
+#if defined(__sh__)
+if ((col&0xFF000000) == 0xFF000000) col = 0xFF000000;
+#endif
 				col = 0x10101 * color;
 			
 			col^=0xFF000000;
