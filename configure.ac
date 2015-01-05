@@ -434,6 +434,7 @@ AC_CONFIG_FILES([
 Makefile
 data/Makefile
 data/display220/Makefile
+data/display400/Makefile
 data/vfd140/Makefile
 data/vfd255/Makefile
 data/fonts/Makefile
