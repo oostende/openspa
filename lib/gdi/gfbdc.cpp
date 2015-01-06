@@ -247,6 +247,11 @@ void gFBDC::setResolution(int xres, int yres, int bpp)
 	surface.stride = fb->Stride();
 	surface.data = fb->lfb;
 
+#if defined(__sh__)
+	for (int y=0; y<yres; y++)    // make whole screen transparent 
+		memset(fb->lfb+ y * xres * 4, 0x00, xres * 4);	
+#endif
+
 	surface.data_phys = fb->getPhysAddr();
 
 	int fb_size = surface.stride * surface.y;
