@@ -175,7 +175,7 @@ class InitInputDevices:
 	def setupConfigEntries(self,device):
 		cmd = "config.inputDevices." + device + " = ConfigSubsection()"
 		exec (cmd)
-		if getBoxType() in ('elite', 'premium', 'premium+', 'ultra', 'dm800'):
+		if boxtype == 'dm800' or boxtype == 'azboxhd':
 			cmd = "config.inputDevices." + device + ".enabled = ConfigYesNo(default = True)"
 		else:
 			cmd = "config.inputDevices." + device + ".enabled = ConfigYesNo(default = False)"
@@ -188,7 +188,7 @@ class InitInputDevices:
 		exec (cmd)
 		if boxtype in ('maram9', 'classm', 'axodin', 'axodinc', 'starsatlx', 'genius', 'evo', 'galaxym6'):
 			cmd = "config.inputDevices." + device + ".repeat = ConfigSlider(default=400, increment = 10, limits=(0, 500))"
-		elif getBoxType() in ('elite', 'premium', 'premium+', 'ultra'):
+		elif boxtype == 'azboxhd':
 			cmd = "config.inputDevices." + device + ".repeat = ConfigSlider(default=80, increment = 10, limits=(0, 500))"
 		else:
 			cmd = "config.inputDevices." + device + ".repeat = ConfigSlider(default=100, increment = 10, limits=(0, 500))"
@@ -197,7 +197,7 @@ class InitInputDevices:
 		exec (cmd)
 		if boxtype in ('maram9', 'classm', 'axodin', 'axodinc', 'starsatlx', 'genius', 'evo', 'galaxym6'):
 			cmd = "config.inputDevices." + device + ".delay = ConfigSlider(default=200, increment = 100, limits=(0, 5000))"
-		elif getBoxType() in ('elite', 'premium', 'premium+', 'ultra'):
+		elif boxtype == 'azboxhd':
 			cmd = "config.inputDevices." + device + ".delay = ConfigSlider(default=800, increment = 100, limits=(0, 5000))"
 		else:
 			cmd = "config.inputDevices." + device + ".delay = ConfigSlider(default=700, increment = 100, limits=(0, 5000))"
