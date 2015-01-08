@@ -176,6 +176,10 @@ class AVSwitch:
 				print "setting videomode failed."
 
 		# self.updateAspect(None)
+		if about.getCPUString().startswith('STx'):
+			#call setResolution() with -1,-1 to read the new scrren dimensions without changing the framebuffer resolution
+			from enigma import gMainDC
+			gMainDC.getInstance().setResolution(-1, -1)
 
 	def saveMode(self, port, mode, rate):
 		config.av.videoport.setValue(port)
