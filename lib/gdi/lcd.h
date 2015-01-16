@@ -143,7 +143,9 @@ public:
 	void setInverted( unsigned char );
 	void setFlipped(bool);
 	int setLED(int value, int option);
+#if defined(__sh__)
         void ShowIcon(int icon, bool show);
+#endif
 	bool isOled() const { return !!is_oled; }
 	void update();
 };
