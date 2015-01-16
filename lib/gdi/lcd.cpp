@@ -12,6 +12,10 @@
 #endif
 #include <lib/gdi/glcddc.h>
 
+#if defined(__sh__)
+static struct aotom_ioctl_data aotom_data;
+#endif
+
 eDBoxLCD *eDBoxLCD::instance;
 
 eLCD::eLCD()
@@ -272,6 +276,18 @@ int eDBoxLCD::setLED(int value, int option)
 			break;
 	}
 }
+
+#if defined(__sh__)
+void eDBoxLCD::ShowIcon(int icon, bool show)
+{
+        aotom_data.u.icon.icon_nr = icon;
+        aotom_data.u.icon.on = show ? 1 : 0;
+       
+        if (ioctl(lcdfd, VFDICONDISPLAYONOFF, &aotom_data) <0)
+                perror("VFDICONDISPLAYONOFF");  
+}
+#endif
+
 
 eDBoxLCD::~eDBoxLCD()
 {
