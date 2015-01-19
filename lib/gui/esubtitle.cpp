@@ -200,7 +200,6 @@ void eSubtitleWidget::setPage(const ePangoSubtitlePage &p)
 					replacement = std::string((!rewrap_enabled && alignment_center) ? "  " : "") + colourise_dialogs_colours.at(colourise_dialogs_current);
 
 					line.replace(ix, 2, replacement);
-
 					colourise_dialogs_current++;
 
 					if(colourise_dialogs_current >= colourise_dialogs_colours.size())
@@ -250,14 +249,14 @@ void eSubtitleWidget::setPixmap(ePtr<gPixmap> &pixmap, gRegion changed, eRect pi
 {
 	m_pixmap = pixmap;
 	m_pixmap_dest = pixmap_dest; /* this is in a virtual 720x576 cage */
-	
+
 		/* incoming "changed" regions are relative to the physical pixmap area, so they have to be scaled to the virtual pixmap area, then to the screen */
 	changed.scale(m_pixmap_dest.width(), 720, m_pixmap_dest.height(), 576);
 	changed.moveBy(ePoint(m_pixmap_dest.x(), m_pixmap_dest.y()));
 
 	if (pixmap->size().width() && pixmap->size().height())
 		changed.scale(size().width(), pixmap->size().width(), size().height(), pixmap->size().height());
-	
+
 	invalidate(changed);
 }
 
@@ -330,27 +329,35 @@ int eSubtitleWidget::event(int event, void *data, void *data2)
 				text = replace_all(text, "&lt", "<");
 				text = replace_all(text, "&gt", ">");
 
+				if (eConfigManager::getConfigBoolValue("config.subtitles.pango_subtitle_fontswitch"))
+					if (text.find("<i>") != std::string::npos || text.find("</i>") != std::string::npos)
+						if (text.find("<b>") != std::string::npos || text.find("</b>") != std::string::npos)
+							face = Subtitle_MAX;
+						else
+							face = Subtitle_Italic;
+					else if (text.find("<b>") != std::string::npos || text.find("</b>") != std::string::npos)
+						face = Subtitle_Bold;
+
 				if (eConfigManager::getConfigIntValue("config.subtitles.pango_subtitle_colors", 1) == 2)
-				{
 					text = (std::string) gRGB(255, 255, 0) + text;
-					text = replace_all(text, "</u>", (std::string) gRGB(255,255,0));
-				}
 				else
+				{
+					text = replace_all(text, "<u>", (std::string) gRGB(0,255,0));
 					text = replace_all(text, "</u>", (std::string) gRGB(255,255,255));
-
-				if (text.find("<i>") != std::string::npos || text.find("</i>") != std::string::npos)
-					if (text.find("<b>") != std::string::npos || text.find("</b>") != std::string::npos)
-						face = Subtitle_MAX;
-					else
-						face = Subtitle_Italic;
-				else if (text.find("<b>") != std::string::npos || text.find("</b>") != std::string::npos)
-					face = Subtitle_Bold;
-
-				text = replace_all(text, "<u>", (std::string) gRGB(255,255,0));
-				text = replace_all(text, "<i>", "");
-				text = replace_all(text, "<b>", "");
+					if (eConfigManager::getConfigIntValue("config.subtitles.pango_subtitle_colors", 1) == 0)
+					{
+						text = replace_all(text, "<i>", gRGB(255,255,0));
+						text = replace_all(text, "<b>", gRGB(0,255,255));
+						text = replace_all(text, "</i>", (std::string) gRGB(255,255,255));
+						text = replace_all(text, "</b>", (std::string) gRGB(255,255,255));
+					}
+				}
+				text = replace_all(text, "</u>", "");
 				text = replace_all(text, "</i>", "");
 				text = replace_all(text, "</b>", "");
+				text = replace_all(text, "<u>", "");
+				text = replace_all(text, "<i>", "");
+				text = replace_all(text, "<b>", "");
 
 				subtitleStyles[face].font->pointSize=fontsize;
 				painter.setFont(subtitleStyles[face].font);
