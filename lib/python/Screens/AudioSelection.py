@@ -11,7 +11,7 @@ from Components.Sources.List import List
 from Components.Sources.Boolean import Boolean
 from Components.SystemInfo import SystemInfo
 
-from enigma import iPlayableService, eTimer
+from enigma import iPlayableService, eTimer, eSize
 
 from Tools.ISO639 import LanguageCodes
 
@@ -640,6 +640,12 @@ class QuickSubtitlesConfigMenu(ConfigListScreen, Screen):
 			"cancel": self.finish,
 			"ok": self.finish,
 		},-2)
+
+		self.onLayoutFinish.append(self.layoutFinished)
+
+	def layoutFinished(self):
+		if not self["videofps"].text:
+			self.instance.resize(eSize(self.instance.size().width(), self["config"].l.getItemSize().height()*len(self["config"].getList()) + 10))
 
 	def changedEntry(self):
 		if self["config"].getCurrent() in [getConfigMenuItem("config.subtitles.pango_subtitles_delay"),getConfigMenuItem("config.subtitles.pango_subtitles_fps")]:
