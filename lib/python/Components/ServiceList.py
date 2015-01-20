@@ -4,6 +4,7 @@ from skin import parseColor, parseFont
 
 from enigma import eListboxServiceContent, eListbox, eServiceCenter, eServiceReference, gFont, eRect
 from Tools.LoadPixmap import LoadPixmap
+from Tools.TextBoundary import getTextBoundarySize
 
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
 
