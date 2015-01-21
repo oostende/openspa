@@ -247,6 +247,9 @@ class UpdatePlugin(Screen):
 	def exit(self):
 		if not self.ipkg.isRunning():
 			if self.packages != 0 and self.error == 0 and self.channellist_only == 0:
+				if fileExists("/etc/enigma2/.removelang"):
+					from Components.Language import language
+					language.delLanguage()
 				self.session.openWithCallback(self.exitAnswer, MessageBox, _("Update completed. Do you want to reboot your receiver?"))
 			else:
 				self.close()

@@ -12,6 +12,8 @@ from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN, SCOPE_LANGUAG
 from Tools.LoadPixmap import LoadPixmap
 import enigma
 
+inWizzard = False
+
 def LanguageEntryComponent(file, name, index):
 	png = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "countries/" + index + ".png"))
 	if png == None:
@@ -49,10 +51,17 @@ class LanguageSelection(Screen):
 
 	def save(self):
 		self.commit(self.run())
-		if InfoBar.instance and self.oldActiveLanguage != config.osd.language.value:
-			self.close(True)
+		global inWizzard
+		if inWizzard:
+			inWizzard = False
+			self.session.openWithCallback(self.deletelanguagesCB, MessageBox, _("Do you want to delete all other languages?"), default = False)
 		else:
-			self.close()
+			self.close(self.oldActiveLanguage != config.osd.language.value)
+
+	def deletelanguagesCB(self, anwser):
+		if anwser:
+			language.delLanguage()
+		self.close()
 
 	def cancel(self):
 		language.activateLanguage(self.oldActiveLanguage)
@@ -85,6 +94,8 @@ class LanguageWizard(LanguageSelection, Rc):
 	def __init__(self, session):
 		LanguageSelection.__init__(self, session)
 		Rc.__init__(self)
+		global inWizzard
+		inWizzard = True
 		self.onLayoutFinish.append(self.selectKeys)
 		self["wizard"] = Pixmap()
 		self["text"] = Label()

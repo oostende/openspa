@@ -11,7 +11,12 @@ class Language:
 		self.activeLanguage = 0
 		self.catalog = None
 		self.lang = {}
+		self.InitLang()
+		self.callbacks = []
+
+	def InitLang(self):
 		self.langlist = []
+		self.ll = os.listdir(resolveFilename(SCOPE_LANGUAGE, ""))
 		# FIXME make list dynamically
 		# name, iso-639 language, iso-3166 country. Please don't mix language&country!
 		self.addLanguage("Arabic",      "ar", "AE", "ISO-8859-15")
@@ -52,12 +57,17 @@ class Language:
 		self.addLanguage("Türkçe",      "tr", "TR", "ISO-8859-15")
 		self.addLanguage("Ukrainian",   "uk", "UA", "ISO-8859-15")
 
-		self.callbacks = []
-
 	def addLanguage(self, name, lang, country, encoding):
 		try:
-			self.lang[str(lang + "_" + country)] = ((name, lang, country, encoding))
-			self.langlist.append(str(lang + "_" + country))
+			if lang in self.ll:
+				if country == "GB" or country == "BR":
+					if (lang + "_" + country) in self.ll:
+						self.lang[str(lang + "_" + country)] = ((name, lang, country))
+						self.langlist.append(str(lang + "_" + country))
+				else:
+					self.lang[str(lang + "_" + country)] = ((name, lang, country))
+					self.langlist.append(str(lang + "_" + country))
+
 		except:
 			print "Language " + str(name) + " not found"
 
@@ -118,5 +128,42 @@ class Language:
 
 	def addCallback(self, callback):
 		self.callbacks.append(callback)
+
+	def delLanguage(self, delLang = None):
+		from Components.config import config, configfile
+		from shutil import rmtree
+		lang = config.osd.language.value
+
+		if delLang:
+			print"DELETE LANG", delLang
+			if delLang == "en_US":
+				print"Default Language can not be deleted !!"
+				return
+			elif delLang == "en_GB" or delLang == "pt_BR":
+				delLang = delLang.lower()
+				delLang = delLang.replace('_','-')				
+				os.system("opkg remove enigma2-locale-" + delLang)
+			else:
+				os.system("opkg remove enigma2-locale-" + delLang[:2])
+		else:
+			print"Delete all lang except ", lang
+			ll = os.listdir(resolveFilename(SCOPE_LANGUAGE, ""))
+			for x in ll:
+				if len(x) > 2:
+					if x != lang:
+						x = x.lower()
+						x = x.replace('_','-')
+						os.system("opkg remove enigma2-locale-" + x)
+				else:
+					if x != lang[:2] and x != "en":
+						os.system("opkg remove enigma2-locale-" + x)
+					elif x == "pt":
+						if x != lang:
+							os.system("opkg remove enigma2-locale-" + x)
+			
+			os.system("touch /etc/enigma2/.removelang")
+
+		self.InitLang()
+
 
 language = Language()
