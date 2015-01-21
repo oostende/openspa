@@ -1,5 +1,6 @@
 import gettext
 from Screen import Screen
+from Screens.MessageBox import MessageBox
 from Components.ActionMap import ActionMap
 from Components.Language import language
 from Components.config import config
