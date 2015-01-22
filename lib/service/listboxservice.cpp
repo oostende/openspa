@@ -458,6 +458,8 @@ int eListboxServiceContent::cursorResolve(int cursorPosition)
 			continue;
 		strippedCursor++;
 	}
+	if ((m_hide_number_marker && (m_list.begin()->flags & eServiceReference::isNumberedMarker)) || (m_list.begin()->flags & eServiceReference::isInvisible))
+		strippedCursor++;
 	return strippedCursor;
 }
 
