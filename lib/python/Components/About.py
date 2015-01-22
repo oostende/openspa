@@ -1,3 +1,4 @@
+from boxbranding import getBoxType
 from sys import modules
 import os
 import time
@@ -36,13 +37,16 @@ def getKernelVersionString():
 		return _("unknown")
 
 def getChipSetString():
-	try:
-		f = open('/proc/stb/info/chipset', 'r')
-		chipset = f.read()
-		f.close()
-		return str(chipset.lower().replace('\n','').replace('bcm','').replace('brcm','').replace('sti',''))
-	except:
-		return "unavailable"
+	if getBoxType() in ('dm7080','dm820'):
+		return "7435"
+	else:
+		try:
+			f = open('/proc/stb/info/chipset', 'r')
+			chipset = f.read()
+			f.close()
+			return str(chipset.lower().replace('\n','').replace('bcm','').replace('brcm','').replace('sti',''))
+		except:
+			return "unavailable"
 
 def getModelString():
 	try:
