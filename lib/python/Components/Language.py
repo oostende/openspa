@@ -153,13 +153,13 @@ class Language:
 					if x != lang:
 						x = x.lower()
 						x = x.replace('_','-')
-						os.system("opkg remove enigma2-locale-" + x)
+						os.system("opkg remove --force-depends enigma2-locale-" + x)
 				else:
 					if x != lang[:2] and x != "en":
-						os.system("opkg remove enigma2-locale-" + x)
+						os.system("opkg remove --force-depends enigma2-locale-" + x)
 					elif x == "pt":
 						if x != lang:
-							os.system("opkg remove enigma2-locale-" + x)
+							os.system("opkg remove --force-depends enigma2-locale-" + x)
 			
 			os.system("touch /etc/enigma2/.removelang")
 
