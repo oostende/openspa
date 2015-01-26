@@ -107,6 +107,8 @@ addSkin('skin_box.xml')
 # add optional discrete second infobar
 addSkin('skin_second_infobar.xml')
 display_skin_id = 1
+if getBoxType().startswith('dm'):
+	display_skin_id = 2
 try:
 	if not addSkin(os.path.join('display', config.skin.display_skin.value)):
 		raise DisplaySkinError, "display skin not found"
@@ -121,10 +123,11 @@ except Exception, err:
 	addSkin(skin)
 	del skin
 
-if addSkin(os.path.join('display', 'skin_display96.xml')):
-	# Color OLED
-	display_skin_id = 2
-addSkin('skin_text.xml')
+# Add Skin for Display
+try:
+	addSkin(config.vfd.show.value)
+except:
+	addSkin('skin_text.xml')
 
 addSkin('skin_subtitles.xml')
 
