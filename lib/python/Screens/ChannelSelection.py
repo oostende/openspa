@@ -302,6 +302,7 @@ class ChannelContextMenu(Screen):
 		if answer:
 			for file in os.listdir("/etc/enigma2/"):
 				if file.startswith("userbouquet") and file.endswith(".del"):
+					file = "/etc/enigma2/" + file
 					print "permantly remove file ", file
 					os.remove(file)
 			self.close()
@@ -309,6 +310,7 @@ class ChannelContextMenu(Screen):
 	def restoreDeletedBouquets(self):
 		for file in os.listdir("/etc/enigma2/"):
 			if file.startswith("userbouquet") and file.endswith(".del"):
+				file = "/etc/enigma2/" + file
 				print "restore file ", file[:-4]
 				os.rename(file, file[:-4])
 		eDVBDB.getInstance().reloadBouquets()
