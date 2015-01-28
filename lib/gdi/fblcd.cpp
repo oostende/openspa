@@ -14,11 +14,6 @@
 #define FBIO_BLIT 0x22
 #endif
 
-#if defined(__sh__)
-static struct aotom_ioctl_data aotom_data;
-#endif
-
-
 eFbLCD::eFbLCD(const char *fb)
 {
 	m_manual_blit = -1;
@@ -289,14 +284,4 @@ int eFbLCD::setLCDBrightness(int brightness)
 	return 0;
 }
 
-#if defined(__sh__)
-void eFbLCD::ShowIcon(int icon, bool show)
-{
-        aotom_data.u.icon.icon_nr = icon;
-        aotom_data.u.icon.on = show ? 1 : 0;
-       
-        if (ioctl(lcdfd, VFDICONDISPLAYONOFF, &aotom_data) <0)
-                perror("VFDICONDISPLAYONOFF");  
-}
-#endif
 
