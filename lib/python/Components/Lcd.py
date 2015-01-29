@@ -105,6 +105,12 @@ class LCD:
 		f.write(value)
 		f.close()
 
+	def setPower(self, value):
+		print 'setLCDPower',value
+		f = open("/proc/stb/power/vfd", "w")
+		f.write(value)
+		f.close()
+
 	def setRepeat(self, value):
 		print 'setLCDRepeat',value
 		f = open("/proc/stb/lcd/scroll_repeats", "w")
@@ -139,20 +145,12 @@ def standbyCounterChanged(configElement):
 	config.lcd.ledbrightnessdeepstandby.apply()
 
 def InitLcd():
-	if getBoxType() in ('et4000', 'et5000', 'et6000', 'et7000', 'et8500'):
+	if getBoxType() in ('et4000', 'et5000', 'et6000', 'et7000'):
 		detected = False
 	else:
 		detected = eDBoxLCD.getInstance().detected()
 	SystemInfo["Display"] = detected
 	config.lcd = ConfigSubsection()
-
-	if SystemInfo["StandbyLED"]:
-		def standbyLEDChanged(configElement):
-			file = open("/proc/stb/power/standbyled", "w")
-			file.write(configElement.value and "on" or "off")
-			file.close()
-		config.usage.standbyLED = ConfigYesNo(default = True)
-		config.usage.standbyLED.addNotifier(standbyLEDChanged)
 
 	if detected:
 		config.lcd.scroll_speed = ConfigSelection(default = "300", choices = [
@@ -181,6 +179,9 @@ def InitLcd():
 
 		def setLCDmode(configElement):
 			ilcd.setMode(configElement.value)
+
+		def setLCDpower(configElement):
+			ilcd.setPower(configElement.value);
 
 		def setLCDrepeat(configElement):
 			ilcd.setRepeat(configElement.value)
@@ -235,6 +236,12 @@ def InitLcd():
 			config.lcd.repeat = ConfigNothing()
 			config.lcd.scrollspeed = ConfigNothing()
 
+		if fileExists("/proc/stb/power/vfd"):
+			config.lcd.power = ConfigSelection([("0", _("No")), ("1", _("Yes"))], "1")
+			config.lcd.power.addNotifier(setLCDpower);
+		else:
+			config.lcd.power = ConfigNothing()
+
 		if getBoxType() == 'vuultimo':
 			config.lcd.ledblinkingtime = ConfigSlider(default = 5, increment = 1, limits = (0,15))
 			config.lcd.ledblinkingtime.addNotifier(setLEDblinkingtime)
@@ -258,6 +265,7 @@ def InitLcd():
 		config.lcd.bright.apply = lambda : doNothing()
 		config.lcd.standby.apply = lambda : doNothing()
 		config.lcd.mode = ConfigNothing()
+		config.lcd.power = ConfigNothing()
 		config.lcd.repeat = ConfigNothing()
 		config.lcd.scrollspeed = ConfigNothing()
 		config.lcd.ledbrightness = ConfigNothing()

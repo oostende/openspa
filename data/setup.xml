@@ -188,6 +188,8 @@
 		<item text="Contrast">config.osd.contrast</item>
 	</setup>
 	<setup key="lcd" title="Display setup" requires="FrontpanelDisplay">
+		<item level="0" text="Power on/off display" description="This option allows you to power off the display.">config.lcd.power</item>
+		<item level="0" text="Power LED state in (deep)-standby" description="Turn on the power LED during standby." requires="StandbyLED">config.usage.standbyLED</item>
 		<item level="0" text="Brightness (Normal)" description="Configure the brightness level of the front panel display for normal operation.">config.lcd.bright</item>
 		<item level="0" text="Brightness (Standby)" description="Configure the brightness level of the front panel display for standby.">config.lcd.standby</item>
 		<item level="0" text="Contrast" description="Configure the contrast level of the front panel display.">config.lcd.contrast</item>
@@ -201,7 +203,6 @@
 		<item level="1" text="Show Transponder Remaining/Elapsed as" description="This option allows you choose how to display the remaining/elapsed time for live tv.">config.usage.swap_time_display_on_vfd</item>
 		<item level="1" text="Show Media playback Remaining/Elapsed as" description="This option allows you choose how to display the remaining/elapsed time for Media playback.">config.usage.swap_media_time_display_on_vfd</item>
 		<item level="0" text="Show time elapsed as positive" description="This option allows you choose how to display elapsed time as + or -">config.usage.elapsed_time_positive_vfd</item>
-		<item level="0" text="StandbyLED" description="Turn on the power LED during standby." requires="StandbyLED">config.usage.standbyLED</item>
 		<item level="0" text="Show on Display" description="Disable all VFD Symbols">config.vfd.show</item>
 		<item level="1" requires="GraphicLCD" text="Show blinking rec symbol in LCD during recording" description="Enable blinking rec symbol on the LCD Display">config.usage.blinking_rec_symbol_during_recording</item>
 	</setup>
