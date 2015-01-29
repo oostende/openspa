@@ -246,7 +246,7 @@ def InitLcd():
 			config.lcd.scrollspeed = ConfigNothing()
 
 		if fileExists("/proc/stb/power/vfd"):
-			config.lcd.power = ConfigSelection([("0", _("No")), ("1", _("Yes"))], "1")
+			config.lcd.power = ConfigSelection([("1", _("No")), ("0", _("Yes"))], "0")
 			config.lcd.power.addNotifier(setLCDpower);
 		else:
 			config.lcd.power = ConfigNothing()
