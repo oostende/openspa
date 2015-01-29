@@ -451,10 +451,11 @@ AX_SWIG_PYTHON_OPT="$AX_SWIG_PYTHON_OPT -DSWIG_PYTHON_LEGACY_BOOL"
 AC_CONFIG_FILES([
 Makefile
 data/Makefile
-data/display220/Makefile
-data/display400/Makefile
-data/vfd140/Makefile
-data/vfd255/Makefile
+data/display/Makefile
+data/display/display220/Makefile
+data/display/display400/Makefile
+data/display/vfd140/Makefile
+data/display/vfd255/Makefile
 data/fonts/Makefile
 data/countries/Makefile
 data/extensions/Makefile
