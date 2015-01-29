@@ -1,25 +1,25 @@
 installdir = $(pkgdatadir)/display
 
 if HAVE_COLORLCD
-dist_pkgdata_DATA += skin_display96.xml
+dist_pkgdata_DATA = skin_display96.xml
 else
-dist_pkgdata_DATA += skin_display.xml
+dist_pkgdata_DATA = skin_display.xml
 endif
 
 if HAVE_COLORLCD220
-SUBDIRS += display220
+SUBDIRS = display220
 endif
 
 if HAVE_COLORLCD400
-SUBDIRS += display400
+SUBDIRS = display400
 endif
 
 if HAVE_BWLCD140
-SUBDIRS += vfd140
+SUBDIRS = vfd140
 endif
 
 if HAVE_BWLCD255
-SUBDIRS += vfd255
+SUBDIRS = vfd255
 endif
 
 skin_display.xml: $(srcdir)/skin_display_default.xml
