@@ -8,10 +8,10 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Language: Spanish\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid ""
 "\n"
@@ -607,6 +607,9 @@ msgstr ""
 "Un temporizador ha fallado!\n"
 "Deshabilitar la TV y volver a intentarlo?\n"
 
+msgid "AAC transcoding"
+msgstr "Transcodificar AAC"
+
 msgid "AC3 Lip Sync Setup"
 msgstr "Configuración de Lip Sync AC3"
 
@@ -785,6 +788,9 @@ msgstr "Activar audiodescripción para sordos"
 msgid "Alpha"
 msgstr "Alpha"
 
+msgid "Alternative"
+msgstr "Alternativo"
+
 msgid "Alternative numbering mode"
 msgstr "Modo alternativo de numeración"
 
@@ -866,7 +872,7 @@ msgid "Attempt to mount shares again"
 msgstr "Intentar montar de nuevo los recursos"
 
 msgid "Attempt to recover lost mounts (in background)"
-msgstr "Intenta recuperar montajes perdidos (en seg. plano). "
+msgstr "Intentar recuperar montajes perdidos (en seg. plano). "
 
 msgid "Audio"
 msgstr "Audio"
@@ -1041,6 +1047,9 @@ msgstr "Editor de Marcadores"
 
 msgid "Bookmark Title"
 msgstr "Título Marcador"
+
+msgid "Bookmark was created."
+msgstr "Se ha creado el marcador."
 
 msgid "Bookmarks"
 msgstr "Marcadores"
@@ -1263,8 +1272,11 @@ msgstr ""
 msgid "Choose Tuner"
 msgstr "Elegir Sintonizador"
 
+msgid "Choose whether AAC sound tracks should be transcoded."
+msgstr "Configura cual de las pistas AAC deberá ser transcodificada"
+
 msgid "Choose whether multi channel sound tracks should be output as PCM."
-msgstr "Configura cuál de las pistas de audio deberá enviarse a la salida PCM"
+msgstr "Configura cual de las pistas de audio deberá enviarse a la salida PCM"
 
 msgid "Choose which tuner to configure."
 msgstr "Qué sintonizador se configurará"
@@ -1393,7 +1405,7 @@ msgid "Configure interface"
 msgstr "Configurar interfaz"
 
 msgid "Configure nameservers"
-msgstr "Configurar DNSs"
+msgstr "Configurar DNS"
 
 msgid "Configure on which devices the background delete option should be used."
 msgstr "Dispositivos en los que se podrá utilizar el borrado en segundo plano."
@@ -1626,6 +1638,9 @@ msgstr "Configurar la RED interna"
 msgid "Configure your network again"
 msgstr "Volver a configurar la red"
 
+msgid "Configure your network settings, and press OK to start the scan"
+msgstr "Configure los ajustes de red, y pulse OK para empezar a buscar"
+
 msgid "Configure your wireless LAN again"
 msgstr "Volver a configurar la RED inalámbrica"
 
@@ -1648,7 +1663,7 @@ msgid "Connect to a wireless network"
 msgstr "Conectar a una red inalámbrica"
 
 msgid "Connected to"
-msgstr "Conectado a"
+msgstr "Tuner:"
 
 msgid "Connected!"
 msgstr "Conectado!"
@@ -2156,7 +2171,7 @@ msgid "Download plugins"
 msgstr "Descarga de plugins"
 
 msgid "Downloadable new plugins"
-msgstr "Nuevos plugins descargables"
+msgstr "Descargar plugins & addons"
 
 msgid "Downloadable plugins"
 msgstr "Plugins descargables"
@@ -2165,7 +2180,7 @@ msgid "Downloading"
 msgstr "Descargando"
 
 msgid "Downloading plugin information. Please wait..."
-msgstr "Descargando información del plugin. Espere..."
+msgstr "Descargando información de los plugins. Espere..."
 
 msgid "Dreambox Keyboard Deutsch"
 msgstr "Teclado alemán DMM"
@@ -2257,6 +2272,9 @@ msgstr "Activar"
 msgid "Enable 5V for active antenna"
 msgstr "Activar 5V para la antena activa"
 
+msgid "Enable auto cable scan"
+msgstr "Habilitar autobúsqueda de cable"
+
 msgid "Enable auto fast scan"
 msgstr "Habilitar autobúsqueda rápida"
 
@@ -2313,6 +2331,9 @@ msgstr "Hora fin"
 
 msgid "End time to ignore inactivity sleeptimer"
 msgstr "Final del margen de 'no temporizador'"
+
+msgid "Enigma2 skin selector"
+msgstr "Selector de skins de Enigma2"
 
 msgid "Enigma2 will restart to change Systemtime - OK ?"
 msgstr "Enigma2 se reiniciará después de cambiar la hora."
@@ -3100,6 +3121,9 @@ msgstr "Conexión de red local"
 msgid "Last speed"
 msgstr "Velocidad final"
 
+msgid "LCD Skin setup"
+msgstr "Config. skin de LCD"
+
 msgid "LNB"
 msgstr "LNB"
 
@@ -3119,7 +3143,7 @@ msgid "Left"
 msgstr "Izda."
 
 msgid "Left from servicename"
-msgstr "A la izquierda del nombre de canal"
+msgstr "A la izquierda del nombre"
 
 msgid "Left Key"
 msgstr "Tecla izquierda"
@@ -3217,7 +3241,7 @@ msgid "Longitude"
 msgstr "Longitud"
 
 msgid "Loop through to"
-msgstr "Bucle en"
+msgstr "Conectado a"
 
 msgid "Lower USB"
 msgstr "USB inferior"
@@ -3767,6 +3791,9 @@ msgstr "No conectado"
 
 msgid "Not configured"
 msgstr "No configurado"
+
+msgid "Not Defined"
+msgstr "No definido"
 
 msgid "Nothing connected"
 msgstr "Nada conectado"
@@ -4690,7 +4717,7 @@ msgid "Right"
 msgstr "Dcha."
 
 msgid "Right from servicename"
-msgstr "A la derecha del nombre de canal"
+msgstr "A la derecha del nombre"
 
 msgid "Right Key"
 msgstr "Tecla derecha"
@@ -4808,6 +4835,9 @@ msgstr "Buscar recurso NFS"
 
 msgid "Scan additional SR"
 msgstr "Escanear otro SR"
+
+msgid "Scan cable provider channels"
+msgstr "Buscar canales de proveedor de cable"
 
 msgid "Scan circular polarisation"
 msgstr "Buscar polarización circular"
@@ -5185,7 +5215,7 @@ msgid "Show SNR percentage instead of dB value"
 msgstr "Mostrar porcentaje S/R en lugar del valor dB"
 
 msgid "Show animation while busy"
-msgstr "Mostrar animación estando ocupado"
+msgstr "Mostrar animación al ejecutar órdenes"
 
 msgid "Show background in radio mode"
 msgstr "Mostrar fondo en el modo radio"
@@ -5251,7 +5281,7 @@ msgid "Show PPanels"
 msgstr "Mostrar paneles"
 
 msgid "Show Scrambled Channel Icon in channel list"
-msgstr "Mostrar icono de 'Canal codificado' en la lista de canales"
+msgstr "Ver icono de 'Codificado' en la lista de canales"
 
 msgid "Show screensaver"
 msgstr "Mostrar salvapantallas"
@@ -5843,6 +5873,12 @@ msgstr "Configuración de test DisEqC"
 msgid "Test mode"
 msgstr "Modo test"
 
+msgid "Testscreens"
+msgstr "Pantallas de test"
+
+msgid "Testscreens that are helpfull to fine-tune your display"
+msgstr "Las pantallas de test son muy útiles para ajustar la pantalla"
+
 msgid "Text"
 msgstr "TxT"
 
@@ -6161,7 +6197,7 @@ msgid "Tuner not available."
 msgstr "Sintoniz. no disponible"
 
 msgid "Tuner not set up, can't scan"
-msgstr "Tuner no configurado. No se puede buscar"
+msgstr "Sintoniz. no configurado. No se puede buscar"
 
 msgid "Tuner slot"
 msgstr "Slot de sintonizador"
@@ -6334,6 +6370,9 @@ msgstr "Utilizar la EPG MHW cuando sea posible"
 msgid "Use Netmed EPG information when it is available."
 msgstr "Utilizar la EPG Netmed cuando sea posible"
 
+msgid "Use official channel numbering"
+msgstr "Utilizar la numeración oficial de canales"
+
 msgid "Use original DVB subtitle position"
 msgstr "Usar la posición original de los subtítulos DVB"
 
@@ -6436,8 +6475,8 @@ msgstr "Configuración de vídeo mejorado"
 msgid "Video enhancement setup"
 msgstr "Configuración de vídeo mejorado"
 
-msgid "Video fine tuning"
-msgstr "Ajuste fino de video"
+msgid "Video PID"
+msgstr "PID Video"
 
 msgid "Video settings"
 msgstr "Brillo & Contraste"
@@ -6762,8 +6801,11 @@ msgstr "Muestra la infobar en el avance rápido/rebobinado, durante la reproducc
 msgid "When enabled, the lenght of each recording will be shown in the movielist (this might cause some additional loading time)."
 msgstr "Si se activa, en la lista aparecerá la duración de cada grabación (esto puede aumentar el tiempo de carga)."
 
-msgid "When enabled, the original line breaks will be removed from the teletext subtitles."
-msgstr "Si se activa, las líneas cortadas se eliminarán de los subtítulos de teletexto"
+# msgid "When enabled, the original line breaks will be removed from the teletext subtitles."
+# msgstr "Si se activa, las líneas cortadas se eliminarán de los subtítulos de teletexto"
+#
+msgid "When enabled, reformat subtitles to match the width of the screen."
+msgstr "Si se activa, formatea los subtítulos para que encajen en la pantalla."
 
 msgid "When enabled, the receiver will automatically use the audio track which you selected before."
 msgstr "Si se activa, el receptor utilizará automáticamente el canal de audio seleccionado previamente"
@@ -7440,9 +7482,6 @@ msgstr "formatos (BMP, PNG, JPG, GIF)"
 
 msgid "filename"
 msgstr "nombre de fichero"
-
-msgid "fine-tune your display"
-msgstr "Configuración fina de vídeo"
 
 msgid "flat alphabetic"
 msgstr "alfabético (también carpetas)"
@@ -8399,8 +8438,11 @@ msgstr "Nuevo perfil: "
 msgid "No card inserted!"
 msgstr "No hay tarjeta!"
 
+msgid "NodeID"
+msgstr "ID de nodo"
+
 msgid "no or unknown card inserted"
-msgstr "no hay, o tarjeta desconocida"
+msgstr "no hay tarjeta, o es desconocida"
 
 msgid "NodeID: "
 msgstr "Nodo: "
@@ -9710,8 +9752,8 @@ msgstr "Nombre de canal en rojo"
 
 msgid "%d pixel wide"
 msgid_plural "%d pixels wid"
-msgstr[0] "Ancho %d pixel"
-msgstr[1] "Ancho %d pixeles"
+msgstr[0] "%d pixel de ancho"
+msgstr[1] "%d pixels de ancho"
 
 msgid "Devide"
 msgstr "Dividir"
@@ -10226,11 +10268,17 @@ msgstr "Resolución de las fotografias"
 msgid "configure in which resolution pictures are displayed with the picture viewer and movieplayer"
 msgstr "Resolucion que se utilizará para la visualización de las fotografias en el visor de imágenes y en el reproductor"
 
-msgid "Fallback remote receiver"
-msgstr "Reenvio a receptor remoto"
+msgid "Enable fallback remote receiver"
+msgstr "Habilitar reenvio a receptor remoto"
 
-msgid "URL of an enigma2 receiver that will be tried to tune into services that cannot be tuned into locally (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
+msgid "Fallback remote receiver URL"
+msgstr "URL para reenvio a receptor remoto"
+
+msgid "Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
 msgstr "URL de un receptor enigma2 al que se intentará sintoninzar canales que no pueden ser sintonizados localmente (p.e. el sintonizador está ocupado, o el tipo de canal no está disponible en el sint. local. Especifique la url completa, incluyendo http:// y el puerto (normalmente ...:8001), p.e. http://segundo_deco:8001"
+
+msgid "URL of fallback remote receiver"
+msgstr "URL para el reenvio a un receptor remoto"
 
 ### OPENSPA EXTRA PLUGINS ###
 msgid ""
@@ -10302,34 +10350,6 @@ msgstr "Seguro que quiere eliminar todos los canales de CABLE?"
 
 msgid "Are you sure to remove all terrestrial services?"
 msgstr "Seguro que quiere eliminar todos los canales de TDT?"
-
-### OPENWEBIF ###
-msgid "Add service name to stream information"
-msgstr "Añadir el nombre del canal a la información"
-
-msgid "Enable Http Authentication"
-msgstr "Activar autentificación Http"
-
-msgid "Enable Https"
-msgstr "Activar Https"
-
-msgid "Http port"
-msgstr "Puerto Http"
-
-msgid "Https port"
-msgstr "Puerto Https"
-
-msgid "OpenWebif Configuration"
-msgstr "Configuración de OpenWebif"
-
-msgid "OpenWebif url: http://yourip:port"
-msgstr "Url OpenWebif: http://192.168.x.x:puerto"
-
-msgid "OpenWebInterface Enabled"
-msgstr "OpenWebInterface Activado"
-
-msgid "Smart services renaming for XBMC"
-msgstr "Renombrado inteligente de canales para XBMC"
 
 ### OSD 3D SETUP ###
 msgid "OSD 3D Setup"
@@ -10753,4 +10773,285 @@ msgstr "Selección de la frecuencia de refresco."
 
 msgid "Select refresh rate"
 msgstr "Seleccione la frecuencia de refresco"
+
+###
+msgid "Attention, this is repeated timer!\n"
+msgstr "Cuidado, este temporizador está repetido!\n"
+
+msgid ""
+"Attention, this is repeated timer!\n"
+"What do you want to do?"
+msgstr ""
+"Cuidado, este temporizador está repetido!\n"
+"Qué quiere hacer?"
+
+msgid "Disable current event but not coming events"
+msgstr "Deshabilitar el evento actual pero no los siguientes"
+
+msgid "Options disable timer"
+msgstr "Opciones de deshabilitado de temporiz."
+
+msgid ""
+"Repeating event currently recording.\n"
+"What do you want to do?"
+msgstr ""
+"Repetir el evento que se está grabando.\n"
+"Qué quiere hacer?"
+
+msgid "Select Channel"
+msgstr "Seleccionar canal"
+
+msgid "Select action for timer '%s'."
+msgstr "Seleccione una acción para el temporizador '%s'."
+
+msgid "Select channel"
+msgstr "Seleccionar canal"
+
+msgid ": %s"
+msgstr ": %s"
+
+msgid "%A %d %B"
+msgstr "%A %d %B"
+
+msgid "%d-%m"
+msgstr "%d-%m"
+
+msgid "%s%d min"
+msgstr "%s%d min"
+
+msgid "Please enter new description:"
+msgstr "Introduzca la nueva descripción"
+
+###
+msgid "Currently selected event EPG"
+msgstr "Evento actualmente seleccionado"
+
+msgid "Select EPG type..."
+msgstr "Seleccione tipo de EPG"
+
+#msgid "Testscreens that are helpfull to fine-tune your display"
+#msgstr "Pantallas de test que ayudan a ajustar la pantalla"
+msgid "Delay after change voltage before switch command"
+msgstr "Retardo posterior al cambio de voltaje, antes de enviar comando"
+
+msgid "Delay after continuous tone disable before diseqc"
+msgstr "Retardo posterior al tono contínuo, antes de deshabilitar diseqc"
+
+msgid "Delay after diseqc peripherial poweron command"
+msgstr "Retardo posterior al comando de inicio de diseqc"
+
+msgid "Delay after diseqc reset command"
+msgstr "Retardo después al comando de reinicio de diseqc"
+
+msgid "Delay after enable voltage before motor command"
+msgstr "Retardo después de habilitar voltaje antes del comando motor"
+
+msgid "Delay after enable voltage before switch command"
+msgstr "Retardo después de habilitar el voltaje, antes del comando de cambio"
+
+msgid "Delay after final continuous tone change"
+msgstr "Retardo después del cambio final de tono contínuo"
+
+msgid "Delay after last diseqc command"
+msgstr "Retardo posterior al último comando diseqc"
+
+msgid "Delay after last voltage change"
+msgstr "Retardo posterior al último cambio de voltaje"
+
+msgid "Delay after motor stop command"
+msgstr "Retardo posterior a la orden de parada del motor"
+
+msgid "Delay after set voltage before measure motor power"
+msgstr "Retardo después de ajustar el voltaje, antes de medir la potencia"
+
+msgid "Delay after toneburst"
+msgstr "Retardo posterior a toneburst"
+
+msgid "Delay after voltage change before motor command"
+msgstr "Retardo después del cambio de voltaje, antes de la orden de motor"
+
+msgid "Delay before sequence repeat"
+msgstr "Retardo antes de repetir la secuencia"
+
+msgid "Delay between diseqc commands"
+msgstr "Retardo entree comandos diseqc"
+
+msgid "Delay between switch and motor command"
+msgstr "Retardo entre la orden y el cambio del motor"
+
+msgid "Motor command retries"
+msgstr "Reintentos del comando de motor"
+
+msgid "Motor running timeout"
+msgstr "Límite (tiempo) de giro del motor"
+
+msgid "Satellite equipment setup"
+msgstr "Configuración del equipo"
+
+msgid "Setup your satellite equipment"
+msgstr "Configura el sistema de recepción por satélite"
+
+msgid "Position Setup"
+msgstr "Ajuste de la posición"
+
+msgid "This option lets you adjust the 3D depth"
+msgstr "Permite ajustar la profundidad 3D"
+
+msgid "This option lets you choose the 3D mode"
+msgstr "Permite elegir el modo 3D"
+
+msgid "This option lets you show the option in the extension screen"
+msgstr "Muestra la opción en la extensión de la pantalla"
+
+###
+msgid "VLAN connection"
+msgstr "Conexión VLAN"
+
+msgid "wireless network interface"
+msgstr "Interface de red inalámbrica"
+
+###
+msgid "Hardware: "
+msgstr "Hardware: "
+
+msgid "Image: "
+msgstr "Imagen: "
+
+msgid "Kernel version: "
+msgstr "versión de kernel: "
+
+msgid "Last upgrade: "
+msgstr "Última actualización: "
+
+msgid "Translations"
+msgstr "Traducciones"
+
+###
+msgid "Memory Info"
+msgstr "Info de memoria"
+
+msgid ""
+"This info is for developers only.\n"
+"For a normal users it is not important.\n"
+"Don't panic, please, when here will be displayed any suspicious informations!"
+msgstr ""
+"Esta info es sólo para desarrolladores.\n"
+"No es relevante para los usuarios normales.\n"
+"Si Vd. no es desarrollador no haga caso de la información que aqui se muestre!"
+
+###
+msgid "From :"
+msgstr "Desde :"
+
+msgid "Goto :"
+msgstr "Goto :"
+
+###
+msgid "false"
+msgstr "falso"
+
+msgid "true"
+msgstr "verdadero"
+
+### AnimationSetup
+msgid "* current animation"
+msgstr "* animación actual"
+
+msgid "Animation Setup"
+msgstr "Configurar animación"
+
+msgid "Animation Speed"
+msgstr "Velocidad de animación"
+
+msgid "Animations"
+msgstr "Animaciones"
+
+msgid "Disable Animations"
+msgstr "Deshabilitar animaciones"
+
+msgid "Grow drop"
+msgstr ""
+
+msgid "Grow from left"
+msgstr "Aumentar desde la izqda."
+
+msgid "Popup"
+msgstr "Emergente"
+
+msgid "Setting"
+msgstr "Ajustes"
+
+msgid "Simple fade"
+msgstr "Desvanecimiento"
+
+msgid "Slide drop"
+msgstr "Bajar diapositivas"
+
+msgid "Slide left to right"
+msgstr "Diapositivas de izda. a dcha."
+
+msgid "Slide top to bottom"
+msgstr "Subir diapositivas"
+
+msgid "Stripes"
+msgstr "Líneas"
+
+### Common Interface Assignment
+msgid "Add provider"
+msgstr "Añadir proveedor"
+
+msgid "Add service"
+msgstr "Añadir canales"
+
+msgid "Assigned CAIds:"
+msgstr "CAIds asignados:"
+
+msgid "Assigned services/provider:"
+msgstr "Canales/proveedor asignados:"
+
+msgid "Common Interface Assignment"
+msgstr "Asignación de Interface Común"
+
+msgid "Common Interface assignment"
+msgstr "Asignación de Interface Común"
+
+msgid "No services/providers selected"
+msgstr "No hay canales/proveedores seleccionados"
+
+msgid "Press OK to select a provider."
+msgstr "Pulse OK para seleccionar un proveedor."
+
+msgid "Select CAId"
+msgstr "Seleccionar CAId"
+
+msgid "Disable all VFD Symbols"
+msgstr "Deshabilitar todos los símbolos VFD"
+
+msgid "Channel Name"
+msgstr "Nombre de canal"
+
+msgid "Clock"
+msgstr "Reloj"
+
+msgid "GraphicLCD"
+msgstr "LCD gráfico"
+
+msgid "Show blinking rec symbol in LCD during recording"
+msgstr "Mostrar icono en el LCD durante la grabación"
+
+msgid "External subtitle dialog colorisation"
+msgstr "Colorización de subtítulos externos"
+
+msgid "Replace `- ` in dialogs with colored text per speaker (like teletext subtitles for the hearing impaired)"
+msgstr "Reemplaza `- ` en los diálogos por textos coloreados (por interlocutor, como los subtítulos de teletexto para sordos)"
+
+msgid "External subtitle switch fonts"
+msgstr "Cambiar formato de subtítulos externos"
+
+msgid "Configure if the subtitle should switch between normal, italic, bold and bolditalic"
+msgstr "Configura si los subtítulos deben cambiar entre normal, itálica, negrita, o itálica en negrita"
+
+###
+msgid "Do you want to delete all other languages?"
+msgstr "Desea eliminar los otros idiomas que no va a utilizar?"
 
