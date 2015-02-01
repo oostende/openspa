@@ -41,7 +41,7 @@ struct DescriptorPair
 	DescriptorPair(int c, __u8* d): reference_count(c), data(d) {}
 };
 
-typedef std::map<uint32_t, DescriptorPair> DescriptorMap;
+typedef std::tr1::unordered_map<uint32_t, DescriptorPair> DescriptorMap;
 
 struct eventData
 {
@@ -315,11 +315,12 @@ eventData::~eventData()
 
 void eventData::load(FILE *f)
 {
-	int size=0;
-	int id=0;
-	__u8 header[2];
+	int size = 0;
+	int id = 0;
 	DescriptorPair p;
+	__u8 header[2];
 	fread(&size, sizeof(int), 1, f);
+	descriptors.rehash(size);
 	while(size)
 	{
 		fread(&id, sizeof(__u32), 1, f);
@@ -332,7 +333,6 @@ void eventData::load(FILE *f)
 		fread(p.data+2, bytes-2, 1, f);
 		descriptors[id] = p;
 		--size;
-		CacheSize += bytes;
 	}
 }
 
@@ -427,8 +427,8 @@ void eEPGCache::timeUpdated()
 			run();
 			m_running = true;
 			singleLock s(channel_map_lock);
-			channelMapIterator it = m_knownChannels.begin();
-			for (; it != m_knownChannels.end(); ++it)
+			for (ChannelMap::const_iterator it = m_knownChannels.begin();
+				it != m_knownChannels.end(); ++it)
 			{
 				if (it->second->state == -1) {
 					it->second->state=0;
@@ -468,7 +468,7 @@ void eEPGCache::DVBChannelAdded(eDVBChannel *chan)
 
 void eEPGCache::DVBChannelRunning(iDVBChannel *chan)
 {
-	channelMapIterator it =
+	ChannelMap::const_iterator it =
 		m_knownChannels.find(chan);
 	if ( it == m_knownChannels.end() )
 		eDebug("[eEPGCache] will start non existing channel %p !!!", chan);
@@ -596,7 +596,7 @@ void eEPGCache::DVBChannelRunning(iDVBChannel *chan)
 
 void eEPGCache::DVBChannelStateChanged(iDVBChannel *chan)
 {
-	channelMapIterator it =
+	ChannelMap::iterator it =
 		m_knownChannels.find(chan);
 	if ( it != m_knownChannels.end() )
 	{
@@ -1008,7 +1008,7 @@ void eEPGCache::flushEPG(const uniqueEPGKey & s)
 #endif
 		channelLastUpdated.clear();
 		singleLock m(channel_map_lock);
-		for (channelMapIterator it(m_knownChannels.begin()); it != m_knownChannels.end(); ++it)
+		for (ChannelMap::const_iterator it(m_knownChannels.begin()); it != m_knownChannels.end(); ++it)
 			it->second->startEPG();
 	}
 }
@@ -1097,7 +1097,7 @@ void eEPGCache::gotMessage( const Message &msg )
 		case Message::startChannel:
 		{
 			singleLock s(channel_map_lock);
-			channelMapIterator channel =
+			ChannelMap::const_iterator channel =
 				m_knownChannels.find(msg.channel);
 			if ( channel != m_knownChannels.end() )
 				channel->second->startChannel();
@@ -1106,7 +1106,7 @@ void eEPGCache::gotMessage( const Message &msg )
 		case Message::leaveChannel:
 		{
 			singleLock s(channel_map_lock);
-			channelMapIterator channel =
+			ChannelMap::const_iterator channel =
 				m_knownChannels.find(msg.channel);
 			if ( channel != m_knownChannels.end() )
 				channel->second->abortEPG();
@@ -1119,7 +1119,7 @@ void eEPGCache::gotMessage( const Message &msg )
 		case Message::got_private_pid:
 		{
 			singleLock s(channel_map_lock);
-			for (channelMapIterator it(m_knownChannels.begin()); it != m_knownChannels.end(); ++it)
+			for (ChannelMap::const_iterator it(m_knownChannels.begin()); it != m_knownChannels.end(); ++it)
 			{
 				eDVBChannel *channel = (eDVBChannel*) it->first;
 				channel_data *data = it->second;
@@ -1153,7 +1153,7 @@ void eEPGCache::gotMessage( const Message &msg )
 		case Message::got_mhw2_channel_pid:
 		{
 			singleLock s(channel_map_lock);
-			for (channelMapIterator it(m_knownChannels.begin()); it != m_knownChannels.end(); ++it)
+			for (ChannelMap::const_iterator it(m_knownChannels.begin()); it != m_knownChannels.end(); ++it)
 			{
 				eDVBChannel *channel = (eDVBChannel*) it->first;
 				channel_data *data = it->second;
@@ -1171,7 +1171,7 @@ void eEPGCache::gotMessage( const Message &msg )
 		case Message::got_mhw2_title_pid:
 		{
 			singleLock s(channel_map_lock);
-			for (channelMapIterator it(m_knownChannels.begin()); it != m_knownChannels.end(); ++it)
+			for (ChannelMap::const_iterator it(m_knownChannels.begin()); it != m_knownChannels.end(); ++it)
 			{
 				eDVBChannel *channel = (eDVBChannel*) it->first;
 				channel_data *data = it->second;
@@ -1189,7 +1189,7 @@ void eEPGCache::gotMessage( const Message &msg )
 		case Message::got_mhw2_summary_pid:
 		{
 			singleLock s(channel_map_lock);
-			for (channelMapIterator it(m_knownChannels.begin()); it != m_knownChannels.end(); ++it)
+			for (ChannelMap::const_iterator it(m_knownChannels.begin()); it != m_knownChannels.end(); ++it)
 			{
 				eDVBChannel *channel = (eDVBChannel*) it->first;
 				channel_data *data = it->second;
@@ -1269,6 +1269,7 @@ void eEPGCache::load()
 		{
 			singleLock s(cache_lock);
 			fread( &size, sizeof(int), 1, f);
+			eventDB.rehash(size); /* Reserve buckets in advance */
 			while(size--)
 			{
 				uniqueEPGKey key;
