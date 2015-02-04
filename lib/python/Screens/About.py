@@ -38,6 +38,8 @@ class About(Screen):
 		self["ImageVersion"] = StaticText(ImageVersion)
 		AboutText += ImageVersion + "\n"
 
+		AboutText += _("Python version: ") + about.getPythonVersionString() + "\n"
+
 		fp_version = getFPVersion()
 		if fp_version is None:
 			fp_version = ""
