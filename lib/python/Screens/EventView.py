@@ -91,7 +91,10 @@ class EventViewBase:
 			return
 		eventid = event.getEventId()
 		begin = event.getBeginTime()
-		end = begin + event.getDuration()
+		try:
+			end = begin + event.getDuration()
+		except:
+			pass
 		refstr = ':'.join(serviceref.ref.toString().split(':')[:11])
 		isRecordEvent = False
 		for timer in self.session.nav.RecordTimer.timer_list:
