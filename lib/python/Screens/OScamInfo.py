@@ -40,41 +40,19 @@ class OscamInfo:
 	IP_PORT = 6
 	HEAD = { NAME: _("Label"), PROT: _("Protocol"),
 		CAID_SRVID: "CAID:SrvID", SRVNAME: _("Serv.Name"),
-		ECMTIME: _("ECM-Time"), IP_PORT: _("IP address") }
+		ECMTIME: _("ECM-Time"), IP_PORT: _("IP-Address") }
 	version = ""
 
 	def confPath(self):
-		#search_dirs = [ "/usr", "/var", "/etc" ]
-		#sdirs = " ".join(search_dirs)
-		#cmd = 'find %s -name "oscam.conf"' % sdirs
-		#res = os.popen(cmd).read()
-		#if res == "":
-		#	return None
-		#else:
-		#	return res.replace("\n", "")
-		cmd = 'ps -eo command | sort -u | grep -v "grep" | grep -c "oscam"'
+		search_dirs = [ "/usr", "/var", "/etc" ]
+		sdirs = " ".join(search_dirs)
+		cmd = 'find %s -name "oscam.conf"' % sdirs
 		res = os.popen(cmd).read()
-		if res:
-			data = res.replace("\n", "")
-			if int(data) == 1:
-				cmd = 'ps -eo command | sort -u | grep -v "grep" | grep "oscam"'
-				res = os.popen(cmd).read()
-				if res:
-					data = res.replace("\n", "")
-					try:
-						data = '/' + data.split(" /")[1].strip() + '/oscam.conf'
-					except:
-						print 'OScaminfo - oscam start-command is not as "/oscam-binary -parameter /config-folder" executed'
-						return None
-					if os.path.exists(data):
-						return data
-					print 'OScaminfo - config file "%s" not found' % data
-					return None
-			elif int(data) > 1:
-				print 'OScaminfo - more than one(%s) oscam binarys is active'  % data
-				return None
-		print 'OScaminfo - no active oscam binarys found'
-		return None
+		if res == "":
+			return None
+		else:
+			return res.replace("\n", "")
+
 
 	def getUserData(self):
 		err = ""
@@ -432,7 +410,7 @@ class OscamInfoMenu(Screen):
 		elif entry == 1:
 			if config.oscaminfo.userdatafromconf.value:
 				if self.osc.confPath() is None:
-					config.oscaminfo.userdatafromconf.setValue(False)
+					config.oscaminfo.userdatafromconf.value = False
 					config.oscaminfo.userdatafromconf.save()
 					self.session.openWithCallback(self.ErrMsgCallback, MessageBox, _("File oscam.conf not found.\nPlease enter username/password manually."), MessageBox.TYPE_ERROR)
 				else:
@@ -442,7 +420,7 @@ class OscamInfoMenu(Screen):
 		elif entry == 2:
 			if config.oscaminfo.userdatafromconf.value:
 				if self.osc.confPath() is None:
-					config.oscaminfo.userdatafromconf.setValue(False)
+					config.oscaminfo.userdatafromconf.value = False
 					config.oscaminfo.userdatafromconf.save()
 					self.session.openWithCallback(self.ErrMsgCallback, MessageBox, _("File oscam.conf not found.\nPlease enter username/password manually."), MessageBox.TYPE_ERROR)
 				else:
@@ -452,7 +430,7 @@ class OscamInfoMenu(Screen):
 		elif entry == 3:
 			if config.oscaminfo.userdatafromconf.value:
 				if self.osc.confPath() is None:
-					config.oscaminfo.userdatafromconf.setValue(False)
+					config.oscaminfo.userdatafromconf.value = False
 					config.oscaminfo.userdatafromconf.save()
 					self.session.openWithCallback(self.ErrMsgCallback, MessageBox, _("File oscam.conf not found.\nPlease enter username/password manually."), MessageBox.TYPE_ERROR)
 				else:
@@ -545,7 +523,7 @@ class oscECMInfo(Screen, OscamInfo):
 		if config.oscaminfo.autoupdate.value:
 			self.loop = eTimer()
 			self.loop.callback.append(self.showData)
-			timeout = config.oscaminfo.intervall.value * 1000
+			timeout = int(config.oscaminfo.intervall.value) * 1000
 			self.loop.start(timeout, False)
 		self["actions"] = ActionMap(["OkCancelActions"],
 					{
@@ -631,7 +609,7 @@ class oscInfo(Screen, OscamInfo):
 		if config.oscaminfo.autoupdate.value:
 			self.loop = eTimer()
 			self.loop.callback.append(self.showData)
-			timeout = config.oscaminfo.intervall.value * 1000
+			timeout = int(config.oscaminfo.intervall.value) * 1000
 			self.loop.start(timeout, False)
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
 					{
@@ -1150,7 +1128,7 @@ class OscamInfoConfigScreen(Screen, ConfigListScreen):
 		if not config.oscaminfo.userdatafromconf.value:
 			self.oscamconfig.append(getConfigListEntry(_("Username (httpuser)"), config.oscaminfo.username))
 			self.oscamconfig.append(getConfigListEntry(_("Password (httpwd)"), config.oscaminfo.password))
-			self.oscamconfig.append(getConfigListEntry(_("IP address"), config.oscaminfo.ip))
+			self.oscamconfig.append(getConfigListEntry(_("IP-Address"), config.oscaminfo.ip))
 			self.oscamconfig.append(getConfigListEntry("Port", config.oscaminfo.port))
 		self.oscamconfig.append(getConfigListEntry(_("Automatically update Client/Server View?"), config.oscaminfo.autoupdate))
 		if config.oscaminfo.autoupdate.value:

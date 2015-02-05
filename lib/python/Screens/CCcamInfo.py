@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 # CCcam Info by AliAbdul
 from base64 import encodestring
-from os import listdir, remove, rename, system, popen, path
+from os import listdir, remove, rename, system, path
 
 from enigma import eListboxPythonMultiContent, eTimer, gFont, loadPNG, RT_HALIGN_RIGHT, getDesktop
 
@@ -29,18 +29,9 @@ from urlparse import urlparse, urlunparse
 
 VERSION = "v2"
 DATE = "21.11.2014"
+CFG = "/etc/CCcam.cfg"
 
 #############################################################
-
-def confPath():
-	search_dirs = [ "/usr", "/var", "/etc" ]
-	sdirs = " ".join(search_dirs)
-	cmd = 'find %s -name "CCcam.cfg" | head -n 1' % sdirs
-	res = popen(cmd).read()
-	if res == "":
-		return None
-	else:
-		return res.replace("\n", "")
 
 def _parse(url):
 	url = url.strip()
@@ -87,13 +78,6 @@ def getPage(url, contextFactory=None, *args, **kwargs):
 	reactor.connectTCP(host, port, factory)
 
 	return factory.deferred
-
-def searchConfig():
-	global CFG, CFG_path
-	CFG = confPath()
-	CFG_path = '/var/etc'
-	if CFG:
-		CFG_path =  path.dirname(CFG)
 
 #############################################################
 
@@ -220,7 +204,7 @@ def getConfigNameAndContent(fileName):
 		idx = name.index("\n")
 		name = name[:idx]
 	else:
-		name = fileName.replace(CFG_path + "/", "")
+		name = fileName.replace("/var/etc/", "")
 
 	return name, content
 
@@ -391,7 +375,6 @@ class CCcamInfoMain(Screen):
 
 		self.working = False
 		self.Console = Console()
-		searchConfig()
 
 		if config.cccaminfo.profile.value == "":
 			self.readConfig()
@@ -1573,13 +1556,13 @@ class CCcamInfoConfigSwitcher(Screen):
 		list = []
 
 		try:
-			files = listdir(CFG_path)
+			files = listdir("/var/etc")
 		except:
 			files = []
 
 		for file in files:
 			if file.startswith("CCcam_") and file.endswith(".cfg"):
-				list.append(CCcamConfigListEntry(CFG_path + "/"+file))
+				list.append(CCcamConfigListEntry("/var/etc/"+file))
 
 		self["list"].setList(list)
 
