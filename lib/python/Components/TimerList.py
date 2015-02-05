@@ -1,5 +1,6 @@
 from HTMLComponent import HTMLComponent
 from GUIComponent import GUIComponent
+from skin import parseFont
 
 from Tools.FuzzyDate import FuzzyTime
 
@@ -89,6 +90,7 @@ class TimerList(HTMLComponent, GUIComponent, object):
 		self.serviceNameFont = gFont("Regular", 20)
 		self.font = gFont("Regular", 18)
 		self.eventNameFont = gFont("Regular", 18)
+		self.l.setList(list)
 		self.itemHeight = 50
 		self.rowSplit = 25
 		self.iconMargin = 4
@@ -179,4 +181,3 @@ class TimerList(HTMLComponent, GUIComponent, object):
 			op = 3600 - op
 			direction = 'W'
 		return ("%d.%d\xc2\xb0%s") % (op // 10, op % 10, direction)
-
