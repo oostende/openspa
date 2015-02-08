@@ -4149,6 +4149,7 @@ void eEPGCache::channel_data::storeMHWTitle(std::map<__u32, mhw_title_t>::iterat
 	packet->section_length_hi =  ((packet_length - 3)&0xf00)>>8;
 	packet->section_length_lo =  (packet_length - 3)&0xff;
 
+	eDebug("[EPGC] mhw2 store epg title for channelID %d - %d", packet->service_id_hi, packet->service_id_lo);
 	// Feed the data to eEPGCache::sectionRead()
 	cache->sectionRead( data, MHW, this );
 
@@ -4591,6 +4592,7 @@ void eEPGCache::channel_data::readMHWData2(const __u8 *data)
 				   std::map<__u32, mhw_title_t>::iterator it = m_titles.find( title_id );
 				   if ( it == m_titles.end() )
 				   {
+					eDebug("[EPGC] mhw2 reading TileID %d for channelID %d & summaryID %d", title_id, title.channel_id, summary_id);
 					startMHWTimeout(30000);
 					m_titles[ title_id ] = title;
 					m_titlesID[ title_id ] = title_id;
