@@ -111,6 +111,7 @@ class UserInterfacePositioner(Screen, ConfigListScreen):
 		ConfigListScreen.__init__(self, self.list, session = self.session, on_change = self.changedEntry)
 		if SystemInfo["CanChangeOsdAlpha"] == True:
 			self.list.append(getConfigListEntry(_("User interface visibility"), config.osd.alpha, _("This option lets you adjust the transparency of the user interface")))
+			self.list.append(getConfigListEntry(_("Teletext base visibility"), config.osd.alpha_teletext, _("Base transparency for teletext, more options available within teletext screen.")))
 		if SystemInfo["CanChangeOsdPosition"] == True:
 			self.list.append(getConfigListEntry(_("Move Left/Right"), config.osd.dst_left, _("Use the Left/Right buttons on your remote to move the user inyterface left/right")))
 			self.list.append(getConfigListEntry(_("Width"), config.osd.dst_width, _("Use the Left/Right buttons on your remote to adjust the size of the user interface. Left button decreases the size, Right increases the size.")))
@@ -159,6 +160,7 @@ class UserInterfacePositioner(Screen, ConfigListScreen):
 
 	def keyDefault(self):
 		config.osd.alpha.setValue(255)
+		config.osd.alpha_teletext.setValue(255)
 
 		config.osd.dst_left.setValue(0)
 		config.osd.dst_width.setValue(720)
