@@ -104,8 +104,6 @@ def InitUsageConfig():
 	config.usage.timeshift_path = ConfigText(default = "/media/hdd/")
 	config.usage.allowed_timeshift_paths = ConfigLocations(default = ["/media/hdd/"])
 
-	if os.path.exists('/usr/bin/'):
-		softcams = os.listdir('/usr/bin/')
 	config.oscaminfo = ConfigSubsection()
 	config.oscaminfo.showInExtensions = ConfigYesNo(default=False)
 	config.oscaminfo.userdatafromconf = ConfigYesNo(default = False)
@@ -115,7 +113,6 @@ def InitUsageConfig():
 	config.oscaminfo.ip = ConfigIP( default = [ 127,0,0,1 ], auto_jump=True)
 	config.oscaminfo.port = ConfigInteger(default = 16002, limits=(0,65536) )
 	config.oscaminfo.intervall = ConfigSelectionNumber(min = 1, max = 600, stepwidth = 1, default = 10, wraparound = True)
-	SystemInfo["OScamInstalled"] = False
 
 	config.cccaminfo = ConfigSubsection()
 	config.cccaminfo.showInExtensions = ConfigYesNo(default=False)
@@ -133,14 +130,6 @@ def InitUsageConfig():
 	config.cccaminfo.ecmInfoPositionY = ConfigInteger(default=50)
 	config.cccaminfo.blacklist = ConfigText(default="/media/cf/CCcamInfo.blacklisted", fixed_size=False)
 	config.cccaminfo.profiles = ConfigText(default="/media/cf/CCcamInfo.profiles", fixed_size=False)
-	SystemInfo["CCcamInstalled"] = False
-	for softcam in softcams:
-		if softcam.startswith('CCcam') or softcam.startswith('cccam'):
-			config.cccaminfo.showInExtensions = ConfigYesNo(default=True)
-			SystemInfo["CCcamInstalled"] = True
-		elif softcam.startswith('OScam') or softcam.startswith('oscam'):
-			config.oscaminfo.showInExtensions = ConfigYesNo(default=True)
-			SystemInfo["OScamInstalled"] = True
 
 	config.usage.movielist_trashcan = ConfigYesNo(default=True)
 	config.usage.movielist_trashcan_days = ConfigNumber(default=8)

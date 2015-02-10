@@ -76,10 +76,6 @@
 		<item level="2" text="Remember last service in PiP" description="Configure if and how long the latest service in the PiP will be remembered." requires="PIPAvailable">config.usage.pip_last_service_timeout</item>
 		<item level="2" text="Show VCR scart on main menu" description="When enabled, the VCR scart option will be shown on the main menu" requires="ScartSwitch">config.usage.show_vcr_scart</item>
 	</setup>
-	<setup key="softcamsetup" title="Softcam settings">
-		<item level="2" text="Show CCcam in extensions ?" description="Allows you to show/hide CCcam in extensions (blue button).">config.cccaminfo.showInExtensions</item>
-		<item level="2" text="Show OScam in extensions ?" description="Allows you to show/hide OScam in extensions (blue button).">config.oscaminfo.showInExtensions</item>
-	</setup>
 	<setup key="epgsettings" title="EPG settings">
 		<item level="2" text="Enable EIT EPG" description="Use EIT EPG information when it is available.">config.epg.eit</item>
 		<item level="2" text="Enable MHW EPG" description="Use MHW EPG information when it is available.">config.epg.mhw</item>
