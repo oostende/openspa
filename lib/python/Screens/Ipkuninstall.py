@@ -1,5 +1,7 @@
 from Components.MenuList import MenuList
+from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
 from Components.Label import Label
+from Components.Sources.List import List
 from Components.ActionMap import NumberActionMap
 from Components.Pixmap import Pixmap
 from Components.FileList import FileList
@@ -10,35 +12,123 @@ from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
 from Screens.Standby import TryQuitMainloop
 from Screens.Console import Console
+from Tools.LoadPixmap import LoadPixmap
+from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
 from os import system
 
+menuid = 0
 
 class Ipkuninstall(Screen):
 	skin = """
-		<screen name="Ipkuninstall" position="center,center" size="900,600" title="" >
-			<!--widget name="text" position="0,0" size="550,25" font="Regular;20" /-->
-			<widget name="list" position="50,50" size="800,500" scrollbarMode="showOnDemand" />
-			<!--widget name="pixmap" position="200,0" size="190,250" /-->
-			<!--eLabel position="70,100" zPosition="-1" size="100,69" backgroundColor="#222222" /-->
-			<widget name="info" position="150,10" zPosition="4" size="500,20" font="Regular;22" foregroundColor="#ffffff" transparent="1" halign="left" valign="center" />
-			<!--widget name="KEY_HELP" position="75,350" size="80,40" valign="center" halign="center" zPosition="4"  foregroundColor="#ffffff" font="Regular;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" /-->
+		<screen name="Ipkuninstall" position="center,center" size="530,400" title="" >
+			<widget source="list" render="Listbox" position="10,50" size="510,380" scrollbarMode="showOnDemand">
+				<convert type="TemplatedMultiContent">
+					{"template": [
+									MultiContentEntryText(pos = (110, 2), size = (440, 26), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 0), # index 2 is the description
+									MultiContentEntryText(pos = (110, 28), size = (440, 26), font=1, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 2), # index 2 is the description
+									MultiContentEntryPixmapAlphaTest(pos = (2, 1), size = (100, 50), png = 3), # index 4 is the status pixmap
+									MultiContentEntryPixmapAlphaTest(pos = (0, 54), size = (510, 2), png = 4), # index 4 is the div pixmap
+							],
+					"fonts": [gFont("Regular", 24),gFont("Regular", 16)],
+					"itemHeight": 58
+					}
+				</convert>
+			</widget>
+			<widget source="info" render="Label" position="150,10" zPosition="4" size="450,25" font="Regular;22" foregroundColor="#ffffff" transparent="1" halign="left" valign="center" />
 		</screen>"""
     
 	def __init__(self, session):
+		self.session = session
 		Screen.__init__(self, session)
-		self.skin = Ipkuninstall.skin
-		title = "Setup Skin"
-		self.setTitle(title)
-		self["list"] = MenuList([])
-		self["info"] = Label()
-		self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.okClicked, "cancel": self.close}, -1)
-		txt = _("Please select ipk to uninstall.")
-		self["info"].setText(txt)
+		self.setTitle(_("Ipk Uninstaller - Main Menu"))
+		self.list = []
+		self['list'] = List(self.list)
+		self['actions'] = ActionMap(['OkCancelActions'],
+		{
+			'ok': self.okPressed,
+			'cancel': self.exit
+		}, -1)
+		self['info'] = Label(_("Please select a category."))
+		self.onLayoutFinish.append(self.createMenu)
+
+	def createMenu(self):
+		self.mylist = []
+		divpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, 'skin_default/div-h.png'))
+		self.mylist.append((_('Emus & Cams'), 'CamSelectMenu', _('Delete emus previous installed.'), LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, 'skin_default/icons/ipkgcam.png')), divpng))
+		self.mylist.append((_('Drivers'), 'DriversSelectMenu', _('Delete drivers previous installed.'), LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, 'skin_default/icons/ipkgpdrivers.png')), divpng))
+		self.mylist.append((_('Extensions'), 'ExtSelectMenu', _('Delete extensions previous installed.'), LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, 'skin_default/icons/ipkgextensions.png')), divpng))
+		self.mylist.append((_('SystemPlugins'), 'SysSelectMenu', _('Delete systemplugins previous installed.'), LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, 'skin_default/icons/ipkgsystemplugins.png')), divpng))
+		self.mylist.append((_('Skins'), 'SkinSelectMenu', _('Delete skins previous installed.'), LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, 'skin_default/icons/ipkgskins.png')), None))
+		self['list'].setList(self.mylist)
+
+	def okPressed(self):
+		cur = self['list'].getCurrent()
+		if cur:
+			name = cur[0]
+			menu = cur[1]
+			global menuid
+			if menu == 'CamSelectMenu':
+				print '[IPKUninstall] open menu %s linked to %s ' % (menu, name)
+				menuid = 1
+				self.session.open(IpkuninstallList)
+			elif menu == 'DriversSelectMenu':
+				print '[IPKUninstall] open menu %s linked to %s ' % (menu, name)
+				menuid = 2
+				self.session.open(IpkuninstallList)
+			elif menu == 'ExtSelectMenu':
+				menuid = 3
+				print '[IPKUninstall] open menu %s linked to %s ' % (menu, name)
+				self.session.open(IpkuninstallList)
+			elif menu == 'SysSelectMenu':
+				menuid = 4
+				print '[IPKUninstall] open menu %s linked to %s ' % (menu, name)
+				self.session.open(IpkuninstallList)
+			elif menu == 'SkinSelectMenu':
+				menuid = 5
+				print '[IPKUninstall] open menu %s linked to %s ' % (menu, name)
+				self.session.open(IpkuninstallList)
+			else:
+				menuid = 0
+				message = '[IPKUninstall] no menu linked to ' + name
+				self.session.open(MessageBox, message, MessageBox.TYPE_INFO, timeout=5)
+
+	def exit(self):
+		self.close()
+
+class IpkuninstallList(Screen):
+	skin = """
+		<screen name="IpkuninstallList" position="center,center" size="530,400" title="" >
+			<widget name="list" position="10,50" size="510,380" scrollbarMode="showOnDemand" />
+			<widget source="info" render="Label" position="center,10" zPosition="4" size="450,25" font="Regular;22" foregroundColor="#ffffff" transparent="1" halign="left" valign="center" />
+		</screen>"""
+    
+	def __init__(self, session):
+		self.session = session
+		Screen.__init__(self, session)
+		self.setTitle(_("Ipk Uninstaller - Emus & Cams"))
+		self['list'] = MenuList([])
+		self['info'] = Label()
+		self['actions'] = ActionMap(['OkCancelActions'],
+		{
+			'ok': self.okClicked,
+			'cancel': self.cancel
+		}, -1)
+		self['info'].setText(_("Please select the package to delete."))
 		self.onShown.append(self.startSession)
+
 
 	def startSession(self):
 		self.ipklist = []
-		cmd = 'opkg list_installed > /tmp/ipkdb'
+		if menuid == 1:
+			cmd = 'opkg list_installed | grep cam > /tmp/ipkdb'
+		elif menuid == 2:
+			cmd = 'opkg list_installed | grep enigma2-plugin-drivers > /tmp/ipkdb'
+		elif menuid == 3:
+			cmd = 'opkg list_installed | grep enigma2-plugin-extensions > /tmp/ipkdb'
+		elif menuid == 4:
+			cmd = 'opkg list_installed | grep enigma2-plugin-systemplugins > /tmp/ipkdb'
+		elif menuid == 5:
+			cmd = 'opkg list_installed | grep enigma2-plugin-skins > /tmp/ipkdb'
 		system(cmd)
 		out_lines = []
 		out_lines = open('/tmp/ipkdb').readlines()
@@ -53,11 +143,14 @@ class Ipkuninstall(Screen):
 			self.ipk = self.ipklist[ires]
 			n1 = self.ipk.find("_", 0)
 			self.ipk = self.ipk[:n1]
-			self.session.openWithCallback(self.test, ChoiceBox, title="Select method?", list=[(_("Remove"), "rem"), (_("Force Remove"), "force")])
+			self.session.openWithCallback(self.delete, ChoiceBox, title="Select method?", list=[(_("Remove"), "rem"), (_("Force Remove"), "force")])
 		else:
 			return
 
-	def test(self, answer): 
+	def cancel(self):
+		self.close()
+
+	def delete(self, answer): 
 		cmd = " "
 		title = " "
 		if answer[1] == "rem":            

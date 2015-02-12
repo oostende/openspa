@@ -47,6 +47,11 @@ dist_install_DATA = \
 	input_rcnew.png \
 	input_rcold-configured.png \
 	input_rcold.png \
+	ipkgcam.png \
+	ipkgextensions.png \
+	ipkgpdrivers.png \
+	ipkgskins.png \
+	ipkgsystemplugins.png \
 	lock_error.png \
 	lock_off.png \
 	lock_on.png \
