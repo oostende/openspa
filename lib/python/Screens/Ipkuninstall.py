@@ -119,6 +119,7 @@ class IpkuninstallList(Screen):
 
 	def startSession(self):
 		self.ipklist = []
+		self.ipklist1 = []
 		if menuid == 1:
 			cmd = 'opkg list_installed | grep cam > /tmp/ipkdb'
 		elif menuid == 2:
@@ -133,14 +134,15 @@ class IpkuninstallList(Screen):
 		out_lines = []
 		out_lines = open('/tmp/ipkdb').readlines()
 		for filename in out_lines:
-			self.ipklist.append(filename[:-1])
+			self.ipklist.append(filename[:-1].split(' - ')[0])
+			self.ipklist1.append(filename[:-1])
 
 		self['list'].setList(self.ipklist)
 
 	def okClicked(self):
 		ires = self["list"].getSelectionIndex()
 		if ires != None:
-			self.ipk = self.ipklist[ires]
+			self.ipk = self.ipklist1[ires]
 			n1 = self.ipk.find("_", 0)
 			self.ipk = self.ipk[:n1]
 			self.session.openWithCallback(self.delete, ChoiceBox, title="Select method?", list=[(_("Remove"), "rem"), (_("Force Remove"), "force")])
