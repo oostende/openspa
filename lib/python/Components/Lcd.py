@@ -100,16 +100,23 @@ class LCD:
 		return eDBoxLCD.getInstance().isOled()
 
 	def setMode(self, value):
-		print 'setLCDMode',value
-		f = open("/proc/stb/lcd/show_symbols", "w")
-		f.write(value)
-		f.close()
+		if fileExists("/proc/stb/lcd/show_symbols"):
+			print 'setLCDMode',value
+			f = open("/proc/stb/lcd/show_symbols", "w")
+			f.write(value)
+			f.close()
 
 	def setPower(self, value):
-		print 'setLCDPower',value
-		f = open("/proc/stb/power/vfd", "w")
-		f.write(value)
-		f.close()
+		if fileExists("/proc/stb/power/vfd"):
+			print 'setLCDPower',value
+			f = open("/proc/stb/power/vfd", "w")
+			f.write(value)
+			f.close()
+		elif fileExists("/proc/stb/lcd/vfd"):
+			print 'setLCDPower',value
+			f = open("/proc/stb/lcd/vfd", "w")
+			f.write(value)
+			f.close()
 
 	def setEt8500(self, value):
 		print 'setLCDet8500',value
@@ -118,16 +125,18 @@ class LCD:
 		f.close()
 
 	def setRepeat(self, value):
-		print 'setLCDRepeat',value
-		f = open("/proc/stb/lcd/scroll_repeats", "w")
-		f.write(value)
-		f.close()
+		if fileExists("/proc/stb/lcd/scroll_repeats"):
+			print 'setLCDRepeat',value
+			f = open("/proc/stb/lcd/scroll_repeats", "w")
+			f.write(value)
+			f.close()
 
 	def setScrollspeed(self, value):
-		print 'setLCDScrollspeed',value
-		f = open("/proc/stb/lcd/scroll_delay", "w")
-		f.write(str(value))
-		f.close()
+		if fileExists("/proc/stb/lcd/scroll_delay"):
+			print 'setLCDScrollspeed',value
+			f = open("/proc/stb/lcd/scroll_delay", "w")
+			f.write(str(value))
+			f.close()
 
 	def setLEDNormalState(self, value):
 		eDBoxLCD.getInstance().setLED(value, 0)
