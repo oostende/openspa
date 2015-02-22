@@ -603,7 +603,7 @@ class NimSelection(Screen):
 		self["actions"] = ActionMap(["OkCancelActions", "MenuActions"],
 		{
 			"ok": self.okbuttonClick ,
-			"cancel": self.close
+			"cancel": self.close,
 			"menu": self.exit,
 		}, -2)
 		self.setTitle(_("Choose Tuner"))
