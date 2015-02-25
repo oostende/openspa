@@ -41,7 +41,7 @@ menuupdater = MenuUpdater()
 class MenuSummary(Screen):
 	pass
 
-class Menu(Screen, ProtectedScreen)
+class Menu(Screen, ProtectedScreen):
 	ALLOW_SUSPEND = True
 
 	def okbuttonClick(self):
