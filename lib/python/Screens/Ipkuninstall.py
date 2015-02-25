@@ -54,7 +54,7 @@ class Ipkuninstall(Screen):
 	def createMenu(self):
 		self.mylist = []
 		divpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, 'skin_default/div-h.png'))
-		self.mylist.append((_('Emus & Cams'), 'CamSelectMenu', _('Delete emus previous installed.'), LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, 'skin_default/icons/ipkgcam.png')), divpng))
+		self.mylist.append((_('Cams'), 'CamSelectMenu', _('Delete cams previous installed.'), LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, 'skin_default/icons/ipkgcam.png')), divpng))
 		self.mylist.append((_('Drivers'), 'DriversSelectMenu', _('Delete drivers previous installed.'), LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, 'skin_default/icons/ipkgpdrivers.png')), divpng))
 		self.mylist.append((_('Extensions'), 'ExtSelectMenu', _('Delete extensions previous installed.'), LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, 'skin_default/icons/ipkgextensions.png')), divpng))
 		self.mylist.append((_('SystemPlugins'), 'SysSelectMenu', _('Delete systemplugins previous installed.'), LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, 'skin_default/icons/ipkgsystemplugins.png')), divpng))
@@ -105,7 +105,7 @@ class IpkuninstallList(Screen):
 	def __init__(self, session):
 		self.session = session
 		Screen.__init__(self, session)
-		self.setTitle(_("Ipk Uninstaller - Emus & Cams"))
+		self.setTitle(_("Ipk Uninstaller - List installed packages"))
 		self['list'] = MenuList([])
 		self['info'] = Label()
 		self['actions'] = ActionMap(['OkCancelActions'],
