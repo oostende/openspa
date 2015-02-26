@@ -159,7 +159,7 @@ class IpkuninstallList(Screen):
 			cmd = "opkg remove " + self.ipk
 			title = _("Removing ipk %s" %(self.ipk))
 		elif answer[1] == "force":            
-			cmd = "opkg remove --force-depends " + self.ipk
+			cmd = "opkg remove --force-remove " + self.ipk
 			title = _("Force Removing ipk %s" %(self.ipk))
 		self.session.open(Console,_(title),[cmd])
 		self.close()
