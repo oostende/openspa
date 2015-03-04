@@ -179,14 +179,17 @@ class AudioSelection(Screen, ConfigListScreen):
 						else:
 							
 							if lang==None or lang=="":
-								language += "---"
+								language += _("Language")+" ["+number+"] "+str(lang)+""
 							else:
-								language += _("Language")+" "+number+" ("+str(lang)+")"
+								language += _("Language")+" ["+number+"] "+str(lang)+""
 
 						cnt += 1
 					if language!="---":
-						conta+=1
-						streams.append((x, "", number,  language,description, selected))
+						try:
+							streams.append((x, "", number,  language,description, selected))
+							conta+=1
+						except:
+							pass
 
 			else:
 				streams = []
