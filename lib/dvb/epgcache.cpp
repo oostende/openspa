@@ -4575,8 +4575,11 @@ void eEPGCache::channel_data::readMHWData2(const __u8 *data)
 				__u32 summary_id = (data[pos+4] << 16) | (data[pos+5] << 8) | data[pos+6];
 				__u8 slen = data[pos+18] & 0x3f;
 				__u8 *dest = ((__u8*)title.title)-4;
+				eDebug("[EPGC] Se va a ejecutar memcpy...");
 				memcpy(dest, &data[pos+19], slen>35 ? 35 : slen);
+				eDebug("[EPGC] Se va a ejecutar memset...");
 				memset(dest+slen, 0, 35-slen);
+				eDebug("[EPGC] Se ha ejecutado memcpy y memset...");
 				pos += 19 + slen;
 
 				title.mhw2_theme = 0xFF;
@@ -4589,6 +4592,7 @@ void eEPGCache::channel_data::readMHWData2(const __u8 *data)
 	
 				pos += 2;
 
+				eDebug("[EPGC] Se va a ejecutar std::map...");
 				//std::map<__u32, mhw_title_t>::iterator it = m_titles.find( title_id );
 				std::map<__u32, __u32>::iterator it1 = m_titlesID.find( title_id );
 				eDebug("[EPGC] Antes del If2...");
