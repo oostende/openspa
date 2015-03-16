@@ -4492,7 +4492,7 @@ void eEPGCache::channel_data::readMHWData2(const __u8 *data)
 			channel.channel_id_hi = *(tmp++);
 			channel.channel_id_lo = *(tmp++);
 			m_channels[i]=channel;
-			eDebug("%d(%02x) %04x: %02x %02x", i, i, (channel.channel_id_hi << 8) | channel.channel_id_lo, *tmp, *(tmp+1));
+//			eDebug("%d(%02x) %04x: %02x %02x", i, i, (channel.channel_id_hi << 8) | channel.channel_id_lo, *tmp, *(tmp+1));
 			tmp+=2;
 		}
 		for (int i=0; i < num_channels; ++i)
@@ -4503,7 +4503,7 @@ void eEPGCache::channel_data::readMHWData2(const __u8 *data)
 			for (; x < channel_name_len; ++x)
 				channel.name[x]=*(tmp++);
 			channel.name[channel_name_len]=0;
-			eDebug("%d(%02x) %s", i, i, channel.name);
+//			eDebug("%d(%02x) %s", i, i, channel.name);
 
 			if (f) fprintf(f,"(%s) %x:%x:%x\n",channel.name,HILO(channel.channel_id),HILO(channel.transport_stream_id),HILO(channel.network_id));						
  		}
@@ -4556,7 +4556,6 @@ void eEPGCache::channel_data::readMHWData2(const __u8 *data)
 			pos = 10;
 			while (pos < dataLen)
 			{
-				eDebug("[EPGC] Dentro del While1...");
 				title.channel_id = data[7]+1;
 				title.mhw2_mjd_hi = data[pos+11];
 				title.mhw2_mjd_lo = data[pos+12];
@@ -4573,68 +4572,49 @@ void eEPGCache::channel_data::readMHWData2(const __u8 *data)
 				__u32 summary_id = (data[pos+4] << 16) | (data[pos+5] << 8) | data[pos+6];
 				__u8 slen = data[pos+18] & 0x3f;
 				__u8 *dest = ((__u8*)title.title)-4;
-				eDebug("[EPGC] Se va a ejecutar memcpy...");
 				memcpy(dest, &data[pos+19], slen>35 ? 35 : slen);
-				eDebug("[EPGC] Se va a ejecutar memset...");
-				memset(dest+slen, 0, 35-slen);
-				eDebug("[EPGC] Se ha ejecutado memcpy y memset...");
+				memset(dest+slen, 0, (slen>35 ? 0 : 35-slen));
 				pos += 19 + slen;
 
 				title.mhw2_theme = 0xFF;
 
 				if (summary_id == 0xFFFFFF)
-				{
-					eDebug("[EPGC] Dentro del If1...");
-					summary_id = (data[pos+1] << 8) | data[pos+2];
-				}
+				    summary_id = (data[pos+1] << 8) | data[pos+2];
 	
 				pos += 2;
 
-				eDebug("[EPGC] Se va a ejecutar std::map...");
 				//std::map<__u32, mhw_title_t>::iterator it = m_titles.find( title_id );
 				std::map<__u32, __u32>::iterator it1 = m_titlesID.find( title_id );
-				eDebug("[EPGC] Antes del If2...");
 				if ( it1 == m_titlesID.end() )
 				{
-				   eDebug("[EPGC] Dentro del If2...");
 				   std::map<__u32, mhw_title_t>::iterator it = m_titles.find( title_id );
 				   if ( it == m_titles.end() )
 				   {
 					eDebug("[EPGC] mhw2 reading TileID %d for channelID %d & summaryID %d", title_id, title.channel_id, summary_id);
 					startMHWTimeout(30000);
-					eDebug("[EPGC] Despues del Timeout1...");
 					m_titles[ title_id ] = title;
 					m_titlesID[ title_id ] = title_id;
 					if (summary_id != 0xFFFF)
  					{
-
-						eDebug("[EPGC] Dentro del If3...");
 						bool add=true;
 						std::multimap<__u32, __u32>::iterator it(m_program_ids.lower_bound(summary_id));
 						while (it != m_program_ids.end() && it->first == summary_id)
 						{
-							eDebug("[EPGC] Dentro del While2...");
 							if (it->second == title_id) {
-								eDebug("[EPGC] Dentro del If4...");
 								add=false;
 								break;
 							}
 							++it;
 						}
-						eDebug("[EPGC] Antes del If5...");
 						if (add)
 						{
-							eDebug("[EPGC] Dentro del If5...");
 							m_program_ids.insert(std::pair<__u32,__u32>(summary_id,title_id));
 							nbr_summary = nbr_summary + 1;
  						}
- 						eDebug("[EPGC] Despues del If5...");
 					}
 				    }
 				}
-				eDebug("[EPGC] Despues del If2...");
 			}
-			eDebug("[EPGC] Despues del While1");
 		}
 		else if (data[0] == 0x96)
 		{
