@@ -450,6 +450,7 @@ from Components.VolumeControl import VolumeControl
 
 def runScreenTest():
 	config.misc.startCounter.value += 1
+	config.misc.startCounter.save()
 
 	profile("readPluginList")
 	plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
@@ -516,8 +517,6 @@ def runScreenTest():
 	os.system("killall -9 showiframe")
 
 	runReactor()
-
-	config.misc.startCounter.save()
 
 	profile("wakeup")
 
