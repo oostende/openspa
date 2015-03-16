@@ -18,7 +18,7 @@ class InputBox(Screen):
 		if useableChars is not None:
 			self["input"].setUseableChars(useableChars)
 
-		self["actions"] = NumberActionMap(["WizardActions", "InputBoxActions", "InputAsciiActions", "KeyboardInputActions"], 
+		self["actions"] = NumberActionMap(["WizardActions", "InputBoxActions", "InputAsciiActions", "KeyboardInputActions"],
 		{
 			"gotAsciiCode": self.gotAsciiCode,
 			"ok": self.go,
@@ -95,7 +95,7 @@ class PinInput(InputBox):
 
 		if service and simple:
 			self.skinName = "PinInputPopup"
-		
+
 		if self.getTries() == 0:
 			if (self.triesEntry.time.value + (self.waitTime * 60)) > time():
 				remaining = (self.triesEntry.time.value + (self.waitTime * 60)) - time()
@@ -126,50 +126,55 @@ class PinInput(InputBox):
 			self.go()
 		else:
 			InputBox.keyNumberGlobal(self, number)
-		
+
 	def checkPin(self, pin):
 		if pin is not None and " " not in pin and int(pin) in self.pinList:
 			return True
 		return False
-		
+
 	def go(self):
-		self.triesEntry.time.value = int(time())
-		self.triesEntry.time.save()
-		if self.checkPin(self["input"].getText()):
-			self.setTries(3)
-			self.closePinCorrect()
-		else:
-			self.keyHome()
-			self.decTries()
-			if self.getTries() == 0:
-				self.closePinWrong()
+		if self.pinList:
+			self.triesEntry.time.value = int(time())
+			self.triesEntry.time.save()
+			if self.checkPin(self["input"].getText()):
+				self.setTries(3)
+				self.closePinCorrect()
 			else:
-				pass
-	
+				self.keyHome()
+				self.decTries()
+				if self.getTries() == 0:
+					self.closePinWrong()
+		else:
+			pin = self["input"].getText()
+			if pin and pin.isdigit():
+				self.close(int(pin))
+			else:
+				self.close(None)
+
 	def closePinWrong(self, *args):
 		print "args:", args
 		self.close(False)
-		
+
 	def closePinCorrect(self, *args):
 		self.setTries(3)
 		self.close(True)
-		
+
 	def closePinCancel(self, *args):
 		self.close(None)
-			
+
 	def cancel(self):
 		self.closePinCancel()
-		
+
 	def getTries(self):
-		return self.triesEntry.tries.value
+		return self.triesEntry and self.triesEntry.tries.value
 
 	def decTries(self):
 		self.setTries(self.triesEntry.tries.value - 1)
 		self.showTries()
-		
+
 	def setTries(self, tries):
 		self.triesEntry.tries.value = tries
 		self.triesEntry.tries.save()
-				
+
 	def showTries(self):
-		self["tries"].setText(_("Tries left:") + " " + str(self.getTries()))
+		self["tries"].setText(self.triesEntry and _("Tries left:") + " " + str(self.getTries() or ""))
