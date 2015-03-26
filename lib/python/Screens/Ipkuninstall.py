@@ -2,15 +2,10 @@ from Components.MenuList import MenuList
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
 from Components.Label import Label
 from Components.Sources.List import List
-from Components.ActionMap import NumberActionMap
-from Components.Pixmap import Pixmap
-from Components.FileList import FileList
 from Components.ActionMap import ActionMap
-from Components.config import config
 from Screens.Screen import Screen
 from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
-from Screens.Standby import TryQuitMainloop
 from Screens.Console import Console
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
@@ -20,8 +15,8 @@ menuid = 0
 
 class Ipkuninstall(Screen):
 	skin = """
-		<screen name="Ipkuninstall" position="center,center" size="530,400" title="" >
-			<widget source="list" render="Listbox" position="10,50" size="510,380" scrollbarMode="showOnDemand">
+		<screen name="Ipkuninstall" position="center,center" size="530,400" title="Ipk Uninstaller - Main Menu" >
+			<widget source="list" render="Listbox" position="10,50" size="510,380" zPosition="1" scrollbarMode="showOnDemand">
 				<convert type="TemplatedMultiContent">
 					{"template": [
 									MultiContentEntryText(pos = (110, 2), size = (440, 26), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 0), # index 2 is the description
@@ -34,21 +29,22 @@ class Ipkuninstall(Screen):
 					}
 				</convert>
 			</widget>
-			<widget source="info" render="Label" position="150,10" zPosition="4" size="450,25" font="Regular;22" foregroundColor="#ffffff" transparent="1" halign="left" valign="center" />
+			<widget source="info" render="Label" position="150,10" size="450,25" zPosition="1" font="Regular;22" foregroundColor="#ffffff" transparent="1" halign="left" valign="center" />
 		</screen>"""
     
 	def __init__(self, session):
 		self.session = session
 		Screen.__init__(self, session)
-		self.setTitle(_("Ipk Uninstaller - Main Menu"))
-		self.list = []
-		self['list'] = List(self.list)
+		self.skinName = "Ipkuninstall"
+
 		self['actions'] = ActionMap(['OkCancelActions'],
 		{
 			'ok': self.okPressed,
 			'cancel': self.exit
 		}, -1)
 		self['info'] = Label(_("Please select a category."))
+		self.list = []
+		self['list'] = List(self.list)
 		self.onLayoutFinish.append(self.createMenu)
 
 	def createMenu(self):
@@ -97,25 +93,25 @@ class Ipkuninstall(Screen):
 
 class IpkuninstallList(Screen):
 	skin = """
-		<screen name="IpkuninstallList" position="center,center" size="530,400" title="" >
-			<widget name="list" position="10,50" size="510,380" scrollbarMode="showOnDemand" />
-			<widget source="info" render="Label" position="center,10" zPosition="4" size="450,25" font="Regular;22" foregroundColor="#ffffff" transparent="1" halign="left" valign="center" />
+		<screen name="IpkuninstallList" position="center,center" size="530,400" title="Ipk Uninstaller - List installed packages" >
+			<widget name="list" position="10,50" size="510,360" zPosition="1" scrollbarMode="showOnDemand" />
+			<widget source="info" render="Label" position="center,10" size="450,25" zPosition="1" font="Regular;22" foregroundColor="#ffffff" transparent="1" halign="left" valign="center" />
 		</screen>"""
     
 	def __init__(self, session):
 		self.session = session
 		Screen.__init__(self, session)
-		self.setTitle(_("Ipk Uninstaller - List installed packages"))
-		self['list'] = MenuList([])
-		self['info'] = Label()
+		self.skinName = "IpkuninstallList" 
+
 		self['actions'] = ActionMap(['OkCancelActions'],
 		{
 			'ok': self.okClicked,
 			'cancel': self.cancel
 		}, -1)
+		self['info'] = Label()
 		self['info'].setText(_("Please select the package to delete."))
+		self['list'] = MenuList([])
 		self.onShown.append(self.startSession)
-
 
 	def startSession(self):
 		self.ipklist = []
@@ -129,7 +125,7 @@ class IpkuninstallList(Screen):
 		elif menuid == 4:
 			cmd = 'opkg list_installed | grep enigma2-plugin-systemplugins > /tmp/ipkdb'
 		elif menuid == 5:
-			cmd = 'opkg list_installed | grep enigma2-plugin-skins > /tmp/ipkdb'
+			cmd = 'opkg list_installed | grep -e enigma2-plugin-skins -e skin > /tmp/ipkdb'
 		system(cmd)
 		out_lines = []
 		out_lines = open('/tmp/ipkdb').readlines()
