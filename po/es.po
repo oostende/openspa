@@ -250,6 +250,9 @@ msgstr "(mostrar menú de audio de DVD)"
 msgid "*** scanning transponders:"
 msgstr "*** buscando transpondedores:"
 
+msgid "<n/a>"
+msgstr "No disponible"
+
 msgid ", "
 msgstr ", "
 
@@ -1245,10 +1248,10 @@ msgid "Check disk terminated with success"
 msgstr "Comprobación terminada correctamente"
 
 msgid "Check the internet connection"
-msgstr "Comprobar la conexión a internet"
+msgstr "Comprobar la conexión a la red"
 
 msgid "Check the internet connection again"
-msgstr "Comprobar otra vez la conexión a internet"
+msgstr "Comprobar otra vez la conexión a la red"
 
 msgid "Checking disk"
 msgstr "Comprobación de dispositivo"
@@ -1260,7 +1263,7 @@ msgid "Checking filesystem..."
 msgstr "Comprobación del sist. de archivos"
 
 msgid "Checking the internet connection"
-msgstr "Comprobando la conexión a internet"
+msgstr "Comprobando la conexión a la red"
 
 msgid ""
 "Checking tuner %d\n"
@@ -1405,7 +1408,7 @@ msgid "Configure interface"
 msgstr "Configurar interfaz"
 
 msgid "Configure nameservers"
-msgstr "Configurar DNS"
+msgstr "Configurar DNSs"
 
 msgid "Configure on which devices the background delete option should be used."
 msgstr "Dispositivos en los que se podrá utilizar el borrado en segundo plano."
@@ -1431,11 +1434,14 @@ msgstr "Comportamiento al llegar al final de la reproducción."
 msgid "Configure the border width of the subtitles. The dark border makes the subtitles easier to read on a light background."
 msgstr "Grosor del marco de los subtítulos. El borde negro facilita la lectura de los subtítulos sobre un fondo claro"
 
-msgid "Configure the brightness level of the front panel display during standby."
+msgid "Configure the brightness level of the front panel display for standby."
 msgstr "Configura el brillo del display en reposo."
 
 msgid "Configure the brightness level of the front panel display."
-msgstr "Configura el brillo del display en funcionamiento"
+msgstr "Configura el brillo del display frontal."
+
+msgid "Configure the brightness level of the front panel display for normal operation."
+msgstr "Configura el brillo del display en modo normal."
 
 msgid "Configure the color of the external subtitles, alternative (normal in white, italic in yellow, bold in cyan, underscore in green), white or yellow."
 msgstr "Configura el color de los subtítulos externos, Alternativo (normal en blanco, cursiva en amarillo, negrita en cyan, y subrayado en azul), Blanco o Amarillo."
@@ -1685,6 +1691,9 @@ msgstr "Continuar la reproducción"
 
 msgid "Continue playing"
 msgstr "Reproducción contínua"
+
+msgid "Continues"
+msgstr "Continua"
 
 msgid "Continues play (loop)"
 msgstr "Reproducción contínua (bucle)"
@@ -2870,7 +2879,7 @@ msgid "Hue"
 msgstr "Matíz"
 
 msgid "ISO file is too large for this filesystem!"
-msgstr "El archivo ISO es demasiado grande para este sistema de ficheros!"
+msgstr "El archivo ISO es demasiado grande para este sistema!"
 
 msgid "ISO path"
 msgstr "ruta ISO"
@@ -3203,6 +3212,9 @@ msgstr[1] "Versión %d de la lista, %d canales encontrados"
 
 msgid "Listing crontab"
 msgstr "Listando crontab"
+
+msgid "Lists reloaded!"
+msgstr "Listas recargadas."
 
 msgid "Load"
 msgstr "Cargar"
@@ -3630,6 +3642,9 @@ msgstr "No"
 
 msgid "No (supported) DVDROM found!"
 msgstr "DVDROM no soportado!"
+
+msgid "No age block"
+msgstr "Sin bloqueo por edad"
 
 msgid "No backup needed"
 msgstr "No, no es necesario en este momento"
@@ -4090,7 +4105,7 @@ msgid "Please connect before enable autoconnect on startup!"
 msgstr "Conéctese antes de habilitar la autoconexión al inicio"
 
 msgid "Please connect your receiver to the internet"
-msgstr "Compruebe que el receptor esté conectado a internet"
+msgstr "Compruebe que el receptor esté conectado a la red"
 
 msgid "Please do not change any values unless you know what you are doing!"
 msgstr "No cambie los valores si no está seguro de lo que está haciendo!"
@@ -4422,6 +4437,9 @@ msgstr "Barra de progr. dcha."
 msgid "Properties of current title"
 msgstr "Propiedades del título actual"
 
+msgid "Protect on epg age"
+msgstr "EPG con protección parental"
+
 msgid "Protect services"
 msgstr "Proteger canales"
 
@@ -4560,8 +4578,8 @@ msgstr "Relativo"
 msgid "Reload"
 msgstr "Recargar"
 
-msgid "Reload black-/white lists"
-msgstr "Recargar listas blanca/negra"
+msgid "Reload blacklists"
+msgstr "Recargar las listas negra"
 
 msgid "Reloading bouquets and services..."
 msgstr "Recargando bouquets y canales..."
@@ -4972,6 +4990,9 @@ msgstr "Seleccione una lista"
 msgid "Select a movie"
 msgstr "Seleccionar una película"
 
+msgid "Select a tuner"
+msgstr "Seleccione un sintoniz."
+
 msgid "Select a wireless network"
 msgstr "Seleccione una red inalámbrica"
 
@@ -5291,9 +5312,6 @@ msgstr "Mostrar la segunda infobar"
 
 msgid "Show service type icons"
 msgstr "Mostrar iconos de tipo de canal"
-
-msgid "Show services beginning with"
-msgstr "Mostrar canales que empiecen por"
 
 msgid "Show shutdown menu"
 msgstr "Menú de apagado"
@@ -5800,6 +5818,9 @@ msgstr "Cambiar a lista de archivos"
 msgid "Switch to HDMI in mode"
 msgstr "Cambiar al modo HDMI-in"
 
+msgid "Switch to next bouquet"
+msgstr "Ir al bouquet siguiente"
+
 msgid "Switch to next channel"
 msgstr "Ir al canal siguiente"
 
@@ -5808,6 +5829,9 @@ msgstr "Ir al canal siguiente en el histórico"
 
 msgid "Switch to playlist"
 msgstr "Cambiar a lista de reproducción"
+
+msgid "Switch to previous bouquet"
+msgstr "Ir al bouquet anterior"
 
 msgid "Switch to previous channel"
 msgstr "Ir al canal anterior"
@@ -6110,7 +6134,7 @@ msgid "Timeshift location"
 msgstr "Ruta de grabación Timeshift"
 
 msgid "Timeshift not possible!"
-msgstr "No se puede grabar timeshift!"
+msgstr "No se puede iniciar timeshift!"
 
 msgid "Timezone"
 msgstr "Zona horaria"
@@ -7065,10 +7089,10 @@ msgid "Your network mount has been updated."
 msgstr "El montaje de red ha sido actualizado."
 
 msgid "Your receiver does not have an internet connection"
-msgstr "El receptor no está conectado a internet"
+msgstr "El receptor no tiene conexión a internet"
 
 msgid "Your receiver is not connected to the internet"
-msgstr "El receptor no está conectado a internet"
+msgstr "El receptor no está conectado a la red"
 
 msgid ""
 "Your receiver is now ready to use.\n"
@@ -7477,6 +7501,12 @@ msgstr "Ejecutando comando"
 msgid "exit DVD player or return to file browser"
 msgstr "salir del reproductor DVD o volver a sistema de archivos"
 
+msgid "fast"
+msgstr "rápido"
+
+msgid "false"
+msgstr "falso"
+
 msgid "fileformats (BMP, PNG, JPG, GIF)"
 msgstr "formatos (BMP, PNG, JPG, GIF)"
 
@@ -7611,6 +7641,9 @@ msgstr "menú"
 
 msgid "mins"
 msgstr "mins"
+
+msgid "minute"
+msgstr "minuto"
 
 msgid "minutes"
 msgstr "minutos"
@@ -7909,6 +7942,9 @@ msgstr "retroceder"
 msgid "skip forward"
 msgstr "adelantar"
 
+msgid "slow"
+msgstr "despacio"
+
 msgid "sorting of playlists"
 msgstr "Clasificar las listas de reproducción"
 
@@ -7966,14 +8002,20 @@ msgstr "fichero de plantilla"
 msgid "this recording"
 msgstr "esta grabación"
 
+msgid "this bouquet is protected by a parental control pin"
+msgstr "esta lista está protegida por el control de adultos"
+
 msgid "this service is protected by a parental control pin"
-msgstr "este canal está bajo el control de adultos"
+msgstr "este canal está protegido por el control de adultos"
 
 msgid "toggle time, chapter, audio, subtitle info"
 msgstr "poner hora, capítulo, audio, info subtítulos"
 
 msgid "top"
 msgstr "arriba"
+
+msgid "true"
+msgstr "verdadero"
 
 msgid "tuner is not supported"
 msgstr "tuner no soportado"
@@ -8240,12 +8282,10 @@ msgstr ""
 "la copia:\n"
 
 ### CCCAMINFO & OSCAMINFO ###
-msgid "Show CCcam in extensions?"
-msgstr "Mostrar CCcam en el menú de extensiones"
-
-msgid "Show OScam in extensions?"
-msgstr "Mostrar OScam en el menú de extensiones"
-
+#msgid "Show CCcam in extensions ?"
+#msgstr "Mostrar CCcam en el menú de extensiones"
+#msgid "Show OScam in extensions ?"
+#msgstr "Mostrar OScam en el menú de extensiones"
 ### Cccaminfo ###
 msgid "Active clients"
 msgstr "Clientes activos"
@@ -8253,6 +8293,8 @@ msgstr "Clientes activos"
 msgid "address:"
 msgstr "dirección:"
 
+#msgid "Allows you to show/hide CCcam in extensions (blue button)."
+#msgstr "Permite mostrar/ocultar CCcam en el menú extensiones (tecla azul)."
 msgid "Available shares:"
 msgstr "Shares disponibles:"
 
@@ -8607,6 +8649,8 @@ msgstr "(mostrar sólo server:"
 msgid "Address"
 msgstr "Dirección"
 
+#msgid "Allows you to show/hide OScam in extensions (blue button)."
+#msgstr "Permite mostrar/ocultar OScam en el menú extensiones (tecla azul)."
 msgid "Automatically update Client/Server View?"
 msgstr "Autoactualizar la vista Servidor/Cliente?"
 
@@ -9893,6 +9937,9 @@ msgstr "Red oculta"
 msgid "InadynSetup"
 msgstr "Inadyn"
 
+msgid "IP-Address"
+msgstr "Dirección IP"
+
 msgid "IP address"
 msgstr "Dirección IP"
 
@@ -10910,12 +10957,15 @@ msgstr "Conexión VLAN"
 msgid "wireless network interface"
 msgstr "Interface de red inalámbrica"
 
-###
+### About.py
 msgid "Hardware: "
 msgstr "Hardware: "
 
 msgid "Image: "
 msgstr "Imagen: "
+
+msgid "Installed: "
+msgstr "Instalado: "
 
 msgid "Kernel version: "
 msgstr "versión de kernel: "
@@ -10946,13 +10996,6 @@ msgstr "Desde :"
 msgid "Goto :"
 msgstr "Goto :"
 
-###
-msgid "false"
-msgstr "falso"
-
-msgid "true"
-msgstr "verdadero"
-
 ### AnimationSetup
 msgid "* current animation"
 msgstr "* animación actual"
@@ -10970,10 +11013,10 @@ msgid "Disable Animations"
 msgstr "Deshabilitar animaciones"
 
 msgid "Grow drop"
-msgstr ""
+msgstr "Traer al frente desde arriba"
 
 msgid "Grow from left"
-msgstr "Aumentar desde la izqda."
+msgstr "Traer al frente desde la izqda."
 
 msgid "Popup"
 msgstr "Emergente"
@@ -10985,16 +11028,16 @@ msgid "Simple fade"
 msgstr "Desvanecimiento"
 
 msgid "Slide drop"
-msgstr "Bajar diapositivas"
+msgstr "Bajar cortinilla"
 
 msgid "Slide left to right"
-msgstr "Diapositivas de izda. a dcha."
+msgstr "Pasar de izda. a dcha."
 
 msgid "Slide top to bottom"
-msgstr "Subir diapositivas"
+msgstr "Pasar de arriba hacia abajo"
 
 msgid "Stripes"
-msgstr "Líneas"
+msgstr "Barras verticales"
 
 ### Common Interface Assignment
 msgid "Add provider"
@@ -11007,7 +11050,7 @@ msgid "Assigned CAIds:"
 msgstr "CAIds asignados:"
 
 msgid "Assigned services/provider:"
-msgstr "Canales/proveedor asignados:"
+msgstr "Proveedor/canales asignados:"
 
 msgid "Common Interface Assignment"
 msgstr "Asignación de Interface Común"
@@ -11054,4 +11097,382 @@ msgstr "Configura si los subtítulos deben cambiar entre normal, itálica, negri
 ###
 msgid "Do you want to delete all other languages?"
 msgstr "Desea eliminar los otros idiomas que no va a utilizar?"
+
+msgid "Load unlinked userbouquets"
+msgstr "Cargar bouquets no enlazados"
+
+msgid "When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are upgraded"
+msgstr "Si se habilita, enigma2 cargará los bouquets no enlazados. Esto significa que los favoritos de usuario que estén disponibles, pero no incluidos en los archivos bouquets.tv o bouquets.radio serán cargados. Esto permite, por ejemplo, mantener los favoritos mientras se actualizan los canales"
+
+msgid "purge deleted userbouquets"
+msgstr "limpiar favoritos eliminados"
+
+msgid "restore deleted userbouquets"
+msgstr "restaurar favoritos eliminados"
+
+msgid "Are you sure to purge all deleted userbouquets?"
+msgstr "Seguro que quiere eliminar los favoritos borrados?"
+
+### SOFTWARE UPDATE
+msgid ""
+"The OpenSPA team would like to point out that upgrading to the latest nightly build comes not only with the latest features, but also with some risks. After the update, it is possible that your device no longer works as expected. We recommend you create backups with Autobackup or Backupsuite. This allows you to quickly and easily restore your device to its previous state, should you experience any problems. If you encounter a 'bug', please report the issue on http://openspa.info.\n"
+"\n"
+"Do you understand this?"
+msgstr "El equipo de desarrollo OpenSPA quiere puntualizar:"
+
+msgid "Show updated packages"
+msgstr "Mostrar paquetes actualizados"
+
+msgid "Packages to update"
+msgstr "Paquetes para actualizar"
+
+###
+msgid "IPv6Setup"
+msgstr "Configuración IPv6"
+
+msgid "IPv6 setup"
+msgstr "Configuración IPv6"
+
+msgid "IPv6 support"
+msgstr "Soporte IPv6"
+
+msgid "Restore inetd"
+msgstr "Restaurar inetd"
+
+msgid "Enable or disable Ipv6."
+msgstr "Des/habilita IPv6"
+
+msgid "Exit IPv6 configuration"
+msgstr "Salir de la configuración"
+
+msgid "Activate IPv6 configuration"
+msgstr "Activar la configuración de IPv6"
+
+msgid "Restore inetd.conf"
+msgstr "Restaurar inetd.conf"
+
+msgid "Successfully restored /etc/inetd.conf!"
+msgstr "/etc/inetd.conf se ha restaurado correctamente."
+
+msgid "Enable Wake On LAN"
+msgstr "Habilitar Wake On Lan"
+
+msgid "menulist"
+msgstr "Lista"
+
+msgid "Enable/Disable IPv6 support of your %s %s.\n"
+msgstr "Habilita el soporte IPv6 del %s %s.\n"
+
+msgid "Enable/Disable IPv6"
+msgstr "Habilitar/deshabilitar IPv6"
+
+msgid "exit mounts setup menu"
+msgstr "salir del menú de montajes"
+
+msgid "Extended Setup..."
+msgstr "Configuración extendida"
+
+msgid "Extended Networksetup Plugin..."
+msgstr "Plugin de config. extendida de red"
+
+msgid "Inetd recovery"
+msgstr "Recuperar Inetd"
+
+msgid "Recover"
+msgstr "Recuperar"
+
+msgid "exit inetd recovery"
+msgstr "salir de la recuperación de inetd"
+
+msgid "recover inetd"
+msgstr "recuperar inetd"
+
+msgid "bad address"
+msgstr "dirección incorrecta"
+
+msgid "Teletext base visibility"
+msgstr "Visibilidad del teletexto"
+
+msgid "Base transparency for teletext, more options available within teletext screen."
+msgstr "Transparencia de base para el teletexto. Más opciones en la pantalla de teletexto"
+
+msgid "Web browser base visibility"
+msgstr "Visibilidad del navegador"
+
+msgid "Base transparency for OpenOpera web browser"
+msgstr "Transparencia de base para el navegador OpenOpera"
+
+msgid "Set startup service"
+msgstr "Ajustar como canal de inicio"
+
+### Infobar
+msgid "open Info..."
+msgstr "abrir info..."
+
+msgid "open EPG..."
+msgstr "abrir EPG..."
+
+msgid "select Info..."
+msgstr "seleccionar info..."
+
+msgid "select EPG..."
+msgstr "seleccionar epg..."
+
+msgid "when PiPzap enabled zap channel up..."
+msgstr "Con PiPzap habilitado zapear al canal siguiente"
+
+msgid "when PiPzap enabled zap channel down..."
+msgstr "Con PiPzap habilitado zapear al canal anterior"
+
+msgid "Yes, delete this movie and return to movie list"
+msgstr "Si, borar esta película y volver a la lista"
+
+### Satconfig
+msgid "Use circular LNB"
+msgstr "Utilizar LNB circular"
+
+msgid "Press OK to select satellites"
+msgstr "Pulsed OK para seleccionar satélites"
+
+msgid "Set default"
+msgstr "Por defecto"
+
+msgid "Select all"
+msgstr "Seleccionar todo"
+
+msgid "Press OK to toggle the selection"
+msgstr "Pulse OK para invertir la selección"
+
+msgid "Select satellites"
+msgstr "Seleccionar satélites"
+
+msgid "Reverse list"
+msgstr "Lista inversa"
+
+msgid "Standart list"
+msgstr "Lista estándar"
+
+msgid "Connected satellites"
+msgstr "Satélites conectados"
+
+msgid "Select sort method:"
+msgstr "Seleccione el método para ordenar"
+
+### UsageConfig
+msgid "Skin Setting"
+msgstr "Config. de skin"
+
+msgid "Mins"
+msgstr "Min's"
+
+msgid "Mins Secs"
+msgstr "Min's seg's"
+
+msgid "Hours Mins"
+msgstr "Horas min's"
+
+msgid "Hours Mins Secs"
+msgstr "Horas min's seg's"
+
+msgid "Percentage"
+msgstr "Porcentaje"
+
+msgid "Remaining"
+msgstr "Restante"
+
+msgid "Elapsed"
+msgstr "Transcurrido"
+
+msgid "Elapsed & Remaining"
+msgstr "Transcurrido & restante"
+
+msgid "Remaining & Elapsed"
+msgstr "Restante & transcurrido"
+
+### PictureInPicture
+msgid "Cascade PiP"
+msgstr "PiP en cascada"
+
+msgid "Splitscreen"
+msgstr "Dividir pantalla"
+
+msgid "Side by side"
+msgstr "Lado con lado"
+
+msgid "Big PiP"
+msgstr "PiP grande"
+
+msgid "External PiP"
+msgstr "PiP externo"
+
+###
+msgid "Hide parentel locked services"
+msgstr "Ocultar canales bajo control parental"
+
+msgid "Unhide parental control services"
+msgstr "Volver a mostrar los canales bajo control parental"
+
+###
+msgid "Allows you to enable/disable displaying icons on the frontpanel."
+msgstr "Habilita/deshabilita mostrar iconos en el panel frontal."
+
+msgid "Brightness (Normal)"
+msgstr "Brillo (normal)"
+
+msgid "Brightness (Standby)"
+msgstr "Brillo (reposo)"
+
+msgid "Clone TV screen to LCD"
+msgstr "Clonar la pantalla de TV en el LCD"
+
+msgid "LED Deep Standby"
+msgstr "LED de reposo profundo"
+
+msgid "LED Normal"
+msgstr "LED Normal"
+
+msgid "LED Standby"
+msgstr "LED de reposo"
+
+msgid "Power LED state in (deep)-standby"
+msgstr "Estado del LED de encendido en reposo-(profundo)"
+
+msgid "Power on/off display"
+msgstr "Encender/apagar display"
+
+msgid "Repeat Display Message"
+msgstr "Repetir el mensaje del display"
+
+msgid "Rewrap subtitles"
+msgstr "Enmarcar subtítulos"
+
+msgid "Scrolling Speed"
+msgstr "Velocidad de desplazamiento"
+
+msgid "Show Display Icons"
+msgstr "Mostrar iconos de pantalla"
+
+msgid "Show Media playback Remaining/Elapsed as"
+msgstr "Mostrar reproducción restante/transcurrida como"
+
+msgid "Show Time Remaining/Elapsed"
+msgstr "Mostrar el tiempo restante/transcurrido"
+
+msgid "Show Transponder Remaining/Elapsed as"
+msgstr "Mostrar restante/transcurrido en transpondedor como"
+
+msgid "Show time elapsed as positive"
+msgstr "Mostrar el tiempo transcurrido como positivo"
+
+msgid "Enable blinking rec symbol on the LCD Display"
+msgstr "Habilitar símbolo parapadeante de grabación en el LCD"
+
+msgid "If the text is too long to be displayed on the front panel, it will be repeated (number of times):"
+msgstr "Si el texto es demasiado largo para ser mostrado en el panel frontal, se repetirá (nº de veces):"
+
+msgid "LED brightness during deep standby."
+msgstr "Brillo del LED en reposo profundo."
+
+msgid "LED brightness during normal operations."
+msgstr "Brillo del LED en modo normal."
+
+msgid "LED brightness during standby."
+msgstr "Brillo del LED en reposo."
+
+msgid "Set the scrolling speed of text on the front display."
+msgstr "Ajusta la velocidad de desplazamiento del texto en el display frontal."
+
+msgid "Shows live tv or informations on LCD."
+msgstr "Muestra TV en directo, o informaciones, en el LCD."
+
+msgid "This option allows you choose how to display elapsed time as + or -"
+msgstr "Permite elegir si se mostrará el tiempo transcurrido como + o -"
+
+msgid "This option allows you choose how to display remaining time, or elapsed time, or both."
+msgstr "Permite elegir si se mostrará el tiempo restante, o el ya transcurrido, o ambos."
+
+msgid "This option allows you choose how to display the remaining/elapsed time for Media playback."
+msgstr "Permite elegir como se mostrará el tiempo restante/transcurrido en el reproductor."
+
+msgid "This option allows you choose how to display the remaining/elapsed time for live tv."
+msgstr "Permite elegir como se mostrará el tiempo restante/transcurrido en los canales en directo."
+
+msgid "This option allows you to power off the display."
+msgstr "Permite desconectar el display."
+
+msgid "When enabled you can zap channels with the  CH+/-, B+/-, P+/- buttons instead of opening the channel selection list."
+msgstr "Si se habilita, permite cambiar los canales con las teclas CH+/-, B+/-, P+/- en lugar de abrir la lista de canales."
+
+msgid "error starting scanning"
+msgstr "error al empezar el escaneo"
+
+msgid "error while scanning"
+msgstr "error mientras se escaneaba"
+
+msgid "no resource manager"
+msgstr "sin gestor de recursos"
+
+msgid "no channel list"
+msgstr "sin lista de canales"
+
+msgid "CH"
+msgstr "Canal"
+
+### Parental Control
+msgid "Change PIN"
+msgstr "Cambiar PIN"
+
+msgid "Protect Screens"
+msgstr "Proteger pantallas"
+
+msgid "Protect main menu"
+msgstr "Proteger el menú principal"
+
+msgid "Protect timer menu"
+msgstr "Proteger el menú de temporizadores"
+
+msgid "Protect plugin browser"
+msgstr "Proteger el navegador de plugins"
+
+msgid "Protect configuration"
+msgstr "Proteger la configuración"
+
+msgid "Protect standby menu"
+msgstr "Proteger el menú de reposo"
+
+msgid "Protect movie list"
+msgstr "Proteger la lista de películas"
+
+#msgid "Show services beginning with"
+#msgstr "Mostrar canales que empiecen por"
+msgid "Buffering %d%%"
+msgstr "Guardando en búffer %d%%"
+
+msgid "The %d min remaining before the end of the event."
+msgstr "Los %d min. restantes antes de terminar el evento."
+
+msgid ""
+"Current event is over.\n"
+"Select an option to save the timeshift file."
+msgstr ""
+"El evnto actual ha terminado.\n"
+"Seleccione una opción para guardar el archivo timeshift"
+
+msgid "Save and stop timeshift"
+msgstr "Guardar y parar timeshift"
+
+msgid "Save and restart timeshift"
+msgstr "Guardar y reiniciar timeshift"
+
+msgid "Don't save and stop timeshift"
+msgstr "No guardar y parar timeshift"
+
+msgid "Save timeshift only for current event"
+msgstr "Guardar timeshift sólko para el evento actual"
+
+msgid "invalid type"
+msgstr "tipo inválido"
+
+msgid "MHz"
+msgstr "MHz"
 
