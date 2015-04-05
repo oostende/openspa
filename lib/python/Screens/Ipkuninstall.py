@@ -151,14 +151,17 @@ class IpkuninstallList(Screen):
 	def delete(self, answer): 
 		cmd = " "
 		title = " "
-		if answer[1] == "rem":            
-			cmd = "opkg remove " + self.ipk
-			title = _("Removing ipk %s" %(self.ipk))
-		elif answer[1] == "force-depens":            
-			cmd = "opkg remove --autoremove --force-depends " + self.ipk
-			title = _("Force Removing ipk %s" %(self.ipk))
-		elif answer[1] == "force-remove":            
-			cmd = "opkg remove --force-remove " + self.ipk
-			title = _("Force Removing ipk %s" %(self.ipk))
-		self.session.open(Console,_(title),[cmd])
-		self.close()
+		if answer is not None:
+			if answer[1] == "rem":
+				cmd = "opkg remove " + self.ipk
+				title = _("Removing ipk %s" %(self.ipk))
+			elif answer[1] == "force-depens":            
+				cmd = "opkg remove --autoremove --force-depends " + self.ipk
+				title = _("Force Removing ipk %s" %(self.ipk))
+			elif answer[1] == "force-remove":            
+				cmd = "opkg remove --force-remove " + self.ipk
+				title = _("Force Removing ipk %s" %(self.ipk))
+			else:
+				close()
+			self.session.open(Console,_(title),[cmd])
+			self.close()
