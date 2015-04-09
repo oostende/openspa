@@ -167,7 +167,56 @@ def InitLcd():
 	SystemInfo["Display"] = detected
 	config.lcd = ConfigSubsection()
 
+	if fileExists("/proc/stb/lcd/mode"):
+		f = open("/proc/stb/lcd/mode", "r")
+		can_lcdmodechecking = f.read().strip().split(" ")
+		f.close()
+	else:
+		can_lcdmodechecking = False
+	SystemInfo["LCDMiniTV"] = can_lcdmodechecking
+
 	if detected:
+		if can_lcdmodechecking:
+			def setLCDModeMinitTV(configElement):
+				try:
+					f = open("/proc/stb/lcd/mode", "w")
+					f.write(configElement.value)
+					f.close()
+				except:
+					pass
+			def setMiniTVFPS(configElement):
+				try:
+					f = open("/proc/stb/lcd/fps", "w")
+					f.write("%d \n" % configElement.value)
+					f.close()
+				except:
+					pass
+			def setLCDModePiP(configElement):
+				pass
+
+			config.lcd.modepip = ConfigSelection(choices={
+					"0": _("off"),
+					"5": _("PIP"),
+					"7": _("PIP with OSD")},
+					default = "0")
+			if config.misc.boxtype.value == 'gbquad' or config.misc.boxtype.value == 'gbquadplus':
+				config.lcd.modepip.addNotifier(setLCDModePiP)
+			else:
+				config.lcd.modepip = ConfigNothing()
+
+			config.lcd.modeminitv = ConfigSelection(choices={
+					"0": _("normal"),
+					"1": _("MiniTV"),
+					"2": _("OSD"),
+					"3": _("MiniTV with OSD")},
+					default = "0")
+			config.lcd.fpsminitv = ConfigSlider(default=30, limits=(0, 30))
+			config.lcd.modeminitv.addNotifier(setLCDModeMinitTV)
+			config.lcd.fpsminitv.addNotifier(setMiniTVFPS)
+		else:
+			config.lcd.modeminitv = ConfigNothing()
+			config.lcd.fpsminitv = ConfigNothing()
+
 		config.lcd.scroll_speed = ConfigSelection(default = "300", choices = [
 			("500", _("slow")),
 			("300", _("normal")),

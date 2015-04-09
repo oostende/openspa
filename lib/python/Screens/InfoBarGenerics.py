@@ -2242,6 +2242,11 @@ class InfoBarPiP:
 					if lastPiPServiceTimeout:
 						self.lastPiPServiceTimeoutTimer.startLongTimer(lastPiPServiceTimeout)
 				del self.session.pip
+				if SystemInfo["LCDMiniTV"]:
+					if config.lcd.modepip.value >= "1":
+						f = open("/proc/stb/lcd/mode", "w")
+						f.write(config.lcd.modeminitv.value)
+						f.close()
 				self.session.pipshown = False
 			if hasattr(self, "ScreenSaverTimerStart"):
 				self.ScreenSaverTimerStart()
@@ -2253,6 +2258,20 @@ class InfoBarPiP:
 			if self.session.pip.playService(newservice):
 				self.session.pipshown = True
 				self.session.pip.servicePath = self.servicelist.getCurrentServicePath()
+				if SystemInfo["LCDMiniTV"]:
+						if config.lcd.modepip.value >= "1":
+							f = open("/proc/stb/lcd/mode", "w")
+							f.write(config.lcd.modepip.value)
+							f.close()
+							f = open("/proc/stb/vmpeg/1/dst_width", "w")
+							f.write("0")
+							f.close()
+							f = open("/proc/stb/vmpeg/1/dst_height", "w")
+							f.write("0")
+							f.close()
+							f = open("/proc/stb/vmpeg/1/dst_apply", "w")
+							f.write("1")
+							f.close()
 			else:
 				newservice = self.session.nav.getCurrentlyPlayingServiceReference() or self.servicelist.servicelist.getCurrent()
 				if self.session.pip.playService(newservice):
