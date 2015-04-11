@@ -16,6 +16,7 @@ dist_pkgdata_DATA = \
 	userinterfacepositionerwizard.xml \
 	freesat.t1 \
 	freesat.t2 \
+	timezone.xml \
 	unicable.xml \
 	videowizard.xml
 
