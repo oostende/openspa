@@ -47,6 +47,7 @@ dist_install_DATA = \
 	input_rcnew.png \
 	input_rcold-configured.png \
 	input_rcold.png \
+	input_warning.png \
 	ipkgcam.png \
 	ipkgextensions.png \
 	ipkgpdrivers.png \
