@@ -22,9 +22,11 @@
     sudo apt-get install -y autoconf automake bison bzip2 chrpath cvs diffstat flex g++ gawk gcc gettext git-core gzip help2man htop libc6-dev libglib2.0-dev libproc-processtable-perl libtool libxml2-utils make ncdu ncurses-bin ncurses-dev patch perl pkg-config po4a pseudo python-setuptools quilt sgmltools-lite sshpass subversion swig tar texi2html texinfo wget xsltproc zip zlib1g-dev
 
 ----------
-2 - Reconfigure dash
+2 - Set your shell to /bin/bash
 
     sudo dpkg-reconfigure dash
+    When asked: Install dash as /bin/sh?
+    select "NO"
 
 ----------
 3 - Add user openspabuilder
