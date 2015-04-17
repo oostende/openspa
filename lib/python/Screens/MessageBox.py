@@ -11,6 +11,7 @@ class MessageBox(Screen):
 	TYPE_INFO = 1
 	TYPE_WARNING = 2
 	TYPE_ERROR = 3
+	TYPE_MESSAGE = 4
 
 	def __init__(self, session, text, type=TYPE_YESNO, timeout=-1, close_on_any_key=False, default=True, enable_input=True, msgBoxID=None, picon=None, simple=False, list=[], timeout_default=None):
 		self.type = type
@@ -43,6 +44,7 @@ class MessageBox(Screen):
 		if picon != self.TYPE_INFO:
 			self["InfoPixmap"].hide()
 
+		self.title = self.type < self.TYPE_MESSAGE and ["Question", "Information", "Warning", "Error"][self.type] or "Message"
 		if type == self.TYPE_YESNO:
 			if list:
 				self.list = list
