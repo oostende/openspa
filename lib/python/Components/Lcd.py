@@ -160,7 +160,7 @@ def standbyCounterChanged(configElement):
 	config.lcd.ledbrightnessdeepstandby.apply()
 
 def InitLcd():
-	if getBoxType() in ('nanoc', 'nano', 'axodinc', 'axodin', 'amikomini', 'dynaspark', 'amiko8900', 'sognorevolution', 'arguspingulux', 'arguspinguluxmini', 'arguspinguluxplus', 'sparkreloaded', 'sabsolo', 'sparklx', 'gis8120', 'gb800se', 'gb800solo', 'gb800seplus', 'gbultrase', 'gbipbox', 'tmsingle', 'tmnano2super', 'iqonios300hd', 'iqonios300hdv2', 'optimussos1plus', 'optimussos1', 'vusolo', 'et4x00', 'et5x00', 'et6x00', 'et7000', 'mixosf7', 'mixoslumi'):
+	if getBoxType() in ('nanoc', 'nano', 'marvel1', 'enfinity', 'amikomini', 'dynaspark', 'amiko8900', 'sognorevolution', 'arguspingulux', 'arguspinguluxmini', 'arguspinguluxplus', 'sparkreloaded', 'sabsolo', 'sparklx', 'gis8120', 'gb800se', 'gb800solo', 'gb800seplus', 'gbultrase', 'gbipbox', 'tmsingle', 'tmnano2super', 'iqonios300hd', 'iqonios300hdv2', 'optimussos1plus', 'optimussos1', 'vusolo', 'vusolose', 'vuzero', 'et4x00', 'et5x00', 'et6x00', 'et7000', 'mixosf7', 'mixoslumi'):
 		detected = False
 	else:
 		detected = eDBoxLCD.getInstance().detected()
@@ -217,7 +217,7 @@ def InitLcd():
 			config.lcd.modeminitv = ConfigNothing()
 			config.lcd.fpsminitv = ConfigNothing()
 
-		if getBoxType() not in ('marvel1', 'enfinity', 'axodin', 'axodinc', 'axase3', 'axase3c', 'evoe3hd', 'geniuse3hd', 'vusolo', 'vusolose', 'vuzero'):
+		if getBoxType() not in ('axodin', 'axodinc', 'axase3', 'axase3c', 'evoe3hd', 'geniuse3hd'):
 			config.lcd.scroll_speed = ConfigSelection(default = "300", choices = [
 				("500", _("slow")),
 				("300", _("normal")),
@@ -301,7 +301,7 @@ def InitLcd():
 			config.lcd.repeat = ConfigSelection([("0", _("None")), ("1", _("1X")), ("2", _("2X")), ("3", _("3X")), ("4", _("4X")), ("500", _("Continues"))], "3")
 			config.lcd.repeat.addNotifier(setLCDrepeat);
 			config.lcd.mode = ConfigNothing()
-		elif fileExists("/proc/stb/lcd/scroll_delay") and getBoxType() not in ('ixussone', 'ixusszero'):
+		elif fileExists("/proc/stb/lcd/scroll_delay") and getBoxType() not in ('ixussone', 'ixusszero', 'axodin', 'axodinc'):
 			config.lcd.scrollspeed = ConfigSlider(default = 150, increment = 10, limits = (0, 500))
 			config.lcd.scrollspeed.addNotifier(setLCDscrollspeed)
 			config.lcd.repeat = ConfigSelection([("0", _("None")), ("1", _("1X")), ("2", _("2X")), ("3", _("3X")), ("4", _("4X")), ("500", _("Continues"))], "3")
