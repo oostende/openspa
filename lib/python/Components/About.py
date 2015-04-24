@@ -1,4 +1,6 @@
+# -*- coding: utf-8 -*-
 from boxbranding import getBoxType
+import struct, socket, fcntl, sys, os, time
 from sys import modules
 import os
 import time
@@ -39,6 +41,14 @@ def getGStreamerVersionString():
 def getKernelVersionString():
 	try:
 		return open("/proc/version","r").read().split(' ', 4)[2].split('-',2)[0]
+	except:
+		return _("unknown")
+
+def getDriverInstalledDate():
+	try:
+		from glob import glob
+		driver = [x.split("-")[-2:-1][0][-8:] for x in open(glob("/var/lib/opkg/info/*-dvb-modules-*.control")[0], "r") if x.startswith("Version:")][0]
+		return  "%s-%s-%s" % (driver[:4], driver[4:6], driver[6:])
 	except:
 		return _("unknown")
 
@@ -129,6 +139,43 @@ def getCPUTempString():
 	except:
 		pass
 	return ""
+
+def _ifinfo(sock, addr, ifname):
+	iface = struct.pack('256s', ifname[:15])
+	info  = fcntl.ioctl(sock.fileno(), addr, iface)
+	if addr == 0x8927:
+		return ''.join(['%02x:' % ord(char) for char in info[18:24]])[:-1].upper()
+	else:
+		return socket.inet_ntoa(info[20:24])
+
+def getIfConfig(ifname):
+	ifreq = {'ifname': ifname}
+	infos = {}
+	sock  = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+	# offsets defined in /usr/include/linux/sockios.h on linux 2.6
+	infos['addr']    = 0x8915 # SIOCGIFADDR
+	infos['brdaddr'] = 0x8919 # SIOCGIFBRDADDR
+	infos['hwaddr']  = 0x8927 # SIOCSIFHWADDR
+	infos['netmask'] = 0x891b # SIOCGIFNETMASK
+	try:
+		print "in TRYYYYYYY", ifname
+		for k,v in infos.items():
+			print infos.items()
+			ifreq[k] = _ifinfo(sock, v, ifname)
+	except:
+		print "IN EXCEEEEEEEEPT", ifname
+		pass
+	sock.close()
+	return ifreq
+
+def getIfTransferredData(ifname):
+	f = open('/proc/net/dev', 'r')
+	for line in f:
+		if ifname in line:
+			data = line.split('%s:' % ifname)[1].split()
+			rx_bytes, tx_bytes = (data[0], data[8])
+			f.close()
+			return rx_bytes, tx_bytes
 
 def getHardwareTypeString():
 	try:
