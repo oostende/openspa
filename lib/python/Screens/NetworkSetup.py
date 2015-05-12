@@ -394,9 +394,9 @@ class IPv6Setup(Screen, ConfigListScreen, HelpableScreen):
 		inetdData += "#time	stream	tcp	nowait	root	internal\n"
 		inetdData += "#time	dgram	udp	wait	root	internal\n"
 		if self.IPv6ConfigEntry.value == True:
-			inetdData += "ftp	stream	tcp6	nowait	root	/usr/sbin/vsftpd	vsftpd\n"
+			inetdData += "#ftp	stream	tcp6	nowait	root	/usr/sbin/vsftpd	vsftpd\n"
 		else:
-			inetdData += "ftp	stream	tcp	nowait	root	/usr/sbin/vsftpd	vsftpd\n"
+			inetdData += "#ftp	stream	tcp	nowait	root	/usr/sbin/vsftpd	vsftpd\n"
 		inetdData += "#ftp	stream	tcp	nowait	root	ftpd	ftpd -w /\n"
 		if self.IPv6ConfigEntry.value == True:
 			inetdData += "#telnet	stream	tcp6	nowait	root	/usr/sbin/telnetd	telnetd\n"
@@ -2295,7 +2295,7 @@ class InetdRecovery(Screen, ConfigListScreen):
 		inetdData += "#daytime	dgram	" + sockTypeudp + "	wait	root	internal\n"
 		inetdData += "#time	stream	tcp	nowait	root	internal\n"
 		inetdData += "#time	dgram	" + sockTypeudp + "	wait	root	internal\n"
-		inetdData += "ftp	stream	" + sockTypetcp + "	nowait	root	/usr/sbin/vsftpd	vsftpd\n"
+		inetdData += "#ftp	stream	" + sockTypetcp + "	nowait	root	/usr/sbin/vsftpd	vsftpd\n"
 		inetdData += "#ftp	stream	" + sockTypetcp + "	nowait	root	ftpd	ftpd -w /\n"
 		inetdData += "#telnet	stream	" + sockTypetcp + "	nowait	root	/usr/sbin/telnetd	telnetd\n"
 		if fileExists('/usr/sbin/smbd'):
