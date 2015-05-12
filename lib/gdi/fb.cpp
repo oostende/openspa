@@ -409,7 +409,7 @@ void fbClass::enableManualBlit()
 {
 #if not defined(__sh__)
 	unsigned char tmp = 1;
-	if (fbFd < 0) return -1;
+	if (fbFd < 0) return;
 	if (ioctl(fbFd,FBIO_SET_MANUAL_BLIT, &tmp)<0)
 		perror("FBIO_SET_MANUAL_BLIT");
 	else
@@ -421,7 +421,7 @@ void fbClass::disableManualBlit()
 {
 #if not defined(__sh__)
 	unsigned char tmp = 0;
-	if (fbFd < 0) return -1;
+	if (fbFd < 0) return;
 	if (ioctl(fbFd,FBIO_SET_MANUAL_BLIT, &tmp)<0)
 		perror("FBIO_SET_MANUAL_BLIT");
 	else
