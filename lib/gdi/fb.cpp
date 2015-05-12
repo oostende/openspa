@@ -120,6 +120,7 @@ int fbClass::SetMode(int nxRes, int nyRes, int nbpp)
 	m_number_of_pages = 1;
 	topDiff=bottomDiff=leftDiff=rightDiff = 0;
 #else
+	if (fbFd < 0) return -1;
 	screeninfo.xres_virtual=screeninfo.xres=nxRes;
 	screeninfo.yres_virtual=(screeninfo.yres=nyRes)*2;
 	screeninfo.height=0;
@@ -215,6 +216,7 @@ void fbClass::getMode(int &xres, int &yres, int &bpp)
 
 int fbClass::setOffset(int off)
 {
+	if (fbFd < 0) return -1;
 	screeninfo.xoffset = 0;
 	screeninfo.yoffset = off;
 	return ioctl(fbFd, FBIOPAN_DISPLAY, &screeninfo);
@@ -223,6 +225,7 @@ int fbClass::setOffset(int off)
 int fbClass::waitVSync()
 {
 	int c = 0;
+	if (fbFd < 0) return -1;
 	return ioctl(fbFd, FBIO_WAITFORVSYNC, &c);
 }
 
@@ -310,6 +313,7 @@ void fbClass::blit()
 		perror("STMFBIO_SYNC_BLITTER");
 	}
 #else
+	if (fbFd < 0) return;
 	if (m_manual_blit == 1) {
 		if (ioctl(fbFd, FBIO_BLIT) < 0)
 			perror("FBIO_BLIT");
@@ -335,6 +339,7 @@ fbClass::~fbClass()
 
 int fbClass::PutCMAP()
 {
+	if (fbFd < 0) return -1;
 	return ioctl(fbFd, FBIOPUTCMAP, &cmap);
 }
 
@@ -404,6 +409,7 @@ void fbClass::enableManualBlit()
 {
 #if not defined(__sh__)
 	unsigned char tmp = 1;
+	if (fbFd < 0) return -1;
 	if (ioctl(fbFd,FBIO_SET_MANUAL_BLIT, &tmp)<0)
 		perror("FBIO_SET_MANUAL_BLIT");
 	else
@@ -415,6 +421,7 @@ void fbClass::disableManualBlit()
 {
 #if not defined(__sh__)
 	unsigned char tmp = 0;
+	if (fbFd < 0) return -1;
 	if (ioctl(fbFd,FBIO_SET_MANUAL_BLIT, &tmp)<0)
 		perror("FBIO_SET_MANUAL_BLIT");
 	else
