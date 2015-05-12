@@ -403,22 +403,26 @@ class IPv6Setup(Screen, ConfigListScreen, HelpableScreen):
 		else:
 			inetdData += "#telnet	stream	tcp	nowait	root	/usr/sbin/telnetd	telnetd\n"
 		if fileExists('/usr/sbin/smbd') and self.IPv6ConfigEntry.value == True:
-			inetdData += "microsoft-ds	stream	tcp6	nowait	root	/usr/sbin/smbd	smbd\n"
+			inetdData += "#microsoft-ds	stream	tcp6	nowait	root	/usr/sbin/smbd	smbd\n"
 		elif fileExists('/usr/sbin/smbd') and self.IPv6ConfigEntry.value == False:
-			inetdData += "microsoft-ds	stream	tcp	nowait	root	/usr/sbin/smbd	smbd\n"
+			inetdData += "#microsoft-ds	stream	tcp	nowait	root	/usr/sbin/smbd	smbd\n"
 		else:
 			pass
-		if fileExists('/usr/sbin/nmbd'):
-			inetdData += "netbios-ns	dgram	udp	wait	root	/usr/sbin/nmbd	nmbd\n"
+		if fileExists('/usr/sbin/nmbd') and self.IPv6ConfigEntry.value == True:
+			inetdData += "#netbios-ns	dgram	udp6	wait	root	/usr/sbin/nmbd	nmbd\n"
+		elif fileExists('/usr/sbin/nmbd') and self.IPv6ConfigEntry.value == False:
+			inetdData += "#netbios-ns	dgram	udp	wait	root	/usr/sbin/nmbd	nmbd\n"
+		else:
+			pass
 		if fileExists('/usr/bin/streamproxy') and self.IPv6ConfigEntry.value == True:
-			inetdData += "8001	stream	tcp6	nowait	root	/usr/bin/streamproxy	streamproxy\n"
+			inetdData += "#8001	stream	tcp6	nowait	root	/usr/bin/streamproxy	streamproxy\n"
 		elif fileExists('/usr/bin/streamproxy') and self.IPv6ConfigEntry.value == False:
-			inetdData += "8001	stream	tcp	nowait	root	/usr/bin/streamproxy	streamproxy\n"
+			inetdData += "#8001	stream	tcp	nowait	root	/usr/bin/streamproxy	streamproxy\n"
 		else:
 			pass
-		if getBoxType() in ('gbquad', 'gbquadplus') and self.IPv6ConfigEntry.value == True:
+		if fileExists('/usr/bin/transtreamproxy') and self.IPv6ConfigEntry.value == True:
 			inetdData += "8002	stream	tcp6	nowait	root	/usr/bin/transtreamproxy	transtreamproxy\n"
-		elif getBoxType() in ('gbquad', 'gbquadplus') and self.IPv6ConfigEntry.value == False:
+		elif fileExists('/usr/bin/transtreamproxy') and self.IPv6ConfigEntry.value == False:
 			inetdData += "8002	stream	tcp	nowait	root	/usr/bin/transtreamproxy	transtreamproxy\n"
 		else:
 			pass
@@ -2265,10 +2269,12 @@ class InetdRecovery(Screen, ConfigListScreen):
 		})
 
 	def keyBlue(self):
-		sockType = "tcp"
+		sockTypetcp = "tcp"
+		sockTypeudp = "udp"
 		if self.ipv6.value:
-			sockType = "tcp6"
-
+			sockTypetcp = "tcp6"
+			sockTypeudp = "udp6"
+			
 		inetdData  = "# /etc/inetd.conf:  see inetd(8) for further informations.\n"
 		inetdData += "#\n"
 		inetdData += "# Internet server configuration database\n"
@@ -2279,27 +2285,27 @@ class InetdRecovery(Screen, ConfigListScreen):
 		inetdData += "# <service_name> <sock_type> <proto> <flags> <user> <server_path> <args>\n"
 		inetdData += "#\n"
 		inetdData += "#:INTERNAL: Internal services\n"
-		inetdData += "#echo	stream	tcp	nowait	root	internal\n"
-		inetdData += "#echo	dgram	udp	wait	root	internal\n"
-		inetdData += "#chargen	stream	tcp	nowait	root	internal\n"
-		inetdData += "#chargen	dgram	udp	wait	root	internal\n"
-		inetdData += "#discard	stream	tcp	nowait	root	internal\n"
-		inetdData += "#discard	dgram	udp	wait	root	internal\n"
-		inetdData += "#daytime	stream	tcp	nowait	root	internal\n"
-		inetdData += "#daytime	dgram	udp	wait	root	internal\n"
+		inetdData += "#echo	stream	" + sockTypetcp + "	nowait	root	internal\n"
+		inetdData += "#echo	dgram	" + sockTypeudp + "	wait	root	internal\n"
+		inetdData += "#chargen	stream	" + sockTypetcp + "	nowait	root	internal\n"
+		inetdData += "#chargen	dgram	" + sockTypeudp + "	wait	root	internal\n"
+		inetdData += "#discard	stream	" + sockTypetcp + "	nowait	root	internal\n"
+		inetdData += "#discard	dgram	" + sockTypeudp + "	wait	root	internal\n"
+		inetdData += "#daytime	stream	" + sockTypetcp + "	nowait	root	internal\n"
+		inetdData += "#daytime	dgram	" + sockTypeudp + "	wait	root	internal\n"
 		inetdData += "#time	stream	tcp	nowait	root	internal\n"
-		inetdData += "#time	dgram	udp	wait	root	internal\n"
-		inetdData += "ftp	stream	" + sockType + "	nowait	root	/usr/sbin/vsftpd	vsftpd\n"
-		inetdData += "#ftp	stream	tcp	nowait	root	ftpd	ftpd -w /\n"
-		inetdData += "#telnet	stream	" + sockType + "	nowait	root	/usr/sbin/telnetd	telnetd\n"
+		inetdData += "#time	dgram	" + sockTypeudp + "	wait	root	internal\n"
+		inetdData += "ftp	stream	" + sockTypetcp + "	nowait	root	/usr/sbin/vsftpd	vsftpd\n"
+		inetdData += "#ftp	stream	" + sockTypetcp + "	nowait	root	ftpd	ftpd -w /\n"
+		inetdData += "#telnet	stream	" + sockTypetcp + "	nowait	root	/usr/sbin/telnetd	telnetd\n"
 		if fileExists('/usr/sbin/smbd'):
-			inetdData += "microsoft-ds	stream	" + sockType + "	nowait	root	/usr/sbin/smbd	smbd\n"
+			inetdData += "#microsoft-ds	stream	" + sockTypetcp + "	nowait	root	/usr/sbin/smbd	smbd\n"
 		if fileExists('/usr/sbin/nmbd'):
-			inetdData += "netbios-ns	dgram	udp	wait	root	/usr/sbin/nmbd	nmbd\n"
+			inetdData += "#netbios-ns	dgram	" + sockTypeudp + "	wait	root	/usr/sbin/nmbd	nmbd\n"
 		if fileExists('/usr/bin/streamproxy'):
-			inetdData += "8001	stream	" + sockType + "	nowait	root	/usr/bin/streamproxy	streamproxy\n"
+			inetdData += "#8001	stream	" + sockTypetcp + "	nowait	root	/usr/bin/streamproxy	streamproxy\n"
 		if getBoxType() in ('gbquad', 'gbquadplus'):
-			inetdData += "8002	stream	" + sockType + "	nowait	root	/usr/bin/transtreamproxy	transtreamproxy\n"
+			inetdData += "8002	stream	" + sockTypetcp + "	nowait	root	/usr/bin/transtreamproxy	transtreamproxy\n"
 
 		fd = file("/etc/inetd.conf", 'w')
 		fd.write(inetdData)
