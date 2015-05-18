@@ -1,6 +1,6 @@
 import os
 from time import strftime
-from enigma import iPlayableService, eTimer, eServiceCenter, iServiceInformation, ePicLoad
+from enigma import iPlayableService, eTimer, eServiceCenter, iServiceInformation, ePicLoad, eServiceReference
 from ServiceReference import ServiceReference
 from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
@@ -378,6 +378,16 @@ class MediaPlayer(Screen, InfoBarBase, InfoBarScreenSaver, InfoBarSeek, InfoBarA
 		if info != "" or clear:
 			if self[name].getText() != info:
 				self[name].setText(info)
+				if info != "":
+					if name == "artist":
+						self.summaries.setText(info,1)
+					elif name == "title":
+						idx = self.playlist.getCurrentIndex()
+						currref = self.playlist.getServiceRefList()[idx]
+						if info != self.getIdentifier(currref):
+							self.summaries.setText(info,3)
+					elif name == "album":
+						self.summaries.setText(info,4)
 
 	def leftDown(self):
 		self.lefttimer = True
@@ -818,6 +828,18 @@ class MediaPlayer(Screen, InfoBarBase, InfoBarScreenSaver, InfoBarSeek, InfoBarA
 				for x in list:
 					self.playlist.addFile(x.ref)
 			self.playlist.updateList()
+		# check if MerlinMusicPlayer is installed and merlinmp3player.so is running
+		# so we need the right id to play now the mp3-file
+		elif self.filelist.getServiceRef().type == 4116:
+				if self.filelist.getSelection() is not None:
+					inst = self.filelist.getSelection()[0]
+					if isinstance(inst, eServiceReference):
+						path = inst.getPath()
+						service = eServiceReference(4097, 0, path)
+						self.playlist.addFile(service)
+						self.playlist.updateList()
+						if len(self.playlist) == 1:
+							self.changeEntry(0)
 		else:
 			self.playlist.addFile(self.filelist.getServiceRef())
 			self.playlist.updateList()
@@ -953,11 +975,16 @@ class MediaPlayer(Screen, InfoBarBase, InfoBarScreenSaver, InfoBarSeek, InfoBarA
 			self.playlist.rewindFile()
 
 	def pauseEntry(self):
-		self.pauseService()
-		if self.seekstate == self.SEEK_STATE_PAUSE:
-			self.show()
+		if self.currList == "playlist" and self.seekstate == self.SEEK_STATE_PAUSE:
+			self.playEntry()
+		elif self.isStateForward(self.seekstate) or self.isStateBackward(self.seekstate):
+			self.playEntry()
 		else:
-			self.hideAndInfoBar()
+			self.pauseService()
+			if self.seekstate == self.SEEK_STATE_PAUSE:
+				self.show()
+			else:
+				self.hideAndInfoBar()
 
 	def stopEntry(self):
 		self.playlist.stopFile()
