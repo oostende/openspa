@@ -215,6 +215,16 @@ AC_ARG_ENABLE([libeplayer3],
 	esac])
 AM_CONDITIONAL([ENABLE_LIBEPLAYER3], [test x$enable_libeplayer3 = xtrue])
 
+AC_ARG_WITH(oldrewindseek,
+	AC_HELP_STRING([--with-oldrewindseek], [use patch for rewind, no or yes]),
+	[[witholdrewindseek=$withval]],
+	[[witholdrewindseek=yes]]
+)
+if test x"$witholdrewindseek" != xno ; then
+	AC_DEFINE(HAVE_NOOLDREWSEEK, 1,[Define when using patch])
+fi
+AM_CONDITIONAL(HAVE_NOOLDREWSEEK, test x"$witholdrewindseek" != xno)
+
 AC_ARG_WITH(nolcd, 
 	AC_HELP_STRING([--with-nolcd], [disable ascii based lcd, yes or no]), 
 	[[withnolcd=$withval]], 
