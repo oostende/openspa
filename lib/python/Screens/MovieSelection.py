@@ -517,6 +517,13 @@ class MovieSelectionScreenSaver(InfoBarScreenSaver):
 					return
 		self.screenSaverTimer.stop()
 
+	def keypressScreenSaver(self, key, flag):
+		if flag:
+			self.screensaver.hide()
+			self.show()
+			self.ScreenSaverTimerStart()
+			eActionMap.getInstance().unbindAction('', self.keypressScreenSaver)
+
 class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, ProtectedScreen, MovieSelectionScreenSaver):
 	# SUSPEND_PAUSES actually means "please call my pauseService()"
 	ALLOW_SUSPEND = Screen.SUSPEND_PAUSES
