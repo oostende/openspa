@@ -51,3 +51,4 @@ SystemInfo["LCDSKINSetup"] = path.exists("/usr/share/enigma2/display") and getMa
 SystemInfo["3DMode"] = fileCheck("/proc/stb/fb/3dmode") or fileCheck("/proc/stb/fb/primary/3d")
 SystemInfo["3DZNorm"] = fileCheck("/proc/stb/fb/znorm") or fileCheck("/proc/stb/fb/primary/zoffset")
 SystemInfo["IPV6"] = fileCheck("/proc/sys/net/ipv6/conf/all/disable_ipv6")
+SystemInfo["Blindscan_t2_available"] = fileCheck("/proc/stb/info/vumodel")
