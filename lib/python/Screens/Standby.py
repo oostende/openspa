@@ -4,12 +4,13 @@ from Components.config import config
 from Components.AVSwitch import AVSwitch
 from Components.Harddisk import internalHDDNotSleeping
 from Components.SystemInfo import SystemInfo
+from Components.Harddisk import harddiskmanager
 from Tools import Notifications
 from GlobalActions import globalActionMap
 import RecordTimer
 from enigma import eDVBVolumecontrol, eTimer, eDVBLocalTimeHandler, eServiceReference
 from time import time, localtime
-from boxbranding import getMachineBrand, getMachineName
+from boxbranding import getMachineBrand, getMachineName, getBrandOEM
 
 inStandby = None
 
@@ -90,6 +91,13 @@ class Standby(Screen):
 		else:
 			self.avswitch.setInput("AUX")
 
+		if (getBrandOEM() in ('fulan')):
+			open("/proc/stb/hdmi/output", "w").write("off")
+
+		if config.usage.hdd_standby_in_standby.value != -1: # HDD standby timer value (box in standby) / -1 = same as when box is active
+			for hdd in harddiskmanager.HDDList():
+				hdd[1].setIdleTime(int(config.usage.hdd_standby_in_standby.value))
+
 		gotoShutdownTime = int(config.usage.standby_to_shutdown_timer.value)
 		if gotoShutdownTime:
 			self.standbyTimeoutTimer.startLongTimer(gotoShutdownTime)
@@ -115,6 +123,8 @@ class Standby(Screen):
 				self.session.nav.playService(self.prev_running_service)
 		self.session.screen["Standby"].boolean = False
 		globalActionMap.setEnabled(True)
+		for hdd in harddiskmanager.HDDList():
+			hdd[1].setIdleTime(int(config.usage.hdd_standby.value)) # HDD standby timer value (box active)
 		if RecordTimer.RecordTimerEntry.receiveRecordEvents:
 			RecordTimer.RecordTimerEntry.stopTryQuitMainloop()
 
