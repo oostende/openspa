@@ -24,6 +24,20 @@ def initPiconPaths():
 def onMountpointAdded(mountpoint):
 	global searchPaths
 	try:
+		path = os.path.join(mountpoint, 'XPicons') + '/'
+		if os.path.isdir(path) and path not in searchPaths:
+			for fn in os.listdir(path):
+				if fn.endswith('.png'):
+					print "[Picon] adding path:", path
+					searchPaths.append(path)
+					break
+		path = os.path.join(mountpoint, 'XPicons/picon') + '/'
+		if os.path.isdir(path) and path not in searchPaths:
+			for fn in os.listdir(path):
+				if fn.endswith('.png'):
+					print "[Picon] adding path:", path
+					searchPaths.append(path)
+					break
 		path = os.path.join(mountpoint, 'picon') + '/'
 		if os.path.isdir(path) and path not in searchPaths:
 			for fn in os.listdir(path):
