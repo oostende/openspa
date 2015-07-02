@@ -123,6 +123,9 @@ class Standby(Screen):
 				self.session.nav.playService(self.prev_running_service)
 		self.session.screen["Standby"].boolean = False
 		globalActionMap.setEnabled(True)
+		if (getBrandOEM() in ('fulan')):
+			open("/proc/stb/hdmi/output", "w").write("on")
+
 		for hdd in harddiskmanager.HDDList():
 			hdd[1].setIdleTime(int(config.usage.hdd_standby.value)) # HDD standby timer value (box active)
 		if RecordTimer.RecordTimerEntry.receiveRecordEvents:
