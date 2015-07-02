@@ -608,71 +608,83 @@ DEVICEDB = \
 			"/devices/platform/brcm-ehci.0/usb1/1-1/1-1.3/1-1.3.": _("Back, lower USB"),
 			"/devices/platform/brcm-ehci-1.1/usb2/2-1/2-1:1.0/": _("Internal USB"),
 			"/devices/platform/brcm-ohci-1.1/usb4/4-1/4-1:1.0/": _("Internal USB"),
-			"/devices/platform/brcm-ehci.0/usb1/1-1/1-1.4/1-1.4.": _("Internal USB"),
+			"/devices/platform/brcm-ehci.0/usb1/1-1/1-1.4/1-1.4.": _("Internal USB")
 		},
 	"dm7020hd":
-	{
-		"/devices/pci0000:01/0000:01:00.0/host0/target0:0:0/0:0:0:0": _("SATA"),
-		"/devices/pci0000:01/0000:01:00.0/host1/target1:0:0/1:0:0:0": _("eSATA"),
-		"/devices/platform/brcm-ehci-1.1/usb2/2-1/2-1:1.0": _("Front USB"),
-		"/devices/platform/brcm-ehci-1.1/usb2/2-1/2-1.": _("Front USB"),
-		"/devices/platform/brcm-ehci.0/usb1/1-2/1-2:1.0": _("Back, upper USB"),
-		"/devices/platform/brcm-ehci.0/usb1/1-2/1-2.": _("Back, upper USB"),
-		"/devices/platform/brcm-ehci.0/usb1/1-1/1-1:1.0": _("Back, lower USB"),
-		"/devices/platform/brcm-ehci.0/usb1/1-1/1-1.": _("Back, lower USB"),
-	},
+		{
+			"/devices/pci0000:01/0000:01:00.0/host0/target0:0:0/0:0:0:0": _("SATA"),
+			"/devices/pci0000:01/0000:01:00.0/host1/target1:0:0/1:0:0:0": _("eSATA"),
+			"/devices/platform/brcm-ehci-1.1/usb2/2-1/2-1:1.0": _("Front USB"),
+			"/devices/platform/brcm-ehci-1.1/usb2/2-1/2-1.": _("Front USB"),
+			"/devices/platform/brcm-ehci.0/usb1/1-2/1-2:1.0": _("Back, upper USB"),
+			"/devices/platform/brcm-ehci.0/usb1/1-2/1-2.": _("Back, upper USB"),
+			"/devices/platform/brcm-ehci.0/usb1/1-1/1-1:1.0": _("Back, lower USB"),
+			"/devices/platform/brcm-ehci.0/usb1/1-1/1-1.": _("Back, lower USB")
+		},
 	"dm7080":
-	{
-		"/devices/pci0000:00/0000:00:00.0/usb9/9-1/": _("Back USB 3.0"),
-		"/devices/pci0000:00/0000:00:00.0/usb9/9-2/": _("Front USB 3.0"),
-		"/devices/platform/ehci-brcm.0/": _("Back, lower USB"),
-		"/devices/platform/ehci-brcm.1/": _("Back, upper USB"),
-		"/devices/platform/ehci-brcm.2/": _("Internal USB"),
-		"/devices/platform/ehci-brcm.3/": _("Internal USB"),
-		"/devices/platform/ohci-brcm.0/": _("Back, lower USB"),
-		"/devices/platform/ohci-brcm.1/": _("Back, upper USB"),
-		"/devices/platform/ohci-brcm.2/": _("Internal USB"),
-		"/devices/platform/ohci-brcm.3/": _("Internal USB"),
-		"/devices/platform/sdhci-brcmstb.0/": _("eMMC"),
-		"/devices/platform/sdhci-brcmstb.1/": _("SD"),
-		"/devices/platform/strict-ahci.0/ata1/": _("SATA"),	# front
-		"/devices/platform/strict-ahci.0/ata2/": _("SATA"),	# back
-	},
+		{
+			"/devices/pci0000:00/0000:00:00.0/usb9/9-1/": _("Back USB 3.0"),
+			"/devices/pci0000:00/0000:00:00.0/usb9/9-2/": _("Front USB 3.0"),
+			"/devices/platform/ehci-brcm.0/": _("Back, lower USB"),
+			"/devices/platform/ehci-brcm.1/": _("Back, upper USB"),
+			"/devices/platform/ehci-brcm.2/": _("Internal USB"),
+			"/devices/platform/ehci-brcm.3/": _("Internal USB"),
+			"/devices/platform/ohci-brcm.0/": _("Back, lower USB"),
+			"/devices/platform/ohci-brcm.1/": _("Back, upper USB"),
+			"/devices/platform/ohci-brcm.2/": _("Internal USB"),
+			"/devices/platform/ohci-brcm.3/": _("Internal USB"),
+			"/devices/platform/sdhci-brcmstb.0/": _("eMMC"),
+			"/devices/platform/sdhci-brcmstb.1/": _("SD"),
+			"/devices/platform/strict-ahci.0/ata1/": _("SATA"),	# front
+			"/devices/platform/strict-ahci.0/ata2/": _("SATA")	# back
+		},
 	"dm800":
-	{
-		"/devices/pci0000:01/0000:01:00.0/host0/target0:0:0/0:0:0:0": _("SATA"),
-		"/devices/platform/brcm-ehci.0/usb1/1-2/1-2:1.0": _("Upper USB"),
-		"/devices/platform/brcm-ehci.0/usb1/1-1/1-1:1.0": _("Lower USB"),
-	},
+		{
+			"/devices/pci0000:01/0000:01:00.0/host0/target0:0:0/0:0:0:0": _("SATA"),
+			"/devices/platform/brcm-ehci.0/usb1/1-2/1-2:1.0": _("Upper USB"),
+			"/devices/platform/brcm-ehci.0/usb1/1-1/1-1:1.0": _("Lower USB")
+		},
 	"dm800se":
-	{
-		"/devices/pci0000:01/0000:01:00.0/host0/target0:0:0/0:0:0:0": _("SATA"),
-		"/devices/pci0000:01/0000:01:00.0/host1/target1:0:0/1:0:0:0": _("eSATA"),
-		"/devices/platform/brcm-ehci.0/usb1/1-2/1-2:1.0": _("Upper USB"),
-		"/devices/platform/brcm-ehci.0/usb1/1-1/1-1:1.0": _("Lower USB"),
-	},
+		{
+			"/devices/pci0000:01/0000:01:00.0/host0/target0:0:0/0:0:0:0": _("SATA"),
+			"/devices/pci0000:01/0000:01:00.0/host1/target1:0:0/1:0:0:0": _("eSATA"),
+			"/devices/platform/brcm-ehci.0/usb1/1-2/1-2:1.0": _("Upper USB"),
+			"/devices/platform/brcm-ehci.0/usb1/1-1/1-1:1.0": _("Lower USB")
+		},
 	"dm500hd":
-	{
-		"/devices/pci0000:01/0000:01:00.0/host1/target1:0:0/1:0:0:0": _("eSATA"),
-		"/devices/pci0000:01/0000:01:00.0/host0/target0:0:0/0:0:0:0": _("eSATA"),
-	},
+		{
+			"/devices/pci0000:01/0000:01:00.0/host1/target1:0:0/1:0:0:0": _("eSATA"),
+			"/devices/pci0000:01/0000:01:00.0/host0/target0:0:0/0:0:0:0": _("eSATA")
+		},
 	"dm800sev2":
-	{
-		"/devices/pci0000:01/0000:01:00.0/host0/target0:0:0/0:0:0:0": _("SATA"),
-		"/devices/pci0000:01/0000:01:00.0/host1/target1:0:0/1:0:0:0": _("eSATA"),
-		"/devices/platform/brcm-ehci.0/usb1/1-2/1-2:1.0": _("Upper USB"),
-		"/devices/platform/brcm-ehci.0/usb1/1-1/1-1:1.0": _("Lower USB"),
-	},
+		{
+			"/devices/pci0000:01/0000:01:00.0/host0/target0:0:0/0:0:0:0": _("SATA"),
+			"/devices/pci0000:01/0000:01:00.0/host1/target1:0:0/1:0:0:0": _("eSATA"),
+			"/devices/platform/brcm-ehci.0/usb1/1-2/1-2:1.0": _("Upper USB"),
+			"/devices/platform/brcm-ehci.0/usb1/1-1/1-1:1.0": _("Lower USB")
+		},
 	"dm500hdv2":
-	{
-		"/devices/pci0000:01/0000:01:00.0/host1/target1:0:0/1:0:0:0": _("eSATA"),
-		"/devices/pci0000:01/0000:01:00.0/host0/target0:0:0/0:0:0:0": _("eSATA"),
-	},
+		{
+			"/devices/pci0000:01/0000:01:00.0/host1/target1:0:0/1:0:0:0": _("eSATA"),
+			"/devices/pci0000:01/0000:01:00.0/host0/target0:0:0/0:0:0:0": _("eSATA")
+		},
 	"dm7025":
-	{
-		"/devices/pci0000:00/0000:00:14.1/ide1/1.0": "Compact Flash", #hdc
-		"/devices/pci0000:00/0000:00:14.1/ide0/0.0": "Internal Harddisk"
-	}
+		{
+			"/devices/pci0000:00/0000:00:14.1/ide1/1.0": "Compact Flash", #hdc
+			"/devices/pci0000:00/0000:00:14.1/ide0/0.0": "Internal Harddisk"
+		},
+	"gbquadplus":
+		{
+			"/devices/platform/ehci-brcm.2/usb3/3-1/3-1:1.0": "Front USB Slot",
+			"/devices/platform/ehci-brcm.3/usb4/4-1/4-1:1.0": "Back single USB Slot",
+			"/devices/platform/ehci-brcm.0/usb1/1-1/1-1:1.0": "Back, upper USB Slot",
+			"/devices/platform/ehci-brcm.1/usb2/2-1/2-1:1.0": "Back, lower USB Slot"
+		},
+	"gbultraue":
+		{
+			"/devices/platform/ehci-brcm.0/usb1/1-2/1-2:1.0": "Front USB Slot",
+			"/devices/platform/ehci-brcm.0/usb1/1-1/1-1:1.0": "Back USB Slot"
+		}
 	}
 
 def addInstallTask(job, package):
@@ -874,7 +886,7 @@ class HarddiskManager:
 		except IOError, s:
 			print "couldn't read model: ", s
 		from Tools.HardwareInfo import HardwareInfo
-		for physdevprefix, pdescription in DEVICEDB.get(HardwareInfo().device_name,{}).items():
+		for physdevprefix, pdescription in DEVICEDB.get(HardwareInfo().get_device_name(),{}).items():
 			if phys.startswith(physdevprefix):
 				description = pdescription
 		# not wholedisk and not partition 1
