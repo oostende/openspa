@@ -13,6 +13,7 @@ from enigma import eDVBSatelliteEquipmentControl as secClass, \
 	eDVBSatelliteRotorParameters as rotorParam, \
 	eDVBResourceManager, eDVBDB, eEnv
 
+from boxbranding import getBoxType
 from time import localtime, mktime
 from datetime import datetime
 from Tools.BoundFunction import boundFunction
@@ -119,9 +120,7 @@ class SecConfigure:
 	def linkNIMs(self, sec, nim1, nim2):
 		print "link tuner", nim1, "to tuner", nim2
 		# for internally connect tuner A to B
-		if about.getChipSetString().find('7356') == -1 and nim2 == (nim1 - 1):
-			self.linkInternally(nim1)
-		elif about.getChipSetString().find('7356') != -1:
+		if getBoxType() == 'vusolo2' or nim2 == (nim1 - 1):
 			self.linkInternally(nim1)
 		sec.setTunerLinked(nim1, nim2)
 
