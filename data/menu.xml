@@ -57,6 +57,7 @@
 					<id val="network" />
 					<item level="0" text="Device Setup" entryID="device_setup"><screen module="NetworkSetup" screen="NetworkAdapterSelection" /></item>
 					<item level="1" text="Inadyn Setup" entryID="Inadyn_setup"><screen module="NetworkSetup" screen="NetworkInadyn" /></item>
+					<item level="1" text="CIFS/Samba Setup" entryID="netsmba_setup"><screen module="NetworkSetup" screen="NetworkSamba"/></item>
 					<item level="1" text="OpenVPN Setup" entryID="netvpn_setup"><screen module="NetworkSetup" screen="NetworkOpenvpn"/></item>
 					<item level="1" text="Inetd recovery" entryID="netinetd_recovery"><screen module="NetworkSetup" screen="InetdRecovery"/></item>
 				</menu>

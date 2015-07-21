@@ -29,6 +29,7 @@ from re import compile as re_compile, search as re_search
 import time
 import os
 
+basegroup = "packagegroup-base"
 
 class NetworkAdapterSelection(Screen, HelpableScreen):
 	def __init__(self, session):
@@ -2243,6 +2244,200 @@ class NetworkInadynLog(Screen):
 			for line in f.readlines():
 				strview += line
 			f.close()
+		self['infotext'].setText(strview)
+
+class NetworkSamba(Screen):
+	skin = """
+		<screen position="center,center" size="560,310" >
+			<widget name="lab1" position="20,90" size="150,30" font="Regular;20" valign="center" transparent="0"/>
+			<widget name="labactive" position="180,90" size="250,30" font="Regular;20" valign="center" transparent="0"/>
+			<widget name="lab2" position="20,160" size="150,30" font="Regular;20" valign="center" transparent="0"/>
+			<widget name="labstop" position="180,160" size="100,30" font="Regular;20" valign="center" halign="center" backgroundColor="red"/>
+			<widget name="labrun" position="180,160" size="100,30" zPosition="1" font="Regular;20" valign="center"  halign="center" backgroundColor="green"/>
+			<ePixmap pixmap="skin_default/buttons/red.png" position="0,260" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/green.png" position="140,260" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,260" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/blue.png" position="420,260" size="140,40" alphatest="on" />
+			<widget name="key_red" position="0,260" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
+			<widget name="key_green" position="140,260" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
+			<widget name="key_yellow" position="280,260" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
+			<widget name="key_blue" position="420,260" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#18188b" transparent="1" />
+		</screen>"""
+
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		Screen.setTitle(self, _("Samba Setup"))
+		self.onChangedEntry = [ ]
+		self['lab1'] = Label(_("Autostart:"))
+		self['labactive'] = Label(_(_("Disabled")))
+		self['lab2'] = Label(_("Current Status:"))
+		self['labstop'] = Label(_("Stopped"))
+		self['labrun'] = Label(_("Running"))
+		self['key_green'] = Label(_("Start"))
+		self['key_red'] = Label(_("Remove Service"))
+		self['key_yellow'] = Label(_("Autostart"))
+		self['key_blue'] = Label(_("Show Log"))
+		self.Console = Console()
+		self.my_Samba_active = False
+		self.my_Samba_run = False
+		self['actions'] = ActionMap(['WizardActions', 'ColorActions'], {'ok': self.close, 'back': self.close, 'red': self.UninstallCheck, 'green': self.SambaStartStop, 'yellow': self.activateSamba, 'blue': self.Sambashowlog})
+		self.service_name = basegroup + '-smbfs-server'
+		self.onLayoutFinish.append(self.InstallCheck)
+
+	def InstallCheck(self):
+		self.Console.ePopen('/usr/bin/opkg list_installed ' + self.service_name, self.checkNetworkState)
+
+	def checkNetworkState(self, str, retval, extra_args):
+		if 'Collected errors' in str:
+			self.session.openWithCallback(self.close, MessageBox, _("A background update check is in progress, please wait a few minutes and try again."), type=MessageBox.TYPE_INFO, timeout=10, close_on_any_key=True)
+		elif not str:
+			self.feedscheck = self.session.open(MessageBox,_('Please wait whilst feeds state is checked.'), MessageBox.TYPE_INFO, enable_input = False)
+			self.feedscheck.setTitle(_('Checking Feeds'))
+			cmd1 = "opkg update"
+			self.CheckConsole = Console()
+			self.CheckConsole.ePopen(cmd1, self.checkNetworkStateFinished)
+		else:
+			self.updateService()
+
+	def checkNetworkStateFinished(self, result, retval,extra_args=None):
+		if 'bad address' in result:
+			self.session.openWithCallback(self.InstallPackageFailed, MessageBox, _("Your %s %s is not connected to the internet, please check your network settings and try again.") % (getMachineBrand(), getMachineName()), type=MessageBox.TYPE_INFO, timeout=10, close_on_any_key=True)
+		elif ('wget returned 1' or 'wget returned 255' or '404 Not Found') in result:
+			self.session.openWithCallback(self.InstallPackageFailed, MessageBox, _("Sorry feeds are down for maintenance, please try again later."), type=MessageBox.TYPE_INFO, timeout=10, close_on_any_key=True)
+		else:
+			self.session.openWithCallback(self.QuestionCallback, MessageBox, _('Ready to install %s ?') % self.service_name, MessageBox.TYPE_YESNO)
+
+	def QuestionCallback(self, val):
+		if val:
+			self.session.openWithCallback(self.InstallPackage, MessageBox, _('Do you want to also install samba client ?\nThis allows you to mount your windows shares on this device.'), MessageBox.TYPE_YESNO)
+		else:
+			self.feedscheck.close()
+			self.close()
+
+	def InstallPackage(self, val):
+		if val:
+			self.service_name = self.service_name + ' ' + basegroup + '-smbfs-client'
+		self.doInstall(self.installComplete, self.service_name)
+
+	def InstallPackageFailed(self, val):
+		self.feedscheck.close()
+		self.close()
+
+	def doInstall(self, callback, pkgname):
+		self.message = self.session.open(MessageBox,_("please wait..."), MessageBox.TYPE_INFO, enable_input = False)
+		self.message.setTitle(_('Installing Service'))
+		self.Console.ePopen('/usr/bin/opkg install ' + pkgname, callback)
+
+	def installComplete(self,result = None, retval = None, extra_args = None):
+		self.session.open(TryQuitMainloop, 2)
+
+	def UninstallCheck(self):
+		self.service_name = self.service_name + ' ' + basegroup + '-smbfs-client'
+		self.Console.ePopen('/usr/bin/opkg list_installed ' + self.service_name, self.RemovedataAvail)
+
+	def RemovedataAvail(self, str, retval, extra_args):
+		if str:
+			restartbox = self.session.openWithCallback(self.RemovePackage,MessageBox,_('Your %s %s will be restarted after the removal of service\nDo you want to remove now ?') % (getMachineBrand(), getMachineName()), MessageBox.TYPE_YESNO)
+			restartbox.setTitle(_('Ready to remove "%s" ?') % self.service_name)
+		else:
+			self.updateService()
+
+	def RemovePackage(self, val):
+		if val:
+			self.doRemove(self.removeComplete, self.service_name)
+
+	def doRemove(self, callback, pkgname):
+		self.message = self.session.open(MessageBox,_("please wait..."), MessageBox.TYPE_INFO, enable_input = False)
+		self.message.setTitle(_('Removing Service'))
+		self.Console.ePopen('/usr/bin/opkg remove ' + pkgname + ' --force-remove --autoremove', callback)
+
+	def removeComplete(self,result = None, retval = None, extra_args = None):
+		self.message.close()
+		self.close()
+
+	def createSummary(self):
+		return NetworkServicesSummary
+
+	def Sambashowlog(self):
+		self.session.open(NetworkSambaLog)
+
+	def SambaStartStop(self):
+		commands = []
+		if not self.my_Samba_run:
+			commands.append('/etc/init.d/samba start')
+		elif self.my_Samba_run:
+			commands.append('/etc/init.d/samba stop')
+			commands.append('killall nmbd')
+			commands.append('killall smbd')
+		self.Console.eBatch(commands, self.StartStopCallback, debug=True)
+
+	def StartStopCallback(self, result = None, retval = None, extra_args = None):
+		time.sleep(3)
+		self.updateService()
+
+	def activateSamba(self):
+		commands = []
+		if fileExists('/etc/rc2.d/S20samba'):
+			commands.append('update-rc.d -f samba remove')
+		else:
+			commands.append('update-rc.d -f samba defaults')
+		self.Console.eBatch(commands, self.StartStopCallback, debug=True)
+
+	def updateService(self):
+		import process
+		p = process.ProcessList()
+		samba_process = str(p.named('smbd')).strip('[]')
+		self['labrun'].hide()
+		self['labstop'].hide()
+		self['labactive'].setText(_("Disabled"))
+		self.my_Samba_active = False
+		if fileExists('/etc/rc2.d/S20samba'):
+			self['labactive'].setText(_("Enabled"))
+			self['labactive'].show()
+			self.my_Samba_active = True
+
+		self.my_Samba_run = False
+		if samba_process:
+			self.my_Samba_run = True
+		if self.my_Samba_run:
+			self['labstop'].hide()
+			self['labactive'].show()
+			self['labrun'].show()
+			self['key_green'].setText(_("Stop"))
+			status_summary = self['lab2'].text + ' ' + self['labrun'].text
+		else:
+			self['labrun'].hide()
+			self['labstop'].show()
+			self['labactive'].show()
+			self['key_green'].setText(_("Start"))
+			status_summary = self['lab2'].text + ' ' + self['labstop'].text
+		title = _("Samba Setup")
+		autostartstatus_summary = self['lab1'].text + ' ' + self['labactive'].text
+
+		for cb in self.onChangedEntry:
+			cb(title, status_summary, autostartstatus_summary)
+
+class NetworkSambaLog(Screen):
+	skin = """
+		<screen position="80,100" size="560,400" >
+				<widget name="infotext" position="10,10" size="540,380" font="Regular;18" />
+		</screen>"""
+
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		Screen.setTitle(self, _("Samba Log"))
+		self['infotext'] = ScrollLabel('')
+		self.Console = Console()
+		self['actions'] = ActionMap(['WizardActions', 'ColorActions'], {'ok': self.close, 'back': self.close, 'up': self['infotext'].pageUp, 'down': self['infotext'].pageDown})
+		strview = ''
+		self.Console.ePopen('tail /tmp/smb.log > /tmp/tmp.log')
+		time.sleep(1)
+		if fileExists('/tmp/tmp.log'):
+			f = open('/tmp/tmp.log', 'r')
+			for line in f.readlines():
+				strview += line
+			f.close()
+			remove('/tmp/tmp.log')
 		self['infotext'].setText(strview)
 
 class InetdRecovery(Screen, ConfigListScreen):
