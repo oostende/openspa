@@ -88,7 +88,7 @@ class CronTimers(Screen):
 		self.updateList()
 
 	def UninstallCheck(self):
-		if self.my_crond_run == False:
+		if not self.my_crond_run:
 			self.Console.ePopen('/usr/bin/opkg list_installed ' + self.service_name, self.RemovedataAvail)
 		else:
 			self.close()
@@ -131,9 +131,9 @@ class CronTimers(Screen):
 			cb(name, desc)
 
 	def CrondStart(self):
-		if self.my_crond_run == False:
+		if not self.my_crond_run:
 			self.Console.ePopen('/etc/init.d/busybox-cron start', self.StartStopCallback)
-		elif self.my_crond_run == True:
+		elif self.my_crond_run:
 			self.Console.ePopen('/etc/init.d/busybox-cron stop', self.StartStopCallback)
 
 	def StartStopCallback(self, result = None, retval = None, extra_args = None):
@@ -170,7 +170,7 @@ class CronTimers(Screen):
 			self['labdisabled'].show()
 		if crond_process:
 			self.my_crond_run = True
-		if self.my_crond_run == True:
+		if self.my_crond_run:
 			self['labstop'].hide()
 			self['labrun'].show()
 			self['key_yellow'].setText(_("Stop"))
@@ -186,54 +186,24 @@ class CronTimers(Screen):
 			f = open('/etc/cron/crontabs/root', 'r')
 			for line in f.readlines():
 				parts = line.strip().split()
-				if parts:
+				if len(parts)>5 and not parts[0].startswith("#"):
 					if parts[1] == '*':
-						try:
-							line2 = 'H: 00:' + parts[0].zfill(2) + '\t' + parts[5] + parts[6] + parts[7] + parts[8] + parts[9]
-						except:
-							try:
-								line2 = 'H: 00:' + parts[0].zfill(2) + '\t' + parts[5] + parts[6] + parts[7] + parts[8]
-							except:
-								try:
-									line2 = 'H: 00:' + parts[0].zfill(2) + '\t' + parts[5] + parts[6] + parts[7]
-								except:
-									try:
-										line2 = 'H: 00:' + parts[0].zfill(2) + '\t' + parts[5] + parts[6]
-									except:
-										line2 = 'H: 00:' + parts[0].zfill(2) + '\t' + parts[5]
+						line2 = 'H: 00:' + parts[0].zfill(2) + '\t'
+						for i in range(5, len(parts)-1):
+							line2 = line2 + parts[i] + ' '
 						res = (line2, line)
 						self.list.append(res)
 					elif parts[2] == '*' and parts[4] == '*':
-						try:
-							line2 = 'D: ' + parts[1].zfill(2) + ':' + parts[0].zfill(2) + '\t' + parts[5] + parts[6] + parts[7] + parts[8] + parts[9]
-						except:
-							try:
-								line2 = 'D: ' + parts[1].zfill(2) + ':' + parts[0].zfill(2) + '\t' + parts[5] + parts[6] + parts[7] + parts[8]
-							except:
-								try:
-									line2 = 'D: ' + parts[1].zfill(2) + ':' + parts[0].zfill(2) + '\t' + parts[5] + parts[6] + parts[7]
-								except:
-									try:
-										line2 = 'D: ' + parts[1].zfill(2) + ':' + parts[0].zfill(2) + '\t' + parts[5] + parts[6]
-									except:
-										line2 = 'D: ' + parts[1].zfill(2) + ':' + parts[0].zfill(2) + '\t' + parts[5]
+						line2 = 'D: ' + parts[1].zfill(2) + ':' + parts[0].zfill(2) + '\t'
+						for i in range(5, len(parts)-1):
+							line2 = line2 + parts[i] + ' '
 						res = (line2, line)
 						self.list.append(res)
 					elif parts[3] == '*':
 						if parts[4] == "*":
-							try:
-								line2 = 'M:  Day ' + parts[2] + '  ' + parts[1].zfill(2) + ':' + parts[0].zfill(2) + '\t' + parts[5] + parts[6] + parts[7] + parts[8] + parts[9]
-							except:
-								try:
-									line2 = 'M:  Day ' + parts[2] + '  ' + parts[1].zfill(2) + ':' + parts[0].zfill(2) + '\t' + parts[5] + parts[6] + parts[7] + parts[8]
-								except:
-									try:
-										line2 = 'M:  Day ' + parts[2] + '  ' + parts[1].zfill(2) + ':' + parts[0].zfill(2) + '\t' + parts[5] + parts[6] + parts[7]
-									except:
-										try:
-											line2 = 'M:  Day ' + parts[2] + '  ' + parts[1].zfill(2) + ':' + parts[0].zfill(2) + '\t' + parts[5] + parts[6]
-										except:
-											line2 = 'M:  Day ' + parts[2] + '  ' + parts[1].zfill(2) + ':' + parts[0].zfill(2) + '\t' + parts[5]
+							line2 = 'M:  Day ' + parts[2] + '  ' + parts[1].zfill(2) + ':' + parts[0].zfill(2) + '\t'
+							for i in range(5, len(parts)-1):
+								line2 = line2 + parts[i] + ' '
 						header = 'W:  '
 						day = ""
 						if str(parts[4]).find('0') >= 0:
@@ -252,19 +222,9 @@ class CronTimers(Screen):
 							day += 'Sat '
 
 						if day:
-							try:
-								line2 = header + day + parts[1].zfill(2) + ':' + parts[0].zfill(2) + '\t' + parts[5] + parts[6] + parts[7] + parts[8] + parts[9]
-							except:
-								try:
-									line2 = header + day + parts[1].zfill(2) + ':' + parts[0].zfill(2) + '\t' + parts[5] + parts[6] + parts[7] + parts[8]
-								except:
-									try:
-										line2 = header + day + parts[1].zfill(2) + ':' + parts[0].zfill(2) + '\t' + parts[5] + parts[6] + parts[7]
-									except:
-										try:
-											line2 = header + day + parts[1].zfill(2) + ':' + parts[0].zfill(2) + '\t' + parts[5] + parts[6]
-										except:
-											line2 = header + day + parts[1].zfill(2) + ':' + parts[0].zfill(2) + '\t' + parts[5]
+							line2 = header + day + parts[1].zfill(2) + ':' + parts[0].zfill(2) + '\t'
+							for i in range(5, len(parts)-1):
+								line2 = line2 + parts[i] + ' '
 						res = (line2, line)
 						self.list.append(res)
 			f.close()
@@ -345,7 +305,7 @@ class CronTimersConfig(Screen, ConfigListScreen):
 		if config.crontimers.runwhen.value == 'Weekly':
 			self.list.append(getConfigListEntry(_("What Day of week ?"), config.crontimers.dayofweek))
 		if config.crontimers.runwhen.value == 'Monthly':
-			self.list.append(getConfigListEntry(_("What Day of month ?"), config.crontimers.dayofmonth))
+			self.list.append(getConfigListEntry(_("What date of month ?"), config.crontimers.dayofmonth))
 		self.list.append(getConfigListEntry(_("Command type"), config.crontimers.commandtype))
 		if config.crontimers.commandtype.value == 'custom':
 			self.list.append(getConfigListEntry(_("Command To Run"), config.crontimers.user_command))
@@ -370,7 +330,7 @@ class CronTimersConfig(Screen, ConfigListScreen):
 			self.vkvar = sel[0]
 			if self.vkvar == _("Command To Run"):
 				from Screens.VirtualKeyBoard import VirtualKeyBoard
-				self.session.openWithCallback(self.VirtualKeyBoardCallback, VirtualKeyBoard, title = self["config"].getCurrent()[0], text = self["config"].getCurrent()[1].getValue())
+				self.session.openWithCallback(self.VirtualKeyBoardCallback, VirtualKeyBoard, title = self["config"].getCurrent()[0], text = self["config"].getCurrent()[1].value)
 
 	def VirtualKeyBoardCallback(self, callback = None):
 		if callback is not None and len(callback):
