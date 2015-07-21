@@ -40,7 +40,10 @@ def getGStreamerVersionString():
 
 def getKernelVersionString():
 	try:
-		return open("/proc/version","r").read().split(' ', 4)[2].split('-',2)[0]
+		f = open("/proc/version","r")
+		kernelversion = f.read().split(' ', 4)[2].split('-',2)[0]
+		f.close()
+		return kernelversion
 	except:
 		return _("unknown")
 
@@ -62,7 +65,7 @@ def getChipSetString():
 			f.close()
 			return str(chipset.lower().replace('\n','').replace('bcm','').replace('brcm','').replace('sti',''))
 		except:
-			return "unavailable"
+			return _("unavailable")
 
 def getModelString():
 	try:
@@ -71,7 +74,7 @@ def getModelString():
 		file.close()
 		return model
 	except IOError:
-		return "unknown"
+		return _("unknown")
 
 def getPythonVersionString():
 	try:
@@ -96,7 +99,7 @@ def getCPUString():
 		file.close()
 		return system 
 	except IOError:
-		return "unavailable"
+		return _("unavailable")
 
 def getCPUSpeedString():
 	try:
@@ -111,7 +114,7 @@ def getCPUSpeedString():
 		file.close()
 		return speed
 	except IOError:
-		return "unavailable"
+		return _("unavailable")
 
 def getCpuCoresString():
 	try:
@@ -129,7 +132,7 @@ def getCpuCoresString():
 		file.close()
 		return cores
 	except IOError:
-		return "unavailable"
+		return _("unavailable")
 
 def getCPUTempString():
 	try:
