@@ -2420,7 +2420,7 @@ class NetworkSamba(Screen):
 class NetworkSambaLog(Screen):
 	skin = """
 		<screen position="80,100" size="560,400" >
-				<widget name="infotext" position="10,10" size="540,380" font="Regular;18" />
+			<widget name="infotext" position="10,10" size="540,380" font="Regular;18" />
 		</screen>"""
 
 	def __init__(self, session):
