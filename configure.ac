@@ -386,7 +386,7 @@ if test "$BOXTYPE" == "odinm9"; then
 fi
 
 if test "$BOXTYPE" == "odinm7" ; then
-	AC_DEFINE(FORCE_NO_BLENDING_ACCELERATION, 1,[define when the framebuffer acceleration does not have alphablending support, though the autodetection might indicate that it does])
+	AC_DEFINE(FORCE_BLENDING_ACCELERATION, 1,[define when the framebuffer acceleration has alphablending support, but detection slow down all])
 fi
 
 if test "$BOXTYPE" == "e3hd"; then
