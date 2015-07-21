@@ -17,7 +17,7 @@ fi
 
 # update NTP time if NTP Time Enabled
 if [ "$(grep config.misc.SyncTimeUsing /etc/enigma2/settings)" == "config.misc.SyncTimeUsing=1" ]; then
-	/usr/bin/ntpdate -s -u pool.ntp.org &
+	/usr/sbin/ntpdate -s -u pool.ntp.org &
 fi
 
 # remove annoying WebInterface relicts
