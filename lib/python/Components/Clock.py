@@ -19,7 +19,7 @@ class Clock(VariableText, HTMLComponent, GUIComponent):
 	def onShow(self):
 		self.doClock()
 		self.clockTimer.start(1000)
-	
+
 	def onHide(self):
 		self.clockTimer.stop()
 
