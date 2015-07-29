@@ -133,6 +133,7 @@ dist_install_DATA = \
 	zaprecclock_prepost.png \
 	DVI.png \
 	HDMI.png \
+	RCA.png \
 	Scart.png \
 	YPbPr.png \
 	lcd_DVI.png \
