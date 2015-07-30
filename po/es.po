@@ -3,15 +3,15 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
-"Last-Translator: pe.tardo <pe.thardo@gmail.com>\n"
+"Last-Translator: pe.tardo <http://openspa.info>\n"
 "Language-Team: OpenSPA <openspa.info>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Spanish\n"
-"X-Poedit-Country: SPAIN\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: es_ES\n"
+"X-Generator: Poedit 1.5.4\n"
 
 msgid ""
 "\n"
@@ -533,6 +533,9 @@ msgstr "Editor de configuraciones de modems 3G/4G"
 msgid "3X"
 msgstr "3x"
 
+msgid "3d mode"
+msgstr "modo 3D"
+
 msgid "4 hours"
 msgstr "4 horas"
 
@@ -1045,6 +1048,9 @@ msgstr ""
 
 msgid "All ages"
 msgstr "Todos los públicos"
+
+msgid "All frequency"
+msgstr "Toda la frecuencia"
 
 msgid "All resolutions"
 msgstr "Todas las resoluciones"
@@ -1628,6 +1634,9 @@ msgstr "Brillo (normal)"
 msgid "Brightness (Standby)"
 msgstr "Brillo (reposo)"
 
+msgid "Broadcast:\t"
+msgstr "Emisión:\t"
+
 msgid "Browse network neighbourhood"
 msgstr "Explorar la red local"
 
@@ -1673,6 +1682,12 @@ msgstr "por OpenSPA"
 
 msgid "Bypass HDMI EDID Check"
 msgstr "No comprobar HDMI EDID"
+
+msgid "Bytes received:"
+msgstr "Bytes recibidos"
+
+msgid "Bytes sent:"
+msgstr "Bytes enviados"
 
 msgid "C"
 msgstr "C"
@@ -1742,6 +1757,9 @@ msgstr "Asignación CI"
 msgid "CIFS Share"
 msgstr "Tipo CIFS"
 
+msgid "CIFS/Samba Setup"
+msgstr "Configurar CIFS/Samba"
+
 msgid "CPU: %s"
 msgstr "CPU: %s"
 
@@ -1789,6 +1807,9 @@ msgstr ""
 
 msgid "Cancel"
 msgstr "Cancelar"
+
+msgid "Cancelled upon user request"
+msgstr "Cancelado a petición del usuario"
 
 msgid "Cannot determine"
 msgstr "No se puede determinar"
@@ -1881,6 +1902,9 @@ msgstr "Cambiar de lista en zapping rápido"
 
 msgid "Change hostname"
 msgstr "Cambiar nombre de host"
+
+msgid "Change recording (add time)"
+msgstr "Cambiar grabación (añadir tiempo)"
 
 msgid "Change recording (duration)"
 msgstr "Cambiar grabación actual (duración)"
@@ -3939,6 +3963,9 @@ msgstr "Exportar"
 msgid "Extend sleeptimer 15 minutes"
 msgstr "Aumentar 15 min. el tempor. de reposo"
 
+msgid "Extended"
+msgstr "Extendido"
+
 msgid "Extended Networksetup Plugin..."
 msgstr "Plugin de config. extendida de red"
 
@@ -4588,6 +4615,9 @@ msgstr "Velocidad horizontal"
 msgid "Horizontal turning speed"
 msgstr "Velocidad horizontal"
 
+msgid "Hostname:"
+msgstr "Nombre del host"
+
 msgid "Hostname: "
 msgstr "Nombre host: "
 
@@ -4779,6 +4809,9 @@ msgstr "Datos de frontend en la infobar"
 msgid "Information"
 msgstr "Información"
 
+msgid "Information openSPA"
+msgstr "Información openSPA"
+
 msgid "Infos"
 msgstr "Información"
 
@@ -4883,6 +4916,9 @@ msgstr "Ubicación de grabaciones instantáneas"
 
 msgid "Instant recording..."
 msgstr "Grabación instantánea"
+
+msgid "Interface:\t/dev/"
+msgstr "Interface:\t/dev/"
 
 msgid "Interface: "
 msgstr "Interface: "
@@ -5169,6 +5205,9 @@ msgstr "Quitar límites"
 msgid "Limits on"
 msgstr "Activar límites"
 
+msgid "Link Quality:"
+msgstr "Calidad del enlace"
+
 msgid "Link quality:"
 msgstr "Calidad del enlace"
 
@@ -5272,6 +5311,9 @@ msgstr "Luxemburgués"
 
 msgid "MAC address"
 msgstr "Dirección MAC"
+
+msgid "MAC:"
+msgstr "MAC:"
 
 msgid "MHz"
 msgstr "MHz"
@@ -5774,6 +5816,9 @@ msgstr "Nombre PID"
 msgid "Netmask"
 msgstr "Máscara"
 
+msgid "Netmask:"
+msgstr "Máscara de red:"
+
 msgid "Network"
 msgstr "Red"
 
@@ -5782,6 +5827,9 @@ msgstr "Configuración de Red"
 
 msgid "Network ID"
 msgstr "ID de red"
+
+msgid "Network Information"
+msgstr "Información de red"
 
 msgid "Network Interface"
 msgstr "Interface de red"
@@ -6145,6 +6193,9 @@ msgstr ""
 "No hay suficiente espacio en /hdd!\n"
 "Se necesitan unos 300MB de espacio libre.\n"
 
+msgid "Not-Associated"
+msgstr "No asociado"
+
 msgid "Not-Associated %d"
 msgstr "No conectado"
 
@@ -6202,6 +6253,9 @@ msgstr "OSD"
 
 msgid "OSD 3D Setup"
 msgstr "Configuración OSD 3D"
+
+msgid "OSD 3D setup"
+msgstr "Configurar OSD 3D"
 
 msgid "OSD Position Setup"
 msgstr "Posición OSD"
@@ -7904,6 +7958,9 @@ msgstr "Escanear transpondedores encontrados"
 msgid "Scan only FTA services"
 msgstr "Buscar sólo canales FTA"
 
+msgid "Scan options"
+msgstr "Opciones de escaneo"
+
 msgid "Scan range"
 msgstr "Rango de búsq."
 
@@ -8299,6 +8356,9 @@ msgstr "Buscar canales"
 
 msgid "Service searching"
 msgstr "Sintonización"
+
+msgid "Service searching "
+msgstr "Búsqueda de canales "
 
 msgid "Service stopped"
 msgstr "Servicio detenido"
@@ -8745,6 +8805,9 @@ msgstr "Lado con lado"
 
 msgid "Signal OK, proceeding"
 msgstr "Señal OK, estableciendo"
+
+msgid "Signal Strength:"
+msgstr "Potencia de la señal"
 
 msgid "Signal quality"
 msgstr "Calidad de señal"
@@ -10080,6 +10143,9 @@ msgstr "Utilidades"
 msgid "Top and Bottom"
 msgstr "Superior e inferior"
 
+msgid "Top and bottom"
+msgstr "Arriba y abajo"
+
 msgid "Total"
 msgstr "Total"
 
@@ -10133,6 +10199,9 @@ msgstr "Intentos restantes:"
 
 msgid "Try to find used transponders in cable network.. please wait..."
 msgstr "Buscando los transpondedores en la red de cable, espere..."
+
+msgid "Try to find used transponders in terrestrial network... please wait..."
+msgstr "Buscar los transpondedores utilizados en la red terrestre. Espere"
 
 msgid "Trying to download a new packetlist. Please wait..."
 msgstr "Espere mientras se descarga la lista de paquetes..."
@@ -10973,6 +11042,9 @@ msgstr "Que dia del mes?"
 msgid "What Day of week ?"
 msgstr "Que dia de la semana?"
 
+msgid "What date of month ?"
+msgstr "Qué dia del mes?"
+
 msgid "What do you want to scan?"
 msgstr "Qué quiere buscar?"
 
@@ -11545,7 +11617,7 @@ msgid ""
 "now."
 msgstr ""
 "Ha elegido hacer un backup de la configuración. Pulse OK para comenzar el "
-"backup ahora."
+"backup."
 
 msgid ""
 "You have chosen to create a new .NFI flasher bootable USB stick. This will "
@@ -12125,6 +12197,9 @@ msgstr "borrar corte"
 msgid "descramble and record ecm"
 msgstr "Descodificar y grabar ecm"
 
+msgid "description"
+msgstr "descripción"
+
 msgid "description match"
 msgstr "coincidir descripción"
 
@@ -12232,6 +12307,9 @@ msgstr "entretenimiento 10-16 años"
 
 msgid "entertainment (6-14 year old)"
 msgstr "entretenimiento 6-14 años"
+
+msgid "epg cache backup"
+msgstr "backup de la caché de epg"
 
 msgid "equal to"
 msgstr "igual a"
@@ -12380,6 +12458,9 @@ msgstr "saltos:"
 msgid "horizontal"
 msgstr "Horizontal"
 
+msgid "http://IP-ADDRESS:8001"
+msgstr "http://dirección_ip:8001"
+
 msgid "in Description"
 msgstr "en la descripción"
 
@@ -12394,6 +12475,9 @@ msgstr "aumentar en un salto"
 
 msgid "info if cron daemon is running"
 msgstr "Mostrar si el proceso está en ejecución"
+
+msgid "information"
+msgstr "información"
 
 msgid "information/education/school program"
 msgstr "programa de información/educación/escolar"
