@@ -6,9 +6,13 @@ from Components.SystemInfo import SystemInfo
 from Components.Sources.StaticText import StaticText
 from Components.Pixmap import Pixmap
 from Components.Console import Console
-from enigma import getDesktop
+from enigma import getDesktop, iPlayableService, iServiceInformation, eServiceCenter, eServiceReference, eDVBDB
 from os import access, R_OK
 from boxbranding import getBoxType, getBrandOEM
+
+from Components.ServiceEventTracker import ServiceEventTracker
+from Screens.ChannelSelection import FLAG_IS_DEDICATED_3D
+
 
 def InitOsd():
 	try:
@@ -301,3 +305,55 @@ class OSD3DSetupScreen(Screen, ConfigListScreen):
 			self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Really close without saving settings?"))
 		else:
 			self.close()
+
+previous = None
+isDedicated3D = False
+
+def applySettings(mode=config.osd.threeDmode.value, znorm=int(config.osd.threeDznorm.value)-50):
+	global previous, isDedicated3D
+	mode = isDedicated3D and mode == "auto" and "sidebyside" or mode
+	mode == "3dmode" in SystemInfo["3DMode"] and mode or mode == 'sidebyside' and 'sbs' or mode == 'topandbottom' and 'tab' or 'off'
+	if previous != (mode, znorm):
+		try:
+			open(SystemInfo["3DMode"], "w").write(mode)
+			open(SystemInfo["3DZNorm"], "w").write('%d' % znorm)
+			previous = (mode, znorm)
+		except:
+			return
+
+class auto3D(Screen):
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		self.session = session
+		self.__event_tracker = ServiceEventTracker(screen = self, eventmap =
+			{
+				iPlayableService.evStart: self.__evStart,
+				iPlayableService.evEnd: self.__evStop,
+			})
+
+	def checkIfDedicated3D(self):
+			service = self.session.nav.getCurrentlyPlayingServiceReference()
+			servicepath = service and service.getPath()
+			if servicepath and servicepath.startswith("/"):
+				if service.toString().startswith("1:"):
+					info = eServiceCenter.getInstance().info(service)
+					service = info and info.getInfoString(service, iServiceInformation.sServiceref)
+					return service and eDVBDB.getInstance().getFlag(eServiceReference(service)) & FLAG_IS_DEDICATED_3D == FLAG_IS_DEDICATED_3D and "sidebyside"
+				else:
+					return ".3d." in servicepath.lower() and "sidebyside" or ".tab." in servicepath.lower() and "topandbottom"
+			service = self.session.nav.getCurrentService()
+			info = service and service.info()
+			return info and info.getInfo(iServiceInformation.sIsDedicated3D) == 1 and "sidebyside"
+
+	def __evStop(self):
+		applySettings("off")
+
+	def __evStart(self):
+		if config.osd.threeDmode.value == "auto":
+			global isDedicated3D
+			isDedicated3D = self.checkIfDedicated3D()
+			if isDedicated3D:
+				applySettings(isDedicated3D)
+			else:
+				applySettings()
+
