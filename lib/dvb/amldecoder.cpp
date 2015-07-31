@@ -406,17 +406,6 @@ eAMLTSMPEGDecoder::~eAMLTSMPEGDecoder()
 		m_pvr_fd = -1;
 	}
 
-#if 0
-	struct buf_status vbuf;
-	do {
-		int ret = codec_get_vbuf_state(&m_codec, &vbuf);
-		if (ret != 0) {
-			eDebug("codec_get_vbuf_state error: %x", -ret);
-			break;
-		}
-	} while (vbuf.data_len > 0x100);
-#endif
-
 	codec_close(&m_codec);
 
 }
