@@ -102,9 +102,7 @@ private:
 
 	eFilePushThreadDecorder m_threadDecoder;
 
-	int m_video_dmx_fd;
 	int m_pvr_fd;
-
 
 	void demux_event(int event);
 	void video_event(struct videoEvent);
