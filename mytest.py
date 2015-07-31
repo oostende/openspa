@@ -230,7 +230,13 @@ class Session:
  			open(origwebifpath + "/WebChilds/External/__init__.py", "w").close()
 
 			os.symlink(hookpath, origwebifpath + "/WebChilds/Toplevel.py")
-		##########################################################
+		######################################################
+		# include auto3D
+		from Screens.UserInterfacePositioner import auto3D
+		from Components.SystemInfo import SystemInfo
+		if SystemInfo["3DMode"]:
+			auto3D(self)
+		#####################
 
 		for p in plugins.getPlugins(PluginDescriptor.WHERE_SESSIONSTART):
 			try:
@@ -239,6 +245,7 @@ class Session:
 				print "Plugin raised exception at WHERE_SESSIONSTART"
 				import traceback
 				traceback.print_exc()
+
 
 	def processDelay(self):
 		callback = self.current_dialog.callback
