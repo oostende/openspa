@@ -95,8 +95,6 @@ eFilePushThreadDecorder::eFilePushThreadDecorder(size_t buffersize):
 	cs_tsbbatch_odd = (dvbcsa_bs_batch_s *) malloc((cs + 1) * sizeof(struct dvbcsa_bs_batch_s));
 	cs_key_even = dvbcsa_bs_key_alloc();
 	cs_key_odd = dvbcsa_bs_key_alloc();
-	/* */
-
 
 	CONNECT(m_messagepump.recv_msg, eFilePushThreadDecorder::recvEvent);
 }
@@ -480,7 +478,6 @@ RESULT eAMLTSMPEGDecoder::setAudioPID(int apid, int type)
 {
 	TRACE__
 	/* do not set an audio pid on decoders without audio support */
-	//if (!m_has_audio) apid = -1;
 
 	if ((m_apid != apid) || (m_atype != type))
 	{
@@ -524,18 +521,6 @@ RESULT eAMLTSMPEGDecoder::setAudioChannel(int channel)
 	TRACE__
 	if (channel == -1)
 		channel = ac_stereo;
-	if (m_decoder == 0 && m_audio_channel != channel)
-	{
-/*
-		if (m_audio)
-		{
-			m_audio->setChannel(channel);
-			m_audio_channel=channel;
-		}
-		else
-			eDebug("eAMLTSMPEGDecoder::setAudioChannel but no audio decoder exist");
-*/
-	}
 	return 0;
 }
 
@@ -679,8 +664,7 @@ RESULT eAMLTSMPEGDecoder::play()
 					eDebug("[eAMLTSMPEGDecoder::play] Amlogic CODEC codec_init success !!!!!");
 					setAvsyncEnable(1);
 				}
-
-				m_threadDecoder.start(m_pvr_fd,&m_codec);
+				//m_threadDecoder.start(m_pvr_fd,&m_codec);
 			}
 			else
 			{
