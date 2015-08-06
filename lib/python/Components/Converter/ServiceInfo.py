@@ -4,7 +4,7 @@ from Components.Element import cached
 
 from os import path
 
-WIDESCREEN = [3, 4, 7, 8, 0xB, 0xC, 0xF, 0x10]
+WIDESCREEN = [1, 3, 4, 7, 8, 0xB, 0xC, 0xF, 0x10]
 
 class ServiceInfo(Converter, object):
 	HAS_TELETEXT = 1
