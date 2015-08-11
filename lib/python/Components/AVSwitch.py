@@ -586,6 +586,7 @@ def InitAVSwitch():
 		can_downmix_aac = "downmix" in file
 	except:
 		can_downmix_aac = False
+		SystemInfo["CanPcmMultichannel"] = False
 
 	SystemInfo["CanDownmixAAC"] = can_downmix_aac
 	if can_downmix_aac:
