@@ -56,7 +56,7 @@ class MessageBox(Screen):
 		if picon != self.TYPE_INFO:
 			self["InfoPixmap"].hide()
 
-		self.title = self.type < self.TYPE_MESSAGE and ["Question", "Information", "Warning", "Error"][self.type] or "Message"
+		self.title = self.type < self.TYPE_MESSAGE and [_("Question"), _("Information"), _("Warning"), _("Error")][self.type] or _("Message")
 		if type == self.TYPE_YESNO:
 			if list:
 				self.list = list
@@ -92,7 +92,7 @@ class MessageBox(Screen):
 		self.onLayoutFinish.append(self.layoutFinished)
 
 	def layoutFinished(self):
-		self.setTitle(_(self.title))
+		self.setTitle(self.title)
 
 	def initTimeout(self, timeout):
 		self.timeout = timeout
