@@ -104,6 +104,12 @@ def getCPUString():
 def getCPUSpeedString():
 	if getBoxType() in ('wetekplay'):
 		return "1.5 GHz"
+	elif getBoxType() in ('azboxhd'):
+		return "300 MHz"
+	elif getBoxType() in ('azboxme'):
+		return "667 MHz"
+	elif getBoxType in ('azboxminime'):
+		return "500 MHz"
 	else:
 		try:
 			file = open('/proc/cpuinfo', 'r')
