@@ -24,8 +24,25 @@ void eRCDeviceInputDev::handleCode(long rccode)
 	eDebug("==> BEFORE check for evtype: %x %x %x", ev->value, ev->code, ev->type);
 	eDebug("==> BEFORE check for evtype:-->BackspaceFLAG %d", bflag);
 */
-	if (ev->code == KEY_BACKSPACE && ev->value == 1 ) {
+	if (ev->code == KEY_POWER && ev->value == 1 ) {
+		bflag = 0;
+	}
+
+	FILE* f;
+	int state = 255;
+	// read powerled
+	if ((f = fopen("/sys/class/leds/wetek:blue:powerled/brightness", "r")) != NULL) {
+		fscanf(f,"%d",&state);
+		fclose(f);
+	} 
+	// signalize colors buttons mode in original rcu with eth led (mode heartbeat). Only in wakeup state 
+	if (ev->code == KEY_BACKSPACE && ev->value == 1 && state > 0) {
 		bflag = !bflag;
+		if ((f = fopen("/sys/class/leds/wetek:blue:ethled/trigger", "w")) != NULL) { 
+			if (bflag) fprintf(f, "heartbeat");
+			else fprintf(f, "ethlink");
+			fclose(f);
+		}
 	}
 /*
 	eDebug("==> BEFORE check for evtype after check for evvalue:-->BackspaceFLAG %d", bflag);
@@ -38,6 +55,50 @@ void eRCDeviceInputDev::handleCode(long rccode)
 	eDebug("%x %x %x", ev->value, ev->code, ev->type);
 
 	int km = iskeyboard ? input->getKeyboardMode() : eRCInput::kmNone;
+
+#if WETEKRC
+/*
+	eDebug("-->BackspaceFLAG %d", bflag);
+	eDebug("-->before change %x %x %x", ev->value, ev->code, ev->type);
+*/
+/* default is with NO numerc keys !!!*/
+	if (bflag) {
+		if (ev->code == KEY_1) {
+			ev->code = KEY_RED;
+		}
+		if (ev->code == KEY_2) {
+			ev->code = KEY_GREEN;
+		}
+		if (ev->code == KEY_3) {
+			ev->code = KEY_YELLOW;
+		}
+		if (ev->code == KEY_4) {
+			ev->code = KEY_BLUE;
+		}
+		if (ev->code == KEY_5) {
+			ev->code = KEY_PREVIOUS;
+		}
+		if (ev->code == KEY_6) {
+			ev->code = KEY_NEXT;
+		}
+		if (ev->code == KEY_7) {
+			ev->code = KEY_REWIND;
+		}
+		if (ev->code == KEY_8) {
+			ev->code = KEY_STOP;
+		}
+		if (ev->code == KEY_9) {
+			ev->code = KEY_FASTFORWARD;
+		}
+		if (ev->code == KEY_0) {
+			ev->code = KEY_PLAYPAUSE;
+		}
+	}
+/*
+	eDebug("-->BackspaceFLAG %d", bflag);
+	eDebug("-->after change %x %x %x", ev->value, ev->code, ev->type);
+*/
+#endif
 
 	switch (ev->code)
 	{
@@ -109,49 +170,6 @@ void eRCDeviceInputDev::handleCode(long rccode)
 		}
 	}
 
-#if WETEKRC
-/*
-	eDebug("-->BackspaceFLAG %d", bflag);
-	eDebug("-->before change %x %x %x", ev->value, ev->code, ev->type);
-*/
-/* default is with NO numerc keys !!!*/
-	if (bflag) {
-		if (ev->code == KEY_1) {
-			ev->code = KEY_RED;
-		}
-		if (ev->code == KEY_2) {
-			ev->code = KEY_GREEN;
-		}
-		if (ev->code == KEY_3) {
-			ev->code = KEY_YELLOW;
-		}
-		if (ev->code == KEY_4) {
-			ev->code = KEY_BLUE;
-		}
-		if (ev->code == KEY_5) {
-			ev->code = KEY_PREVIOUS;
-		}
-		if (ev->code == KEY_6) {
-			ev->code = KEY_NEXT;
-		}
-		if (ev->code == KEY_7) {
-			ev->code = KEY_REWIND;
-		}
-		if (ev->code == KEY_8) {
-			ev->code = KEY_STOP;
-		}
-		if (ev->code == KEY_9) {
-			ev->code = KEY_FASTFORWARD;
-		}
-		if (ev->code == KEY_0) {
-			ev->code = KEY_PLAYPAUSE;
-		}
-	}
-/*
-	eDebug("-->BackspaceFLAG %d", bflag);
-	eDebug("-->after change %x %x %x", ev->value, ev->code, ev->type);
-*/
-#endif
 
 #if KEY_F7_TO_KEY_MENU
 	if (ev->code == KEY_F7) {
