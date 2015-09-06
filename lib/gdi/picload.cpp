@@ -430,24 +430,22 @@ static unsigned char *jpeg_load(const char *file, int *ox, int *oy, unsigned int
 	jpeg_stdio_src(ciptr, fh);
 	jpeg_read_header(ciptr, TRUE);
 	ciptr->out_color_space = JCS_RGB;
-	int s = 8;
+
 	if (max_x == 0) max_x = 1280; // sensible default
 	if (max_y == 0) max_y = 720;
-	while (s != 1)
-	{
-		if ((ciptr->image_width >= (s * max_x)) ||
-		    (ciptr->image_height >= (s * max_y)))
-			break;
-		s /= 2;
-	}
-	ciptr->scale_num = 1;
-	ciptr->scale_denom = s;
+	// define scale to always fit vertically or horizontally in all orientations
+	ciptr->scale_denom = 8;
+	unsigned int screenmax = max_x > max_y ? max_x : max_y;
+	unsigned int imagemin  = ciptr->image_width < ciptr->image_height ? ciptr->image_width : ciptr->image_height;
+	ciptr->scale_num = (ciptr->scale_denom * screenmax + imagemin -1) / imagemin;
+	if (ciptr->scale_num < 1)  ciptr->scale_num = 1;
+	if (ciptr->scale_num > 16) ciptr->scale_num = 16;
 
 	jpeg_start_decompress(ciptr);
 
 	*ox=ciptr->output_width;
 	*oy=ciptr->output_height;
-	// eDebug("jpeg_read ox=%d oy=%d w=%d (%d), h=%d (%d) scale=%d rec_outbuf_height=%d", ciptr->output_width, ciptr->output_height, ciptr->image_width, max_x, ciptr->image_height, max_y, ciptr->scale_denom, ciptr->rec_outbuf_height);
+	//eDebug("[jpeg_load] ox=%d oy=%d w=%d (%d), h=%d (%d) scale=%d rec_outbuf_height=%d", ciptr->output_width, ciptr->output_height, ciptr->image_width, max_x, ciptr->image_height, max_y, ciptr->scale_num, ciptr->rec_outbuf_height);
 
 	if(ciptr->output_components == 3)
 	{
@@ -616,6 +614,7 @@ ERROR_R:
 
 ePicLoad::ePicLoad():
 	m_filepara(NULL),
+	m_exif(NULL),
 	threadrunning(false),
 	m_conf(),
 	msg_thread(this,1),
@@ -648,6 +647,10 @@ ePicLoad::~ePicLoad()
 		waitFinished();
 	if(m_filepara != NULL)
 		delete m_filepara;
+	if (m_exif != NULL) {
+		m_exif->ClearExif();
+		delete m_exif;
+	}
 }
 
 void ePicLoad::thread_finished()
@@ -711,6 +714,7 @@ void ePicLoad::decodePic()
 
 	eDebug("[Picload] decode picture... %s",m_filepara->file);
 #endif
+	getExif(m_filepara->file);
 	switch(m_filepara->id)
 	{
 		case F_PNG:	png_load(m_filepara, m_conf.background); break;
@@ -981,6 +985,11 @@ void ePicLoad::gotMessage(const Message &msg)
 					delete m_filepara;
 					m_filepara = NULL;
 				}
+				if (m_exif != NULL) {
+					m_exif->ClearExif();
+					delete m_exif;
+					m_exif = NULL;
+				}
 			}
 			break;
 		default:
@@ -1001,6 +1010,11 @@ int ePicLoad::startThread(int what, const char *file, int x, int y, bool async)
 	{
 		delete m_filepara;
 		m_filepara = NULL;
+	}
+	if (m_exif != NULL) {
+		m_exif->ClearExif();
+		delete m_exif;
+		m_exif = NULL;
 	}
 
 	int file_id = -1;
@@ -1062,63 +1076,63 @@ PyObject *ePicLoad::getInfo(const char *filename)
 {
 	ePyObject list;
 
-	Cexif *exif = new Cexif;
-	if(exif->DecodeExif(filename))
+	getExif(filename);
+	if(m_exif && m_exif->m_exifinfo->IsExif)
 	{
-		if(exif->m_exifinfo->IsExif)
-		{
-			char tmp[256];
-			int pos=0;
-			list = PyList_New(23);
-			PyList_SET_ITEM(list, pos++,  PyString_FromString(filename));
-			PyList_SET_ITEM(list, pos++,  PyString_FromString(exif->m_exifinfo->Version));
-			PyList_SET_ITEM(list, pos++,  PyString_FromString(exif->m_exifinfo->CameraMake));
-			PyList_SET_ITEM(list, pos++,  PyString_FromString(exif->m_exifinfo->CameraModel));
-			PyList_SET_ITEM(list, pos++,  PyString_FromString(exif->m_exifinfo->DateTime));
-			PyList_SET_ITEM(list, pos++,  PyString_FromFormat("%d x %d", exif->m_exifinfo->Width, exif->m_exifinfo->Height));
-			PyList_SET_ITEM(list, pos++,  PyString_FromString(exif->m_exifinfo->FlashUsed));
-			PyList_SET_ITEM(list, pos++,  PyString_FromString(exif->m_exifinfo->Orientation));
-			PyList_SET_ITEM(list, pos++,  PyString_FromString(exif->m_exifinfo->Comments));
-			PyList_SET_ITEM(list, pos++,  PyString_FromString(exif->m_exifinfo->MeteringMode));
-			PyList_SET_ITEM(list, pos++,  PyString_FromString(exif->m_exifinfo->ExposureProgram));
-			PyList_SET_ITEM(list, pos++,  PyString_FromString(exif->m_exifinfo->LightSource));
-			PyList_SET_ITEM(list, pos++,  PyString_FromFormat("%d", exif->m_exifinfo->CompressionLevel));
-			PyList_SET_ITEM(list, pos++,  PyString_FromFormat("%d", exif->m_exifinfo->ISOequivalent));
-			sprintf(tmp, "%.2f", exif->m_exifinfo->Xresolution);
-			PyList_SET_ITEM(list, pos++,  PyString_FromString(tmp));
-			sprintf(tmp, "%.2f", exif->m_exifinfo->Yresolution);
-			PyList_SET_ITEM(list, pos++,  PyString_FromString(tmp));
-			PyList_SET_ITEM(list, pos++,  PyString_FromString(exif->m_exifinfo->ResolutionUnit));
-			sprintf(tmp, "%.2f", exif->m_exifinfo->Brightness);
-			PyList_SET_ITEM(list, pos++,  PyString_FromString(tmp));
-			sprintf(tmp, "%.5f sec.", exif->m_exifinfo->ExposureTime);
-			PyList_SET_ITEM(list, pos++,  PyString_FromString(tmp));
-			sprintf(tmp, "%.5f", exif->m_exifinfo->ExposureBias);
-			PyList_SET_ITEM(list, pos++,  PyString_FromString(tmp));
-			sprintf(tmp, "%.5f", exif->m_exifinfo->Distance);
-			PyList_SET_ITEM(list, pos++,  PyString_FromString(tmp));
-			sprintf(tmp, "%.5f", exif->m_exifinfo->CCDWidth);
-			PyList_SET_ITEM(list, pos++,  PyString_FromString(tmp));
-			sprintf(tmp, "%.2f", exif->m_exifinfo->ApertureFNumber);
-			PyList_SET_ITEM(list, pos++,  PyString_FromString(tmp));
-		}
-		else
-		{
-			list = PyList_New(2);
-			PyList_SET_ITEM(list, 0, PyString_FromString(filename));
-			PyList_SET_ITEM(list, 1, PyString_FromString(exif->m_szLastError));
-		}
-		exif->ClearExif();
+		char tmp[256];
+		int pos = 0;
+		list = PyList_New(23);
+		PyList_SET_ITEM(list, pos++,  PyString_FromString(filename));
+		PyList_SET_ITEM(list, pos++,  PyString_FromString(m_exif->m_exifinfo->Version));
+		PyList_SET_ITEM(list, pos++,  PyString_FromString(m_exif->m_exifinfo->CameraMake));
+		PyList_SET_ITEM(list, pos++,  PyString_FromString(m_exif->m_exifinfo->CameraModel));
+		PyList_SET_ITEM(list, pos++,  PyString_FromString(m_exif->m_exifinfo->DateTime));
+		PyList_SET_ITEM(list, pos++,  PyString_FromFormat("%d x %d", m_exif->m_exifinfo->Width, m_exif->m_exifinfo->Height));
+		PyList_SET_ITEM(list, pos++,  PyString_FromString(m_exif->m_exifinfo->FlashUsed));
+		PyList_SET_ITEM(list, pos++,  PyString_FromString(m_exif->m_exifinfo->Orientation));
+		PyList_SET_ITEM(list, pos++,  PyString_FromString(m_exif->m_exifinfo->Comments));
+		PyList_SET_ITEM(list, pos++,  PyString_FromString(m_exif->m_exifinfo->MeteringMode));
+		PyList_SET_ITEM(list, pos++,  PyString_FromString(m_exif->m_exifinfo->ExposureProgram));
+		PyList_SET_ITEM(list, pos++,  PyString_FromString(m_exif->m_exifinfo->LightSource));
+		PyList_SET_ITEM(list, pos++,  PyString_FromFormat("%d", m_exif->m_exifinfo->CompressionLevel));
+		PyList_SET_ITEM(list, pos++,  PyString_FromFormat("%d", m_exif->m_exifinfo->ISOequivalent));
+		sprintf(tmp, "%.2f", m_exif->m_exifinfo->Xresolution);
+		PyList_SET_ITEM(list, pos++,  PyString_FromString(tmp));
+		sprintf(tmp, "%.2f", m_exif->m_exifinfo->Yresolution);
+		PyList_SET_ITEM(list, pos++,  PyString_FromString(tmp));
+		PyList_SET_ITEM(list, pos++,  PyString_FromString(m_exif->m_exifinfo->ResolutionUnit));
+		sprintf(tmp, "%.2f", m_exif->m_exifinfo->Brightness);
+		PyList_SET_ITEM(list, pos++,  PyString_FromString(tmp));
+		sprintf(tmp, "%.5f sec.", m_exif->m_exifinfo->ExposureTime);
+		PyList_SET_ITEM(list, pos++,  PyString_FromString(tmp));
+		sprintf(tmp, "%.5f", m_exif->m_exifinfo->ExposureBias);
+		PyList_SET_ITEM(list, pos++,  PyString_FromString(tmp));
+		sprintf(tmp, "%.5f", m_exif->m_exifinfo->Distance);
+		PyList_SET_ITEM(list, pos++,  PyString_FromString(tmp));
+		sprintf(tmp, "%.5f", m_exif->m_exifinfo->CCDWidth);
+		PyList_SET_ITEM(list, pos++,  PyString_FromString(tmp));
+		sprintf(tmp, "%.2f", m_exif->m_exifinfo->ApertureFNumber);
+		PyList_SET_ITEM(list, pos++,  PyString_FromString(tmp));
 	}
 	else
 	{
 		list = PyList_New(2);
 		PyList_SET_ITEM(list, 0, PyString_FromString(filename));
-		PyList_SET_ITEM(list, 1, PyString_FromString(exif->m_szLastError));
+		PyList_SET_ITEM(list, 1, PyString_FromString(m_exif->m_szLastError));
 	}
 	delete exif;
 
 	return list ? (PyObject*)list : (PyObject*)PyList_New(0);
+}
+
+bool ePicLoad::getExif(const char *filename)
+{
+	if (!m_exif) {
+		m_exif = new Cexif;
+		bool r = m_exif->DecodeExif(filename);
+		return r;
+	}
+	return true;
 }
 
 int ePicLoad::getData(ePtr<gPixmap> &result)
@@ -1133,6 +1147,11 @@ int ePicLoad::getData(ePtr<gPixmap> &result)
 	{
 		delete m_filepara;
 		m_filepara = NULL;
+		if (m_exif != NULL) {
+			m_exif->ClearExif();
+			delete m_exif;
+			m_exif = NULL;
+		}
 		return 0;
 	}
 
@@ -1276,8 +1295,13 @@ int ePicLoad::getData(ePtr<gPixmap> &result)
 		}
 	}
 
-	delete m_filepara;
+	delete m_filepara; // so caller can start a new decode in background
 	m_filepara = NULL;
+	if (m_exif != NULL) {
+		m_exif->ClearExif();
+		delete m_exif;
+		m_exif = NULL;
+	}
 
 	return 0;
 }
