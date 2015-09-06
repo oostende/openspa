@@ -34,31 +34,17 @@ public:
 
 	int poll() { if (action) { action=doAction(); return 1; } return 0; }
 	enum { stateInCreation, stateBusy, stateInDeletion, stateStarted, statePrivate};
-
+	
 	static int parseLengthField(const unsigned char *pkt, int &len);
 	static int buildLengthField(unsigned char *pkt, int len);
 
 	static void receiveData(eDVBCISlot *slot, const unsigned char *ptr, size_t len);
-
+	
 	int getState() { return state; }
 	int getStatus() { return status; }
-
+	
 	static int pollAll();
-
-	static void setAction(unsigned int session, int val);
-};
-
-class eDVBCIPlusHelper: public eDVBCISession
-{
-	eDVBCISlot *m_tslot;
-	unsigned long m_tag;
-	int m_session;
-
-	int receivedAPDU(const unsigned char *tag, const void *data, int len);
-	int doAction();
-public:
-	eDVBCIPlusHelper(eDVBCISlot *tslot, unsigned long tag, int session);
-	~eDVBCIPlusHelper();
+	
 };
 
 #endif
