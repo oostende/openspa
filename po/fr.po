@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-15 18:20+0200\n"
-"PO-Revision-Date: 2015-08-15 20:14+0200\n"
+"POT-Creation-Date: 2015-09-09 12:44+0200\n"
+"PO-Revision-Date: 2015-09-09 12:46+0200\n"
 "Last-Translator: Pr2 <dummy@dummy.com>\n"
 "Language-Team: french\n"
 "Language: fr\n"
@@ -129,6 +129,14 @@ msgstr ""
 "\n"
 "Choix périphérique sauvegarde.\n"
 "périphérique actuel :"
+
+#, python-format
+msgid ""
+"\n"
+"Timer '%s' disabled!"
+msgstr ""
+"\n"
+"Programmation ‘%s’ désactivée!"
 
 msgid ""
 "\n"
@@ -1076,6 +1084,9 @@ msgstr "Mode création"
 msgid "Auto"
 msgstr "Auto"
 
+msgid "Auto EXIF Orientation rotation/flipping"
+msgstr "Orientation EXIF automatique rotation/retournement (seulement jpg)"
+
 msgid "Auto chapter split every ? minutes (0=never)"
 msgstr "Auto diviser chaque chapitre ? minutes (0 = jamais)"
 
@@ -1946,6 +1957,9 @@ msgstr "Configurez le type de sortie vidéo qui sera utilisé."
 msgid "Configuring"
 msgstr "Configuration"
 
+msgid "Conflict not resolved!"
+msgstr "Conflit non résolu!"
+
 msgid "Conflicting timer"
 msgstr "Programmation conflictuelle"
 
@@ -1966,6 +1980,9 @@ msgstr "Connecté à"
 
 msgid "Connected: "
 msgstr "Connecté:"
+
+msgid "Console"
+msgstr "Console"
 
 msgid "Constellation"
 msgstr "Constellation"
@@ -3238,6 +3255,9 @@ msgstr "Sauvegarde complète sur %s"
 
 msgid "Full transparency"
 msgstr "Transparence complète"
+
+msgid "Fulview resulution"
+msgstr "Résolution plein écran"
 
 msgid "Function of OK button"
 msgstr "Fonction de la touche OK"
@@ -7224,7 +7244,7 @@ msgstr ""
 "Enigma2 - OpenSPA\n"
 "\n"
 "Support: www.openspa.info\n"
-"Dernière MAJ: 15 août 2015"
+"Dernière MAJ: 09 septembre 2015"
 
 msgid "TS file is too large for ISO9660 level 1!"
 msgstr "Fichier TS trop grand pour le niveau 1 ISO9660 !"
@@ -10337,9 +10357,6 @@ msgstr "Zappé"
 
 #~ msgid "Enable parental control"
 #~ msgstr "Activer contrôle parental"
-
-#~ msgid "Fulview resulution"
-#~ msgstr "Résolution plein écran"
 
 #~ msgid "Green boost"
 #~ msgstr "Intensifier le vert"
