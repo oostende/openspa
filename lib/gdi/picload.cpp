@@ -525,7 +525,6 @@ static void gif_load(Cfilepara* filepara)
 {
 	unsigned char *pic_buffer = NULL;
 	int px, py, i, j;
-	unsigned char *fbptr;
 	unsigned char *slb=NULL;
 	GifFileType *gft;
 	GifRecordType rt;
@@ -567,10 +566,9 @@ static void gif_load(Cfilepara* filepara)
 						filepara->palette[i].b = cmap->Colors[i].Blue;
 					}
 
-					fbptr = pic_buffer;
 					if (!(gft->Image.Interlace))
 					{
-						for (i = 0; i < py; i++, fbptr += px * 3)
+						for (i = 0; i < py; i++)
 						{
 							if (DGifGetLine(gft, slb, px) == GIF_ERROR)
 								goto ERROR_R;
@@ -579,14 +577,14 @@ static void gif_load(Cfilepara* filepara)
 					}
 					else
 					{
+						int IOffset[] = { 0, 4, 2, 1 }; // The way Interlaced image should.
+						int IJumps[] = { 8, 8, 4, 2 };  // be read - offsets and jumps...
 						for (j = 0; j < 4; j++)
 						{
-							slb = pic_buffer;
-							for (i = 0; i < py; i++)
+							for (i = IOffset[j]; i < py; i += IJumps[j])
 							{
-								if (DGifGetLine(gft, slb, px) == GIF_ERROR)
+								if (DGifGetLine(gft, pic_buffer + i*px, px) == GIF_ERROR)
 									goto ERROR_R;
-								slb += px;
 							}
 						}
 					}
