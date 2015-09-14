@@ -7,14 +7,18 @@ datarootdir=@datarootdir@
 if [ -e /usr/bin/xbmc ]; then
 	if [ -e /etc/.xbmcstart ]; then
 		rm -f /etc/.xbmcstart
+		echo 0 >  /sys/class/video/disable_video
 		/usr/bin/xbmc
+		echo 0 >  /sys/class/video/disable_video
 	fi
 fi
 
 if [ -e /usr/bin/kodi ]; then
 	if [ -e /etc/.kodistart ]; then
 		rm -f /etc/.kodistart
+		echo 0 >  /sys/class/video/disable_video
 		/usr/bin/kodi
+		echo 0 >  /sys/class/video/disable_video
 	fi
 fi
 
