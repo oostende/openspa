@@ -10,6 +10,7 @@ if [ -e /usr/bin/xbmc ]; then
 		echo 0 >  /sys/class/video/disable_video
 		/usr/bin/xbmc
 		echo 0 >  /sys/class/video/disable_video
+		echo 720p >  /proc/stb/video/videomode
 	fi
 fi
 
@@ -18,6 +19,13 @@ if [ -e /usr/bin/kodi ]; then
 		rm -f /etc/.kodistart
 		echo 0 >  /sys/class/video/disable_video
 		/usr/bin/kodi
+		if grep -q 1080 /etc/enigma2/settings; then
+			echo "0 0 1919 1079" > /sys/class/video/axis
+			echo 1080p50Hz > /sys/class/display/mode
+		else
+			echo "0 0 1279 719" > /sys/class/video/axis
+			echo 720p50Hz > /sys/class/display/mode
+		fi
 		echo 0 >  /sys/class/video/disable_video
 	fi
 fi
