@@ -2,6 +2,8 @@ from enigma import eServiceCenter, eServiceReference, eTimer, pNavigation, getBe
 from Components.ParentalControl import parentalControl
 from Components.SystemInfo import SystemInfo
 from Components.config import config, configfile
+from Components.PluginComponent import plugins
+from Plugins.Plugin import PluginDescriptor
 from Tools.BoundFunction import boundFunction
 from Tools.StbHardware import setFPWakeuptime, getFPWakeuptime, getFPWasTimerWakeup
 from Tools import Notifications
@@ -33,7 +35,15 @@ class Navigation:
 		self.currentlyPlayingServiceReference = None
 		self.currentlyPlayingServiceOrGroup = None
 		self.currentlyPlayingService = None
-		self.RecordTimer = RecordTimer.RecordTimer()
+
+		self.RecordTimer = None
+		for p in plugins.getPlugins(PluginDescriptor.WHERE_RECORDTIMER):
+			self.RecordTimer = p()
+			if self.RecordTimer:
+				break
+		if not self.RecordTimer:
+			self.RecordTimer = RecordTimer.RecordTimer()
+
 		self.__wasTimerWakeup = getFPWasTimerWakeup()
 		if self.__wasTimerWakeup:
 			RecordTimer.RecordTimerEntry.setWasInDeepStandby()

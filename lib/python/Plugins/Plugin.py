@@ -67,6 +67,10 @@ class PluginDescriptor:
 	# start as channellist context menu plugin. session, serviceref (currently selected)
 	WHERE_CHANNEL_CONTEXT_MENU = 17
 
+	# override internal RecordTimer navigation instance
+	# fnc must return the custom instance or None to skip it
+	WHERE_RECORDTIMER = 18
+
 	def __init__(self, name = "Plugin", where = [ ], description = "", icon = None, fnc = None, wakeupfnc = None, needsRestart = None, internal = False, weight = 0):
 		self.name = name
 		self.internal = internal
