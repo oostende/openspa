@@ -223,7 +223,7 @@ def InitUsageConfig():
 		("5", "DVB-T/-S/-C"),
 		("127", _("No priority")) ])
 
-	config.usage.remote_fallback_enabled = ConfigYesNo(default = False);
+	config.usage.remote_fallback_enabled = ConfigYesNo(default = False)
 	config.usage.remote_fallback = ConfigText(default = _("http://IP-ADDRESS:8001"), fixed_size = False)
 
 	dvbs_nims = [("-2", _("Disabled"))]
