@@ -14,69 +14,11 @@ extern "C" {
 #include <jpeglib.h>
 }
 
-/* Keep a table of already-loaded pixmaps, and return the old one when
- * needed. The "dispose" method isn't very efficient, but not having
- * to load the same pixmap twice will probably make up for that.
- * There is a race condition, when two threads load the same image,
- * the worst case scenario is then that the pixmap is loaded twice. This
- * isn't any worse than before, and all the UI pixmaps will be loaded
- * from the same thread anyway. */
-
-typedef std::map<std::string, gPixmap*> NameToPixmap;
-static eSingleLock pixmapTableLock;
-static NameToPixmap pixmapTable;
-
-static void pixmapDisposed(gPixmap* pixmap)
-{
-	eSingleLocker lock(pixmapTableLock);
-	for (NameToPixmap::iterator it = pixmapTable.begin();
-		 it != pixmapTable.end();
-		 ++it)
-	{
-		 if (it->second == pixmap)
-		 {
-			 pixmapTable.erase(it);
-			 break;
-		 }
-
-	}
-}
-
-static int pixmapFromTable(ePtr<gPixmap> &result, const char *filename)
-{
-	/* Prevent a deadlock: assigning a pixmap to result may cause the
-	 * previous to be destroyed, which would call pixmapDisposed which
-	 * in turn would aquire the lock a second time. */
-	ePtr<gPixmap> disposeMeOutsideTheLock(result);
-	{
-		eSingleLocker lock(pixmapTableLock);
-		NameToPixmap::iterator it = pixmapTable.find(filename);
-		if (it != pixmapTable.end())
-		{
-			result = it->second; /* Yay, re-use the pixmap */
-			return 0;
-		}
-		else
-		{
-			return -1;
-		}
-	}
-}
-
-static void pixmapToTable(ePtr<gPixmap> &result, const char *filename)
-{
-	eSingleLocker lock(pixmapTableLock);
-	pixmapTable[filename] = result;
-}
-
 /* TODO: I wonder why this function ALWAYS returns 0 */
 int loadPNG(ePtr<gPixmap> &result, const char *filename, int accel)
 {
-	if (pixmapFromTable(result, filename) == 0)
-		return 0;
-
 	CFile fp(filename, "rb");
-	
+
 	if (!fp)
 	{
 		eDebug("[ePNG] couldn't open %s", filename );
@@ -125,14 +67,14 @@ int loadPNG(ePtr<gPixmap> &result, const char *filename, int accel)
 	png_init_io(png_ptr, fp);
 	png_set_sig_bytes(png_ptr, 8);
 	png_read_info(png_ptr, info_ptr);
-	
+
 	png_uint_32 width, height;
 	int bit_depth;
 	int color_type;
 	int interlace_type;
 	int channels;
 	int trns;
-	
+
 	png_get_IHDR(png_ptr, info_ptr, &width, &height, &bit_depth, &color_type, &interlace_type, 0, 0);
 	channels = png_get_channels(png_ptr, info_ptr);
 	trns = png_get_valid(png_ptr, info_ptr, PNG_INFO_tRNS);
@@ -175,7 +117,7 @@ int loadPNG(ePtr<gPixmap> &result, const char *filename, int accel)
 	png_get_IHDR(png_ptr, info_ptr, &width, &height, &bit_depth, &color_type, 0, 0, 0);
 	channels = png_get_channels(png_ptr, info_ptr);
 
-	result = new gPixmap(width, height, bit_depth * channels, pixmapDisposed, accel);
+	result = new gPixmap(eSize(width, height), bit_depth * channels, accel);
 	gUnmanagedSurface *surface = result->surface;
 
 	png_bytep *rowptr = new png_bytep[height];
@@ -184,7 +126,7 @@ int loadPNG(ePtr<gPixmap> &result, const char *filename, int accel)
 	png_read_image(png_ptr, rowptr);
 
 	delete [] rowptr;
-	
+
 	int num_palette = -1, num_trans = -1;
 	if (color_type == PNG_COLOR_TYPE_PALETTE) {
 		if (png_get_valid(png_ptr, info_ptr, PNG_INFO_PLTE)) {
@@ -195,7 +137,7 @@ int loadPNG(ePtr<gPixmap> &result, const char *filename, int accel)
 			else
 				surface->clut.data = 0;
 			surface->clut.colors = num_palette;
-			
+
 			for (int i = 0; i < num_palette; i++) {
 				surface->clut.data[i].a = 0;
 				surface->clut.data[i].r = palette[i].red;
@@ -217,7 +159,6 @@ int loadPNG(ePtr<gPixmap> &result, const char *filename, int accel)
 		}
 		surface->clut.start = 0;
 	}
-	pixmapToTable(result, filename);
 	//eDebug("[ePNG] %s: after  %dx%dx%dbpcx%dchan coltyp=%d cols=%d trans=%d", filename, (int)width, (int)height, bit_depth, channels, color_type, num_palette, num_trans);
 
 	png_read_end(png_ptr, end_info);
@@ -354,8 +295,8 @@ static int savePNGto(FILE *fp, gPixmap *pixmap)
 		return -3;
 	}
 
-	png_set_IHDR(png_ptr, info_ptr, surface->x, surface->y, surface->bpp/surface->bypp, 
-		PNG_COLOR_TYPE_RGB_ALPHA, 
+	png_set_IHDR(png_ptr, info_ptr, surface->x, surface->y, surface->bpp/surface->bypp,
+		PNG_COLOR_TYPE_RGB_ALPHA,
 		PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
 
 	if (setjmp(png_jmpbuf(png_ptr)))
