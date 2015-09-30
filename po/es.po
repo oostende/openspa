@@ -3,14 +3,15 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
-"Last-Translator: pe.tardo <http://openspa.info>\n"
+"Last-Translator: pe.tardo <pe.thardo@gmail.com>\n"
 "Language-Team: OpenSPA <openspa.info>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: es_ES\n"
+"X-Poedit-Language: Spanish\n"
+"X-Poedit-Country: SPAIN\n"
 "X-Generator: Poedit 1.5.4\n"
 
 msgid ""
@@ -30,6 +31,29 @@ msgstr ""
 "\n"
 "\n"
 "[Bouquets de usuario (TV)]\n"
+
+msgid ""
+"\n"
+"   Please press OK to start Kodi..."
+msgstr ""
+"\n"
+"   Pulse OK para inciar Kodi..."
+
+msgid ""
+"\n"
+"  WARNING: \n"
+"  There is not enough space to install Kodi!"
+msgstr ""
+"\n"
+"  AVISO: \n"
+"  No dispone de espacio suficiente para instalar Kodi!"
+
+msgid ""
+"\n"
+" Kodi not present. Proceed with install?"
+msgstr ""
+"\n"
+" No se ha encontrado Kodi. Desea instalarlo?"
 
 msgid ""
 "\n"
@@ -1551,7 +1575,7 @@ msgid "Begin time"
 msgstr "Hora de inicio"
 
 msgid "Behavior of 'pause and ok' when paused"
-msgstr "Comportamiento de 'pausa y OK' cuando está en pausa"
+msgstr "Acción de 'pausa y OK' si está en pausa"
 
 msgid "Behavior of 0 key in PiP-mode"
 msgstr "Uso de la tecla 0 en el modo PiP"
@@ -1746,7 +1770,7 @@ msgid "CCcamInstalled"
 msgstr "CCcam instalado"
 
 msgid "CH"
-msgstr "Canal"
+msgstr "Canal "
 
 msgid "CH%s"
 msgstr "CA%s"
@@ -2123,7 +2147,7 @@ msgid "Command To Run"
 msgstr "Comando a ejecutar"
 
 msgid "Command execution..."
-msgstr "Ejecutar comando:"
+msgstr "Ejecución de comando"
 
 msgid "Command order"
 msgstr "Orden de comando"
@@ -2353,8 +2377,8 @@ msgid ""
 "Configure the duration in minutes for the sleeptimer. Select this entry and "
 "click OK or green to start/stop the sleeptimer"
 msgstr ""
-"Duración (en minutos) para que se active el temporizador de reposo. Pulse OK "
-"o 'verde' para activarlo/desactivarlo"
+"Duración (en minutos) para que se active el temporizador de reposo. "
+"Habilítelo y pulse OK o 'VERDE' para activarlo, y viceversa"
 
 msgid ""
 "Configure the duration when the receiver should go to shut down in case the "
@@ -2621,7 +2645,8 @@ msgstr ""
 "número de canales/satélites"
 
 msgid "Configure your NTP server."
-msgstr "Configurar el servidor NTP."
+msgstr ""
+"Configura el servidor NTP para la sincronización de la hora por internet."
 
 msgid "Configure your internal LAN"
 msgstr "Configurar la RED interna"
@@ -2670,6 +2695,9 @@ msgstr "Conectado!"
 
 msgid "Connected: "
 msgstr "Conectado: "
+
+msgid "Console"
+msgstr "Consola"
 
 msgid "Constellation"
 msgstr "Constelación"
@@ -2975,6 +3003,9 @@ msgstr "Predeterminado (US)"
 msgid "Default movie location"
 msgstr "Ubicación por defecto de películas"
 
+msgid "Default recording type"
+msgstr "Tipo de grabación por defecto"
+
 msgid "Default settings"
 msgstr "Listas por defecto"
 
@@ -3115,6 +3146,17 @@ msgstr "Borrando crontab"
 
 msgid "Depth"
 msgstr "Profundidad"
+
+msgid ""
+"Descramble & record ECM gives the option to descramble afterwards if "
+"descrambling on recording failed. 'Don't descramble, record ECM' save a "
+"scramble recording that can be descrambled on playback. 'Normal' means "
+"descramble the recording and don't record ECM."
+msgstr ""
+"'Descodificar y grabar ECM': permite descodificar posteriormente si falla la "
+"descodificación al grabar. 'No descoificar, grabar ECM': guarda una "
+"grabación que se descodificará al reproducirla. 'Normal': descodifica la "
+"grabación sin grabar la ECM"
 
 msgid "Descramble http streams"
 msgstr "Descodificar streams http"
@@ -3672,7 +3714,7 @@ msgid "Enable Timer"
 msgstr "Habilitar reserva"
 
 msgid "Enable ViaSat EPG"
-msgstr "Activar EPG Viasat"
+msgstr "Activar EPG ViaSat"
 
 msgid "Enable Virgin EPG"
 msgstr "Activar EPG Virgin"
@@ -3771,10 +3813,10 @@ msgid "End time"
 msgstr "Hora fin"
 
 msgid "End time to ignore inactivity sleeptimer"
-msgstr "Final del margen de 'no temporizador'"
+msgstr "Final del intervalo de 'no temporizador'"
 
 msgid "End time to ignore shutdown in standby"
-msgstr "Final del margen de 'no apagado en reposo'"
+msgstr "Final del interv. para ignorar 'apagar en reposo'"
 
 msgid "English"
 msgstr "Inglés"
@@ -3840,7 +3882,7 @@ msgid "Enter username:"
 msgstr "Introduzca el nombre de usuario"
 
 msgid "Entitlements"
-msgstr "Abono"
+msgstr "Tarjeta local"
 
 msgid "Epg Search"
 msgstr "Buscar EPG"
@@ -3904,7 +3946,7 @@ msgid "Execution finished!!"
 msgstr "Ejecución finalizada!"
 
 msgid "Execution progress:"
-msgstr "Ejecución en progreso:"
+msgstr "Progreso:"
 
 msgid "Exif"
 msgstr "Información"
@@ -4012,15 +4054,13 @@ msgid "External subtitle switch fonts"
 msgstr "Cambiar formato de subtítulos externos"
 
 msgid "Extra end time to ignore inactivity sleeptimer"
-msgstr ""
-"Tiempo extra de finalización para ignorar la inactividad del tempor. de "
-"reposo"
+msgstr "T. extra final para ignorar la inact. del sleeptimer"
 
 msgid "Extra motor options"
 msgstr "Opciones extra de motor"
 
 msgid "Extra start time to ignore inactivity sleeptimer"
-msgstr "Tiempo extra antes de ignorar la inactividad del tempor. de reposo"
+msgstr "T. extra antes de ignorar la inactiv. del sleeptimer"
 
 msgid "Extras"
 msgstr "Extras"
@@ -4045,6 +4085,9 @@ msgstr "Grabación no válida"
 
 msgid "Fallback remote receiver URL"
 msgstr "URL para reenvio a receptor remoto"
+
+msgid "False"
+msgstr "No"
 
 msgid "Fan %d"
 msgstr "Ventilador %d"
@@ -4246,6 +4289,9 @@ msgstr "Memoria libre"
 
 msgid "Free memory:"
 msgstr "Memoria libre:"
+
+msgid "Free space in MB:"
+msgstr "Espacio libre (MB):"
 
 msgid "Free:"
 msgstr "Libre:"
@@ -4509,7 +4555,7 @@ msgid "Hard disk standby after"
 msgstr "Poner el disco duro en reposo después de"
 
 msgid "Hard disk standby in box standby after"
-msgstr "HDD en reposo con el receptor en reposo después de"
+msgstr "HDD a reposo con recept. en reposo después de"
 
 msgid "Harddisk"
 msgstr "Disco duro"
@@ -4633,6 +4679,9 @@ msgstr "Horas + min."
 msgid "Hours Mins Secs"
 msgstr "Horas + min. + seg."
 
+msgid "How many minutes do you want add to record?"
+msgstr "Cuantos minutos desea añadir a la grabación?"
+
 msgid "How many minutes do you want to record?"
 msgstr "Cuántos minutos quiere grabar?"
 
@@ -4690,6 +4739,9 @@ msgstr ""
 
 msgid "If enabled the video will always be de-interlaced."
 msgstr "Si se activa, el vídeo será desentrelazado siempre."
+
+msgid "If enabled, AIT data is included in recordings."
+msgstr "Si se activa, los datos AIT se incluirán en las grabaciones."
 
 msgid ""
 "If the text is too long to be displayed on the front panel, it will be "
@@ -4769,6 +4821,9 @@ msgstr "Incluir"
 
 msgid "Include AIT in http streams"
 msgstr "Incluir AIT en streams http"
+
+msgid "Include AIT in recordings"
+msgstr "Incluir AIT en las grabaciones"
 
 msgid "Include ECM in http streams"
 msgstr "Incluir ECM en streams http"
@@ -4936,7 +4991,7 @@ msgid "Internal USB"
 msgstr "USB interno"
 
 msgid "Internal flash"
-msgstr "Flah interna"
+msgstr "Flash interna"
 
 msgid "Internal hdd only"
 msgstr "Sólo en el HDD interno"
@@ -5048,7 +5103,7 @@ msgid "Just scale"
 msgstr "Ajuste exacto"
 
 msgid "Keep service"
-msgstr "Mantener en el canal"
+msgstr "Mantener en canal"
 
 msgid "Keep service + Reverse bouquet buttons"
 msgstr "Mantener en canal e invertir teclas bouquet"
@@ -5073,6 +5128,9 @@ msgstr "Mapa del teclado"
 
 msgid "Keyboard setup"
 msgstr "Configuración de teclado"
+
+msgid "Kodi installed:"
+msgstr "Kodi está instalado:"
 
 msgid "LAN adapter"
 msgstr "Adaptador LAN"
@@ -5151,6 +5209,9 @@ msgstr "Latitud"
 
 msgid "Latvian"
 msgstr "Letón"
+
+msgid "Leave DVD player?"
+msgstr "Salir del reproductor de DVD?"
 
 msgid "Left"
 msgstr "Izda."
@@ -5679,8 +5740,8 @@ msgstr "Posición cambiada en el índice"
 msgid "Movement"
 msgstr "Movimiento"
 
-msgid "Movie Browser Configuration"
-msgstr "Configuración de Explorador de películas"
+msgid "Movie Browser Configuration "
+msgstr "Configuración del Explorador de películas"
 
 msgid "Movie list configuration"
 msgstr "Configuración de la lista de películas"
@@ -6161,6 +6222,9 @@ msgstr "Norte"
 msgid "Norwegian"
 msgstr "Noruego"
 
+msgid "Not Applicable"
+msgstr "No disponible"
+
 msgid "Not Defined"
 msgstr "No definido"
 
@@ -6571,10 +6635,10 @@ msgid "Percentage"
 msgstr "Porcentaje"
 
 msgid "Percentage left"
-msgstr "Porcentj. izda."
+msgstr "% a la izq."
 
 msgid "Percentage right"
-msgstr "Porcentj. dcha."
+msgstr "% a la derecha"
 
 msgid "Permanently delete all recordings in the trash can?"
 msgstr "Eliminar definitivamente todas las grabaciones de la papelera?"
@@ -7043,6 +7107,12 @@ msgstr "Preferencias"
 msgid "Preferred tuner"
 msgstr "Sintonizador preferido"
 
+msgid "Preferred tuner DVB-T"
+msgstr "Sintonizador DVB-T preferido"
+
+msgid "Preferred tuner DVB-T for recordings"
+msgstr "Sintonizador DVB-T preferido para grabaciones"
+
 msgid "Preferred tuner for recordings"
 msgstr "Sintonizador preferido para grabaciones"
 
@@ -7183,10 +7253,10 @@ msgid "Progress"
 msgstr "Progreso"
 
 msgid "Progress bar left"
-msgstr "Barra de progr. izda."
+msgstr "Barra progreso izda."
 
 msgid "Progress bar right"
-msgstr "Barra de progr. dcha."
+msgstr "Barra progreso dcha."
 
 msgid "Properties of current title"
 msgstr "Propiedades del título actual"
@@ -7528,13 +7598,13 @@ msgid "Remove bookmark"
 msgstr "Borrar marcador"
 
 msgid "Remove completed timers after (days)"
-msgstr "Eliminar reservas completadas despues de (días)"
+msgstr "Eliminar reservas completadas despues de (dias)"
 
 msgid "Remove currently selected title"
 msgstr "Borrar el título seleccionado"
 
 msgid "Remove items from trash can after (days)"
-msgstr "Eliminar elementos de la papelera después de (días)"
+msgstr "Eliminar elementos de la papelera después de (dias)"
 
 msgid "Remove plugins"
 msgstr "Eliminar plugins"
@@ -7604,7 +7674,7 @@ msgstr ""
 "Qué quiere hacer?"
 
 msgid "Repeating event currently recording... What do you want to do?"
-msgstr "Repitiendo la grabación del evento actual... Qué quieres hacer?"
+msgstr "Repitiendo la grabación del evento actual... Qué desea hacer?"
 
 msgid "Repeats"
 msgstr "Repeticiones"
@@ -7617,7 +7687,7 @@ msgstr ""
 "los subtítulos de teletexto para sordos)"
 
 msgid "Require authentication for http streams"
-msgstr "Autentificación necesaria para los canales http"
+msgstr "Autentificación obligatoria para los canales http"
 
 msgid "Require client cert for HTTPS"
 msgstr "Certificado del cliente requerido para HTTPS"
@@ -7663,6 +7733,9 @@ msgstr "Resolución"
 
 msgid "Restart"
 msgstr "Reiniciar sistema"
+
+msgid "Restart Enigma2 to apply the changes?"
+msgstr "Desea reiniciar GUI para aplicar los cambios?"
 
 msgid "Restart GUI"
 msgstr "Reiniciar GUI"
@@ -7731,7 +7804,7 @@ msgid "Return to previous service"
 msgstr "Volver al canal"
 
 msgid "Reverse bouquet buttons"
-msgstr "Invertir teclas de bouquet"
+msgstr "Invertir teclas bouquet"
 
 msgid "Reverse list"
 msgstr "Lista inversa"
@@ -7802,6 +7875,9 @@ msgstr "SATA"
 msgid "SD"
 msgstr "SD"
 
+msgid "SDcard present. Please configure use for SDcard"
+msgstr "Se ha detectado una tarjeta microSD. Elija qué uso le va a dar."
+
 msgid "SID"
 msgstr "SID"
 
@@ -7819,6 +7895,9 @@ msgstr "SPDIF"
 
 msgid "SSID:"
 msgstr "Red (SSID):"
+
+msgid "STORAGE DEVICE"
+msgstr "Dispositivo de almacenamiento"
 
 msgid "SWAP creation in process..."
 msgstr "Se está creando la Swap..."
@@ -8578,7 +8657,7 @@ msgid "Show SNR percentage instead of dB value"
 msgstr "Mostrar porcentaje S/R en lugar del valor dB"
 
 msgid "Show Scrambled Channel Icon in channel list"
-msgstr "Ver icono de 'Codificado' en la lista de canales"
+msgstr "Ver icono 'Codificado' en la lista de canales"
 
 msgid "Show Time Remaining/Elapsed"
 msgstr "Mostrar el tiempo restante/transcurrido"
@@ -8630,7 +8709,7 @@ msgid "Show event details"
 msgstr "Mostrar info. de evento"
 
 msgid "Show event-progress in channel selection"
-msgstr "Mostrar progreso de evento en selecc. de canal"
+msgstr "Progreso de evento en selecc. de canal"
 
 msgid "Show extended description"
 msgstr "Mostrar descripción detallada"
@@ -8864,10 +8943,10 @@ msgid "Skin Setting"
 msgstr "Config. de skin"
 
 msgid "Skin Setup"
-msgstr "Configuración de Skin"
+msgstr "Selección de Skin"
 
 msgid "Skin setup"
-msgstr "Piel (Skin)"
+msgstr "Selección de Skin"
 
 msgid "Skins"
 msgstr "Skins"
@@ -9007,7 +9086,7 @@ msgid "Sort list to default and exit?"
 msgstr "Poner la lista en el orden predeterminado y salir?"
 
 msgid "Sort list:"
-msgstr "Ordenar lista:"
+msgstr "Ordenar la lista por:"
 
 msgid "Sort plugins list to default?"
 msgstr "Mostrar la lista por defecto de plugins?"
@@ -9031,20 +9110,18 @@ msgid "Spanish"
 msgstr "Español"
 
 msgid "Specify extra timeframe to ignore inactivity sleeptimer"
-msgstr ""
-"Configura el intérvalo de tiempo para ignorar la inactividad del "
-"temporizador de reposo"
+msgstr "Intervalo para ignorar la inactividad del tempor. de reposo"
 
 msgid ""
 "Specify the end time to ignore the shutdown timer when the receiver is in "
 "standby mode"
 msgstr ""
-"Configura el final del margen de tiempo en el que se ignorará el "
-"temporizador de apagado si el receptor está en reposo"
+"Configura el final del intervalo en el que se ignorará el temporizador de "
+"apagado si el receptor está en reposo"
 
 msgid "Specify the end time until the inactivity sleeptimer should be ignored"
 msgstr ""
-"Configura el final del margen de tiempo en el que el temporizador será "
+"Configura el final del intervalo en el que el temporizador de reposo será "
 "ignorado"
 
 msgid ""
@@ -9063,19 +9140,19 @@ msgid ""
 "Specify the start time to ignore the shutdown timer when the receiver is in "
 "standby mode"
 msgstr ""
-"Configura el inicio del margen de tiempo en el que se ignorará el "
-"temporizador de apagado si el receptor está en reposo"
+"Configura el inicio del intervalo en el que se ignorará el temporizador de "
+"apagado si el receptor está en reposo"
 
 msgid "Specify the start time when the inactivity sleeptimer should be ignored"
 msgstr ""
-"Configura el inicio del margen de tiempo en el que el temporizador será "
+"Configura el inicio del intervalo en el que el temporizador de reposo será "
 "ignorado"
 
 msgid "Specify timeframe to ignore inactivity sleeptimer"
-msgstr "Configurar margen en que no actuará el temporizador"
+msgstr "Intervalo donde no actuará el tempor. de reposo"
 
 msgid "Specify timeframe to ignore the shutdown in standby"
-msgstr "Configurar margen para ignorar el apagado en reposo"
+msgstr "Intervalo para ignorar 'apagar en reposo'"
 
 msgid "Split preview mode"
 msgstr "Dividir modo previsualización"
@@ -9161,6 +9238,9 @@ msgstr "Iniciar"
 msgid "Start Instant Record"
 msgstr "Iniciar grabación instantánea"
 
+msgid "Start Kodi"
+msgstr "Iniciar Kodi"
+
 msgid "Start Page"
 msgstr "Página de inicio"
 
@@ -9186,10 +9266,10 @@ msgid "Start time is after end time"
 msgstr "La hora de inicio es posterior a la hora de finalización"
 
 msgid "Start time to ignore inactivity sleeptimer"
-msgstr "Inicio del margen de 'no temporizador'"
+msgstr "Inicio del intervalo de 'no temporizador'"
 
 msgid "Start time to ignore shutdown in standby"
-msgstr "Inicio del margen de 'no apagado en reposo'"
+msgstr "Inicio del interv. para ignorar 'apagar en reposo'"
 
 msgid "Start timeshift"
 msgstr "Iniciar timeshift"
@@ -9258,6 +9338,12 @@ msgstr "Parar y eliminar todas las grabaciones en curso"
 msgid "Stop and delete recording"
 msgstr "Parar y borrar grabación"
 
+msgid "Stop and delete recording:"
+msgstr "Va a parar y borrar la grabación:"
+
+msgid "Stop and delete recordings:"
+msgstr "Parar y borrar grabaciones:"
+
 msgid "Stop current event and disable coming events"
 msgstr "Parar el evento actual y desactivar los eventos siguientes"
 
@@ -9278,6 +9364,12 @@ msgstr "Detener grabación"
 
 msgid "Stop recording and delete"
 msgstr "Parar la grabación y borrar"
+
+msgid "Stop recording:"
+msgstr "Parar grabación:"
+
+msgid "Stop recordings:"
+msgstr "Parar grabaciones:"
 
 msgid "Stop service on return to movie list"
 msgstr "Detener el canal al volver a la lista de películas"
@@ -9316,7 +9408,7 @@ msgid "Stored position"
 msgstr "Posición almacenada"
 
 msgid "Stream"
-msgstr "Canal"
+msgstr "Streaming de"
 
 msgid "Stream request"
 msgstr "A petición del canal"
@@ -9358,7 +9450,7 @@ msgid "Subtitle border width"
 msgstr "Grosor del marco de los subtítulos"
 
 msgid "Subtitle delay when timing is bad"
-msgstr "Retardo de subtítulos con horario erróneo"
+msgstr "Retardo de subtítulos con pauta horaria erróneo"
 
 msgid "Subtitle delay when timing lacks"
 msgstr "Retardo de los subtitulos"
@@ -9501,6 +9593,9 @@ msgstr "Sincronizar la hora desde el transpondedor o internet."
 msgid "System"
 msgstr "Sistema"
 
+msgid "System Message"
+msgstr "Mensaje del Sistema"
+
 msgid "System OE"
 msgstr "Sistema OE"
 
@@ -9631,7 +9726,7 @@ msgstr ""
 "permitirá devolver el receptor al estado anterior en caso de encontrar "
 "problemas. Si detecta algún 'bug', notifíquelo en http://openspa.info.\n"
 "\n"
-"Ha entendido este aviso?"
+"Seguro que quiere continuar?"
 
 msgid "The PIN code has been changed successfully."
 msgstr "El código PIN ha sido cambiado correctamente."
@@ -9975,11 +10070,11 @@ msgstr "Este test detecta y comprueba el adaptador de red."
 
 msgid ""
 "This will (re-)calculate all positions of your rotor and may remove "
-"previously memorised positions and fine-tuning! \n"
-" Are you sure?"
+"previously memorised positions and fine-tuning!\n"
+"Are you sure?"
 msgstr ""
 "Esto (re)calculará todas las posiciones del motor y puede borrar las "
-"posiciones anteriormente guardadas! \n"
+"posiciones anteriormente guardadas!\n"
 "Está seguro?"
 
 msgid ""
@@ -10196,6 +10291,9 @@ msgstr "Papelera"
 
 msgid "Tries left:"
 msgstr "Intentos restantes:"
+
+msgid "True"
+msgstr "Si"
 
 msgid "Try to find used transponders in cable network.. please wait..."
 msgstr "Buscando los transpondedores en la red de cable, espere..."
@@ -10481,6 +10579,18 @@ msgstr "Utilizar la EPG MHW cuando sea posible"
 
 msgid "Use Netmed EPG information when it is available."
 msgstr "Utilizar la EPG Netmed cuando sea posible"
+
+msgid "Use SDCard for epg storage path"
+msgstr "-Carpeta de almacenamiento de EPG"
+
+msgid "Use SDCard for kodi storage folder"
+msgstr "-Carpeta de almacenamiento de Kodi"
+
+msgid "Use SDCard for movies storage"
+msgstr "-Carpeta de almacenamiento de películas"
+
+msgid "Use SDCard for timeshift storage"
+msgstr "-Carpeta de almacenamiento de timeshift"
 
 msgid "Use TV remote control"
 msgstr "Utilizar el mando de la TV"
@@ -10946,6 +11056,9 @@ msgstr "Visualizar grabaciones"
 msgid "We"
 msgstr "Mi"
 
+msgid "WeTek media player"
+msgstr "WeTek Media Player"
+
 msgid "Web browser base visibility"
 msgstr "Visibilidad del navegador"
 
@@ -11054,10 +11167,10 @@ msgid ""
 "bouquets.radio files, will still be loaded. This allows you for example to "
 "keep your own user bouquet while installed settings are upgraded"
 msgstr ""
-"Si se habilita, enigma2 cargará los bouquets no enlazados. Esto significa "
-"que los favoritos de usuario que estén disponibles, pero no incluidos en los "
-"archivos bouquets.tv o bouquets.radio serán cargados. Esto permite, por "
-"ejemplo, mantener los favoritos mientras se actualizan los canales"
+"Si se habilita, enigma2 cargará los bouquets no enlazados: los favoritos de "
+"usuario que estén disponibles, pero no incluidos en los archivos de bouquets "
+"de tv o radio continuarán cargados. Esto permite, p.ej, mantener los "
+"favoritos mientras se actualizan los canales"
 
 msgid "When enabled the PiP can be closed by the exit button."
 msgstr "Si se activa permite cerrar la ventana PiP pulsando la tecla 'Exit'"
@@ -11090,7 +11203,7 @@ msgid ""
 "ignored. Not the detection is disabled during this timeframe but the "
 "inactivity timeout is disabled"
 msgstr ""
-"Si se activa, permite especificar un margen de tiempo en el que el "
+"Si se activa, permite especificar un intervalo de tiempo en el que el "
 "temporizador de inactividad será ignorado. No se deshabilita la detección de "
 "inactividad, sólo el cronómetro"
 
@@ -11099,9 +11212,9 @@ msgid ""
 "sleeptimer is ignored. Not the detection is disabled during this timeframe "
 "but the inactivity timeout is disabled"
 msgstr ""
-"Si se habilita, permite especificar un margen de tiempo en el que el "
-"temporizador de reposo será ignorado. No se deshabilita la detección, sino "
-"el margen de inactividad"
+"Si se habilita, permite especificar un intervalo de tiempo en el que se "
+"ignorará el temporizador de reposo. No se deshabilita la detección, sino el "
+"intervalo de inactividad"
 
 msgid ""
 "When enabled you can zap channels with the  CH+/-, B+/-, P+/- buttons "
@@ -11382,6 +11495,16 @@ msgstr ""
 "Si se activa, el receptor seleccionará un canal AC3+ (si está disponible)"
 
 msgid ""
+"When enabled, this setting has more weight than 'Preferred tuner for "
+"recordings'."
+msgstr ""
+"Si se habilita, este ajuste prevalecerá sobre 'Sintonizador preferido para "
+"grabaciones'"
+
+msgid "When enabled, this setting has more weight than 'Preferred tuner'."
+msgstr "Si se habilita, este ajuste prevalecerá sobre 'Sintonizador preferido'"
+
+msgid ""
 "When enabled, timeshift starts automatically in background after specified "
 "time."
 msgstr ""
@@ -11617,7 +11740,7 @@ msgid ""
 "now."
 msgstr ""
 "Ha elegido hacer un backup de la configuración. Pulse OK para comenzar el "
-"backup."
+"backup ahora."
 
 msgid ""
 "You have chosen to create a new .NFI flasher bootable USB stick. This will "
@@ -11720,7 +11843,7 @@ msgid ""
 "Your internet connection is not working!\n"
 "Please choose what you want to do next."
 msgstr ""
-"La conexión a internet está funcionando!\n"
+"No hay conexión a internet!\n"
 "Elija lo siguiente que desee hacer."
 
 msgid "Your internet connection is working (ip: %s)"
@@ -12177,7 +12300,7 @@ msgid "daily"
 msgstr "Diario"
 
 msgid "day"
-msgstr "día"
+msgstr "dia"
 
 msgid "decrease uphop by 1"
 msgstr "disminuir en 1 salto"
@@ -12523,6 +12646,9 @@ msgstr "volver al título anterior"
 
 msgid "jump forward to the next title"
 msgstr "ir al título siguiente"
+
+msgid "jump to chapter by number"
+msgstr "Ir al capítulo (por número)"
 
 msgid "languages"
 msgstr "idiomas"
