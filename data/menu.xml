@@ -27,9 +27,9 @@
 			<id val="setup" />
 			<menu weight="7" level="0" text="Service searching" entryID="service_searching_selection">
 				<id val="scan" />
-				<item text="Tuner configuration" entryID="tuner_setup"><screen module="Satconfig" screen="NimSelection" /></item>
-				<item text="Automatic scan" entryID="auto_scan"><screen module="ScanSetup" screen="ScanSimple" /></item>
-				<item text="Manual scan" entryID="manual_scan"><screen module="ScanSetup" /></item>
+				<item text="Tuner configuration" entryID="tuner_setup" requires="HasTuners"><screen module="Satconfig" screen="NimSelection" /></item>
+				<item text="Automatic scan" entryID="auto_scan" requires="HasTuners"><screen module="ScanSetup" screen="ScanSimple" /></item>
+				<item text="Manual scan" entryID="manual_scan" requires="HasTuners"><screen module="ScanSetup" /></item>
 			</menu>
 			<menu weight="5" level="0" text="System" entryID="system_selection">
 				<id val="system" />
