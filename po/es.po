@@ -10583,8 +10583,8 @@ msgstr "Utilizar la EPG Netmed cuando sea posible"
 msgid "Use SDCard for epg storage path"
 msgstr "-Carpeta de almacenamiento de EPG"
 
-msgid "Use SDCard for kodi storage folder"
-msgstr "-Carpeta de almacenamiento de Kodi"
+msgid "Use SDCard for %s storage folder"
+msgstr "-Carpeta de almacenamiento de %s"
 
 msgid "Use SDCard for movies storage"
 msgstr "-Carpeta de almacenamiento de películas"
