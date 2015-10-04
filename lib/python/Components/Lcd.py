@@ -220,7 +220,6 @@ def InitLcd():
 			config.lcd.modeminitv = ConfigNothing()
 			config.lcd.fpsminitv = ConfigNothing()
 
-		if getBoxType() not in ('axodin', 'axodinc', 'axase3', 'axase3c', 'evoe3hd', 'geniuse3hd', 'vusolo', 'vusolose', 'vuzero'):
 			config.lcd.scroll_speed = ConfigSelection(default = "300", choices = [
 				("500", _("slow")),
 				("300", _("normal")),
