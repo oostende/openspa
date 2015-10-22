@@ -38,6 +38,7 @@ AC_ARG_WITH(gstversion,
 	AS_HELP_STRING([--with-gstversion],[use gstreamer version (major.minor)]),
 	[GST_MAJORMINOR=$withval],[GST_MAJORMINOR=0.10])
 
+PKG_CHECK_MODULES(GSTREAMER, gstreamer-$GST_MAJORMINOR gstreamer-pbutils-$GST_MAJORMINOR)
 PKG_CHECK_MODULES(BASE, [freetype2 fribidi gstreamer-$GST_MAJORMINOR gstreamer-pbutils-$GST_MAJORMINOR libdvbsi++ libpng libxml-2.0 sigc++-1.2 libssl libcrypto])
 PKG_CHECK_MODULES(LIBDDVD, libdreamdvd, HAVE_LIBDDVD="yes", HAVE_LIBDDVD="no")
 AM_CONDITIONAL(HAVE_LIBDDVD, test "$HAVE_LIBDDVD" = "yes")
@@ -60,7 +61,6 @@ AC_ARG_WITH(boxtype,
 AC_SUBST(BOXTYPE)
 AC_DEFINE_UNQUOTED(BOXTYPE,"$BOXTYPE",[box type])
 
-AM_CONDITIONAL(WETEK, test `echo "$BOXTYPE" | cut -b 1-2` == "we")
 AM_CONDITIONAL(AZBOX, test `echo "$BOXTYPE" | cut -b 1-5` == "azbox")
 AM_CONDITIONAL(CUBE, test `echo "$BOXTYPE" | cut -b 1-4` == "cube")
 AM_CONDITIONAL(DAGS, test `echo "$BOXTYPE" | cut -b 1-4` == "dags")
@@ -83,7 +83,6 @@ AM_CONDITIONAL(SPARK, test `echo "$BOXTYPE" | cut -b 1-5` == "spark")
 AM_CONDITIONAL(UNIBOXHDE, test "$BOXTYPE" == uniboxhde)
 AM_CONDITIONAL(EVO, test `echo "$BOXTYPE" | cut -b 1-4` == "enfi")
 AM_CONDITIONAL(MIRACLEBOX, test `echo "$BOXTYPE" | cut -b 1-2` == "mb")
-AM_CONDITIONAL(WETEKPLAY, test "$BOXTYPE" == wetekplay)
 AM_CONDITIONAL(AZBOXME, test "$BOXTYPE" == azboxme)
 AM_CONDITIONAL(AZBOXMINIME, test "$BOXTYPE" == azboxminime)
 AM_CONDITIONAL(AZBOXHD, test "$BOXTYPE" == azboxhd)
@@ -122,6 +121,7 @@ AM_CONDITIONAL(ET7X00, test "$BOXTYPE" == et7x00)
 AM_CONDITIONAL(ET9X00, test "$BOXTYPE" == et9x00)
 AM_CONDITIONAL(ET8000, test "$BOXTYPE" == et8000)
 AM_CONDITIONAL(ET8500, test "$BOXTYPE" == et8500)
+AM_CONDITIONAL(ET8500S, test "$BOXTYPE" == et8500s)
 AM_CONDITIONAL(ET10000, test "$BOXTYPE" == et10000)
 AM_CONDITIONAL(FORCE1, test "$BOXTYPE" == force1)
 AM_CONDITIONAL(WORLDVISIONF1, test "$BOXTYPE" == worldvisionf1)
@@ -176,7 +176,6 @@ AM_CONDITIONAL(VUDUO2, test "$BOXTYPE" == vuduo2)
 AM_CONDITIONAL(VUZERO, test "$BOXTYPE" == vuzero)
 AM_CONDITIONAL(VENTONHDX, test "$BOXTYPE" == ventonhdx)
 AM_CONDITIONAL(XP1000, test "$BOXTYPE" == xp1000)
-AM_CONDITIONAL(HAVE_WETEK_XBMC, test "$BOXTYPE" == wetekplay)
 AM_CONDITIONAL(HAVE_COLORLCD3, test "$BOXTYPE" == dm7080)
 AM_CONDITIONAL(HAVE_COLORLCD2, test "$BOXTYPE" == dm800se -o "$BOXTYPE" == dm800sev2 -o "$BOXTYPE" == dm820)
 AM_CONDITIONAL(HAVE_COLORLCD1, test "$BOXTYPE" == dm8000 -o "$BOXTYPE" == dm800 -o "$BOXTYPE" == dm7020hd -o "$BOXTYPE" == dm7020hdv2)
@@ -187,7 +186,6 @@ AC_ARG_WITH(machinebuild,
 AC_SUBST(MACHINEBUILD)
 AC_DEFINE_UNQUOTED(MACHINEBUILD,"$MACHINEBUILD",[machine build])
 
-### should/could add opengl-amlogic
 AC_ARG_WITH(libvugles2,
 	AS_HELP_STRING([--with-libvugles2],[use libvugles2, yes or no]),
 	[with_libvugles2=$withval],[with_libvugles2=no])
@@ -221,13 +219,13 @@ AC_ARG_ENABLE([libeplayer3],
 	esac])
 AM_CONDITIONAL([ENABLE_LIBEPLAYER3], [test x$enable_libeplayer3 = xtrue])
 
-AC_ARG_WITH(nolcd, 
-	AC_HELP_STRING([--with-nolcd], [disable ascii based lcd, yes or no]), 
-	[[withnolcd=$withval]], 
+AC_ARG_WITH(nolcd,
+	AC_HELP_STRING([--with-nolcd], [disable ascii based lcd, yes or no]),
+	[[withnolcd=$withval]],
 	[[withnolcd=no]]
 )
-if test x"$withnolcd" != xno ; then 
-	AC_DEFINE(NO_LCD, 1,[Define when disable an ascii based lcd device]) 
+if test x"$withnolcd" != xno ; then
+	AC_DEFINE(NO_LCD, 1,[Define when disable an ascii based lcd device])
 fi
 AM_CONDITIONAL(NO_LCD, test x"$withnolcd" != xno)
 
@@ -279,7 +277,19 @@ AC_ARG_WITH(colorlcd400,
 if test x"$withcolorlcd400" != xno ; then
 	AC_DEFINE(HAVE_COLORLCD400, 1,[Define when using a 400x176 color display device])
 fi
+
 AM_CONDITIONAL(HAVE_COLORLCD400, test x"$withcolorlcd400" != xno)
+
+AC_ARG_WITH(colorlcd720,
+	AC_HELP_STRING([--with-colorlcd720], [use 720x576 16bpp color display, yes or no]),
+	[[withcolorlcd720=$withval]],
+	[[withcolorlcd720=no]]
+)
+if test x"$withcolorlcd720" != xno ; then
+	AC_DEFINE(HAVE_COLORLCD720, 1,[Define when using a 720x576 color display device])
+fi
+
+AM_CONDITIONAL(HAVE_COLORLCD720, test x"$withcolorlcd720" != xno)
 
 AC_ARG_WITH(bwlcd255,
 	AC_HELP_STRING([--with-bwlcd255], [use 255x64 1bpp black and white display, yes or no]),
@@ -341,28 +351,10 @@ if test x"$witholdpvr" != xno ; then
 fi
 AM_CONDITIONAL(HAVE_OLDPVR, test x"$witholdpvr" != xno)
 
-### for now leave enabled, probably alphablending should be disabled
-if test "$BOXTYPE" == "wetekplay"; then
-#	AC_DEFINE(FORCE_NO_BLENDING_ACCELERATION, 1,[define when the framebuffer acceleration does not have alphablending support, though the autodetection might indicate that it does])
-#	AC_DEFINE(FORCE_NO_ACCELNEVER, 1,[define when the framebuffer acceleration auto not working correct])
-	AC_DEFINE(KEY_F7_TO_KEY_MENU, 1,[define when rc sends a KEY_F7 event for its KEY_MENU])
-	AC_DEFINE(KEY_F1_TO_KEY_MEDIA, 1,[define when rc sends a KEY_F1 event for its KEY_MEDIA])
-	AC_DEFINE(KEY_HOME_TO_KEY_INFO, 1,[define when rc sends a KEY_HOME event for its KEY_INFO])
-	AC_DEFINE(KEY_BACK_TO_KEY_EXIT, 1,[define when rc sends a KEY_BACK event for its KEY_EXIT])
-	AC_DEFINE(KEY_F2_TO_KEY_EPG, 1,[define when rc sends a KEY_F2 event for its KEY_EPG])
-	AC_DEFINE(KEY_ENTER_TO_KEY_OK, 1,[define when rc sends a KEY_ENTER event for its KEY_OK])
-	AC_DEFINE(WETEKRC, 1, [WetekPlay Remote-use BACKSPACE to toggle extended functions on numeric buttons])
-	AC_DEFINE(HAVE_ALSA, 1, [try with alsa])
-	PKG_CHECK_MODULES(ALSA, alsa)
-	PKG_CHECK_MODULES(AMLPLAYER, libamcodec)
-	PKG_CHECK_MODULES(DVBCSA, libdvbcsa)
-	ALSA_CFLAGS="-lasound"
-fi
-
 if test "$BOXTYPE" == "azboxme" -o "$BOXTYPE" == "azboxminime"; then
 	AC_DEFINE(FORCE_ADVANCED_REMOTE, 1,[define to fixup the input device identification when the remote control is actually an 'advanced' remote (with play/forward/rewind keys)])
 	AC_DEFINE(FORCE_NO_BLENDING_ACCELERATION, 1,[define when the framebuffer acceleration does not have alphablending support, though the autodetection might indicate that it does])
-	AC_DEFINE(FORCE_NO_ACCELNEVER, 1,[define when the framebuffer acceleration auto not working correct])	
+	AC_DEFINE(FORCE_NO_ACCELNEVER, 1,[define when the framebuffer acceleration auto not working correct])
 	AC_DEFINE(KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE, 1,[define when rc sends a KEY_PLAY event for its KEY_PLAYPAUSE key])
 fi
 
@@ -371,18 +363,27 @@ if test "$BOXTYPE" == "azboxhd"; then
 	AC_DEFINE(FORCE_NO_BLENDING_ACCELERATION, 1,[define when the framebuffer acceleration does not have alphablending support, though the autodetection might indicate that it does])
 	AC_DEFINE(FORCE_NO_ACCELNEVER, 1,[define when the framebuffer acceleration auto not working correct])
 	AC_DEFINE(KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE, 1,[define when rc sends a KEY_PLAY event for its KEY_PLAYPAUSE key])
-	AC_DEFINE(KEY_TEXT_TO_KEY_AUDIO, 1,[define when rc sends a KEY_TEXT event for its KEY_AUDIO key]) 
+	AC_DEFINE(KEY_TEXT_TO_KEY_AUDIO, 1,[define when rc sends a KEY_TEXT event for its KEY_AUDIO key])
 fi
 
-if test "$BOXTYPE" == "et4x00" -o "$BOXTYPE" == "et5x00" -o "$BOXTYPE" == "et6x00" -o "$BOXTYPE" == "et7x00" -o "$BOXTYPE" == "et9x00" -o "$BOXTYPE" == "et8000" -o "$BOXTYPE" == "et8500" -o "$BOXTYPE" == "et10000"; then
+if test "$BOXTYPE" == "et4x00" -o "$BOXTYPE" == "et5x00" -o "$BOXTYPE" == "et6x00" -o "$BOXTYPE" == "et7x00" -o "$BOXTYPE" == "et9x00" -o "$BOXTYPE" == "et8000" -o "$BOXTYPE" == "et8500" -o "$BOXTYPE" == "et8500s" -o "$BOXTYPE" == "et10000"; then
 	AC_DEFINE(KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE, 1,[define when rc sends a KEY_PLAY event for its KEY_PLAYPAUSE key])
 fi
 
-if test "$BOXTYPE" == "et8500" -o "$BOXTYPE" == "et7x00"; then
+if test "$BOXTYPE" == "et8500" -o "$BOXTYPE" == "et8500s" -o "$BOXTYPE" == "et7x00"; then
 	AC_DEFINE(FORCE_BLENDING_ACCELERATION, 1,[define when the framebuffer acceleration has alphablending support, but detection slow down all])
 fi
 
-if test "$BOXTYPE" == "hd2400" -o "$BOXTYPE" == "hd1100"; then
+if test "$BOXTYPE" == "ultramini"; then
+	AC_DEFINE(KEY_F1_TO_KEY_F2, 1,[define when rc sends a KEY_F1 event for its KEY_F2 key])
+	AC_DEFINE(FORCE_BLENDING_ACCELERATION, 1,[define when the framebuffer acceleration has alphablending support, but detection slow down all])
+fi
+
+if test "$BOXTYPE" == "xc7362"; then
+	AC_DEFINE(KEY_FAV_TO_KEY_PVR, 1,[define FAV KEY to PVR])
+fi
+
+if test "$BOXTYPE" == "hd2400" -o "$BOXTYPE" == "hd1100" -o "$BOXTYPE" == "hd1200" -o "$BOXTYPE" == "hd500c"; then
 	AC_DEFINE(KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE, 1,[define when rc sends a KEY_PLAY event for its KEY_PLAYPAUSE key])
 fi
 
@@ -390,15 +391,12 @@ if test "$BOXTYPE" == "ew7358" -o "$BOXTYPE" == "ew7356" -o "$BOXTYPE" == "ew736
 	AC_DEFINE(KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE, 1,[define when rc sends a KEY_PLAY event for its KEY_PLAYPAUSE key])
 fi
 
-if test "$BOXTYPE" == "ew7356" ; then
-	AC_DEFINE(KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE, 1,[define when rc sends a KEY_PLAY event for its KEY_PLAYPAUSE key])
-fi
-
 if test "$BOXTYPE" == "sh1" -o "$BOXTYPE" == "sh2"; then
 	AC_DEFINE(KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE, 1,[define when rc sends a KEY_PLAY event for its KEY_PLAYPAUSE key])
 fi
 
-if test "$BOXTYPE" == "7000s" -0 "$BOXTYPE" == "7100s"; then
+if test "$BOXTYPE" == "7000s" -0 "$BOXTYPE" == "7100s" -0 "$BOXTYPE" == "7300s"; then
+#	AC_DEFINE(FORCE_NO_BLENDING_ACCELERATION, 1,[define when the framebuffer acceleration does not have alphablending support, though the autodetection might indicate that it does])
 	AC_DEFINE(KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE, 1,[define when rc sends a KEY_PLAY event for its KEY_PLAYPAUSE key])
 fi
 
@@ -437,7 +435,7 @@ if test "$BOXTYPE" == "inihde" -o "$BOXTYPE" == "inihdx" -o "$BOXTYPE" == "inihd
 	AC_DEFINE(FORCE_NO_BLENDING_ACCELERATION, 1,[define when the framebuffer acceleration does not have alphablending support, though the autodetection might indicate that it does])
 fi
 
-if test "$MACHINEBUILD" == "bwidowx" ; then
+if test "$MACHINEBUILD" == "bwidowx" -o "$MACHINEBUILD" == "bwidowx2" -o "$MACHINEBUILD" == "fegasusx5t" -o "$MACHINEBUILD" == "fegasusx5s" -o "$MACHINEBUILD" == "fegasusx3"; then
 	AC_DEFINE(FORCE_NO_BLENDING_ACCELERATION, 1,[define when the framebuffer acceleration does not have alphablending support, though the autodetection might indicate that it does])
 fi
 
@@ -514,7 +512,7 @@ AC_SUBST(ENIGMA2_CFLAGS)
 
 CPPFLAGS="$CPPFLAGS $PYTHON_CPPFLAGS"
 CFLAGS="$CFLAGS $DEBUG_CFLAGS -Wall"
-CXXFLAGS="$CXXFLAGS $DEBUG_CFLAGS -Wall $BASE_CFLAGS $ENIGMA2_CFLAGS $PTHREAD_CFLAGS $OPENMP_CFLAGS $GLES_CFLAGS $ALSA_CFLAGS"
+CXXFLAGS="$CXXFLAGS $DEBUG_CFLAGS -Wall $BASE_CFLAGS $ENIGMA2_CFLAGS $PTHREAD_CFLAGS $OPENMP_CFLAGS $GLES_CFLAGS"
 AX_SWIG_PYTHON_OPT="$AX_SWIG_PYTHON_OPT -DSWIG_PYTHON_LEGACY_BOOL"
 
 AC_CONFIG_FILES([
@@ -570,8 +568,6 @@ lib/python/Plugins/Extensions/SocketMMI/meta/Makefile
 lib/python/Plugins/Extensions/SocketMMI/src/Makefile
 lib/python/Plugins/Extensions/TuxboxPlugins/Makefile
 lib/python/Plugins/Extensions/TuxboxPlugins/meta/Makefile
-lib/python/Plugins/Extensions/StartXBMC/Makefile
-lib/python/Plugins/Extensions/StartKodi/Makefile
 lib/python/Plugins/SystemPlugins/CommonInterfaceAssignment/Makefile
 lib/python/Plugins/SystemPlugins/CommonInterfaceAssignment/meta/Makefile
 lib/python/Plugins/SystemPlugins/DefaultServicesScanner/Makefile
