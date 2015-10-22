@@ -65,15 +65,6 @@ class picshow(Screen):
 		if not pathExists(currDir):
 			currDir = "/"
 
-		self.oldService = self.session.nav.getCurrentlyPlayingServiceReference()
-		self.session.nav.stopService()
-		# Show Background MVI
-		import os
-		try:
-			os.system("/usr/bin/showiframe /usr/share/enigma2/black.mvi &")
-		except:
-			pass
-
 		self.filelist = FileList(currDir, matchingPattern = "(?i)^.*\.(jpeg|jpg|jpe|png|bmp|gif)")
 		self["filelist"] = self.filelist
 		self["filelist"].onSelectionChanged.append(self.selectionChanged)
@@ -119,7 +110,7 @@ class picshow(Screen):
 			self.session.open(Pic_Exif, self.picload.getInfo(self.filelist.getCurrentDirectory() + self.filelist.getFilename()))
 
 	def KeyMenu(self):
-		self.session.openWithCallback(self.setConf ,Pic_Setup)
+		self.session.openWithCallback(self.setConf, Pic_Setup)
 
 	def KeyOk(self):
 		if self.filelist.canDescent():
@@ -146,7 +137,6 @@ class picshow(Screen):
 			config.pic.lastDir.value = self.filelist.getCurrentDirectory()
 
 		config.pic.save()
-		self.session.nav.playService(self.oldService)
 		self.close()
 
 #------------------------------------------------------------------------------------------
@@ -186,6 +176,7 @@ class Pic_Setup(Screen, ConfigListScreen):
 			getConfigListEntry(_("Slide picture in loop"), config.pic.loop),
 			getConfigListEntry(_("Background color"), config.pic.bgcolor),
 			getConfigListEntry(_("Text color"), config.pic.textcolor),
+			getConfigListEntry(_("Fulview resulution"), config.usage.pic_resolution),
 		]
 		self["config"].list = setup_list
 		self["config"].l.setList(setup_list)
@@ -477,6 +468,7 @@ class Pic_Full_View(Screen):
 			"left": self.prevPic,
 			"right": self.nextPic,
 			"showEventInfo": self.StartExif,
+			"contextMenu": self.KeyMenu,
 		}, -1)
 
 		self["point"] = Pixmap()
@@ -520,13 +512,16 @@ class Pic_Full_View(Screen):
 			self.onLayoutFinish.append(self.setPicloadConf)
 
 	def setPicloadConf(self):
-		sc = getScale()
-		self.picload.setPara([self["pic"].instance.size().width(), self["pic"].instance.size().height(), sc[0], sc[1], 0, int(config.pic.resize.value), self.bgcolor])
-
+		self.setConf()
 		self["play_icon"].hide()
 		if config.pic.infoline.value == False:
 			self["file"].setText("")
 		self.start_decode()
+
+	def setConf(self, retval=None):
+		sc = getScale()
+		#0=Width 1=Height 2=Aspect 3=use_cache 4=resize_type 5=Background(#AARRGGBB)
+		self.picload.setPara([self["pic"].instance.size().width(), self["pic"].instance.size().height(), sc[0], sc[1], 0, int(config.pic.resize.value), self.bgcolor])
 
 	def ShowPicture(self):
 		if self.shownow and len(self.currPic):
@@ -604,6 +599,9 @@ class Pic_Full_View(Screen):
 			return
 		self.session.open(Pic_Exif, self.picload.getInfo(self.filelist[self.lastindex]))
 
+	def KeyMenu(self):
+		self.session.openWithCallback(self.setConf, Pic_Setup)
+
 	def Exit(self):
 		del self.picload
 
@@ -612,4 +610,3 @@ class Pic_Full_View(Screen):
 			getDesktop(0).resize(eSize(self.size_w, self.size_h))
 
 		self.close(self.lastindex + self.dirlistcount)
-
