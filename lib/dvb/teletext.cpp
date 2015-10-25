@@ -270,7 +270,6 @@ void eDVBTeletextParser::processPESPacket(__u8 *pkt, int len)
 
 		if (len < data_unit_length)
 		{
-			eDebug("data_unit_length > len");
 			break;
 		}
 
