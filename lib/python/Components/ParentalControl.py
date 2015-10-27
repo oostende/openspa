@@ -6,7 +6,7 @@ from Screens.MessageBox import MessageBox
 from Tools.BoundFunction import boundFunction
 from ServiceReference import ServiceReference
 from Tools import Notifications
-from Tools.Directories import resolveFilename, SCOPE_CONFIG
+from Tools.Directories import resolveFilename, fileExists, SCOPE_CONFIG
 from Tools.Notifications import AddPopup
 from enigma import eTimer, eServiceCenter, iServiceInformation, eServiceReference, eDVBDB
 import time, os
@@ -31,6 +31,8 @@ def InitParentalControl():
 	config.ParentalControl.hideBlacklist = ConfigYesNo(default = False)
 	config.ParentalControl.config_sections = ConfigSubsection()
 	config.ParentalControl.config_sections.main_menu = ConfigYesNo(default = False)
+	if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/spazeMenu/plugin.pyo"):
+		config.ParentalControl.config_sections.spzmenu = ConfigYesNo(default = False)
 	config.ParentalControl.config_sections.configuration = ConfigYesNo(default = False)
 	config.ParentalControl.config_sections.timer_menu = ConfigYesNo(default = False)
 	config.ParentalControl.config_sections.plugin_browser = ConfigYesNo(default = False)
