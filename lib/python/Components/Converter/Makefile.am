@@ -9,3 +9,11 @@ install_PYTHON = \
 	ValueBitTest.py TunerInfo.py ConfigEntryTest.py TemplatedMultiContent.py ProgressToText.py \
 	Combine.py SensorToText.py ValueToPixmap.py PliExtraInfo.py genre.py TransponderInfo.py \
 	RotorPosition.py
+
+if HAVE_COLORLCD220
+install_PYTHON += info_timernoVFD.py
+endif
+
+if HAVE_COLORLCD400
+install_PYTHON += info_timernoVFD.py
+endif

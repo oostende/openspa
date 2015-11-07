@@ -23,3 +23,11 @@ endif
 if VUDUO2
 dist_install_DATA += analog.ttf MyriadPro-Regular.otf MyriadPro-Semibold.otf MyriadPro-SemiboldIt.otf
 endif
+
+if HAVE_COLORLCD220
+dist_install_DATA += hd2.ttf tuxtxt2.ttf
+endif
+
+if HAVE_COLORLCD400
+dist_install_DATA += hd2.ttf tuxtxt2.ttf
+endif
