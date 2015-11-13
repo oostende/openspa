@@ -13634,3 +13634,27 @@ msgstr "Canviar abans d'Stream"
 
 msgid "zapped"
 msgstr "Canviat"
+
+msgid "Channel zap delay mode"
+msgstr "Retard del zàping"
+
+msgid "Setup delay mode to zap to channels."
+msgstr "Configura el retard que s'aplicarà al zàping"
+
+msgid "Channel zap delay first button"
+msgstr "Retard del canal - primera tecla"
+
+msgid "User defined delay when you press the first button to zap to the channel."
+msgstr "Retard (configurable) quan es prem la primera tecla per al canvi de canal"
+
+msgid "Channel zap delay another button"
+msgstr "Retard del canal - una altra tecla"
+
+msgid "User defined delay when you press another button to zap to the channel."
+msgstr "Retard (configurable) quan es prem una altra tecla per al canvi de canal"
+
+msgid "Number of channel number digits"
+msgstr "Nombre de dígits del canal"
+
+msgid "This allows you to set the number of digits to 5, if you have more than 9999 channels."
+msgstr "Configura el nombre de dígits del canal a 5 per quan es disposa de més de 9999 canals."

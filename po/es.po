@@ -13668,3 +13668,27 @@ msgstr "Cambiar antes de Stream"
 
 msgid "zapped"
 msgstr "Cambiado"
+
+msgid "Channel zap delay mode"
+msgstr "Retardo del zapping"
+
+msgid "Setup delay mode to zap to channels."
+msgstr "Configura el retardo que se aplicará al zapping"
+
+msgid "Channel zap delay first button"
+msgstr "Retardo del canal - primera tecla"
+
+msgid "User defined delay when you press the first button to zap to the channel."
+msgstr "Retardo (configurable) cuando se pulsa la primera tecla para el cambio de canal"
+
+msgid "Channel zap delay another button"
+msgstr "Retardo del canal - otra tecla"
+
+msgid "User defined delay when you press another button to zap to the channel."
+msgstr "Retardo (configurable) cuando se pulsa otra tecla para el cambio de canal"
+
+msgid "Number of channel number digits"
+msgstr "Número de dígitos del canal"
+
+msgid "This allows you to set the number of digits to 5, if you have more than 9999 channels."
+msgstr "Configura el número de dígitos del canal a 5 para cuando se dispone de más de 9999 canales."
