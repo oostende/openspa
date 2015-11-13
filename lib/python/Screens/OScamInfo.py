@@ -761,14 +761,14 @@ class oscInfo(Screen, OscamInfo):
 			ysize = (len(out) + 4 ) * 25
 			if self.what == "c":
 				self.changeScreensize( ysize )
-				self.setTitle("Client Info ( Oscam-Version: %s )" % self.getVersion())
+				self.setTitle(_("Client Info ( Oscam-Version: %s )") % self.getVersion())
 			elif self.what == "s":
 				self.changeScreensize( ysize )
-				self.setTitle("Server Info( Oscam-Version: %s )" % self.getVersion())
+				self.setTitle(_("Server Info( Oscam-Version: %s )") % self.getVersion())
 
 			elif self.what == "l":
 				self.changeScreensize( 500 )
-				self.setTitle("Oscam Log ( Oscam-Version: %s )" % self.getVersion())
+				self.setTitle(_("Oscam Log ( Oscam-Version: %s )") % self.getVersion())
 			self["output"].l.setList(out)
 			self["output"].selectionEnabled(False)
 		else:
@@ -1129,7 +1129,7 @@ class OscamInfoConfigScreen(Screen, ConfigListScreen):
 			self.oscamconfig.append(getConfigListEntry(_("Username (httpuser)"), config.oscaminfo.username))
 			self.oscamconfig.append(getConfigListEntry(_("Password (httpwd)"), config.oscaminfo.password))
 			self.oscamconfig.append(getConfigListEntry(_("IP-Address"), config.oscaminfo.ip))
-			self.oscamconfig.append(getConfigListEntry("Port", config.oscaminfo.port))
+			self.oscamconfig.append(getConfigListEntry(_("Port"), config.oscaminfo.port))
 		self.oscamconfig.append(getConfigListEntry(_("Automatically update Client/Server View?"), config.oscaminfo.autoupdate))
 		if config.oscaminfo.autoupdate.value:
 			self.oscamconfig.append(getConfigListEntry(_("Update interval (in seconds)"), config.oscaminfo.intervall))
