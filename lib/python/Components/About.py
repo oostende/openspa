@@ -85,6 +85,7 @@ def getPythonVersionString():
 		return _("unknown")
 
 def getCPUString():
+	system = _("unavailable")
 	try:
 		file = open('/proc/cpuinfo', 'r')
 		lines = file.readlines()
@@ -95,6 +96,8 @@ def getCPUString():
 				if splitted[0].startswith("system type"):
 					system = splitted[1].split(' ')[0]
 				elif splitted[0].startswith("Processor"):
+					system = splitted[1].split(' ')[0]
+				elif splitted[0].startswith("model name"):
 					system = splitted[1].split(' ')[0]
 		file.close()
 		return system 
