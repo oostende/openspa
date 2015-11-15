@@ -2020,6 +2020,9 @@ class InfoBarExtensions:
 		self.addExtension(extension = self.getOScamInfo, type = InfoBarExtensions.EXTENSION_LIST)
 		self.addExtension(extension = self.getIpkUninstall, type = InfoBarExtensions.EXTENSION_LIST)
 
+		for p in plugins.getPlugins(PluginDescriptor.WHERE_EXTENSIONSINGLE):
+			p(self)
+
 	def get3DSetupname(self):
 		return _("OSD 3D Setup")
 

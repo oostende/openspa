@@ -14,6 +14,10 @@ if HAVE_LIBVUGLES2
 SUBDIRS += AnimationSetup
 endif
 
+if VUSOLO4K
+SUBDIRS += FastZapSupport
+endif
+
 if DREAMBOX
 SUBDIRS += FrontprocessorUpgrade NFIFlash CableScan
 endif
