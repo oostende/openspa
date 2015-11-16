@@ -14,6 +14,10 @@ if HAVE_LIBVUGLES2
 SUBDIRS += AnimationSetup
 endif
 
+if WETEK
+SUBDIRS += WetekFRQ
+endif
+
 if DREAMBOX
 SUBDIRS += FrontprocessorUpgrade NFIFlash CableScan
 endif
