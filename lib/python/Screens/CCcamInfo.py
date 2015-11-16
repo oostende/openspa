@@ -3,7 +3,7 @@
 from base64 import encodestring
 from os import listdir, remove, rename, system, path
 
-from enigma import eListboxPythonMultiContent, eTimer, gFont, loadPNG, RT_HALIGN_RIGHT, getDesktop
+from enigma import eListboxPythonMultiContent, eTimer, gFont, loadPNG, RT_HALIGN_RIGHT, getDesktop, BT_SCALE, BT_KEEP_ASPECT_RATIO
 
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.config import config, getConfigListEntry
@@ -24,6 +24,8 @@ from Tools.Directories import fileExists, SCOPE_ACTIVE_SKIN, resolveFilename
 from twisted.internet import reactor
 from twisted.web.client import HTTPClientFactory
 from urlparse import urlparse, urlunparse
+
+from Plugins.Extensions.spazeMenu.plugin import fhd, esHD
 
 #TOGGLE_SHOW = InfoBar.toggleShow
 
@@ -213,30 +215,30 @@ def getConfigNameAndContent(fileName):
 class CCcamList(MenuList):
 	def __init__(self, list):
 		MenuList.__init__(self, list, False, eListboxPythonMultiContent)
-		self.l.setItemHeight(25)
+		self.l.setItemHeight(fhd(25,2))
 		self.l.setFont(0, gFont("Regular", 20))
-		self.l.setFont(1, gFont("Regular", 32))
+		self.l.setFont(1, gFont("Regular", fhd(32,0.7)))
 
 class CCcamShareList(MenuList):
 	def __init__(self, list):
 		MenuList.__init__(self, list, False, eListboxPythonMultiContent)
-		self.l.setItemHeight(60)
+		self.l.setItemHeight(fhd(60))
 		self.l.setFont(0, gFont("Regular", 18))
-		self.l.setFont(1, gFont("Regular", 32))
+		self.l.setFont(1, gFont("Regular", fhd(32,0.7)))
 
 class CCcamConfigList(MenuList):
 	def __init__(self, list):
 		MenuList.__init__(self, list, False, eListboxPythonMultiContent)
-		self.l.setItemHeight(30)
+		self.l.setItemHeight(fhd(30))
 		self.l.setFont(0, gFont("Regular", 20))
-		self.l.setFont(1, gFont("Regular", 32))
+		self.l.setFont(1, gFont("Regular", fhd(32,0.7)))
 
 class CCcamShareViewList(MenuList):
 	def __init__(self, list):
 		MenuList.__init__(self, list, False, eListboxPythonMultiContent)
-		self.l.setItemHeight(20)
+		self.l.setItemHeight(fhd(20))
 		self.l.setFont(0, gFont("Regular", 18))
-		self.l.setFont(1, gFont("Regular", 32))
+		self.l.setFont(1, gFont("Regular", fhd(32,0.7)))
 
 def CCcamListEntry(name, idx):
 	screenwidth = getDesktop(0).size().width()
@@ -259,8 +261,8 @@ def CCcamListEntry(name, idx):
 		png = "/usr/share/enigma2/skin_default/buttons/key_%s.png" % str(idx)
 	if screenwidth and screenwidth == 1920:
 		if fileExists(png):
-			res.append(MultiContentEntryPixmapAlphaBlend(pos=(10, 5), size=(67, 48), png=loadPNG(png)))
-		res.append(MultiContentEntryText(pos=(90, 7), size=(900, 50), font=1, text=name))
+			res.append(MultiContentEntryPixmapAlphaBlend(pos=(fhd(10,1), fhd(5,0.2)), size=(fhd(67,0.9), fhd(48,1)), png=loadPNG(png), flags = BT_SCALE | BT_KEEP_ASPECT_RATIO))
+		res.append(MultiContentEntryText(pos=(fhd(90,1), fhd(7,0.6)), size=(fhd(900), fhd(50,0.8)), font=1, text=name))
 	else:
 		if fileExists(png):
 			res.append(MultiContentEntryPixmapAlphaBlend(pos=(0, 0), size=(35, 25), png=loadPNG(png)))
@@ -276,8 +278,8 @@ def CCcamServerListEntry(name, color):
 		png = "/usr/share/enigma2/skin_default/buttons/key_%s.png" % color
 	if screenwidth and screenwidth == 1920:
 		if fileExists(png):
-			res.append(MultiContentEntryPixmapAlphaBlend(pos=(10, 5), size=(67, 48), png=loadPNG(png)))
-		res.append(MultiContentEntryText(pos=(90, 7), size=(900, 50), font=1, text=name))
+			res.append(MultiContentEntryPixmapAlphaBlend(pos=(fhd(10,1), fhd(5,0.2)), size=(fhd(67,0.9), fhd(48,1)), png=loadPNG(png), flags = BT_SCALE | BT_KEEP_ASPECT_RATIO))
+		res.append(MultiContentEntryText(pos=(fhd(90,1), fhd(7,0.6)), size=(fhd(900), fhd(50,0.8)), font=1, text=name))
 	else:
 		if fileExists(png):
 			res.append(MultiContentEntryPixmapAlphaBlend(pos=(0, 0), size=(35, 25), png=loadPNG(png)))
@@ -915,7 +917,7 @@ class CCcamShareViewMenu(Screen, HelpableScreen):
 									count = 1
 									countList.append(count)
 									numberofcards = count
-									providername = self.providers.get(caidprovider, 'Multiple Providers given')
+									providername = self.providers.get(caidprovider, _('Multiple Providers given'))
 									#if providername == 'Multiple Providers given':
 									#	print caidprovider
 									numberofreshare = 0
@@ -946,7 +948,7 @@ class CCcamShareViewMenu(Screen, HelpableScreen):
 									elif int(down)==0:
 										numberofreshare = reshareList[i]
 
-									providername = self.providers.get(caidprovider, 'Multiple Providers given')
+									providername = self.providers.get(caidprovider, _('Multiple Providers given'))
 									shareList[i] = CCcamShareViewListEntry(caidprovider, providername, str(numberofcards), str(numberofreshare))
 
 								self.hostList.append(hostname)
@@ -984,7 +986,7 @@ class CCcamShareViewMenu(Screen, HelpableScreen):
 										count = 1
 										countList.append(count)
 										numberofcards = count
-										providername = self.providers.get(caidprovider, 'Multiple Providers given')
+										providername = self.providers.get(caidprovider, _('Multiple Providers given'))
 										#if providername == 'Multiple Providers given':
 										#	print caidprovider
 
@@ -1017,7 +1019,7 @@ class CCcamShareViewMenu(Screen, HelpableScreen):
 										elif int(down)==0:
 											numberofreshare = reshareList[i]
 
-										providername = self.providers.get(caidprovider, 'Multiple Providers given')
+										providername = self.providers.get(caidprovider, _('Multiple Providers given'))
 										shareList[i] = CCcamShareViewListEntry(caidprovider, providername, str(numberofcards), str(numberofreshare))
 
 									self.hostList.append(hostname)
@@ -1342,7 +1344,7 @@ class CCcamInfoRemoteBoxMenu(Screen):
 			self["list"].setList(self.list)
 
 	def new(self):
-		self.session.openWithCallback(self.newCallback, CCcamInfoConfigMenu, CCcamInfoRemoteBox("Profile", "192.168.2.12", "", "", 16001))
+		self.session.openWithCallback(self.newCallback, CCcamInfoConfigMenu, CCcamInfoRemoteBox(_("Profile"), "192.168.2.12", "", "", 16001))
 
 	def newCallback(self, callback):
 		if callback:
