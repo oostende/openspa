@@ -13658,3 +13658,48 @@ msgstr "Nombre de dígits del canal"
 
 msgid "This allows you to set the number of digits to 5, if you have more than 9999 channels."
 msgstr "Configura el nombre de dígits del canal a 5 per quan es disposa de més de 9999 canals."
+
+msgid "REC"
+msgstr "GRAV."
+
+msgid "Please set up tuner E"
+msgstr "Configureu el sintonitzador E"
+
+msgid "Please set up tuner F"
+msgstr "Configureu el sintonitzador F"
+
+msgid "Please set up tuner G"
+msgstr "Configureu el sintonitzador G"
+
+msgid "Please set up tuner H"
+msgstr "Configureu el sintonitzador H"
+
+msgid "Please set up tuner I"
+msgstr "Configureu el sintonitzador I"
+
+msgid "Please set up tuner J"
+msgstr "Configureu el sintonitzador J"
+
+msgid "Disable MiniTV"
+msgstr "Deshabilitar MiniTV"
+
+msgid "Enable MiniTV"
+msgstr "Habilitar MiniTV"
+
+msgid "Disable FastZapping"
+msgstr "Deshabilitar FastZapping"
+
+msgid "Enable FastZapping"
+msgstr "Habilitar FastZapping"
+
+msgid "will take about 1-4 minutes for this system\n"
+msgstr "trigarà entre 1 i 4 minuts en acabar\n\n"
+
+msgid "\n<This tuner is configured automatically>"
+msgstr "\n<Aquest sintonitz. es configura automàticament>"
+
+msgid "HDMI Colorspace"
+msgstr "Espai de color HDMI"
+
+msgid "This option allows you can config the Colorspace from Auto to RGB"
+msgstr "Permet configurar l'espai de color d'Auto a RGB"
