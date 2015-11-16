@@ -164,6 +164,13 @@ msgstr ""
 
 msgid ""
 "\n"
+"Timer '%s' disabled!"
+msgstr ""
+"\n"
+"Temporiz. '%s' deshabilitado"
+
+msgid ""
+"\n"
 "View, install and remove available or installed packages."
 msgstr ""
 "\n"
@@ -314,6 +321,9 @@ msgstr "%d/%B/%Y"
 
 msgid "%s %s free disk space"
 msgstr "Espacio libre en disco: %s %s"
+
+msgid "%s %s front panel"
+msgstr "Panel frontal %s %s"
 
 msgid "%s (%s)\n"
 msgstr "%s (%s)\n"
@@ -858,10 +868,10 @@ msgid "Accesspoint:"
 msgstr "Punto de Acceso:"
 
 msgid "Action on long powerbutton press"
-msgstr "Acción dejando pulsado el encendido"
+msgstr "Pulsac. larga del botón de encendido"
 
 msgid "Action on short powerbutton press"
-msgstr "Acción con una pulsación corta del botón de encend."
+msgstr "Pulsac. corta del botón de encendido"
 
 msgid "Action when receiver is not controlled"
 msgstr "Acción cuando el receptor no obedece"
@@ -1104,7 +1114,7 @@ msgid "Allocate unused memory index"
 msgstr "Ubicar índices no utilizados"
 
 msgid "Allow quit movieplayer with exit"
-msgstr "Permitir salir del reproductor con 'EXIT'"
+msgstr "Salir del reproductor con 'EXIT'"
 
 msgid "Allow subtitle language to equal audio language"
 msgstr "Permitir el idioma de subtitulos igual que el de audio"
@@ -1145,6 +1155,20 @@ msgstr "siempre"
 
 msgid "Always ask"
 msgstr "Preguntar siempre"
+
+msgid "Always include ECM in recordings"
+msgstr "Incluir siempre las ECM en las grabaciones"
+
+msgid ""
+"Always include ECM messages in recordings. This overrides the individual "
+"timer settings globally. It allows recordings to be always decrypted "
+"afterwards (sometimes called offline decoding), if supported by your "
+"receiver. Default: off."
+msgstr ""
+"Incluye los mensajes ECM en las grabaciones. Este ajuste prevalece sobre los "
+"ajustes globales de los temporizadores. Permite a las grabaciones (si el "
+"receptor lo admite) ser descodificadas con posterioridad (generalmente "
+"llamado \"decodificación offline\"). Defecto: deshabilitado"
 
 msgid "Always use smart1080p mode"
 msgstr "Utilizar siempre el modo smart1080p"
@@ -1430,7 +1454,7 @@ msgid "Automatic start time"
 msgstr "Hora de la copia automática"
 
 msgid "Automatically start timeshift after"
-msgstr "Iniciar timeshift automáticamente después de"
+msgstr "Autoiniciar timeshift después de"
 
 msgid "Automatically turn on external subtitles"
 msgstr "Activar automáticamente los subtítulos externos"
@@ -1581,7 +1605,7 @@ msgid "Behavior of 0 key in PiP-mode"
 msgstr "Uso de la tecla 0 en el modo PiP"
 
 msgid "Behavior when a movie is started"
-msgstr "Cuando una película ha comenzado"
+msgstr "Al empezar una película"
 
 msgid "Behavior when a movie is stopped"
 msgstr "Cuando se detiene una película"
@@ -1674,7 +1698,7 @@ msgid "BrowserMain"
 msgstr "Navegador - Menú Principal"
 
 msgid "Buffering %d%%"
-msgstr "Guardando en búffer %d%%"
+msgstr "Búffer: %d%%"
 
 msgid "Build: %s"
 msgstr "Build: %s"
@@ -1862,11 +1886,8 @@ msgstr ""
 msgid "Cannot move to trash can"
 msgstr "No se puede mover a la papelera"
 
-msgid "Cannot umount current drive."
-msgstr "No se puede desmontar el dispositivo"
-
 msgid ""
-"Cannot umount current drive.\n"
+"Cannot umount current device.\n"
 "A record in progress, timeshift or some external tools (like samba, swapfile "
 "and nfsd) may cause this problem.\n"
 "Please stop this actions/applications and try again"
@@ -1875,6 +1896,9 @@ msgstr ""
 "Una grabación iniciada, timeshift, o algún factor externo (samba, swap...) "
 "pueden estar causando este problema.\n"
 "Detenga este proceso e inténtelo de nuevo."
+
+msgid "Cannot umount current drive."
+msgstr "No se puede desmontar el dispositivo"
 
 msgid "Capacity"
 msgstr "Capacidad"
@@ -2254,6 +2278,9 @@ msgid ""
 "list."
 msgstr ""
 "Configura si la lista de canales se mostrará en columnas (y su anchura)"
+
+msgid "Configure if behind the subtitles a background is shown"
+msgstr "Configura si se mostrará (o no) un fondo detrás de los subtítulos"
 
 msgid ""
 "Configure if service picons will be shown in the channel selection list."
@@ -2712,7 +2739,7 @@ msgid "Continue"
 msgstr "Continuar"
 
 msgid "Continue in background"
-msgstr "Continuar en segundo plano"
+msgstr "2º plano"
 
 msgid "Continue playback"
 msgstr "Continuar la reproducción"
@@ -2781,7 +2808,7 @@ msgid "Create Full Backup for AZBox"
 msgstr "Backup de imagen completa para Azbox"
 
 msgid "Create more detailed crash log"
-msgstr "Crear un 'crashlog' detallado"
+msgstr "Generar un 'crashlog' detallado"
 
 msgid "Create new folder and exit"
 msgstr "Crear una carpeta y salir"
@@ -2846,6 +2873,9 @@ msgstr "Modo actual: %s \n"
 
 msgid "Current page is already exist."
 msgstr "La página ya existe."
+
+msgid "Current rotor position: "
+msgstr "Posición actual del motor: "
 
 msgid "Current settings:"
 msgstr "Configuración actual:"
@@ -3161,6 +3191,12 @@ msgstr ""
 msgid "Descramble http streams"
 msgstr "Descodificar streams http"
 
+msgid "Descramble receiving http streams"
+msgstr "Descodificar streams http recibidos"
+
+msgid "Descramble sending http streams"
+msgstr "Descodificar streams http enviados"
+
 msgid "Description"
 msgstr "Descripción"
 
@@ -3339,7 +3375,7 @@ msgid "Display and userinterface"
 msgstr "Aspecto e interfaz de usuario"
 
 msgid "Display message before playing next movie"
-msgstr "Mostrar mensaje antes de reproducir la película siguiente"
+msgstr "Mensaje antes de reproducir la película siguiente"
 
 msgid "Display setup"
 msgstr "Configuración del display"
@@ -3366,6 +3402,13 @@ msgstr ""
 "Seguro que quiere comprobar el tipo de sistema?\n"
 "Esto podria tardar varios minutos."
 
+msgid ""
+"Do you really want to convert the filesystem?\n"
+"You cannot go back!"
+msgstr ""
+"Seguro que quiere convertir el sistema de archivos?\n"
+"No se podrá volver atrás!"
+
 msgid "Do you really want to delete %s?"
 msgstr "Seguro que quiere borrar %s?"
 
@@ -3389,6 +3432,13 @@ msgid "Do you really want to exit?"
 msgstr "Seguro que quiere salir?"
 
 msgid ""
+"Do you really want to initialize the device?\n"
+"All data on the disk will be lost!"
+msgstr ""
+"Seguro que quiere inicializar el dispositivo?\n"
+"Todos los datos se perderán!"
+
+msgid ""
 "Do you really want to remove\n"
 "the plugin \"%s\"?"
 msgstr ""
@@ -3406,6 +3456,13 @@ msgstr "Seguro que quiere restaurar desde el archivo?"
 
 msgid "Do you want this?"
 msgstr "Quiere hacer esto?"
+
+msgid ""
+"Do you want to also install samba client ?\n"
+"This allows you to mount your windows shares on this device."
+msgstr ""
+"Dresea instalar también el cliente samba?\n"
+"Con samba podrá montar los recursos windows en este dispositivo."
 
 msgid "Do you want to burn this collection to DVD medium?"
 msgstr "Desea grabar esta colección en un disco DVD?"
@@ -3666,7 +3723,7 @@ msgid "Enable"
 msgstr "Activar"
 
 msgid "Enable 'neutrino' style channel select controlling"
-msgstr "Habilitar controlador 'neutrino' para la selección de canal"
+msgstr "Controlador 'neutrino' para la selección de canales"
 
 msgid "Enable 5V for active antenna"
 msgstr "Activar 5V para la antena activa"
@@ -3744,7 +3801,7 @@ msgid "Enable multiple bouquets"
 msgstr "Habilitar múltiples listas"
 
 msgid "Enable or disable Ipv6."
-msgstr "Des/habilita IPv6"
+msgstr "[Des]habilita IPv6"
 
 msgid "Enable parental control"
 msgstr "Activar el control de adultos"
@@ -3769,6 +3826,9 @@ msgstr "Activar caché de teletexto"
 
 msgid "Enable timer"
 msgstr "Activar programación"
+
+msgid "Enable timer conflict detection"
+msgstr "Habilitar detección de conflictos de timers"
 
 msgid "Enable zapping with CH+/-, B+/-, P+/-"
 msgstr "Habilitar zapping con CH+/-, B+/-, P+/-"
@@ -3996,6 +4056,9 @@ msgstr "Salir de YouTube TV"
 msgid "Exit the wizard"
 msgstr "Salir del asistente"
 
+msgid "Exit/OK"
+msgstr "Salir/OK"
+
 msgid "Expert"
 msgstr "Experto"
 
@@ -4048,7 +4111,7 @@ msgid "External subtitle color"
 msgstr "Color de los subtítulos externos"
 
 msgid "External subtitle dialog colorisation"
-msgstr "Colorización de subtítulos externos"
+msgstr "Coloración de subtítulos externos"
 
 msgid "External subtitle switch fonts"
 msgstr "Cambiar formato de subtítulos externos"
@@ -4067,6 +4130,9 @@ msgstr "Extras"
 
 msgid "FEC"
 msgstr "FEC"
+
+msgid "FEC:"
+msgstr "FEC:"
 
 msgid "FTA"
 msgstr "FTA"
@@ -5073,7 +5139,7 @@ msgid "Javascript Libraries"
 msgstr "Libreria Javascript"
 
 msgid "Job View"
-msgstr "Ver tareas"
+msgstr "Tareas"
 
 msgid "Job overview"
 msgstr "Tarea ejecutada"
@@ -5149,6 +5215,9 @@ msgstr "Configurar LCD4Linux"
 
 msgid "LED Deep Standby"
 msgstr "LED de reposo profundo"
+
+msgid "LED Display Setup"
+msgstr "Configuración de LED/Display"
 
 msgid "LED Normal"
 msgstr "LED Normal"
@@ -5280,6 +5349,9 @@ msgstr "Enlazar los títulos con un menú de DVD"
 
 msgid "List EPG functions..."
 msgstr "Lista de funciones de la EPG"
+
+msgid "List available networks"
+msgstr "Lista de redes disponibles"
 
 msgid "List mode"
 msgstr "Modo lista"
@@ -5424,6 +5496,9 @@ msgstr "Manual"
 msgid "Manual Scan"
 msgstr "Búsqueda manual"
 
+msgid "Manual configuration"
+msgstr "Configuración manual"
+
 msgid "Manual scan"
 msgstr "Búsqueda manual"
 
@@ -5468,6 +5543,13 @@ msgstr "Nº máximo de dias en EPG"
 
 msgid "May"
 msgstr "Mayo"
+
+msgid ""
+"Maybe the reason that recording is currently running. Please stop the "
+"recording before trying to configure the positioner."
+msgstr ""
+"Tal vez la razón sea que hay una grabación en curso. Detenga la grabación "
+"antes de configurar el posicionador."
 
 msgid "Media player"
 msgstr "Reproductor"
@@ -5740,7 +5822,7 @@ msgstr "Posición cambiada en el índice"
 msgid "Movement"
 msgstr "Movimiento"
 
-msgid "Movie Browser Configuration "
+msgid "Movie Browser Configuration"
 msgstr "Configuración del Explorador de películas"
 
 msgid "Movie list configuration"
@@ -5936,6 +6018,20 @@ msgstr "Servidor de red"
 
 msgid "Never"
 msgstr "Nunca"
+
+msgid ""
+"Never decrypt the content while recording. This overrides the individual "
+"timer settings globally. If enabled, recordings are stored in crypted "
+"presentation and must be decrypted afterwards (sometimes called offline "
+"decoding). Default: off."
+msgstr ""
+"No desencripta nunca mientras se está grabando. Este ajuste prevalece sobre "
+"los ajustes globales de los temporizadores. Si se habilita, las grabaciones "
+"se guardarán codificadas y deberán descodificarse posteriormente "
+"(generalmente llamado \"decodificación offline\"). Defecto: deshabilitado"
+
+msgid "Never decrypt while recording"
+msgstr "No desencriptar nunca durante la grabación"
 
 msgid "New"
 msgstr "Nuevo"
@@ -6428,6 +6524,9 @@ msgstr "Abrir la lista de canales y seleccionar el canal siguiente"
 
 msgid "Open service list and select previous channel"
 msgstr "Abrir la lista de canales y seleccionar el canal anterior"
+
+msgid "Open setup tuner "
+msgstr "Abrir configuración del sinton. "
 
 msgid "Open the movie list"
 msgstr "Abrir la lista de películas"
@@ -7062,6 +7161,9 @@ msgstr "Estado de configuración del motor"
 msgid "Positioner setup"
 msgstr "Configuración del motor"
 
+msgid "Positioner setup log"
+msgstr "Log de config. del posicionador"
+
 msgid "Positioner setup..."
 msgstr "Configuración del motor"
 
@@ -7069,7 +7171,7 @@ msgid "Power Control"
 msgstr "Reposo/reinicio"
 
 msgid "Power LED state in (deep)-standby"
-msgstr "Estado del LED de encendido en reposo-(profundo)"
+msgstr "Estado del LED de encendido en reposo/(profundo)"
 
 msgid "Power on/off display"
 msgstr "Encender/apagar display"
@@ -7107,11 +7209,17 @@ msgstr "Preferencias"
 msgid "Preferred tuner"
 msgstr "Sintonizador preferido"
 
+msgid "Preferred tuner DVB-S"
+msgstr "Sintonizador DVB-S preferido"
+
+msgid "Preferred tuner DVB-S for recordings"
+msgstr "Sinton. DVB-S preferido para grabaciones"
+
 msgid "Preferred tuner DVB-T"
 msgstr "Sintonizador DVB-T preferido"
 
 msgid "Preferred tuner DVB-T for recordings"
-msgstr "Sintonizador DVB-T preferido para grabaciones"
+msgstr "Sinton. DVB-T preferido para grabaciones"
 
 msgid "Preferred tuner for recordings"
 msgstr "Sintonizador preferido para grabaciones"
@@ -7204,6 +7312,9 @@ msgstr "Pulse OK para invertir la selección"
 msgid "Press OK to toggle the selection."
 msgstr "Pulse OK para activar la selección."
 
+msgid "Press OK, save and exit..."
+msgstr "Pulse OK, guarde y salga"
+
 msgid "Press [OK] to select"
 msgstr "Pulse OK para seleccionar"
 
@@ -7274,7 +7385,7 @@ msgid "Protect main menu"
 msgstr "Proteger el menú principal"
 
 msgid "Protect manufacturer reset screen"
-msgstr "Pantalla de reset de protección del fabricante"
+msgstr "Proteger la pantalla de reinicio de fábrica"
 
 msgid "Protect movie list"
 msgstr "Proteger la lista de películas"
@@ -7292,7 +7403,10 @@ msgid "Protect setup"
 msgstr "Proteger configuración"
 
 msgid "Protect software update screen"
-msgstr "Pantalla de actualización de la protección de software"
+msgstr "Proteger la pantalla de actualización de software"
+
+msgid "Protect spzMenu"
+msgstr "Proteger spzMenu"
 
 msgid "Protect standby menu"
 msgstr "Proteger el menú de reposo"
@@ -7428,6 +7542,9 @@ msgstr "Quiere reiniciar GUI ahora?"
 
 msgid "Really shutdown now?"
 msgstr "Quiere apagar el receptor ahora?"
+
+msgid "Really store at index %2d for current position?"
+msgstr "Seguro que quiere guardar la posición actual en el índice %2d?"
 
 msgid "Really upgrade the frontprocessor and reboot now?"
 msgstr "Seguro que desea actualizar el frontprocessor y reiniciar?"
@@ -7586,7 +7703,7 @@ msgid "Remove Confirmation"
 msgstr "Confirmación de borrado"
 
 msgid "Remove Service"
-msgstr "Quitar servicio"
+msgstr "Quitar serv."
 
 msgid "Remove a mark"
 msgstr "Eliminar una marca"
@@ -7908,6 +8025,9 @@ msgstr "Sa"
 msgid "Safe mode"
 msgstr "Modo seguro"
 
+msgid "Samba Setup"
+msgstr "Configurar samba"
+
 msgid "Same as in active"
 msgstr "Igual que activo"
 
@@ -8091,13 +8211,13 @@ msgstr ""
 "El script para añadir a crontab está vacío, no se ha añadido el retardo"
 
 msgid "Scrolling Speed"
-msgstr "Velocidad de desplazamiento"
+msgstr "Veloc. desplazam."
 
 msgid "Scrolling delay (software renderer)"
-msgstr "Retardo de desplazamiento (software de renderización)"
+msgstr "Retardo desplazam. (renderiz. por software)"
 
 msgid "Scrolling speed (software renderer)"
-msgstr "Velocidad de desplazamiento (renderiz. por software)"
+msgstr "Velocidad desplazam. (renderiz. por software)"
 
 msgid "Search"
 msgstr "Buscar"
@@ -8142,7 +8262,7 @@ msgid "Searching west ..."
 msgstr "Buscando al oeste..."
 
 msgid "Searching your network. Please wait..."
-msgstr "Buscando en su red interna. Espere."
+msgstr "Buscando en su red privada. Espere."
 
 msgid "Second cable of motorized LNB"
 msgstr "Segundo hilo de un LNB motorizado"
@@ -8302,6 +8422,9 @@ msgstr "Seleccionar satélites"
 
 msgid "Select service to add..."
 msgstr "Seleccionar el canal a añadir..."
+
+msgid "Select slot"
+msgstr "Seleccionar ranura"
 
 msgid "Select sort method:"
 msgstr "Seleccione el método para ordenar"
@@ -8636,7 +8759,7 @@ msgid "Show Log"
 msgstr "Mostrar log"
 
 msgid "Show Media playback Remaining/Elapsed as"
-msgstr "Mostrar reproducción restante/transcurrida como"
+msgstr "Mostrar reproducción rest./transcurrida:"
 
 msgid "Show MiniTV in the Front Display"
 msgstr "Mostrar MiniTV en el Display"
@@ -8657,13 +8780,13 @@ msgid "Show SNR percentage instead of dB value"
 msgstr "Mostrar porcentaje S/R en lugar del valor dB"
 
 msgid "Show Scrambled Channel Icon in channel list"
-msgstr "Ver icono 'Codificado' en la lista de canales"
+msgstr "Icono 'Codificado' en la lista?"
 
 msgid "Show Time Remaining/Elapsed"
 msgstr "Mostrar el tiempo restante/transcurrido"
 
 msgid "Show Transponder Remaining/Elapsed as"
-msgstr "Mostrar tiempo rest./transcurr. del evento como"
+msgstr "Mostrar tiempo rest./transcurr. del evento:"
 
 msgid "Show VCR scart on main menu"
 msgstr "Mostrar VCR scart en el menú principal"
@@ -8673,6 +8796,9 @@ msgstr "Estado de la conexión WiFi"
 
 msgid "Show animation while busy"
 msgstr "Mostrar animación al ejecutar órdenes"
+
+msgid "Show background behind subtitles"
+msgstr "Mostrar fondo tras los subtítulos"
 
 msgid "Show background in radio mode"
 msgstr "Mostrar fondo en el modo radio"
@@ -8691,7 +8817,7 @@ msgid "Show busy indicator when the system is busy."
 msgstr "Muestra una animación (spinner) cuando el sistema está ocupado."
 
 msgid "Show channel numbers in channel selection"
-msgstr "Mostrar número de canal en la selección de canales"
+msgstr "Mostrar núm. de canal en la lista de canales"
 
 msgid "Show columns"
 msgstr "Mostrar columnas"
@@ -9065,6 +9191,9 @@ msgstr "No se han encontrado backups"
 
 msgid "Sorry, no details available!"
 msgstr "No hay detalles"
+
+msgid "Sorry, this tuner is in use."
+msgstr "Este sintonizador está en uso"
 
 msgid ""
 "Sorry, your backup destination is not writeable.\n"
@@ -9572,6 +9701,9 @@ msgstr "Tipos de tuner seleccionables:"
 msgid "Symbol rate"
 msgstr "Velocidad de símbolo"
 
+msgid "Symbol rate:"
+msgstr "Veloc. de símbolo"
+
 msgid "Symbolrate"
 msgstr "Velocidad de símbolo"
 
@@ -9617,6 +9749,9 @@ msgstr "El fichero TS es demasiado grande para el nivel 1 ISO9660."
 
 msgid "TSID"
 msgstr "TSID"
+
+msgid "TUNING"
+msgstr "SINTONIZANDO"
 
 msgid "TV"
 msgstr "TV"
@@ -9810,7 +9945,7 @@ msgstr ""
 "El fichero de grabaciones (timers.xml) está corrupto y no puede cargarse."
 
 msgid "The user interface of your receiver is restarting"
-msgstr "El interfaz de usuario (GUI) se está reiniciando"
+msgstr "La interfaz de usuario (GUI) se está reiniciando"
 
 msgid ""
 "The user interface of your receiver is restarting\n"
@@ -10421,6 +10556,9 @@ msgstr "URL para el reenvio a un receptor remoto"
 msgid "USALS"
 msgstr "USALS"
 
+msgid "USALS Calibration"
+msgstr "Calibración USALS"
+
 msgid "USALS calibration"
 msgstr "Calibración USALS"
 
@@ -10580,11 +10718,11 @@ msgstr "Utilizar la EPG MHW cuando sea posible"
 msgid "Use Netmed EPG information when it is available."
 msgstr "Utilizar la EPG Netmed cuando sea posible"
 
-msgid "Use SDCard for epg storage path"
-msgstr "-Carpeta de almacenamiento de EPG"
-
 msgid "Use SDCard for %s storage folder"
 msgstr "-Carpeta de almacenamiento de %s"
+
+msgid "Use SDCard for epg storage path"
+msgstr "-Carpeta de almacenamiento de EPG"
 
 msgid "Use SDCard for movies storage"
 msgstr "-Carpeta de almacenamiento de películas"
@@ -11149,6 +11287,9 @@ msgstr "Oeste"
 msgid "West limit set"
 msgstr "Límite oeste configurado"
 
+msgid "Wetek CPU Frequency Setup"
+msgstr "Configuración de la Freq. de WeTek Play"
+
 msgid "What Day of month ?"
 msgstr "Que dia del mes?"
 
@@ -11289,6 +11430,17 @@ msgstr ""
 "Si se activa, mostrará un aviso y el usuario tendrá la opción de parar o "
 "continuar el timeshift."
 
+msgid ""
+"When enabled, always descramble receiving http streams. This takes up more "
+"resources (descrambling demuxers), only enable if necessary. Individual "
+"streams are always descrambled if 0x100 is added to the service type, "
+"regardless of this setting. Default off."
+msgstr ""
+"Si se habilita, se desencriptarán los streams http recibidos. Esto consumirá "
+"más recursos (desencriptar demuxers), habilitar sólo en caso necesario. "
+"Independientemente de est ajuste, los streams individuales siempre se "
+"descodifican si se añade 0x100 al tipo de canal. Por defecto, deshabilitado."
+
 msgid "When enabled, authentication is required to watch http streams."
 msgstr ""
 "Si se habilita, es necesario autentificarse para visualizar canales http"
@@ -11381,10 +11533,10 @@ msgstr ""
 
 msgid ""
 "When enabled, http streams are descrambled on the server side. The (remote) "
-"client receiver does not have to do descrambling."
+"client receiver does not have to do descrambling. Default on."
 msgstr ""
 "Si se activa, los canales http se descodificarán en el servidor. El receptor "
-"cliente (remoto) no necesitará descodificarlos."
+"cliente (remoto) no necesitará descodificarlos. Activado por defecto"
 
 msgid "When enabled, it is possible to leave the movieplayer with exit."
 msgstr "Si se activa, se podrá salir del reproductor pulsando la tecla Exit."
@@ -11562,6 +11714,15 @@ msgstr ""
 "\n"
 "Quiere hacer un reinicio de fábrica?"
 
+msgid ""
+"When you use the remote fallback tuner to do recording, the timer conflict "
+"detection can't handle remote fallback tuners. This option allows you to "
+"turn off the timer confict detection"
+msgstr ""
+"Cuando se utiliza el sintonizador remoto para grabar, la detección de "
+"reservas en conflicto no puede administrar los sintonizadores remotos. Esta "
+"opción permite desactivar la detección de conflictos"
+
 msgid "Where do you want to backup your settings?"
 msgstr "Donde quiere salvar la configuración?"
 
@@ -11580,8 +11741,11 @@ msgstr "Red inalámbrica"
 msgid "Wireless network"
 msgstr "Red inalámbrica"
 
+msgid "Wireless network connection setup."
+msgstr "Configuración de la conexión WiFi"
+
 msgid "Wireless network state"
-msgstr "Estado de la red WiFi"
+msgstr "Estado de la conexión WiFi"
 
 msgid "With popup"
 msgstr "Con ventana emergente"
@@ -11612,6 +11776,9 @@ msgstr ""
 msgid "Write failed!"
 msgstr "Falló la escritura!"
 
+msgid "Write to /tmp/positionersetup.log"
+msgstr "Guardar en /tmp/positionersetup.log"
+
 msgid "Wrong parameter format 'set=%s'. Use set=set15 "
 msgstr "Formato de parámetro incorrecto 'set=%s'. Use set=set15"
 
@@ -11629,6 +11796,9 @@ msgstr "Subtítulos externos amarillos"
 
 msgid "Yes"
 msgstr "Si"
+
+msgid "Yes (save index in setup tuner)"
+msgstr "Si (guardar el índice en la config.)"
 
 msgid "Yes and save"
 msgstr "Si y guardar"
@@ -11711,7 +11881,7 @@ msgid "You can cancel the removal."
 msgstr "Ha cancelado la desinstalación."
 
 msgid "You can continue watching TV etc. while this is running."
-msgstr "Puede continuar viendo TV, etc. durante la comprobación."
+msgstr "Puede continuar viendo TV, etc. mientras se ejecutan las tareas."
 
 msgid "You can install this plugin."
 msgstr "Puede instalar el plugin."
@@ -11805,6 +11975,13 @@ msgid ""
 msgstr ""
 "El %s %s no está conectado a internet, compruebe la configuración de red e "
 "inténtelo de nuevo."
+
+msgid ""
+"Your %s %s will be restarted after the removal of service\n"
+"Do you want to remove now ?"
+msgstr ""
+"El %s %s se reiniciará después de eliminar el servicio.\n"
+"Seguro que quiere eliminarlo?"
 
 msgid ""
 "Your backup succeeded. We will now continue to explain the further upgrade "
@@ -12533,6 +12710,9 @@ msgstr "libre"
 msgid "from"
 msgstr "de"
 
+msgid "front panel"
+msgstr "Panel frontal"
+
 msgid "further education"
 msgstr "educación avanzada"
 
@@ -12856,6 +13036,9 @@ msgstr "de un disco de cara SIMPLE usado."
 
 msgid "off"
 msgstr "desactivado"
+
+msgid "offset is"
+msgstr "La desviación es"
 
 msgid "on"
 msgstr "activado"
@@ -13485,3 +13668,72 @@ msgstr "Cambiar antes de Stream"
 
 msgid "zapped"
 msgstr "Cambiado"
+
+msgid "Channel zap delay mode"
+msgstr "Retardo del zapping"
+
+msgid "Setup delay mode to zap to channels."
+msgstr "Configura el retardo que se aplicará al zapping"
+
+msgid "Channel zap delay first button"
+msgstr "Retardo del canal - primera tecla"
+
+msgid "User defined delay when you press the first button to zap to the channel."
+msgstr "Retardo (configurable) cuando se pulsa la primera tecla para el cambio de canal"
+
+msgid "Channel zap delay another button"
+msgstr "Retardo del canal - otra tecla"
+
+msgid "User defined delay when you press another button to zap to the channel."
+msgstr "Retardo (configurable) cuando se pulsa otra tecla para el cambio de canal"
+
+msgid "Number of channel number digits"
+msgstr "Número de dígitos del canal"
+
+msgid "This allows you to set the number of digits to 5, if you have more than 9999 channels."
+msgstr "Configura el número de dígitos del canal a 5 para cuando se dispone de más de 9999 canales."
+
+msgid "REC"
+msgstr "GRAB"
+
+msgid "Please set up tuner E"
+msgstr "Configure el sintonizador E"
+
+msgid "Please set up tuner F"
+msgstr "Configure el sintonizador F"
+
+msgid "Please set up tuner G"
+msgstr "Configure el sintonizador G"
+
+msgid "Please set up tuner H"
+msgstr "Configure el sintonizador H"
+
+msgid "Please set up tuner I"
+msgstr "Configure el sintonizador I"
+
+msgid "Please set up tuner J"
+msgstr "Configure el sintonizador J"
+
+msgid "Disable MiniTV"
+msgstr "Deshabilitar MiniTV"
+
+msgid "Enable MiniTV"
+msgstr "Habilitar MiniTV"
+
+msgid "Disable FastZapping"
+msgstr "Deshabilitar FastZapping"
+
+msgid "Enable FastZapping"
+msgstr "Habilitar FastZapping"
+
+msgid "will take about 1-4 minutes for this system\n"
+msgstr "tardará entre 1 y 4 min. en este sitema\n"
+
+msgid "\n<This tuner is configured automatically>"
+msgstr "\n<Este sintoniz. se configura automáticamente>"
+
+msgid "HDMI Colorspace"
+msgstr "Espacio de color HDMI"
+
+msgid "This option allows you can config the Colorspace from Auto to RGB"
+msgstr "Permite configurar el espacio de color de Auto a RGB"

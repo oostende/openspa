@@ -3,14 +3,15 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
-"Last-Translator: pe.tardo <http://openspa.info>\n"
+"Last-Translator: pe.tardo <pe.thardo@gmail.com>\n"
 "Language-Team: OpenSPA <openspa.info>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: ca_CA\n"
+"X-Poedit-Language: Catalan\n"
+"X-Poedit-Country: CATALONIA\n"
 "X-Generator: Poedit 1.5.4\n"
 
 msgid ""
@@ -30,6 +31,29 @@ msgstr ""
 "\n"
 "\n"
 "[Bouquets d'usuari (TV)]\n"
+
+msgid ""
+"\n"
+"   Please press OK to start Kodi..."
+msgstr ""
+"\n"
+"   Premeu OK per inciar Kodi..."
+
+msgid ""
+"\n"
+"  WARNING: \n"
+"  There is not enough space to install Kodi!"
+msgstr ""
+"\n"
+"  AVÍS: \n"
+"  No disposeu de prou espai per a poder instal·lar Kodi!"
+
+msgid ""
+"\n"
+" Kodi not present. Proceed with install?"
+msgstr ""
+"\n"
+" No s'ha trobat Kodi. Voleu instal·lar-ho?"
 
 msgid ""
 "\n"
@@ -137,6 +161,13 @@ msgstr ""
 "\n"
 "Selecciona el dispositiu de backup.\n"
 "Dispositiu actual:"
+
+msgid ""
+"\n"
+"Timer '%s' disabled!"
+msgstr ""
+"\n"
+"Temporitz. '%s' deshabilitat"
 
 msgid ""
 "\n"
@@ -290,6 +321,9 @@ msgstr "%d/%B/%Y"
 
 msgid "%s %s free disk space"
 msgstr "Espai lliure al disc: %s %s"
+
+msgid "%s %s front panel"
+msgstr "Panell frontal %s %s"
 
 msgid "%s (%s)\n"
 msgstr "%s (%s)\n"
@@ -619,6 +653,9 @@ msgstr "<Carpeta per defecte de pel·lícules>"
 
 msgid "<Last timer location>"
 msgstr "<Carpeta de l'última gravació>"
+
+msgid "<default>"
+msgstr "per defecte"
 
 msgid "<n/a>"
 msgstr "No disponible"
@@ -1081,7 +1118,7 @@ msgid "Allocate unused memory index"
 msgstr "Ubicar índexs no utilitzats"
 
 msgid "Allow quit movieplayer with exit"
-msgstr "Permetre sortir del reproductor amb 'EXIT'"
+msgstr "Sortir del reproductor amb 'EXIT'"
 
 msgid "Allow subtitle language to equal audio language"
 msgstr "Permetre l'idioma de subtítols igual que el d'àudio"
@@ -1101,6 +1138,9 @@ msgstr ""
 
 msgid "Allows you to enable/disable displaying icons on the frontpanel."
 msgstr "Habilita/deshabilita mostrar icones al panell frontal."
+
+msgid "Almost there... "
+msgstr "Ja falta poc... "
 
 msgid "Alpha"
 msgstr "Alpha"
@@ -1122,6 +1162,20 @@ msgstr "Sempre"
 
 msgid "Always ask"
 msgstr "Demanar-ho sempre"
+
+msgid "Always include ECM in recordings"
+msgstr "Incloure sempre les ECM a les gravacions"
+
+msgid ""
+"Always include ECM messages in recordings. This overrides the individual "
+"timer settings globally. It allows recordings to be always decrypted "
+"afterwards (sometimes called offline decoding), if supported by your "
+"receiver. Default: off."
+msgstr ""
+"Incluye los mensajes ECM en las grabaciones. Este ajuste prevalece sobre los "
+"ajustes globales de los temporizadores. Permite a las grabaciones (si el "
+"receptor lo admite) ser descodificadas con posterioridad (generalmente "
+"llamado \"decodificación offline\"). Defecto: deshabilitado"
 
 msgid "Always use smart1080p mode"
 msgstr "Utilitzar sempre el mode smart1080p"
@@ -1265,7 +1319,7 @@ msgid "Arts/Culture"
 msgstr "Art/Cultura"
 
 msgid "Ask user"
-msgstr "Demanar-ho a l'usuari"
+msgstr "Demanar a l'usuari"
 
 msgid "Ask, default No"
 msgstr "Preguntar. Per defecte, no"
@@ -1407,7 +1461,7 @@ msgid "Automatic start time"
 msgstr "Hora de la còpia automàtica"
 
 msgid "Automatically start timeshift after"
-msgstr "Iniciar timeshift automàticament després de"
+msgstr "Autoiniciar timeshift després de"
 
 msgid "Automatically turn on external subtitles"
 msgstr "Activar automàticament els subtítols externs"
@@ -1551,7 +1605,7 @@ msgid "Begin time"
 msgstr "Hora d'inici"
 
 msgid "Behavior of 'pause and ok' when paused"
-msgstr "Comportament de 'pausa i OK' quan està en pausa"
+msgstr "Acció de 'Pausa i OK' si està en pausa"
 
 msgid "Behavior of 0 key in PiP-mode"
 msgstr "Ús de la tecla 0 en el mode PiP"
@@ -1746,7 +1800,7 @@ msgid "CCcamInstalled"
 msgstr "CCcam instal·lada"
 
 msgid "CH"
-msgstr "Canal"
+msgstr "Canal "
 
 msgid "CH%s"
 msgstr "CA%s"
@@ -1795,7 +1849,7 @@ msgstr "Cams"
 
 msgid "Can be used for different fps between external subtitles and video."
 msgstr ""
-"Es pot utilitzar per a configurar diferents fps per als subtítols  i el vídeo"
+"Es pot utilitzar per a configurar diferents fps per als subtítols i el vídeo"
 
 msgid ""
 "Can't open selected bookmark.\n"
@@ -1836,11 +1890,8 @@ msgstr ""
 msgid "Cannot move to trash can"
 msgstr "No es pot moure a la paperera"
 
-msgid "Cannot umount current drive."
-msgstr "No es pot desmuntar el dispositiu"
-
 msgid ""
-"Cannot umount current drive.\n"
+"Cannot umount current device.\n"
 "A record in progress, timeshift or some external tools (like samba, swapfile "
 "and nfsd) may cause this problem.\n"
 "Please stop this actions/applications and try again"
@@ -1849,6 +1900,9 @@ msgstr ""
 "Una gravació, timeshift, o qualsevol altre factor extern (samba, swap, "
 "nfsd..) poden ser la causa d'aquest problema.\n"
 "Atureu aquest procés i torneu a provar-ho."
+
+msgid "Cannot umount current drive."
+msgstr "No es pot desmuntar el dispositiu"
 
 msgid "Capacity"
 msgstr "Capacitat"
@@ -1896,7 +1950,7 @@ msgid "Change active delay"
 msgstr "Canviar retard actiu"
 
 msgid "Change bouquets in quickzap"
-msgstr "Canviar de llista en zàpping ràpid"
+msgstr "Canviar de llista en zàping ràpid"
 
 msgid "Change hostname"
 msgstr "Canviar nom de host"
@@ -1986,7 +2040,7 @@ msgid "Check the internet connection again"
 msgstr "Tornar a comprovar la connexió a la xarxa"
 
 msgid "Checking Feeds"
-msgstr "Comprovant fonts"
+msgstr "Comprovant les fonts"
 
 msgid "Checking disk"
 msgstr "Comprovació de dispositiu"
@@ -2226,6 +2280,9 @@ msgid ""
 "list."
 msgstr "Configura si la llista de canals es mostrarà en columnes (i l'amplada)"
 
+msgid "Configure if behind the subtitles a background is shown"
+msgstr "Configura si es mostrarà (o no) un fons rere els subtítols"
+
 msgid ""
 "Configure if service picons will be shown in the channel selection list."
 msgstr "Configura si es mostraràn els picons de canal a la llista de canals"
@@ -2345,8 +2402,8 @@ msgid ""
 "Configure the duration in minutes for the sleeptimer. Select this entry and "
 "click OK or green to start/stop the sleeptimer"
 msgstr ""
-"Duració (en minuts) per que s'activi el temporitzador de repòs. Premeu OK o "
-"VERD per a [des]activar-lo"
+"Duració (en minuts) per que s'activi el temporitzador de repòs. Habiliteu-ho "
+"i premeu OK o 'VERD' per a activar-ho, i vice-versa"
 
 msgid ""
 "Configure the duration when the receiver should go to shut down in case the "
@@ -2611,7 +2668,7 @@ msgstr ""
 "nombre de canals/satèl·lits"
 
 msgid "Configure your NTP server."
-msgstr "Configurar el servidor NTP."
+msgstr "Configura el servidor NTP per a la sincronització d'hora per internet."
 
 msgid "Configure your internal LAN"
 msgstr "Configurar la XARXA interna"
@@ -2661,6 +2718,9 @@ msgstr "Connectat!"
 msgid "Connected: "
 msgstr "Connectat: "
 
+msgid "Console"
+msgstr "Consola"
+
 msgid "Constellation"
 msgstr "Constel·lació"
 
@@ -2674,7 +2734,7 @@ msgid "Continue"
 msgstr "Continuar"
 
 msgid "Continue in background"
-msgstr "Continuar en segon plà"
+msgstr "Segon plà"
 
 msgid "Continue playback"
 msgstr "Continuar la reproducció"
@@ -2743,7 +2803,7 @@ msgid "Create Full Backup for AZBox"
 msgstr "Backup d'imatge completa per Azbox"
 
 msgid "Create more detailed crash log"
-msgstr "Crear un 'crashlog' detallat"
+msgstr "Generar un 'crashlog' detallat"
 
 msgid "Create new folder and exit"
 msgstr "Crear una carpeta i sortir"
@@ -2808,6 +2868,9 @@ msgstr "Mode actual: %s \n"
 
 msgid "Current page is already exist."
 msgstr "La pàgina ja existeix."
+
+msgid "Current rotor position: "
+msgstr "Posició actual del motor: "
 
 msgid "Current settings:"
 msgstr "Configuració actual:"
@@ -2965,6 +3028,9 @@ msgstr "Predeterminat (US)"
 msgid "Default movie location"
 msgstr "Ubicació per defecte de pel·lícules"
 
+msgid "Default recording type"
+msgstr "Tipus de gravació per defecte"
+
 msgid "Default settings"
 msgstr "Llistes per defecte"
 
@@ -3106,8 +3172,25 @@ msgstr "Esborrant crontab"
 msgid "Depth"
 msgstr "Profunditat"
 
+msgid ""
+"Descramble & record ECM gives the option to descramble afterwards if "
+"descrambling on recording failed. 'Don't descramble, record ECM' save a "
+"scramble recording that can be descrambled on playback. 'Normal' means "
+"descramble the recording and don't record ECM."
+msgstr ""
+"'Descodificar i gravar ECM': permet descodificar posteriorment si falla la "
+"descodificació en gravar. 'No descodificar, grabar ECM': desa una gravació "
+"que es descodificará en reproduir-la. 'Normal': descodifica la gravació "
+"sense gravar la ECM"
+
 msgid "Descramble http streams"
 msgstr "Descodificar streams http"
+
+msgid "Descramble receiving http streams"
+msgstr "Descodificar streams http rebuts"
+
+msgid "Descramble sending http streams"
+msgstr "Descodificar streams http enviats"
 
 msgid "Description"
 msgstr "Descripció"
@@ -3287,7 +3370,7 @@ msgid "Display and userinterface"
 msgstr "Aspecte i interfície d'usuari"
 
 msgid "Display message before playing next movie"
-msgstr "Mostrar missatge abans de reproduir la pel·lícula següent"
+msgstr "Missatge abans de reproduir la pel·lícula següent"
 
 msgid "Display setup"
 msgstr "Configuració del display"
@@ -3314,6 +3397,13 @@ msgstr ""
 "Segur que voleu comprovar el tipus de sistema?\n"
 "Això podria trigar molta estona!"
 
+msgid ""
+"Do you really want to convert the filesystem?\n"
+"You cannot go back!"
+msgstr ""
+"Segur que voleu convertir el sistema d'arxius?\n"
+"No es podrà tornar enrere!"
+
 msgid "Do you really want to delete %s?"
 msgstr "Segur que voleu esborrar %s?"
 
@@ -3337,6 +3427,13 @@ msgid "Do you really want to exit?"
 msgstr "Segur que voleu sortir?"
 
 msgid ""
+"Do you really want to initialize the device?\n"
+"All data on the disk will be lost!"
+msgstr ""
+"Segur que voleu inicialitzar el dispositiu?\n"
+"Totes les dades es perdràn!"
+
+msgid ""
 "Do you really want to remove\n"
 "the plugin \"%s\"?"
 msgstr ""
@@ -3354,6 +3451,13 @@ msgstr "Segur que voleu restaurar des de l'arxiu?"
 
 msgid "Do you want this?"
 msgstr "Voleu fer això?"
+
+msgid ""
+"Do you want to also install samba client ?\n"
+"This allows you to mount your windows shares on this device."
+msgstr ""
+"Voleu instal·lar també el client samba?\n"
+"Amb samba podreu muntar els recursos windows en aquest dispositiu."
 
 msgid "Do you want to burn this collection to DVD medium?"
 msgstr "Voleu gravar aquesta col·lecció en un disc DVD?"
@@ -3445,10 +3549,9 @@ msgstr "No anar-hi i eliminar temporitzador"
 msgid "Done"
 msgstr "Fet"
 
-msgid "Done - Installed, upgraded or removed %d package (%s)"
-msgid_plural "Done - Installed, upgraded or removed %d packages (%s)"
-msgstr[0] "Fet - Instal·lat, actualitzat o eliminat %d paquet (%s)"
-msgstr[1] "Fet - Instal·lats, actualitzats o eliminats %d paquets (%s)"
+msgid "Done - Installed, upgraded or removed %d packages with %d errors"
+msgstr ""
+"Fet - Instal·lat(s), actualitzat(s) o eliminat(s) %d paquet(s) amb %d errors"
 
 msgid "Down Key"
 msgstr "Tecla baixar"
@@ -3463,7 +3566,7 @@ msgid "Download Playlist for"
 msgstr "Descarregar llista de reproducció per"
 
 msgid "Download plugins"
-msgstr "Descàrrega de plugins"
+msgstr "Descarr. plugins"
 
 msgid "Downloadable new plugins"
 msgstr "Descarregar plugins & addons"
@@ -3613,7 +3716,7 @@ msgid "Enable"
 msgstr "Activar"
 
 msgid "Enable 'neutrino' style channel select controlling"
-msgstr "Habilitar controlador 'neutrino' per a la selecció de canal"
+msgstr "Controlador 'neutrino' per a la selecció de canals"
 
 msgid "Enable 5V for active antenna"
 msgstr "Activar 5V per a l'antena activa"
@@ -3661,7 +3764,7 @@ msgid "Enable Timer"
 msgstr "Habilitar reserva"
 
 msgid "Enable ViaSat EPG"
-msgstr "Activar EPG Viasat"
+msgstr "Activar EPG ViaSat"
 
 msgid "Enable Virgin EPG"
 msgstr "Activar EPG Virgin"
@@ -3717,6 +3820,9 @@ msgstr "Activar memòria de teletext"
 msgid "Enable timer"
 msgstr "Activar programació"
 
+msgid "Enable timer conflict detection"
+msgstr "Habilitar detecció de conflictes de timers"
+
 msgid "Enable zapping with CH+/-, B+/-, P+/-"
 msgstr "Habilitar zàping amb CH+/-, B+/-, P+/-"
 
@@ -3760,10 +3866,10 @@ msgid "End time"
 msgstr "Hora final"
 
 msgid "End time to ignore inactivity sleeptimer"
-msgstr "Fi del marge de 'no temporitzador'"
+msgstr "Fi de l'intèrval de 'no temporitzador'"
 
 msgid "End time to ignore shutdown in standby"
-msgstr "Fi del marge de 'no apagar en repòs'"
+msgstr "Fi de l'intèrval de 'no apagar en repòs'"
 
 msgid "English"
 msgstr "Anglès"
@@ -3829,7 +3935,7 @@ msgid "Enter username:"
 msgstr "Introduïu el nom d'usuari"
 
 msgid "Entitlements"
-msgstr "Canals contractats"
+msgstr "Targeta local"
 
 msgid "Epg Search"
 msgstr "Cercar EPG"
@@ -3893,7 +3999,7 @@ msgid "Execution finished!!"
 msgstr "Execució finalitzada!"
 
 msgid "Execution progress:"
-msgstr "Execució en progrés:"
+msgstr "Progrés:"
 
 msgid "Exif"
 msgstr "Informació"
@@ -3932,7 +4038,7 @@ msgid "Exit network interface list"
 msgstr "Sortir de la interfície de xarxa"
 
 msgid "Exit network wizard"
-msgstr "Sortir del assistent de xarxa"
+msgstr "Sortir de l'assistent de xarxa"
 
 msgid "Exit the Opera browser."
 msgstr "Sortir del Navegador WEB Opera"
@@ -3941,7 +4047,10 @@ msgid "Exit the YouTube TV"
 msgstr "Sortir de YouTube TV"
 
 msgid "Exit the wizard"
-msgstr "Sortir del assistent"
+msgstr "Sortir de l'assistent"
+
+msgid "Exit/OK"
+msgstr "Sortir/OK"
 
 msgid "Expert"
 msgstr "Expert"
@@ -3953,7 +4062,7 @@ msgid "Extend sleeptimer 15 minutes"
 msgstr "Augmentar 15 min. el tempor. de repòs"
 
 msgid "Extended"
-msgstr "Extès"
+msgstr "Estès"
 
 msgid "Extended Networksetup Plugin..."
 msgstr "Plugin de config. extesa de xarxa"
@@ -4001,20 +4110,22 @@ msgid "External subtitle switch fonts"
 msgstr "Canviar el format de subtítols externs"
 
 msgid "Extra end time to ignore inactivity sleeptimer"
-msgstr ""
-"Temps extra de finalització per ignorar la inactivitat del tempor. de repòs"
+msgstr "T. extra final per ignorar la inact. del sleeptimer"
 
 msgid "Extra motor options"
 msgstr "Opcions extra de motor"
 
 msgid "Extra start time to ignore inactivity sleeptimer"
-msgstr "Temps extra abans d'ignorar la inactivitat del tempor. de repòs"
+msgstr "T. extra abans d'ignorar la inactiv. del sleeptimer"
 
 msgid "Extras"
 msgstr "Extres"
 
 msgid "FEC"
 msgstr "FEC"
+
+msgid "FEC:"
+msgstr "FEC:"
 
 msgid "FTA"
 msgstr "FTA"
@@ -4033,6 +4144,9 @@ msgstr "Gravació no vàlida"
 
 msgid "Fallback remote receiver URL"
 msgstr "URL per poder reenviar a receptor remot"
+
+msgid "False"
+msgstr "No"
 
 msgid "Fan %d"
 msgstr "Ventilador %d"
@@ -4234,6 +4348,9 @@ msgstr "Memòria lliure"
 
 msgid "Free memory:"
 msgstr "Memòria lliure:"
+
+msgid "Free space in MB:"
+msgstr "Espai lliure (MB):"
 
 msgid "Free:"
 msgstr "Lliure:"
@@ -4460,7 +4577,7 @@ msgid "HDMI"
 msgstr "HDMI"
 
 msgid "HDMI CEC setup"
-msgstr "HDMI CEC"
+msgstr "HDMI CeC"
 
 msgid "HDMI-CEC setup"
 msgstr "Configuració d'HDMI-CEC"
@@ -4496,7 +4613,7 @@ msgid "Hard disk standby after"
 msgstr "Posar el disc dur en repòs després de"
 
 msgid "Hard disk standby in box standby after"
-msgstr "HDD en repòs amb el receptor en repòs després de"
+msgstr "HDD a repòs amb receptor en repòs després de"
 
 msgid "Harddisk"
 msgstr "Disc dur"
@@ -4531,7 +4648,7 @@ msgid "Hebrew"
 msgstr "Hebreu"
 
 msgid "Height"
-msgstr "Alçada"
+msgstr "Altura"
 
 msgid "Help"
 msgstr "Ajuda"
@@ -4620,6 +4737,9 @@ msgstr "Hores + min."
 msgid "Hours Mins Secs"
 msgstr "Hores + min. + seg."
 
+msgid "How many minutes do you want add to record?"
+msgstr "Quants minuts voleu afegir a l'enregistrament?"
+
 msgid "How many minutes do you want to record?"
 msgstr "Quants minuts voleu enregistrar?"
 
@@ -4677,6 +4797,9 @@ msgstr ""
 
 msgid "If enabled the video will always be de-interlaced."
 msgstr "Si s'activa, el vídeo serà desentrellaçat sempre."
+
+msgid "If enabled, AIT data is included in recordings."
+msgstr "Si s'activa, les dades AIT s'inclouràn als enregistraments."
 
 msgid ""
 "If the text is too long to be displayed on the front panel, it will be "
@@ -4758,6 +4881,9 @@ msgstr "Incloure"
 
 msgid "Include AIT in http streams"
 msgstr "Incloure AIT als streams http"
+
+msgid "Include AIT in recordings"
+msgstr "Incloure AIT a les gravacions"
 
 msgid "Include ECM in http streams"
 msgstr "Incloure ECM als streams http"
@@ -4889,7 +5015,7 @@ msgid "Installing Driver"
 msgstr "Instal·lant els controladors..."
 
 msgid "Installing Service"
-msgstr "Instal·lant servei"
+msgstr "Instal·lant el servei"
 
 msgid "Installing Software..."
 msgstr "Instal·lant el Software"
@@ -4907,7 +5033,7 @@ msgid "Instant recording..."
 msgstr "Gravació instantània"
 
 msgid "Interface:\t/dev/"
-msgstr "Interfície:\t/dev/"
+msgstr "Interface:\t/dev/"
 
 msgid "Interface: "
 msgstr "Interficie: "
@@ -4925,7 +5051,7 @@ msgid "Internal USB"
 msgstr "USB intern"
 
 msgid "Internal flash"
-msgstr "Flah interna"
+msgstr "Flash interna"
 
 msgid "Internal hdd only"
 msgstr "Només en l'HDD intern"
@@ -5007,7 +5133,7 @@ msgid "Javascript Libraries"
 msgstr "Llibreria Javascript"
 
 msgid "Job View"
-msgstr "Veure tasques"
+msgstr "Tasques"
 
 msgid "Job overview"
 msgstr "Tasca executada"
@@ -5037,7 +5163,7 @@ msgid "Just scale"
 msgstr "Ajust exacte"
 
 msgid "Keep service"
-msgstr "Mantenir en el canal"
+msgstr "Mantenir al canal"
 
 msgid "Keep service + Reverse bouquet buttons"
 msgstr "Mantenir en canal i invertir tecles bouquet"
@@ -5063,6 +5189,9 @@ msgstr "Mapa del teclat"
 msgid "Keyboard setup"
 msgstr "Configuració de teclat"
 
+msgid "Kodi installed:"
+msgstr "Kodi està instal·lat:"
+
 msgid "LAN adapter"
 msgstr "Adaptador LAN"
 
@@ -5080,6 +5209,9 @@ msgstr "Configurar LCD4Linux"
 
 msgid "LED Deep Standby"
 msgstr "LED de repòs profund"
+
+msgid "LED Display Setup"
+msgstr "Led/Display VFD"
 
 msgid "LED Normal"
 msgstr "LED Normal"
@@ -5140,6 +5272,9 @@ msgstr "Latitud"
 
 msgid "Latvian"
 msgstr "Letó"
+
+msgid "Leave DVD player?"
+msgstr "Sortir del reproductor de DVD?"
 
 msgid "Left"
 msgstr "Esquerra"
@@ -5209,6 +5344,9 @@ msgstr "Enllaçar els títols amb un menú de DVD"
 msgid "List EPG functions..."
 msgstr "Llista de funcions de la EPG"
 
+msgid "List available networks"
+msgstr "Llista de xarxes disponibles"
+
 msgid "List mode"
 msgstr "Mode llista"
 
@@ -5272,7 +5410,7 @@ msgid "Lock ratio"
 msgstr "Relació de bloqueig"
 
 msgid "Lock:"
-msgstr "Bloqueig:"
+msgstr "Fixat:"
 
 msgid "Locked"
 msgstr "Bloquejat"
@@ -5352,6 +5490,9 @@ msgstr "Manual"
 msgid "Manual Scan"
 msgstr "Recerca manual"
 
+msgid "Manual configuration"
+msgstr "Configuració manual"
+
 msgid "Manual scan"
 msgstr "Recerca manual"
 
@@ -5396,6 +5537,13 @@ msgstr "Nº màxim de dies a la EPG"
 
 msgid "May"
 msgstr "Maig"
+
+msgid ""
+"Maybe the reason that recording is currently running. Please stop the "
+"recording before trying to configure the positioner."
+msgstr ""
+"Pot ser que tingueu un enregistrament en marxa?. Atureu la gravació abans de "
+"configurar el posicionador."
 
 msgid "Media player"
 msgstr "Reproductor"
@@ -5864,6 +6012,20 @@ msgstr "Servidor de xarxa"
 msgid "Never"
 msgstr "Mai"
 
+msgid ""
+"Never decrypt the content while recording. This overrides the individual "
+"timer settings globally. If enabled, recordings are stored in crypted "
+"presentation and must be decrypted afterwards (sometimes called offline "
+"decoding). Default: off."
+msgstr ""
+"No desencripta nunca mientras se está grabando. Este ajuste prevalece sobre "
+"los ajustes globales de los temporizadores. Si se habilita, las grabaciones "
+"se guardarán codificadas y deberán descodificarse posteriormente "
+"(generalmente llamado \"decodificación offline\"). Defecto: deshabilitado"
+
+msgid "Never decrypt while recording"
+msgstr "No desencriptar mai mentre s'enregistra"
+
 msgid "New"
 msgstr "Nou"
 
@@ -6143,10 +6305,13 @@ msgid "Normal mode"
 msgstr "Mode normal"
 
 msgid "North"
-msgstr "Nort"
+msgstr "Nord"
 
 msgid "Norwegian"
 msgstr "Norueg"
+
+msgid "Not Applicable"
+msgstr "No disponible"
 
 msgid "Not Defined"
 msgstr "No definit"
@@ -6207,6 +6372,9 @@ msgstr "Novembre"
 
 msgid "Now"
 msgstr "Ara"
+
+msgid "Now building the USB-Image"
+msgstr "S'està creant la imatge USB"
 
 msgid "Now playing"
 msgstr "Reproducció actual"
@@ -6338,10 +6506,10 @@ msgid "Open plugin menu"
 msgstr "Obrir menú de plugin"
 
 msgid "Open select location"
-msgstr "AObrir la carpeta seleccionada"
+msgstr "Obrir la carpeta seleccionada"
 
 msgid "Open select location as timer name"
-msgstr "Obrir la carpeta com a nom de la programació"
+msgstr "Obrir la carpeta com nom de la programació"
 
 msgid "Open service list"
 msgstr "Obrir la llista de canals"
@@ -6351,6 +6519,9 @@ msgstr "Obrir la llista de canals i seleccionar el canal següent"
 
 msgid "Open service list and select previous channel"
 msgstr "Obrir la llista de canals i seleccionar el canal anterior"
+
+msgid "Open setup tuner "
+msgstr "Obrir configuración del sinton. "
 
 msgid "Open the movie list"
 msgstr "Obrir la llista de pel·lícules"
@@ -6557,10 +6728,10 @@ msgid "Percentage"
 msgstr "Percentatge"
 
 msgid "Percentage left"
-msgstr "Percentg. esq."
+msgstr "% a l'esquerra"
 
 msgid "Percentage right"
-msgstr "Percentg. drta."
+msgstr "% a dreta"
 
 msgid "Permanently delete all recordings in the trash can?"
 msgstr "Eliminar definitivament totes les gravacions de la paperera?"
@@ -6985,6 +7156,9 @@ msgstr "Estat de configuració del motor"
 msgid "Positioner setup"
 msgstr "Configuració del motor"
 
+msgid "Positioner setup log"
+msgstr "Log de config. del posicionador"
+
 msgid "Positioner setup..."
 msgstr "Configuració del motor"
 
@@ -6992,7 +7166,7 @@ msgid "Power Control"
 msgstr "Repòs/reinici"
 
 msgid "Power LED state in (deep)-standby"
-msgstr "Estat del LED d'encès en repòs (profund)"
+msgstr "Estat del LED d'encès en repòs/(profund)"
 
 msgid "Power on/off display"
 msgstr "Engegar/apagar display"
@@ -7030,6 +7204,18 @@ msgstr "Preferències"
 msgid "Preferred tuner"
 msgstr "Sintonitzador preferit"
 
+msgid "Preferred tuner DVB-S"
+msgstr "Sintonitzador DVB-S preferit"
+
+msgid "Preferred tuner DVB-S for recordings"
+msgstr "Sinton. DVB-S preferit per a gravacions"
+
+msgid "Preferred tuner DVB-T"
+msgstr "Sintonitzador DVB-T preferit"
+
+msgid "Preferred tuner DVB-T for recordings"
+msgstr "Sinton. DVB-T preferit per a gravacions"
+
 msgid "Preferred tuner for recordings"
 msgstr "Sintonitzador preferit per a les gravacions"
 
@@ -7065,7 +7251,7 @@ msgid "Press OK on your remote control to continue."
 msgstr "Premeu OK al comandament a distància per continuar."
 
 msgid "Press OK to activate the selected skin."
-msgstr "Premeu OK per activar l'skin seleccionat."
+msgstr "Premeu OK per activar el skin seleccionat."
 
 msgid "Press OK to activate the settings."
 msgstr "Premeu OK per activar la configuració."
@@ -7121,6 +7307,9 @@ msgstr "Premeu OK per invertir la selecció"
 msgid "Press OK to toggle the selection."
 msgstr "Premeu OK per activar la selecció."
 
+msgid "Press OK, save and exit..."
+msgstr "Premeu OK, deseu-ho i sortiu"
+
 msgid "Press [OK] to select"
 msgstr "Premeu OK per seleccionar"
 
@@ -7170,10 +7359,10 @@ msgid "Progress"
 msgstr "Progrés"
 
 msgid "Progress bar left"
-msgstr "Barra de progr. esq."
+msgstr "Barra progrés a l'esq."
 
 msgid "Progress bar right"
-msgstr "Barra de progr. drta."
+msgstr "Barra progrés a la dreta"
 
 msgid "Properties of current title"
 msgstr "Propietats del títol actual"
@@ -7210,6 +7399,9 @@ msgstr "Protegir configuració"
 
 msgid "Protect software update screen"
 msgstr "Protegir la pantalla d'actualització de software"
+
+msgid "Protect spzMenu"
+msgstr "Protegir spzMenu"
 
 msgid "Protect standby menu"
 msgstr "Protegir el menú de repòs"
@@ -7346,6 +7538,9 @@ msgstr "Segur que voleu reiniciar GUI?"
 msgid "Really shutdown now?"
 msgstr "Segur que voleu apagar el receptor?"
 
+msgid "Really store at index %2d for current position?"
+msgstr "Segur que voleu desar la posició actual a l'índex %2d?"
+
 msgid "Really upgrade the frontprocessor and reboot now?"
 msgstr "Segur que voleu actualitzar el frontprocessor i reiniciar?"
 
@@ -7362,7 +7557,7 @@ msgid "Reception Settings"
 msgstr "Opcions de recepció"
 
 msgid "Record"
-msgstr "Config. de gravació"
+msgstr "Configuració de gravacions"
 
 msgid "Record a maximum of x times"
 msgstr "Gravar un màxim d'X vegades"
@@ -7604,7 +7799,7 @@ msgstr ""
 "els subtítols de teletext per a sords)"
 
 msgid "Require authentication for http streams"
-msgstr "Cal autentificació per als canals http"
+msgstr "Autentificació obligatoria per als canals http"
 
 msgid "Require client cert for HTTPS"
 msgstr "Cal un certificat de client per HTTPS"
@@ -7650,6 +7845,9 @@ msgstr "Resolució"
 
 msgid "Restart"
 msgstr "Reiniciar sistema"
+
+msgid "Restart Enigma2 to apply the changes?"
+msgstr "Voleu reiniciar GUI per tal d'aplicar els canvis?"
 
 msgid "Restart GUI"
 msgstr "Reiniciar GUI"
@@ -7718,7 +7916,7 @@ msgid "Return to previous service"
 msgstr "Tornar al canal anterior"
 
 msgid "Reverse bouquet buttons"
-msgstr "Invertir tecles de bouquet"
+msgstr "Invertir tecles bouquet"
 
 msgid "Reverse list"
 msgstr "Llista inversa"
@@ -7789,6 +7987,9 @@ msgstr "SATA"
 msgid "SD"
 msgstr "SD"
 
+msgid "SDcard present. Please configure use for SDcard"
+msgstr "S'ha detectat una targeta microSD. Trieu quin ús voleu donar-l'hi."
+
 msgid "SID"
 msgstr "SID"
 
@@ -7807,6 +8008,9 @@ msgstr "SPDIF"
 msgid "SSID:"
 msgstr "Xarxa (SSID):"
 
+msgid "STORAGE DEVICE"
+msgstr "Dispositiu d'emmagatzematge"
+
 msgid "SWAP creation in process..."
 msgstr "S'està creant la Swap..."
 
@@ -7815,6 +8019,9 @@ msgstr "Ds"
 
 msgid "Safe mode"
 msgstr "Mode segur"
+
+msgid "Samba Setup"
+msgstr "Configurar samba"
 
 msgid "Same as in active"
 msgstr "Igual que actiu"
@@ -7844,7 +8051,7 @@ msgid "Satellites"
 msgstr "Satèl·lits"
 
 msgid "Satfinder"
-msgstr "Buscador de satèl·lits"
+msgstr "Cercador de satèl·lits"
 
 msgid "Sats"
 msgstr "Sats"
@@ -7862,7 +8069,7 @@ msgid "Save"
 msgstr "Desar"
 
 msgid "Save and exit"
-msgstr "Desar i sortir"
+msgstr "Guardar i sortir"
 
 msgid "Save and restart timeshift"
 msgstr "Desar i reiniciar timeshift"
@@ -7997,13 +8204,13 @@ msgid "Script for adding to crontab is NONE, skipping crontab delay command"
 msgstr "L'script per afegir a crontab està buit, no s'ha afegit el retard"
 
 msgid "Scrolling Speed"
-msgstr "Velocitat de desplaçament"
+msgstr "Veloc. desplaçam."
 
 msgid "Scrolling delay (software renderer)"
-msgstr "Retard de desplaçament (software de renderització)"
+msgstr "Retard desplaçam. (renderitz. per software)"
 
 msgid "Scrolling speed (software renderer)"
-msgstr "Velocitat de desplaçament (renderitz. per software)"
+msgstr "Velocitat desplaçam. (renderitz. per software)"
 
 msgid "Search"
 msgstr "Cercar"
@@ -8048,7 +8255,7 @@ msgid "Searching west ..."
 msgstr "Cercant a l'oest..."
 
 msgid "Searching your network. Please wait..."
-msgstr "Cercant a la xarxa local. Espereu..."
+msgstr "Cercant a la vostra xarxa privada. Espereu..."
 
 msgid "Second cable of motorized LNB"
 msgstr "Segon fil d'un LNB motoritzat"
@@ -8207,6 +8414,9 @@ msgstr "Seleccioneu satèl·lits"
 
 msgid "Select service to add..."
 msgstr "Seleccioneu el canal a afegir..."
+
+msgid "Select slot"
+msgstr "Seleccionar ranura"
 
 msgid "Select sort method:"
 msgstr "Seleccioneu el mètode per ordenar"
@@ -8540,7 +8750,7 @@ msgid "Show Log"
 msgstr "Mostrar log"
 
 msgid "Show Media playback Remaining/Elapsed as"
-msgstr "Mostrar reproducció restant/transcoreguda com"
+msgstr "Mostrar reproducció rest./transcoreguda:"
 
 msgid "Show MiniTV in the Front Display"
 msgstr "Mostrar MiniTV al Display"
@@ -8561,7 +8771,7 @@ msgid "Show SNR percentage instead of dB value"
 msgstr "Mostrar percentatge S/R en lloc del valor dB"
 
 msgid "Show Scrambled Channel Icon in channel list"
-msgstr "Veure icona de 'Codificat' a la llista de canals"
+msgstr "Icona 'Codificat' a la llista?"
 
 msgid "Show Time Remaining/Elapsed"
 msgstr "Mostrar el temps restant/transcorregut"
@@ -8578,12 +8788,15 @@ msgstr "Estat de la connexió WiFi"
 msgid "Show animation while busy"
 msgstr "Mostrar animació quan s'executin ordres"
 
+msgid "Show background behind subtitles"
+msgstr "Mostrar fons rere els subtítols"
+
 msgid "Show background in radio mode"
 msgstr "Mostrar fons en el mode radio"
 
 msgid "Show blinking rec symbol on Display during recording"
 msgstr ""
-"Mostra la icona de gravació intermitent en el display mentre s'enregistri"
+"Mostra la icona de gravació intermitent en el display mentre s'enregistra"
 
 msgid "Show bouquet selection menu"
 msgstr "Mostrar menú de selecció de bouquet"
@@ -8595,7 +8808,7 @@ msgid "Show busy indicator when the system is busy."
 msgstr "Mostra una animació (spinner) quan el sistema està ocupat."
 
 msgid "Show channel numbers in channel selection"
-msgstr "Mostrar número de canal en la selecció de canals"
+msgstr "Mostrar núm. de canal en la llista de canals"
 
 msgid "Show columns"
 msgstr "Mostrar columnes"
@@ -8613,7 +8826,7 @@ msgid "Show event details"
 msgstr "Mostrar info. de l'event"
 
 msgid "Show event-progress in channel selection"
-msgstr "Mostrar progrés de l'event en selecc. de canal"
+msgstr "Progrés de l'event en selecció de canal"
 
 msgid "Show extended description"
 msgstr "Mostrar descripció detallada"
@@ -8646,7 +8859,7 @@ msgid "Show infobar on skip forward/backward"
 msgstr "Mostrar la infobar en avançar/rebobinar"
 
 msgid "Show message when recording starts"
-msgstr "Mostrar missatge quan la gravació comenci"
+msgstr "Mostrar missatge quan comenci l'enregistrament"
 
 msgid "Show movie lengths in movielist"
 msgstr "Mostrar longitud de pel·lícules a la llista"
@@ -8676,7 +8889,7 @@ msgid "Show second infobar"
 msgstr "Mostrar la segona infobar"
 
 msgid "Show service type icons"
-msgstr "Mostrar icones de tipus de canal"
+msgstr "Mostrar icona de tipus de canal"
 
 msgid "Show shutdown menu"
 msgstr "Menú d'apagat"
@@ -8790,7 +9003,7 @@ msgid "Signal OK, proceeding"
 msgstr "Senyal OK, procedint"
 
 msgid "Signal Strength:"
-msgstr "Potència del senyl"
+msgstr "Potència del senyal"
 
 msgid "Signal quality"
 msgstr "Qualitat del senyal"
@@ -8847,10 +9060,10 @@ msgid "Skin Setting"
 msgstr "Config. de skin"
 
 msgid "Skin Setup"
-msgstr "Configuració de Skin"
+msgstr "Selecció de Skin"
 
 msgid "Skin setup"
-msgstr "Pell (Skin)"
+msgstr "Selecció de Skin"
 
 msgid "Skins"
 msgstr "Skins"
@@ -8970,6 +9183,9 @@ msgstr "No s'han trobat backups"
 msgid "Sorry, no details available!"
 msgstr "No hi ha detalls"
 
+msgid "Sorry, this tuner is in use."
+msgstr "Aquest sintonitzador està en ús"
+
 msgid ""
 "Sorry, your backup destination is not writeable.\n"
 "Please select a different one."
@@ -8990,7 +9206,7 @@ msgid "Sort list to default and exit?"
 msgstr "Posar la llista en l'ordre predefinit i sortir?"
 
 msgid "Sort list:"
-msgstr "Ordenar llista:"
+msgstr "Ordenar la llista per:"
 
 msgid "Sort plugins list to default?"
 msgstr "Mostrar la llista per defecte de plugins?"
@@ -9014,51 +9230,44 @@ msgid "Spanish"
 msgstr "Espanyol"
 
 msgid "Specify extra timeframe to ignore inactivity sleeptimer"
-msgstr ""
-"Configura l'intèrval de temps per ignorar la inactivitat del temporitzador "
-"de repòs"
+msgstr "Intèrval per ignorar la inactivitat del tempor. de repòs"
 
 msgid ""
 "Specify the end time to ignore the shutdown timer when the receiver is in "
 "standby mode"
 msgstr ""
-"Configura el final de l'intèrval de temps en el qual s'ignorarà el "
-"temporitzador d'apagat si el receptor està en repòs"
+"Configura el final de l'intèrval on s'ignorarà el temporitzador d'apagat si "
+"el receptor està en repòs"
 
 msgid "Specify the end time until the inactivity sleeptimer should be ignored"
 msgstr ""
-"Configura el final de l'intèrval de temps en el qual el temporitzador "
-"s'ignorarà"
+"Configura el final de l'intèrval en el qual s'ignorarà el temporitzador de "
+"repòs"
 
 msgid ""
 "Specify the extra end time until the inactivity sleeptimer should be ignored"
 msgstr ""
-"Especifica la finalització del temps extra en el qual la inactivitat del "
-"temporitzador de repòs haurà d'ignorar-se"
+"Finalització del temps extra on ignorar la inactivitat del tempor. de repòs"
 
 msgid ""
 "Specify the extra start time when the inactivity sleeptimer should be ignored"
-msgstr ""
-"Especifica l'inici del temps extra en el qual la inactivitat del "
-"temporitzador de repòs haurà d'ignorar-se"
+msgstr "Inici del temps extra on ignorar la inactivitat del tempor. de repòs"
 
 msgid ""
 "Specify the start time to ignore the shutdown timer when the receiver is in "
 "standby mode"
 msgstr ""
-"Configura l'inici de l'intèrval de temps en el qual s'ignorarà el "
-"temporitzador d'apagat si el receptor està en repòs"
+"Configura l'inici de l'intèrval on s'ignorarà el temporitzador d'apagat si "
+"el receptor està en repòs"
 
 msgid "Specify the start time when the inactivity sleeptimer should be ignored"
-msgstr ""
-"Configura l'inici de l'intèrval de temps en el qual el temporitzador serà "
-"ignorat"
+msgstr "Configura l'inici de l'intèrval on ignorar el temporitzador de repòs"
 
 msgid "Specify timeframe to ignore inactivity sleeptimer"
-msgstr "Configurar l'intèrval en el qual no actuarà el temporitzador"
+msgstr "Intèrval en el qual no actuarà el tempor. de repòs"
 
 msgid "Specify timeframe to ignore the shutdown in standby"
-msgstr "Configurar l'intèrval en el qual ignorar l'apagat en repòs"
+msgstr "Intèrval en el qual ignorar l'apagat en repòs"
 
 msgid "Split preview mode"
 msgstr "Dividir mode previsualització"
@@ -9143,6 +9352,9 @@ msgstr "Iniciar"
 
 msgid "Start Instant Record"
 msgstr "Iniciar gravació instantània"
+
+msgid "Start Kodi"
+msgstr "Iniciar Kodi"
 
 msgid "Start Page"
 msgstr "Pàgina d'inici"
@@ -9241,6 +9453,12 @@ msgstr "Aturar i eliminar totes les gravacions en curs"
 msgid "Stop and delete recording"
 msgstr "Aturar i esborrar gravació"
 
+msgid "Stop and delete recording:"
+msgstr "Aneu a aturar i esborrar la gravació:"
+
+msgid "Stop and delete recordings:"
+msgstr "Aturar i esborrar gravacions:"
+
 msgid "Stop current event and disable coming events"
 msgstr "Aturar l'event actual i desactivar els següents"
 
@@ -9261,6 +9479,12 @@ msgstr "Aturar gravació"
 
 msgid "Stop recording and delete"
 msgstr "Aturar la gravació i esborrar"
+
+msgid "Stop recording:"
+msgstr "Aturar gravació:"
+
+msgid "Stop recordings:"
+msgstr "Aturar gravacions:"
 
 msgid "Stop service on return to movie list"
 msgstr "Aturar el canal en tornar a la llista de pel·lícules"
@@ -9299,7 +9523,7 @@ msgid "Stored position"
 msgstr "Posició desada"
 
 msgid "Stream"
-msgstr "Canal"
+msgstr "Streaming de"
 
 msgid "Stream request"
 msgstr "A petició del canal"
@@ -9341,7 +9565,7 @@ msgid "Subtitle border width"
 msgstr "Gruix del marc dels subtítols"
 
 msgid "Subtitle delay when timing is bad"
-msgstr "Retard de subtítols amb horari erroni"
+msgstr "Retard de subtítols amb pauta horaria errònia"
 
 msgid "Subtitle delay when timing lacks"
 msgstr "Retard dels subtitols"
@@ -9463,6 +9687,9 @@ msgstr "Tipus de tuner seleccionables:"
 msgid "Symbol rate"
 msgstr "Velocitat de símbol"
 
+msgid "Symbol rate:"
+msgstr "Veloc. de símbol"
+
 msgid "Symbolrate"
 msgstr "Velocitat de símbol"
 
@@ -9483,6 +9710,9 @@ msgstr "Sincronitzar l'hora des del transponedor o internet."
 
 msgid "System"
 msgstr "Sistema"
+
+msgid "System Message"
+msgstr "Missatge del Sistema"
 
 msgid "System OE"
 msgstr "Sistema OE"
@@ -9607,14 +9837,15 @@ msgid ""
 "\n"
 "Do you understand this?"
 msgstr ""
-"Avís d'OpenSPA: actualitzar a la darrera 'nightly build' pot suposar tenir "
-"no només les darreres funcionalitats, sino també alguns riscos. Després "
-"d'actualitzar, és possible que el receptor no funcioni com s'esperava. És "
-"aconsellable fer còpies de seguretat amb Autobackup o Backupsuite, el que "
-"permetrà tornar el receptor a l'estat anterior en cas de trobar problemes. "
-"Si detecteu qualsevol 'bug', notifiqueu-lo a http://openspa.info.\n"
+"L'equip OpenSPA vol puntualitzar que, actualitzar a la darrera 'nightly "
+"build' pot suposar tenir no només les darreres funcionalitats, sino també "
+"alguns riscos. Després d'actualitzar, és possible que el receptor no "
+"funcioni com s'esperava. És aconsellable fer còpies de seguretat amb "
+"Autobackup o Backupsuite, que permetrà tornar el receptor a l'estat anterior "
+"en cas de trobar problemes. Si detecteu qualsevol 'bug', notifiqueu-lo a "
+"http://openspa.info.\n"
 "\n"
-"Heu entès aquest avis?"
+"Segur que voleu continuar?"
 
 msgid "The PIN code has been changed successfully."
 msgstr "El codi PIN s'ha canviat correctament."
@@ -9705,7 +9936,7 @@ msgid ""
 "due to an error in mytest.py"
 msgstr ""
 "S'està reiniciant el GUI\n"
-"per causa d'un error a mytest.py"
+"a causa d'un error a mytest.py"
 
 msgid ""
 "The wireless LAN plugin is not installed!\n"
@@ -9954,11 +10185,11 @@ msgstr "Aquest test detecta i comprova l'adaptador de xarxa."
 
 msgid ""
 "This will (re-)calculate all positions of your rotor and may remove "
-"previously memorised positions and fine-tuning! \n"
-" Are you sure?"
+"previously memorised positions and fine-tuning!\n"
+"Are you sure?"
 msgstr ""
 "Això (re)calcularà totes les posicions del motor i pot eliminar les "
-"posicions previament desades! \n"
+"posicions previament desades!\n"
 " N'esteu segur?"
 
 msgid ""
@@ -10093,7 +10324,7 @@ msgid "To audio selection"
 msgstr "Selecció d'àudio"
 
 msgid "To back-up directly to the USB-stick, the USB-stick MUST\n"
-msgstr "Per fer un backup directament a l'USB, el pendrive CAL\n"
+msgstr "Per fer un backup a l'USB, el pendrive caldrà que \n"
 
 msgid "To subtitle selection"
 msgstr "Selecció de subtítols"
@@ -10123,7 +10354,7 @@ msgid "Top and Bottom"
 msgstr "Superior i inferior"
 
 msgid "Top and bottom"
-msgstr "Dalt i baix"
+msgstr "Superior i inferior"
 
 msgid "Total"
 msgstr "Total"
@@ -10175,6 +10406,9 @@ msgstr "Paperera"
 
 msgid "Tries left:"
 msgstr "Intents que queden:"
+
+msgid "True"
+msgstr "Si"
 
 msgid "Try to find used transponders in cable network.. please wait..."
 msgstr "Cercant els transponedors a la xarxa de cable, espereu..."
@@ -10301,6 +10535,9 @@ msgstr "URL per poder reenviar a un receptor remot"
 
 msgid "USALS"
 msgstr "USALS"
+
+msgid "USALS Calibration"
+msgstr "Calibració USALS"
 
 msgid "USALS calibration"
 msgstr "Calibració USALS"
@@ -10461,6 +10698,18 @@ msgstr "Utilitzar la EPG MHW quan sigui possible"
 
 msgid "Use Netmed EPG information when it is available."
 msgstr "Utilitzar la EPG Netmed quan sigui possible"
+
+msgid "Use SDCard for %s storage folder"
+msgstr "-Carpeta d'emmagatzematge de %s"
+
+msgid "Use SDCard for epg storage path"
+msgstr "-Carpeta d'emmagatzematge d'EPG"
+
+msgid "Use SDCard for movies storage"
+msgstr "-Carpeta d'emmagatzematge de pel·lícules"
+
+msgid "Use SDCard for timeshift storage"
+msgstr "-Carpeta d'emmagatzematge de timeshift"
 
 msgid "Use TV remote control"
 msgstr "Utilitzar el comandament de la TV"
@@ -10925,6 +11174,9 @@ msgstr "Visualitzar gravacions"
 msgid "We"
 msgstr "Dc"
 
+msgid "WeTek media player"
+msgstr "WeTek Media Player"
+
 msgid "Web browser base visibility"
 msgstr "Visibilitat del navegador"
 
@@ -11015,6 +11267,9 @@ msgstr "Oest"
 msgid "West limit set"
 msgstr "Límit oest configurat"
 
+msgid "Wetek CPU Frequency Setup"
+msgstr "Configuració de la Freq. de WeTek Play"
+
 msgid "What Day of month ?"
 msgstr "Quin dia del mes?"
 
@@ -11033,10 +11288,10 @@ msgid ""
 "bouquets.radio files, will still be loaded. This allows you for example to "
 "keep your own user bouquet while installed settings are upgraded"
 msgstr ""
-"Si s'habilita, enigma2 carregarà els bouquets no enllaçats. Això vol dir que "
-"els favorits d'usuari que estiguin disponibles, però no inclosos als arxius "
-"bouquets.tv o bouquets.radio es carregaràn. Això permet, per exemple, "
-"mantenir els favorits mentre s'actualitzen els canals"
+"Si s'habilita, enigma2 carregarà els bouquets no enllaçats: els favorits "
+"d'usuari que estiguin disponibles, però no inclosos als arxius de favorits "
+"de tv o radio, continuaràn carregats. Això permet, p.ex, mantenir els "
+"favorits mentre s'actualitzen els canals"
 
 msgid "When enabled the PiP can be closed by the exit button."
 msgstr "Si s'activa permet tancar la finestra PiP prement la tecla 'Exit'"
@@ -11078,9 +11333,9 @@ msgid ""
 "sleeptimer is ignored. Not the detection is disabled during this timeframe "
 "but the inactivity timeout is disabled"
 msgstr ""
-"Si s'habilita, permet especificar un intèrval de temps en el qual el "
-"temporitzador de repòs serà ignorat. No es deshabilita la detecció, sino "
-"l'intèrval d'inactivitat"
+"Si s'habilita, permet especificar un intèrval de temps en el qual s'ignorarà "
+"el temporitzador de repòs. No es deshabilita la detecció, sino l'intèrval "
+"d'inactivitat"
 
 msgid ""
 "When enabled you can zap channels with the  CH+/-, B+/-, P+/- buttons "
@@ -11154,6 +11409,18 @@ msgid ""
 msgstr ""
 "Si s'activa, es mostrarà un avís i l'usuari tindrà l'opció d'aturar o "
 "continuar el timeshift."
+
+msgid ""
+"When enabled, always descramble receiving http streams. This takes up more "
+"resources (descrambling demuxers), only enable if necessary. Individual "
+"streams are always descrambled if 0x100 is added to the service type, "
+"regardless of this setting. Default off."
+msgstr ""
+"Si s'habilita, es desencriptaràn els streams http rebuts. Això consumirà més "
+"recursos (desencriptar demuxers), habiliteu-ho només en cas necessari. "
+"Independenment d'aquest ajust, els streams individuals sempre es "
+"descodifiquen si s'afegeix 0x100 al tipus de canal. Per defecte, "
+"deshabilitat."
 
 msgid "When enabled, authentication is required to watch http streams."
 msgstr "Si s'habilita, caldrà autentificar-se per visualitzar canals http"
@@ -11245,10 +11512,10 @@ msgstr ""
 
 msgid ""
 "When enabled, http streams are descrambled on the server side. The (remote) "
-"client receiver does not have to do descrambling."
+"client receiver does not have to do descrambling. Default on."
 msgstr ""
 "Si s'activa, els canals http es descodificaràn al servidor. Al receptor "
-"client (remot) no li caldrà descodificar-los."
+"client (remot) no li caldrà descodificar-los. Per defecte, activat"
 
 msgid "When enabled, it is possible to leave the movieplayer with exit."
 msgstr "Si s'activa, se podrà sortir del reproductor prement la tecla Exit."
@@ -11356,6 +11623,16 @@ msgstr ""
 "Si s'activa, el receptor seleccionarà un canal AC3+ (si està disponible)"
 
 msgid ""
+"When enabled, this setting has more weight than 'Preferred tuner for "
+"recordings'."
+msgstr ""
+"Si s'habilita, aquesta opció prevaldrà sobre 'Sintonitzador preferit per a "
+"gravacions'"
+
+msgid "When enabled, this setting has more weight than 'Preferred tuner'."
+msgstr "Si s'habilita, aquesta opció prevaldrà sobre 'Sintonitzador preferit'"
+
+msgid ""
 "When enabled, timeshift starts automatically in background after specified "
 "time."
 msgstr ""
@@ -11412,6 +11689,15 @@ msgstr ""
 "\n"
 "Voleu fer un reinici de fàbrica?"
 
+msgid ""
+"When you use the remote fallback tuner to do recording, the timer conflict "
+"detection can't handle remote fallback tuners. This option allows you to "
+"turn off the timer confict detection"
+msgstr ""
+"Quan s'utilitza el sintonizador remot per a enregistrar, la detecció de "
+"reserves en conflicte no pot administrar els sintonitzadors remots. Aquesta "
+"opció permet desactivar la detecció de conflictes"
+
 msgid "Where do you want to backup your settings?"
 msgstr "On voleu desar la configuració?"
 
@@ -11430,8 +11716,11 @@ msgstr "Xarxa sense fils"
 msgid "Wireless network"
 msgstr "Xarxa sense fils"
 
+msgid "Wireless network connection setup."
+msgstr "Configuració de la connexió WiFi"
+
 msgid "Wireless network state"
-msgstr "Estat de la xarxa WiFi"
+msgstr "Estat de la connexió WiFi"
 
 msgid "With popup"
 msgstr "Amb pantalla emergent"
@@ -11462,6 +11751,9 @@ msgstr ""
 msgid "Write failed!"
 msgstr "Error en escriure!"
 
+msgid "Write to /tmp/positionersetup.log"
+msgstr "Desar-ho a /tmp/positionersetup.log"
+
 msgid "Wrong parameter format 'set=%s'. Use set=set15 "
 msgstr "Format de paràmetre incorrecte 'set=%s'. Utilitzeu set=set15"
 
@@ -11479,6 +11771,9 @@ msgstr "Subtítols externs grocs"
 
 msgid "Yes"
 msgstr "Si"
+
+msgid "Yes (save index in setup tuner)"
+msgstr "Si (desar l'índex a la config.)"
 
 msgid "Yes and save"
 msgstr "Si i desar"
@@ -11561,7 +11856,7 @@ msgid "You can cancel the removal."
 msgstr "Heu cancel·lat la desinstal·lació."
 
 msgid "You can continue watching TV etc. while this is running."
-msgstr "Podeu continuar mirant la TV, etc. mentre dura la comprovació."
+msgstr "Podeu continuar mirant la TV, etc. mentre s'executen les tasques."
 
 msgid "You can install this plugin."
 msgstr "Podeu instal·lar el plugin."
@@ -11654,6 +11949,13 @@ msgstr ""
 "torneu-ho a provar."
 
 msgid ""
+"Your %s %s will be restarted after the removal of service\n"
+"Do you want to remove now ?"
+msgstr ""
+"El %s %s es reiniciarà després d'eliminar el servei.\n"
+"Segur que voleu eliminar-ho?"
+
+msgid ""
 "Your backup succeeded. We will now continue to explain the further upgrade "
 "process."
 msgstr ""
@@ -11690,8 +11992,8 @@ msgid ""
 "Your internet connection is not working!\n"
 "Please choose what you want to do next."
 msgstr ""
-"La connexió a internet està funcionant!\n"
-"Trieu el que voldreu fer després."
+"No teniu connexió a internet!\n"
+"Trieu el que voldreu fer ara."
 
 msgid "Your internet connection is working (ip: %s)"
 msgstr "La connexió a internet és correcta (ip: %s)"
@@ -11731,7 +12033,7 @@ msgid "Your receiver is rebooting"
 msgstr ""
 "El receptor s'està reiniciant\n"
 "\n"
-"Espereu, en pocs instants tornarà a estar operatiu"
+"Espereu, en pocs moments tornarà a estar operatiu"
 
 msgid "Your receiver is shutting down"
 msgstr ""
@@ -12030,7 +12332,7 @@ msgid "ballet"
 msgstr "ballet"
 
 msgid "because of the used filesystem the back-up\n"
-msgstr "per causa del sistema utilitzat, la còpia\n"
+msgstr "Per raons del sistema utilitzat, la còpia\n"
 
 msgid "better"
 msgstr "Millor"
@@ -12124,7 +12426,7 @@ msgid ""
 "contain a file with the name: \n"
 "\n"
 msgstr ""
-"contenir un arxiu amb el nom: \n"
+"contingui un arxiu amb el nom: \n"
 "\n"
 
 msgid "continue"
@@ -12379,6 +12681,9 @@ msgstr "lliure"
 msgid "from"
 msgstr "de"
 
+msgid "front panel"
+msgstr "Panell frontal"
+
 msgid "further education"
 msgstr "educació avançada"
 
@@ -12492,6 +12797,9 @@ msgstr "tornar al títol anterior"
 
 msgid "jump forward to the next title"
 msgstr "anar al títol següent"
+
+msgid "jump to chapter by number"
+msgstr "Anar al capítol (per número)"
 
 msgid "languages"
 msgstr "idiomes"
@@ -12699,6 +13007,9 @@ msgstr "d'un disc de cara SIMPLE usat."
 
 msgid "off"
 msgstr "desactivat"
+
+msgid "offset is"
+msgstr "La desviació es"
 
 msgid "on"
 msgstr "activat"
@@ -13288,13 +13599,8 @@ msgstr "esports d'hivern"
 msgid "wireless network interface"
 msgstr "Interfície de xarxa sense fils"
 
-msgid "with %d error"
-msgid_plural "with %d errors"
-msgstr[0] "amb %d error"
-msgstr[1] "amb %d errors"
-
 msgid "with text"
-msgstr "amb texte"
+msgstr "amb text"
 
 msgid "with tuner name"
 msgstr "amb el nom del sint."
@@ -13328,3 +13634,72 @@ msgstr "Canviar abans d'Stream"
 
 msgid "zapped"
 msgstr "Canviat"
+
+msgid "Channel zap delay mode"
+msgstr "Retard del zàping"
+
+msgid "Setup delay mode to zap to channels."
+msgstr "Configura el retard que s'aplicarà al zàping"
+
+msgid "Channel zap delay first button"
+msgstr "Retard del canal - primera tecla"
+
+msgid "User defined delay when you press the first button to zap to the channel."
+msgstr "Retard (configurable) quan es prem la primera tecla per al canvi de canal"
+
+msgid "Channel zap delay another button"
+msgstr "Retard del canal - una altra tecla"
+
+msgid "User defined delay when you press another button to zap to the channel."
+msgstr "Retard (configurable) quan es prem una altra tecla per al canvi de canal"
+
+msgid "Number of channel number digits"
+msgstr "Nombre de dígits del canal"
+
+msgid "This allows you to set the number of digits to 5, if you have more than 9999 channels."
+msgstr "Configura el nombre de dígits del canal a 5 per quan es disposa de més de 9999 canals."
+
+msgid "REC"
+msgstr "GRAV."
+
+msgid "Please set up tuner E"
+msgstr "Configureu el sintonitzador E"
+
+msgid "Please set up tuner F"
+msgstr "Configureu el sintonitzador F"
+
+msgid "Please set up tuner G"
+msgstr "Configureu el sintonitzador G"
+
+msgid "Please set up tuner H"
+msgstr "Configureu el sintonitzador H"
+
+msgid "Please set up tuner I"
+msgstr "Configureu el sintonitzador I"
+
+msgid "Please set up tuner J"
+msgstr "Configureu el sintonitzador J"
+
+msgid "Disable MiniTV"
+msgstr "Deshabilitar MiniTV"
+
+msgid "Enable MiniTV"
+msgstr "Habilitar MiniTV"
+
+msgid "Disable FastZapping"
+msgstr "Deshabilitar FastZapping"
+
+msgid "Enable FastZapping"
+msgstr "Habilitar FastZapping"
+
+msgid "will take about 1-4 minutes for this system\n"
+msgstr "trigarà entre 1 i 4 minuts en acabar\n\n"
+
+msgid "\n<This tuner is configured automatically>"
+msgstr "\n<Aquest sintonitz. es configura automàticament>"
+
+msgid "HDMI Colorspace"
+msgstr "Espai de color HDMI"
+
+msgid "This option allows you can config the Colorspace from Auto to RGB"
+msgstr "Permet configurar l'espai de color d'Auto a RGB"
