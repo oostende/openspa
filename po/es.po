@@ -13676,13 +13676,13 @@ msgid "Setup delay mode to zap to channels."
 msgstr "Configura el retardo que se aplicará al zapping"
 
 msgid "Channel zap delay first button"
-msgstr "Retardo del canal - primera tecla"
+msgstr "Retardo canal - 1"
 
 msgid "User defined delay when you press the first button to zap to the channel."
 msgstr "Retardo (configurable) cuando se pulsa la primera tecla para el cambio de canal"
 
 msgid "Channel zap delay another button"
-msgstr "Retardo del canal - otra tecla"
+msgstr "Retardo canal - 2"
 
 msgid "User defined delay when you press another button to zap to the channel."
 msgstr "Retardo (configurable) cuando se pulsa otra tecla para el cambio de canal"
