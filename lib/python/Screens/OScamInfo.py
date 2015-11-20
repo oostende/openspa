@@ -452,7 +452,7 @@ class OscamInfoMenu(Screen):
 			osc = OscamInfo()
 			reader = osc.getReaders()
 			if reader is not None:
-				reader.append( ("All", "all") )
+				reader.append( (_("All"), "all") ) 
 				if isinstance(reader, list):
 					if len(reader) == 1:
 						self.session.open(oscReaderStats, reader[0][1])
