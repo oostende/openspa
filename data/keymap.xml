@@ -436,6 +436,9 @@
 			<key id="KEY_TAB" mapto="toggleMark" flags="m" />
 			<key id="KEY_NEXTSONG" mapto="jumpNextMark" flags="m" />
 		</device>
+		<key id="KEY_5" mapto="toggleMark" flags="m" />
+		<key id="KEY_0" mapto="toggleMark" flags="m" />
+		<key id="KEY_RED" mapto="toggleMark" flags="m" />
 	</map>
 	
 	<map context="MediaPlayerCueSheetActions">
