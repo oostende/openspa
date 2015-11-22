@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-07 14:59+0200\n"
-"PO-Revision-Date: 2015-10-07 15:24+0200\n"
+"POT-Creation-Date: 2015-11-02 22:27+0100\n"
+"PO-Revision-Date: 2015-11-02 22:30+0100\n"
 "Last-Translator: Pr2 <dummy@dummy.com>\n"
 "Language-Team: french\n"
 "Language: fr\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Poedit 1.8.5\n"
+"X-Generator: Poedit 1.8.6\n"
 
 msgid ""
 "\n"
@@ -636,9 +636,6 @@ msgstr ""
 "Un enregistrement est en cours.\n"
 "Que voulez-vous faire ?"
 
-msgid "A recording is currently running. Please stop the recording before trying to configure the positioner."
-msgstr "Un enregistrement est en cours. Veuillez arrêter l'enregistrement avant d'essayer de configurer le positionneur."
-
 msgid "A recording is currently running. Please stop the recording before trying to scan."
 msgstr "Un enregistrement est en cours. Veuillez arrêter l'enregistrement avant d'essayer de scanner."
 
@@ -698,6 +695,9 @@ msgstr "AC3"
 
 msgid "AC3 downmix"
 msgstr "Downmix AC3"
+
+msgid "AGC:"
+msgstr "AGC:"
 
 msgid "Abort"
 msgstr "Abandon"
@@ -911,6 +911,12 @@ msgstr "Priorité tuner services alternatifs"
 
 msgid "Always ask"
 msgstr "Toujours demander"
+
+msgid "Always include ECM in recordings"
+msgstr "Toujours inclure ECM dans les enregistrements"
+
+msgid "Always include ECM messages in recordings. This overrides the individual timer settings globally. It allows recordings to be always decrypted afterwards (sometimes called offline decoding), if supported by your receiver. Default: off."
+msgstr "Toujours inclure des messages ECM dans des enregistrements. Cela remplace les paramètres de temporisation globaux. Il permet aux enregistrements d’être toujours décryptés après (parfois appelé décodage hors ligne), si supporté par votre récepteur. Par défaut: désactivé."
 
 msgid "Always use smart1080p mode"
 msgstr "Toujours utiliser le mode intelligent1080p"
@@ -2115,6 +2121,9 @@ msgstr ""
 msgid "Current mode: %s \n"
 msgstr "Mode courant: %s \n"
 
+msgid "Current rotor position: "
+msgstr "Position actuelle du rotor :"
+
 msgid "Current settings:"
 msgstr "Paramètres actuels :"
 
@@ -2369,8 +2378,11 @@ msgstr "Profondeur"
 msgid "Descramble & record ECM gives the option to descramble afterwards if descrambling on recording failed. 'Don't descramble, record ECM' save a scramble recording that can be descrambled on playback. 'Normal' means descramble the recording and don't record ECM."
 msgstr "‘Décoder & enregistrer ECM’ permet de décoder plus tard si le décodage lors de l’enregistrement échoue. ‘Ne pas décoder, enregistrer ECM’ sauvegarde un enregistrement encodé qui pourra être décodé lors de la lecture. ‘Normal’ décode l’enregistrement et ne sauvegarde pas les ECMs."
 
-msgid "Descramble http streams"
-msgstr "Décrypter les flux HTTP"
+msgid "Descramble receiving http streams"
+msgstr "Décrypter les flux HTTP reçus"
+
+msgid "Descramble sending http streams"
+msgstr "Décrypter les flux HTTP envoyés"
 
 msgid "Description"
 msgstr "Description"
@@ -2842,6 +2854,9 @@ msgstr "Activer le récepteur enigma2 distant a utiliser pour syntoniser les ser
 msgid "Enable teletext caching"
 msgstr "Activer la mise en cache du télétexte"
 
+msgid "Enable timer conflict detection"
+msgstr "Activer la détection des conflits de la minuterie"
+
 msgid "Enable zapping with CH+/-, B+/-, P+/-"
 msgstr "Activer le zap avec CH+/-, B+/-, P+/-"
 
@@ -2993,6 +3008,9 @@ msgstr "Quitter assistant réseau"
 msgid "Exit the wizard"
 msgstr "Quitter l'assistant"
 
+msgid "Exit/OK"
+msgstr "Exit/OK"
+
 msgid "Expert"
 msgstr "Expert"
 
@@ -3062,6 +3080,9 @@ msgstr "F1/F3"
 
 msgid "FEC"
 msgstr "FEC"
+
+msgid "FEC:"
+msgstr "FEC:"
 
 msgid "FTA"
 msgstr "En Clair"
@@ -4124,6 +4145,9 @@ msgstr "Maxdown: "
 msgid "Maximum number of days in EPG"
 msgstr "Nombre maximum de jours dans l’EPG"
 
+msgid "Maybe the reason that recording is currently running. Please stop the recording before trying to configure the positioner."
+msgstr "Peut-être parce qu’un enregistrement est en cours. Veuillez arrêter l'enregistrement avant d'essayer de configurer le positionneur."
+
 msgid "Media player"
 msgstr "Lecteur de médias"
 
@@ -4416,6 +4440,12 @@ msgstr "Assistant réseau"
 
 msgid "Neutrino"
 msgstr "Neutrino"
+
+msgid "Never decrypt the content while recording. This overrides the individual timer settings globally. If enabled, recordings are stored in crypted presentation and must be decrypted afterwards (sometimes called offline decoding). Default: off."
+msgstr "Ne jamais déchiffrer le contenu lors de l’enregistrement. Cela remplace les paramètres de temporisation globaux. Si elle est activée, les enregistrements sont stockés encryptés et doivent donc être décryptés après (parfois appelé décodage hors-ligne). Par défaut: désactivé."
+
+msgid "Never decrypt while recording"
+msgstr "Ne jamais décrypter pendant l’enregistrement"
 
 msgid "New"
 msgstr "Nouvelle"
@@ -4789,6 +4819,9 @@ msgstr "Ouvrir la localisation sélectionnée comme nom de programmation (timer)
 
 msgid "Open service list"
 msgstr "Ouvrir liste service"
+
+msgid "Open setup tuner "
+msgstr "Ouvrir la configuration du tuner "
 
 msgid "Open the movie list"
 msgstr "Ouvrir la liste des films"
@@ -5227,9 +5260,6 @@ msgstr "Plugins"
 msgid "Polarisation"
 msgstr "Polarisation"
 
-msgid "Polarisation:"
-msgstr "Polarisation:"
-
 msgid "Polarization"
 msgstr "Polarisation"
 
@@ -5272,11 +5302,11 @@ msgstr "Positionneur"
 msgid "Positioner (selecting satellites)"
 msgstr "Positionneur (sélection satellites)"
 
-msgid "Positioner Setup"
-msgstr "Paramètres positionneur"
-
 msgid "Positioner setup"
 msgstr "Paramètres positionneur"
+
+msgid "Positioner setup log"
+msgstr "Configuration du positionneur log"
 
 msgid "Power LED state in (deep)-standby"
 msgstr "Etat de la LED d’alimentation en veille profonde/veille"
@@ -5387,6 +5417,9 @@ msgstr "Pressez OK pour basculer la sélection"
 msgid "Press OK to toggle the selection."
 msgstr "Pressez OK pour basculer le choix"
 
+msgid "Press OK, save and exit..."
+msgstr "Appuyer sur OK, sauvegarder et quitter…"
+
 msgid "Press yellow to set this interface as default interface."
 msgstr "Pressez le bouton Jaune pour choisir l'interface comme interface standard."
 
@@ -5465,6 +5498,9 @@ msgstr "Services protégés"
 
 msgid "Protect software update screen"
 msgstr "Protéger l'écran de mise-à-jour"
+
+msgid "Protect spzMenu (OpenSPA Main Menu)"
+msgstr "Protéger spzMenu (Menu Principal OpenSPA)"
 
 msgid "Protect standby menu"
 msgstr "Protéger le menu de veille"
@@ -5584,6 +5620,10 @@ msgstr "Voulez-vous vraiment redémarrer maintenant ?"
 
 msgid "Really shutdown now?"
 msgstr "Voulez-vous vraiment éteindre maintenant ?"
+
+#, python-format
+msgid "Really store at index %2d for current position?"
+msgstr "Vraiment sauvegarder à l’index %2d pour la position actuelle?"
 
 msgid "Really upgrade the frontprocessor and reboot now?"
 msgstr "Voulez-vous vraiment mettre à jour le frontprocessor et redémarrer maintenant ?"
@@ -6260,6 +6300,9 @@ msgstr "Chosir les satellites"
 msgid "Select service to add..."
 msgstr "Choisir service à ajouter..."
 
+msgid "Select slot"
+msgstr "Choisir un slot"
+
 msgid "Select sort method:"
 msgstr "Choisir la méthode de tri:"
 
@@ -6859,6 +6902,9 @@ msgstr "Désolé pas de sauvegardes trouvées !"
 
 msgid "Sorry, no details available!"
 msgstr "Désolé, aucuns détails disponibles !"
+
+msgid "Sorry, this tuner is in use."
+msgstr "Désolé, ce tuner est utilisé."
 
 msgid ""
 "Sorry, your backup destination is not writeable.\n"
@@ -8614,6 +8660,9 @@ msgstr "Lorsqu'elle est activée, un enregistrement est autorisé à interrompre
 msgid "When enabled, a warning will be displayed and the user will get an option to stop or to continue the timeshift."
 msgstr "Lorsqu'elle est activée, un avertissement sera affiché et l'utilisateur aura l'option d'arrêter ou de continuer le timeshift."
 
+msgid "When enabled, always descramble receiving http streams. This takes up more resources (descrambling demuxers), only enable if necessary. Individual streams are always descrambled if 0x100 is added to the service type, regardless of this setting. Default off."
+msgstr "Lorsqu’il est activé, toujours décrypter la réception de flux http. Cela prend plus de ressources (de demuxers de décodages), n’activer que si c’est nécessaire. Les flux individuels sont toujours décryptés si 0x100 est ajouté au type de service, indépendamment de ce paramètre. Désactivé par défaut."
+
 msgid "When enabled, authentication is required to watch http streams."
 msgstr "Lorsque c'est activé, une authentification est nécessaire pour regarder les flux (streams) http"
 
@@ -8656,8 +8705,8 @@ msgstr "Lorsqu'elle est activée, les sous-titres graphiques DVB seront affiché
 msgid "When enabled, graphical DVB subtitles will be displayed in yellow, instead of the original color."
 msgstr "Lorsqu'elle est activée, les sous-titres graphiques DVB seront affichés en jaune, au lieu de la couleur d'origine."
 
-msgid "When enabled, http streams are descrambled on the server side. The (remote) client receiver does not have to do descrambling."
-msgstr "Lorsqu'elle est activée, les flux http sont décryptés du côté serveur. Le récepteur client (distant) n'aura pas a décrypter."
+msgid "When enabled, http streams are descrambled on the server side. The (remote) client receiver does not have to do descrambling. Default on."
+msgstr "Lorsqu'elle est activée, les flux http sont décryptés du côté serveur. Le récepteur client (distant) n'aura pas a décrypter. Par défaut: actif."
 
 msgid "When enabled, it is possible to leave the movieplayer with exit."
 msgstr "Lorsqu'elle est activée, il est possible de quitter le lecteur de film avec exit."
@@ -8765,6 +8814,9 @@ msgstr ""
 "\n"
 "Voulez-vous vraiment faire une réinitialisation usine ?"
 
+msgid "When you use the remote fallback tuner to do recording, the timer conflict detection can't handle remote fallback tuners. This option allows you to turn off the timer confict detection"
+msgstr "Lorsque vous utilisez le tuner distant de repli pour effectuer l’enregistrement, la détection des conflits de programmation ne peut pas gérer à distance les tuners de repli. Cette option vous permet de désactiver la détection des conflicts de programmation."
+
 msgid "Where do you want to backup your settings?"
 msgstr "Où voulez-vous sauver vos paramètres ?"
 
@@ -8804,6 +8856,9 @@ msgstr "Erreur d'écriture lors de l'enregistrement. Disque plein ?\n"
 msgid "Write failed!"
 msgstr "Échec d'écriture !"
 
+msgid "Write to /tmp/positionersetup.log"
+msgstr "Ecriture dans /tmp/positionersetup.log"
+
 msgid "XP1000"
 msgstr "XP1000"
 
@@ -8821,6 +8876,9 @@ msgstr "Sous-titres DVB jaune"
 
 msgid "Yes"
 msgstr "Oui"
+
+msgid "Yes (save index in setup tuner)"
+msgstr "Oui (sauvegarder l’index dans la configuration du tuner)"
 
 msgid "Yes and save"
 msgstr "Oui et sauvegarder"
@@ -10300,280 +10358,3 @@ msgstr "Zapper et enregistrer"
 
 msgid "zapped"
 msgstr "Zappé"
-
-#~ msgid "A recording is currently running. Please stop the recording before trying to start the satfinder."
-#~ msgstr "Un enregistrement est en cours. Veuillez arrêter l'enregistrement avant de démarrer la recherche satellites."
-
-#~ msgid "AA"
-#~ msgstr "AA"
-
-#~ msgid "AB"
-#~ msgstr "AB"
-
-#~ msgid "Add Bookmark"
-#~ msgstr "Ajouter Marque-page"
-
-#~ msgid "Adjust HDMI CEC settings"
-#~ msgstr "Ajuster les paramètres HDMI CEC"
-
-#~ msgid "Always hide infobar"
-#~ msgstr "Toujours cacher la barre d'infos"
-
-#~ msgid "And will shutdown your receiver over "
-#~ msgstr "Et va éteindre votre récepteur après"
-
-#~ msgid "BA"
-#~ msgstr "BA"
-
-#~ msgid "BB"
-#~ msgstr "BB"
-
-#~ msgid "Blue boost"
-#~ msgstr "Intensifier le bleu"
-
-#~ msgid "Change pin code"
-#~ msgstr "Changer code pin"
-
-#~ msgid "Change service PIN"
-#~ msgstr "Changer PIN service"
-
-#~ msgid "Change service PINs"
-#~ msgstr "Changer PINs service"
-
-#~ msgid "Compact flash"
-#~ msgstr "Compact Flash"
-
-#~ msgid "Configure the sharpness of the video scaling."
-#~ msgstr "Configurez la netteté de l'échelle vidéo."
-
-#~ msgid "Configure the transparency of the OSD."
-#~ msgstr "Configurez la transparence de l'OSD."
-
-#~ msgid "Connected!"
-#~ msgstr "Connecté !"
-
-#~ msgid "Currently the commit log cannot be retreived - please try later again"
-#~ msgstr "Actuellement le log des commits ne peut pas être récupéré - merci de réessayer plus tard "
-
-#~ msgid "DVB_C"
-#~ msgstr "DVB_C"
-
-#~ msgid "Delete..."
-#~ msgstr "Effacer..."
-
-#~ msgid "Dialing:"
-#~ msgstr "Appel :"
-
-#~ msgid "Directory %s nonexistent."
-#~ msgstr "Répertoire %s n'existe pas."
-
-#~ msgid "Directory contains %d file(s) and %d sub-directories.\n"
-#~ msgstr "Le répertoire contient %d fichier(s) et %d sous-répertoire(s).\n"
-
-#~ msgid "Disconnect"
-#~ msgstr "Déconnecter"
-
-#~ msgid "Do you want to install a channel list?"
-#~ msgstr "Voulez-vous installer la liste des chaines ?"
-
-#~ msgid "Do you want to update your receiver to %s?"
-#~ msgstr "Voulez-vous mettre à jour votre récepteur vers %s ?"
-
-#~ msgid "Edit bouquets list"
-#~ msgstr "Éditer liste bouquets"
-
-#~ msgid "Edit services list"
-#~ msgstr "Éditer liste services"
-
-#~ msgid "Enable parental control"
-#~ msgstr "Activer contrôle parental"
-
-#~ msgid "Green boost"
-#~ msgstr "Intensifier le vert"
-
-#~ msgid "Hard disk"
-#~ msgstr "Disque dur"
-
-#~ msgid "Install softcam"
-#~ msgstr "Installer softcam"
-
-#~ msgid "Latest Commits"
-#~ msgstr "Derniers commits"
-
-#~ msgid "Load Length of Movies in Movielist"
-#~ msgstr "Charger la durée des films dans la liste des films"
-
-#~ msgid "Move to other directory"
-#~ msgstr "Déplacer vers un autre répertoire"
-
-#~ msgid "Movie List Configuration"
-#~ msgstr "Configuration de la liste des films"
-
-#~ msgid "Movie Selection"
-#~ msgstr "Sélection d'un film"
-
-#~ msgid "Network mount"
-#~ msgstr "Monter réseau"
-
-#~ msgid "Network mount %s"
-#~ msgstr "Monter réseau %s"
-
-#~ msgid "New PIN"
-#~ msgstr "Nouveau PIN"
-
-#~ msgid "No satellite frontend found!!"
-#~ msgstr "Aucun tuner satellite trouvé !!"
-
-#~ msgid ""
-#~ "No valid service PIN found!\n"
-#~ "Do you like to change the service PIN now?\n"
-#~ "When you say 'No' here the service protection stay disabled!"
-#~ msgstr ""
-#~ "Aucun Service-PIN trouvé !\n"
-#~ "Voulez-vous changer le Service-PIN maintenant ?\n"
-#~ "Si vous répondez 'NON', la protection de service restera désactivé !"
-
-#~ msgid ""
-#~ "No valid setup PIN found!\n"
-#~ "Do you like to change the setup PIN now?\n"
-#~ "When you say 'No' here the setup protection stay disabled!"
-#~ msgstr ""
-#~ "Aucun Réglages-PIN trouvé !\n"
-#~ "Voulez-vous changer le Réglages-PIN maintenant ?\n"
-#~ "Si vous répondez 'NON', la protection des Réglages restera désactivé !"
-
-#~ msgid "Nonlinear"
-#~ msgstr "Non Linéaire"
-
-#~ msgid "OSD transparency"
-#~ msgstr "Transparence OSD"
-
-#~ msgid "Open service list and select next channel"
-#~ msgstr "Ouvrir la liste des services et sélectionner la chaine suivante"
-
-#~ msgid "Parental control type"
-#~ msgstr "Type du contrôle parental"
-
-#~ msgid "Phone number"
-#~ msgstr "Numéro de téléphone"
-
-#~ msgid "Please wait"
-#~ msgstr "Veuillez attendre."
-
-#~ msgid "Please wait (downloading softcam)"
-#~ msgstr "Veuillez patienter (téléchargement du softcam)"
-
-#~ msgid "Ram disk"
-#~ msgstr "Disque RAM"
-
-#~ msgid "Rec"
-#~ msgstr "Enr"
-
-#~ msgid "Recording paths"
-#~ msgstr "Chemins pour enregistrer"
-
-#~ msgid "Reenter new PIN"
-#~ msgstr "Re-saisir nouveau PIN"
-
-#~ msgid "Remember these settings for each folder"
-#~ msgstr "Se rappeler de ces paramètres pour chaque dossier"
-
-#~ msgid "Show latest commits on sourceforge"
-#~ msgstr "Afficher les derniers 'commits' sur sourceforge"
-
-#~ msgid "Show services beginning with"
-#~ msgstr "Afficher les services commençant par"
-
-#~ msgid "Show status icons in Movielist"
-#~ msgstr "Afficher l'icône du statut dans la liste des films"
-
-#~ msgid "Show tag menu"
-#~ msgstr "Afficher menu étiquette"
-
-#~ msgid "Shutdown in "
-#~ msgstr "Éteindre dans "
-
-#~ msgid "Single transponder"
-#~ msgstr "Transpondeur unique"
-
-#~ msgid "Skin"
-#~ msgstr "Thème"
-
-#~ msgid "SoftCam / CI"
-#~ msgstr "Lecteur de cartes"
-
-#~ msgid "Softcam type"
-#~ msgstr "Type softcam"
-
-#~ msgid "StandbyLED"
-#~ msgstr "LED de veille"
-
-#~ msgid ""
-#~ "The current beta image might not be stable.\n"
-#~ "For more information see %s."
-#~ msgstr ""
-#~ "L'image bêta actuelle pourrait ne pas être stable.\n"
-#~ "Pour plus d'informations, voir %s."
-
-#~ msgid "The status of the current beta image could not be checked because %s can not be reached."
-#~ msgstr "Le statut de l'image bêta actuelle n'a pas pu être vérifié, car %s ne peut pas être atteint."
-
-#~ msgid "USB stick"
-#~ msgstr "Clé USB"
-
-#~ msgid "Uncommitted DiSEqC command"
-#~ msgstr "Commande DiSEqC non validée"
-
-#~ msgid "Video fine tuning"
-#~ msgstr "Réglage Vidéo avancé"
-
-#~ msgid "When enabled, the original line breaks will be removed from the teletext subtitles."
-#~ msgstr "Lorsqu'elle est activée, les sauts de lignes originales seront retirés des sous-titres télétexte."
-
-#~ msgid "Would you like to install a softcam?"
-#~ msgstr "Voulez-vous installer un softcam ?"
-
-#~ msgid "Your receiver will shutdown due to inactivity."
-#~ msgstr "Votre récepteur va s'éteindre faute d'activité."
-
-#~ msgid "Your receiver will shutdown due to the sleeptimer."
-#~ msgstr "Votre récepteur va s'éteindre à cause du timer d'inactivité (sleeptimer)."
-
-#~ msgid "Zap back to service before satfinder?"
-#~ msgstr "Revenir sur le service avant le pointage?"
-
-#~ msgid "complex"
-#~ msgstr "Complexe"
-
-#~ msgid "delete..."
-#~ msgstr "Efface..."
-
-#~ msgid "fine-tune your display"
-#~ msgstr "Réglage avancé de votre affichage"
-
-#~ msgid "on end of movie"
-#~ msgstr "À la fin du film"
-
-#~ msgid "select movie"
-#~ msgstr "Choisir un film"
-
-#~ msgid "select the movie path"
-#~ msgstr "Sélectionner le chemin des films"
-
-#~ msgid "service PIN"
-#~ msgstr "Pin service"
-
-#~ msgid "setup PIN"
-#~ msgstr "PIN paramètres"
-
-#~ msgid "show extended description"
-#~ msgstr "Afficher la description étendue"
-
-#~ msgid "show tag menu"
-#~ msgstr "Afficher le menu des marqueurs"
-
-#~ msgid "special characters"
-#~ msgstr "Caractères spéciaux"
-
-#~ msgid "whitelist"
-#~ msgstr "Liste autorisée (whitelist)"
