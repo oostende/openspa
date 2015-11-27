@@ -5,9 +5,10 @@ from Tools.Alternatives import GetWithAlternative
 from Tools.Directories import pathExists, SCOPE_SKIN_IMAGE, SCOPE_CURRENT_SKIN, resolveFilename
 from Components.Harddisk import harddiskmanager
 from ServiceReference import ServiceReference
-from Components.config import config, ConfigText
+from Components.config import config, ConfigText, ConfigYesNo
 
 config.misc.picon_path = ConfigText(default = "/usr/share/enigma2/picon/")
+config.misc.picon_search_hdd = ConfigYesNo (default = False)
 
 searchPaths = []
 lastPiconPath = None
@@ -19,7 +20,9 @@ def initPiconPaths():
 	for mp in ('/usr/share/enigma2/', '/', path):
 		onMountpointAdded(mp)
 	for part in harddiskmanager.getMountedPartitions():
-		onMountpointAdded(part.mountpoint)
+		if not part.mountpoint.startswith("/media/hdd") or config.misc.picon_search_hdd.value == True: 
+			open("/tmp/prueba","a").write(str(part.mountpoint)+"\n")
+			onMountpointAdded(part.mountpoint)
 
 def onMountpointAdded(mountpoint):
 	global searchPaths
