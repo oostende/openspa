@@ -21,7 +21,6 @@ def initPiconPaths():
 		onMountpointAdded(mp)
 	for part in harddiskmanager.getMountedPartitions():
 		if not part.mountpoint.startswith("/media/hdd") or config.misc.picon_search_hdd.value == True: 
-			open("/tmp/prueba","a").write(str(part.mountpoint)+"\n")
 			onMountpointAdded(part.mountpoint)
 
 def onMountpointAdded(mountpoint):
