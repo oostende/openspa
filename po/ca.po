@@ -57,6 +57,13 @@ msgstr ""
 
 msgid ""
 "\n"
+"<This tuner is configured automatically>"
+msgstr ""
+"\n"
+"<Aquest sintonitz. es configura automàticament>"
+
+msgid ""
+"\n"
 "Advanced options and settings."
 msgstr ""
 "\n"
@@ -2006,6 +2013,15 @@ msgstr "El canal no està a la llista"
 msgid "Channel selection"
 msgstr "Selecció de canals"
 
+msgid "Channel zap delay another button"
+msgstr "Retard canal - 2"
+
+msgid "Channel zap delay first button"
+msgstr "Retard canal - 1"
+
+msgid "Channel zap delay mode"
+msgstr "Retard del zàping"
+
 msgid "Channel:"
 msgstr "Canal:"
 
@@ -3309,6 +3325,12 @@ msgstr "Deshabilitar"
 msgid "Disable Animations"
 msgstr "Deshabilitar animacions"
 
+msgid "Disable FastZapping"
+msgstr "Deshabilitar FastZapping"
+
+msgid "Disable MiniTV"
+msgstr "Deshabilitar MiniTV"
+
 msgid "Disable Picture in Picture"
 msgstr "Deshabilitar PiP"
 
@@ -3727,6 +3749,9 @@ msgstr "Habilitar autenticació per streaming"
 msgid "Enable EIT EPG"
 msgstr "Activar EPG EIT"
 
+msgid "Enable FastZapping"
+msgstr "Habilitar FastZapping"
+
 msgid "Enable Filtering"
 msgstr "Habilitar el filtrat"
 
@@ -3744,6 +3769,9 @@ msgstr "Activar EPG MHW"
 
 msgid "Enable Messages"
 msgstr "Habilitar missatges"
+
+msgid "Enable MiniTV"
+msgstr "Habilitar MiniTV"
 
 msgid "Enable Netmed EPG"
 msgstr "Activar EPG Netmed"
@@ -4579,6 +4607,9 @@ msgstr "HDMI"
 msgid "HDMI CEC setup"
 msgstr "HDMI CeC"
 
+msgid "HDMI Colorspace"
+msgstr "Espai de color HDMI"
+
 msgid "HDMI-CEC setup"
 msgstr "Configuració d'HDMI-CEC"
 
@@ -4679,6 +4710,9 @@ msgstr "Amagar canals sota control parental"
 
 msgid "Hide player"
 msgstr "Amagar reproductor"
+
+msgid "Hide this Dial"
+msgstr "Amagar aquest dial"
 
 msgid "Hide zap errors"
 msgstr "Amagar errors de zàping"
@@ -6391,6 +6425,9 @@ msgstr ""
 msgid "Nowhere"
 msgstr "Enlloc"
 
+msgid "Number of channel number digits"
+msgstr "Nombre de dígits del canal"
+
 msgid "OFW Launcher"
 msgstr "Iniciar FRW oficial"
 
@@ -6855,7 +6892,7 @@ msgid "Please choose an HbbTV application."
 msgstr "Seleccioneu una aplicació HbbTV."
 
 msgid "Please choose an extension..."
-msgstr "Trieu una extensió..."
+msgstr "Trieu una opció..."
 
 msgid "Please choose one."
 msgstr "Seleccioneu una opció:"
@@ -7023,14 +7060,32 @@ msgstr "Configureu el sintonitzador C"
 msgid "Please set up tuner D"
 msgstr "Configureu el sintonitzador D"
 
+msgid "Please set up tuner E"
+msgstr "Configureu el sintonitzador E"
+
+msgid "Please set up tuner F"
+msgstr "Configureu el sintonitzador F"
+
+msgid "Please set up tuner G"
+msgstr "Configureu el sintonitzador G"
+
+msgid "Please set up tuner H"
+msgstr "Configureu el sintonitzador H"
+
+msgid "Please set up tuner I"
+msgstr "Configureu el sintonitzador I"
+
+msgid "Please set up tuner J"
+msgstr "Configureu el sintonitzador J"
+
 msgid ""
 "Please setup your user interface by adjusting the values till the edges of "
 "the red box are touching the edges of your TV.\n"
 "When you are ready press OK to continue."
 msgstr ""
-"Ajusteu l'OSD de tal manera que les cantonades de la pantalla de prova "
-"coincideixin amb les cantonades del vostre TV.\n"
-"Quan la posició sigui correcta, premeu OK per continuar."
+"Ajusteu l'OSD de tal manera que els extrems de la pantalla de prova "
+"coincideixin amb els extrems del vostre TV.\n"
+"Quan la mida i posició siguin correctes, premeu OK per continuar."
 
 msgid ""
 "Please use direction keys to move the PiP window.\n"
@@ -7455,7 +7510,10 @@ msgid "Quick and safe remove for your mounted devices "
 msgstr "Desmuntat ràpid i segur dels disp. muntats "
 
 msgid "Quick zap"
-msgstr "Zaping ràpid"
+msgstr "Zàping ràpid"
+
+msgid "REC"
+msgstr "GRAV."
 
 msgid "RF output"
 msgstr "Sortida d'antena"
@@ -8230,6 +8288,9 @@ msgstr "Cerca recursos compartits"
 msgid "Search for network shares..."
 msgstr "Cerca recursos compartits. "
 
+msgid "Search picons in /media/hdd"
+msgstr "Cercar picons al disc dur"
+
 msgid "Search strictness"
 msgstr "Recerca estricta"
 
@@ -8501,6 +8562,9 @@ msgstr "Info de servidor (Versió oscam: %s)"
 msgid "Server share"
 msgstr "Carpeta compart. del servidor"
 
+msgid "Server:"
+msgstr "Servidor:"
+
 msgid "Servers"
 msgstr "Servidors"
 
@@ -8666,6 +8730,9 @@ msgstr "Configurar rutes"
 
 msgid "Setup"
 msgstr "Configuració"
+
+msgid "Setup delay mode to zap to channels."
+msgstr "Configura el retard que s'aplicarà al zàping"
 
 msgid "Setup for the Audio Sync Plugin"
 msgstr "Configuració del plugin Audio Sync"
@@ -9999,6 +10066,13 @@ msgstr ""
 "continguts del disc."
 
 msgid ""
+"This allows you to set the number of digits to 5, if you have more than 9999 "
+"channels."
+msgstr ""
+"Configura el nombre de dígits del canal a 5 per quan es disposa de més de "
+"9999 canals."
+
+msgid ""
 "This info is for developers only.\n"
 "For a normal users it is not important.\n"
 "Don't panic, please, when here will be displayed any suspicious informations!"
@@ -10006,6 +10080,9 @@ msgstr ""
 "Aquesta info es només per desenvolupadors.\n"
 "No és rellevant per als usuaris normals.\n"
 "Si no sóu desenvolupador, no feu cas de la informació que es mostri aqui!"
+
+msgid "This option allows you can config the Colorspace from Auto to RGB"
+msgstr "Permet configurar l'espai de color d'Auto a RGB"
 
 msgid "This option allows you choose how to display elapsed time as + or -"
 msgstr "Permet triar si el temps transcorregut es mostrarà com + o -"
@@ -10587,6 +10664,9 @@ msgstr "Sense encriptar"
 msgid "UnhandledKey"
 msgstr "Tecla no gestionada"
 
+msgid "Unhide All Dials"
+msgstr "Mostrar els dials amagats"
+
 msgid "Unhide parental control services"
 msgstr "Tornar a mostrar els canals sota control parental"
 
@@ -10833,6 +10913,15 @@ msgstr "Usuari :"
 
 msgid "User defined"
 msgstr "Definit per l'usuari"
+
+msgid "User defined delay when you press another button to zap to the channel."
+msgstr ""
+"Retard (configurable) quan es prem una altra tecla per al canvi de canal"
+
+msgid ""
+"User defined delay when you press the first button to zap to the channel."
+msgstr ""
+"Retard (configurable) quan es prem la primera tecla per al canvi de canal"
 
 msgid "User defined transponder"
 msgstr "Transponedor definit per l'usuari"
@@ -11266,9 +11355,6 @@ msgstr "Oest"
 
 msgid "West limit set"
 msgstr "Límit oest configurat"
-
-msgid "Wetek CPU Frequency Setup"
-msgstr "Configuració de la Freq. de WeTek Play"
 
 msgid "What Day of month ?"
 msgstr "Quin dia del mes?"
@@ -13590,6 +13676,11 @@ msgstr "Llista blanca"
 msgid "width"
 msgstr "ample"
 
+msgid "will take about 1-4 minutes for this system\n"
+msgstr ""
+"trigarà entre 1 i 4 minuts en acabar\n"
+"\n"
+
 msgid "will take about 3-12 minutes for this system\n"
 msgstr "trigarà entre 3 i 12 minuts en acabar\n"
 
@@ -13634,72 +13725,3 @@ msgstr "Canviar abans d'Stream"
 
 msgid "zapped"
 msgstr "Canviat"
-
-msgid "Channel zap delay mode"
-msgstr "Retard del zàping"
-
-msgid "Setup delay mode to zap to channels."
-msgstr "Configura el retard que s'aplicarà al zàping"
-
-msgid "Channel zap delay first button"
-msgstr "Retard del canal - primera tecla"
-
-msgid "User defined delay when you press the first button to zap to the channel."
-msgstr "Retard (configurable) quan es prem la primera tecla per al canvi de canal"
-
-msgid "Channel zap delay another button"
-msgstr "Retard del canal - una altra tecla"
-
-msgid "User defined delay when you press another button to zap to the channel."
-msgstr "Retard (configurable) quan es prem una altra tecla per al canvi de canal"
-
-msgid "Number of channel number digits"
-msgstr "Nombre de dígits del canal"
-
-msgid "This allows you to set the number of digits to 5, if you have more than 9999 channels."
-msgstr "Configura el nombre de dígits del canal a 5 per quan es disposa de més de 9999 canals."
-
-msgid "REC"
-msgstr "GRAV."
-
-msgid "Please set up tuner E"
-msgstr "Configureu el sintonitzador E"
-
-msgid "Please set up tuner F"
-msgstr "Configureu el sintonitzador F"
-
-msgid "Please set up tuner G"
-msgstr "Configureu el sintonitzador G"
-
-msgid "Please set up tuner H"
-msgstr "Configureu el sintonitzador H"
-
-msgid "Please set up tuner I"
-msgstr "Configureu el sintonitzador I"
-
-msgid "Please set up tuner J"
-msgstr "Configureu el sintonitzador J"
-
-msgid "Disable MiniTV"
-msgstr "Deshabilitar MiniTV"
-
-msgid "Enable MiniTV"
-msgstr "Habilitar MiniTV"
-
-msgid "Disable FastZapping"
-msgstr "Deshabilitar FastZapping"
-
-msgid "Enable FastZapping"
-msgstr "Habilitar FastZapping"
-
-msgid "will take about 1-4 minutes for this system\n"
-msgstr "trigarà entre 1 i 4 minuts en acabar\n\n"
-
-msgid "\n<This tuner is configured automatically>"
-msgstr "\n<Aquest sintonitz. es configura automàticament>"
-
-msgid "HDMI Colorspace"
-msgstr "Espai de color HDMI"
-
-msgid "This option allows you can config the Colorspace from Auto to RGB"
-msgstr "Permet configurar l'espai de color d'Auto a RGB"

@@ -57,6 +57,13 @@ msgstr ""
 
 msgid ""
 "\n"
+"<This tuner is configured automatically>"
+msgstr ""
+"\n"
+"<Este sintoniz. se configura automáticamente>"
+
+msgid ""
+"\n"
 "Advanced options and settings."
 msgstr ""
 "\n"
@@ -1946,7 +1953,7 @@ msgid "Change active delay"
 msgstr "Cambiar retardo activo"
 
 msgid "Change bouquets in quickzap"
-msgstr "Cambiar de lista en zapping rápido"
+msgstr "Cambiar de lista en záping rápido"
 
 msgid "Change hostname"
 msgstr "Cambiar nombre de host"
@@ -2001,6 +2008,15 @@ msgstr "El canal no está en la lista"
 
 msgid "Channel selection"
 msgstr "Selección de canales"
+
+msgid "Channel zap delay another button"
+msgstr "Retardo canal, 2ª"
+
+msgid "Channel zap delay first button"
+msgstr "Retardo canal, 1ª"
+
+msgid "Channel zap delay mode"
+msgstr "Retardo del zapping"
 
 msgid "Channel:"
 msgstr "Canal:"
@@ -3314,6 +3330,12 @@ msgstr "Deshabilitar"
 msgid "Disable Animations"
 msgstr "Deshabilitar animaciones"
 
+msgid "Disable FastZapping"
+msgstr "Deshabilitar FastZapping"
+
+msgid "Disable MiniTV"
+msgstr "Deshabilitar MiniTV"
+
 msgid "Disable Picture in Picture"
 msgstr "Deshabilitar PiP"
 
@@ -3734,6 +3756,9 @@ msgstr "Habilitar autenticación para streaming"
 msgid "Enable EIT EPG"
 msgstr "Activar EPG EIT"
 
+msgid "Enable FastZapping"
+msgstr "Habilitar FastZapping"
+
 msgid "Enable Filtering"
 msgstr "Habilitar el filtrado"
 
@@ -3751,6 +3776,9 @@ msgstr "Activar EPG MHW"
 
 msgid "Enable Messages"
 msgstr "Habilitar mensajes"
+
+msgid "Enable MiniTV"
+msgstr "Habilitar MiniTV"
 
 msgid "Enable Netmed EPG"
 msgstr "Activar EPG Netmed"
@@ -4587,6 +4615,9 @@ msgstr "HDMI"
 msgid "HDMI CEC setup"
 msgstr "HDMI CEC"
 
+msgid "HDMI Colorspace"
+msgstr "Espacio de color HDMI"
+
 msgid "HDMI-CEC setup"
 msgstr "Configuración de HDMI-CEC"
 
@@ -4687,6 +4718,9 @@ msgstr "Ocultar canales bajo control parental"
 
 msgid "Hide player"
 msgstr "Ocultar reproductor"
+
+msgid "Hide this Dial"
+msgstr "Ocultar este dial"
 
 msgid "Hide zap errors"
 msgstr "Ocultar errores de zapeo"
@@ -6396,6 +6430,9 @@ msgstr ""
 msgid "Nowhere"
 msgstr "En ninguna parte"
 
+msgid "Number of channel number digits"
+msgstr "Número de dígitos del canal"
+
 msgid "OFW Launcher"
 msgstr "Iniciar FRW oficial"
 
@@ -6861,7 +6898,7 @@ msgid "Please choose an HbbTV application."
 msgstr "Seleccione una aplicación HbbTV."
 
 msgid "Please choose an extension..."
-msgstr "Elija una extensión..."
+msgstr "Elija una opción..."
 
 msgid "Please choose one."
 msgstr "Seleccione una opción:"
@@ -7028,14 +7065,32 @@ msgstr "Configure el sintonizador C"
 msgid "Please set up tuner D"
 msgstr "Configure el sintonizador D"
 
+msgid "Please set up tuner E"
+msgstr "Configure el sintonizador E"
+
+msgid "Please set up tuner F"
+msgstr "Configure el sintonizador F"
+
+msgid "Please set up tuner G"
+msgstr "Configure el sintonizador G"
+
+msgid "Please set up tuner H"
+msgstr "Configure el sintonizador H"
+
+msgid "Please set up tuner I"
+msgstr "Configure el sintonizador I"
+
+msgid "Please set up tuner J"
+msgstr "Configure el sintonizador J"
+
 msgid ""
 "Please setup your user interface by adjusting the values till the edges of "
 "the red box are touching the edges of your TV.\n"
 "When you are ready press OK to continue."
 msgstr ""
-"Ajuste el OSD de modo que las esquinas de la pantalla de prueba coincidan "
-"con las esquinas de su TV.\n"
-"Cuando la posición sea correcta, pulse OK para continuar."
+"Ajuste el OSD de modo que los bordes de la pantalla de prueba coincidan con "
+"los bordes de su TV.\n"
+"Cuando el tamaño y posición sean correctos, pulse OK para continuar."
 
 msgid ""
 "Please use direction keys to move the PiP window.\n"
@@ -7460,7 +7515,10 @@ msgid "Quick and safe remove for your mounted devices "
 msgstr "Desmontado rápido y seguro de los disp. montados "
 
 msgid "Quick zap"
-msgstr "Zaping rápido"
+msgstr "Zapping rápido"
+
+msgid "REC"
+msgstr "GRAB"
 
 msgid "RF output"
 msgstr "Salida de antena"
@@ -8237,6 +8295,9 @@ msgstr "Busca recursos compartidos"
 msgid "Search for network shares..."
 msgstr "Busca recursos compartidos. "
 
+msgid "Search picons in /media/hdd"
+msgstr "Buscar picons en el disco duro"
+
 msgid "Search strictness"
 msgstr "Búsqueda estricta"
 
@@ -8262,7 +8323,7 @@ msgid "Searching west ..."
 msgstr "Buscando al oeste..."
 
 msgid "Searching your network. Please wait..."
-msgstr "Buscando en su red privada. Espere."
+msgstr "Buscando en su red interna. Espere."
 
 msgid "Second cable of motorized LNB"
 msgstr "Segundo hilo de un LNB motorizado"
@@ -8509,6 +8570,9 @@ msgstr "Info de servidor (Versión oscam: %s)"
 msgid "Server share"
 msgstr "Carpeta compart. del servidor"
 
+msgid "Server:"
+msgstr "Servidor:"
+
 msgid "Servers"
 msgstr "Servidores"
 
@@ -8675,6 +8739,9 @@ msgstr "Configurar rutas"
 
 msgid "Setup"
 msgstr "Configuración"
+
+msgid "Setup delay mode to zap to channels."
+msgstr "Configura el retardo que se aplicará al zapping"
 
 msgid "Setup for the Audio Sync Plugin"
 msgstr "Configuración del plugin Audio Sync"
@@ -9281,7 +9348,7 @@ msgid "Specify timeframe to ignore inactivity sleeptimer"
 msgstr "Intervalo donde no actuará el tempor. de reposo"
 
 msgid "Specify timeframe to ignore the shutdown in standby"
-msgstr "Intervalo para ignorar 'apagar en reposo'"
+msgstr "Intérvalo para ignorar 'apagar en reposo'"
 
 msgid "Split preview mode"
 msgstr "Dividir modo previsualización"
@@ -9750,9 +9817,6 @@ msgstr "El fichero TS es demasiado grande para el nivel 1 ISO9660."
 msgid "TSID"
 msgstr "TSID"
 
-msgid "TUNING"
-msgstr "SINTONIZANDO"
-
 msgid "TV"
 msgstr "TV"
 
@@ -10017,6 +10081,13 @@ msgstr ""
 "contenidos del disco."
 
 msgid ""
+"This allows you to set the number of digits to 5, if you have more than 9999 "
+"channels."
+msgstr ""
+"Configura el número de dígitos del canal a 5 para cuando se dispone de más "
+"de 9999 canales."
+
+msgid ""
 "This info is for developers only.\n"
 "For a normal users it is not important.\n"
 "Don't panic, please, when here will be displayed any suspicious informations!"
@@ -10025,6 +10096,9 @@ msgstr ""
 "No es relevante para los usuarios normales.\n"
 "Si Vd. no es desarrollador no haga caso de la información que aqui se "
 "muestre!"
+
+msgid "This option allows you can config the Colorspace from Auto to RGB"
+msgstr "Permite configurar el espacio de color de Auto a RGB"
 
 msgid "This option allows you choose how to display elapsed time as + or -"
 msgstr "Permite elegir si se mostrará el tiempo transcurrido como + o -"
@@ -10606,6 +10680,9 @@ msgstr "Sin encriptar"
 msgid "UnhandledKey"
 msgstr "Tecla no gestionada"
 
+msgid "Unhide All Dials"
+msgstr "Mostrar los diales ocultos"
+
 msgid "Unhide parental control services"
 msgstr "Volver a mostrar los canales bajo control parental"
 
@@ -10852,6 +10929,16 @@ msgstr "Usuario :"
 
 msgid "User defined"
 msgstr "Definido por el usuario"
+
+msgid "User defined delay when you press another button to zap to the channel."
+msgstr ""
+"Retardo (configurable) cuando se pulsa otra tecla para el cambio de canal"
+
+msgid ""
+"User defined delay when you press the first button to zap to the channel."
+msgstr ""
+"Retardo (configurable) cuando se pulsa la primera tecla para el cambio de "
+"canal"
 
 msgid "User defined transponder"
 msgstr "Transpondedor definido por el usuario"
@@ -11286,9 +11373,6 @@ msgstr "Oeste"
 
 msgid "West limit set"
 msgstr "Límite oeste configurado"
-
-msgid "Wetek CPU Frequency Setup"
-msgstr "Configuración de la Freq. de WeTek Play"
 
 msgid "What Day of month ?"
 msgstr "Que dia del mes?"
@@ -12133,7 +12217,7 @@ msgid "Zap focus to main screen"
 msgstr "Zapear en la pantalla principal"
 
 msgid "Zap mode"
-msgstr "Pantalla de zaping"
+msgstr "Pantalla de zapping"
 
 msgid "Zap to"
 msgstr "Saltar a"
@@ -13619,6 +13703,9 @@ msgstr "Lista blanca"
 msgid "width"
 msgstr "ancho"
 
+msgid "will take about 1-4 minutes for this system\n"
+msgstr "tardará entre 1 y 4 minutos en finalizar\n"
+
 msgid "will take about 3-12 minutes for this system\n"
 msgstr "tardará entre 3 y 12 minutos en finalizar\n"
 
@@ -13668,72 +13755,3 @@ msgstr "Cambiar antes de Stream"
 
 msgid "zapped"
 msgstr "Cambiado"
-
-msgid "Channel zap delay mode"
-msgstr "Retardo del zapping"
-
-msgid "Setup delay mode to zap to channels."
-msgstr "Configura el retardo que se aplicará al zapping"
-
-msgid "Channel zap delay first button"
-msgstr "Retardo canal - 1"
-
-msgid "User defined delay when you press the first button to zap to the channel."
-msgstr "Retardo (configurable) cuando se pulsa la primera tecla para el cambio de canal"
-
-msgid "Channel zap delay another button"
-msgstr "Retardo canal - 2"
-
-msgid "User defined delay when you press another button to zap to the channel."
-msgstr "Retardo (configurable) cuando se pulsa otra tecla para el cambio de canal"
-
-msgid "Number of channel number digits"
-msgstr "Número de dígitos del canal"
-
-msgid "This allows you to set the number of digits to 5, if you have more than 9999 channels."
-msgstr "Configura el número de dígitos del canal a 5 para cuando se dispone de más de 9999 canales."
-
-msgid "REC"
-msgstr "GRAB"
-
-msgid "Please set up tuner E"
-msgstr "Configure el sintonizador E"
-
-msgid "Please set up tuner F"
-msgstr "Configure el sintonizador F"
-
-msgid "Please set up tuner G"
-msgstr "Configure el sintonizador G"
-
-msgid "Please set up tuner H"
-msgstr "Configure el sintonizador H"
-
-msgid "Please set up tuner I"
-msgstr "Configure el sintonizador I"
-
-msgid "Please set up tuner J"
-msgstr "Configure el sintonizador J"
-
-msgid "Disable MiniTV"
-msgstr "Deshabilitar MiniTV"
-
-msgid "Enable MiniTV"
-msgstr "Habilitar MiniTV"
-
-msgid "Disable FastZapping"
-msgstr "Deshabilitar FastZapping"
-
-msgid "Enable FastZapping"
-msgstr "Habilitar FastZapping"
-
-msgid "will take about 1-4 minutes for this system\n"
-msgstr "tardará entre 1 y 4 min. en este sitema\n"
-
-msgid "\n<This tuner is configured automatically>"
-msgstr "\n<Este sintoniz. se configura automáticamente>"
-
-msgid "HDMI Colorspace"
-msgstr "Espacio de color HDMI"
-
-msgid "This option allows you can config the Colorspace from Auto to RGB"
-msgstr "Permite configurar el espacio de color de Auto a RGB"
