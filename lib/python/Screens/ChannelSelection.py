@@ -237,6 +237,8 @@ class ChannelContextMenu(Screen):
 				if not csel.entry_marked and not inBouquetRootList and current_root and not (current_root.flags & eServiceReference.isGroup):
 					if current.type != -1:
 						menu.append(ChoiceEntryComponent(text=(_("add marker"), self.showMarkerInputBox)))
+						menu.append(ChoiceEntryComponent(text=(_("Hide this Dial"), self.HideDial)))
+						menu.append(ChoiceEntryComponent(text=(_("Unhide All Dials"), self.removeHideDials)))
 					if not csel.movemode:
 						if haveBouquets:
 							append_when_current_valid(current, menu, (_("enable bouquet edit"), self.bouquetMarkStart), level=0)
@@ -506,6 +508,14 @@ class ChannelContextMenu(Screen):
 	def markerInputCallback(self, marker):
 		if marker is not None:
 			self.csel.addMarker(marker)
+		self.close()
+
+	def HideDial(self):
+		self.csel.HideDial()
+		self.close()
+
+	def removeHideDials(self):
+		self.csel.removeHideDials()
 		self.close()
 
 	def addCurrentServiceToBouquet(self, dest, closeBouquetSelection=True):
@@ -950,6 +960,41 @@ class ChannelSelectionEdit:
 				mutableList.flushChanges()
 				break
 			cnt+=1
+
+	def HideDial(self):
+		current = self.servicelist.getCurrent()
+		mutableList = self.getMutableList()
+		cnt = 0
+		while mutableList:
+			str = '1:832:%d:0:0:0:0:0:0:0::----Hide Dial----'% cnt
+			ref = eServiceReference(str)
+			if current and current.valid():
+				if not mutableList.addService(ref, current):
+					self.servicelist.addService(ref, True)
+					mutableList.flushChanges()
+					break
+			elif not mutableList.addService(ref):
+				self.servicelist.addService(ref, True)
+				mutableList.flushChanges()
+				break
+			cnt+=1
+		self.servicelist.resetRoot()
+
+	def removeHideDials(self):
+		currentBouquet = self.servicelist and self.servicelist.getRoot()
+		serviceHandler = eServiceCenter.getInstance()
+		servicelist = serviceHandler.list(currentBouquet)
+		mutableList = self.getMutableList()
+		if servicelist is not None:
+			while True:
+				service = servicelist.getNext()
+				if not service.valid():
+					break
+				info = service.toString()
+				if info.startswith("1:832:") and "----Hide Dial----" in info:
+					mutableList.removeService(service, False)
+			mutableList.flushChanges()
+			self.servicelist.resetRoot()
 
 	def addAlternativeServices(self):
 		cur_service = ServiceReference(self.getCurrentSelection())
