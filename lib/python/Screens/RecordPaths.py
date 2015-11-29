@@ -2,13 +2,14 @@ from Screens.Screen import Screen
 from Screens.LocationBox import MovieLocationBox, TimeshiftLocationBox, LocationBox
 from Screens.MessageBox import MessageBox
 from Components.Label import Label
-from Components.config import config, ConfigSelection, getConfigListEntry, configfile, ConfigText
+from Components.config import config, ConfigSelection, getConfigListEntry, configfile, ConfigText, ConfigYesNo
 from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import ActionMap
 from Tools.Directories import fileExists
 from Components.UsageConfig import preferredPath
 
 config.misc.picon_path = ConfigText(default = "/usr/share/enigma2/picon/")
+config.misc.picon_search_hdd = ConfigYesNo (default = False)
 
 class RecordPathsSettings(Screen,ConfigListScreen):
 	skin = """
@@ -135,6 +136,8 @@ class RecordPathsSettings(Screen,ConfigListScreen):
 		self.list.append(self.timeshift_entry)
 		self.picon_entry = getConfigListEntry(_("Picon location"), self.picon_dirname)
 		self.list.append(self.picon_entry)
+		self.piconHDD_entry = getConfigListEntry(_("Search picons in /media/hdd"), config.misc.picon_search_hdd)
+		self.list.append(self.piconHDD_entry)
 		self.epgdir_entry = getConfigListEntry(_("EPG location"), self.epg_dirname)
 		self.list.append(self.epgdir_entry)
 		self.epgfile_entry = getConfigListEntry(_("EPG file name"), self.epg_filename)
@@ -254,7 +257,7 @@ class RecordPathsSettings(Screen,ConfigListScreen):
 	def save(self):
 		currentry = self["config"].getCurrent()
 		save = True
-		if currentry != self.epgfile_entry and currentry != self.picon_entry:
+		if currentry != self.epgfile_entry and currentry != self.picon_entry and currentry != self.piconHDD_entry:
 			save = self.checkReadWriteDir(currentry[1])
 		if save:
 			config.usage.default_path.value = self.default_dirname.value
@@ -269,6 +272,7 @@ class RecordPathsSettings(Screen,ConfigListScreen):
 			config.usage.instantrec_path.save()
 			config.usage.timeshift_path.save()
 			config.misc.epgcache_filename.save()
+			config.misc.picon_search_hdd.save()
 			from Components.Renderer import Picon
 			Picon.setPiconPath()
 			self.close()
