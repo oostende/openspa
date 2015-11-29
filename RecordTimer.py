@@ -134,7 +134,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 			RecordTimerEntry.staticGotRecordEvent(None, iRecordableService.evEnd)
 #################################################################
 
-	def __init__(self, serviceref, begin, end, name, description, eit, disabled = False, justplay = False, afterEvent = AFTEREVENT.AUTO, checkOldTimers = False, dirname = None, tags = None, descramble = True, record_ecm = False, always_zap = False, zap_wakeup = "always", rename_repeat = True):
+	def __init__(self, serviceref, begin, end, name, description, eit, disabled = False, justplay = False, afterEvent = AFTEREVENT.AUTO, checkOldTimers = False, dirname = None, tags = None, descramble = True, record_ecm = False, always_zap = False, zap_wakeup = "always", rename_repeat = True, conflict_detection = True, isAutoTimer = False):
 		timer.TimerEntry.__init__(self, int(begin), int(end))
 
 		if checkOldTimers == True:
@@ -182,6 +182,8 @@ class RecordTimerEntry(timer.TimerEntry, object):
 			self.descramble = descramble
 			self.record_ecm = record_ecm
 
+		self.isAutoTimer = isAutoTimer
+		self.conflict_detection = conflict_detection
 		self.rename_repeat = rename_repeat
 		self.setAdvancedPriorityFrontend = None
 		if SystemInfo["DVB-T_priority_tuner_available"] or SystemInfo["DVB-C_priority_tuner_available"] or SystemInfo["DVB-S_priority_tuner_available"]:
@@ -209,7 +211,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 		self.resetState()
 
 	def __repr__(self):
-		return "RecordTimerEntry(name=%s, begin=%s, serviceref=%s, justplay=%s)" % (self.name, ctime(self.begin), self.service_ref, self.justplay)
+		return "RecordTimerEntry(name=%s, begin=%s, serviceref=%s, justplay=%s, isAutoTimer=%s)" % (self.name, ctime(self.begin), self.service_ref, self.justplay, self.isAutoTimer)
 
 	def log(self, code, msg):
 		self.log_entries.append((int(time()), code, msg))
@@ -662,6 +664,7 @@ def createTimer(xml):
 	justplay = long(xml.get("justplay") or "0")
 	always_zap = long(xml.get("always_zap") or "0")
 	zap_wakeup = str(xml.get("zap_wakeup") or "always")
+	conflict_detection = long(xml.get("conflict_detection") or "1")
 	afterevent = str(xml.get("afterevent") or "nothing")
 	afterevent = {
 		"nothing": AFTEREVENT.NONE,
@@ -686,10 +689,11 @@ def createTimer(xml):
 		tags = None
 	descramble = int(xml.get("descramble") or "1")
 	record_ecm = int(xml.get("record_ecm") or "0")
+	isAutoTimer = int(xml.get("isAutoTimer") or "0")
 
 	name = xml.get("name").encode("utf-8")
 	#filename = xml.get("filename").encode("utf-8")
-	entry = RecordTimerEntry(serviceref, begin, end, name, description, eit, disabled, justplay, afterevent, dirname = location, tags = tags, descramble = descramble, record_ecm = record_ecm, always_zap = always_zap, zap_wakeup = zap_wakeup, rename_repeat = rename_repeat)
+	entry = RecordTimerEntry(serviceref, begin, end, name, description, eit, disabled, justplay, afterevent, dirname = location, tags = tags, descramble = descramble, record_ecm = record_ecm, always_zap = always_zap, zap_wakeup = zap_wakeup, rename_repeat = rename_repeat, conflict_detection = conflict_detection, isAutoTimer = isAutoTimer)
 	entry.repeated = int(repeated)
 
 	for l in xml.findall("log"):
@@ -857,8 +861,10 @@ class RecordTimer(timer.Timer):
 			list.append(' always_zap="' + str(int(timer.always_zap)) + '"')
 			list.append(' zap_wakeup="' + str(timer.zap_wakeup) + '"')
 			list.append(' rename_repeat="' + str(int(timer.rename_repeat)) + '"')
+			list.append(' conflict_detection="' + str(int(timer.conflict_detection)) + '"')
 			list.append(' descramble="' + str(int(timer.descramble)) + '"')
 			list.append(' record_ecm="' + str(int(timer.record_ecm)) + '"')
+			list.append(' isAutoTimer="' + str(int(timer.isAutoTimer)) + '"')
 			list.append('>\n')
 
 			if config.recording.debug.value:
@@ -1049,11 +1055,16 @@ class RecordTimer(timer.Timer):
 		returnValue = None
 		type = 0
 		time_match = 0
+		isAutoTimer = False
 		bt = None
 		check_offset_time = not config.recording.margin_before.value and not config.recording.margin_after.value
 		end = begin + duration
 		refstr = ':'.join(service.split(':')[:11])
 		for x in self.timer_list:
+			if x.isAutoTimer == 1:
+				isAutoTimer = True
+			else:
+				isAutoTimer = False
 			check = ':'.join(x.service_ref.ref.toString().split(':')[:11]) == refstr
 			if not check:
 				sref = x.service_ref.ref
@@ -1207,7 +1218,7 @@ class RecordTimer(timer.Timer):
 				if time_match:
 					if type in (2,7,12,17,22,27):
 						# When full recording do not look further
-						returnValue = (time_match, [type])
+						returnValue = (time_match, [type], isAutoTimer)
 						break
 					elif returnValue:
 						if type not in returnValue[1]:
