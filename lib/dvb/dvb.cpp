@@ -134,7 +134,7 @@ void eDVBAdapterLinux::scanDevices()
 		// scan frontends
 	int num_fe = 0;
 
-	eDebug("scanning for frontends..");
+	eDebug("[eDVBResourceManager] scanning for frontends..");
 	while (1)
 	{
 		/*
@@ -191,6 +191,8 @@ int eDVBAdapterLinux::getNumDemux()
 
 RESULT eDVBAdapterLinux::getDemux(ePtr<eDVBDemux> &demux, int nr)
 {
+	eDebug("[eDVBAdapterLinux] get demux %d", nr);
+
 	eSmartPtrList<eDVBDemux>::iterator i(m_demux.begin());
 	while (nr && (i != m_demux.end()))
 	{
@@ -357,7 +359,7 @@ eDVBUsbAdapter::eDVBUsbAdapter(int nr)
 		goto error;
 	}
 
-	eDebug("linking adapter%d/frontend0 to vtuner%d", nr, vtunerid);
+	eDebug("[eDVBUsbAdapter] linking adapter%d/frontend0 to vtuner%d", nr, vtunerid);
 
 	switch (fe_info.type)
 	{
@@ -374,7 +376,7 @@ eDVBUsbAdapter::eDVBUsbAdapter(int nr)
 		strcpy(type,"ATSC");
 		break;
 	default:
-		eDebug("Frontend type 0x%x not supported", fe_info.type);
+		eDebug("[eDVBUsbAdapter] Frontend type 0x%x not supported", fe_info.type);
 		goto error;
 	}
 
@@ -677,7 +679,7 @@ PyObject *eDVBResourceManager::setFrontendSlotInformations(ePyObject list)
 		}
 	}
 	if (assigned != m_frontend.size()) {
-		eDebug("eDVBResourceManager::setFrontendSlotInformations .. assigned %zd socket informations, but %d registered frontends!",
+		eDebug("[eDVBResourceManager::setFrontendSlotInformations] .. assigned %zd socket informations, but %d registered frontends!",
 			m_frontend.size(), assigned);
 	}
 	for (eSmartPtrList<eDVBRegisteredFrontend>::iterator i(m_simulate_frontend.begin()); i != m_simulate_frontend.end(); ++i)
@@ -864,7 +866,7 @@ RESULT eDVBResourceManager::allocateFrontendByIndex(ePtr<eDVBAllocatedFrontend> 
 				eDVBRegisteredFrontend *satpos_depends_to_fe = (eDVBRegisteredFrontend *)tmp;
 				if (satpos_depends_to_fe->m_inuse)
 				{
-					eDebug("another satpos depending frontend is in use.. so allocateFrontendByIndex not possible!");
+					eDebug("[eDVBResourceManager] another satpos depending frontend is in use.. so allocateFrontendByIndex not possible!");
 					err = errAllSourcesBusy;
 					goto alloc_fe_by_id_not_possible;
 				}
@@ -877,7 +879,7 @@ RESULT eDVBResourceManager::allocateFrontendByIndex(ePtr<eDVBAllocatedFrontend> 
 					eDVBRegisteredFrontend *next = (eDVBRegisteredFrontend *) tmp;
 					if (next->m_inuse)
 					{
-						eDebug("another linked frontend is in use.. so allocateFrontendByIndex not possible!");
+						eDebug("[eDVBResourceManager] another linked frontend is in use.. so allocateFrontendByIndex not possible!");
 						err = errAllSourcesBusy;
 						goto alloc_fe_by_id_not_possible;
 					}
@@ -889,7 +891,7 @@ RESULT eDVBResourceManager::allocateFrontendByIndex(ePtr<eDVBAllocatedFrontend> 
 					eDVBRegisteredFrontend *prev = (eDVBRegisteredFrontend *) tmp;
 					if (prev->m_inuse)
 					{
-						eDebug("another linked frontend is in use.. so allocateFrontendByIndex not possible!");
+						eDebug("[eDVBResourceManager] another linked frontend is in use.. so allocateFrontendByIndex not possible!");
 						err = errAllSourcesBusy;
 						goto alloc_fe_by_id_not_possible;
 					}
@@ -911,7 +913,7 @@ RESULT eDVBResourceManager::allocateDemux(eDVBRegisteredFrontend *fe, ePtr<eDVBA
 	 * look for a demux on the same adapter as the frontend, or the first adapter for dvr playback
 	 */
 	iDVBAdapter *adapter = fe ? fe->m_adapter : m_adapter.begin();
-	int source = fe ? fe->m_frontend->getDVBID() : -1;
+	int fesource = fe ? fe->m_frontend->getDVBID() : -1;
 
 	eDebug("[eDVBResourceManager] allocate demux cap=%02X", cap);
 	eSmartPtrList<eDVBRegisteredDemux>::iterator i(m_demux.begin());
@@ -949,7 +951,7 @@ RESULT eDVBResourceManager::allocateDemux(eDVBRegisteredFrontend *fe, ePtr<eDVBA
 			else
 			{
 				/* demux is in use, see if we can share it */
-				if (source >= 0 && i->m_demux->getSource() == source)
+				if (fesource >= 0 && i->m_demux->getSource() == fesource)
 				{
 					i->m_demux->getCAAdapterID(a);
 					i->m_demux->getCADemuxID(d);
@@ -1019,15 +1021,18 @@ RESULT eDVBResourceManager::allocateDemux(eDVBRegisteredFrontend *fe, ePtr<eDVBA
 
 	if (unused)
 	{
+		unused->m_demux->getCAAdapterID(a);
+		unused->m_demux->getCADemuxID(d);
+		eDebug("[eDVBResourceManager] allocating demux adapter=%d, demux=%d, source=%d fesource=%d", a, d, unused->m_demux->getSource(), fesource);
 		demux = new eDVBAllocatedDemux(unused);
 		if (fe)
-			demux->get().setSourceFrontend(fe->m_frontend->getDVBID());
+			demux->get().setSourceFrontend(fesource);
 		else
 			demux->get().setSourcePVR(0);
 		return 0;
 	}
 
-	eDebug("demux not found");
+	eDebug("[eDVBResourceManager] no free demux found");
 	return -1;
 }
 
@@ -1063,7 +1068,7 @@ RESULT eDVBResourceManager::allocateChannel(const eDVBChannelID &channelid, eUse
 		eDVBChannel *cache_chan = (eDVBChannel*)&(*m_cached_channel);
 		if(channelid==cache_chan->getChannelID())
 		{
-			eDebug("use cached_channel");
+			eDebug("[eDVBResourceManager] use cached_channel");
 			channel = m_cached_channel;
 			return 0;
 		}
@@ -1072,13 +1077,13 @@ RESULT eDVBResourceManager::allocateChannel(const eDVBChannelID &channelid, eUse
 		m_releaseCachedChannelTimer->stop();
 	}
 
-	eDebugNoSimulate("allocate channel.. %04x:%04x", channelid.transport_stream_id.get(), channelid.original_network_id.get());
+	eDebugNoSimulate("[eDVBResourceManager] allocate channel.. %04x:%04x", channelid.transport_stream_id.get(), channelid.original_network_id.get());
 	for (std::list<active_channel>::iterator i(active_channels.begin()); i != active_channels.end(); ++i)
 	{
-		eDebugNoSimulate("available channel.. %04x:%04x", i->m_channel_id.transport_stream_id.get(), i->m_channel_id.original_network_id.get());
+		eDebugNoSimulate("[eDVBResourceManager] available channel.. %04x:%04x", i->m_channel_id.transport_stream_id.get(), i->m_channel_id.original_network_id.get());
 		if (i->m_channel_id == channelid)
 		{
-			eDebugNoSimulate("found shared channel..");
+			eDebugNoSimulate("[eDVBResourceManager] found shared channel..");
 			channel = i->m_channel;
 			return 0;
 		}
@@ -1088,14 +1093,14 @@ RESULT eDVBResourceManager::allocateChannel(const eDVBChannelID &channelid, eUse
 
 	if (!m_list)
 	{
-		eDebugNoSimulate("no channel list set!");
+		eDebugNoSimulate("[eDVBResourceManager] no channel list set!");
 		return errNoChannelList;
 	}
 
 	ePtr<iDVBFrontendParameters> feparm;
 	if (m_list->getChannelFrontendData(channelid, feparm))
 	{
-		eDebugNoSimulate("channel not found!");
+		eDebugNoSimulate("[eDVBResourceManager] channel not found!");
 		return errChannelNotInList;
 	}
 
@@ -1138,13 +1143,13 @@ void eDVBResourceManager::DVBChannelStateChanged(iDVBChannel *chan)
 		case iDVBChannel::state_release:
 		case iDVBChannel::state_ok:
 		{
-			eDebug("stop release channel timer");
+			eDebug("[eDVBResourceManager] stop release channel timer");
 			m_releaseCachedChannelTimer->stop();
 			break;
 		}
 		case iDVBChannel::state_last_instance:
 		{
-			eDebug("start release channel timer");
+			eDebug("[eDVBResourceManager] start release channel timer");
 			m_releaseCachedChannelTimer->start(3000, true);
 			break;
 		}
@@ -1324,13 +1329,13 @@ int eDVBResourceManager::canAllocateChannel(const eDVBChannelID &channelid, cons
 	}
 
 		/* first, check if a channel is already existing. */
-//	eDebug("allocate channel.. %04x:%04x", channelid.transport_stream_id.get(), channelid.original_network_id.get());
+//	eDebug("[eDVBResourceManager] allocate channel.. %04x:%04x", channelid.transport_stream_id.get(), channelid.original_network_id.get());
 	for (std::list<active_channel>::iterator i(active_channels.begin()); i != active_channels.end(); ++i)
 	{
-//		eDebug("available channel.. %04x:%04x", i->m_channel_id.transport_stream_id.get(), i->m_channel_id.original_network_id.get());
+//		eDebug("[eDVBResourceManager] available channel.. %04x:%04x", i->m_channel_id.transport_stream_id.get(), i->m_channel_id.original_network_id.get());
 		if (i->m_channel_id == channelid)
 		{
-//			eDebug("found shared channel..");
+//			eDebug("[eDVBResourceManager] found shared channel..");
 			return tuner_type_channel_default(m_list, channelid, system);
 		}
 	}
@@ -1341,7 +1346,7 @@ int eDVBResourceManager::canAllocateChannel(const eDVBChannelID &channelid, cons
 	for (std::list<active_channel>::iterator i(active_channels.begin()); i != active_channels.end(); ++i)
 	{
 		eSmartPtrList<eDVBRegisteredFrontend> &frontends = simulate ? m_simulate_frontend : m_frontend;
-//		eDebug("available channel.. %04x:%04x", i->m_channel_id.transport_stream_id.get(), i->m_channel_id.original_network_id.get());
+//		eDebug("[eDVBResourceManager] available channel.. %04x:%04x", i->m_channel_id.transport_stream_id.get(), i->m_channel_id.original_network_id.get());
 		if (i->m_channel_id == ignore)
 		{
 			eDVBChannel *channel = (eDVBChannel*) &(*i->m_channel);
@@ -1402,13 +1407,13 @@ int eDVBResourceManager::canAllocateChannel(const eDVBChannelID &channelid, cons
 
 	if (!m_list)
 	{
-		eDebug("no channel list set!");
+		eDebug("[eDVBResourceManager] no channel list set!");
 		goto error;
 	}
 
 	if (m_list->getChannelFrontendData(channelid, feparm))
 	{
-		eDebug("channel not found!");
+		eDebug("[eDVBResourceManager] channel not found!");
 		goto error;
 	}
 	feparm->getSystem(system);
@@ -1522,24 +1527,24 @@ void eDVBChannel::frontendStateChanged(iDVBFrontend*fe)
 
 	if (state == iDVBFrontend::stateLock)
 	{
-		eDebug("OURSTATE: ok");
+		eDebug("[eDVBChannel] OURSTATE: ok");
 		ourstate = state_ok;
 	} else if (state == iDVBFrontend::stateTuning)
 	{
-		eDebug("OURSTATE: tuning");
+		eDebug("[eDVBChannel] OURSTATE: tuning");
 		ourstate = state_tuning;
 	} else if (state == iDVBFrontend::stateLostLock)
 	{
 			/* on managed channels, we try to retune in order to re-acquire lock. */
 		if (m_current_frontend_parameters)
 		{
-			eDebug("OURSTATE: lost lock, trying to retune");
+			eDebug("[eDVBChannel] OURSTATE: lost lock, trying to retune");
 			ourstate = state_tuning;
 			m_frontend->get().tune(*m_current_frontend_parameters);
 		} else
 			/* on unmanaged channels, we don't do this. the client will do this. */
 		{
-			eDebug("OURSTATE: lost lock, unavailable now.");
+			eDebug("[eDVBChannel] OURSTATE: lost lock, unavailable now.");
 			ourstate = state_unavailable;
 		}
 	} else if (state == iDVBFrontend::stateFailed)
@@ -1548,14 +1553,14 @@ void eDVBChannel::frontendStateChanged(iDVBFrontend*fe)
 			/* on managed channels, we do a retry */
 		if (m_current_frontend_parameters)
 		{
-			eDebug("OURSTATE: failed, retune");
+			eDebug("[eDVBChannel] OURSTATE: failed, retune");
 			m_frontend->get().tune(*m_current_frontend_parameters);
 		} else
 		{ /* nothing we can do */
-			eDebug("OURSTATE: failed, fatal");
+			eDebug("[eDVBChannel] OURSTATE: failed, fatal");
 		}
 	} else
-		eFatal("state unknown");
+		eFatal("[eDVBChannel] state unknown");
 
 	if (ourstate != m_state)
 	{
@@ -1569,15 +1574,15 @@ void eDVBChannel::pvrEvent(int event)
 	switch (event)
 	{
 	case eFilePushThread::evtEOF:
-		eDebug("eDVBChannel: End of file!");
+		eDebug("[eDVBChannel] End of file!");
 		m_event(this, evtEOF);
 		break;
 	case eFilePushThread::evtUser: /* start */
-		eDebug("SOF");
+		eDebug("[eDVBChannel] SOF");
 		m_event(this, evtSOF);
 		break;
 	case eFilePushThread::evtStopped:
-		eDebug("eDVBChannel: pvrEvent evtStopped");
+		eDebug("[eDVBChannel] pvrEvent evtStopped");
 		m_event(this, evtStopped);
 		break;
 	}
@@ -1591,7 +1596,7 @@ void eDVBChannel::cueSheetEvent(int event)
 	switch (event)
 	{
 	case eCueSheet::evtSeek:
-		eDebug("seek.");
+		eDebug("[eDVBChannel] seek.");
 		flushPVR(m_cue->m_decoding_demux);
 		break;
 	case eCueSheet::evtSkipmode:
@@ -1606,7 +1611,7 @@ void eDVBChannel::cueSheetEvent(int event)
 				m_tstools_lock.lock();
 				int bitrate = m_tstools.calcBitrate(); /* in bits/s */
 				m_tstools_lock.unlock();
-				eDebug("skipmode ratio is %lld:90000, bitrate is %d bit/s", m_cue->m_skipmode_ratio, bitrate);
+				eDebug("[eDVBChannel] skipmode ratio is %lld:90000, bitrate is %d bit/s", m_cue->m_skipmode_ratio, bitrate);
 						/* i agree that this might look a bit like black magic. */
 				m_skipmode_n = 512*1024; /* must be 1 iframe at least. */
 				m_skipmode_m = bitrate / 8 / 90000 * m_cue->m_skipmode_ratio / 8;
@@ -1616,16 +1621,16 @@ void eDVBChannel::cueSheetEvent(int event)
 				if (m_cue->m_skipmode_ratio < 0)
 					m_skipmode_m -= m_skipmode_n;
 
-				eDebug("resolved to: %d %d", m_skipmode_m, m_skipmode_n);
+				eDebug("[eDVBChannel] resolved to: %d %d", m_skipmode_m, m_skipmode_n);
 
 				if (abs(m_skipmode_m) < abs(m_skipmode_n))
 				{
-					eWarning("something is wrong with this calculation");
+					eWarning("[eDVBChannel] something is wrong with this cueSheetEvent calculation");
 					m_skipmode_frames = m_skipmode_n = m_skipmode_m = 0;
 				}
 			} else
 			{
-				eDebug("skipmode ratio is 0, normal play");
+				eDebug("[eDVBChannel] skipmode ratio is 0, normal play");
 				m_skipmode_frames = m_skipmode_n = m_skipmode_m = 0;
 			}
 		}
@@ -1634,9 +1639,9 @@ void eDVBChannel::cueSheetEvent(int event)
 			m_pvr_thread->setTimebaseChange(0x10000 * 9000 / (m_cue->m_skipmode_ratio / 10)); /* negative values are also ok */
 		else
 			m_pvr_thread->setTimebaseChange(0); /* normal playback */
-		eDebug("flush pvr");
+		eDebug("[eDVBChannel] flush pvr");
 		flushPVR(m_cue->m_decoding_demux);
-		eDebug("done");
+		eDebug("[eDVBChannel] done");
 		break;
 	}
 	case eCueSheet::evtSpanChanged:
@@ -1651,10 +1656,10 @@ void eDVBChannel::cueSheetEvent(int event)
 			m_tstools_lock.unlock();
 			if (r)
 			{
-				eDebug("span translation failed.\n");
+				eDebug("[eDVBChannel] span translation failed.\n");
 				continue;
 			}
-			eDebug("source span: %llu .. %llu, translated to %llu..%llu", pts_in, pts_out, offset_in, offset_out);
+			eDebug("[eDVBChannel] source span: %llu .. %llu, translated to %llu..%llu", pts_in, pts_out, offset_in, offset_out);
 			m_source_span.push_back(std::pair<off_t, off_t>(offset_in, offset_out));
 		}
 		break;
@@ -1691,7 +1696,7 @@ void eDVBChannel::getNextSourceSpan(off_t current_offset, size_t bytes_read, off
 
 	if (!m_cue)
 	{
-		eDebug("no cue sheet. forcing normal play");
+		eDebug("[eDVBChannel] no cue sheet. forcing normal play");
 		start = current_offset;
 		size = max;
 		return;
@@ -1702,13 +1707,13 @@ void eDVBChannel::getNextSourceSpan(off_t current_offset, size_t bytes_read, off
 		max = align(m_skipmode_n, blocksize);
 	}
 
-	//eDebug("getNextSourceSpan, current offset is %08llx, m_skipmode_m = %d!", current_offset, m_skipmode_m);
+	//eDebug("[eDVBChannel] getNextSourceSpan, current offset is %08llx, m_skipmode_m = %d!", current_offset, m_skipmode_m);
 	int frame_skip_success = 0;
 
 	if (m_skipmode_m)
 	{
 		int frames_to_skip = m_skipmode_frames + m_skipmode_frames_remainder;
-		//eDebug("we are at %llu, and we try to skip %d+%d frames from here", current_offset, m_skipmode_frames, m_skipmode_frames_remainder);
+		//eDebug("[eDVBChannel] we are at %llu, and we try to skip %d+%d frames from here", current_offset, m_skipmode_frames, m_skipmode_frames_remainder);
 		size_t iframe_len;
 		off_t iframe_start = current_offset;
 		int frames_skipped = frames_to_skip;
@@ -1718,14 +1723,14 @@ void eDVBChannel::getNextSourceSpan(off_t current_offset, size_t bytes_read, off
 		if (!r)
 		{
 			m_skipmode_frames_remainder = frames_to_skip - frames_skipped;
-			//eDebug("successfully skipped %d (out of %d, rem now %d) frames.", frames_skipped, frames_to_skip, m_skipmode_frames_remainder);
+			//eDebug("[eDVBChannel] successfully skipped %d (out of %d, rem now %d) frames.", frames_skipped, frames_to_skip, m_skipmode_frames_remainder);
 			current_offset = align(iframe_start, blocksize);
 			max = align(iframe_len + 187, blocksize);
 			frame_skip_success = 1;
 		} else
 		{
 			m_skipmode_frames_remainder = 0;
-			eDebug("frame skipping failed, reverting to byte-skipping");
+			eDebug("[eDVBChannel] frame skipping failed, reverting to byte-skipping");
 		}
 	}
 
@@ -1735,7 +1740,7 @@ void eDVBChannel::getNextSourceSpan(off_t current_offset, size_t bytes_read, off
 
 		if (m_skipmode_m)
 		{
-			eDebug("we are at %llu, and we try to find the iframe here:", current_offset);
+			eDebug("[eDVBChannel] we are at %llu, and we try to find the iframe here:", current_offset);
 			size_t iframe_len;
 			off_t iframe_start = current_offset;
 
@@ -1744,7 +1749,7 @@ void eDVBChannel::getNextSourceSpan(off_t current_offset, size_t bytes_read, off
 			int r = m_tstools.findFrame(iframe_start, iframe_len, direction);
 			m_tstools_lock.unlock();
 			if (r)
-				eDebug("failed");
+				eDebug("[eDVBChannel] failed");
 			else
 			{
 				current_offset = align(iframe_start, blocksize);
@@ -1770,24 +1775,24 @@ void eDVBChannel::getNextSourceSpan(off_t current_offset, size_t bytes_read, off
 		{
 			if (!m_cue->m_decoder)
 			{
-				eDebug("no decoder - can't seek relative");
+				eDebug("[eDVBChannel] no decoder - can't seek relative");
 				continue;
 			}
 			if (m_cue->m_decoder->getPTS(0, now))
 			{
-				eDebug("decoder getPTS failed, can't seek relative");
+				eDebug("[eDVBChannel] decoder getPTS failed, can't seek relative");
 				continue;
 			}
 			if (!m_cue->m_decoding_demux)
 			{
-				eDebug("getNextSourceSpan, no decoding demux. couldn't seek to %llu... ignore request!", pts);
+				eDebug("[eDVBChannel] getNextSourceSpan, no decoding demux. couldn't seek to %llu... ignore request!", pts);
 				start = current_offset;
 				size = max;
 				continue;
 			}
 			if (getCurrentPosition(m_cue->m_decoding_demux, now, 1))
 			{
-				eDebug("seekTo: getCurrentPosition failed!");
+				eDebug("[eDVBChannel] seekTo: getCurrentPosition failed!");
 				continue;
 			}
 		} else if (pts < 0) /* seek relative to end */
@@ -1795,11 +1800,11 @@ void eDVBChannel::getNextSourceSpan(off_t current_offset, size_t bytes_read, off
 			pts_t len;
 			if (!getLength(len))
 			{
-				eDebug("seeking relative to end. len=%lld, seek = %lld", len, pts);
+				eDebug("[eDVBChannel] seeking relative to end. len=%lld, seek = %lld", len, pts);
 				pts += len;
 			} else
 			{
-				eWarning("getLength failed - can't seek relative to end!");
+				eWarning("[eDVBChannel] getLength failed - can't seek relative to end!");
 				continue;
 			}
 		}
@@ -1817,17 +1822,17 @@ void eDVBChannel::getNextSourceSpan(off_t current_offset, size_t bytes_read, off
 
 		if (relative == 2) /* AP relative */
 		{
-			eDebug("AP relative seeking: %lld, at %lld", pts, now);
+			eDebug("[eDVBChannel] AP relative seeking: %lld, at %lld", pts, now);
 			pts_t nextap;
 			eSingleLocker l(m_tstools_lock);
 			if (m_tstools.getNextAccessPoint(nextap, now, pts))
 			{
 				pts = now - 90000; /* approx. 1s */
-				eDebug("AP relative seeking failed!");
+				eDebug("[eDVBChannel] AP relative seeking failed!");
 			} else
 			{
 				pts = nextap;
-				eDebug("next ap is %llu\n", pts);
+				eDebug("[eDVBChannel] next ap is %llu\n", pts);
 			}
 		}
 
@@ -1837,11 +1842,11 @@ void eDVBChannel::getNextSourceSpan(off_t current_offset, size_t bytes_read, off
 		m_tstools_lock.unlock();
 		if (r)
 		{
-			eDebug("get offset for pts=%llu failed!", pts);
+			eDebug("[eDVBChannel] get offset for pts=%llu failed!", pts);
 			continue;
 		}
 
-		eDebug("ok, resolved skip (rel: %d, diff %lld), now at %08llx", relative, pts, offset);
+		eDebug("[eDVBChannel] ok, resolved skip (rel: %d, diff %lld), now at %08llx", relative, pts, offset);
 		current_offset = align(offset, blocksize); /* in case tstools return non-aligned offset */
 	}
 
@@ -1855,7 +1860,7 @@ void eDVBChannel::getNextSourceSpan(off_t current_offset, size_t bytes_read, off
 			{
 				start = current_offset;
 				size = diff_upto(i->second, start, max);
-				//eDebug("HIT, %lld < %lld < %lld, size: %zd", i->first, current_offset, i->second, size);
+				//eDebug("[eDVBChannel] HIT, %lld < %lld < %lld, size: %zd", i->first, current_offset, i->second, size);
 				return;
 			}
 		}
@@ -1867,10 +1872,10 @@ void eDVBChannel::getNextSourceSpan(off_t current_offset, size_t bytes_read, off
 					/* in normal playback, just start at the next zone. */
 				start = i->first;
 				size = diff_upto(i->second, start, max);
-				eDebug("skip");
+				eDebug("[eDVBChannel] skip");
 				if (m_skipmode_m < 0)
 				{
-					eDebug("reached SOF");
+					eDebug("[eDVBChannel] reached SOF");
 					m_skipmode_m = 0;
 					m_pvr_thread->sendEvent(eFilePushThread::evtUser);
 				}
@@ -1879,20 +1884,20 @@ void eDVBChannel::getNextSourceSpan(off_t current_offset, size_t bytes_read, off
 					/* when skipping reverse, however, choose the zone before. */
 					/* This returns a size 0 block, in case you noticed... */
 				--i;
-				eDebug("skip to previous block, which is %llu..%llu", i->first, i->second);
+				eDebug("[eDVBChannel] skip to previous block, which is %llu..%llu", i->first, i->second);
 				size_t len = diff_upto(i->second, i->first, max);
 				start = i->second - len;
-				eDebug("skipping to %llu, %zd", start, len);
+				eDebug("[eDVBChannel] skipping to %llu, %zd", start, len);
 			}
 
-			eDebug("result: %llu, %zx (%llu %llu)", start, size, i->first, i->second);
+			eDebug("[eDVBChannel] result: %llu, %zx (%llu %llu)", start, size, i->first, i->second);
 			return;
 		}
 	}
 
 	if ((current_offset < -m_skipmode_m) && (m_skipmode_m < 0))
 	{
-		eDebug("reached SOF");
+		eDebug("[eDVBChannel] reached SOF");
 		m_skipmode_m = 0;
 		m_pvr_thread->sendEvent(eFilePushThread::evtUser);
 	}
@@ -1901,7 +1906,7 @@ void eDVBChannel::getNextSourceSpan(off_t current_offset, size_t bytes_read, off
 	if (m_source_span.empty())
 	{
 		size = max;
-		// eDebug("NO CUESHEET. (%08llx, %zd)", start, size);
+		// eDebug("[eDVBChannel] NO CUESHEET. (%08llx, %zd)", start, size);
 	} else
 	{
 		size = 0;
@@ -2041,6 +2046,8 @@ RESULT eDVBChannel::getDemux(ePtr<iDVBDemux> &demux, int cap)
 {
 	ePtr<eDVBAllocatedDemux> &our_demux = (cap & capDecode) ? m_decoder_demux : m_demux;
 
+	eDebug("[eDVBChannel] getDemux cap=%02X", cap);
+
 	if (!m_frontend)
 	{
 		/* in dvr mode, we have to stick to a single demux (the one connected to our dvr device) */
@@ -2086,7 +2093,7 @@ RESULT eDVBChannel::playFile(const char *file)
 
 	if (f->open(file) < 0)
 	{
-		eDebug("can't open PVR file %s (%m)", file);
+		eDebug("[eDVBChannel] can't open PVR file %s: %m", file);
 		return -ENOENT;
 	}
 
@@ -2105,7 +2112,7 @@ RESULT eDVBChannel::playSource(ePtr<iTsSource> &source, const char *streaminfo_f
 
 	if (!source->valid() && !source->isStream())
 	{
-		eDebug("PVR source is not valid!");
+		eDebug("[eDVBChannel] PVR source is not valid!");
 		return -ENOENT;
 	}
 
@@ -2122,7 +2129,7 @@ RESULT eDVBChannel::playSource(ePtr<iTsSource> &source, const char *streaminfo_f
 		m_pvr_fd_dst = open("/dev/misc/pvr", O_WRONLY);
 		if (m_pvr_fd_dst < 0)
 		{
-			eDebug("can't open /dev/misc/pvr - %m"); // or wait for the driver to be improved.
+			eDebug("[eDVBChannel] can't open /dev/misc/pvr: %m"); // or wait for the driver to be improved.
 			return -ENODEV;
 		}
 #else
@@ -2138,13 +2145,13 @@ RESULT eDVBChannel::playSource(ePtr<iTsSource> &source, const char *streaminfo_f
 			m_pvr_fd_dst = demux->get().openDVR(O_WRONLY);
 			if (m_pvr_fd_dst < 0)
 			{
-				eDebug("can't open /dev/dvb/adapterX/dvrX - you need to buy the new(!) $$$ box! (%m)"); // or wait for the driver to be improved.
+				eDebug("[eDVBChannel] can't open /dev/dvb/adapterX/dvrX: %m"); // or wait for the driver to be improved.
 				return -ENODEV;
 			}
 		}
 		else
 		{
-			eDebug("no demux allocated yet.. so its not possible to open the dvr device!!");
+			eDebug("[eDVBChannel] no demux allocated yet.. so its not possible to open the dvr device!!");
 			return -ENODEV;
 		}
 #endif
@@ -2219,7 +2226,7 @@ RESULT eDVBChannel::getCurrentPosition(iDVBDemux *decoding_demux, pts_t &pos, in
 		r = decoding_demux->getSTC(now, 0);
 		if (r)
 		{
-			eDebug("demux getSTC failed");
+			eDebug("[eDVBChannel] demux getSTC failed");
 			return -1;
 		}
 	} else
