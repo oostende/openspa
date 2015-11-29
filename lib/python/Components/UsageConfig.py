@@ -225,6 +225,7 @@ def InitUsageConfig():
 
 	config.usage.remote_fallback_enabled = ConfigYesNo(default = False)
 	config.usage.remote_fallback = ConfigText(default = _("http://IP-ADDRESS:8001"), fixed_size = False)
+	config.usage.show_timer_conflict_warning = ConfigYesNo(default = True)
 
 	dvbs_nims = [("-2", _("Disabled"))]
 	dvbt_nims = [("-2", _("Disabled"))]
