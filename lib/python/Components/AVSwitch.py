@@ -509,7 +509,7 @@ def InitAVSwitch():
 			except:
 				pass
 		config.av.hdmicolorspace = ConfigSelection(choices={
-				"Edid(Auto": _("Auto"),
+				"Edid(Auto)": _("Auto"),
 				"Hdmi_Rgb": _("RGB")},
 				default = "Edid(Auto)")
 		config.av.hdmicolorspace.addNotifier(setHDMIColorspace)
