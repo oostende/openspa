@@ -226,6 +226,9 @@ def InitUsageConfig():
 	config.usage.remote_fallback_enabled = ConfigYesNo(default = False);
 	config.usage.remote_fallback = ConfigText(default = _("http://IP-ADDRESS:8001"), fixed_size = False)
 
+	dvbs_nims = [("-2", _("Disabled"))]
+	dvbt_nims = [("-2", _("Disabled"))]
+	dvbc_nims = [("-2", _("Disabled"))]
 	nims = [("-1", _("auto"))]
 	for x in nimmanager.nim_slots:
 		if x.isCompatible("DVB-S"):
