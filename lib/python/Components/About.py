@@ -85,43 +85,47 @@ def getPythonVersionString():
 		return _("unknown")
 
 def getCPUString():
-	system = _("unavailable")
-	try:
-		file = open('/proc/cpuinfo', 'r')
-		lines = file.readlines()
-		for x in lines:
-			splitted = x.split(': ')
-			if len(splitted) > 1:
-				splitted[1] = splitted[1].replace('\n','')
-				if splitted[0].startswith("system type"):
-					system = splitted[1].split(' ')[0]
-				elif splitted[0].startswith("Processor"):
-					system = splitted[1].split(' ')[0]
-				elif splitted[0].startswith("model name"):
-					system = splitted[1].split(' ')[0]
-		file.close()
-		return system 
-	except IOError:
-		return _("unavailable")
+	if getBoxType() in ('xc7362', 'vusolo4k'):
+		return "Broadcom"
+	else:
+		try:
+			system="unknown"
+			file = open('/proc/cpuinfo', 'r')
+			lines = file.readlines()
+			for x in lines:
+				splitted = x.split(': ')
+				if len(splitted) > 1:
+					splitted[1] = splitted[1].replace('\n','')
+					if splitted[0].startswith("system type"):
+						system = splitted[1].split(' ')[0]
+					elif splitted[0].startswith("Processor"):
+						system = splitted[1].split(' ')[0]
+			file.close()
+			return system
+		except IOError:
+			return "unavailable"
 
 def getCPUSpeedString():
-	try:
-		file = open('/proc/cpuinfo', 'r')
-		lines = file.readlines()
-		for x in lines:
-			splitted = x.split(': ')
-			if len(splitted) > 1:
-				splitted[1] = splitted[1].replace('\n','')
-				if splitted[0].startswith("cpu MHz"):
-					mhz = float(splitted[1].split(' ')[0])
-					if mhz and mhz >= 1000:
-						mhz = "%s GHz" % str(round(mhz/1000,1))
-					else:
-						mhz = "%s MHz" % str(round(mhz,1))
-		file.close()
-		return mhz
-	except IOError:
-		return _("unavailable")
+	if getBoxType() in ('vusolo4k'):
+		return "1,5 GHz"
+	else:
+		try:
+			file = open('/proc/cpuinfo', 'r')
+			lines = file.readlines()
+			for x in lines:
+				splitted = x.split(': ')
+				if len(splitted) > 1:
+					splitted[1] = splitted[1].replace('\n','')
+					if splitted[0].startswith("cpu MHz"):
+						mhz = float(splitted[1].split(' ')[0])
+						if mhz and mhz >= 1000:
+							mhz = "%s GHz" % str(round(mhz/1000,1))
+						else:
+							mhz = "%s MHz" % str(round(mhz,1))
+			file.close()
+			return mhz
+		except IOError:
+			return "unavailable"
 
 def getCpuCoresString():
 	try:
