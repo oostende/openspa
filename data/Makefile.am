@@ -21,11 +21,12 @@ dist_pkgdata_DATA = \
 	videowizard.xml
 
 if HAVE_TEXTLCD
-dist_pkgdata_DATA += skin_text.xml
+f SPARK
+SUBDIRS += displaydualtext
+else
+SUBDIRS += displaytext
 endif
-
-if HAVE_TEXTLCD
-dist_pkgdata_DATA += skin_text.xml
+endif
 
 if HAVE_COLORLCD220
 SUBDIRS = display220
