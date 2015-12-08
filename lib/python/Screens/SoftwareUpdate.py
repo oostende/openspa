@@ -10,6 +10,7 @@ from Components.Ipkg import IpkgComponent
 from Components.Sources.StaticText import StaticText
 from Components.Slider import Slider
 from Tools.BoundFunction import boundFunction
+from Tools.Directories import fileExists
 from enigma import eTimer, eDVBDB
 from boxbranding import getBoxType
 
