@@ -10,7 +10,7 @@ from GlobalActions import globalActionMap
 import RecordTimer
 from enigma import eDVBVolumecontrol, eTimer, eDVBLocalTimeHandler, eServiceReference
 from time import time, localtime
-from boxbranding import getMachineBrand, getMachineName, getBrandOEM
+from boxbranding import getMachineBrand, getMachineName, getBrandOEM, getBoxType
 
 inStandby = None
 
