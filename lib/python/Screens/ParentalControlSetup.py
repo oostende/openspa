@@ -9,6 +9,7 @@ from Screens.MessageBox import MessageBox
 from Screens.InputBox import PinInput
 from Screens.ChannelSelection import service_types_tv
 from Tools.BoundFunction import boundFunction
+from Tools.Directories import fileExists
 from enigma import eServiceCenter, eTimer, eServiceReference
 from operator import itemgetter
 
@@ -44,9 +45,9 @@ class ParentalControlSetup(Screen, ConfigListScreen, ProtectedScreen):
 
 		self["actions"] = NumberActionMap(["SetupActions", "MenuActions"],
 		{
-		  "cancel": self.keyCancel,
-		  "save": self.keySave,
-		  "menu": self.closeRecursive,
+			"cancel": self.keyCancel,
+			"save": self.keySave,
+			"menu": self.closeRecursive,
 		}, -2)
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))
@@ -77,7 +78,10 @@ class ParentalControlSetup(Screen, ConfigListScreen, ProtectedScreen):
 				self.list.append(self.reloadLists)
 			self.list.append(getConfigListEntry(_("Protect Screens"), config.ParentalControl.setuppinactive))
 			if config.ParentalControl.setuppinactive.value:
-				self.list.append(getConfigListEntry(_("Protect main menu"), config.ParentalControl.config_sections.main_menu))
+				if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/spazeMenu/plugin.pyo"):
+					self.list.append(getConfigListEntry(_("Protect spzMenu (OpenSPA Main Menu)"), config.ParentalControl.config_sections.spzmenu))
+				else:
+					self.list.append(getConfigListEntry(_("Protect main menu"), config.ParentalControl.config_sections.main_menu))
 				self.list.append(getConfigListEntry(_("Protect timer menu"), config.ParentalControl.config_sections.timer_menu))
 				self.list.append(getConfigListEntry(_("Protect plugin browser"), config.ParentalControl.config_sections.plugin_browser))
 				self.list.append(getConfigListEntry(_("Protect configuration"), config.ParentalControl.config_sections.configuration))
@@ -108,11 +112,17 @@ class ParentalControlSetup(Screen, ConfigListScreen, ProtectedScreen):
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
-		self.createSetup()
+		if self["config"].l.getCurrentSelection() == self.changePin:
+			pass
+		else:
+			self.createSetup()
 
 	def keyRight(self):
 		ConfigListScreen.keyRight(self)
-		self.createSetup()
+		if self["config"].l.getCurrentSelection() == self.changePin:
+			pass
+		else:
+			self.createSetup()
 
 	def cancelCB(self, value):
 		self.keySave()
