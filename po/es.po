@@ -469,8 +469,23 @@ msgstr "1 segundo"
 msgid "1.0 sec"
 msgstr "1.0 seg."
 
+msgid "1.08Ghz"
+msgstr "1.08GHz"
+
+msgid "1.2GHz"
+msgstr "1.2GHz"
+
+msgid "1.2GHz (default)"
+msgstr "1.2GHz (defecto)"
+
+msgid "1.32Ghz"
+msgstr "1.32GHz"
+
 msgid "1.5 sec"
 msgstr "1.5 seg."
+
+msgid "1.512GHhz"
+msgstr "1.512GHz"
 
 msgid "10 minutes"
 msgstr "10 minutos"
@@ -508,6 +523,9 @@ msgstr "16:9 Letterbox"
 msgid "16:9 always"
 msgstr "siempre 16:9"
 
+msgid "1GHhz"
+msgstr "1GHz"
+
 msgid "1X"
 msgstr "1x"
 
@@ -528,6 +546,9 @@ msgstr "2.5 seg."
 
 msgid "20 minutes"
 msgstr "20 minutos"
+
+msgid "200Mhz"
+msgstr "200MHz"
 
 msgid "2X"
 msgstr "2x"
@@ -622,6 +643,9 @@ msgstr "6.0 seg."
 msgid "6.5 sec"
 msgstr "6.5 seg."
 
+msgid "600Mhz"
+msgstr "600MHz"
+
 msgid "7 seconds"
 msgstr "7 segundos"
 
@@ -630,6 +654,12 @@ msgstr "7.0 seg."
 
 msgid "7.5 sec"
 msgstr "7.5 seg."
+
+msgid "792Mhz"
+msgstr "792MHz"
+
+msgid "792Mhz (default)"
+msgstr "792MHz (defecto)"
 
 msgid "8 seconds"
 msgstr "8 segundos"
@@ -640,6 +670,12 @@ msgstr "8.0 seg."
 msgid "8.5 sec"
 msgstr "8.5 seg."
 
+msgid "816Mhz"
+msgstr "816MHz"
+
+msgid "840Mhz"
+msgstr "840MHz"
+
 msgid "9 seconds"
 msgstr "9 segundos"
 
@@ -648,6 +684,12 @@ msgstr "9.0 seg."
 
 msgid "9.5 sec"
 msgstr "9.5 seg."
+
+msgid "96Mhz"
+msgstr "96MHz"
+
+msgid "984Mhz"
+msgstr "984MHz"
 
 msgid ": %s"
 msgstr ": %s"
@@ -1953,7 +1995,7 @@ msgid "Change active delay"
 msgstr "Cambiar retardo activo"
 
 msgid "Change bouquets in quickzap"
-msgstr "Cambiar de lista en záping rápido"
+msgstr "Cambiar de lista en zapping rápido"
 
 msgid "Change hostname"
 msgstr "Cambiar nombre de host"
@@ -2208,7 +2250,7 @@ msgid "Common Interface assignment"
 msgstr "Asignación de Interface Común"
 
 msgid "Common interface PIN Setup"
-msgstr "Configuración del PIN de interface común"
+msgstr "Configuración del PIN"
 
 msgid "Communication"
 msgstr "Comunicación"
@@ -2712,6 +2754,9 @@ msgstr "Configurando"
 msgid "Confirm shutdown:"
 msgstr "Confirmar apagado:"
 
+msgid "Conflict not resolved!"
+msgstr "El conflicto no se ha resuelto"
+
 msgid "Conflicting timer"
 msgstr "Temporiz. en conflicto"
 
@@ -3045,6 +3090,9 @@ msgstr "Por defecto"
 
 msgid "Default (US)"
 msgstr "Predeterminado (US)"
+
+msgid "Default PIN for CI"
+msgstr "PIN por defecto para C.I"
 
 msgid "Default movie location"
 msgstr "Ubicación por defecto de películas"
@@ -3806,6 +3854,9 @@ msgstr "Activar EPG Virgin"
 
 msgid "Enable Wake On LAN"
 msgstr "Habilitar Wake On Lan"
+
+msgid "Enable auto PIN"
+msgstr "Habilitar auto PIN"
 
 msgid "Enable auto cable scan"
 msgstr "Habilitar autobúsqueda de cable"
@@ -4875,6 +4926,9 @@ msgstr ""
 "los grises más bajos son apreciables.\n"
 "No se preocupe ahora por las sombras. Se configurarán en el próximo paso.\n"
 "Cuando los resultados sean satisfactorios, pulse OK."
+
+msgid "Ignore conflict"
+msgstr "Ignorar conflicto"
 
 msgid "Image Backup"
 msgstr "Backup de imagen"
@@ -6571,6 +6625,9 @@ msgstr "Abrir la lista de películas"
 msgid "OpenSPA USB Devices"
 msgstr "OpenSPA - Dispositivos USB"
 
+msgid "OpenSPA max CPU frequency"
+msgstr "Frec. máxima CPU - normal"
+
 msgid "OpenVPN Setup"
 msgstr "Configuración OpenVPN"
 
@@ -8173,6 +8230,9 @@ msgstr "Guardar valores y salir"
 msgid "Scaler sharpness"
 msgstr "Nitidez del escalado"
 
+msgid "Scaling governor"
+msgstr "Governor"
+
 msgid "Scaling mode"
 msgstr "Tipo de escalado"
 
@@ -8642,6 +8702,9 @@ msgstr "Información del Canal"
 msgid "Services"
 msgstr "Canales"
 
+msgid "Set CPU speed settings"
+msgstr "Ajuste de la frec. de la CPU"
+
 msgid "Set Framerate for MiniTV"
 msgstr "Ajustar el framerate para MiniTV"
 
@@ -8999,6 +9062,9 @@ msgstr "Mostrar el tiempo transcurrido como positivo"
 
 msgid "Show updated packages"
 msgstr "Mostrar paquetes actualizados"
+
+msgid "Show warning before set 'Ignore conflict'"
+msgstr "Mostrar alerta antes de ajustar 'Ignorar conflicto'"
 
 msgid "Show warning when timeshift is stopped"
 msgstr "Mostrar alerta al detener timeshift"
@@ -9425,11 +9491,17 @@ msgstr "Ir a reposo después de 75 minutos"
 msgid "Standby in 90 minutes"
 msgstr "Ir a reposo después de 90 minutos"
 
+msgid "Standby max CPU frequency"
+msgstr "Frec. máxima CPU - reposo"
+
 msgid "StandbyLED"
 msgstr "LED de reposo"
 
 msgid "Start"
 msgstr "Iniciar"
+
+msgid "Start Boot Frequency"
+msgstr "Frecuencia de arranque"
 
 msgid "Start Instant Record"
 msgstr "Iniciar grabación instantánea"
@@ -9856,6 +9928,9 @@ msgstr "Terrestre"
 msgid "Terrestrial provider"
 msgstr "Zona geográfica"
 
+msgid "Test"
+msgstr "Probar"
+
 msgid "Test DiSEqC settings"
 msgstr "Configuración de test DisEqC"
 
@@ -10168,7 +10243,7 @@ msgstr ""
 "Permite elegir de qué modo se mostrará la definición estándar en la TV."
 
 msgid "This option allows you to enable 3D Surround Sound."
-msgstr "Permite des/habilitar el audio 3D Envolvente."
+msgstr "Permite habilitar/deshabilitar el audio 3D envolvente."
 
 msgid "This option allows you to power off the display."
 msgstr "Permite desconectar el display."
@@ -11269,6 +11344,15 @@ msgstr "Despertar como"
 msgid "Warning"
 msgstr "Advertencia"
 
+msgid ""
+"Warning!\n"
+"This is an option for advanced users.\n"
+"Really disable timer conflict detection?"
+msgstr ""
+"Atención!\n"
+"Esta es una opción para usuarios avanzados.\n"
+"Seguro que quiere deshabilitarla?"
+
 msgid "Warning: no LNB; using factory defaults."
 msgstr "No hay LNB, se utilizará la configuración por defecto"
 
@@ -11373,6 +11457,12 @@ msgstr "Oeste"
 
 msgid "West limit set"
 msgstr "Límite oeste configurado"
+
+msgid "Wetek CPU Control"
+msgstr "Control de CPU WeTek"
+
+msgid "Wetek FRQ Setup"
+msgstr "WeTek FRQ"
 
 msgid "What Day of month ?"
 msgstr "Que dia del mes?"
@@ -11797,15 +11887,6 @@ msgstr ""
 "Después de un reseteo, el receptor se reiniciará automáticamente!\n"
 "\n"
 "Quiere hacer un reinicio de fábrica?"
-
-msgid ""
-"When you use the remote fallback tuner to do recording, the timer conflict "
-"detection can't handle remote fallback tuners. This option allows you to "
-"turn off the timer confict detection"
-msgstr ""
-"Cuando se utiliza el sintonizador remoto para grabar, la detección de "
-"reservas en conflicto no puede administrar los sintonizadores remotos. Esta "
-"opción permite desactivar la detección de conflictos"
 
 msgid "Where do you want to backup your settings?"
 msgstr "Donde quiere salvar la configuración?"
@@ -12384,8 +12465,8 @@ msgstr "Siempre"
 msgid "and AutoRestart service when restart GUI"
 msgstr "y activar inicio automático al reiniciar GUI"
 
-msgid "and never ask again this session again"
-msgstr "y no volver a preguntar en esta sesión"
+msgid "and never ask this again"
+msgstr "y no volver a preguntarlo"
 
 msgid "and never show this message again"
 msgstr "no volver a mostrar este mensaje"
@@ -12534,6 +12615,9 @@ msgstr "Confirmado"
 
 msgid "connected"
 msgstr "Conectado"
+
+msgid "conservative (default)"
+msgstr "Conservative (defecto)"
 
 msgid ""
 "contain a file with the name: \n"
@@ -12845,6 +12929,9 @@ msgstr "saltos:"
 msgid "horizontal"
 msgstr "Horizontal"
 
+msgid "hotplug"
+msgstr "Hotplug"
+
 msgid "http://IP-ADDRESS:8001"
 msgstr "http://dirección_ip:8001"
 
@@ -12877,6 +12964,9 @@ msgstr "iniciar módulos"
 
 msgid "insert mark here"
 msgstr "insertar marca aquí"
+
+msgid "interactive"
+msgstr "Interactiva"
 
 msgid "invalid data: "
 msgstr "Fecha no válida: "
@@ -13136,6 +13226,9 @@ msgstr "de Lunes a Viernes"
 msgid "once"
 msgstr "Una vez"
 
+msgid "ondemand"
+msgstr "Ondemand"
+
 msgid "only HD"
 msgstr "Sólo en HD"
 
@@ -13174,6 +13267,9 @@ msgstr "coincidencia parcial"
 
 msgid "pass"
 msgstr "contraseña"
+
+msgid "performance"
+msgstr "Performance"
 
 msgid "performing arts"
 msgstr "artes"

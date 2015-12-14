@@ -95,7 +95,7 @@ msgid ""
 "Edit the upgrade source address."
 msgstr ""
 "\n"
-"Edita la URL des de la que s'actualitzarà."
+"Edita la URL des de la qual s'actualitzarà."
 
 msgid ""
 "\n"
@@ -469,8 +469,23 @@ msgstr "1 segon"
 msgid "1.0 sec"
 msgstr "1.0 seg."
 
+msgid "1.08Ghz"
+msgstr "1.08GHz"
+
+msgid "1.2GHz"
+msgstr "1.2GHz"
+
+msgid "1.2GHz (default)"
+msgstr "1.2GHz (defecte)"
+
+msgid "1.32Ghz"
+msgstr "1.32GHz"
+
 msgid "1.5 sec"
 msgstr "1.5 seg."
+
+msgid "1.512GHhz"
+msgstr "1.512GHz"
 
 msgid "10 minutes"
 msgstr "10 minuts"
@@ -508,6 +523,9 @@ msgstr "16:9 Letterbox"
 msgid "16:9 always"
 msgstr "Sempre 16:9"
 
+msgid "1GHhz"
+msgstr "1GHz"
+
 msgid "1X"
 msgstr "1x"
 
@@ -528,6 +546,9 @@ msgstr "2.5 seg."
 
 msgid "20 minutes"
 msgstr "20 minuts"
+
+msgid "200Mhz"
+msgstr "200MHz"
 
 msgid "2X"
 msgstr "2x"
@@ -622,6 +643,9 @@ msgstr "6.0 seg."
 msgid "6.5 sec"
 msgstr "6.5 seg."
 
+msgid "600Mhz"
+msgstr "600MHz"
+
 msgid "7 seconds"
 msgstr "7 segons"
 
@@ -630,6 +654,12 @@ msgstr "7.0 seg."
 
 msgid "7.5 sec"
 msgstr "7.5 seg."
+
+msgid "792Mhz"
+msgstr "792MHz"
+
+msgid "792Mhz (default)"
+msgstr "792MHz (defecte)"
 
 msgid "8 seconds"
 msgstr "8 segons"
@@ -640,6 +670,12 @@ msgstr "8.0 seg."
 msgid "8.5 sec"
 msgstr "8.5 seg."
 
+msgid "816Mhz"
+msgstr "816MHz"
+
+msgid "840Mhz"
+msgstr "840MHz"
+
 msgid "9 seconds"
 msgstr "9 segons"
 
@@ -648,6 +684,12 @@ msgstr "9.0 seg."
 
 msgid "9.5 sec"
 msgstr "9.5 seg."
+
+msgid "96Mhz"
+msgstr "96MHz"
+
+msgid "984Mhz"
+msgstr "984MHz"
 
 msgid ": %s"
 msgstr ": %s"
@@ -2213,7 +2255,7 @@ msgid "Common Interface assignment"
 msgstr "Assignació d'Interfície Comú"
 
 msgid "Common interface PIN Setup"
-msgstr "Configuració del PIN d'interfície comú"
+msgstr "Configuració del PIN"
 
 msgid "Communication"
 msgstr "Comunicació"
@@ -2707,6 +2749,9 @@ msgstr "Configurant"
 msgid "Confirm shutdown:"
 msgstr "Confirmar apagada:"
 
+msgid "Conflict not resolved!"
+msgstr "El conflicte no s'ha resolt!"
+
 msgid "Conflicting timer"
 msgstr "Temporitz. en conflicte"
 
@@ -3040,6 +3085,9 @@ msgstr "Per defecte"
 
 msgid "Default (US)"
 msgstr "Predeterminat (US)"
+
+msgid "Default PIN for CI"
+msgstr "PIN per defecte per a C.I"
 
 msgid "Default movie location"
 msgstr "Ubicació per defecte de pel·lícules"
@@ -3799,6 +3847,9 @@ msgstr "Activar EPG Virgin"
 
 msgid "Enable Wake On LAN"
 msgstr "Habilitar Wake On Lan"
+
+msgid "Enable auto PIN"
+msgstr "Habilitar auto PIN"
 
 msgid "Enable auto cable scan"
 msgstr "Habilitar autorecerca de cable"
@@ -4869,6 +4920,9 @@ msgstr ""
 "No us preocupeu en aquest moment per les ombres. Es configuraràn en el "
 "següent pas.\n"
 "Quan els resultats us semblin satisfactoris, premeu OK."
+
+msgid "Ignore conflict"
+msgstr "Ignorar conflicte"
 
 msgid "Image Backup"
 msgstr "Backup d'imatge"
@@ -6566,6 +6620,9 @@ msgstr "Obrir la llista de pel·lícules"
 msgid "OpenSPA USB Devices"
 msgstr "OpenSPA - Dispositius USB"
 
+msgid "OpenSPA max CPU frequency"
+msgstr "Freq. màxima CPU - normal"
+
 msgid "OpenVPN Setup"
 msgstr "Configuració d'OpenVPN"
 
@@ -8168,6 +8225,9 @@ msgstr "Desar valors i sortir"
 msgid "Scaler sharpness"
 msgstr "Nitidesa de l'escalat"
 
+msgid "Scaling governor"
+msgstr "Governor"
+
 msgid "Scaling mode"
 msgstr "Tipus d'escalat"
 
@@ -8634,6 +8694,9 @@ msgstr "Informació del canal"
 msgid "Services"
 msgstr "Canals"
 
+msgid "Set CPU speed settings"
+msgstr "Ajust de la freq. de la CPU"
+
 msgid "Set Framerate for MiniTV"
 msgstr "Ajusteu el framerate per MiniTV"
 
@@ -8990,6 +9053,9 @@ msgstr "Mostrar el temps transcorregut com positiu"
 
 msgid "Show updated packages"
 msgstr "Mostrar paquets actualizats"
+
+msgid "Show warning before set 'Ignore conflict'"
+msgstr "Mostrar alerta abans de configurar 'Ignorar conflicte'"
 
 msgid "Show warning when timeshift is stopped"
 msgstr "Mostrar alerta en aturar timeshift"
@@ -9411,11 +9477,17 @@ msgstr "Anar a repòs després de 75 minuts"
 msgid "Standby in 90 minutes"
 msgstr "Anar a repòs després de 90 minuts"
 
+msgid "Standby max CPU frequency"
+msgstr "Freq. màxima CPU - repòs"
+
 msgid "StandbyLED"
 msgstr "LED de repòs"
 
 msgid "Start"
 msgstr "Iniciar"
+
+msgid "Start Boot Frequency"
+msgstr "Freqüència d'inici"
 
 msgid "Start Instant Record"
 msgstr "Iniciar gravació instantània"
@@ -9842,6 +9914,9 @@ msgstr "Terrestre"
 msgid "Terrestrial provider"
 msgstr "Zona geogràfica"
 
+msgid "Test"
+msgstr "Provar"
+
 msgid "Test DiSEqC settings"
 msgstr "Comprovar configuració de DisEqC"
 
@@ -10151,7 +10226,7 @@ msgstr ""
 "Permet triar de quina manera es mostrarà la definició estàndard a la TV."
 
 msgid "This option allows you to enable 3D Surround Sound."
-msgstr "Permet des/habilitar l'àudio 3D envolvent."
+msgstr "Permet habilitar/deshabilitar l'àudio 3D envolvent."
 
 msgid "This option allows you to power off the display."
 msgstr "Permet desconnectar el display."
@@ -11251,6 +11326,15 @@ msgstr "Despertar com"
 msgid "Warning"
 msgstr "Advertiment"
 
+msgid ""
+"Warning!\n"
+"This is an option for advanced users.\n"
+"Really disable timer conflict detection?"
+msgstr ""
+"Atenció!\n"
+"Aquesta es una opció per a usuaris avançats.\n"
+"Segur que voleu deshabilitar-ho?"
+
 msgid "Warning: no LNB; using factory defaults."
 msgstr "No hi ha LNB, s'utilitzarà la configuració per defecte"
 
@@ -11355,6 +11439,12 @@ msgstr "Oest"
 
 msgid "West limit set"
 msgstr "Límit oest configurat"
+
+msgid "Wetek CPU Control"
+msgstr "Control de CPU WeTek"
+
+msgid "Wetek FRQ Setup"
+msgstr "WeTek FRQ"
 
 msgid "What Day of month ?"
 msgstr "Quin dia del mes?"
@@ -11774,15 +11864,6 @@ msgstr ""
 "Després d'un reset, el receptor es reiniciarà automàticament!\n"
 "\n"
 "Voleu fer un reinici de fàbrica?"
-
-msgid ""
-"When you use the remote fallback tuner to do recording, the timer conflict "
-"detection can't handle remote fallback tuners. This option allows you to "
-"turn off the timer confict detection"
-msgstr ""
-"Quan s'utilitza el sintonizador remot per a enregistrar, la detecció de "
-"reserves en conflicte no pot administrar els sintonitzadors remots. Aquesta "
-"opció permet desactivar la detecció de conflictes"
 
 msgid "Where do you want to backup your settings?"
 msgstr "On voleu desar la configuració?"
@@ -12357,8 +12438,8 @@ msgstr "Sempre"
 msgid "and AutoRestart service when restart GUI"
 msgstr "i activar l'inici automàtic en reiniciar GUI"
 
-msgid "and never ask again this session again"
-msgstr "i no tornar a preguntar en aquesta sessió"
+msgid "and never ask this again"
+msgstr "i no tornar a preguntar-ho"
 
 msgid "and never show this message again"
 msgstr "no tornar a mostrar aquest missatge"
@@ -12507,6 +12588,9 @@ msgstr "Confirmat"
 
 msgid "connected"
 msgstr "Connectat"
+
+msgid "conservative (default)"
+msgstr "Conservative (defecte)"
 
 msgid ""
 "contain a file with the name: \n"
@@ -12818,6 +12902,9 @@ msgstr "salts:"
 msgid "horizontal"
 msgstr "Horitzontal"
 
+msgid "hotplug"
+msgstr "Hotplug"
+
 msgid "http://IP-ADDRESS:8001"
 msgstr "http://adreça_ip:8001"
 
@@ -12850,6 +12937,9 @@ msgstr "iniciar mòduls"
 
 msgid "insert mark here"
 msgstr "inserir marca aquí"
+
+msgid "interactive"
+msgstr "Interactiva"
 
 msgid "invalid data: "
 msgstr "Data no vàlida: "
@@ -13109,6 +13199,9 @@ msgstr "de Dilluns a Divendres"
 msgid "once"
 msgstr "Un cop"
 
+msgid "ondemand"
+msgstr "Ondemand"
+
 msgid "only HD"
 msgstr "Només en HD"
 
@@ -13147,6 +13240,9 @@ msgstr "coincidència parcial"
 
 msgid "pass"
 msgstr "contrasenya"
+
+msgid "performance"
+msgstr "Performance"
 
 msgid "performing arts"
 msgstr "arts"
