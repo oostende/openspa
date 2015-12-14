@@ -179,6 +179,8 @@ int eHttpStream::openUrl(const std::string &url, std::string &newurl)
 				strncasecmp(linebuf, "location: ", 10) == 0)
 		{
 			newurl = &linebuf[10];
+			if (!extra_headers.empty())
+				newurl.append("#").append(extra_headers);
 			eDebug("%s: redirecting to: %s", __FUNCTION__, newurl.c_str());
 			break;
 		}
