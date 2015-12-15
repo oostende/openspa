@@ -21,7 +21,7 @@ dist_pkgdata_DATA = \
 	videowizard.xml
 
 if HAVE_TEXTLCD
-f SPARK
+if SPARK
 SUBDIRS += displaydualtext
 else
 SUBDIRS += displaytext
