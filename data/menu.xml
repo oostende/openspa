@@ -33,7 +33,8 @@
 			</menu>
 			<menu weight="5" level="0" text="System" entryID="system_selection">
 				<id val="system" />
-				<item weight="10" text="A/V settings" entryID="av_setup"><screen module="VideoMode" screen="VideoSetup" /></item>
+				<item weight="10" text="Video settings" entryID="av_setup"><screen module="VideoMode" screen="VideoSetup" /></item>
+				<item weight="11" text="Audio settings" entryID="av_setup"><screen module="VideoMode" screen="AudioSetup" /></item>
 				<item level="0" entryID="usage_setup"><setup id="usage" /></item>
 				<item level="0" entryID="user_interface"><setup id="userinterface" /></item>
 				<item level="0" entryID="epg_settings"><setup id="epgsettings" /></item>

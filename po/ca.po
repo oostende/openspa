@@ -11140,7 +11140,10 @@ msgid "Video output mode"
 msgstr "Mode de sortida de vídeo"
 
 msgid "Video settings"
-msgstr "Brillantor & Contrast"
+msgstr "Ajustaments de vídeo"
+
+msgid "Audio settings"
+msgstr "Ajustaments d'àudio"
 
 msgid "Video setup"
 msgstr "Configuració de vídeo"

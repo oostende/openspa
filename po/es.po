@@ -11158,7 +11158,10 @@ msgid "Video output mode"
 msgstr "Modo de salida de vídeo"
 
 msgid "Video settings"
-msgstr "Brillo & Contraste"
+msgstr "Ajustes de Vídeo"
+
+msgid "Audio settings"
+msgstr "Ajustes de Audio"
 
 msgid "Video setup"
 msgstr "Configuración de vídeo"
