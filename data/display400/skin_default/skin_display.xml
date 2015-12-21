@@ -39,37 +39,13 @@
     <font filename="tuxtxt2.ttf" name="Consola" scale="120" />
     <font filename="hd2.ttf" name="VFD" scale="120" />
   </fonts>
-  <screen name="InfoBarSummaryold" position="0,0" size="400,240" backgroundColor="black">
-	  <widget source="session.CurrentService" render="Label" position="61,106" size="337,40" font="VFD; 33" halign="left" transparent="1" noWrap="1" valign="center">
-		<convert type="ServiceName">Name</convert>
-	  </widget>
-	  <widget source="session.CurrentService" render="Picon" size="100,60" position="11,13" transparent="1" zPosition="22" alphatest="blend" backgroundColor="black">
-		<convert type="ServiceName">Reference</convert>
-	  </widget>
-
-	<!-- 150,90 200,120 220,132-->
-	  <widget source="session.Event_Now" render="Progress" position="142,20" size="245,16" backgroundColor="verde" foregroundColor="verde" transparent="1" zPosition="2">
-		<convert type="EventTime">Progress</convert>
-	  </widget>
-	  <eLabel name="fondoprogreso" position="142,20" size="245,16" backgroundColor="verdeoscuro" />
-	  <widget source="session.Event_Now" render="Label" position="208,41" size="179,44" font="VFD; 40" zPosition="2" halign="right" transparent="1" foregroundColor="verde">
-		<convert type="EventTime">Remaining</convert>
-		<convert type="RemainingToText">NoSeconds</convert>
-	  </widget>
-	  <widget source="session.FrontendInfo" render="Pixmap" position="5,106" zPosition="2" size="46,42" pixmap="display/skin_default/vfd_sat.png" alphatest="blend" transparent="0">
-		<convert type="FrontendInfo">TYPE</convert>
-		<convert type="ValueRange">0,0</convert>
-		<convert type="ConditionalShowHide" />
-	  </widget>
-	  <widget source="session.FrontendInfo" render="Pixmap" position="5,106" zPosition="2" size="46,42" pixmap="display/skin_default/vfd_tdt.png" alphatest="off" transparent="0">
-		<convert type="FrontendInfo">TYPE</convert>
-		<convert type="ValueRange">2,2</convert>
-		<convert type="ConditionalShowHide" />
-	  </widget>
-	  <ePixmap name="icotv" position="15,111" size="36,36" alphatest="blend" pixmap="display/skin_default/vfd_tv.png" zPosition="1" />
+  
+<screen name="NumberZap_summary" position="0,0" size="400,240" backgroundColor="black">
+	<widget source="parent.channel_summary" render="Label" position="400,240" size="1,1" noWrap="1" foregroundColor="black" backgroundColor="black"/>
+    <widget source="parent.number_summary" render="Label" position="0,15" size="400,130" zPosition="2" noWrap="1" font="VFD; 54" halign="center" foregroundColor="naranja" />
 	<panel name="RelojAbajo" />
-
 </screen>
+
 <screen name="InfoBarSummary" position="0,0" size="400,240" backgroundColor="black">
    <widget source="session.CurrentService" render="Label" position="8,5" size="276,40" font="VFD; 33" halign="left" transparent="1" noWrap="1" valign="center">
     <convert type="ServiceName">Name</convert>
