@@ -2,7 +2,7 @@ from HTMLComponent import HTMLComponent
 from GUIComponent import GUIComponent
 from skin import parseColor, parseFont
 
-from enigma import eListboxServiceContent, eListbox, eServiceCenter, eServiceReference, gFont, eRect
+from enigma import eListboxServiceContent, eListbox, eServiceCenter, eServiceReference, gFont, eRect, eSize
 from Tools.LoadPixmap import LoadPixmap
 from Tools.TextBoundary import getTextBoundarySize
 
@@ -57,10 +57,14 @@ class ServiceList(HTMLComponent, GUIComponent):
 
 		self.root = None
 		self.mode = self.MODE_NORMAL
-		self.ItemHeight = 28
-		self.ServiceNameFont = parseFont("Regular;22", ((1,1),(1,1)))
-		self.ServiceInfoFont = parseFont("Regular;18", ((1,1),(1,1)))
-		self.ServiceNumberFont = parseFont("Regular;20", ((1,1),(1,1)))
+		self.listHeight = None
+		self.listWidth = None
+		self.ServiceNumberFontName = "Regular"
+		self.ServiceNumberFontSize = 20
+		self.ServiceNameFontName = "Regular"
+		self.ServiceNameFontSize = 22
+		self.ServiceInfoFontName = "Regular"
+		self.ServiceInfoFontSize = 18
 		self.progressBarWidth = 52
 		self.progressPercentWidth = 0
 		self.fieldMargins = 10
@@ -114,11 +118,17 @@ class ServiceList(HTMLComponent, GUIComponent):
 		def serviceItemHeight(value):
 			self.ItemHeight = int(value)
 		def serviceNameFont(value):
-			self.ServiceNameFont = parseFont(value, ((1,1),(1,1)))
+			font = parseFont(value, ((1,1),(1,1)) )
+			self.ServiceNameFontName = font.family
+			self.ServiceNameFontSize = font.pointSize
 		def serviceInfoFont(value):
-			self.ServiceInfoFont = parseFont(value, ((1,1),(1,1)))
+			font = parseFont(value, ((1,1),(1,1)) )
+			self.ServiceInfoFontName = font.family
+			self.ServiceInfoFontSize = font.pointSize
 		def serviceNumberFont(value):
-			self.ServiceNumberFont = parseFont(value, ((1,1),(1,1)))
+			font = parseFont(value, ((1,1),(1,1)) )
+			self.ServiceNumberFontName = font.family
+			self.ServiceNumberFontSize = font.pointSize
 		def progressbarHeight(value):
 			self.l.setProgressbarHeight(int(value))
 		def progressbarBorderWidth(value):
@@ -139,7 +149,12 @@ class ServiceList(HTMLComponent, GUIComponent):
 				self.skinAttributes.remove((attrib, value))
 			except:
 				pass
-		return GUIComponent.applySkin(self, desktop, parent)
+		rc = GUIComponent.applySkin(self, desktop, parent)
+		self.listHeight = self.instance.size().height()
+		self.listWidth = self.instance.size().width()
+		self.setItemsPerPage()
+		self.setFontsize()
+		return rc
 
 	def connectSelChanged(self, fnc):
 		if not fnc in self.onSelectionChanged:
@@ -245,10 +260,29 @@ class ServiceList(HTMLComponent, GUIComponent):
 
 	GUI_WIDGET = eListbox
 
+	def setItemsPerPage(self):
+		if self.listHeight > 0:
+			itemHeight = self.listHeight / int(config.usage.serviceitems_per_page.value)
+		else:
+			itemHeight = 28
+		self.ItemHeight = itemHeight
+		self.l.setItemHeight(itemHeight)
+		if self.listHeight:
+			self.instance.resize(eSize(self.listWidth, self.listHeight / itemHeight * itemHeight))
+
+	def setFontsize(self):
+		self.ServiceNumberFont = gFont(self.ServiceNameFontName, self.ServiceNameFontSize + int(config.usage.servicenum_fontsize.value))
+		self.ServiceNameFont = gFont(self.ServiceNameFontName, self.ServiceNameFontSize + int(config.usage.servicename_fontsize.value))
+		self.ServiceInfoFont = gFont(self.ServiceInfoFontName, self.ServiceInfoFontSize + int(config.usage.serviceinfo_fontsize.value))
+		self.l.setElementFont(self.l.celServiceName, self.ServiceNameFont)
+		self.l.setElementFont(self.l.celServiceNumber, self.ServiceNumberFont)
+		self.l.setElementFont(self.l.celServiceInfo, self.ServiceInfoFont)
+
 	def postWidgetCreate(self, instance):
 		instance.setWrapAround(True)
 		instance.setContent(self.l)
 		instance.selectionChanged.get().append(self.selectionChanged)
+		self.setFontsize()
 		self.setMode(self.mode)
 
 	def preWidgetRemove(self, instance):
@@ -326,6 +360,7 @@ class ServiceList(HTMLComponent, GUIComponent):
 
 	def setMode(self, mode):
 		self.mode = mode
+		self.setItemsPerPage()
 		self.l.setItemHeight(self.ItemHeight)
 		self.l.setVisualMode(eListboxServiceContent.visModeComplex)
 
