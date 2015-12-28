@@ -57,6 +57,13 @@ msgstr ""
 
 msgid ""
 "\n"
+"<This tuner is configured automatically>"
+msgstr ""
+"\n"
+"<Este sintoniz. se configura automáticamente>"
+
+msgid ""
+"\n"
 "Advanced options and settings."
 msgstr ""
 "\n"
@@ -209,13 +216,13 @@ msgid " (disabled)"
 msgstr " (deshabilitado)"
 
 msgid " (higher than any auto)"
-msgstr " (mayor que cualquier auto)"
+msgstr " (mayor que cualquier 'auto')"
 
 msgid " (higher than rotor any auto)"
-msgstr " (mayor que cualquier auto de motor)"
+msgstr " (mayor que cualquier 'auto' de motor)"
 
 msgid " (lower than any auto)"
-msgstr " (menor que cualquier auto)"
+msgstr " (menor que cualquier 'auto')"
 
 msgid " - mounted on "
 msgstr " - montado en "
@@ -447,6 +454,9 @@ msgstr "-9.0 seg."
 msgid "-9.5 sec"
 msgstr "-9.5 seg."
 
+msgid "/media/custom"
+msgstr "/media/custom"
+
 msgid "0.5 sec"
 msgstr "0.5 seg."
 
@@ -462,8 +472,23 @@ msgstr "1 segundo"
 msgid "1.0 sec"
 msgstr "1.0 seg."
 
+msgid "1.08Ghz"
+msgstr "1.08GHz"
+
+msgid "1.2GHz"
+msgstr "1.2GHz"
+
+msgid "1.2GHz (default)"
+msgstr "1.2GHz (defecto)"
+
+msgid "1.32Ghz"
+msgstr "1.32GHz"
+
 msgid "1.5 sec"
 msgstr "1.5 seg."
+
+msgid "1.512GHhz"
+msgstr "1.512GHz"
 
 msgid "10 minutes"
 msgstr "10 minutos"
@@ -501,6 +526,9 @@ msgstr "16:9 Letterbox"
 msgid "16:9 always"
 msgstr "siempre 16:9"
 
+msgid "1GHhz"
+msgstr "1GHz"
+
 msgid "1X"
 msgstr "1x"
 
@@ -521,6 +549,9 @@ msgstr "2.5 seg."
 
 msgid "20 minutes"
 msgstr "20 minutos"
+
+msgid "200Mhz"
+msgstr "200MHz"
 
 msgid "2X"
 msgstr "2x"
@@ -615,6 +646,9 @@ msgstr "6.0 seg."
 msgid "6.5 sec"
 msgstr "6.5 seg."
 
+msgid "600Mhz"
+msgstr "600MHz"
+
 msgid "7 seconds"
 msgstr "7 segundos"
 
@@ -623,6 +657,12 @@ msgstr "7.0 seg."
 
 msgid "7.5 sec"
 msgstr "7.5 seg."
+
+msgid "792Mhz"
+msgstr "792MHz"
+
+msgid "792Mhz (default)"
+msgstr "792MHz (defecto)"
 
 msgid "8 seconds"
 msgstr "8 segundos"
@@ -633,6 +673,12 @@ msgstr "8.0 seg."
 msgid "8.5 sec"
 msgstr "8.5 seg."
 
+msgid "816Mhz"
+msgstr "816MHz"
+
+msgid "840Mhz"
+msgstr "840MHz"
+
 msgid "9 seconds"
 msgstr "9 segundos"
 
@@ -641,6 +687,12 @@ msgstr "9.0 seg."
 
 msgid "9.5 sec"
 msgstr "9.5 seg."
+
+msgid "96Mhz"
+msgstr "96MHz"
+
+msgid "984Mhz"
+msgstr "984MHz"
 
 msgid ": %s"
 msgstr ": %s"
@@ -1381,6 +1433,9 @@ msgstr "Cuarto idioma de audio"
 msgid "Audio options..."
 msgstr "Opciones de audio"
 
+msgid "Audio settings"
+msgstr "Ajustes de audio"
+
 msgid "August"
 msgstr "Agosto"
 
@@ -1868,6 +1923,17 @@ msgstr "No hay señal... cancelando"
 msgid "Cannot format current drive."
 msgstr "No se puede formatear el disp. actual"
 
+msgid ""
+"Cannot format current drive.\n"
+"A record in progress, timeshift or some external tools (like samba, swapfile "
+"and nfsd) may cause this problem.\n"
+"Please stop this actions/applications and try again"
+msgstr ""
+"No se puede formatear el dispositivo.\n"
+"Una grabación, timeshift o algún proceso externo (samba, swap, nfsd...) "
+"pueden estar causando este problema.\n"
+"Detenga estos procesos/servicios y vuelva a intentarlo"
+
 msgid "Cannot format partition %d"
 msgstr "No se puede formatear la partición %d"
 
@@ -1899,6 +1965,17 @@ msgstr ""
 
 msgid "Cannot umount current drive."
 msgstr "No se puede desmontar el dispositivo"
+
+msgid ""
+"Cannot umount current drive.\n"
+"A record in progress, timeshift or some external tools (like samba, swapfile "
+"and nfsd) may cause this problem.\n"
+"Please stop this actions/applications and try again"
+msgstr ""
+"No se puede desmontar la unidad.\n"
+"Una grabación, timeshift o algún proceso externo (samba, swap, nfsd...) "
+"pueden estar causando este problema.\n"
+"Detenga estos procesos/servicios y vuelva a intentarlo"
 
 msgid "Capacity"
 msgstr "Capacidad"
@@ -1951,6 +2028,9 @@ msgstr "Cambiar de lista en zapping rápido"
 msgid "Change hostname"
 msgstr "Cambiar nombre de host"
 
+msgid "Change old drive with this new drive"
+msgstr "Cambiar la unidad anterior por la nueva"
+
 msgid "Change recording (add time)"
 msgstr "Cambiar grabación (añadir tiempo)"
 
@@ -2001,6 +2081,15 @@ msgstr "El canal no está en la lista"
 
 msgid "Channel selection"
 msgstr "Selección de canales"
+
+msgid "Channel zap delay another button"
+msgstr "Retardo canal, 2ª"
+
+msgid "Channel zap delay first button"
+msgstr "Retardo canal, 1ª"
+
+msgid "Channel zap delay mode"
+msgstr "Retardo del zapping"
 
 msgid "Channel:"
 msgstr "Canal:"
@@ -2192,7 +2281,7 @@ msgid "Common Interface assignment"
 msgstr "Asignación de Interface Común"
 
 msgid "Common interface PIN Setup"
-msgstr "Configuración del PIN de interface común"
+msgstr "Configuración del PIN"
 
 msgid "Communication"
 msgstr "Comunicación"
@@ -2236,8 +2325,7 @@ msgstr ""
 
 msgid ""
 "Configure for how long the infobar will remain visible after activation."
-msgstr ""
-"Configura el tiempo durante el que la infobar se mostrará en la pantalla."
+msgstr "Configura durante cuánto tiempo se mostrará la infobar en la pantalla."
 
 msgid ""
 "Configure for how many minutes finished events should remain visible in the "
@@ -2270,8 +2358,8 @@ msgid ""
 "Configure if and how the record indicator will be shown in the channel "
 "selection list."
 msgstr ""
-"Configura si se mostrará (y dónde) un indicador de grabación en la lista de "
-"canales"
+"Configura si se mostrará y dónde (o cómo) un indicador de grabación en la "
+"lista de canales"
 
 msgid ""
 "Configure if and how wide columns will be shown in the channel selection "
@@ -2279,12 +2367,13 @@ msgid ""
 msgstr ""
 "Configura si la lista de canales se mostrará en columnas (y su anchura)"
 
-msgid "Configure if behind the subtitles a background is shown"
+msgid "Configure if behind the subtitles a background is shown."
 msgstr "Configura si se mostrará (o no) un fondo detrás de los subtítulos"
 
 msgid ""
 "Configure if service picons will be shown in the channel selection list."
-msgstr "Configura si se mostrarán los`picons de canal en la lista de canales"
+msgstr ""
+"Configura si se mostrarán los picon de los canales en la lista de canales"
 
 msgid ""
 "Configure if the subtitle should switch between normal, italic, bold and "
@@ -2696,6 +2785,9 @@ msgstr "Configurando"
 msgid "Confirm shutdown:"
 msgstr "Confirmar apagado:"
 
+msgid "Conflict not resolved!"
+msgstr "El conflicto no se ha resuelto"
+
 msgid "Conflicting timer"
 msgstr "Temporiz. en conflicto"
 
@@ -2988,8 +3080,14 @@ msgstr "DVB-T2"
 msgid "DVB-USB Device Manager"
 msgstr "Gestor de dispositivos DVB-USB"
 
+msgid "DVD Tool"
+msgstr "DVD Tool"
+
 msgid "DVD media toolbox"
 msgstr "Barra de herramientas DVD"
+
+msgid "DVD titlelist"
+msgstr "Lista de títulos DVD"
 
 msgid "Daily"
 msgstr "Diario"
@@ -3029,6 +3127,9 @@ msgstr "Por defecto"
 
 msgid "Default (US)"
 msgstr "Predeterminado (US)"
+
+msgid "Default PIN for CI"
+msgstr "PIN por defecto para C.I"
 
 msgid "Default movie location"
 msgstr "Ubicación por defecto de películas"
@@ -3313,6 +3414,12 @@ msgstr "Deshabilitar"
 
 msgid "Disable Animations"
 msgstr "Deshabilitar animaciones"
+
+msgid "Disable FastZapping"
+msgstr "Deshabilitar FastZapping"
+
+msgid "Disable MiniTV"
+msgstr "Deshabilitar MiniTV"
 
 msgid "Disable Picture in Picture"
 msgstr "Deshabilitar PiP"
@@ -3734,6 +3841,9 @@ msgstr "Habilitar autenticación para streaming"
 msgid "Enable EIT EPG"
 msgstr "Activar EPG EIT"
 
+msgid "Enable FastZapping"
+msgstr "Habilitar FastZapping"
+
 msgid "Enable Filtering"
 msgstr "Habilitar el filtrado"
 
@@ -3751,6 +3861,9 @@ msgstr "Activar EPG MHW"
 
 msgid "Enable Messages"
 msgstr "Habilitar mensajes"
+
+msgid "Enable MiniTV"
+msgstr "Habilitar MiniTV"
 
 msgid "Enable Netmed EPG"
 msgstr "Activar EPG Netmed"
@@ -3778,6 +3891,9 @@ msgstr "Activar EPG Virgin"
 
 msgid "Enable Wake On LAN"
 msgstr "Habilitar Wake On Lan"
+
+msgid "Enable auto PIN"
+msgstr "Habilitar auto PIN"
 
 msgid "Enable auto cable scan"
 msgstr "Habilitar autobúsqueda de cable"
@@ -4180,7 +4296,7 @@ msgid "Fast Scan"
 msgstr "Búsqueda rápida"
 
 msgid "Fast epoch"
-msgstr "Época rápida"
+msgstr "Intérvalo de giro rápido"
 
 msgid "Fast forward speeds"
 msgstr "Velocidades de avance rápido"
@@ -4197,10 +4313,10 @@ msgid ""
 "P.x on Devicelist - where x >=2) are mounted on the same Device.\n"
 "Please unmount Fixed Mounted Devices with Device Manager Panel!"
 msgstr ""
-"Se ha desmontado el medio.\n"
-"Ahora se puede extraer con seguridad si no hay más particiones montadas en "
-"el mismo dispositivo (se muestran en la lista como P.x, siendo x >=2)\n"
-"Desmonte los montajes fijos desde el Gestor de dispositivos"
+"Se ha desmontado la unidad.\n"
+"Ahora ya se puede extraer si no hay más particiones montadas en el mismo "
+"dispositivo (se muestran en la lista como P.x, siendo x >=2)\n"
+"Si tiene más montajes fijos, desmóntelos desde el Gestor de dispositivos"
 
 msgid "Favourites"
 msgstr "Favoritos"
@@ -4587,6 +4703,9 @@ msgstr "HDMI"
 msgid "HDMI CEC setup"
 msgstr "HDMI CEC"
 
+msgid "HDMI Colorspace"
+msgstr "Espacio de color HDMI"
+
 msgid "HDMI-CEC setup"
 msgstr "Configuración de HDMI-CEC"
 
@@ -4605,11 +4724,17 @@ msgstr "Administrar el reposo desde la TV"
 msgid "Handle wakeup from TV"
 msgstr "Administrar el encendido desde la TV"
 
+msgid "Hard Drive Fast Umount"
+msgstr "Desmontado rápido del disco duro"
+
 msgid "Hard Drive Info"
 msgstr "Info HDD"
 
 msgid "Hard Drive Partitions"
 msgstr "Particiones del Disco Duro"
+
+msgid "Hard Drive Setup"
+msgstr "Configuración del disco duro"
 
 msgid "Hard disk model"
 msgstr "Modelo Disco Duro"
@@ -4687,6 +4812,9 @@ msgstr "Ocultar canales bajo control parental"
 
 msgid "Hide player"
 msgstr "Ocultar reproductor"
+
+msgid "Hide this Dial"
+msgstr "Ocultar este dial"
 
 msgid "Hide zap errors"
 msgstr "Ocultar errores de zapeo"
@@ -4842,6 +4970,9 @@ msgstr ""
 "No se preocupe ahora por las sombras. Se configurarán en el próximo paso.\n"
 "Cuando los resultados sean satisfactorios, pulse OK."
 
+msgid "Ignore conflict"
+msgstr "Ignorar conflicto"
+
 msgid "Image Backup"
 msgstr "Backup de imagen"
 
@@ -4980,6 +5111,9 @@ msgstr "Configuración del dispositivo de entrada"
 
 msgid "Input devices"
 msgstr "Dispositivos de entrada"
+
+msgid "Insert mount point:"
+msgstr "Insertar montaje"
 
 msgid "Install"
 msgstr "Instalar"
@@ -5167,6 +5301,9 @@ msgstr "Solo reproducir"
 
 msgid "Just scale"
 msgstr "Ajuste exacto"
+
+msgid "Keep old drive"
+msgstr "Mantener el dispositivo anterior"
 
 msgid "Keep service"
 msgstr "Mantener en canal"
@@ -5721,6 +5858,9 @@ msgstr "Montar en ruta personalizada"
 
 msgid "Mount options"
 msgstr "Opciones de montaje"
+
+msgid "Mount point exist!"
+msgstr "El montaje ya existe!"
 
 msgid "Mount shares again"
 msgstr "Montar de nuevo los recursos de red"
@@ -6396,6 +6536,12 @@ msgstr ""
 msgid "Nowhere"
 msgstr "En ninguna parte"
 
+msgid "Number of channel number digits"
+msgstr "Número de dígitos del canal"
+
+msgid "Number of rows"
+msgstr "Número de filas"
+
 msgid "OFW Launcher"
 msgstr "Iniciar FRW oficial"
 
@@ -6533,6 +6679,9 @@ msgstr "Abrir la lista de películas"
 
 msgid "OpenSPA USB Devices"
 msgstr "OpenSPA - Dispositivos USB"
+
+msgid "OpenSPA max CPU frequency"
+msgstr "Frec. máxima CPU - normal"
 
 msgid "OpenVPN Setup"
 msgstr "Configuración OpenVPN"
@@ -6861,7 +7010,7 @@ msgid "Please choose an HbbTV application."
 msgstr "Seleccione una aplicación HbbTV."
 
 msgid "Please choose an extension..."
-msgstr "Elija una extensión..."
+msgstr "Elija una opción..."
 
 msgid "Please choose one."
 msgstr "Seleccione una opción:"
@@ -7028,14 +7177,32 @@ msgstr "Configure el sintonizador C"
 msgid "Please set up tuner D"
 msgstr "Configure el sintonizador D"
 
+msgid "Please set up tuner E"
+msgstr "Configure el sintonizador E"
+
+msgid "Please set up tuner F"
+msgstr "Configure el sintonizador F"
+
+msgid "Please set up tuner G"
+msgstr "Configure el sintonizador G"
+
+msgid "Please set up tuner H"
+msgstr "Configure el sintonizador H"
+
+msgid "Please set up tuner I"
+msgstr "Configure el sintonizador I"
+
+msgid "Please set up tuner J"
+msgstr "Configure el sintonizador J"
+
 msgid ""
 "Please setup your user interface by adjusting the values till the edges of "
 "the red box are touching the edges of your TV.\n"
 "When you are ready press OK to continue."
 msgstr ""
-"Ajuste el OSD de modo que las esquinas de la pantalla de prueba coincidan "
-"con las esquinas de su TV.\n"
-"Cuando la posición sea correcta, pulse OK para continuar."
+"Ajuste el OSD de modo que los bordes de la pantalla de prueba coincidan con "
+"los bordes de su TV.\n"
+"Cuando el tamaño y posición sean correctos, pulse OK para continuar."
 
 msgid ""
 "Please use direction keys to move the PiP window.\n"
@@ -7144,7 +7311,7 @@ msgid "Position Setup"
 msgstr "Ajuste de la posición"
 
 msgid "Position of completed timers in timerlist"
-msgstr "Posición, en la lista, de las reservas completadas"
+msgstr "Ubicación de las reservas terminadas"
 
 msgid "Position stored at index"
 msgstr "Posición guardada en el índice"
@@ -7460,7 +7627,10 @@ msgid "Quick and safe remove for your mounted devices "
 msgstr "Desmontado rápido y seguro de los disp. montados "
 
 msgid "Quick zap"
-msgstr "Zaping rápido"
+msgstr "Zapping rápido"
+
+msgid "REC"
+msgstr "GRAB"
 
 msgid "RF output"
 msgstr "Salida de antena"
@@ -7896,6 +8066,9 @@ msgstr "Restauración en curso..."
 msgid "Restore system settings"
 msgstr "Restaurar la configuración"
 
+msgid "Restoring satellites.xml not possible!"
+msgstr "No es posible restaurar satellites.xml!"
+
 msgid "Restoring..."
 msgstr "Restaurando"
 
@@ -8115,6 +8288,9 @@ msgstr "Guardar valores y salir"
 msgid "Scaler sharpness"
 msgstr "Nitidez del escalado"
 
+msgid "Scaling governor"
+msgstr "Governor"
+
 msgid "Scaling mode"
 msgstr "Tipo de escalado"
 
@@ -8237,6 +8413,9 @@ msgstr "Busca recursos compartidos"
 msgid "Search for network shares..."
 msgstr "Busca recursos compartidos. "
 
+msgid "Search picons in /media/hdd"
+msgstr "Buscar picons en el disco duro"
+
 msgid "Search strictness"
 msgstr "Búsqueda estricta"
 
@@ -8262,7 +8441,7 @@ msgid "Searching west ..."
 msgstr "Buscando al oeste..."
 
 msgid "Searching your network. Please wait..."
-msgstr "Buscando en su red privada. Espere."
+msgstr "Buscando en su red interna. Espere."
 
 msgid "Second cable of motorized LNB"
 msgstr "Segundo hilo de un LNB motorizado"
@@ -8461,6 +8640,9 @@ msgstr "Seleccionar red inalámbrica"
 msgid "Select your provider, and press OK to start the scan"
 msgstr "Seleccione el proveedor y pulse OK para iniciar la búsqueda"
 
+msgid "Selected mount point is already used by another drive."
+msgstr "El montaje seleccionado ya está siendo utilizado por otro dispositivo"
+
 msgid "Selecting satellites 1 (USALS)"
 msgstr "Seleccionar satélite 1 (USALS)"
 
@@ -8509,6 +8691,9 @@ msgstr "Info de servidor (Versión oscam: %s)"
 msgid "Server share"
 msgstr "Carpeta compart. del servidor"
 
+msgid "Server:"
+msgstr "Servidor:"
+
 msgid "Servers"
 msgstr "Servidores"
 
@@ -8533,6 +8718,9 @@ msgstr "El canal ha sido añadido a los favoritos."
 msgid "Service has been added to the selected bouquet."
 msgstr "El canal ha sido añadido a la lista seleccionada."
 
+msgid "Service info font size"
+msgstr "Tamaño de fuente - Info del canal"
+
 msgid ""
 "Service invalid!\n"
 "(Timeout reading PMT)"
@@ -8543,12 +8731,18 @@ msgstr ""
 msgid "Service name"
 msgstr "Nombre del canal"
 
+msgid "Service name font size"
+msgstr "Tamaño de fuente - Nombre del canal"
+
 msgid ""
 "Service not found!\n"
 "(SID not found in PAT)"
 msgstr ""
 "¡Canal no encontrado!\n"
 "(SID no encontrado en el PAT)"
+
+msgid "Service number font size"
+msgstr "Tamaño de fuente - Número del canal"
 
 msgid "Service reference"
 msgstr "Refer. del canal"
@@ -8577,6 +8771,9 @@ msgstr "Información del Canal"
 
 msgid "Services"
 msgstr "Canales"
+
+msgid "Set CPU speed settings"
+msgstr "Ajuste de la frec. de la CPU"
 
 msgid "Set Framerate for MiniTV"
 msgstr "Ajustar el framerate para MiniTV"
@@ -8676,6 +8873,9 @@ msgstr "Configurar rutas"
 msgid "Setup"
 msgstr "Configuración"
 
+msgid "Setup delay mode to zap to channels."
+msgstr "Configura el retardo que se aplicará al zapping"
+
 msgid "Setup for the Audio Sync Plugin"
 msgstr "Configuración del plugin Audio Sync"
 
@@ -8727,6 +8927,9 @@ msgstr "Mostrar 1080p 25fps como"
 
 msgid "Show 1080p 30fps as"
 msgstr "Mostrar 1080p 30fps como"
+
+msgid "Show 480/576p 24fps as"
+msgstr "Mostrar 480/576p 24fps como"
 
 msgid "Show 720p 24fps as"
 msgstr "Mostrar 720p 24fps como"
@@ -8932,6 +9135,9 @@ msgstr "Mostrar el tiempo transcurrido como positivo"
 
 msgid "Show updated packages"
 msgstr "Mostrar paquetes actualizados"
+
+msgid "Show warning before set 'Ignore conflict'"
+msgstr "Mostrar alerta antes de ajustar 'Ignorar conflicto'"
 
 msgid "Show warning when timeshift is stopped"
 msgstr "Mostrar alerta al detener timeshift"
@@ -9281,7 +9487,7 @@ msgid "Specify timeframe to ignore inactivity sleeptimer"
 msgstr "Intervalo donde no actuará el tempor. de reposo"
 
 msgid "Specify timeframe to ignore the shutdown in standby"
-msgstr "Intervalo para ignorar 'apagar en reposo'"
+msgstr "Intérvalo para ignorar 'apagar en reposo'"
 
 msgid "Split preview mode"
 msgstr "Dividir modo previsualización"
@@ -9358,11 +9564,17 @@ msgstr "Ir a reposo después de 75 minutos"
 msgid "Standby in 90 minutes"
 msgstr "Ir a reposo después de 90 minutos"
 
+msgid "Standby max CPU frequency"
+msgstr "Frec. máxima CPU - reposo"
+
 msgid "StandbyLED"
 msgstr "LED de reposo"
 
 msgid "Start"
 msgstr "Iniciar"
+
+msgid "Start Boot Frequency"
+msgstr "Frecuencia de arranque"
 
 msgid "Start Instant Record"
 msgstr "Iniciar grabación instantánea"
@@ -9420,7 +9632,7 @@ msgid "Startpage"
 msgstr "Pagina Inicio"
 
 msgid "Startup the set top box in standby"
-msgstr "Inicia el receptor poniendolo en modo reposo"
+msgstr "Inicia el receptor poniéndolo en modo reposo"
 
 msgid "Startup to Standby"
 msgstr "Iniciar en reposo"
@@ -9750,9 +9962,6 @@ msgstr "El fichero TS es demasiado grande para el nivel 1 ISO9660."
 msgid "TSID"
 msgstr "TSID"
 
-msgid "TUNING"
-msgstr "SINTONIZANDO"
-
 msgid "TV"
 msgstr "TV"
 
@@ -9764,6 +9973,9 @@ msgstr "Reportar dirección física de la TV"
 
 msgid "TXT PID"
 msgstr "PID TxT"
+
+msgid "Table of contents for collection"
+msgstr "Índice para la colección"
 
 msgid "Tags"
 msgstr "Etiquetas"
@@ -9791,6 +10003,9 @@ msgstr "Terrestre"
 
 msgid "Terrestrial provider"
 msgstr "Zona geográfica"
+
+msgid "Test"
+msgstr "Probar"
 
 msgid "Test DiSEqC settings"
 msgstr "Configuración de test DisEqC"
@@ -9842,6 +10057,15 @@ msgid ""
 msgstr ""
 "El plugin CSFD no está instalado!\n"
 "Por favor, instálelo"
+
+msgid ""
+"The DVD standard doesn't support H.264 (HDTV) video streams. Do you want to "
+"create a special format data DVD (which will not play in stand-alone DVD "
+"players) instead?"
+msgstr ""
+"El DVD standard no soporta videos H.264 (HDTV). En su lugar, desea crear un "
+"DVD de datos de formato especial (no reproducible en reproductores de "
+"sobremesa)?"
 
 msgid ""
 "The OpenSPA team would like to point out that upgrading to the latest "
@@ -10017,6 +10241,26 @@ msgstr ""
 "contenidos del disco."
 
 msgid ""
+"This allows you change the font size relative to skin size, so 1 increases "
+"by 1 point size, and -1 decreases by 1 point size"
+msgstr ""
+"Permite cambiar el tamaño de la fuente en relación al tamaño del skin: 1 "
+"aumenta el tamaño en 1 punto; -1 lo disminuye en 1 punto.\n"
+" Valores: -8..0..10"
+
+msgid "This allows you change the number of rows shown."
+msgstr ""
+"Permite cambiar el número de filas que se mostrarán (útil si se cambia el "
+"tamaño de fuente)"
+
+msgid ""
+"This allows you to set the number of digits to 5, if you have more than 9999 "
+"channels."
+msgstr ""
+"Configura el número de dígitos del canal a 5 para cuando se dispone de más "
+"de 9999 canales."
+
+msgid ""
 "This info is for developers only.\n"
 "For a normal users it is not important.\n"
 "Don't panic, please, when here will be displayed any suspicious informations!"
@@ -10025,6 +10269,9 @@ msgstr ""
 "No es relevante para los usuarios normales.\n"
 "Si Vd. no es desarrollador no haga caso de la información que aqui se "
 "muestre!"
+
+msgid "This option allows you can config the Colorspace from Auto to RGB"
+msgstr "Permite configurar el espacio de color de Auto a RGB"
 
 msgid "This option allows you choose how to display elapsed time as + or -"
 msgstr "Permite elegir si se mostrará el tiempo transcurrido como + o -"
@@ -10051,8 +10298,8 @@ msgstr ""
 "canales en directo."
 
 msgid ""
-"This option allows you to always use 1080p50 for TV/.ts, and 1080p24/p50/p60 "
-"for videos"
+"This option allows you to always use e.g. 1080p50 for TV/.ts, and 1080p24/"
+"p50/p60 for videos"
 msgstr ""
 "Permite utilizar siempre 1080p50 en TV/.ts, y 1080p24/p50/p60 en los videos"
 
@@ -10088,13 +10335,20 @@ msgstr ""
 "los TV soportan estas resoluciones)"
 
 msgid ""
+"This option allows you to choose how to display SD progressive 24Hz on your "
+"TV. (as not all TV's support these resolutions)"
+msgstr ""
+"Permite elegir de qué modo SD progresivo 24Hz se mostrará en la pantalla. "
+"(No todos los TV soportan estas resoluciones)"
+
+msgid ""
 "This option allows you to choose how to display standard defintion video on "
 "your TV."
 msgstr ""
 "Permite elegir de qué modo se mostrará la definición estándar en la TV."
 
 msgid "This option allows you to enable 3D Surround Sound."
-msgstr "Permite des/habilitar el audio 3D Envolvente."
+msgstr "Permite habilitar/deshabilitar el audio 3D envolvente."
 
 msgid "This option allows you to power off the display."
 msgstr "Permite desconectar el display."
@@ -10606,6 +10860,9 @@ msgstr "Sin encriptar"
 msgid "UnhandledKey"
 msgstr "Tecla no gestionada"
 
+msgid "Unhide All Dials"
+msgstr "Mostrar los diales ocultos"
+
 msgid "Unhide parental control services"
 msgstr "Volver a mostrar los canales bajo control parental"
 
@@ -10764,7 +11021,7 @@ msgid "Use fastscan channel numbering"
 msgstr "Usar numeración de canales 'fastscan'"
 
 msgid "Use for load only x days in EPG"
-msgstr "Utilizar para cargar sólo X dias en el EPG"
+msgstr "Nº máximo de dias que se descargarán en la EPG"
 
 msgid "Use frequency or channel"
 msgstr "Buscar por frecuencia o por canal"
@@ -10852,6 +11109,16 @@ msgstr "Usuario :"
 
 msgid "User defined"
 msgstr "Definido por el usuario"
+
+msgid "User defined delay when you press another button to zap to the channel."
+msgstr ""
+"Retardo (configurable) cuando se pulsa otra tecla para el cambio de canal"
+
+msgid ""
+"User defined delay when you press the first button to zap to the channel."
+msgstr ""
+"Retardo (configurable) cuando se pulsa la primera tecla para el cambio de "
+"canal"
 
 msgid "User defined transponder"
 msgstr "Transpondedor definido por el usuario"
@@ -10996,7 +11263,7 @@ msgid "Video output mode"
 msgstr "Modo de salida de vídeo"
 
 msgid "Video settings"
-msgstr "Brillo & Contraste"
+msgstr "Ajustes de vídeo"
 
 msgid "Video setup"
 msgstr "Configuración de vídeo"
@@ -11182,6 +11449,15 @@ msgstr "Despertar como"
 msgid "Warning"
 msgstr "Advertencia"
 
+msgid ""
+"Warning!\n"
+"This is an option for advanced users.\n"
+"Really disable timer conflict detection?"
+msgstr ""
+"Atención!\n"
+"Esta es una opción para usuarios avanzados.\n"
+"Seguro que quiere deshabilitarla?"
+
 msgid "Warning: no LNB; using factory defaults."
 msgstr "No hay LNB, se utilizará la configuración por defecto"
 
@@ -11287,8 +11563,11 @@ msgstr "Oeste"
 msgid "West limit set"
 msgstr "Límite oeste configurado"
 
-msgid "Wetek CPU Frequency Setup"
-msgstr "Configuración de la Freq. de WeTek Play"
+msgid "Wetek CPU Control"
+msgstr "Control de CPU WeTek"
+
+msgid "Wetek FRQ Setup"
+msgstr "WeTek FRQ"
 
 msgid "What Day of month ?"
 msgstr "Que dia del mes?"
@@ -11438,7 +11717,7 @@ msgid ""
 msgstr ""
 "Si se habilita, se desencriptarán los streams http recibidos. Esto consumirá "
 "más recursos (desencriptar demuxers), habilitar sólo en caso necesario. "
-"Independientemente de est ajuste, los streams individuales siempre se "
+"Independientemente de este ajuste, los streams individuales siempre se "
 "descodifican si se añade 0x100 al tipo de canal. Por defecto, deshabilitado."
 
 msgid "When enabled, authentication is required to watch http streams."
@@ -11714,15 +11993,6 @@ msgstr ""
 "\n"
 "Quiere hacer un reinicio de fábrica?"
 
-msgid ""
-"When you use the remote fallback tuner to do recording, the timer conflict "
-"detection can't handle remote fallback tuners. This option allows you to "
-"turn off the timer confict detection"
-msgstr ""
-"Cuando se utiliza el sintonizador remoto para grabar, la detección de "
-"reservas en conflicto no puede administrar los sintonizadores remotos. Esta "
-"opción permite desactivar la detección de conflictos"
-
 msgid "Where do you want to backup your settings?"
 msgstr "Donde quiere salvar la configuración?"
 
@@ -11886,6 +12156,9 @@ msgstr "Puede continuar viendo TV, etc. mientras se ejecutan las tareas."
 msgid "You can install this plugin."
 msgstr "Puede instalar el plugin."
 
+msgid "You can only burn receiver recordings!"
+msgstr "Sólo puede grabar grabaciones del receptor"
+
 msgid "You can remove this plugin."
 msgstr "Puede desinstalar el plugin."
 
@@ -11949,6 +12222,9 @@ msgstr ""
 "el sitio web http://openspa.info.\n"
 "El receptor se apagará. Después de realizar las instrucciones del sitio web, "
 "el firmware le preguntará si quiere restaurar la configuración."
+
+msgid "You need to initialize your storage device first"
+msgstr "Antes debe inicializar el dispositivo"
 
 msgid "You system does not support ext4"
 msgstr "Este sistema no soporta EXT4"
@@ -12133,7 +12409,7 @@ msgid "Zap focus to main screen"
 msgstr "Zapear en la pantalla principal"
 
 msgid "Zap mode"
-msgstr "Pantalla de zaping"
+msgstr "Pantalla de zapping"
 
 msgid "Zap to"
 msgstr "Saltar a"
@@ -12300,8 +12576,8 @@ msgstr "Siempre"
 msgid "and AutoRestart service when restart GUI"
 msgstr "y activar inicio automático al reiniciar GUI"
 
-msgid "and never ask again this session again"
-msgstr "y no volver a preguntar en esta sesión"
+msgid "and never ask this again"
+msgstr "y no volver a preguntarlo"
 
 msgid "and never show this message again"
 msgstr "no volver a mostrar este mensaje"
@@ -12450,6 +12726,9 @@ msgstr "Confirmado"
 
 msgid "connected"
 msgstr "Conectado"
+
+msgid "conservative (default)"
+msgstr "Conservative (defecto)"
 
 msgid ""
 "contain a file with the name: \n"
@@ -12650,6 +12929,9 @@ msgstr "salir del menú de configuración del adaptador de red"
 msgid "experimental film/video"
 msgstr "cine/video experimental"
 
+msgid "extrawide"
+msgstr "extra-amplio"
+
 msgid "false"
 msgstr "falso"
 
@@ -12761,6 +13043,9 @@ msgstr "saltos:"
 msgid "horizontal"
 msgstr "Horizontal"
 
+msgid "hotplug"
+msgstr "Hotplug"
+
 msgid "http://IP-ADDRESS:8001"
 msgstr "http://dirección_ip:8001"
 
@@ -12793,6 +13078,12 @@ msgstr "iniciar módulos"
 
 msgid "insert mark here"
 msgstr "insertar marca aquí"
+
+msgid "insert without cutlist editor"
+msgstr "insertar sin el editor de listas"
+
+msgid "interactive"
+msgstr "Interactiva"
 
 msgid "invalid data: "
 msgstr "Fecha no válida: "
@@ -13052,6 +13343,9 @@ msgstr "de Lunes a Viernes"
 msgid "once"
 msgstr "Una vez"
 
+msgid "ondemand"
+msgstr "Ondemand"
+
 msgid "only HD"
 msgstr "Sólo en HD"
 
@@ -13090,6 +13384,9 @@ msgstr "coincidencia parcial"
 
 msgid "pass"
 msgstr "contraseña"
+
+msgid "performance"
+msgstr "Performance"
 
 msgid "performing arts"
 msgstr "artes"
@@ -13261,6 +13558,16 @@ msgstr "romántica"
 
 msgid "running"
 msgstr "corriendo"
+
+msgid ""
+"satellites.xml not found or corrupted!\n"
+"It is possible to watch TV,\n"
+"but it's not possible to search for new TV channels\n"
+"or to configure tuner settings"
+msgstr ""
+"No se ha encointrado satellites.xml o está corrupto\n"
+"Puede seguir viendo TV, pero no podrá buscar nuevos canales\n"
+"ni configurar el sintonizador"
 
 msgid "save last directory on exit"
 msgstr "Guardar el último directorio al salir"
@@ -13616,8 +13923,14 @@ msgstr "Blanco"
 msgid "whitelist"
 msgstr "Lista blanca"
 
+msgid "wide"
+msgstr "amplio"
+
 msgid "width"
 msgstr "ancho"
+
+msgid "will take about 1-4 minutes for this system\n"
+msgstr "tardará entre 1 y 4 minutos en finalizar\n"
 
 msgid "will take about 3-12 minutes for this system\n"
 msgstr "tardará entre 3 y 12 minutos en finalizar\n"
@@ -13668,72 +13981,3 @@ msgstr "Cambiar antes de Stream"
 
 msgid "zapped"
 msgstr "Cambiado"
-
-msgid "Channel zap delay mode"
-msgstr "Retardo del zapping"
-
-msgid "Setup delay mode to zap to channels."
-msgstr "Configura el retardo que se aplicará al zapping"
-
-msgid "Channel zap delay first button"
-msgstr "Retardo del canal - primera tecla"
-
-msgid "User defined delay when you press the first button to zap to the channel."
-msgstr "Retardo (configurable) cuando se pulsa la primera tecla para el cambio de canal"
-
-msgid "Channel zap delay another button"
-msgstr "Retardo del canal - otra tecla"
-
-msgid "User defined delay when you press another button to zap to the channel."
-msgstr "Retardo (configurable) cuando se pulsa otra tecla para el cambio de canal"
-
-msgid "Number of channel number digits"
-msgstr "Número de dígitos del canal"
-
-msgid "This allows you to set the number of digits to 5, if you have more than 9999 channels."
-msgstr "Configura el número de dígitos del canal a 5 para cuando se dispone de más de 9999 canales."
-
-msgid "REC"
-msgstr "GRAB"
-
-msgid "Please set up tuner E"
-msgstr "Configure el sintonizador E"
-
-msgid "Please set up tuner F"
-msgstr "Configure el sintonizador F"
-
-msgid "Please set up tuner G"
-msgstr "Configure el sintonizador G"
-
-msgid "Please set up tuner H"
-msgstr "Configure el sintonizador H"
-
-msgid "Please set up tuner I"
-msgstr "Configure el sintonizador I"
-
-msgid "Please set up tuner J"
-msgstr "Configure el sintonizador J"
-
-msgid "Disable MiniTV"
-msgstr "Deshabilitar MiniTV"
-
-msgid "Enable MiniTV"
-msgstr "Habilitar MiniTV"
-
-msgid "Disable FastZapping"
-msgstr "Deshabilitar FastZapping"
-
-msgid "Enable FastZapping"
-msgstr "Habilitar FastZapping"
-
-msgid "will take about 1-4 minutes for this system\n"
-msgstr "tardará entre 1 y 4 min. en este sitema\n"
-
-msgid "\n<This tuner is configured automatically>"
-msgstr "\n<Este sintoniz. se configura automáticamente>"
-
-msgid "HDMI Colorspace"
-msgstr "Espacio de color HDMI"
-
-msgid "This option allows you can config the Colorspace from Auto to RGB"
-msgstr "Permite configurar el espacio de color de Auto a RGB"
