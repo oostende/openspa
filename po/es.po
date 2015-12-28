@@ -216,13 +216,13 @@ msgid " (disabled)"
 msgstr " (deshabilitado)"
 
 msgid " (higher than any auto)"
-msgstr " (mayor que cualquier auto)"
+msgstr " (mayor que cualquier 'auto')"
 
 msgid " (higher than rotor any auto)"
-msgstr " (mayor que cualquier auto de motor)"
+msgstr " (mayor que cualquier 'auto' de motor)"
 
 msgid " (lower than any auto)"
-msgstr " (menor que cualquier auto)"
+msgstr " (menor que cualquier 'auto')"
 
 msgid " - mounted on "
 msgstr " - montado en "
@@ -453,6 +453,9 @@ msgstr "-9.0 seg."
 
 msgid "-9.5 sec"
 msgstr "-9.5 seg."
+
+msgid "/media/custom"
+msgstr "/media/custom"
 
 msgid "0.5 sec"
 msgstr "0.5 seg."
@@ -1430,6 +1433,9 @@ msgstr "Cuarto idioma de audio"
 msgid "Audio options..."
 msgstr "Opciones de audio"
 
+msgid "Audio settings"
+msgstr "Ajustes de audio"
+
 msgid "August"
 msgstr "Agosto"
 
@@ -1917,6 +1923,17 @@ msgstr "No hay señal... cancelando"
 msgid "Cannot format current drive."
 msgstr "No se puede formatear el disp. actual"
 
+msgid ""
+"Cannot format current drive.\n"
+"A record in progress, timeshift or some external tools (like samba, swapfile "
+"and nfsd) may cause this problem.\n"
+"Please stop this actions/applications and try again"
+msgstr ""
+"No se puede formatear el dispositivo.\n"
+"Una grabación, timeshift o algún proceso externo (samba, swap, nfsd...) "
+"pueden estar causando este problema.\n"
+"Detenga estos procesos/servicios y vuelva a intentarlo"
+
 msgid "Cannot format partition %d"
 msgstr "No se puede formatear la partición %d"
 
@@ -1948,6 +1965,17 @@ msgstr ""
 
 msgid "Cannot umount current drive."
 msgstr "No se puede desmontar el dispositivo"
+
+msgid ""
+"Cannot umount current drive.\n"
+"A record in progress, timeshift or some external tools (like samba, swapfile "
+"and nfsd) may cause this problem.\n"
+"Please stop this actions/applications and try again"
+msgstr ""
+"No se puede desmontar la unidad.\n"
+"Una grabación, timeshift o algún proceso externo (samba, swap, nfsd...) "
+"pueden estar causando este problema.\n"
+"Detenga estos procesos/servicios y vuelva a intentarlo"
 
 msgid "Capacity"
 msgstr "Capacidad"
@@ -1999,6 +2027,9 @@ msgstr "Cambiar de lista en zapping rápido"
 
 msgid "Change hostname"
 msgstr "Cambiar nombre de host"
+
+msgid "Change old drive with this new drive"
+msgstr "Cambiar la unidad anterior por la nueva"
 
 msgid "Change recording (add time)"
 msgstr "Cambiar grabación (añadir tiempo)"
@@ -2294,8 +2325,7 @@ msgstr ""
 
 msgid ""
 "Configure for how long the infobar will remain visible after activation."
-msgstr ""
-"Configura el tiempo durante el que la infobar se mostrará en la pantalla."
+msgstr "Configura durante cuánto tiempo se mostrará la infobar en la pantalla."
 
 msgid ""
 "Configure for how many minutes finished events should remain visible in the "
@@ -2328,8 +2358,8 @@ msgid ""
 "Configure if and how the record indicator will be shown in the channel "
 "selection list."
 msgstr ""
-"Configura si se mostrará (y dónde) un indicador de grabación en la lista de "
-"canales"
+"Configura si se mostrará y dónde (o cómo) un indicador de grabación en la "
+"lista de canales"
 
 msgid ""
 "Configure if and how wide columns will be shown in the channel selection "
@@ -2337,12 +2367,13 @@ msgid ""
 msgstr ""
 "Configura si la lista de canales se mostrará en columnas (y su anchura)"
 
-msgid "Configure if behind the subtitles a background is shown"
+msgid "Configure if behind the subtitles a background is shown."
 msgstr "Configura si se mostrará (o no) un fondo detrás de los subtítulos"
 
 msgid ""
 "Configure if service picons will be shown in the channel selection list."
-msgstr "Configura si se mostrarán los`picons de canal en la lista de canales"
+msgstr ""
+"Configura si se mostrarán los picon de los canales en la lista de canales"
 
 msgid ""
 "Configure if the subtitle should switch between normal, italic, bold and "
@@ -3049,8 +3080,14 @@ msgstr "DVB-T2"
 msgid "DVB-USB Device Manager"
 msgstr "Gestor de dispositivos DVB-USB"
 
+msgid "DVD Tool"
+msgstr "DVD Tool"
+
 msgid "DVD media toolbox"
 msgstr "Barra de herramientas DVD"
+
+msgid "DVD titlelist"
+msgstr "Lista de títulos DVD"
 
 msgid "Daily"
 msgstr "Diario"
@@ -4259,7 +4296,7 @@ msgid "Fast Scan"
 msgstr "Búsqueda rápida"
 
 msgid "Fast epoch"
-msgstr "Época rápida"
+msgstr "Intérvalo de giro rápido"
 
 msgid "Fast forward speeds"
 msgstr "Velocidades de avance rápido"
@@ -4276,10 +4313,10 @@ msgid ""
 "P.x on Devicelist - where x >=2) are mounted on the same Device.\n"
 "Please unmount Fixed Mounted Devices with Device Manager Panel!"
 msgstr ""
-"Se ha desmontado el medio.\n"
-"Ahora se puede extraer con seguridad si no hay más particiones montadas en "
-"el mismo dispositivo (se muestran en la lista como P.x, siendo x >=2)\n"
-"Desmonte los montajes fijos desde el Gestor de dispositivos"
+"Se ha desmontado la unidad.\n"
+"Ahora ya se puede extraer si no hay más particiones montadas en el mismo "
+"dispositivo (se muestran en la lista como P.x, siendo x >=2)\n"
+"Si tiene más montajes fijos, desmóntelos desde el Gestor de dispositivos"
 
 msgid "Favourites"
 msgstr "Favoritos"
@@ -4687,11 +4724,17 @@ msgstr "Administrar el reposo desde la TV"
 msgid "Handle wakeup from TV"
 msgstr "Administrar el encendido desde la TV"
 
+msgid "Hard Drive Fast Umount"
+msgstr "Desmontado rápido del disco duro"
+
 msgid "Hard Drive Info"
 msgstr "Info HDD"
 
 msgid "Hard Drive Partitions"
 msgstr "Particiones del Disco Duro"
+
+msgid "Hard Drive Setup"
+msgstr "Configuración del disco duro"
 
 msgid "Hard disk model"
 msgstr "Modelo Disco Duro"
@@ -5069,6 +5112,9 @@ msgstr "Configuración del dispositivo de entrada"
 msgid "Input devices"
 msgstr "Dispositivos de entrada"
 
+msgid "Insert mount point:"
+msgstr "Insertar montaje"
+
 msgid "Install"
 msgstr "Instalar"
 
@@ -5255,6 +5301,9 @@ msgstr "Solo reproducir"
 
 msgid "Just scale"
 msgstr "Ajuste exacto"
+
+msgid "Keep old drive"
+msgstr "Mantener el dispositivo anterior"
 
 msgid "Keep service"
 msgstr "Mantener en canal"
@@ -5809,6 +5858,9 @@ msgstr "Montar en ruta personalizada"
 
 msgid "Mount options"
 msgstr "Opciones de montaje"
+
+msgid "Mount point exist!"
+msgstr "El montaje ya existe!"
 
 msgid "Mount shares again"
 msgstr "Montar de nuevo los recursos de red"
@@ -6486,6 +6538,9 @@ msgstr "En ninguna parte"
 
 msgid "Number of channel number digits"
 msgstr "Número de dígitos del canal"
+
+msgid "Number of rows"
+msgstr "Número de filas"
 
 msgid "OFW Launcher"
 msgstr "Iniciar FRW oficial"
@@ -7256,7 +7311,7 @@ msgid "Position Setup"
 msgstr "Ajuste de la posición"
 
 msgid "Position of completed timers in timerlist"
-msgstr "Posición, en la lista, de las reservas completadas"
+msgstr "Ubicación de las reservas terminadas"
 
 msgid "Position stored at index"
 msgstr "Posición guardada en el índice"
@@ -8011,6 +8066,9 @@ msgstr "Restauración en curso..."
 msgid "Restore system settings"
 msgstr "Restaurar la configuración"
 
+msgid "Restoring satellites.xml not possible!"
+msgstr "No es posible restaurar satellites.xml!"
+
 msgid "Restoring..."
 msgstr "Restaurando"
 
@@ -8582,6 +8640,9 @@ msgstr "Seleccionar red inalámbrica"
 msgid "Select your provider, and press OK to start the scan"
 msgstr "Seleccione el proveedor y pulse OK para iniciar la búsqueda"
 
+msgid "Selected mount point is already used by another drive."
+msgstr "El montaje seleccionado ya está siendo utilizado por otro dispositivo"
+
 msgid "Selecting satellites 1 (USALS)"
 msgstr "Seleccionar satélite 1 (USALS)"
 
@@ -8657,6 +8718,9 @@ msgstr "El canal ha sido añadido a los favoritos."
 msgid "Service has been added to the selected bouquet."
 msgstr "El canal ha sido añadido a la lista seleccionada."
 
+msgid "Service info font size"
+msgstr "Tamaño de fuente - Info del canal"
+
 msgid ""
 "Service invalid!\n"
 "(Timeout reading PMT)"
@@ -8667,12 +8731,18 @@ msgstr ""
 msgid "Service name"
 msgstr "Nombre del canal"
 
+msgid "Service name font size"
+msgstr "Tamaño de fuente - Nombre del canal"
+
 msgid ""
 "Service not found!\n"
 "(SID not found in PAT)"
 msgstr ""
 "¡Canal no encontrado!\n"
 "(SID no encontrado en el PAT)"
+
+msgid "Service number font size"
+msgstr "Tamaño de fuente - Número del canal"
 
 msgid "Service reference"
 msgstr "Refer. del canal"
@@ -8857,6 +8927,9 @@ msgstr "Mostrar 1080p 25fps como"
 
 msgid "Show 1080p 30fps as"
 msgstr "Mostrar 1080p 30fps como"
+
+msgid "Show 480/576p 24fps as"
+msgstr "Mostrar 480/576p 24fps como"
 
 msgid "Show 720p 24fps as"
 msgstr "Mostrar 720p 24fps como"
@@ -9559,7 +9632,7 @@ msgid "Startpage"
 msgstr "Pagina Inicio"
 
 msgid "Startup the set top box in standby"
-msgstr "Inicia el receptor poniendolo en modo reposo"
+msgstr "Inicia el receptor poniéndolo en modo reposo"
 
 msgid "Startup to Standby"
 msgstr "Iniciar en reposo"
@@ -9901,6 +9974,9 @@ msgstr "Reportar dirección física de la TV"
 msgid "TXT PID"
 msgstr "PID TxT"
 
+msgid "Table of contents for collection"
+msgstr "Índice para la colección"
+
 msgid "Tags"
 msgstr "Etiquetas"
 
@@ -9981,6 +10057,15 @@ msgid ""
 msgstr ""
 "El plugin CSFD no está instalado!\n"
 "Por favor, instálelo"
+
+msgid ""
+"The DVD standard doesn't support H.264 (HDTV) video streams. Do you want to "
+"create a special format data DVD (which will not play in stand-alone DVD "
+"players) instead?"
+msgstr ""
+"El DVD standard no soporta videos H.264 (HDTV). En su lugar, desea crear un "
+"DVD de datos de formato especial (no reproducible en reproductores de "
+"sobremesa)?"
 
 msgid ""
 "The OpenSPA team would like to point out that upgrading to the latest "
@@ -10156,6 +10241,19 @@ msgstr ""
 "contenidos del disco."
 
 msgid ""
+"This allows you change the font size relative to skin size, so 1 increases "
+"by 1 point size, and -1 decreases by 1 point size"
+msgstr ""
+"Permite cambiar el tamaño de la fuente en relación al tamaño del skin: 1 "
+"aumenta el tamaño en 1 punto; -1 lo disminuye en 1 punto.\n"
+" Valores: -8..0..10"
+
+msgid "This allows you change the number of rows shown."
+msgstr ""
+"Permite cambiar el número de filas que se mostrarán (útil si se cambia el "
+"tamaño de fuente)"
+
+msgid ""
 "This allows you to set the number of digits to 5, if you have more than 9999 "
 "channels."
 msgstr ""
@@ -10200,8 +10298,8 @@ msgstr ""
 "canales en directo."
 
 msgid ""
-"This option allows you to always use 1080p50 for TV/.ts, and 1080p24/p50/p60 "
-"for videos"
+"This option allows you to always use e.g. 1080p50 for TV/.ts, and 1080p24/"
+"p50/p60 for videos"
 msgstr ""
 "Permite utilizar siempre 1080p50 en TV/.ts, y 1080p24/p50/p60 en los videos"
 
@@ -10235,6 +10333,13 @@ msgid ""
 msgstr ""
 "Permite elegir de qué modo se mostrará 720p 24Hz en la pantalla. (No todos "
 "los TV soportan estas resoluciones)"
+
+msgid ""
+"This option allows you to choose how to display SD progressive 24Hz on your "
+"TV. (as not all TV's support these resolutions)"
+msgstr ""
+"Permite elegir de qué modo SD progresivo 24Hz se mostrará en la pantalla. "
+"(No todos los TV soportan estas resoluciones)"
 
 msgid ""
 "This option allows you to choose how to display standard defintion video on "
@@ -10916,7 +11021,7 @@ msgid "Use fastscan channel numbering"
 msgstr "Usar numeración de canales 'fastscan'"
 
 msgid "Use for load only x days in EPG"
-msgstr "Utilizar para cargar sólo X dias en el EPG"
+msgstr "Nº máximo de dias que se descargarán en la EPG"
 
 msgid "Use frequency or channel"
 msgstr "Buscar por frecuencia o por canal"
@@ -11158,10 +11263,7 @@ msgid "Video output mode"
 msgstr "Modo de salida de vídeo"
 
 msgid "Video settings"
-msgstr "Ajustes de Vídeo"
-
-msgid "Audio settings"
-msgstr "Ajustes de Audio"
+msgstr "Ajustes de vídeo"
 
 msgid "Video setup"
 msgstr "Configuración de vídeo"
@@ -11615,7 +11717,7 @@ msgid ""
 msgstr ""
 "Si se habilita, se desencriptarán los streams http recibidos. Esto consumirá "
 "más recursos (desencriptar demuxers), habilitar sólo en caso necesario. "
-"Independientemente de est ajuste, los streams individuales siempre se "
+"Independientemente de este ajuste, los streams individuales siempre se "
 "descodifican si se añade 0x100 al tipo de canal. Por defecto, deshabilitado."
 
 msgid "When enabled, authentication is required to watch http streams."
@@ -12054,6 +12156,9 @@ msgstr "Puede continuar viendo TV, etc. mientras se ejecutan las tareas."
 msgid "You can install this plugin."
 msgstr "Puede instalar el plugin."
 
+msgid "You can only burn receiver recordings!"
+msgstr "Sólo puede grabar grabaciones del receptor"
+
 msgid "You can remove this plugin."
 msgstr "Puede desinstalar el plugin."
 
@@ -12117,6 +12222,9 @@ msgstr ""
 "el sitio web http://openspa.info.\n"
 "El receptor se apagará. Después de realizar las instrucciones del sitio web, "
 "el firmware le preguntará si quiere restaurar la configuración."
+
+msgid "You need to initialize your storage device first"
+msgstr "Antes debe inicializar el dispositivo"
 
 msgid "You system does not support ext4"
 msgstr "Este sistema no soporta EXT4"
@@ -12821,6 +12929,9 @@ msgstr "salir del menú de configuración del adaptador de red"
 msgid "experimental film/video"
 msgstr "cine/video experimental"
 
+msgid "extrawide"
+msgstr "extra-amplio"
+
 msgid "false"
 msgstr "falso"
 
@@ -12967,6 +13078,9 @@ msgstr "iniciar módulos"
 
 msgid "insert mark here"
 msgstr "insertar marca aquí"
+
+msgid "insert without cutlist editor"
+msgstr "insertar sin el editor de listas"
 
 msgid "interactive"
 msgstr "Interactiva"
@@ -13445,6 +13559,16 @@ msgstr "romántica"
 msgid "running"
 msgstr "corriendo"
 
+msgid ""
+"satellites.xml not found or corrupted!\n"
+"It is possible to watch TV,\n"
+"but it's not possible to search for new TV channels\n"
+"or to configure tuner settings"
+msgstr ""
+"No se ha encointrado satellites.xml o está corrupto\n"
+"Puede seguir viendo TV, pero no podrá buscar nuevos canales\n"
+"ni configurar el sintonizador"
+
 msgid "save last directory on exit"
 msgstr "Guardar el último directorio al salir"
 
@@ -13798,6 +13922,9 @@ msgstr "Blanco"
 
 msgid "whitelist"
 msgstr "Lista blanca"
+
+msgid "wide"
+msgstr "amplio"
 
 msgid "width"
 msgstr "ancho"
