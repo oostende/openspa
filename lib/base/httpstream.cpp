@@ -42,6 +42,14 @@ int eHttpStream::openUrl(const std::string &url, std::string &newurl)
 
 	close();
 
+	std::string extra_headers = "";
+	size_t pos = uri.find('#');
+	if (pos != std::string::npos)
+	{
+		extra_headers = uri.substr(pos + 1);
+		uri = uri.substr(0, pos);
+	}
+
 	int pathindex = uri.find("/", 7);
 	if (pathindex > 0) 
 	{
@@ -73,14 +81,6 @@ int eHttpStream::openUrl(const std::string &url, std::string &newurl)
 	else
 	{
 		port = 80;
-	}
-
-	std::string extra_headers = "";
-	size_t pos = uri.find('#');
-	if (pos != std::string::npos)
-	{
-		extra_headers = uri.substr(pos + 1);
-		uri = uri.substr(0, pos);
 	}
 
 	streamSocket = Connect(hostname.c_str(), port, 10);
