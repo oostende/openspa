@@ -1357,7 +1357,7 @@ RESULT eDVBServicePlay::start()
 			scrambled = meta.m_scrambled;
 		}
 		else
-+		{
+		{
 			/* when there is no meta file we need to handle ts/m2ts as descrambled */
 			scrambled = false;
 		}
