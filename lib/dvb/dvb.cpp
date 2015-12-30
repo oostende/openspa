@@ -1092,7 +1092,7 @@ RESULT eDVBResourceManager::allocateDemux(eDVBRegisteredFrontend *fe, ePtr<eDVBA
 					}
 				}
 			}
-			if (fe)
+			if (fe || (cap & iDVBChannel::capDecode))
 			{
 				++i;
 			}
