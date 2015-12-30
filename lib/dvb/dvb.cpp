@@ -1067,16 +1067,16 @@ RESULT eDVBResourceManager::allocateDemux(eDVBRegisteredFrontend *fe, ePtr<eDVBA
 					}
 				}
 			}
-		}
-		if (use_decode_demux)
-		{
-			++i;
-		}
-		else
-		{
-			if(i == m_demux.begin())
-				break;
-			--i;
+			if (use_decode_demux)
+			{
+				++i;
+			}
+			else
+			{
+				if(i == m_demux.begin())
+					break;
+				--i;
+			}
 		}
 	}
 #else // we use our own algo for demux detection
