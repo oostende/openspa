@@ -262,7 +262,10 @@ class CiMessageHandler:
 		self.ci = { }
 		self.dlgs = { }
 		eDVBCI_UI.getInstance().ciStateChanged.get().append(self.ciStateChanged)
-		SystemInfo["CommonInterface"] = eDVBCIInterfaces.getInstance().getNumOfSlots() > 0
+		if getBoxType() in ('vuzero', 'wetekplay'):
+			SystemInfo["CommonInterface"] = False
+		else:
+			SystemInfo["CommonInterface"] = eDVBCIInterfaces.getInstance().getNumOfSlots() > 0
 		try:
 			file = open("/proc/stb/tsmux/ci0_tsclk", "r")
 			file.close()
