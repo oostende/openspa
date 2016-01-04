@@ -10,7 +10,7 @@ from Components.SystemInfo import SystemInfo
 
 from enigma import eTimer, eDVBCI_UI, eDVBCIInterfaces
 
-from boxbranding import getBrandOEM
+from boxbranding import getBrandOEM, getBoxType
 
 MAX_NUM_CI = 4
 
