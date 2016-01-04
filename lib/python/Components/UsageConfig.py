@@ -257,6 +257,11 @@ def InitUsageConfig():
 
 	config.misc.disable_background_scan = ConfigYesNo(default = False)
 
+	config.usage.servicenum_fontsize = ConfigSelectionNumber(default = 0, stepwidth = 1, min = -8, max = 10, wraparound = True)
+	config.usage.servicename_fontsize = ConfigSelectionNumber(default = 0, stepwidth = 1, min = -8, max = 10, wraparound = True)
+	config.usage.serviceinfo_fontsize = ConfigSelectionNumber(default = 0, stepwidth = 1, min = -8, max = 10, wraparound = True)
+	config.usage.serviceitems_per_page = ConfigSelectionNumber(default = 14, stepwidth = 1, min = 8, max = 20, wraparound = True)
+
 	config.usage.show_event_progress_in_servicelist = ConfigSelection(default = 'barright', choices = [
 		('barleft', _("Progress bar left")),
 		('barright', _("Progress bar right")),

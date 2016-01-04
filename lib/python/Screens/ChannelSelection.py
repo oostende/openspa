@@ -1320,6 +1320,9 @@ class ChannelSelectionEdit:
 		self.session.openWithCallback(self.exitContext, ChannelContextMenu, self)
 
 	def exitContext(self, close=False):
+		l = self["list"]
+		l.setFontsize()
+		l.setItemsPerPage()
 		if close:
 			self.cancel()
 
