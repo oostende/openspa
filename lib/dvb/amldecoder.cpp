@@ -67,11 +67,11 @@ DEFINE_REF(eAMLTSMPEGDecoder);
 
 
 eAMLTSMPEGDecoder::eAMLTSMPEGDecoder(eDVBDemux *demux, int decoder)
-: m_demux(demux),
-m_vpid(-1), m_vtype(-1), m_apid(-1), m_atype(-1), m_pcrpid(-1), m_textpid(-1),
-m_width(-1), m_height(-1), m_framerate(-1), m_aspect(-1), m_progressive(-1),
-m_changed(0), m_decoder(decoder), m_radio_pic_on(0), m_video_clip_fd(-1), 
-aml_fd(-1), m_showSinglePicTimer(eTimer::create(eApp)), m_VideoRead(eTimer::create(eApp))
+	: m_demux(demux),
+		m_vpid(-1), m_vtype(-1), m_apid(-1), m_atype(-1), m_pcrpid(-1), m_textpid(-1),
+		m_width(-1), m_height(-1), m_framerate(-1), m_aspect(-1), m_progressive(-1),
+		m_changed(0), m_decoder(decoder), m_radio_pic_on(0), m_video_clip_fd(-1), 
+		aml_fd(-1), m_showSinglePicTimer(eTimer::create(eApp)), m_VideoRead(eTimer::create(eApp))
 {
 	TRACE__
 	if (m_demux)
@@ -91,7 +91,7 @@ aml_fd(-1), m_showSinglePicTimer(eTimer::create(eApp)), m_VideoRead(eTimer::crea
 	adec_handle = NULL;
 
 	if (m_demux && m_decoder == 0)	// Tuxtxt caching actions only on primary decoder
-	eTuxtxtApp::getInstance()->initCache();
+		eTuxtxtApp::getInstance()->initCache();
 
 }
 
@@ -99,14 +99,14 @@ eAMLTSMPEGDecoder::~eAMLTSMPEGDecoder()
 {
 	TRACE__
 	if (m_radio_pic_on)
-	finishShowSinglePic();
+		finishShowSinglePic();
 
 	m_vpid = m_apid = m_pcrpid = m_textpid = pidNone;
 	m_changed = -1;
 	setState();
 
 	if (m_demux && m_decoder == 0)	// Tuxtxt caching actions only on primary decoder
-	eTuxtxtApp::getInstance()->freeCache();
+		eTuxtxtApp::getInstance()->freeCache();
 
 	if (adec_handle)
 	{
@@ -115,7 +115,7 @@ eAMLTSMPEGDecoder::~eAMLTSMPEGDecoder()
 	}
 	adec_handle = NULL;
 	if (aml_fd >= 0)
-	close(aml_fd);
+		close(aml_fd);
 
 	setSyncMode(0);	
 }
@@ -130,7 +130,7 @@ int eAMLTSMPEGDecoder::setState()
 }
 
 int eAMLTSMPEGDecoder::m_pcm_delay=-1,
-eAMLTSMPEGDecoder::m_ac3_delay=-1;
+	eAMLTSMPEGDecoder::m_ac3_delay=-1;
 
 RESULT eAMLTSMPEGDecoder::setHwPCMDelay(int delay)
 {
@@ -169,19 +169,19 @@ RESULT eAMLTSMPEGDecoder::setVideoPID(int vpid, int type)
 		m_codec.video_type = VFORMAT_MPEG12;
 		switch (type)
 		{
-		default:
-		case MPEG2:
-		case MPEG1:
-			eDebug("%s() video type: MPEG1/2",__PRETTY_FUNCTION__);
-			break;
-		case MPEG4_H264:
-			m_codec.video_type = VFORMAT_H264;
-			eDebug("%s() video type: MPEG4 H264",__PRETTY_FUNCTION__);
-			break;
-		case MPEG4_Part2:
-			m_codec.video_type = VFORMAT_MPEG4; //maybe?
-			eDebug("%s() video type: MPEG4 Part2",__PRETTY_FUNCTION__);
-			break;
+			default:
+			case MPEG2:
+			case MPEG1:
+				eDebug("%s() video type: MPEG1/2",__PRETTY_FUNCTION__);
+				break;
+			case MPEG4_H264:
+				m_codec.video_type = VFORMAT_H264;
+				eDebug("%s() video type: MPEG4 H264",__PRETTY_FUNCTION__);
+				break;
+			case MPEG4_Part2:
+				m_codec.video_type = VFORMAT_MPEG4; //maybe?
+				eDebug("%s() video type: MPEG4 Part2",__PRETTY_FUNCTION__);
+				break;
 		}
 		eDebug("%s() vpid=%d, type=%d",__PRETTY_FUNCTION__, vpid, type);
 	}
@@ -201,32 +201,31 @@ RESULT eAMLTSMPEGDecoder::setAudioPID(int apid, int type)
 		m_codec.audio_type = AFORMAT_MPEG;
 		switch (type)
 		{
-		default:
-		case aMPEG:
-			eDebug("%s() audio type: MPEG",__PRETTY_FUNCTION__);
-			break;
-		case aAC3:
-			m_codec.audio_type = AFORMAT_AC3;
-			eDebug("%s() audio type: AC3",__PRETTY_FUNCTION__);
-			break;
-		case aAAC:
-			m_codec.audio_type = AFORMAT_AAC;
-			eDebug("%s() audio type: AAC",__PRETTY_FUNCTION__);
-			break;
-		case aDTS:
-			m_codec.audio_type = AFORMAT_DTS;
-			eDebug("%s() audio type: DTS",__PRETTY_FUNCTION__);
-			break;
-		case aAACHE:
-			m_codec.audio_type = AFORMAT_AAC_LATM;
-			eDebug("%s() audio type: AAC_LATM",__PRETTY_FUNCTION__);
-			break;
-
+			default:
+			case aMPEG:
+				eDebug("%s() audio type: MPEG",__PRETTY_FUNCTION__);
+				break;
+			case aAC3:
+				m_codec.audio_type = AFORMAT_AC3;
+				eDebug("%s() audio type: AC3",__PRETTY_FUNCTION__);
+				break;
+			case aAAC:
+				m_codec.audio_type = AFORMAT_AAC;
+				eDebug("%s() audio type: AAC",__PRETTY_FUNCTION__);
+				break;
+			case aDTS:
+				m_codec.audio_type = AFORMAT_DTS;
+				eDebug("%s() audio type: DTS",__PRETTY_FUNCTION__);
+				break;
+			case aAACHE:
+				m_codec.audio_type = AFORMAT_AAC_LATM;
+				eDebug("%s() audio type: AAC_LATM",__PRETTY_FUNCTION__);
+				break;
 		}
 		eDebug("%s() apid=%d, type=%d",__PRETTY_FUNCTION__, apid, type);
 
-		if (aml_fd >= 0 ) {
-
+		if (aml_fd >= 0 )
+		{
 			audio_decode_stop(adec_handle);
 			audio_decode_release(&adec_handle);
 
@@ -239,6 +238,7 @@ RESULT eAMLTSMPEGDecoder::setAudioPID(int apid, int type)
 			{
 				eDebug("[eAMLTSMPEGDecoder::play] set audio format failed");
 			}
+
 			if(::ioctl(aml_fd, AMSTREAM_IOC_AID, m_apid) < 0)
 			{
 				eDebug("[eAMLTSMPEGDecoder::play] set audio PID failed");
@@ -271,7 +271,7 @@ RESULT eAMLTSMPEGDecoder::setAudioChannel(int channel)
 {
 	TRACE__
 	if (channel == -1)
-	channel = ac_stereo;
+		channel = ac_stereo;
 	return 0;
 }
 
@@ -373,13 +373,13 @@ RESULT eAMLTSMPEGDecoder::play()
 			osdBlank("/sys/class/video/blackout_policy", 0);
 
 			if(m_radio_pic.length())
-			showSinglePic(m_radio_pic.c_str());
+				showSinglePic(m_radio_pic.c_str());
 
 			if (m_radio_pic_on)
-			finishShowSinglePic();
+				finishShowSinglePic();
 
 			if ((m_vpid >= 0) && (m_vpid < 0x1FFF))
-			osdBlank("/sys/class/video/blackout_policy", 1);
+				osdBlank("/sys/class/video/blackout_policy", 1);
 
 			aml_fd = ::open("/dev/amstream_mpts",  O_RDWR);
 			if(aml_fd < 0)
@@ -493,7 +493,7 @@ RESULT eAMLTSMPEGDecoder::pause()
 	int i;
 
 	if (m_state == statePause)
-	return 0;
+		return 0;
 
 	if (m_demux && m_demux->m_pvr_fd)
 		::ioctl(m_demux->m_pvr_fd, PVR_P0);
@@ -512,7 +512,7 @@ RESULT eAMLTSMPEGDecoder::setFastForward(int frames_to_skip)
 	TRACE__
 	// fast forward is only possible if video data is present
 	if (!m_codec.has_video)
-	return -1;
+		return -1;
 
 	return 0;
 }
@@ -522,7 +522,7 @@ RESULT eAMLTSMPEGDecoder::setSlowMotion(int repeat)
 	TRACE__
 	// slow motion is only possible if video data is present
 	if (!m_codec.has_video)
-	return -1;
+		return -1;
 
 	return 0;
 }
@@ -531,7 +531,7 @@ RESULT eAMLTSMPEGDecoder::setTrickmode()
 {
 	TRACE__
 	if (!m_codec.has_video)
-	return -1;
+		return -1;
 
 	return 0;
 }
@@ -547,11 +547,11 @@ void eAMLTSMPEGDecoder::demux_event(int event)
 	TRACE__
 	switch (event)
 	{
-	case eDVBDemux::evtFlush:
-		flush();
-		break;
-	default:
-		break;
+		case eDVBDemux::evtFlush:
+			flush();
+			break;
+		default:
+			break;
 	}
 }
 
@@ -604,7 +604,7 @@ RESULT eAMLTSMPEGDecoder::showSinglePic(const char *filename)
 			fstat(f, &s);
 #if defined(__sh__) // our driver has a different behaviour for iframes
 			if (m_video_clip_fd >= 0)
-			finishShowSinglePic();
+				finishShowSinglePic();
 #endif
 
 			m_codec.has_video = 1;
@@ -734,7 +734,7 @@ int eAMLTSMPEGDecoder::getVideoWidth()
 	int m_width = -1;
 	CFile::parseIntHex(&m_width, "/proc/stb/vmpeg/0/xres");
 	if (!m_width)
-	return -1;
+		return -1;
 	eDebug("couldnt open %d", m_width);
 	return m_width;
 }
@@ -745,7 +745,7 @@ int eAMLTSMPEGDecoder::getVideoHeight()
 	int m_height = -1;
 	CFile::parseIntHex(&m_height, "/proc/stb/vmpeg/0/yres");
 	if (!m_height)
-	return -1;
+		return -1;
 	return m_height;
 }
 
@@ -755,7 +755,7 @@ int eAMLTSMPEGDecoder::getVideoProgressive()
 	int m_progressive = -1;
 	CFile::parseIntHex(&m_progressive, "/proc/stb/vmpeg/0/progressive");
 	if (m_progressive == 2)
-	return -1;
+		return -1;
 	return m_progressive;
 }
 
@@ -773,7 +773,7 @@ int eAMLTSMPEGDecoder::getVideoAspect()
 	int m_aspect = -1;
 	CFile::parseInt(&m_aspect, "/proc/stb/vmpeg/0/aspect");
 	if (!m_aspect)
-	return -1;
+		return -1;
 
 	return m_aspect == 1 ? 2 : 3;
 }
