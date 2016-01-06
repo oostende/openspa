@@ -452,7 +452,7 @@ class OscamInfoMenu(Screen):
 			osc = OscamInfo()
 			reader = osc.getReaders()
 			if reader is not None:
-				reader.append( ("All", "all") )
+				reader.append( (_("All"), "all") )
 				if isinstance(reader, list):
 					if len(reader) == 1:
 						self.session.open(oscReaderStats, reader[0][1])
@@ -597,19 +597,19 @@ class oscInfo(Screen, OscamInfo):
 		self["key_red"] = StaticText(_("Close"))
 		if self.what == "c":
 			self["key_green"] = StaticText("")
-			self["key_yellow"] = StaticText("Servers")
+			self["key_yellow"] = StaticText(_("Servers"))
 			self["key_blue"] = StaticText("Log")
 		elif self.what == "s":
-			self["key_green"] = StaticText("Clients")
+			self["key_green"] = StaticText(_("Clients"))
 			self["key_yellow"] = StaticText("")
 			self["key_blue"] = StaticText("Log")
 		elif self.what == "l":
-			self["key_green"] = StaticText("Clients")
-			self["key_yellow"] = StaticText("Servers")
+			self["key_green"] = StaticText(_("Clients"))
+			self["key_yellow"] = StaticText(_("Servers"))
 			self["key_blue"] = StaticText("")
 		else:
-			self["key_green"] = StaticText("Clients")
-			self["key_yellow"] = StaticText("Servers")
+			self["key_green"] = StaticText(_("Clients"))
+			self["key_yellow"] = StaticText(_("Servers"))
 			self["key_blue"] = StaticText("Log")
 		self.fieldSizes = []
 		self.fs2 = {}
@@ -724,22 +724,22 @@ class oscInfo(Screen, OscamInfo):
 		self["key_red"].setText(_("Close"))
 		if self.what == "c":
 			self["key_green"].setText("")
-			self["key_yellow"].setText("Servers")
+			self["key_yellow"].setText(_("Servers"))
 			self["key_blue"].setText("Log")
 			self["output"].l.setItemHeight(fhd(20))
 		elif self.what == "s":
-			self["key_green"].setText("Clients")
+			self["key_green"].setText(_("Clients"))
 			self["key_yellow"].setText("")
 			self["key_blue"].setText("Log")
 			self["output"].l.setItemHeight(fhd(20))
 		elif self.what == "l":
-			self["key_green"].setText("Clients")
-			self["key_yellow"].setText("Servers")
+			self["key_green"].setText(_("Clients"))
+			self["key_yellow"].setText(_("Servers"))
 			self["key_blue"].setText("")
 			self["output"].l.setItemHeight(fhd(14))
 		else:
-			self["key_green"].setText("Clients")
-			self["key_yellow"].setText("Servers")
+			self["key_green"].setText(_("Clients"))
+			self["key_yellow"].setText(_("Servers"))
 			self["key_blue"].setText("Log")
 
 	def showData(self):
@@ -768,14 +768,14 @@ class oscInfo(Screen, OscamInfo):
 			ysize = (len(out) + 4 ) * 25
 			if self.what == "c":
 				self.changeScreensize( ysize )
-				self.setTitle("Client Info ( Oscam-Version: %s )" % self.getVersion())
+				self.setTitle(_("Client Info ( Oscam-Version: %s )") % self.getVersion())
 			elif self.what == "s":
 				self.changeScreensize( ysize )
-				self.setTitle("Server Info( Oscam-Version: %s )" % self.getVersion())
+				self.setTitle(_("Server Info( Oscam-Version: %s )") % self.getVersion())
 
 			elif self.what == "l":
 				self.changeScreensize( 500 )
-				self.setTitle("Oscam Log ( Oscam-Version: %s )" % self.getVersion())
+				self.setTitle(_("Oscam Log ( Oscam-Version: %s )") % self.getVersion())
 			self["output"].l.setList(out)
 			self["output"].selectionEnabled(False)
 		else:
@@ -931,7 +931,7 @@ class oscEntitlements(Screen, OscamInfo):
 		else:
 			self["output"].setStyle("default")
 		self["output"].setList(result)
-		title = [ _("Reader"), self.cccamreader, _("Cards:"), cardTotal, "Server:", hostadr ]
+		title = [ _("Reader"), self.cccamreader, _("Cards:"), cardTotal, _("Server:"), hostadr ]
 		self.setTitle( " ".join(title))
 
 
@@ -1136,7 +1136,7 @@ class OscamInfoConfigScreen(Screen, ConfigListScreen):
 			self.oscamconfig.append(getConfigListEntry(_("Username (httpuser)"), config.oscaminfo.username))
 			self.oscamconfig.append(getConfigListEntry(_("Password (httpwd)"), config.oscaminfo.password))
 			self.oscamconfig.append(getConfigListEntry(_("IP-Address"), config.oscaminfo.ip))
-			self.oscamconfig.append(getConfigListEntry("Port", config.oscaminfo.port))
+			self.oscamconfig.append(getConfigListEntry(_("Port"), config.oscaminfo.port))
 		self.oscamconfig.append(getConfigListEntry(_("Automatically update Client/Server View?"), config.oscaminfo.autoupdate))
 		if config.oscaminfo.autoupdate.value:
 			self.oscamconfig.append(getConfigListEntry(_("Update interval (in seconds)"), config.oscaminfo.intervall))
