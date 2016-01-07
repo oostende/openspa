@@ -2013,6 +2013,7 @@ class InfoBarExtensions:
 		self["InstantExtensionsActions"] = HelpableActionMap(self, "InfobarExtensions",
 			{
 				"extensions": (self.showExtensionSelection, _("Show extensions...")),
+				"showPluginBrowser": (self.showPluginBrowser, _("Show the plugin browser..")),
 			}, 1) # lower priority
 
 		self.addExtension(extension = self.getOsd3DSetup, type = InfoBarExtensions.EXTENSION_LIST)
@@ -2115,6 +2116,10 @@ class InfoBarExtensions:
 	def extensionCallback(self, answer):
 		if answer is not None:
 			answer[1][1]()
+
+	def showPluginBrowser(self):
+		from Screens.PluginBrowser import PluginBrowser
+		self.session.open(PluginBrowser)
 
 	def open3DSetup(self):
 		from Screens.UserInterfacePositioner import OSD3DSetupScreen
