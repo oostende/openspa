@@ -47,6 +47,7 @@ enigma2_LDADD = \
 	@LIBDDVD_LIBS@ \
 	@AMLPLAYER_LIBS@ \
 	@DVBCSA_LIBS@ \
+	@ALSA_LIBS@ \
 	-ltuxtxt -ltuxtxt32bpp -lcrypt -lrt -ldl
 
 if ENABLE_SH
