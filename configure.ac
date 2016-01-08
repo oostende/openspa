@@ -433,8 +433,8 @@ if test "$BOXTYPE" == "vuduo" -o "$BOXTYPE" == "vusolo" -o "$BOXTYPE" == "vuduo2
 	AC_DEFINE(FORCE_ADVANCED_REMOTE, 1,[define to fixup the input device identification when the remote control is actually an 'advanced' remote (with play/forward/rewind keys)])
 fi
 
-if test "$BOXTYPE" == "vusolo2" -o "$BOXTYPE" == "vuduo2" -o "$BOXTYPE" == "vusolose"; then
-	AC_DEFINE(VUPLUS_RC_WORKAROUND, 1, [workaround for problem with vusolo2/vuduo2/vusolose event/rc driver])
+if test "$BOXTYPE" == "vusolo2" -o "$BOXTYPE" == "vuduo2" -o "$BOXTYPE" == "vusolose" -o "$BOXTYPE" == "vusolo4k" -o "$BOXTYPE" == "vuzero"; then
+	AC_DEFINE(VUPLUS_RC_WORKAROUND, 1, [workaround for problem with vuplus event/rc driver])
 fi
 
 if test "$BOXTYPE" == "vp7358ci" ; then
