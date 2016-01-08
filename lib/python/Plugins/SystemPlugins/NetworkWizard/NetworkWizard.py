@@ -9,7 +9,7 @@ from Components.Network import iNetwork
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from enigma import eTimer
 from boxbranding import getMachineBrand, getMachineName, getBoxType
-from os import system
+import enigma
 
 class NetworkWizard(WizardLanguage, Rc):
 	skin = """
@@ -132,7 +132,7 @@ class NetworkWizard(WizardLanguage, Rc):
 				if interface == self.selectedInterface:
 					if self.originalInterfaceState[interface]["up"] is False:
 						if iNetwork.checkforInterface(interface) is True:
-							system("ifconfig " + interface + " down")
+							enigma.eConsoleAppContainer().execute("ifconfig %s down" % interface)
 
 	def listInterfaces(self):
 		self.checkOldInterfaceState()
