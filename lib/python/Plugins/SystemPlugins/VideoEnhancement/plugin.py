@@ -1,5 +1,3 @@
-from os import path as os_path
-
 from Plugins.Plugin import PluginDescriptor
 from Components.ConfigList import ConfigListScreen
 from Components.config import getConfigListEntry, config, ConfigNothing
@@ -10,9 +8,9 @@ from Components.Sources.Boolean import Boolean
 from Components.Sources.StaticText import StaticText
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
-import VideoEnhancement
-
 from boxbranding import getBoxType
+import VideoEnhancement
+import os
 
 class VideoEnhancementSetup(Screen, ConfigListScreen):
 
@@ -413,6 +411,6 @@ def startSetup(menuid):
 
 def Plugins(**kwargs):
 	list = []
-	if config.usage.setup_level.index >= 2 and os_path.exists("/proc/stb/vmpeg/0/pep_apply"):
+	if config.usage.setup_level.index >= 2 and os.path.exists("/proc/stb/vmpeg/0/pep_apply"):
 		list.append(PluginDescriptor(name=_("Video enhancement setup"), description=_("Advanced video enhancement setup"), where = PluginDescriptor.WHERE_MENU, needsRestart = False, fnc=startSetup))
 	return list
