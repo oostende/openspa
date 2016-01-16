@@ -24,7 +24,7 @@ def InitOsd():
 	except:
 		SystemInfo["CanChangeOsdAlpha"] = False
 	try:
-		SystemInfo["CanChangeOsdPosition"] = access('/proc/stb/fb/dst_left', R_OK) and True or False
+		SystemInfo["CanChangeOsdPosition"] = access('/proc/stb/vmpeg/0/dst_left', R_OK) and True or False
 	except:
 		SystemInfo["CanChangeOsdPosition"] = False
 	SystemInfo["OsdSetup"] = SystemInfo["CanChangeOsdPosition"]
@@ -39,28 +39,28 @@ def InitOsd():
 
 	def setOSDLeft(configElement):
 		if SystemInfo["CanChangeOsdPosition"]:
-			f = open("/proc/stb/fb/dst_left", "w")
+			f = open("/proc/stb/vmpeg/0/dst_left", "w")
 			f.write('%X' % configElement.getValue())
 			f.close()
 	config.osd.dst_left.addNotifier(setOSDLeft)
 
 	def setOSDWidth(configElement):
 		if SystemInfo["CanChangeOsdPosition"]:
-			f = open("/proc/stb/fb/dst_width", "w")
+			f = open("/proc/stb/vmpeg/0/dst_width", "w")
 			f.write('%X' % configElement.getValue())
 			f.close()
 	config.osd.dst_width.addNotifier(setOSDWidth)
 
 	def setOSDTop(configElement):
 		if SystemInfo["CanChangeOsdPosition"]:
-			f = open("/proc/stb/fb/dst_top", "w")
+			f = open("/proc/stb/vmpeg/0/dst_top", "w")
 			f.write('%X' % configElement.getValue())
 			f.close()
 	config.osd.dst_top.addNotifier(setOSDTop)
 
 	def setOSDHeight(configElement):
 		if SystemInfo["CanChangeOsdPosition"]:
-			f = open("/proc/stb/fb/dst_height", "w")
+			f = open("/proc/stb/vmpeg/0/dst_height", "w")
 			f.write('%X' % configElement.getValue())
 			f.close()
 	config.osd.dst_height.addNotifier(setOSDHeight)
