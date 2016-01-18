@@ -14,8 +14,4 @@ if HAVE_LIBVUGLES2
 SUBDIRS += AnimationSetup
 endif
 
-if DREAMBOX
-SUBDIRS += FrontprocessorUpgrade NFIFlash CableScan
-endif
-
 install_PYTHON = __init__.py
