@@ -350,6 +350,8 @@ void setAnimation_speed(int speed)
 	gles_set_animation_speed(speed);
 }
 #else
+#ifndef HAVE_OSDANIMATION
 void setAnimation_current(int a) {}
 void setAnimation_speed(int speed) {}
+#endif
 #endif
