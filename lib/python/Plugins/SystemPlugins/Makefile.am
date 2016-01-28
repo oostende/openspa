@@ -18,8 +18,4 @@ if WETEK
 SUBDIRS += WetekFRQ
 endif
 
-if DREAMBOX
-SUBDIRS += FrontprocessorUpgrade NFIFlash CableScan
-endif
-
 install_PYTHON = __init__.py
