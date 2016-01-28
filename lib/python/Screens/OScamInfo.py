@@ -57,14 +57,22 @@ class OscamInfo:
 	version = ""
 
 	def confPath(self):
-		search_dirs = [ "/usr", "/var", "/etc" ]
-		sdirs = " ".join(search_dirs)
-		cmd = 'find %s -name "oscam.conf"' % sdirs
+		cmd = 'find /usr -name "oscam.conf"'
 		res = os.popen(cmd).read()
-		if res == "":
-			return None
+		if res == '':
+			cmd = 'find /var -name "oscam.conf"'
+			res = os.popen(cmd).read()
+			if res == '':
+				cmd = 'find /etc -name "oscam.conf"'
+				res = os.popen(cmd).read()
+				if res == '':
+					return None
+				else:
+					return res.replace('\n', '')
+			else:
+				return res.replace('\n', '')
 		else:
-			return res.replace("\n", "")
+			return res.replace('\n', '')
 
 
 	def getUserData(self):
