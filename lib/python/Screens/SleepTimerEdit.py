@@ -7,7 +7,7 @@ from Components.Label import Label
 from Components.Sources.StaticText import StaticText
 from Components.config import config, getConfigListEntry
 from enigma import eEPGCache
-from time import time
+from time import time, localtime, mktime
 
 class SleepTimerEdit(ConfigListScreen, Screen):
 	def __init__(self, session):
@@ -83,10 +83,23 @@ class SleepTimerEdit(ConfigListScreen, Screen):
 				self.list.append(getConfigListEntry(_("End time to ignore shutdown in standby"),
 					config.usage.standby_to_shutdown_timer_blocktime_end,
 					_("Specify the end time to ignore the shutdown timer when the receiver is in standby mode")))
+		self.list.append(getConfigListEntry(_("Enable wakeup timer"),
+			config.usage.wakeup_enabled,
+			_("Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'.")))
+		if config.usage.wakeup_enabled.value:
+			for i in range(7):
+				self.list.append(getConfigListEntry([_("Monday"), _("Tuesday"), _("Wednesday"), _("Thursday"), _("Friday"), _("Saturday"), _("Sunday")][i],
+					config.usage.wakeup_day[i]))
+				if config.usage.wakeup_day[i].value:
+					self.list.append(getConfigListEntry(_("Wakeup time"),
+						config.usage.wakeup_time[i]))
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 
 	def ok(self):
+		if self.getCurrentEntry() == _("Wakeup timer"):
+			self.session.open(WakeupTimerEdit)
+			return
 		if self["config"].isChanged():
 			for x in self["config"].list:
 				x[1].save()
