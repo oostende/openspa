@@ -102,6 +102,18 @@ eAMLTSMPEGDecoder::~eAMLTSMPEGDecoder()
 	if (m_radio_pic_on)
 		finishShowSinglePic();
 
+	if (m_state == statePause)
+	{
+		if (adec_handle)
+			audio_decode_resume(adec_handle);
+
+		if ((m_vpid >= 0) && (m_vpid < 0x1FFF) && aml_fd >= 0)
+			::ioctl(aml_fd, AMSTREAM_IOC_VPAUSE, 0);
+
+		if (m_demux && m_demux->m_pvr_fd >= 0)
+			::ioctl(m_demux->m_pvr_fd, PVR_P3);
+	}
+
 	m_vpid = m_apid = m_pcrpid = m_textpid = pidNone;
 	m_changed = -1;
 	setState();
@@ -121,7 +133,7 @@ eAMLTSMPEGDecoder::~eAMLTSMPEGDecoder()
 	if (cntl_fd >= 0)
 		close(cntl_fd);
 
-	setSyncMode(0);
+	setAvsyncEnable(0);
 }
 
 
@@ -394,7 +406,7 @@ RESULT eAMLTSMPEGDecoder::play()
 			{
 				eDebug("[eAMLTSMPEGDecoder::play] Amlogic CODEC open success !!!!!");
 
-				setAvsyncEnable(0);
+				setAvsyncEnable(m_demux ? (m_demux->getSource() == -1 ? 1 : 0) : 0);
 
 				if ((m_vpid >= 0) && (m_vpid < 0x1FFF))	 
 				{
@@ -441,7 +453,7 @@ RESULT eAMLTSMPEGDecoder::play()
 				}
 
 				/* Tell the kernel on which adapter we want HW CSA/LiveTV */
-				if(::ioctl(aml_fd, AMSTREAM_IOC_SET_DEMUX, (unsigned long) ((m_demux) ? ((m_demux->m_pvr_fd) ? 2 : m_demux->getSource()) : 0)) < 0)
+				if(::ioctl(aml_fd, AMSTREAM_IOC_SET_DEMUX, (unsigned long) (m_demux ? (m_demux->getSource() == -1 ? 2 : m_demux->getSource()) : 0)) < 0)
 				{
 					eDebug("[eAMLTSMPEGDecoder::play] set AMSTREAM_IOC_SET_DEMUX failed");
 				}
@@ -452,13 +464,13 @@ RESULT eAMLTSMPEGDecoder::play()
 				am_param.format = m_codec.audio_type;
 				audio_decode_init(&adec_handle, &am_param);
 
-				if (cntl_fd >= 0) {
+				if (cntl_fd >= 0 && m_demux && m_demux->getSource() != -1) {
 						if(::ioctl(cntl_fd, AMSTREAM_IOC_AVTHRESH, (unsigned long)90000 * 30 ) < 0)
 							eDebug("[eAMLTSMPEGDecoder::play] set AMSTREAM_IOC_AVTHRESH failed");
 						if(::ioctl(cntl_fd, AMSTREAM_IOC_SYNCTHRESH, (unsigned long) 0) < 0)
 							eDebug("[eAMLTSMPEGDecoder::play] set AMSTREAM_IOC_SYNCTHRESH failed");
 				} else
-						eDebug("[eAMLTSMPEGDecoder::play] cntl_fd NULL");
+						eDebug("[eAMLTSMPEGDecoder::play] cntl_fd NULL or PVR mode");
 
 				if(::ioctl(aml_fd, AMSTREAM_IOC_PORT_INIT, 0) < 0)
 				{
@@ -483,7 +495,7 @@ RESULT eAMLTSMPEGDecoder::play()
 		if ((m_vpid >= 0) && (m_vpid < 0x1FFF))	 
 			::ioctl(aml_fd, AMSTREAM_IOC_VPAUSE, 0);
 
-		if (m_demux && m_demux->m_pvr_fd)
+		if (m_demux && m_demux->m_pvr_fd >= 0)
 			::ioctl(m_demux->m_pvr_fd, PVR_P3);
 
 		m_state = statePlay;
@@ -501,7 +513,7 @@ RESULT eAMLTSMPEGDecoder::pause()
 	if (m_state == statePause)
 		return 0;
 
-	if (m_demux && m_demux->m_pvr_fd)
+	if (m_demux && m_demux->m_pvr_fd >= 0)
 		::ioctl(m_demux->m_pvr_fd, PVR_P0);
 
 	audio_decode_pause(adec_handle);
