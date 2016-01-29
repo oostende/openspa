@@ -158,3 +158,26 @@ class SleepTimerEdit(ConfigListScreen, Screen):
 					end = start + duration
 					remaining = end - now
 		return remaining + config.recording.margin_after.value * 60
+
+def isNextWakeupTime():
+	if config.usage.wakeup_enabled.value:
+		wakeup_day, wakeup_time = WakeupDayTimeOfWeek()
+		if wakeup_day == -1:
+				return -1
+		elif wakeup_day == 0:
+			return wakeup_time
+		return wakeup_time + (86400 * wakeup_day)
+	return -1
+
+def WakeupDayTimeOfWeek():
+	now = localtime()
+	current_day = int(now.tm_wday)
+	if current_day >= 0:
+		if config.usage.wakeup_day[current_day].value:
+			wakeup_time = int(mktime((now.tm_year, now.tm_mon, now.tm_mday, config.usage.wakeup_time[current_day].value[0], config.usage.wakeup_time[current_day].value[1], 0, now.tm_wday, now.tm_yday, now.tm_isdst)))
+			if wakeup_time > time():
+				return 0, wakeup_time
+		for i in range(1,8):
+			if config.usage.wakeup_day[(current_day+i)%7].value:
+				return i, int(mktime((now.tm_year, now.tm_mon, now.tm_mday, config.usage.wakeup_time[(current_day+i)%7].value[0], config.usage.wakeup_time[(current_day+i)%7].value[1], 0, now.tm_wday, now.tm_yday, now.tm_isdst)))
+	return -1, None
