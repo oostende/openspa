@@ -269,7 +269,7 @@ msgstr "%H:%M"
 
 msgid "%d channel found"
 msgid_plural "%d channels found"
-msgstr[0] "canales encontrados: %d"
+msgstr[0] "canal encontrado: %d"
 msgstr[1] "canales encontrados: %d"
 
 msgid "%d channels found"
@@ -576,6 +576,9 @@ msgstr "Modo 3D"
 
 msgid "3D Surround"
 msgstr "3D Surround"
+
+msgid "3D Surround Speaker Position"
+msgstr "Posición del altavoz 3D Surround"
 
 msgid "3D surround"
 msgstr "3D envolvente"
@@ -1096,6 +1099,9 @@ msgstr "Software avanzado"
 msgid "Advanced software plugin"
 msgstr "Plugin de software avanzado"
 
+msgid "Advanced video enhancement setup"
+msgstr "Configuración avanzada de mejora de video"
+
 msgid "Advanced video setup"
 msgstr "Configuración avanzada de vídeo"
 
@@ -1158,6 +1164,9 @@ msgstr "Todos los satélites 4 (DiSEqC modo 1.2)"
 
 msgid "All satellites 4 (USALS)"
 msgstr "todos los satélites 4 (USALS)"
+
+msgid "All services provider"
+msgstr "Proveedor de todos los canales"
 
 msgid "Allocate"
 msgstr "Localizar"
@@ -1415,6 +1424,9 @@ msgstr "PID de audio"
 msgid "Audio Selection"
 msgstr "Selección de audio"
 
+msgid "Audio Source"
+msgstr "Fuente de audio"
+
 msgid "Audio Sync"
 msgstr "Sincronización de Audio"
 
@@ -1471,6 +1483,9 @@ msgstr "Iniciando Autoenfoque"
 
 msgid "Auto language selection"
 msgstr "Autoselección de idioma"
+
+msgid "Auto play blu-ray file"
+msgstr "Auto-reproducir archivo de blu-ray"
 
 msgid "Auto scart switching"
 msgstr "Cambio automático a euroconector"
@@ -1704,6 +1719,12 @@ msgstr "Se ha creado el marcador."
 msgid "Bookmarks"
 msgstr "Marcadores"
 
+msgid "Boost blue"
+msgstr "Enfatizar el azul"
+
+msgid "Boost green"
+msgstr "Enfatizar el verde"
+
 msgid "Bouquet Editor"
 msgstr "Editor de Favoritos"
 
@@ -1856,6 +1877,9 @@ msgstr "CA%s"
 
 msgid "CI assignment"
 msgstr "Asignación CI"
+
+msgid "CI slot: "
+msgstr "Ranura CI: "
 
 msgid "CIFS Share"
 msgstr "Tipo CIFS"
@@ -2158,8 +2182,15 @@ msgstr "Chipset: BCM%s"
 msgid "Choose Tuner"
 msgstr "Elegir Sintonizador"
 
+msgid "Choose bouquet"
+msgstr "Elegir bouquet"
+
 msgid "Choose whether AAC sound tracks should be transcoded."
 msgstr "Configura cual de las pistas AAC deberá ser transcodificada"
+
+msgid ""
+"Choose whether multi channel sound tracks should be convert to PCM or SPDIF."
+msgstr "Elija cual de las pistas de audio deberá convertirse a PCM o SPDIF"
 
 msgid ""
 "Choose whether multi channel sound tracks should be downmixed to stereo."
@@ -2255,6 +2286,9 @@ msgstr "Ajustes de la colección"
 
 msgid "Color format"
 msgstr "Paleta de color"
+
+msgid "Color space"
+msgstr "Espacio de color"
 
 msgid "Command To Run"
 msgstr "Comando a ejecutar"
@@ -3516,6 +3550,13 @@ msgstr ""
 "Seguro que quiere convertir el sistema de archivos?\n"
 "No se podrá volver atrás!"
 
+msgid ""
+"Do you really want to delete\n"
+"%s ?"
+msgstr ""
+"Seguro que quiere eliminar\n"
+"%s ?"
+
 msgid "Do you really want to delete %s?"
 msgstr "Seguro que quiere borrar %s?"
 
@@ -3676,6 +3717,9 @@ msgstr "Descargar"
 msgid "Download .NFI-Files for USB-Flasher"
 msgstr "Descargar ficheros .NFI para el USB-Flasher"
 
+msgid "Download Failed !!"
+msgstr "Descarga fallida"
+
 msgid "Download Playlist for"
 msgstr "Descargar lista de reproducción para"
 
@@ -3690,6 +3734,9 @@ msgstr "Plugins descargables"
 
 msgid "Downloading"
 msgstr "Descargando"
+
+msgid "Downloading %s"
+msgstr "Descargando %s"
 
 msgid "Downloading plugin information. Please wait..."
 msgstr "Descargando información de los plugins. Espere..."
@@ -3945,6 +3992,9 @@ msgstr "Activar programación"
 
 msgid "Enable timer conflict detection"
 msgstr "Habilitar detección de conflictos de timers"
+
+msgid "Enable wakeup timer"
+msgstr "Habilitar tempor. para despertar"
 
 msgid "Enable zapping with CH+/-, B+/-, P+/-"
 msgstr "Habilitar zapping con CH+/-, B+/-, P+/-"
@@ -4244,6 +4294,9 @@ msgstr "T. extra antes de ignorar la inactiv. del sleeptimer"
 msgid "Extras"
 msgstr "Extras"
 
+msgid "Extrude from left"
+msgstr "Extruir desde la izda."
+
 msgid "FEC"
 msgstr "FEC"
 
@@ -4409,6 +4462,9 @@ msgstr "Flash Online/Local"
 msgid "Flashing failed"
 msgstr "El flasheo ha fallado"
 
+msgid "Flashing: "
+msgstr "Instalando: "
+
 msgid "Following tasks will be done after you press OK!"
 msgstr "Las siguientes tareas se ejecutarán después de pulsar OK"
 
@@ -4531,6 +4587,9 @@ msgstr "Resolución en vista completa"
 
 msgid "Further Options"
 msgstr "Opciones avanzadas"
+
+msgid "GB800SOLO takes about 20 mins !!\n"
+msgstr "GB800SOLO tardará unos 20 min.\n"
 
 msgid ""
 "GUI needs a restart to apply a new skin\n"
@@ -6054,6 +6113,9 @@ msgstr "Tipo NFS"
 msgid "NIM"
 msgstr "Sint."
 
+msgid "NO"
+msgstr "No"
+
 msgid "NOW"
 msgstr "AHORA"
 
@@ -6209,6 +6271,17 @@ msgid ""
 msgstr ""
 "No hay /hdd!\n"
 "Asegúrese de que tiene un HDD montado.\n"
+
+msgid ""
+"No /hdd found !!\n"
+"Please make sure you have a HDD mounted.\n"
+"\n"
+"Exit plugin."
+msgstr ""
+"No se ha encontrado ningún /hdd\n"
+"Asegúrese que tiene un /hdd montado.\n"
+"\n"
+"Salir del plugin."
 
 msgid "No Connection"
 msgstr "Sin conexión"
@@ -6493,11 +6566,30 @@ msgstr ""
 "No hay suficiente espacio en /hdd!\n"
 "Se necesitan unos 300MB de espacio libre.\n"
 
+msgid ""
+"Not enough free space on /hdd !!\n"
+"You need at least 300Mb free space.\n"
+"\n"
+"Exit plugin."
+msgstr ""
+"No hay suficiente espacio en /hdd\n"
+"Se necesitan, al menos, 300Mb de espacio libre.\n"
+"\n"
+"Salir del plugin."
+
 msgid "Not-Associated"
 msgstr "No asociado"
 
 msgid "Not-Associated %d"
 msgstr "No conectado"
+
+msgid ""
+"Note: when enabled, and you do want standby mode after wake up, set option "
+"'Startup to Standby' as 'No, except Wakeup timer'."
+msgstr ""
+"Nota: si se habilita, y desea ponerlo en reposo después de despertarlo, en "
+"la opción 'Reposo al iniciar' elija 'No, excepto temporizador para "
+"despertar'."
 
 msgid "Nothing"
 msgstr "Nada"
@@ -7262,6 +7354,9 @@ msgstr "Se está comprobando..."
 msgid "Please wait... Loading list..."
 msgstr "Espere... Cargando lista..."
 
+msgid "Please: DO NOT reboot your STB and turn off the power.\n"
+msgstr "ATENCIÓN: NO reinicie ni apague el equipo.\n"
+
 msgid "Plugin browser"
 msgstr "Navegador de plugins"
 
@@ -7574,6 +7669,9 @@ msgstr "Proteger la pantalla de actualización de software"
 
 msgid "Protect spzMenu"
 msgstr "Proteger spzMenu"
+
+msgid "Protect spzMenu (OpenSPA Main Menu)"
+msgstr "Proteger el menú principal OpenSPA"
 
 msgid "Protect standby menu"
 msgstr "Proteger el menú de reposo"
@@ -8622,6 +8720,9 @@ msgstr "Seleccionar carpeta final"
 msgid "Select the movie path"
 msgstr "Seleccione la carpeta de las películas"
 
+msgid "Select the remote RCU"
+msgstr "Selección del mando a distancia"
+
 msgid "Select upgrade source"
 msgstr "Fuente de la actualización"
 
@@ -9010,6 +9111,9 @@ msgid "Show blinking rec symbol on Display during recording"
 msgstr ""
 "Muestra el icono de grabación parpadeante en el display durante la grabación"
 
+msgid "Show bootvideo on boot"
+msgstr "Mostrar el bootvideo en el arranque"
+
 msgid "Show bouquet selection menu"
 msgstr "Mostrar menú de selección de bouquet"
 
@@ -9082,6 +9186,9 @@ msgstr "Mostrar EPG Multi canal"
 msgid "Show on Display"
 msgstr "Mostrar en pantalla"
 
+msgid "Show only found image and mtd partitions.\n"
+msgstr "Mostrar sólo la imagen y las particiones mtd.\n"
+
 msgid "Show picons in channel list"
 msgstr "Mostrar picons en la lista de canales"
 
@@ -9123,6 +9230,9 @@ msgstr "Mostrar el Menú."
 
 msgid "Show the Virtual keyboard window."
 msgstr "Mostrar el teclado virtual"
+
+msgid "Show the plugin browser.."
+msgstr "Mostrar el navegador de plugins"
 
 msgid "Show the radio player..."
 msgstr "Reproductor de radio"
@@ -9244,8 +9354,14 @@ msgstr "Desvanecimiento"
 msgid "Simple titleset (compatibility for legacy players)"
 msgstr "Título Simple (compatibilidad para más reproductores)"
 
+msgid "Simple zoom"
+msgstr "Zoom sencillo"
+
 msgid "Simulate"
 msgstr "Simular"
+
+msgid "Simulate (no write)"
+msgstr "Simulación (sin escribir)"
 
 msgid "Single"
 msgstr "Uno"
@@ -9311,11 +9427,17 @@ msgstr "Temporizador de reposo"
 msgid "Slide drop"
 msgstr "Bajar cortinilla"
 
+msgid "Slide from left"
+msgstr "Deslizar desde la izda."
+
 msgid "Slide left to right"
 msgstr "Pasar de izquierda a derecha"
 
 msgid "Slide picture in loop"
 msgstr "Mostrar imágenes en bucle"
+
+msgid "Slide right to left"
+msgstr "Deslizar de dcha. a izda."
 
 msgid "Slide show interval (sec.)"
 msgstr "Intervalo de visualización (seg.)"
@@ -9397,6 +9519,13 @@ msgstr "No se han encontrado backups"
 
 msgid "Sorry, no details available!"
 msgstr "No hay detalles"
+
+msgid ""
+"Sorry, no physical devices that supports SWAP attached. Can't create "
+"Swapfile on network or fat32 filesystems"
+msgstr ""
+"No se ha encontrado ningún dispositivo donde crear la SWAP. La swap no puede "
+"crearse en red ni en sistemas fat32"
 
 msgid "Sorry, this tuner is in use."
 msgstr "Este sintonizador está en uso"
@@ -10126,6 +10255,12 @@ msgstr ""
 msgid "The following files were found..."
 msgstr "Se han encontrado los siguientes archivos..."
 
+msgid "The image is downloaded. Do you want to flash now?"
+msgstr "La imagen se ha descargado. Desea instalarla ahora?"
+
+msgid "The image or kernel will be flashing and auto booted in few minutes.\n"
+msgstr "La imagen/kernel se instalará y autoiniciará en unos minutos.\n"
+
 msgid "The md5sum validation failed, the file may be corrupted!"
 msgstr "La validación md5sum ha fallado, el fichero parece corrupto!"
 
@@ -10246,7 +10381,7 @@ msgid ""
 msgstr ""
 "Permite cambiar el tamaño de la fuente en relación al tamaño del skin: 1 "
 "aumenta el tamaño en 1 punto; -1 lo disminuye en 1 punto.\n"
-" Valores: -8..0..10"
+" Valores: -8 <-> +10"
 
 msgid "This allows you change the number of rows shown."
 msgstr ""
@@ -10269,6 +10404,16 @@ msgstr ""
 "No es relevante para los usuarios normales.\n"
 "Si Vd. no es desarrollador no haga caso de la información que aqui se "
 "muestre!"
+
+msgid ""
+"This option allows to reduce the block-noise in the picture. Obviously this "
+"is at the cost of the picture's sharpness."
+msgstr ""
+"Permite reducir el ruido de bloque de la imagen. Obviamente, en detrimentode "
+"la nitidez de la imagen"
+
+msgid "This option allows to set the level of dynamic contrast of the picture."
+msgstr "Permite ajustar la cantidad de contraste dinámico de la imagen"
 
 msgid "This option allows you can config the Colorspace from Auto to RGB"
 msgstr "Permite configurar el espacio de color de Auto a RGB"
@@ -10303,8 +10448,17 @@ msgid ""
 msgstr ""
 "Permite utilizar siempre 1080p50 en TV/.ts, y 1080p24/p50/p60 en los videos"
 
+msgid "This option allows you to boost the blue tones in the picture."
+msgstr "Permite enfatizar los tonos azules de la imagen"
+
+msgid "This option allows you to boost the green tones in the picture."
+msgstr "Permite enfatizar los tonos verdes de la imagen"
+
 msgid "This option allows you to bypass HDMI EDID check"
 msgstr "Permite obviar la comprobacion de HDMI EDID"
+
+msgid "This option allows you to change the virtuell loadspeaker position."
+msgstr "Esta opción permite cambiar la posición del altavoz virtual"
 
 msgid ""
 "This option allows you to choose how to display 1080p 24Hz on your TV. (as "
@@ -10353,6 +10507,10 @@ msgstr "Permite habilitar/deshabilitar el audio 3D envolvente."
 msgid "This option allows you to power off the display."
 msgstr "Permite desconectar el display."
 
+msgid "This option allows you to view the old and new settings side by side."
+msgstr ""
+"Permite ver las opciones anteriores y las actuales, una junto a la otra"
+
 msgid ""
 "This option configures the general audio delay of Dolby Digital sound tracks."
 msgstr "Configura el retardo genérico del audio en los canales Dolby Digital."
@@ -10383,6 +10541,54 @@ msgstr "Permite elegir el modo 3D"
 
 msgid "This option lets you show the option in the extension screen"
 msgstr "Muestra la opción en la extensión de la pantalla"
+
+msgid ""
+"This option set the level of surpression of musquito noise (Musquito Noise "
+"is random aliasing as a result of strong compression). Obviously this goes "
+"at the cost of picture details."
+msgstr ""
+"Configura el nivel de supresión del zumbido (El zumbido es una indefinición "
+"aleatoria debida a una compresión demasiado fuerte). Obviamente afecta al "
+"detalle de la imagen"
+
+msgid "This option sets  the picture contrast."
+msgstr "Configura el contraste de la imagen"
+
+msgid "This option sets the picture brightness."
+msgstr "Configura la nitidez de la imagen"
+
+msgid "This option sets the picture color space."
+msgstr "Configura el espacio de color de la imagen"
+
+msgid "This option sets the picture flesh tones."
+msgstr "Configura el color carne de la imagen"
+
+msgid "This option sets the picture hue."
+msgstr "Configura el matiz de la imagen"
+
+msgid "This option sets the picture saturation."
+msgstr "Configura la saturación de la imagen"
+
+msgid ""
+"This option sets the scaler sharpness, used when stretching picture from 4:3 "
+"to 16:9."
+msgstr ""
+"Configura la nitidez del reescalado, cuando se \"estira\" la imagende 4:3 a "
+"16:9"
+
+msgid ""
+"This option sets the surpression of false digital contours, that are the "
+"result of a limited number of discrete values."
+msgstr ""
+"Configura la supresión de falsos contornos digitales, que son el resultado "
+"de un número limitado de valores pequeños"
+
+msgid ""
+"This option sets up the picture sharpness, used when the picture is being "
+"upscaled."
+msgstr ""
+"Configura la nitidez de la imagen, se utiliza durante el reescalado de la "
+"imagen"
 
 msgid "This plugin is installed."
 msgstr "Este plugin está instalado."
@@ -10638,6 +10844,9 @@ msgstr "Memoria total"
 
 msgid "Total cards:"
 msgstr "Tarjetas totales:"
+
+msgid "Total clients streaming: %d (%s)"
+msgstr "Total clientes en streaming: %d (%s)"
 
 msgid "Total handled client ecm's"
 msgstr "Total de ecm gestionadas por cliente"
@@ -10895,6 +11104,9 @@ msgstr "Desmontar"
 
 msgid "Unsupported"
 msgstr "No soportado"
+
+msgid "Unzipping files, Please wait ..."
+msgstr "Descomprimiendo. Espere..."
 
 msgid "Up Key"
 msgstr "Tecla arriba"
@@ -11207,6 +11419,9 @@ msgstr "Atención - Nombres de archivo muy, muy cortos"
 msgid "Video"
 msgstr "Video"
 
+msgid "Video Enhancement Settings"
+msgstr "Configuración de mejora de video"
+
 msgid "Video Height"
 msgstr "Alto de video"
 
@@ -11255,6 +11470,15 @@ msgstr "Selección del modo de vídeo."
 
 msgid "Video mode: %s"
 msgstr "Modo de vídeo: %s"
+
+msgid "Video mode: %s not available"
+msgstr "Modo de video %s no disponible"
+
+msgid "Video mode: 1080p also not available"
+msgstr "Modo de video 1080p tampoco está disponible"
+
+msgid "Video mode: 2160p also not available"
+msgstr "Modo de video 2160p tampoco está disponible"
 
 msgid "Video output"
 msgstr "Salida de vídeo"
@@ -11442,6 +11666,12 @@ msgstr "Encender el receptor desde reposo"
 
 msgid "Wakeup signal from TV"
 msgstr "Despertar con señal de TV"
+
+msgid "Wakeup time"
+msgstr "Hora para despertar"
+
+msgid "Wakeup timer"
+msgstr "Temporiz. para despertar"
 
 msgid "Wakeup type"
 msgstr "Despertar como"
@@ -12052,6 +12282,9 @@ msgstr "Guardar en /tmp/positionersetup.log"
 msgid "Wrong parameter format 'set=%s'. Use set=set15 "
 msgstr "Formato de parámetro incorrecto 'set=%s'. Use set=set15"
 
+msgid "YES"
+msgstr "Si"
+
 msgid "YPbPr"
 msgstr "YPbPr"
 
@@ -12259,6 +12492,9 @@ msgstr ""
 "El %s %s se reiniciará después de eliminar el servicio.\n"
 "Seguro que quiere eliminarlo?"
 
+msgid "Your STB will freeze during the flashing process.\n"
+msgstr "El receptor sufrirá parones durante el proceso de flasheo.\n"
+
 msgid ""
 "Your backup succeeded. We will now continue to explain the further upgrade "
 "process."
@@ -12426,6 +12662,12 @@ msgstr ""
 
 msgid "Zapped to"
 msgstr "Saltado a"
+
+msgid "Zoom from left"
+msgstr "Zoom desde la izda."
+
+msgid "Zoom from right"
+msgstr "Zoom desde la dcha."
 
 msgid "[Enigma2 Settings]\n"
 msgstr "[Configuración Enigma2]\n"
@@ -13331,6 +13573,20 @@ msgstr "desactivado"
 msgid "offset is"
 msgstr "La desviación es"
 
+msgid ""
+"ofgwrite not found !!\n"
+"Please make sure you have ofgwrite installed in /usr/bin/ofgwrite.\n"
+"\n"
+"Exit plugin."
+msgstr ""
+"No se ha encontrado ofgwrite\n"
+"Asegúrese de que está instalado en /usr/bin/ofgwrite.\n"
+"\n"
+"Salir del plugin."
+
+msgid "ofgwrite will stop enigma2 now to run the flash.\n"
+msgstr "ofgwrite detendrá enigma2 para proceder al flasheo.\n"
+
 msgid "on"
 msgstr "activado"
 
@@ -13383,7 +13639,7 @@ msgid "partial match"
 msgstr "coincidencia parcial"
 
 msgid "pass"
-msgstr "contraseña"
+msgstr "Paso"
 
 msgid "performance"
 msgstr "Performance"
@@ -13555,6 +13811,9 @@ msgstr "rock/pop"
 
 msgid "romance"
 msgstr "romántica"
+
+msgid "root and kernel"
+msgstr "root y kernel"
 
 msgid "running"
 msgstr "corriendo"
@@ -13868,6 +14127,9 @@ msgstr "no definido"
 
 msgid "unknown"
 msgstr "(Sin determinar)"
+
+msgid "unknown error"
+msgstr "error desconocido"
 
 msgid "unknown service"
 msgstr "canal desconocido"

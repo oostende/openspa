@@ -454,6 +454,9 @@ msgstr "-9.0 seg."
 msgid "-9.5 sec"
 msgstr "-9.5 seg."
 
+msgid "/media/custom"
+msgstr "/media/custom"
+
 msgid "0.5 sec"
 msgstr "0.5 seg."
 
@@ -573,6 +576,9 @@ msgstr "Mode 3D"
 
 msgid "3D Surround"
 msgstr "3D Surround"
+
+msgid "3D Surround Speaker Position"
+msgstr "Posició de l'altaveu 3D Surround"
 
 msgid "3D surround"
 msgstr "3D envolvent"
@@ -1097,6 +1103,9 @@ msgstr "Software avançat"
 msgid "Advanced software plugin"
 msgstr "Plugin de software avançat"
 
+msgid "Advanced video enhancement setup"
+msgstr "Configuració avançada de millora de vídeo"
+
 msgid "Advanced video setup"
 msgstr "Configuració avançada de vídeo"
 
@@ -1159,6 +1168,9 @@ msgstr "Tots els satèl·lits 4 (DiSEqC 1.2)"
 
 msgid "All satellites 4 (USALS)"
 msgstr "Tots els satèl·lits 4 (USALS)"
+
+msgid "All services provider"
+msgstr "Proveïdor de tots els canals"
 
 msgid "Allocate"
 msgstr "Localitzar"
@@ -1419,6 +1431,9 @@ msgstr "PID d'àudio"
 msgid "Audio Selection"
 msgstr "Selecció d'àudio"
 
+msgid "Audio Source"
+msgstr "Font d'àudio"
+
 msgid "Audio Sync"
 msgstr "Sincronització d'àudio"
 
@@ -1436,6 +1451,9 @@ msgstr "Quart idioma d'àudio"
 
 msgid "Audio options..."
 msgstr "Opcions d'àudio"
+
+msgid "Audio settings"
+msgstr "Ajustaments d'àudio"
 
 msgid "August"
 msgstr "Agost"
@@ -1472,6 +1490,9 @@ msgstr "Iniciant Autofocus"
 
 msgid "Auto language selection"
 msgstr "Autoselecció d'idioma"
+
+msgid "Auto play blu-ray file"
+msgstr "Auto-reproduir arxiu de blu-ray"
 
 msgid "Auto scart switching"
 msgstr "Canvi automàtic a Scart"
@@ -1704,6 +1725,12 @@ msgstr "S'ha creat el marcador."
 msgid "Bookmarks"
 msgstr "Marcadors"
 
+msgid "Boost blue"
+msgstr "Enfatitzar el blau"
+
+msgid "Boost green"
+msgstr "Enfatitzar el verd"
+
 msgid "Bouquet Editor"
 msgstr "Editor de Favorits"
 
@@ -1857,6 +1884,9 @@ msgstr "CA%s"
 msgid "CI assignment"
 msgstr "Assignació CI"
 
+msgid "CI slot: "
+msgstr "Ranura CI: "
+
 msgid "CIFS Share"
 msgstr "Tipus CIFS"
 
@@ -1922,6 +1952,17 @@ msgstr "No hi ha senyal... cancel·lant"
 msgid "Cannot format current drive."
 msgstr "No es pot formatar el disp. actual"
 
+msgid ""
+"Cannot format current drive.\n"
+"A record in progress, timeshift or some external tools (like samba, swapfile "
+"and nfsd) may cause this problem.\n"
+"Please stop this actions/applications and try again"
+msgstr ""
+"No es pot formatar el dispositiu.\n"
+"Un enregistrament, timeshift o algún procés extern (samba, swap, nfsd...) "
+"poden estar causant aquest problema.\n"
+"Atureu aquests processos/serveis i torneu a provar-ho"
+
 msgid "Cannot format partition %d"
 msgstr "No es pot formatar la partició %d"
 
@@ -1952,6 +1993,17 @@ msgstr ""
 
 msgid "Cannot umount current drive."
 msgstr "No es pot desmuntar el dispositiu"
+
+msgid ""
+"Cannot umount current drive.\n"
+"A record in progress, timeshift or some external tools (like samba, swapfile "
+"and nfsd) may cause this problem.\n"
+"Please stop this actions/applications and try again"
+msgstr ""
+"No es pot desmuntar la unitat.\n"
+"Un enregistrament, timeshift o algún procés extern (samba, swap, nfsd...) "
+"poden estar causant aquest problema.\n"
+"Atureu aquests processos/serveis i torneu a provar-ho"
 
 msgid "Capacity"
 msgstr "Capacitat"
@@ -2003,6 +2055,9 @@ msgstr "Canviar de llista en zàping ràpid"
 
 msgid "Change hostname"
 msgstr "Canviar nom de host"
+
+msgid "Change old drive with this new drive"
+msgstr "Canviar la unitat anterior per la nova"
 
 msgid "Change recording (add time)"
 msgstr "Canviar gravació (afegir temps)"
@@ -2131,8 +2186,15 @@ msgstr "Xipset: BCM%s"
 msgid "Choose Tuner"
 msgstr "Triar sintonitzador"
 
+msgid "Choose bouquet"
+msgstr "Triar bouquet"
+
 msgid "Choose whether AAC sound tracks should be transcoded."
 msgstr "Configura quina de les pistes AAC serà transcodificada"
+
+msgid ""
+"Choose whether multi channel sound tracks should be convert to PCM or SPDIF."
+msgstr "Trieu quina de les pistes d'àudio haurà convertir-se a PCM o SPDIF"
 
 msgid ""
 "Choose whether multi channel sound tracks should be downmixed to stereo."
@@ -2229,6 +2291,9 @@ msgstr "Ajustaments de la col·lecció"
 
 msgid "Color format"
 msgstr "Paleta de color"
+
+msgid "Color space"
+msgstr "Espai de color"
 
 msgid "Command To Run"
 msgstr "Ordre per executar"
@@ -2330,20 +2395,20 @@ msgid ""
 "Configure if and how the record indicator will be shown in the channel "
 "selection list."
 msgstr ""
-"Configura si es mostrarà (i on) un indicador d'enregistrament a la llista de "
-"canals"
+"Configura si es mostrarà i on (o com) un indicador d'enregistrament a la "
+"llista de canals"
 
 msgid ""
 "Configure if and how wide columns will be shown in the channel selection "
 "list."
 msgstr "Configura si la llista de canals es mostrarà en columnes (i l'amplada)"
 
-msgid "Configure if behind the subtitles a background is shown"
+msgid "Configure if behind the subtitles a background is shown."
 msgstr "Configura si es mostrarà (o no) un fons rere els subtítols"
 
 msgid ""
 "Configure if service picons will be shown in the channel selection list."
-msgstr "Configura si es mostraràn els picons de canal a la llista de canals"
+msgstr "Configura si es mostraràn els picon dels canals a la llista de canals"
 
 msgid ""
 "Configure if the subtitle should switch between normal, italic, bold and "
@@ -3044,8 +3109,14 @@ msgstr "DVB-T2"
 msgid "DVB-USB Device Manager"
 msgstr "Gestor de dispositius DVB-USB"
 
+msgid "DVD Tool"
+msgstr "DVD Tool"
+
 msgid "DVD media toolbox"
 msgstr "Barra d'eines DVD"
+
+msgid "DVD titlelist"
+msgstr "Llista de títols DVD"
 
 msgid "Daily"
 msgstr "Diari"
@@ -3474,6 +3545,13 @@ msgstr ""
 "Segur que voleu convertir el sistema d'arxius?\n"
 "No es podrà tornar enrere!"
 
+msgid ""
+"Do you really want to delete\n"
+"%s ?"
+msgstr ""
+"Segur que voleu eliminar\n"
+"%s ?"
+
 msgid "Do you really want to delete %s?"
 msgstr "Segur que voleu esborrar %s?"
 
@@ -3632,6 +3710,9 @@ msgstr "Descarregar"
 msgid "Download .NFI-Files for USB-Flasher"
 msgstr "Descarregar fitxers .NFI per a l'USB-Flasher"
 
+msgid "Download Failed !!"
+msgstr "Descàrrega fallida"
+
 msgid "Download Playlist for"
 msgstr "Descarregar llista de reproducció per"
 
@@ -3646,6 +3727,9 @@ msgstr "Plugins descarregables"
 
 msgid "Downloading"
 msgstr "Descarregant"
+
+msgid "Downloading %s"
+msgstr "Descarregant %s"
 
 msgid "Downloading plugin information. Please wait..."
 msgstr "Descarregant informació dels plugins. Espereu..."
@@ -3901,6 +3985,9 @@ msgstr "Activar programació"
 
 msgid "Enable timer conflict detection"
 msgstr "Habilitar detecció de conflictes de timers"
+
+msgid "Enable wakeup timer"
+msgstr "Habilitar tempor. per despertar"
 
 msgid "Enable zapping with CH+/-, B+/-, P+/-"
 msgstr "Habilitar zàping amb CH+/-, B+/-, P+/-"
@@ -4200,6 +4287,9 @@ msgstr "T. extra abans d'ignorar la inactiv. del sleeptimer"
 msgid "Extras"
 msgstr "Extres"
 
+msgid "Extrude from left"
+msgstr "Extruir des de l'esquerra"
+
 msgid "FEC"
 msgstr "FEC"
 
@@ -4252,7 +4342,7 @@ msgid "Fast Scan"
 msgstr "Recerca ràpida"
 
 msgid "Fast epoch"
-msgstr "Època ràpida"
+msgstr "Intèrval de gir ràpid"
 
 msgid "Fast forward speeds"
 msgstr "Velocitats d'avanç ràpid"
@@ -4269,10 +4359,10 @@ msgid ""
 "P.x on Devicelist - where x >=2) are mounted on the same Device.\n"
 "Please unmount Fixed Mounted Devices with Device Manager Panel!"
 msgstr ""
-"El medi ha estat desmuntat.\n"
-"Ara es pot extreure amb seguretat si no hi ha més particions muntades al "
-"mateix dispositiu (es mostren a la llista com P.x, sent x >=2)\n"
-"Desmunteu els muntatges fixes des del Gestor de dispositius"
+"La unitat ha estat desmuntada.\n"
+"Ara ja es pot extreure si no hi ha més particions muntades al mateix "
+"dispositiu (es mostren a la llista com P.x, sent x >=2)\n"
+"Si teniu més muntatges fixes, desmunteu-ho des del Gestor de dispositius"
 
 msgid "Favourites"
 msgstr "Favorits"
@@ -4364,6 +4454,9 @@ msgstr "Flash Online/Local"
 
 msgid "Flashing failed"
 msgstr "La instal·lació ha fallat"
+
+msgid "Flashing: "
+msgstr "Instal·lant: "
 
 msgid "Following tasks will be done after you press OK!"
 msgstr "Les següents tasques s'executaràn després de prémer OK"
@@ -4487,6 +4580,9 @@ msgstr "Resolució en vista completa"
 
 msgid "Further Options"
 msgstr "Opcions avançades"
+
+msgid "GB800SOLO takes about 20 mins !!\n"
+msgstr "GB800SOLO trigará uns 20 min.\n"
 
 msgid ""
 "GUI needs a restart to apply a new skin\n"
@@ -4679,11 +4775,17 @@ msgstr "Administrar el repòs desde la TV"
 msgid "Handle wakeup from TV"
 msgstr "Administrar l'engegada desde la TV"
 
+msgid "Hard Drive Fast Umount"
+msgstr "Desmuntat ràpid del disc dur"
+
 msgid "Hard Drive Info"
 msgstr "Info HDD"
 
 msgid "Hard Drive Partitions"
 msgstr "Particions del Disc Dur"
+
+msgid "Hard Drive Setup"
+msgstr "Configuració del disc dur"
 
 msgid "Hard disk model"
 msgstr "Model Disc Dur"
@@ -5063,6 +5165,9 @@ msgstr "Configuració del dispositiu d'entrada"
 msgid "Input devices"
 msgstr "Dispositius d'entrada"
 
+msgid "Insert mount point:"
+msgstr "Inserir muntatge"
+
 msgid "Install"
 msgstr "Instal·lar"
 
@@ -5249,6 +5354,9 @@ msgstr "només reprod."
 
 msgid "Just scale"
 msgstr "Ajust exacte"
+
+msgid "Keep old drive"
+msgstr "Mantenir el dispositiu anterior"
 
 msgid "Keep service"
 msgstr "Mantenir al canal"
@@ -5804,6 +5912,9 @@ msgstr "Muntar en ruta personalitzada"
 msgid "Mount options"
 msgstr "Opcions de muntatge"
 
+msgid "Mount point exist!"
+msgstr "El muntatge ja existeix!"
+
 msgid "Mount shares again"
 msgstr "Tornar a muntar els recursos de xarxa"
 
@@ -5995,6 +6106,9 @@ msgstr "Tipus NFS"
 msgid "NIM"
 msgstr "Sint."
 
+msgid "NO"
+msgstr "No"
+
 msgid "NOW"
 msgstr "ARA"
 
@@ -6150,6 +6264,17 @@ msgid ""
 msgstr ""
 "No hi ha /hdd!\n"
 "Asegureu-vos que teniu un HDD muntat.\n"
+
+msgid ""
+"No /hdd found !!\n"
+"Please make sure you have a HDD mounted.\n"
+"\n"
+"Exit plugin."
+msgstr ""
+"No s'ha trobat cap /hdd\n"
+"Asegureu-vos de tenir un /hdd muntat.\n"
+"\n"
+"Sortir del plugin."
 
 msgid "No Connection"
 msgstr "Sense connexió"
@@ -6433,11 +6558,29 @@ msgstr ""
 "No hi ha prou espai a /hdd!\n"
 "Es necessiten uns 300MB d'espai lliure.\n"
 
+msgid ""
+"Not enough free space on /hdd !!\n"
+"You need at least 300Mb free space.\n"
+"\n"
+"Exit plugin."
+msgstr ""
+"No hi ha prou espai a /hdd\n"
+"Es necessiten, mínim, 300Mb d'espai lliure.\n"
+"\n"
+"Sortir del plugin."
+
 msgid "Not-Associated"
 msgstr "No associat"
 
 msgid "Not-Associated %d"
 msgstr "No connectat"
+
+msgid ""
+"Note: when enabled, and you do want standby mode after wake up, set option "
+"'Startup to Standby' as 'No, except Wakeup timer'."
+msgstr ""
+"Nota: si s'habilita, i voleu posar-ho en repòs després de despertar-ho, a la "
+"opció 'Repòs en l'inici' trieu 'No, excepte temporitzador per despertar'."
 
 msgid "Nothing"
 msgstr "Res"
@@ -6481,6 +6624,9 @@ msgstr "Enlloc"
 
 msgid "Number of channel number digits"
 msgstr "Nombre de dígits del canal"
+
+msgid "Number of rows"
+msgstr "Nombre de files"
 
 msgid "OFW Launcher"
 msgstr "Iniciar FRW oficial"
@@ -7202,6 +7348,9 @@ msgstr "S'està comprovant..."
 msgid "Please wait... Loading list..."
 msgstr "Espereu... Carregant llista..."
 
+msgid "Please: DO NOT reboot your STB and turn off the power.\n"
+msgstr "ATENCIÓ: NO reinicieu ni apagueu l'equip.\n"
+
 msgid "Plugin browser"
 msgstr "Navegador de plugins"
 
@@ -7251,7 +7400,7 @@ msgid "Position Setup"
 msgstr "Ajust de la posició"
 
 msgid "Position of completed timers in timerlist"
-msgstr "Posició, a la llista, de les reserves completades"
+msgstr "Ubicació de les reserves acabades"
 
 msgid "Position stored at index"
 msgstr "Posició desada en l'índex"
@@ -7514,6 +7663,9 @@ msgstr "Protegir la pantalla d'actualització de software"
 
 msgid "Protect spzMenu"
 msgstr "Protegir spzMenu"
+
+msgid "Protect spzMenu (OpenSPA Main Menu)"
+msgstr "Protegir el menú principal OpenSPA"
 
 msgid "Protect standby menu"
 msgstr "Protegir el menú de repòs"
@@ -8005,6 +8157,9 @@ msgstr "Restauració en curs..."
 
 msgid "Restore system settings"
 msgstr "Restaurar la configuració"
+
+msgid "Restoring satellites.xml not possible!"
+msgstr "No és possible de restaurar satellites.xml!"
 
 msgid "Restoring..."
 msgstr "Restaurant"
@@ -8556,6 +8711,9 @@ msgstr "Seleccioneu carpeta final"
 msgid "Select the movie path"
 msgstr "Seleccioneu la carpeta de les pel·lícules"
 
+msgid "Select the remote RCU"
+msgstr "Selecció del comandament a distancia"
+
 msgid "Select upgrade source"
 msgstr "Font de l'actualització"
 
@@ -8573,6 +8731,9 @@ msgstr "Seleccioneu xarxa wifi"
 
 msgid "Select your provider, and press OK to start the scan"
 msgstr "Seleccioneu el proveïdor i premeu OK per començar a cercar"
+
+msgid "Selected mount point is already used by another drive."
+msgstr "El muntatge seleccionat ja l'està utilitzant un altre dispositiu"
 
 msgid "Selecting satellites 1 (USALS)"
 msgstr "Seleccioneu satèl·lit 1 (USALS)"
@@ -8649,6 +8810,9 @@ msgstr "El canal s'ha afegit als favorits."
 msgid "Service has been added to the selected bouquet."
 msgstr "El canal s'ha afegit a la llista seleccionada."
 
+msgid "Service info font size"
+msgstr "Mida del text - Info del canal"
+
 msgid ""
 "Service invalid!\n"
 "(Timeout reading PMT)"
@@ -8659,12 +8823,18 @@ msgstr ""
 msgid "Service name"
 msgstr "Nom del canal"
 
+msgid "Service name font size"
+msgstr "Mida del text - Nom del canal"
+
 msgid ""
 "Service not found!\n"
 "(SID not found in PAT)"
 msgstr ""
 "¡Canal no trobat!\n"
 "(SID no trobat al PAT)"
+
+msgid "Service number font size"
+msgstr "Mida del text - Nombre del canal"
 
 msgid "Service reference"
 msgstr "Refer. del canal"
@@ -8849,6 +9019,9 @@ msgstr "Mostrar 1080p 25fps com"
 msgid "Show 1080p 30fps as"
 msgstr "Mostrar 1080p 30fps com"
 
+msgid "Show 480/576p 24fps as"
+msgstr "Mostrar 480/576p 24fps com"
+
 msgid "Show 720p 24fps as"
 msgstr "Mostrar 720p 24fps com"
 
@@ -8928,6 +9101,9 @@ msgid "Show blinking rec symbol on Display during recording"
 msgstr ""
 "Mostra la icona de gravació intermitent en el display mentre s'enregistra"
 
+msgid "Show bootvideo on boot"
+msgstr "Mostrar el bootvideo en engegar"
+
 msgid "Show bouquet selection menu"
 msgstr "Mostrar menú de selecció de bouquet"
 
@@ -9000,6 +9176,9 @@ msgstr "Mostrar EPG Multi canal"
 msgid "Show on Display"
 msgstr "Mostrar en pantalla"
 
+msgid "Show only found image and mtd partitions.\n"
+msgstr "Mostrar només la imatge i les particions mtd.\n"
+
 msgid "Show picons in channel list"
 msgstr "Mostrar picons a la llista de canals"
 
@@ -9041,6 +9220,9 @@ msgstr "Mostrar el Menú."
 
 msgid "Show the Virtual keyboard window."
 msgstr "Mostrar el teclat virtual"
+
+msgid "Show the plugin browser.."
+msgstr "Mostrar el navegador de plugins"
 
 msgid "Show the radio player..."
 msgstr "Reproductor de ràdio"
@@ -9162,8 +9344,14 @@ msgstr "Esvaïment"
 msgid "Simple titleset (compatibility for legacy players)"
 msgstr "Títol simple (compatibilitat amb més reproductors)"
 
+msgid "Simple zoom"
+msgstr "Zoom senzill"
+
 msgid "Simulate"
 msgstr "Simular"
+
+msgid "Simulate (no write)"
+msgstr "Simulació (sense escriure)"
 
 msgid "Single"
 msgstr "Un"
@@ -9229,11 +9417,17 @@ msgstr "Temporitzador de repòs"
 msgid "Slide drop"
 msgstr "Baixar cortina"
 
+msgid "Slide from left"
+msgstr "Lliscar des de l'esq."
+
 msgid "Slide left to right"
 msgstr "Passar d'esquerra a dreta"
 
 msgid "Slide picture in loop"
 msgstr "Mostrar imatges en bucle"
+
+msgid "Slide right to left"
+msgstr "Lliscar de drta. a esq."
 
 msgid "Slide show interval (sec.)"
 msgstr "Intèrval de visualització (seg.)"
@@ -9315,6 +9509,13 @@ msgstr "No s'han trobat backups"
 
 msgid "Sorry, no details available!"
 msgstr "No hi ha detalls"
+
+msgid ""
+"Sorry, no physical devices that supports SWAP attached. Can't create "
+"Swapfile on network or fat32 filesystems"
+msgstr ""
+"No s'ha trobat cap dispositiu on crear-hi la SWAP. La swap no pot crear-se "
+"en la xarxa ni en sistemes fat32"
 
 msgid "Sorry, this tuner is in use."
 msgstr "Aquest sintonitzador està en ús"
@@ -9887,6 +10088,9 @@ msgstr "Reportar adreça física de la TV"
 msgid "TXT PID"
 msgstr "PID TxT"
 
+msgid "Table of contents for collection"
+msgstr "Índex per a la col·lecció"
+
 msgid "Tags"
 msgstr "Etiquetes"
 
@@ -9969,6 +10173,15 @@ msgstr ""
 "Instal·leu-lo"
 
 msgid ""
+"The DVD standard doesn't support H.264 (HDTV) video streams. Do you want to "
+"create a special format data DVD (which will not play in stand-alone DVD "
+"players) instead?"
+msgstr ""
+"El DVD standard no suporta videos H.264 (HDTV). En comptes d'això, voleu "
+"crear un DVD de dades de format especial (no es podrà reproduïr en "
+"reproductors de sobretaula)?"
+
+msgid ""
 "The OpenSPA team would like to point out that upgrading to the latest "
 "nightly build comes not only with the latest features, but also with some "
 "risks. After the update, it is possible that your device no longer works as "
@@ -10027,6 +10240,12 @@ msgstr ""
 
 msgid "The following files were found..."
 msgstr "S'han trobat aquests arxius..."
+
+msgid "The image is downloaded. Do you want to flash now?"
+msgstr "La imatge s'ha descarregat. Voleu instal·lar-la ara?"
+
+msgid "The image or kernel will be flashing and auto booted in few minutes.\n"
+msgstr "La imatge/kernel s'instal·lará i autoiniciará en uns minuts.\n"
 
 msgid "The md5sum validation failed, the file may be corrupted!"
 msgstr "La validació md5sum ha fallat, el fitxer sembla estar corrupte!"
@@ -10141,6 +10360,19 @@ msgstr ""
 "continguts del disc."
 
 msgid ""
+"This allows you change the font size relative to skin size, so 1 increases "
+"by 1 point size, and -1 decreases by 1 point size"
+msgstr ""
+"Permet canviar la mida del text en relació a la mida del skin: 1 augmenta la "
+"mida en 1 punt; -1 disminueix la mida en 1 punt.\n"
+" Valors: -8 <-> +10"
+
+msgid "This allows you change the number of rows shown."
+msgstr ""
+"Permet canviar el nombre de files que es mostraràn (útil si es canvia la "
+"mida de la font)"
+
+msgid ""
 "This allows you to set the number of digits to 5, if you have more than 9999 "
 "channels."
 msgstr ""
@@ -10155,6 +10387,16 @@ msgstr ""
 "Aquesta info es només per desenvolupadors.\n"
 "No és rellevant per als usuaris normals.\n"
 "Si no sóu desenvolupador, no feu cas de la informació que es mostri aqui!"
+
+msgid ""
+"This option allows to reduce the block-noise in the picture. Obviously this "
+"is at the cost of the picture's sharpness."
+msgstr ""
+"Permet reduir el soroll de bloc de la imatge. Obviament, en detrimentde la "
+"nitidesa de la imatge"
+
+msgid "This option allows to set the level of dynamic contrast of the picture."
+msgstr "Permet ajustar la quantitat de contrast dinàmic de la imatge"
 
 msgid "This option allows you can config the Colorspace from Auto to RGB"
 msgstr "Permet configurar l'espai de color d'Auto a RGB"
@@ -10183,13 +10425,22 @@ msgstr ""
 "directe."
 
 msgid ""
-"This option allows you to always use 1080p50 for TV/.ts, and 1080p24/p50/p60 "
-"for videos"
+"This option allows you to always use e.g. 1080p50 for TV/.ts, and 1080p24/"
+"p50/p60 for videos"
 msgstr ""
-"Permet utilitzar sempre 1080p50 en TV/.ts, i 1080p24/p50/p60 als videos"
+"Permet utilitzar sempre 1080p50 en TV/.ts, i 1080p24/p50/p60 per als videos"
+
+msgid "This option allows you to boost the blue tones in the picture."
+msgstr "Permet enfatitzar els tons blaus de la imatge"
+
+msgid "This option allows you to boost the green tones in the picture."
+msgstr "Permit enfatitzar els tons verds de la imatge"
 
 msgid "This option allows you to bypass HDMI EDID check"
 msgstr "Permet obviar la comprovació d'HDMI EDID"
+
+msgid "This option allows you to change the virtuell loadspeaker position."
+msgstr "Aquesta opció permet canviar la posició de l'altaveu virtual"
 
 msgid ""
 "This option allows you to choose how to display 1080p 24Hz on your TV. (as "
@@ -10220,6 +10471,13 @@ msgstr ""
 "les TV suporten aquestes resolucions)"
 
 msgid ""
+"This option allows you to choose how to display SD progressive 24Hz on your "
+"TV. (as not all TV's support these resolutions)"
+msgstr ""
+"Permet triar de quina manera SD progressiu 24Hz es mostrarà a la pantalla. "
+"(No totes les TV suporten aquestes resolucions)"
+
+msgid ""
 "This option allows you to choose how to display standard defintion video on "
 "your TV."
 msgstr ""
@@ -10230,6 +10488,10 @@ msgstr "Permet habilitar/deshabilitar l'àudio 3D envolvent."
 
 msgid "This option allows you to power off the display."
 msgstr "Permet desconnectar el display."
+
+msgid "This option allows you to view the old and new settings side by side."
+msgstr ""
+"Permet veure les opcions anteriors i les actuals, una al costat de l'altre"
 
 msgid ""
 "This option configures the general audio delay of Dolby Digital sound tracks."
@@ -10261,6 +10523,53 @@ msgstr "Permet triar el mode 3D"
 
 msgid "This option lets you show the option in the extension screen"
 msgstr "Mostra la opció a la pantalla d'extensions"
+
+msgid ""
+"This option set the level of surpression of musquito noise (Musquito Noise "
+"is random aliasing as a result of strong compression). Obviously this goes "
+"at the cost of picture details."
+msgstr ""
+"Configura el nivell de supressió del brogit (El brogit es una indefinició "
+"aleatoria deguda a una compressió massa forta). Obviament afecta al detall "
+"de la imatge"
+
+msgid "This option sets  the picture contrast."
+msgstr "Configura el contrast de la imatge"
+
+msgid "This option sets the picture brightness."
+msgstr "Configura la nitidesa de la imatge"
+
+msgid "This option sets the picture color space."
+msgstr "Configura l'espai de color de la imatge"
+
+msgid "This option sets the picture flesh tones."
+msgstr "Configura el color carn de la imatge"
+
+msgid "This option sets the picture hue."
+msgstr "Configura el matís de la imatge"
+
+msgid "This option sets the picture saturation."
+msgstr "Configura la saturació de la imatge"
+
+msgid ""
+"This option sets the scaler sharpness, used when stretching picture from 4:3 "
+"to 16:9."
+msgstr ""
+"Configura la nitidesa del reescalat, quan \"s'estira\" la imatgede 4:3 a 16:9"
+
+msgid ""
+"This option sets the surpression of false digital contours, that are the "
+"result of a limited number of discrete values."
+msgstr ""
+"Configura la supressió de falsos contorns digitals, que son el resultat d'un "
+"nombre limitat de valors petits"
+
+msgid ""
+"This option sets up the picture sharpness, used when the picture is being "
+"upscaled."
+msgstr ""
+"Configura la nitidesa de la imatge, s'utilitza durant el reescalat de la "
+"imatge"
 
 msgid "This plugin is installed."
 msgstr "Aquest plugin està instal·lat."
@@ -10516,6 +10825,9 @@ msgstr "Memòria total"
 
 msgid "Total cards:"
 msgstr "Targetes totals:"
+
+msgid "Total clients streaming: %d (%s)"
+msgstr "Total clients en streaming: %d (%s)"
 
 msgid "Total handled client ecm's"
 msgstr "Total d'ecm gestionades per client"
@@ -10775,6 +11087,9 @@ msgstr "Desmuntar"
 msgid "Unsupported"
 msgstr "No suportat"
 
+msgid "Unzipping files, Please wait ..."
+msgstr "Descomprimint. Espereu..."
+
 msgid "Up Key"
 msgstr "Tecla pujar"
 
@@ -10900,7 +11215,7 @@ msgid "Use fastscan channel numbering"
 msgstr "Utilitzar numeració de canals 'fastscan'"
 
 msgid "Use for load only x days in EPG"
-msgstr "Utilitzar per carregar només X dies a la EPG"
+msgstr "Nombre màxim de dies que es descarregaràn a la EPG"
 
 msgid "Use frequency or channel"
 msgstr "Cercar per freqüència o per canal"
@@ -11085,6 +11400,9 @@ msgstr "Atenció - Noms d'arxiu molt, molt curts"
 msgid "Video"
 msgstr "Vídeo"
 
+msgid "Video Enhancement Settings"
+msgstr "Configuració de millora de vídeo"
+
 msgid "Video Height"
 msgstr "Alçada del vídeo"
 
@@ -11133,6 +11451,15 @@ msgstr "Selecció del mode de vídeo."
 msgid "Video mode: %s"
 msgstr "Mode de vídeo: %s"
 
+msgid "Video mode: %s not available"
+msgstr "Mode de vídeo %s no disponible"
+
+msgid "Video mode: 1080p also not available"
+msgstr "Mode de vídeo 1080p tampoc està disponible"
+
+msgid "Video mode: 2160p also not available"
+msgstr "Mode de vídeo 2160p tampoc està disponible"
+
 msgid "Video output"
 msgstr "Sortida de vídeo"
 
@@ -11141,9 +11468,6 @@ msgstr "Mode de sortida de vídeo"
 
 msgid "Video settings"
 msgstr "Ajustaments de vídeo"
-
-msgid "Audio settings"
-msgstr "Ajustaments d'àudio"
 
 msgid "Video setup"
 msgstr "Configuració de vídeo"
@@ -11322,6 +11646,12 @@ msgstr "Engegar el receptor des de repòs"
 
 msgid "Wakeup signal from TV"
 msgstr "Despertar amb senyal de TV"
+
+msgid "Wakeup time"
+msgstr "Hora per despertar"
+
+msgid "Wakeup timer"
+msgstr "Temporitz. per despertar"
 
 msgid "Wakeup type"
 msgstr "Despertar com"
@@ -11927,6 +12257,9 @@ msgstr "Desar-ho a /tmp/positionersetup.log"
 msgid "Wrong parameter format 'set=%s'. Use set=set15 "
 msgstr "Format de paràmetre incorrecte 'set=%s'. Utilitzeu set=set15"
 
+msgid "YES"
+msgstr "Si"
+
 msgid "YPbPr"
 msgstr "YPbPr"
 
@@ -12031,6 +12364,9 @@ msgstr "Podeu continuar mirant la TV, etc. mentre s'executen les tasques."
 msgid "You can install this plugin."
 msgstr "Podeu instal·lar el plugin."
 
+msgid "You can only burn receiver recordings!"
+msgstr "Només podeu enregistrar-hi gravacions del receptor"
+
 msgid "You can remove this plugin."
 msgstr "Podeu desinstal·lar el plugin."
 
@@ -12093,6 +12429,9 @@ msgstr ""
 "El receptor s'apagarà. Després de seguir les instruccions del web, el "
 "firmware us demanarà si voleu restaurar la configuració."
 
+msgid "You need to initialize your storage device first"
+msgstr "Abans cal inicialitzar el dispositiu"
+
 msgid "You system does not support ext4"
 msgstr "Aquest sistema no suporta EXT4"
 
@@ -12124,6 +12463,9 @@ msgid ""
 msgstr ""
 "El %s %s es reiniciarà després d'eliminar el servei.\n"
 "Segur que voleu eliminar-ho?"
+
+msgid "Your STB will freeze during the flashing process.\n"
+msgstr "El receptor tindrà aturades durant el procés d'instal·lació.\n"
 
 msgid ""
 "Your backup succeeded. We will now continue to explain the further upgrade "
@@ -12292,6 +12634,12 @@ msgstr ""
 
 msgid "Zapped to"
 msgstr "Canviat a"
+
+msgid "Zoom from left"
+msgstr "Zoom des de la esq."
+
+msgid "Zoom from right"
+msgstr "Zoom des de la drta."
 
 msgid "[Enigma2 Settings]\n"
 msgstr "[Configuració Enigma2]\n"
@@ -12794,6 +13142,9 @@ msgstr "sortir del menú de configuració de l'adaptador de xarxa"
 msgid "experimental film/video"
 msgstr "cinema/vídeo experimental"
 
+msgid "extrawide"
+msgstr "extra-ampli"
+
 msgid "false"
 msgstr "fals"
 
@@ -12940,6 +13291,9 @@ msgstr "iniciar mòduls"
 
 msgid "insert mark here"
 msgstr "inserir marca aquí"
+
+msgid "insert without cutlist editor"
+msgstr "inserir sense l'editor de llistes"
 
 msgid "interactive"
 msgstr "Interactiva"
@@ -13190,6 +13544,20 @@ msgstr "desactivat"
 msgid "offset is"
 msgstr "La desviació es"
 
+msgid ""
+"ofgwrite not found !!\n"
+"Please make sure you have ofgwrite installed in /usr/bin/ofgwrite.\n"
+"\n"
+"Exit plugin."
+msgstr ""
+"No s'ha trobat ofgwrite\n"
+"Asegureu-vos que està instal·lat a /usr/bin/ofgwrite.\n"
+"\n"
+"Sortir del plugin."
+
+msgid "ofgwrite will stop enigma2 now to run the flash.\n"
+msgstr "ofgwrite aturarà enigma2 per procedir a la instal·lació.\n"
+
 msgid "on"
 msgstr "activat"
 
@@ -13242,7 +13610,7 @@ msgid "partial match"
 msgstr "coincidència parcial"
 
 msgid "pass"
-msgstr "contrasenya"
+msgstr "Pas"
 
 msgid "performance"
 msgstr "Performance"
@@ -13415,8 +13783,21 @@ msgstr "rock/pop"
 msgid "romance"
 msgstr "romàntica"
 
+msgid "root and kernel"
+msgstr "root i kernel"
+
 msgid "running"
 msgstr "corrent"
+
+msgid ""
+"satellites.xml not found or corrupted!\n"
+"It is possible to watch TV,\n"
+"but it's not possible to search for new TV channels\n"
+"or to configure tuner settings"
+msgstr ""
+"No s'ha trobat satellites.xml o està corrupte\n"
+"Podeu seguir veient TV, però no podreu cercar canals\n"
+"ni configurar el sintonitzador"
 
 msgid "save last directory on exit"
 msgstr "Desar l'últim directori en sortir"
@@ -13718,6 +14099,9 @@ msgstr "no definit"
 msgid "unknown"
 msgstr "(sense determinar)"
 
+msgid "unknown error"
+msgstr "error desconegut"
+
 msgid "unknown service"
 msgstr "canal desconegut"
 
@@ -13771,6 +14155,9 @@ msgstr "Blanc"
 
 msgid "whitelist"
 msgstr "Llista blanca"
+
+msgid "wide"
+msgstr "ampli"
 
 msgid "width"
 msgstr "ample"
