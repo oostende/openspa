@@ -42,6 +42,8 @@ class WizardSDCardUse(Screen, ConfigListScreen):
 				system("mkdir -m 777 /media/uSDextra/.kodi")
 			if not path.exists("/.kodi"):
 				system("ln -s /media/uSDextra/.kodi /.kodi")
+			if not path.exists("/home/root/.kodi"):
+				system("ln -s /media/uSDextra/.kodi /home/root/.kodi")
 		if config.plugins.sdcard.movie:
 			if not path.exists("/media/uSDextra/movie"):
 				system("mkdir -m 777 /media/uSDextra/movie")
