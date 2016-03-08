@@ -403,6 +403,7 @@ eDVBUsbAdapter::eDVBUsbAdapter(int nr)
 #define VTUNER_SET_ADAPTER 33
 	ioctl(vtunerFd, VTUNER_SET_NAME, name);
 	ioctl(vtunerFd, VTUNER_SET_TYPE, type);
+	ioctl(vtunerFd, VTUNER_SET_FE_INFO, &fe_info);
 	ioctl(vtunerFd, VTUNER_SET_HAS_OUTPUTS, "no");
 	ioctl(vtunerFd, VTUNER_SET_ADAPTER, nr);
 
@@ -743,6 +744,30 @@ bool eDVBResourceManager::frontendIsCompatible(int index, const char *type)
 		}
 	}
 	return false;
+}
+
+bool eDVBResourceManager::frontendIsMultistream(int index)
+{
+	for (eSmartPtrList<eDVBRegisteredFrontend>::iterator i(m_frontend.begin()); i != m_frontend.end(); ++i)
+	{
+		if (i->m_frontend->getSlotID() == index)
+		{
+			return i->m_frontend->is_multistream();
+		}
+	}
+	return false;
+}
+
+std::string eDVBResourceManager::getFrontendCapabilities(int index)
+{
+	for (eSmartPtrList<eDVBRegisteredFrontend>::iterator i(m_frontend.begin()); i != m_frontend.end(); ++i)
+	{
+		if (i->m_frontend->getSlotID() == index)
+		{
+			return i->m_frontend->getCapabilities();
+		}
+	}
+	return "";
 }
 
 void eDVBResourceManager::setFrontendType(int index, const char *type)
