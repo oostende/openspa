@@ -55,7 +55,8 @@ class MessageBox(Screen):
 			self["QuestionPixmap"].hide()
 		if picon != self.TYPE_INFO:
 			self["InfoPixmap"].hide()
-
+		if picon != self.TYPE_WARNING:
+			self["WarningPixmap"].hide()
 		self.title = self.type < self.TYPE_MESSAGE and [_("Question"), _("Information"), _("Warning"), _("Error")][self.type] or _("Message")
 		if type == self.TYPE_YESNO:
 			if list:
