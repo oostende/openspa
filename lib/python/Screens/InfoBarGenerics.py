@@ -907,8 +907,11 @@ class InfoBarEPG:
 	def getDefaultGuidetype(self):
 		config.usage.defaultGuideType=ConfigText(default="/usr/lib/enigma2/python/Plugins/Extensions/GraphMultiEPG")
 		for plugin in self.getEPGPluginList():
-			if plugin[2] == config.usage.defaultGuideType.value:
-				return plugin[1]
+			try:
+				if plugin[2] == config.usage.defaultGuideType.value.split("@")[0] and plugin[0] == config.usage.defaultGuideType.value.split("@")[1]:
+					return plugin[1]
+			except:
+					pass
 		return None
 
 	def showEventInfoWhenNotVisible(self):
@@ -1085,7 +1088,7 @@ class InfoBarEPG:
 	def DefaultGuidePluginChosen(self, answer):
 		if answer is not None:
 			self.defaultGuideType = answer[1]
-			config.usage.defaultGuideType.value = answer[2]
+			config.usage.defaultGuideType.value = answer[2] + "@" + answer[0]
 			config.usage.defaultGuideType.save()
 
 	def openSimilarList(self, eventid, refstr):
