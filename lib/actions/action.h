@@ -57,7 +57,7 @@ private:
 		int m_prev_seen_make_key;
 	};
 
-	std::multimap<long long int, eActionBinding> m_bindings
+	std::multimap<long long int, eActionBinding> m_bindings;
 
 	friend struct compare_string_keybind_native;
 	struct eNativeKeyBinding
