@@ -692,7 +692,7 @@ class NimSelection(Screen):
 
 	def NimSetupCB(self, index=None):
 		self.loadFBCLinks()
-		self.updateList()
+		self.updateList(index)
 
 	def showNim(self, nim):
 		return True
