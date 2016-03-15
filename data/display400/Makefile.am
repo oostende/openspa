@@ -1,1 +1,1 @@
-SUBDIRS = skin_default openSPA_simple
+SUBDIRS = skin_default openSPA_simple openSPA_classic
