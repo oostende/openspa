@@ -3,12 +3,14 @@ from Components.ActionMap import ActionMap
 from Components.ScrollLabel import ScrollLabel
 
 class TextBox(Screen):
-	def __init__(self, session, text="", title=None):
+	def __init__(self, session, text="", title=None, pigless=False):
 		Screen.__init__(self, session)
-		
+
+		if pigless:
+			self.skinName=["TextBoxPigLess", "TextBox"]
 		self.text = text
 		self["text"] = ScrollLabel(self.text)
-		
+
 		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions"], 
 				{
 					"cancel": self.cancel,
