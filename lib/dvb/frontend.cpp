@@ -2597,7 +2597,11 @@ bool eDVBFrontend::setSlotInfo(int id, const char *descr, bool enabled, bool isD
 
 bool eDVBFrontend::is_multistream()
 {
+#if DVB_API_VERSION >= 5
 	return fe_info.caps & FE_CAN_MULTISTREAM;
+#else //if DVB_API_VERSION < 5
+	return fe_info.caps & false;
+#endif
 }
 
 std::string eDVBFrontend::getCapabilities()
