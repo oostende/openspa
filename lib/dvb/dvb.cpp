@@ -1007,7 +1007,7 @@ RESULT eDVBResourceManager::allocateDemux(eDVBRegisteredFrontend *fe, ePtr<eDVBA
 					// demux is in use, but can be share
 					demux = new eDVBAllocatedDemux(i);
 					i->m_demux->getCAAdapterID(a);
-					eDebug("[eDVBResourceManager] allocating shared demux adapter=%d, demux=%d, source=%d fesource=%d", a
+					eDebug("[eDVBResourceManager] allocating shared demux adapter=%d, demux=%d, source=%d fesource=%d", a, d, i->m_demux->getSource(), fesource);
 					return 0;
 				}
 			}
