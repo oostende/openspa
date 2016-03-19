@@ -13,6 +13,7 @@ config.mediaplayer.savePlaylistOnExit = ConfigYesNo(default=True)
 config.mediaplayer.saveDirOnExit = ConfigYesNo(default=False)
 config.mediaplayer.defaultDir = ConfigDirectory()
 config.mediaplayer.sortPlaylists = ConfigYesNo(default=False)
+config.mediaplayer.alwaysHideInfoBar = ConfigYesNo(default=True)
 config.mediaplayer.onMainMenu = ConfigYesNo(default=False)
 
 class DirectoryBrowser(Screen, HelpableScreen):
@@ -96,6 +97,7 @@ class MediaPlayerSettings(Screen,ConfigListScreen):
 			if not config.mediaplayer.saveDirOnExit.getValue():
 				self.list.append(getConfigListEntry(_("start directory"), config.mediaplayer.defaultDir))
 			self.list.append(getConfigListEntry(_("sorting of playlists"), config.mediaplayer.sortPlaylists))
+			self.list.append(getConfigListEntry(_("Always hide infobar"), config.mediaplayer.alwaysHideInfoBar))
 			self.list.append(getConfigListEntry(_("show mediaplayer on mainmenu"), config.mediaplayer.onMainMenu))
 			self["config"].setList(self.list)
 		except KeyError:
