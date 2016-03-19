@@ -991,58 +991,52 @@ RESULT eDVBResourceManager::allocateDemux(eDVBRegisteredFrontend *fe, ePtr<eDVBA
 	ePtr<eDVBRegisteredDemux> unused;
 	uint8_t d, a;
 
-	/*
-	 * For pvr playback, start with the last demux.
-	 * On some hardware, there are less ca devices than demuxes, so try to leave
-	 * the first demuxes for live tv, and start with the last for pvr playback
-	 */
-	bool use_decode_demux = (fe || (cap & iDVBChannel::capDecode));
-
-	if (!use_decode_demux)
-	{
-		i = m_demux.end();
-		--i;
-	}
-
 #if not defined(__sh__)
 	if (m_boxtype == WETEKPLAY)
 	{
-		int n = 0;
-
-		for (; i != m_demux.end(); ++i, ++n)
+		// find first unused demux which is on same adapter as frontend
+		while (i != m_demux.end())
 		{
-			if (fe || (cap & iDVBChannel::capDecode))
-			{
-				if (!i->m_inuse && ((n == 0 && fesource == 0) ||
-					(n == 1 && fesource == 1)))
-				{
-					if (!unused) 
-					{
-						unused = i;
-						break;
-					}
+			i->m_demux->getCADemuxID(d);
+			if (fe) {
+				if (!i->m_inuse && d == fesource) {
+					unused = i;
+					break;
 				}
-				else if (i->m_adapter == adapter && 
-					i->m_demux->getSource() == fesource)
-				{
+				else if (i->m_adapter == adapter && i->m_demux->getSource() == fesource) {
+					// demux is in use, but can be share
 					demux = new eDVBAllocatedDemux(i);
+					i->m_demux->getCAAdapterID(a);
+					eDebug("[eDVBResourceManager] allocating shared demux adapter=%d, demux=%d, source=%d fesource=%d", a
 					return 0;
 				}
 			}
-			else if (n == (m_demux.size() - 1)) // always use last demux for PVR 
-			{
-				if (i->m_inuse)
-				{
+			else if (d == (m_demux.size() - 1)) { // always use last demux for PVR
+				if (i->m_inuse) {
 					demux = new eDVBAllocatedDemux(i);
 					return 0;
 				}
 				unused = i;
 				break;
 			}
+			i++;
 		}
 	}
 	else
 	{
+		/*
+		 * For pvr playback, start with the last demux.
+		 * On some hardware, there are less ca devices than demuxes, so try to leave
+		 * the first demuxes for live tv, and start with the last for pvr playback
+		 */
+		bool use_decode_demux = (fe || (cap & iDVBChannel::capDecode));
+
+		if (!use_decode_demux)
+		{
+			i = m_demux.end();
+			--i;
+		}
+
 		while (i != m_demux.end())
 		{
 			if (i->m_adapter == adapter)

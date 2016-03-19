@@ -23,15 +23,17 @@
 
 #include <lib/base/object.h>
 #include <lib/dvb/demux.h>
+#include <lib/dvb/decoder.h>
 // Amlogic includes
 extern "C" {
 #include <codec.h>
 #include <adec-external-ctrl.h>
 #define AMSTREAM_IOC_MAGIC  'S'
-#define AMSTREAM_IOC_PCRID        _IOW(AMSTREAM_IOC_MAGIC, 0x4f, int)
+#define AMSTREAM_IOC_PCRID  _IOW(AMSTREAM_IOC_MAGIC, 0x4f, int)
 }
 
 class eSocketNotifier;
+
 
 class eAMLTSMPEGDecoder: public Object, public iTSMPEGDecoder
 {
@@ -42,6 +44,7 @@ private:
 	static int m_audio_channel;
 	std::string m_radio_pic;
 	ePtr<eDVBDemux> m_demux;
+	ePtr<eDVBTText> m_text;
 	int m_vpid, m_vtype, m_apid, m_atype, m_pcrpid, m_textpid;
 	int m_width, m_height, m_framerate, m_aspect, m_progressive;
 	int aml_fd;
@@ -63,6 +66,7 @@ private:
 	ePtr<eConnection> m_demux_event_conn;
 	ePtr<eConnection> m_video_event_conn;
 
+
 	void demux_event(int event);
 	void video_event(struct videoEvent);
 	Signal1<void, struct videoEvent> m_video_event;
@@ -71,15 +75,14 @@ private:
 	void finishShowSinglePic(); // called by timer
 	ePtr<eTimer> m_VideoRead;	
 	void parseVideoInfo(); // called by timer
-
+	
 	//Amcodec related
 
 	int m_axis[8];
 
-	int osdBlank(char *path,int cmd);
+	int osdBlank(int cmd);
 	int setAvsyncEnable(int enable);
 	int setSyncMode(int mode);
-
 	codec_para_t m_codec;
 	dec_sysinfo_t am_sysinfo;
 	arm_audio_info am_param;
