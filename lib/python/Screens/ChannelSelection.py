@@ -2091,7 +2091,9 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 			# Move to playing service
 			lastservice = eServiceReference(self.lastservice.value)
 			if lastservice.valid() and self.getCurrentSelection() != lastservice:
-				self.setCurrentSelection(lastservice)
+ 				self.setCurrentSelection(lastservice)
+				if self.getCurrentSelection() != lastservice:
+					self.servicelist.setCurrent(lastservice)
 
 			title += _(" (TV)")
 		else:
@@ -2101,6 +2103,8 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 			self.__evServiceStart()
 			# Move to service playing in pip (will not work with subservices)
 			self.setCurrentSelection(self.session.pip.getCurrentService())
+			if self.getCurrentSelection() != lastservice:
+					self.servicelist.setCurrent(lastservice)
 
 			title += _(" (PiP)")
 		self.setTitle(title)
