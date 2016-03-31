@@ -1054,7 +1054,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 			if menu:
 				text += _(": %s") % event.getEventName()
 		menu.append((_("Timer Overview"), self.openTimerOverview))
-		menu.append((_("Setup menu"), self.showSetup))
+		menu.append((_("Setup menu"), self.showSetup, "menu"))
 
 		def boxAction(choice):
 			if choice:
