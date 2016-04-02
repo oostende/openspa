@@ -430,11 +430,11 @@ static ePtr<eDVBFrontendParameters> parseFrontendData(const char* line, int vers
 		{
 			eDVBFrontendParametersTerrestrial ter;
 			int frequency, bandwidth, code_rate_HP, code_rate_LP, modulation, transmission_mode,
-				guard_interval, hierarchy, inversion, flags = 0, plpid = 0;
+				guard_interval, hierarchy, inversion, flags = 0, plp_id = 0;
 			int system = eDVBFrontendParametersTerrestrial::System_DVB_T;
 			sscanf(line+2, "%d:%d:%d:%d:%d:%d:%d:%d:%d:%d:%d:%d",
 				&frequency, &bandwidth, &code_rate_HP, &code_rate_LP, &modulation,
-				&transmission_mode, &guard_interval, &hierarchy, &inversion, &flags, &system, &plpid);
+				&transmission_mode, &guard_interval, &hierarchy, &inversion, &flags, &system, &plp_id);
  			// correction in system DVB-T for compability by morser
  			if (system == eDVBFrontendParametersTerrestrial::System_DVB_T_T2) system = eDVBFrontendParametersTerrestrial::System_DVB_T;
  			//
@@ -458,7 +458,7 @@ static ePtr<eDVBFrontendParameters> parseFrontendData(const char* line, int vers
 			ter.hierarchy = hierarchy;
 			ter.inversion = inversion;
 			ter.system = system;
-			ter.plpid = plpid;
+			ter.plp_id = plp_id;
 			ePtr<eDVBFrontendParameters> feparm = new eDVBFrontendParameters;
 			feparm->setDVBT(ter);
 			feparm->setFlags(flags);
@@ -683,7 +683,7 @@ void eDVBDB::saveServicelist(const char *file)
 			fprintf(f, "\tt %d:%d:%d:%d:%d:%d:%d:%d:%d:%d:%d:%d\n",
 				ter.frequency, bandwidth, ter.code_rate_HP,
 				ter.code_rate_LP, ter.modulation, ter.transmission_mode,
-				ter.guard_interval, ter.hierarchy, ter.inversion, flags, ter.system, ter.plpid);
+				ter.guard_interval, ter.hierarchy, ter.inversion, flags, ter.system, ter.plp_id);
 		}
 		else if (!ch.m_frontendParameters->getDVBC(cab))
 		{
@@ -1379,7 +1379,7 @@ PyObject *eDVBDB::readTerrestrials(ePyObject ter_list, ePyObject tp_dict)
 	const Attribute *at;
 	std::string name;
 	int tmp, *dest,
-		freq, bw, constellation, crh, crl, guard, transm, hierarchy, inv, system, plpid;
+		freq, bw, constellation, crh, crl, guard, transm, hierarchy, inv, system, plp_id;
 	char *end_ptr;
 	const ElementList &root_elements = root->getElementList();
 	for (ElementConstIterator it(root_elements.begin()); it != root_elements.end(); ++it)
@@ -1430,7 +1430,7 @@ PyObject *eDVBDB::readTerrestrials(ePyObject ter_list, ePyObject tp_dict)
 				hierarchy = eDVBFrontendParametersTerrestrial::Hierarchy_Auto;
 				inv = eDVBFrontendParametersTerrestrial::Inversion_Unknown;
 				system = eDVBFrontendParametersTerrestrial::System_DVB_T_T2;
-				plpid = 0;
+				plp_id = 0;
 				for (AttributeConstIterator it(tp_attributes.begin()); it != end; ++it)
 				{
 //					eDebug("\t\tattr: %s", at->name().c_str());
@@ -1447,7 +1447,7 @@ PyObject *eDVBDB::readTerrestrials(ePyObject ter_list, ePyObject tp_dict)
 					else if (name == "hierarchy_information") dest = &hierarchy;
 					else if (name == "inversion") dest = &inv;
 					else if (name == "system") dest = &system;
-					else if (name == "plp_id") dest = &plpid;
+					else if (name == "plp_id") dest = &plp_id;
 					else continue;
 					if (dest)
 					{
@@ -1485,7 +1485,7 @@ PyObject *eDVBDB::readTerrestrials(ePyObject ter_list, ePyObject tp_dict)
 					PyTuple_SET_ITEM(tuple, 8, PyInt_FromLong(hierarchy));
 					PyTuple_SET_ITEM(tuple, 9, PyInt_FromLong(inv));
 					PyTuple_SET_ITEM(tuple, 10, PyInt_FromLong(system));
-					PyTuple_SET_ITEM(tuple, 11, PyInt_FromLong(plpid));
+					PyTuple_SET_ITEM(tuple, 11, PyInt_FromLong(plp_id));
 					PyList_Append(tplist, tuple);
 					Py_DECREF(tuple);
 				}
