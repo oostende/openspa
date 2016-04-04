@@ -134,7 +134,7 @@ class Harddisk:
 		if hw_type == 'elite' or hw_type == 'premium' or hw_type == 'premium+' or hw_type == 'ultra' :
 			internal = "ide" in self.phys_path
 		else:
-			internal = "pci" in self.phys_path or "ahci" in self.phys_path
+			internal = ("pci" or "ahci") in self.phys_path
 
 		if card:
 			ret += type_name
@@ -178,14 +178,14 @@ class Harddisk:
 			else:
 				raise Exception, "no hdX or sdX or mmcX"
 		except Exception, e:
-			print "[Harddisk] Failed to get model:", e
+			#print "[Harddisk] Failed to get model:", e
 			return "-?-"
 
 	def free(self):
 		dev = self.findMount()
 		if dev:
 			stat = os.statvfs(dev)
-			return int((stat.f_bfree/1000) * (stat.f_bsize/1000))
+			return int((stat.f_bfree/1000) * (stat.f_bsize/1024))
 		return -1
 
 	def numPartitions(self):
@@ -525,7 +525,7 @@ class Harddisk:
 			Console().ePopen(("sdparm", "sdparm", "--flexible", "--readonly", "--command=stop", self.disk_path))
 		else:
 			Console().ePopen(("hdparm", "hdparm", "-y", self.disk_path))
-			
+
 	def setIdleTime(self, idle):
 		self.max_idle_time = idle
 		if self.idle_running:
@@ -913,7 +913,7 @@ class HarddiskManager:
 		except IOError, s:
 			print "couldn't read model: ", s
 		from Tools.HardwareInfo import HardwareInfo
-		for physdevprefix, pdescription in DEVICEDB.get(HardwareInfo().get_device_name(),{}).items():
+		for physdevprefix, pdescription in DEVICEDB.get(HardwareInfo().device_name,{}).items():
 			if phys.startswith(physdevprefix):
 				description = pdescription
 		# not wholedisk and not partition 1
