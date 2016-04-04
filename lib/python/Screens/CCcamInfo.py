@@ -25,8 +25,6 @@ from twisted.internet import reactor
 from twisted.web.client import HTTPClientFactory
 from urlparse import urlparse, urlunparse
 
-from Plugins.Extensions.spazeMenu.plugin import fhd, esHD
-
 #TOGGLE_SHOW = InfoBar.toggleShow
 
 VERSION = "v2"
@@ -34,6 +32,18 @@ DATE = "21.11.2014"
 CFG = "/etc/CCcam.cfg"
 
 #############################################################
+
+def esHD():
+	if getDesktop(0).size().width() > 1400:
+		return True
+	else:
+		return False
+		
+def fhd(num, factor=1.5):
+	if esHD():
+		prod=num*factor
+	else: prod=num
+	return int(round(prod))
 
 def _parse(url):
 	url = url.strip()
