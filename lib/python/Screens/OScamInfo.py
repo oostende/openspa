@@ -17,7 +17,6 @@ from xml.etree import ElementTree
 from operator import itemgetter
 import os, time
 import urllib2
-from Plugins.Extensions.spazeMenu.plugin import fhd, esHD
 from Components.MultiContent import MultiContentEntryPixmapAlphaBlend
 
 fb = getDesktop(0).size()
@@ -28,6 +27,18 @@ else:
 	# sizeH = fb.width() - 50
 	sizeH = 700
 	HDSKIN = False
+
+def esHD():
+	if getDesktop(0).size().width() > 1400:
+		return True
+	else:
+		return False
+		
+def fhd(num, factor=1.5):
+	if esHD():
+		prod=num*factor
+	else: prod=num
+	return int(round(prod))
 
 class OscamInfo:
 	def __init__(self):
