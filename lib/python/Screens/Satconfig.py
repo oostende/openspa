@@ -199,6 +199,10 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 				self.have_advanced = True
 			if self.nim.description == "Alps BSBE2" and config.usage.setup_level.index >= 2: # expert
 				self.list.append(getConfigListEntry(_("Tone amplitude"), self.nimConfig.toneAmplitude))
+			if path.exists("/proc/stb/frontend/fbc/force_lnbon") and config.usage.setup_level.index >= 2: # expert
+				self.list.append(getConfigListEntry(_("Force LNB Power"), self.nimConfig.forceLnbPower))
+			if path.exists("/proc/stb/frontend/fbc/force_toneburst") and config.usage.setup_level.index >= 2: # expert
+				self.list.append(getConfigListEntry(_("Force ToneBurst"), self.nimConfig.forceToneBurst))
 		elif self.nim.isCompatible("DVB-C"):
 			self.configMode = getConfigListEntry(_("Configuration mode"), self.nimConfig.configMode)
 			self.list.append(self.configMode)
