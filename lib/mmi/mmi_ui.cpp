@@ -114,9 +114,8 @@ int eMMI_UI::processMMIData(int slot_id, const unsigned char *tag, const void *d
 			memcpy(str, ((char*)d), textlen);
 			str[textlen] = '\0';
 			mmiScreenAddText(slot_id, pos++, (char*)convertDVBUTF8(str).c_str());
-			while (textlen--)
-				eDebugNoNewLine("%c", *d++);
-			eDebug("");
+			eDebug("[eMMI_UI] %s", str);
+			d += textlen;
 		}
 		mmiScreenFinish(slot_id);
 		break;
