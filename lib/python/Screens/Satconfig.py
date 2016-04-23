@@ -19,6 +19,7 @@ from boxbranding import getBoxType
 
 from time import mktime, localtime
 from datetime import datetime
+from os import path
 
 def isFBCTuner(nim):
 	if nim.description.find("FBC") == -1:
