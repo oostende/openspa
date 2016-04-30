@@ -48,4 +48,4 @@ dist_install_DATA = \
 	red.png \
 	red_HD.png \
 	yellow.png \
-	yellow_HD.png \
+	yellow_HD.png
