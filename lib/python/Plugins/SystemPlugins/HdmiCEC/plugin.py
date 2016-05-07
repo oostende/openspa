@@ -1,7 +1,15 @@
+from boxbranding import getMachineBrand, getMachineName
+from os import path
+
 from Screens.Screen import Screen
 from Components.ConfigList import ConfigListScreen
-from Components.config import config, getConfigListEntry
+from Components.config import config, configfile, getConfigListEntry
 from Components.Sources.StaticText import StaticText
+
+from Tools.Directories import fileExists
+
+if path.exists("/dev/hdmi_cec") or path.exists("/dev/misc/hdmi_cec0"):
+	import Components.HdmiCec
 
 class HdmiCECSetupScreen(Screen, ConfigListScreen):
 	skin = """
@@ -20,11 +28,10 @@ class HdmiCECSetupScreen(Screen, ConfigListScreen):
 	</screen>"""
 
 	def __init__(self, session):
-		self.skin = HdmiCECSetupScreen.skin
 		Screen.__init__(self, session)
+		Screen.setTitle(self, _("HDMI CEC Setup"))
 
 		from Components.ActionMap import ActionMap
-		from Components.Button import Button
 
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))
@@ -45,26 +52,40 @@ class HdmiCECSetupScreen(Screen, ConfigListScreen):
 			"menu": self.closeRecursive,
 		}, -2)
 
+		self.onChangedEntry = [ ]
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session = self.session)
+		ConfigListScreen.__init__(self, self.list, session = self.session, on_change = self.changedEntry)
+		self.createSetup()
 
+	def createSetup(self):
+		self.list = []
 		self.list.append(getConfigListEntry(_("Enabled"), config.hdmicec.enabled))
-		self.list.append(getConfigListEntry(_("Put TV in standby"), config.hdmicec.control_tv_standby))
-		self.list.append(getConfigListEntry(_("Wakeup TV from standby"), config.hdmicec.control_tv_wakeup))
-		self.list.append(getConfigListEntry(_("Regard deep standby as standby"), config.hdmicec.handle_deepstandby_events))
-		self.list.append(getConfigListEntry(_("Switch TV to correct input"), config.hdmicec.report_active_source))
-		self.list.append(getConfigListEntry(_("Use TV remote control"), config.hdmicec.report_active_menu))
-		self.list.append(getConfigListEntry(_("Handle standby from TV"), config.hdmicec.handle_tv_standby))
-		self.list.append(getConfigListEntry(_("Handle wakeup from TV"), config.hdmicec.handle_tv_wakeup))
-		self.list.append(getConfigListEntry(_("Wakeup signal from TV"), config.hdmicec.tv_wakeup_detection))
-		self.list.append(getConfigListEntry(_("Forward volume keys"), config.hdmicec.volume_forwarding))
-		self.list.append(getConfigListEntry(_("Put receiver in standby"), config.hdmicec.control_receiver_standby))
-		self.list.append(getConfigListEntry(_("Wakeup receiver from standby"), config.hdmicec.control_receiver_wakeup))
-		self.list.append(getConfigListEntry(_("Minimum send interval"), config.hdmicec.minimum_send_interval))
+		if config.hdmicec.enabled.value:
+			self.list.append(getConfigListEntry(_("Put TV in standby"), config.hdmicec.control_tv_standby))
+			self.list.append(getConfigListEntry(_("Wakeup TV from standby"), config.hdmicec.control_tv_wakeup))
+			self.list.append(getConfigListEntry(_("Regard deep standby as standby"), config.hdmicec.handle_deepstandby_events))
+			self.list.append(getConfigListEntry(_("Switch TV to correct input"), config.hdmicec.report_active_source))
+			self.list.append(getConfigListEntry(_("Use TV remote control"), config.hdmicec.report_active_menu))
+			self.list.append(getConfigListEntry(_("Handle standby from TV"), config.hdmicec.handle_tv_standby))
+			self.list.append(getConfigListEntry(_("Handle wakeup from TV"), config.hdmicec.handle_tv_wakeup))
+			self.list.append(getConfigListEntry(_("Wakeup signal from TV"), config.hdmicec.tv_wakeup_detection))
+			self.list.append(getConfigListEntry(_("Forward volume keys"), config.hdmicec.volume_forwarding))
+			self.list.append(getConfigListEntry(_("Put your %s %s in standby") % (getMachineBrand(), getMachineName()), config.hdmicec.control_receiver_standby))
+			self.list.append(getConfigListEntry(_("Wakeup your %s %s from standby") % (getMachineBrand(), getMachineName()), config.hdmicec.control_receiver_wakeup))
+			self.list.append(getConfigListEntry(_("Minimum send interval"), config.hdmicec.minimum_send_interval))
+			if fileExists("/proc/stb/hdmi/preemphasis"):
+				self.list.append(getConfigListEntry(_("Use HDMI-preemphasis"), config.hdmicec.preemphasis))
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 
 		self.updateAddress()
+
+	# for summary:
+	def changedEntry(self):
+		if self["config"].getCurrent()[0] == _("Enabled"):
+			self.createSetup()
+		for x in self.onChangedEntry:
+			x()
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -75,6 +96,7 @@ class HdmiCECSetupScreen(Screen, ConfigListScreen):
 	def keyGo(self):
 		for x in self["config"].list:
 			x[1].save()
+		configfile.save()
 		self.close()
 
 	def keyCancel(self):
@@ -83,17 +105,14 @@ class HdmiCECSetupScreen(Screen, ConfigListScreen):
 		self.close()
 
 	def setFixedAddress(self):
-		import Components.HdmiCec
 		Components.HdmiCec.hdmi_cec.setFixedPhysicalAddress(Components.HdmiCec.hdmi_cec.getPhysicalAddress())
 		self.updateAddress()
 
 	def clearFixedAddress(self):
-		import Components.HdmiCec
 		Components.HdmiCec.hdmi_cec.setFixedPhysicalAddress("0.0.0.0")
 		self.updateAddress()
 
 	def updateAddress(self):
-		import Components.HdmiCec
 		self["current_address"].setText(_("Current CEC address") + ": " + Components.HdmiCec.hdmi_cec.getPhysicalAddress())
 		if config.hdmicec.fixed_physical_address.value == "0.0.0.0":
 			fixedaddresslabel = ""
@@ -110,9 +129,7 @@ def startSetup(menuid):
 	return []
 
 def Plugins(**kwargs):
-	from os import path
 	if path.exists("/dev/hdmi_cec") or path.exists("/dev/misc/hdmi_cec0"):
-		import Components.HdmiCec
 		from Plugins.Plugin import PluginDescriptor
 		return [PluginDescriptor(where = PluginDescriptor.WHERE_MENU, fnc = startSetup)]
 	return []
