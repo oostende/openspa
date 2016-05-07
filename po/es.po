@@ -92,6 +92,13 @@ msgstr ""
 
 msgid ""
 "\n"
+"Conflict detection disabled!"
+msgstr ""
+"\n"
+"Detección de conflictos deshabilitada"
+
+msgid ""
+"\n"
 "Edit the upgrade source address."
 msgstr ""
 "\n"
@@ -326,11 +333,23 @@ msgstr "%d-%m"
 msgid "%d.%B %Y"
 msgstr "%d/%B/%Y"
 
+msgid "%s %s advanced remote control (native)"
+msgstr "Control remoto avanzado (nativo) %s %s"
+
 msgid "%s %s free disk space"
 msgstr "Espacio libre en disco: %s %s"
 
 msgid "%s %s front panel"
 msgstr "Panel frontal %s %s"
+
+msgid "%s %s ir keyboard"
+msgstr "teclado IR %s %s"
+
+msgid "%s %s ir mouse"
+msgstr "Ratón IR %s %s"
+
+msgid "%s %s remote control (native)"
+msgstr "Control remoto (nativo) %s %s"
 
 msgid "%s (%s)\n"
 msgstr "%s (%s)\n"
@@ -351,6 +370,9 @@ msgstr "%s%d min"
 
 msgid "( All readers)"
 msgstr "(todos los servidores)"
+
+msgid "(Restart GUI)"
+msgstr "(Reiniciar GUI)"
 
 msgid "(Show only reader:"
 msgstr "(mostrar sólo server:"
@@ -699,6 +721,9 @@ msgstr "984MHz"
 
 msgid ": %s"
 msgstr ": %s"
+
+msgid ": 0000 - default (disabled)"
+msgstr ": 0000 - por defecto (deshabilitado)"
 
 msgid "<Current movielist location>"
 msgstr "<Ubicación actual de la lista de películas>"
@@ -1120,6 +1145,12 @@ msgstr "Álbum"
 msgid "Alias"
 msgstr "Host"
 
+msgid "Alignment of events"
+msgstr "Alineamiento de los eventos"
+
+msgid "Alignment of service names"
+msgstr "Alineación de los nombres de canal"
+
 msgid "All"
 msgstr "Todo"
 
@@ -1216,6 +1247,9 @@ msgstr "siempre"
 
 msgid "Always ask"
 msgstr "Preguntar siempre"
+
+msgid "Always hide infobar"
+msgstr "Ocultar siempre la infobar"
 
 msgid "Always include ECM in recordings"
 msgstr "Incluir siempre las ECM en las grabaciones"
@@ -2001,6 +2035,9 @@ msgstr ""
 "pueden estar causando este problema.\n"
 "Detenga estos procesos/servicios y vuelva a intentarlo"
 
+msgid "Capabilities: "
+msgstr "Capacidades: "
+
 msgid "Capacity"
 msgstr "Capacidad"
 
@@ -2037,6 +2074,9 @@ msgstr "Nombre de categoría"
 msgid "Center DVB subtitles"
 msgstr "Centrar los subtítulos DVB"
 
+msgid "Center time-labels and remove date"
+msgstr "Centrar las etiquetas de hora y eliminar fechas"
+
 msgid "Change PIN"
 msgstr "Cambiar PIN"
 
@@ -2051,6 +2091,9 @@ msgstr "Cambiar de lista en zapping rápido"
 
 msgid "Change hostname"
 msgstr "Cambiar nombre de host"
+
+msgid "Change list"
+msgstr "Cambiar lista"
 
 msgid "Change old drive with this new drive"
 msgstr "Cambiar la unidad anterior por la nueva"
@@ -2164,10 +2207,10 @@ msgid "Checking the internet connection"
 msgstr "Comprobando la conexión a la red"
 
 msgid ""
-"Checking tuner %d\n"
+"Checking tuner %s\n"
 "DiSEqC port %s for %s"
 msgstr ""
-"Comprobando sintoniz. %d\n"
+"Comprobando sintoniz. %s\n"
 "Puerto DiSEqC %s: %s"
 
 msgid "Children/Youth"
@@ -2465,10 +2508,14 @@ msgstr ""
 msgid ""
 "Configure the brightness level of the front panel display for normal "
 "operation."
-msgstr "Configura el brillo del display en modo normal."
+msgstr ""
+"Configura el brillo con que se verá el display cuando el receptor está en "
+"modo de uso normal."
 
 msgid "Configure the brightness level of the front panel display for standby."
-msgstr "Configura el brillo del display en reposo."
+msgstr ""
+"Configura el brillo con que se verá el display cuando el receptor está en "
+"reposo."
 
 msgid "Configure the brightness level of the front panel display."
 msgstr "Configura el brillo del display frontal."
@@ -3057,6 +3104,9 @@ msgstr "Cortar"
 msgid "Cutlist Editor"
 msgstr "Editor de listas de corte"
 
+msgid "Cutlist editor"
+msgstr "Editor de cortes"
+
 msgid "Cutlist editor..."
 msgstr "Editor de listas de corte..."
 
@@ -3090,6 +3140,9 @@ msgstr "HECHO"
 msgid "DUAL LAYER DVD"
 msgstr "DVD DOBLE CAPA"
 
+msgid "DVB CI Delay"
+msgstr "Retardo de CI"
+
 msgid "DVB subtitle black transparency"
 msgstr "Transparencia de los subtítulos DVB"
 
@@ -3113,6 +3166,9 @@ msgstr "DVB-T2"
 
 msgid "DVB-USB Device Manager"
 msgstr "Gestor de dispositivos DVB-USB"
+
+msgid "DVD Menu"
+msgstr "Menú DVD"
 
 msgid "DVD Tool"
 msgstr "DVD Tool"
@@ -3819,6 +3875,9 @@ msgstr "ERROR - ¡la búsqueda (%s) ha fallado!"
 msgid "EXIT"
 msgstr "Salir (EXIT)"
 
+msgid "EXIT_"
+msgstr "EXIT"
+
 msgid "East"
 msgstr "Este"
 
@@ -4143,6 +4202,9 @@ msgstr "Estonio"
 
 msgid "Ethernet network interface"
 msgstr "Configuración de la red Ethernet"
+
+msgid "Event font size (relative to skin size)"
+msgstr "Evento - tamaño de la fuente (relativo al tamaño del skin)"
 
 msgid "Event view menu"
 msgstr "Menú vista de evento"
@@ -4474,11 +4536,17 @@ msgstr "Forzar"
 msgid "Force Depends"
 msgstr "Forzar dependencias"
 
+msgid "Force LNB Power"
+msgstr "Forzar alimentación del LNB"
+
 msgid "Force Remove"
 msgstr "Forzar eliminación"
 
 msgid "Force Removing ipk %s"
 msgstr "Forzando la eliminación de %s"
+
+msgid "Force ToneBurst"
+msgstr "Forzar ToneBurst"
 
 msgid "Force de-interlace"
 msgstr "Forzar desentrelazado"
@@ -4584,6 +4652,9 @@ msgstr "Transparencia máxima"
 
 msgid "Fulview resulution"
 msgstr "Resolución en vista completa"
+
+msgid "Function of OK button"
+msgstr "Función de la tecla OK"
 
 msgid "Further Options"
 msgstr "Opciones avanzadas"
@@ -4717,6 +4788,9 @@ msgstr "Calibración de GotoX"
 
 msgid "Grab Screenshot"
 msgstr "Captura de pantalla"
+
+msgid "GraphMultiEpg Settings"
+msgstr "Ajustes de GraphMultiEPG"
 
 msgid "GraphicLCD"
 msgstr "LCD gráfico"
@@ -5307,6 +5381,9 @@ msgstr "Ipkg"
 msgid "Ipkg Installer..."
 msgstr "Instalador de paquetes ipkg"
 
+msgid "Is this setting ok?"
+msgstr "Es correcto este ajuste?"
+
 msgid "Is this video mode ok?"
 msgstr "Es correcto este modo de vídeo?"
 
@@ -5324,6 +5401,12 @@ msgstr "Subir el puntero del ratón."
 
 msgid "Italian"
 msgstr "Italiano"
+
+msgid "Items per page "
+msgstr "Ítems por página"
+
+msgid "Items per page for list screen"
+msgstr "Ítems por página en la lista"
 
 msgid "January"
 msgstr "Enero"
@@ -5623,6 +5706,9 @@ msgstr "Logear resultados al disco duro"
 msgid "Long filenames"
 msgstr "Nombre de archivo largo"
 
+msgid "Long key press"
+msgstr "Con pulsación larga"
+
 msgid "Longitude"
 msgstr "Longitud"
 
@@ -5749,6 +5835,9 @@ msgstr ""
 
 msgid "Media player"
 msgstr "Reproductor"
+
+msgid "Media scanner"
+msgstr "Buscador de medios"
 
 msgid "Medium is not a writeable DVD!"
 msgstr "El disco no es un DVD escribible!"
@@ -6407,6 +6496,9 @@ msgstr "No hay canales/proveedores seleccionados"
 msgid "No standby"
 msgstr "Sin reposo"
 
+msgid "No stream clients"
+msgstr "No hay clientes en streaming"
+
 msgid "No subtitles"
 msgstr "Sin subtítulos"
 
@@ -6503,6 +6595,9 @@ msgstr "No, reiniciar desde el principio"
 
 msgid "No, do nothing."
 msgstr "No, no hacer nada"
+
+msgid "No, except Wakeup timer"
+msgstr "No, excepto el temporizador de despertar"
 
 msgid "No, just start my receiver"
 msgstr "No, seguir con la nueva configuración"
@@ -6809,6 +6904,9 @@ msgstr "Navegador WEB Opera"
 
 msgid "Opera Web Browser Plugin v1.0"
 msgstr "Navegador WEB Opera v1.0"
+
+msgid "Option to enable the Hardware Standby Timer"
+msgstr "Habilita el temporizador de reposo del hardware"
 
 msgid "Options"
 msgstr "Opciones"
@@ -8242,6 +8340,9 @@ msgstr "Velocidad de giro"
 msgid "Rotor: "
 msgstr "Motor: "
 
+msgid "Round start time on"
+msgstr "Redondeo de la hora de inicio"
+
 msgid "Run a backup now"
 msgstr "Hacer una copia ahora"
 
@@ -8860,6 +8961,9 @@ msgstr "Búsqueda de canales "
 msgid "Service stopped"
 msgstr "Servicio detenido"
 
+msgid "Service title mode"
+msgstr "Modo del título del canal"
+
 msgid ""
 "Service unavailable!\n"
 "Check tuner configuration!"
@@ -8878,6 +8982,9 @@ msgstr "Ajuste de la frec. de la CPU"
 
 msgid "Set Framerate for MiniTV"
 msgstr "Ajustar el framerate para MiniTV"
+
+msgid "Set PIN"
+msgstr "Definir PIN"
 
 msgid "Set System"
 msgstr "Activar"
@@ -9111,9 +9218,6 @@ msgid "Show blinking rec symbol on Display during recording"
 msgstr ""
 "Muestra el icono de grabación parpadeante en el display durante la grabación"
 
-msgid "Show bootvideo on boot"
-msgstr "Mostrar el bootvideo en el arranque"
-
 msgid "Show bouquet selection menu"
 msgstr "Mostrar menú de selección de bouquet"
 
@@ -9159,6 +9263,9 @@ msgstr "Mostrar iconos para nuevo/no visto"
 msgid "Show in extensions list ?"
 msgstr "Mostrar en la lista de extensiones?"
 
+msgid "Show in extensions menu"
+msgstr "Mostrar en el menú de extensiones"
+
 msgid "Show info"
 msgstr "Mostrar info"
 
@@ -9197,6 +9304,9 @@ msgstr "Mostrar movimiento del motor"
 
 msgid "Show positioner position"
 msgstr "Mostrar la posición del motor"
+
+msgid "Show record clock icons"
+msgstr "Mostrar iconos de grabación"
 
 msgid "Show record indicator"
 msgstr "Mostrar indicador de grabación"
@@ -9246,11 +9356,17 @@ msgstr "Mostrar el tiempo transcurrido como positivo"
 msgid "Show updated packages"
 msgstr "Mostrar paquetes actualizados"
 
+msgid "Show vertical timelines"
+msgstr "Mostrar líneas de tiempo verticales"
+
 msgid "Show warning before set 'Ignore conflict'"
 msgstr "Mostrar alerta antes de ajustar 'Ignorar conflicto'"
 
 msgid "Show warning when timeshift is stopped"
 msgstr "Mostrar alerta al detener timeshift"
+
+msgid "Show/hide window"
+msgstr "Mostrar/ocultar ventana"
 
 msgid "Shows live tv or informations on LCD."
 msgstr "Muestra TV en directo, o informaciones, en el LCD."
@@ -9401,6 +9517,9 @@ msgstr "Skins"
 
 msgid "Skip backward 10 sec"
 msgstr "Ir 10 seg atrás."
+
+msgid "Skip empty services"
+msgstr "Saltar canales vacíos"
 
 msgid "Skip forward 10 sec"
 msgstr "Adelantar 10 seg."
@@ -9744,6 +9863,9 @@ msgstr "Inicio del interv. para ignorar 'apagar en reposo'"
 msgid "Start timeshift"
 msgstr "Iniciar timeshift"
 
+msgid "Start with list screen"
+msgstr "Iniciar con la lista"
+
 msgid "Start/Stop"
 msgstr "Iniciar/Detener"
 
@@ -9783,6 +9905,24 @@ msgstr "Paso en ms para tecla %i"
 
 msgid "Step in ms for keys '%s'"
 msgstr "Paso en ms para teclas '%s'"
+
+msgid ""
+"Step value for fast switching or long press the volume button. Depending on "
+"the setting (if greater) and the current volume (if less) will adjusted the "
+"step. (30 to 4, 18 to 3, 9 to 2 and 3 to 1)"
+msgstr ""
+"Valor del paso para un cambio rápido o una pulsación prolongada de la tecla "
+"de volumen. Se ajustará (30 a 4, 18 a 3, 9 a 2 y 3 a 1) según la config. (si "
+"es mayor) y el volumen actual (si es menor)"
+
+msgid ""
+"Step value for single press the volume button. Depending on the setting (if "
+"greater) and the current volume (if less) will adjusted the step. (30 to 4, "
+"18 to 3, 9 to 2 and 3 to 1)"
+msgstr ""
+"Valor del paso para una única pulsación de la tecla de volumen. Se ajustará "
+"(30 a 4, 18 a 3, 9 a 2 y 3 a 1) según la config. (si es mayor) y el volumen "
+"actual (si es menor)"
 
 msgid "Step west"
 msgstr "Paso oeste"
@@ -9882,6 +10022,9 @@ msgstr "Streaming de"
 
 msgid "Stream request"
 msgstr "A petición del canal"
+
+msgid "Streaming clients info"
+msgstr "Info de clientes de streaming"
 
 msgid "Streaming port"
 msgstr "Puerto de 'streaming'"
@@ -10712,6 +10855,9 @@ msgstr "Actualización (min.):"
 msgid "Time for next LCD scrolling"
 msgstr "Próximo desplazamiento del LCD"
 
+msgid "Time scale"
+msgstr "Escala de tiempo"
+
 msgid "Time settings"
 msgstr "Zona Horaria"
 
@@ -10750,7 +10896,7 @@ msgstr ""
 "Compruébelo"
 
 msgid "Timer overview"
-msgstr "Reservas de grabación"
+msgstr "Vista previa del temporizador"
 
 msgid "Timer recording location"
 msgstr "Ubicación de grabaciones programadas"
@@ -11181,6 +11327,9 @@ msgstr "Utilizar la EPG EIT cuando sea posible"
 msgid "Use FreeSat EPG information when it is available."
 msgstr "Utilizar la EPG FreeSat cuando sea posible"
 
+msgid "Use Harddisk Hardware Standby Timer"
+msgstr "Utilizar el temporizador de reposo del HDD"
+
 msgid "Use MHW EPG information when it is available."
 msgstr "Utilizar la EPG MHW cuando sea posible"
 
@@ -11590,6 +11739,12 @@ msgstr "Volumen"
 
 msgid "Volume Control"
 msgstr "Control Volumen"
+
+msgid "Volume adjust fast"
+msgstr "Volumen - Rápido"
+
+msgid "Volume adjust slow"
+msgstr "Volumen - Lento"
 
 msgid "Volume down"
 msgstr "Bajar volumen"
@@ -12363,6 +12518,13 @@ msgstr ""
 "donde guardar los archivos de Backup"
 
 msgid ""
+"You PIN code is 0000. This is the default PIN code and it disable parental "
+"control!\n"
+msgstr ""
+"El PIN es 0000. Este es el valor por defecto y deshabilita el control "
+"parental\n"
+
+msgid ""
 "You already have a channel list installed,\n"
 "would you like to remove\n"
 "\"%s\"?"
@@ -12637,6 +12799,9 @@ msgstr "Volver al canal anterior al buscador de satélites?"
 
 msgid "Zap back to service before tuner setup?"
 msgstr "Volver al canal anterior a la configuración del tuner?"
+
+msgid "Zap bouquets blindly on zap buttons"
+msgstr "Zapear en los bouquets vacios con las teclas de zapear"
 
 msgid "Zap focus to Picture in Picture"
 msgstr "Zapear en la ventana PiP"
@@ -13030,6 +13195,9 @@ msgstr "policíaca/thriller"
 msgid "disable"
 msgstr "desactivar"
 
+msgid "disable intro screen"
+msgstr "deshabilitar la pantalla de intro"
+
 msgid "disable move mode"
 msgstr "quitar modo movimiento"
 
@@ -13105,6 +13273,9 @@ msgstr "habilitar edición de listas"
 msgid "enable favourite edit"
 msgstr "habilitar edición de favoritos"
 
+msgid "enable intro screen"
+msgstr "habilitar la pantalla de intro"
+
 msgid "enable move mode"
 msgstr "habilitar modo movimiento"
 
@@ -13150,6 +13321,9 @@ msgstr "coincidencia exacta"
 msgid "example"
 msgstr "Ejemplo"
 
+msgid "execute cuts (requires MovieCut plugin)"
+msgstr "cortar (requiere el plugin de cortes)"
+
 msgid "executing command on Dreambox"
 msgstr "Ejecutando comando"
 
@@ -13170,6 +13344,9 @@ msgstr "salir del menú de configuración del adaptador de red"
 
 msgid "experimental film/video"
 msgstr "cine/video experimental"
+
+msgid "extra wide"
+msgstr "extra ancho"
 
 msgid "extrawide"
 msgstr "extra-amplio"
@@ -13887,6 +14064,9 @@ msgstr "solemne/clásico/religioso/película histórica/drama"
 
 msgid "service PIN"
 msgstr "PIN del canal"
+
+msgid "service is in bouquet parental protection"
+msgstr "el canal está bajo la protección parental"
 
 msgid "set as startup service"
 msgstr "definir como canal de inicio"
