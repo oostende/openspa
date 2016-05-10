@@ -25,6 +25,8 @@ from twisted.internet import reactor
 from twisted.web.client import HTTPClientFactory
 from urlparse import urlparse, urlunparse
 
+from Plugins.Extensions.spazeMenu.plugin import fhd, esHD
+
 #TOGGLE_SHOW = InfoBar.toggleShow
 
 VERSION = "v2"
@@ -32,18 +34,6 @@ DATE = "21.11.2014"
 CFG = "/etc/CCcam.cfg"
 
 #############################################################
-
-def esHD():
-	if getDesktop(0).size().width() > 1400:
-		return True
-	else:
-		return False
-		
-def fhd(num, factor=1.5):
-	if esHD():
-		prod=num*factor
-	else: prod=num
-	return int(round(prod))
 
 def _parse(url):
 	url = url.strip()
@@ -271,8 +261,8 @@ def CCcamListEntry(name, idx):
 		png = "/usr/share/enigma2/skin_default/buttons/key_%s.png" % str(idx)
 	if screenwidth and screenwidth == 1920:
 		if fileExists(png):
-			res.append(MultiContentEntryPixmapAlphaBlend(pos=(fhd(10,1), fhd(5,0.2)), size=(fhd(67,0.9), fhd(48,1)), png=loadPNG(png), flags = BT_SCALE | BT_KEEP_ASPECT_RATIO))
-		res.append(MultiContentEntryText(pos=(fhd(90,1), fhd(7,0.6)), size=(fhd(900), fhd(50,0.8)), font=1, text=name))
+			res.append(MultiContentEntryPixmapAlphaBlend(pos=(fhd(10,1), fhd(5,0.4)), size=(fhd(35,1.5), fhd(25,1.5)), png=loadPNG(png), flags = BT_SCALE | BT_KEEP_ASPECT_RATIO))
+		res.append(MultiContentEntryText(pos=(fhd(90,1), fhd(7,0)), size=(fhd(900), fhd(50,0.8)), font=1, text=name))
 	else:
 		if fileExists(png):
 			res.append(MultiContentEntryPixmapAlphaBlend(pos=(0, 0), size=(35, 25), png=loadPNG(png)))
@@ -288,8 +278,8 @@ def CCcamServerListEntry(name, color):
 		png = "/usr/share/enigma2/skin_default/buttons/key_%s.png" % color
 	if screenwidth and screenwidth == 1920:
 		if fileExists(png):
-			res.append(MultiContentEntryPixmapAlphaBlend(pos=(fhd(10,1), fhd(5,0.2)), size=(fhd(67,0.9), fhd(48,1)), png=loadPNG(png), flags = BT_SCALE | BT_KEEP_ASPECT_RATIO))
-		res.append(MultiContentEntryText(pos=(fhd(90,1), fhd(7,0.6)), size=(fhd(900), fhd(50,0.8)), font=1, text=name))
+			res.append(MultiContentEntryPixmapAlphaBlend(pos=(fhd(10,1), fhd(5,0.4)), size=(fhd(35,1.5), fhd(25,1.5)), png=loadPNG(png), flags = BT_SCALE | BT_KEEP_ASPECT_RATIO))
+		res.append(MultiContentEntryText(pos=(fhd(90,1), fhd(7,0)), size=(fhd(900), fhd(50,0.8)), font=1, text=name))
 	else:
 		if fileExists(png):
 			res.append(MultiContentEntryPixmapAlphaBlend(pos=(0, 0), size=(35, 25), png=loadPNG(png)))
@@ -927,7 +917,7 @@ class CCcamShareViewMenu(Screen, HelpableScreen):
 									count = 1
 									countList.append(count)
 									numberofcards = count
-									providername = self.providers.get(caidprovider, _('Multiple Providers given'))
+									providername = self.providers.get(caidprovider, 'Multiple Providers given')
 									#if providername == 'Multiple Providers given':
 									#	print caidprovider
 									numberofreshare = 0
@@ -958,7 +948,7 @@ class CCcamShareViewMenu(Screen, HelpableScreen):
 									elif int(down)==0:
 										numberofreshare = reshareList[i]
 
-									providername = self.providers.get(caidprovider, _('Multiple Providers given'))
+									providername = self.providers.get(caidprovider, 'Multiple Providers given')
 									shareList[i] = CCcamShareViewListEntry(caidprovider, providername, str(numberofcards), str(numberofreshare))
 
 								self.hostList.append(hostname)
@@ -996,7 +986,7 @@ class CCcamShareViewMenu(Screen, HelpableScreen):
 										count = 1
 										countList.append(count)
 										numberofcards = count
-										providername = self.providers.get(caidprovider, _('Multiple Providers given'))
+										providername = self.providers.get(caidprovider, 'Multiple Providers given')
 										#if providername == 'Multiple Providers given':
 										#	print caidprovider
 
@@ -1029,7 +1019,7 @@ class CCcamShareViewMenu(Screen, HelpableScreen):
 										elif int(down)==0:
 											numberofreshare = reshareList[i]
 
-										providername = self.providers.get(caidprovider, _('Multiple Providers given'))
+										providername = self.providers.get(caidprovider, 'Multiple Providers given')
 										shareList[i] = CCcamShareViewListEntry(caidprovider, providername, str(numberofcards), str(numberofreshare))
 
 									self.hostList.append(hostname)
@@ -1354,7 +1344,7 @@ class CCcamInfoRemoteBoxMenu(Screen):
 			self["list"].setList(self.list)
 
 	def new(self):
-		self.session.openWithCallback(self.newCallback, CCcamInfoConfigMenu, CCcamInfoRemoteBox(_("Profile"), "192.168.2.12", "", "", 16001))
+		self.session.openWithCallback(self.newCallback, CCcamInfoConfigMenu, CCcamInfoRemoteBox("Profile", "192.168.2.12", "", "", 16001))
 
 	def newCallback(self, callback):
 		if callback:
