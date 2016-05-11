@@ -25,8 +25,6 @@ from twisted.internet import reactor
 from twisted.web.client import HTTPClientFactory
 from urlparse import urlparse, urlunparse
 
-from Plugins.Extensions.spazeMenu.plugin import fhd, esHD
-
 #TOGGLE_SHOW = InfoBar.toggleShow
 
 VERSION = "v2"
@@ -34,6 +32,18 @@ DATE = "21.11.2014"
 CFG = "/etc/CCcam.cfg"
 
 #############################################################
+
+def esHD():
+	if getDesktop(0).size().width() > 1400:
+		return True
+	else:
+		return False
+		
+def fhd(num, factor=1.5):
+	if esHD():
+		prod=num*factor
+	else: prod=num
+	return int(round(prod))
 
 def _parse(url):
 	url = url.strip()
@@ -917,7 +927,7 @@ class CCcamShareViewMenu(Screen, HelpableScreen):
 									count = 1
 									countList.append(count)
 									numberofcards = count
-									providername = self.providers.get(caidprovider, 'Multiple Providers given')
+									providername = self.providers.get(caidprovider, _('Multiple Providers given'))
 									#if providername == 'Multiple Providers given':
 									#	print caidprovider
 									numberofreshare = 0
@@ -948,7 +958,7 @@ class CCcamShareViewMenu(Screen, HelpableScreen):
 									elif int(down)==0:
 										numberofreshare = reshareList[i]
 
-									providername = self.providers.get(caidprovider, 'Multiple Providers given')
+									providername = self.providers.get(caidprovider, _('Multiple Providers given'))
 									shareList[i] = CCcamShareViewListEntry(caidprovider, providername, str(numberofcards), str(numberofreshare))
 
 								self.hostList.append(hostname)
@@ -986,7 +996,7 @@ class CCcamShareViewMenu(Screen, HelpableScreen):
 										count = 1
 										countList.append(count)
 										numberofcards = count
-										providername = self.providers.get(caidprovider, 'Multiple Providers given')
+										providername = self.providers.get(caidprovider, _('Multiple Providers given'))
 										#if providername == 'Multiple Providers given':
 										#	print caidprovider
 
@@ -1019,7 +1029,7 @@ class CCcamShareViewMenu(Screen, HelpableScreen):
 										elif int(down)==0:
 											numberofreshare = reshareList[i]
 
-										providername = self.providers.get(caidprovider, 'Multiple Providers given')
+										providername = self.providers.get(caidprovider, _('Multiple Providers given'))
 										shareList[i] = CCcamShareViewListEntry(caidprovider, providername, str(numberofcards), str(numberofreshare))
 
 									self.hostList.append(hostname)
@@ -1344,7 +1354,7 @@ class CCcamInfoRemoteBoxMenu(Screen):
 			self["list"].setList(self.list)
 
 	def new(self):
-		self.session.openWithCallback(self.newCallback, CCcamInfoConfigMenu, CCcamInfoRemoteBox("Profile", "192.168.2.12", "", "", 16001))
+		self.session.openWithCallback(self.newCallback, CCcamInfoConfigMenu, CCcamInfoRemoteBox(_("Profile"), "192.168.2.12", "", "", 16001))
 
 	def newCallback(self, callback):
 		if callback:
