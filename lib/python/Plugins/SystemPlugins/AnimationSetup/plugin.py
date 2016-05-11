@@ -233,10 +233,9 @@ def animationSetupMain(session, **kwargs):
 	session.open(AnimationSetupScreen)
 
 def startAnimationSetup(menuid):
-	if menuid != "ui_menu":
-		return []
-
-	return [( _("Animations"), animationSetupMain, "animation_setup", 3)]
+	if menuid == "system":
+		return [( _("Animations"), animationSetupMain, "animation_setup", 3)]
+	return []
 
 def sessionAnimationSetup(session, reason, **kwargs):
 	setAnimation_current(config.misc.window_animation_default.value)
