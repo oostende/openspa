@@ -8,6 +8,12 @@ from enigma import gFont, getDesktop, gMainDC, eSize, RT_HALIGN_RIGHT, RT_WRAP
 def RGB(r,g,b):
 	return (r<<16)|(g<<8)|b
 
+def esHD():
+	if getDesktop(0).size().width() > 1400:
+		return True
+	else:
+		return False
+
 class OverscanTestScreen(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -77,6 +83,7 @@ class VideoFinetune(Screen):
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
+		self.skinAttributes = None
 		self["Canvas"] = CanvasSource()
 
 		self.basic_colors = [RGB(255, 255, 255), RGB(255, 255, 0), RGB(0, 255, 255), RGB(0, 255, 0), RGB(255, 0, 255), RGB(255, 0, 0), RGB(0, 0, 255), RGB(0, 0, 0)]
@@ -331,12 +338,12 @@ class VideoFinetune(Screen):
 		c.flush()
 
 	def testpic_overscan(self):
-		self.next = SystemInfo["HasFullHDSkinSupport"] and self.testpic_fullhd or self.testpic_brightness
+		self.next = getDesktop(0).size().width() > 1400 and self.testpic_fullhd or self.testpic_brightness
 		self.hide()
 		self.session.openWithCallback(self.testpicCallback, OverscanTestScreen)
 
 	def testpic_fullhd(self):
-		if SystemInfo["HasFullHDSkinSupport"]:
+		if esHD():
 			self.next = self.testpic_brightness
 			self.hide()
 			self.session.openWithCallback(self.testpicCallback, FullHDTestScreen)
