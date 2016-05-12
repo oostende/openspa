@@ -1,3 +1,4 @@
+#mod by mpiero
 from Tools.Profile import profile
 profile("LOAD:ElementTree")
 import xml.etree.cElementTree
@@ -832,6 +833,14 @@ def readSkin(screen, skin, names, desktop):
 	if myscreen is None:
 		print "[SKIN] No skin to read..."
 		myscreen = screen.parsedSkin = xml.etree.cElementTree.fromstring("<screen></screen>")
+
+	#mpiero sdhd convert 
+	try:
+		if config.plugins.sdhdmaster.enable.value and config.plugins.sdhdmaster.ready.value:
+			from Plugins.Extensions.spazeMenu.spacvsd.spacvsd import openspa_sdhd
+			openspa_sdhd(myscreen,screen,path,names)
+	except:
+		pass
 
 	screen.skinAttributes = [ ]
 	skin_path_prefix = getattr(screen, "skin_path", path)
