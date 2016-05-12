@@ -282,7 +282,7 @@ def InitLcd():
 		if getBoxType() in ('mixosf5', 'mixosf5mini', 'gi9196m', 'gi9196lite', 'marvel1', 'enfinity', 'zgemmass', 'zgemmas2s', 'zgemmash1', 'zgemmash2', 'spycat'):
 			config.lcd.standby = ConfigSlider(default=standby_default, limits=(0, 4))
 			config.lcd.bright = ConfigSlider(default=4, limits=(0, 4))
-		elif getBoxType() in ('zgemmahs', 'zgemmah2s', 'zgemmah2h'):
+		elif getBoxType() in ('zgemmahs', 'zgemmah2s', 'zgemmah2h', 'zgemmaslc'):
 			config.lcd.standby = ConfigSlider(default=2, limits=(0, 8))
 			config.lcd.bright = ConfigSlider(default=5, limits=(0, 8))
 		else:
