@@ -74,7 +74,6 @@ class OscamInfo:
 		else:
 			return res.replace('\n', '')
 
-
 	def getUserData(self):
 		err = ""
 		self.oscamconf = self.confPath()
@@ -471,7 +470,7 @@ class OscamInfoMenu(Screen):
 			osc = OscamInfo()
 			reader = osc.getReaders()
 			if reader is not None:
-				reader.append( (_("All"), "all") )
+				reader.append( (_("All"), "all") ) 
 				if isinstance(reader, list):
 					if len(reader) == 1:
 						self.session.open(oscReaderStats, reader[0][1])
@@ -505,7 +504,7 @@ class OscamInfoMenu(Screen):
 				if png is not None:
 					if screenwidth and screenwidth == 1920:
 						res.append((eListboxPythonMultiContent.TYPE_PIXMAP, 10,3,360, 4, png))
-						res.append((eListboxPythonMultiContent.TYPE_TEXT, 85, 7, 900, 35, 4, RT_HALIGN_LEFT, x[2:]))
+						res.append((eListboxPythonMultiContent.TYPE_TEXT, 85, 7, 900, 40, 4, RT_HALIGN_LEFT, x[2:]))
 					else:
 						res.append((eListboxPythonMultiContent.TYPE_PIXMAP, 10,0,360, 2, png))
 						res.append((eListboxPythonMultiContent.TYPE_TEXT, 45, 3, 800, 25, 0, RT_HALIGN_LEFT, x[2:]))
@@ -520,7 +519,7 @@ class OscamInfoMenu(Screen):
 							#res.append(MultiContentEntryPixmapAlphaBlend(pos=(fhd(5), fhd(3)), size=(fhd(35), fhd(25)), png = png2, flags = BT_SCALE | BT_KEEP_ASPECT_RATIO))
 			else:
 				if screenwidth and screenwidth == 1920:
-					res.append((eListboxPythonMultiContent.TYPE_TEXT, 85, 7, 900, 35, 4, RT_HALIGN_LEFT, x))
+					res.append((eListboxPythonMultiContent.TYPE_TEXT, 85, 4, 900, 40, 4, RT_HALIGN_LEFT, x))
 				else:
 					res.append((eListboxPythonMultiContent.TYPE_TEXT, 45, 00, 800, 25, 0, RT_HALIGN_LEFT, x))
 				png2 = LoadPixmap("/usr/share/enigma2/skin_default/buttons/key_" + keys[y] + ".png")
@@ -567,8 +566,8 @@ class oscECMInfo(Screen, OscamInfo):
 		if screenwidth and screenwidth == 1920:
 			return [
 				None,
-				(eListboxPythonMultiContent.TYPE_TEXT, 10, 10, 300, 35, 4, RT_HALIGN_LEFT, listentry[0]),
-				(eListboxPythonMultiContent.TYPE_TEXT, 300, 10, 300, 35, 4, RT_HALIGN_LEFT, listentry[1])
+				(eListboxPythonMultiContent.TYPE_TEXT, 10, 10, 300, 40, 4, RT_HALIGN_LEFT, listentry[0]),
+				(eListboxPythonMultiContent.TYPE_TEXT, 300, 10, 300, 40, 4, RT_HALIGN_LEFT, listentry[1])
 				]
 		else:
 			return [
@@ -599,13 +598,17 @@ class oscInfo(Screen, OscamInfo):
 #		entry_count = len(self.readXML(typ = self.what))
 		ysize = fhd((entry_count + 4) * 25)
 		ypos = 10
+		if esHD():
+			ypos2 = 5
+		else:
+			ypos2 = ypos
 		self.sizeLH = sizeH - 20
-		self.skin = """<screen position="center,center" size="%d, %d" title="Client Info" >""" % (sizeH, ysize)
+		self.skin = """<screen position="center,center" size="%d, %d" title="Client Info" >""" % (sizeH-40, ysize)
 		button_width = int(sizeH / 4)
 		for k, v in enumerate(["red", "green", "yellow", "blue"]):
 			xpos = k * button_width
 			self.skin += """<ePixmap name="%s" position="%d,%d" size="35,25" pixmap="/usr/share/enigma2/skin_default/buttons/key_%s.png" zPosition="1" transparent="1" alphatest="on" />""" % (v, xpos, ypos, v)
-			self.skin += """<widget source="key_%s" render="Label" position="%d,%d" size="%d,%d" font="Regular;16" zPosition="1" valign="center" transparent="1" />""" % (v, xpos + 40, ypos, button_width, fhd(20))
+			self.skin += """<widget source="key_%s" render="Label" position="%d,%d" size="%d,%d" font="Regular;16" zPosition="1" valign="center" transparent="1" />""" % (v, xpos + 40, ypos2, button_width, fhd(20))
 		self.skin +="""<ePixmap name="divh" position="0,37" size="%d,2" pixmap="/usr/share/enigma2/skin_default/div-h.png" transparent="1" alphatest="on" />""" % sizeH
 		self.skin +="""<widget name="output" position="10,45" size="%d,%d" zPosition="1" scrollbarMode="showOnDemand" />""" % ( self.sizeLH, ysize)
 		self.skin += """</screen>"""
@@ -683,7 +686,7 @@ class oscInfo(Screen, OscamInfo):
 			useFont = 3
 		else:
 			self.fieldsize = [ 150, 200, 130, 200, 100, 150 ]
-			self.startPos = [ 50, 200, 400, 530, 730, 830 ]
+			self.startPos = [ 50, 200, 400, 530, 730, 930 ]
 
 			useFont = 1
 		if isinstance(self.errmsg, tuple):
@@ -733,11 +736,11 @@ class oscInfo(Screen, OscamInfo):
 
 	def changeScreensize(self, new_height, new_width = None):
 		if new_width is None:
-			new_width = sizeH
+			new_width = sizeH-40
 		self.instance.resize(eSize(new_width, new_height))
 		fb = getDesktop(0).size()
 		new_posY = int(( fb.height() / 2 ) - ( new_height / 2 ))
-		x = int( ( fb.width() - sizeH ) / 2 )
+		x = int( ( fb.width() - sizeH ) / 2 )+20
 		self.instance.move(ePoint(x, new_posY))
 		self["output"].resize(eSize(self.sizeLH, new_height - 20))
 		self["key_red"].setText(_("Close"))
@@ -971,15 +974,15 @@ class oscReaderStats(Screen, OscamInfo):
 							MultiContentEntryText(pos = (510, 1), size = (80, 24), font=0, flags = RT_HALIGN_LEFT, text = 6), # index 6 is hop 5
 							MultiContentEntryText(pos = (590, 1), size = (80, 24), font=0, flags = RT_HALIGN_LEFT, text = 7), # index 7 is sum of cards for caid
 							]),
-					"HD": (25,[
-							MultiContentEntryText(pos = (0, 1), size = (300, 36), font=1, flags = RT_HALIGN_LEFT, text = 0), # index 0 is caid
-							MultiContentEntryText(pos = (300, 1), size = (105, 36), font=1, flags = RT_HALIGN_LEFT, text = 1), # index 1 is csystem
-							MultiContentEntryText(pos = (450, 1), size = (330, 36), font=1, flags = RT_HALIGN_LEFT, text = 2), # index 2 is hop 1
-							MultiContentEntryText(pos = (810, 1), size = (120, 36), font=1, flags = RT_HALIGN_LEFT, text = 3), # index 3 is hop 2
-							MultiContentEntryText(pos = (945, 1), size = (120, 36), font=1, flags = RT_HALIGN_LEFT, text = 4), # index 4 is hop 3
-							MultiContentEntryText(pos = (1080, 1), size = (195, 36), font=1, flags = RT_HALIGN_LEFT, text = 5), # index 5 is hop 4
-							MultiContentEntryText(pos = (1260, 1), size = (195, 36), font=1, flags = RT_HALIGN_LEFT, text = 6), # index 6 is hop 5
-							MultiContentEntryText(pos = (1455, 1), size = (150, 36), font=1, flags = RT_HALIGN_LEFT, text = 7), # index 7 is sum of cards for caid
+					"HD": (40,[
+							MultiContentEntryText(pos = (0, 1), size = (300, 40), font=1, flags = RT_HALIGN_LEFT, text = 0), # index 0 is caid
+							MultiContentEntryText(pos = (300, 1), size = (105, 40), font=1, flags = RT_HALIGN_LEFT, text = 1), # index 1 is csystem
+							MultiContentEntryText(pos = (400, 1), size = (370, 40), font=1, flags = RT_HALIGN_LEFT, text = 2), # index 2 is hop 1
+							MultiContentEntryText(pos = (800, 1), size = (180, 40), font=1, flags = RT_HALIGN_LEFT, text = 3), # index 3 is hop 2
+							MultiContentEntryText(pos = (990, 1), size = (150, 40), font=1, flags = RT_HALIGN_LEFT, text = 4), # index 4 is hop 3
+							MultiContentEntryText(pos = (1150, 1), size = (195, 40), font=1, flags = RT_HALIGN_LEFT, text = 5), # index 5 is hop 4
+							MultiContentEntryText(pos = (1280, 1), size = (195, 40), font=1, flags = RT_HALIGN_LEFT, text = 6), # index 6 is hop 5
+							MultiContentEntryText(pos = (1525, 1), size = (150, 40), font=1, flags = RT_HALIGN_LEFT, text = 7), # index 7 is sum of cards for caid
 							]),
 					},
 					"fonts": [gFont("Regular", 14),gFont("Regular", 18),gFont("Regular", 24),gFont("Regular", 20)],
