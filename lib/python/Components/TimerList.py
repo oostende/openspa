@@ -17,6 +17,7 @@ class TimerList(HTMLComponent, GUIComponent, object):
 #  | <Name of the Timer>     <Service>  |
 #  | <state>  <orb.pos.>  <start, end>  |
 #
+
 	def buildTimerEntry(self, timer, processed):
 		width = self.l.getItemSize().width()
 		res = [ None ]
@@ -26,8 +27,8 @@ class TimerList(HTMLComponent, GUIComponent, object):
 		if 200 > width - serviceNameWidth - self.iconWidth - self.iconMargin:
 			serviceNameWidth = width - 200 - self.iconWidth - self.iconMargin
 
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, width - serviceNameWidth, 0, serviceNameWidth, self.rowSplit, 0, RT_HALIGN_RIGHT|RT_VALIGN_BOTTOM, serviceName))
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, self.iconWidth + self.iconMargin, 0, width - serviceNameWidth - self.iconWidth - self.iconMargin, self.rowSplit, 2, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, timer.name))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, width - serviceNameWidth, self.posy, serviceNameWidth, self.rowSplit, 0, RT_HALIGN_RIGHT|RT_VALIGN_BOTTOM, serviceName))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, self.iconWidth + self.iconMargin, self.posy2, width - serviceNameWidth - self.iconWidth - self.iconMargin, self.rowSplit, 2, RT_HALIGN_LEFT|RT_VALIGN_BOTTOM, timer.name))
 
 		begin = FuzzyTime(timer.begin)
 		if timer.repeated:
@@ -93,6 +94,8 @@ class TimerList(HTMLComponent, GUIComponent, object):
 		self.font = gFont("Regular", 18)
 		self.eventNameFont = gFont("Regular", 18)
 		self.l.setList(list)
+		self.posy = 0
+		self.posy2 = 0
 		self.itemHeight = 50
 		self.rowSplit = 25
 		self.iconMargin = 4
@@ -122,6 +125,10 @@ class TimerList(HTMLComponent, GUIComponent, object):
 			self.rowSplit = int(value)
 		def iconMargin(value):
 			self.iconMargin = int(value)
+		def posy(value):
+			self.posy = int(value)
+		def posy2(value):
+			self.posy2 = int(value)
 		def satPosLeft(value):
 			self.satPosLeft = int(value)
 		for (attrib, value) in list(self.skinAttributes):
