@@ -25,20 +25,21 @@
 #if 0
 		else \
 		{ \
-			eDebugNoNewLine("SIMULATE:"); \
-			eDebug(x); \
+			eDebugNoNewLineStart("SIMULATE:"); \
+			eDebugNoNewLine(x); \
+			eDebugNoNewLine("\n"); \
 		}
 #endif
 
-#define eDebugNoSimulateNoNewLine(x...) \
+#define eDebugNoSimulateNoNewLineStart(x...) \
 	do { \
 		if (!m_simulate) \
-			eDebugNoNewLine(x); \
+			eDebugNoNewLineStart(x); \
 	} while(0)
 #if 0
 		else \
 		{ \
-			eDebugNoNewLine("SIMULATE:"); \
+			eDebugNoNewLineStart("SIMULATE:"); \
 			eDebugNoNewLine(x); \
 		}
 #endif
