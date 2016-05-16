@@ -16,6 +16,7 @@ from enigma import eDVBSatelliteEquipmentControl as secClass, \
 from boxbranding import getBoxType
 from time import localtime, mktime
 from datetime import datetime
+from os import path
 
 from Tools import Directories
 import xml.etree.cElementTree
