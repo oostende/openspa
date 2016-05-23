@@ -2,7 +2,7 @@ from HTMLComponent import HTMLComponent
 from GUIComponent import GUIComponent
 from skin import parseColor, parseFont
 
-from enigma import eListboxServiceContent, eListbox, eServiceCenter, eServiceReference, gFont, eRect, eSize
+from enigma import eListboxServiceContent, eListbox, eServiceCenter, eServiceReference, gFont, eRect, eSize, getDesktop
 from Tools.LoadPixmap import LoadPixmap
 from Tools.TextBoundary import getTextBoundarySize
 
@@ -68,6 +68,7 @@ class ServiceList(HTMLComponent, GUIComponent):
 		self.progressBarWidth = 52
 		self.progressPercentWidth = 0
 		self.fieldMargins = 10
+		self.itemsppage = 1
 
 		self.onSelectionChanged = [ ]
 
@@ -143,6 +144,8 @@ class ServiceList(HTMLComponent, GUIComponent):
 			self.l.setNonplayableMargins(int(value))
 		def itemsDistances(value):
 			self.l.setItemsDistances(int(value))
+		def itemsppage(value):
+			self.itemsppage = int(value)
 		for (attrib, value) in list(self.skinAttributes):
 			try:
 				locals().get(attrib)(value)
@@ -261,10 +264,14 @@ class ServiceList(HTMLComponent, GUIComponent):
 	GUI_WIDGET = eListbox
 
 	def setItemsPerPage(self):
-		if self.listHeight > 0:
-			itemHeight = self.listHeight / int(config.usage.serviceitems_per_page.value)
+		ppages = self.itemsppage
+		if ppages == 0:
+			itemHeight = self.ItemHeight
 		else:
-			itemHeight = 28
+			if self.listHeight > 0 :
+				itemHeight = self.listHeight / int(config.usage.serviceitems_per_page.value)
+			else:
+				itemHeight = 28
 		self.ItemHeight = itemHeight
 		self.l.setItemHeight(itemHeight)
 		if self.listHeight:
