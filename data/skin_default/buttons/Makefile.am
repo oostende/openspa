@@ -2,17 +2,23 @@ installdir = $(pkgdatadir)/skin_default/buttons
 
 dist_install_DATA = \
 	blue.png \
+	blue_HD.png \
 	blue_pressed.png \
 	button_blue_off.png \
 	button_blue.png \
+	button_blue_HD.png \
 	button_green_off.png \
 	button_green.png \
+	button_green_HD.png \
 	button_red_off.png \
 	button_red.png \
+	button_red_HD.png \
 	button_yellow_off.png \
 	button_yellow.png \
+	button_yellow_HD.png \
 	green-big.png \
 	green.png \
+	green_HD.png \
 	key_0.png \
 	key_1.png \
 	key_2.png \
@@ -24,11 +30,15 @@ dist_install_DATA = \
 	key_8.png \
 	key_9.png \
 	key_blue.png \
+	key_blue_HD.png \
 	key_green.png \
+	key_green_HD.png \
 	key_info.png \
 	key_menu.png \
 	key_red.png \
+	key_red_HD.png \
 	key_yellow.png \
+	key_yellow_HD.png \
 	key_text.png \
 	key_left.png \
 	key_right.png \
@@ -36,4 +46,6 @@ dist_install_DATA = \
 	key_prev.png \
 	red-big.png \
 	red.png \
-	yellow.png
+	red_HD.png \
+	yellow.png \
+	yellow_HD.png
