@@ -1487,10 +1487,9 @@ def InitNimManager(nimmgr, update_slots = []):
 			positions_append(int(product.get("positions",1)))
 			for cnt in range(positions[0]):
 				lof=[]
-				lof_append = lof.append
-				lof_append(int(product.get("lofl",9750)))
-				lof_append(int(product.get("lofh",10600)))
-				lof_append(int(product.get("threshold",11700)))
+				lof.append(int(product.get("lofl",9750)))
+				lof.append(int(product.get("lofh",10600)))
+				lof.append(int(product.get("threshold",11700)))
 				positions_append(tuple(lof))
 
 			p_update({"positions":tuple(positions)})							#add positons to dict product
@@ -1532,10 +1531,9 @@ def InitNimManager(nimmgr, update_slots = []):
 			positions_append(int(product.get("positions",1)))
 			for cnt in range(positions[0]):
 				lof=[]
-				lof_append = lof.append
-				lof_append(int(product.get("lofl",9750)))
-				lof_append(int(product.get("lofh",10600)))
-				lof_append(int(product.get("threshold",11700)))
+				lof.append(int(product.get("lofl",9750)))
+				lof.append(int(product.get("lofh",10600)))
+				lof.append(int(product.get("threshold",11700)))
 				positions_append(tuple(lof))
 
 			p_update({"positions":tuple(positions)})										#add positons to dict product
