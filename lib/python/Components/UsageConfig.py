@@ -662,6 +662,10 @@ def InitUsageConfig():
 	config.streaming.stream_ait = ConfigYesNo(default = True)
 	config.streaming.authentication = ConfigYesNo(default = False)
 
+	config.mediaplayer = ConfigSubsection()
+	config.mediaplayer.useAlternateUserAgent = ConfigYesNo(default=False)
+	config.mediaplayer.alternateUserAgent = ConfigText(default="")
+
 	#config.osd = ConfigSubsection()
 	config.osd.dst_left = ConfigSelectionNumber(default = 0, stepwidth = 1, min = 0, max = 720, wraparound = False)
 	config.osd.dst_width = ConfigSelectionNumber(default = 720, stepwidth = 1, min = 0, max = 720, wraparound = False)
