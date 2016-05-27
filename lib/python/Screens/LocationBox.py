@@ -94,6 +94,7 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 		self["key_yellow"] = Button(_("Rename"))
 		self["key_blue"] = Button(_("Remove bookmark"))
 		self["key_red"] = Button(_("Cancel"))
+		self["key_ch"] = Label(_("Change list"))
 
 		# Background for Buttons
 		self["green"] = Pixmap()
@@ -192,6 +193,7 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 		# Don't allow renaming when filename is empty
 		if self.filename == "":
 			self["key_yellow"].hide()
+			self["yellow"].hide()
 
 	def switchToFileList(self):
 		if not self.userMode:
