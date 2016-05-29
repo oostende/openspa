@@ -122,6 +122,14 @@ class Setup(ConfigListScreen, Screen):
 			x()
 		self.createSetup() 
 
+	def keyLeft(self):
+		ConfigListScreen.keyLeft(self)
+		self.changedEntry()
+
+	def keyRight(self):
+		ConfigListScreen.keyRight(self)
+		self.changedEntry()
+
 	def addItems(self, list, parentNode):
 		for x in parentNode:
 			if not x.tag:
