@@ -8,8 +8,7 @@ from Components.Sources.StaticText import StaticText
 
 from Tools.Directories import fileExists
 
-if path.exists("/dev/hdmi_cec") or path.exists("/dev/misc/hdmi_cec0"):
-	import Components.HdmiCec
+import Components.HdmiCec
 
 class HdmiCECSetupScreen(Screen, ConfigListScreen):
 	skin = """
@@ -73,6 +72,7 @@ class HdmiCECSetupScreen(Screen, ConfigListScreen):
 			self.list.append(getConfigListEntry(_("Put your %s %s in standby") % (getMachineBrand(), getMachineName()), config.hdmicec.control_receiver_standby))
 			self.list.append(getConfigListEntry(_("Wakeup your %s %s from standby") % (getMachineBrand(), getMachineName()), config.hdmicec.control_receiver_wakeup))
 			self.list.append(getConfigListEntry(_("Minimum send interval"), config.hdmicec.minimum_send_interval))
+			self.list.append(getConfigListEntry(_("Repeat leave standby messages"), config.hdmicec.repeat_wakeup_timer))
 			if fileExists("/proc/stb/hdmi/preemphasis"):
 				self.list.append(getConfigListEntry(_("Use HDMI-preemphasis"), config.hdmicec.preemphasis))
 		self["config"].list = self.list
@@ -89,9 +89,11 @@ class HdmiCECSetupScreen(Screen, ConfigListScreen):
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
+		self.changedEntry()
 
 	def keyRight(self):
 		ConfigListScreen.keyRight(self)
+		self.changedEntry()
 
 	def keyGo(self):
 		for x in self["config"].list:
