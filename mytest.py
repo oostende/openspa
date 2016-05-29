@@ -86,7 +86,7 @@ def useSyncUsingChanged(configElement):
 		print "[Time By]: NTP"
 		enigma.eDVBLocalTimeHandler.getInstance().setUseDVBTime(False)
 		enigma.eEPGCache.getInstance().timeUpdated()
-config.misc.SyncTimeUsing.addNotifier(useSyncUsingChanged, immediate_feedback = True)
+config.misc.SyncTimeUsing.addNotifier(useSyncUsingChanged)
 
 def NTPserverChanged(configElement):
 	if config.misc.NTPserver.getValue() == "pool.ntp.org":
