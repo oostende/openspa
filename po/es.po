@@ -8171,6 +8171,9 @@ msgstr "Repetir"
 msgid "Repeat Display Message"
 msgstr "Repetir el mensaje del display"
 
+msgid "Repeat leave standby messages"
+msgstr "Repetir los mensajes de salida de reposo"
+
 msgid "Repeat type"
 msgstr "Repetición"
 

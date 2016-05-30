@@ -8165,6 +8165,9 @@ msgstr "Repetir"
 msgid "Repeat Display Message"
 msgstr "Repetir el missatge del display"
 
+msgid "Repeat leave standby messages"
+msgstr "Repetir els missatges de sortida de repòs"
+
 msgid "Repeat type"
 msgstr "Repetició"
 
