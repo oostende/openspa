@@ -10,8 +10,8 @@
 std::string buildShortName( const std::string &str )
 {
 	std::string tmp;
-	static char stropen[3] = { 0xc2, 0x86, 0x00 };
-	static char strclose[3] = { 0xc2, 0x87, 0x00 };
+	static char stropen[3] = { char(0xc2), char(0x86), 0x00 };
+	static char strclose[3] = { char(0xc2), char(0x87), 0x00 };
 	size_t open=std::string::npos-1;
 	while ( (open = str.find(stropen, open+2)) != std::string::npos )
 	{
@@ -31,8 +31,8 @@ std::string getNum(int val, int sys)
 	if (sys == 10)
 		snprintf(buf, 12, "%i", val);
 	else if (sys == 16)
-		snprintf(buf, 12, "%X", val);		
-	
+		snprintf(buf, 12, "%X", val);
+
 	std::string res;
 	res.assign(buf);
 	return res;
