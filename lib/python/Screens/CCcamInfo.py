@@ -1554,7 +1554,7 @@ class CCcamInfoConfigSwitcher(Screen):
 
 		self["actions"] = ActionMap(["CCcamInfoActions"],
 			{
-				"ok": self.activate,
+#				"ok": self.activate,
 				"cancel": self.close,
 				"red": self.delete,
 				"green": self.activate,
