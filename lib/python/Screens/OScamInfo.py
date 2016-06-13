@@ -8,6 +8,7 @@ from Components.Sources.StaticText import StaticText
 from Components.config import config, configfile, getConfigListEntry
 from Components.ConfigList import ConfigList, ConfigListScreen
 from Components.MenuList import MenuList
+from Components.Label import Label
 
 from Tools.LoadPixmap import LoadPixmap
 
@@ -66,7 +67,15 @@ class OscamInfo:
 				cmd = 'find /etc -name "oscam.conf"'
 				res = os.popen(cmd).read()
 				if res == '':
-					return None
+					try:
+						folders = listdir("/etc/tuxbox/config")
+						for folder in folders:
+							if folder.startswith("oscam"):
+								cmd = 'find /etc/tuxbox/config/' + folder + ' -name "oscam.conf"'
+								res = os.popen(cmd).read()
+							if res=='':
+								return None
+					except: return None
 				else:
 					return res.replace('\n', '')
 			else:
@@ -112,10 +121,20 @@ class OscamInfo:
 				return user, pwd, port
 		else:
 			return _("file oscam.conf could not be found")
-
+	
+	def getip(self):
+		c = "127.0.0.1"
+		file = os.popen('ifconfig')
+		cmd = file.readlines()
+		for line in cmd:
+			if 'inet addr:' in line:
+				c = line.split('inet addr:')[1].split(' ')[0]
+				if c!='127.0.0.1':
+					return c
+			
 	def openWebIF(self, part = None, reader = None):
 		if config.oscaminfo.userdatafromconf.value:
-			self.ip = "127.0.0.1"
+			self.ip = self.getip()
 			udata = self.getUserData()
 			if isinstance(udata, str):
 				if "httpuser" in udata:
@@ -611,10 +630,12 @@ class oscInfo(Screen, OscamInfo):
 			self.skin += """<widget source="key_%s" render="Label" position="%d,%d" size="%d,%d" font="Regular;16" zPosition="1" valign="center" transparent="1" />""" % (v, xpos + 40, ypos2, button_width, fhd(20))
 		self.skin +="""<ePixmap name="divh" position="0,37" size="%d,2" pixmap="/usr/share/enigma2/skin_default/div-h.png" transparent="1" alphatest="on" />""" % sizeH
 		self.skin +="""<widget name="output" position="10,45" size="%d,%d" zPosition="1" scrollbarMode="showOnDemand" />""" % ( self.sizeLH, ysize)
+#		self.skin +="""<widget name="path" zPosition="10" position="10,45" size="%d,%d" zPosition="1" scrollbarMode="showOnDemand" />""" % ( self.sizeLH, ysize)
 		self.skin += """</screen>"""
 		Screen.__init__(self, session)
 		self.mlist = oscMenuList([])
 		self["output"] = self.mlist
+#		self["path"] = Label()
 		self.errmsg = ""
 		self["key_red"] = StaticText(_("Close"))
 		if self.what == "c":
@@ -765,6 +786,7 @@ class oscInfo(Screen, OscamInfo):
 			self["key_blue"].setText("Log")
 
 	def showData(self):
+#		self["path"].setText(texto)
 		if self.firstrun:
 			data = self.webif_data
 			self.firstrun = False

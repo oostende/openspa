@@ -271,8 +271,8 @@ def CCcamListEntry(name, idx):
 		png = "/usr/share/enigma2/skin_default/buttons/key_%s.png" % str(idx)
 	if screenwidth and screenwidth == 1920:
 		if fileExists(png):
-			res.append(MultiContentEntryPixmapAlphaBlend(pos=(fhd(10,1), fhd(5,0.4)), size=(fhd(35,1.5), fhd(25,1.5)), png=loadPNG(png), flags = BT_SCALE | BT_KEEP_ASPECT_RATIO))
-		res.append(MultiContentEntryText(pos=(fhd(90,1), fhd(7,0)), size=(fhd(900), fhd(50,0.8)), font=1, text=name))
+			res.append(MultiContentEntryPixmapAlphaBlend(pos=(10, 2), size=(53, 38), png=loadPNG(png), flags = BT_SCALE | BT_KEEP_ASPECT_RATIO))
+		res.append(MultiContentEntryText(pos=(90, 0), size=(900, 40), font=1, text=name))
 	else:
 		if fileExists(png):
 			res.append(MultiContentEntryPixmapAlphaBlend(pos=(0, 0), size=(35, 25), png=loadPNG(png)))
@@ -350,8 +350,8 @@ def CCcamConfigListEntry(file):
 	else:
 		png = lock_off
 	if screenwidth and screenwidth == 1920:
-		res.append(MultiContentEntryPixmapAlphaBlend(pos=(5, 5), size=(50, 50), png=png))
-		res.append(MultiContentEntryText(pos=(85, 5), size=(800, 35), font=1, text=name))
+		res.append(MultiContentEntryPixmapAlphaBlend(pos=(5, 2), size=(40, 40), png=png,  flags = BT_SCALE | BT_KEEP_ASPECT_RATIO))
+		res.append(MultiContentEntryText(pos=(85, 2), size=(800, 42), font=1, text=name))
 	else:
 		res.append(MultiContentEntryPixmapAlphaBlend(pos=(2, 2), size=(25, 25), png=png))
 		res.append(MultiContentEntryText(pos=(35, 2), size=(550, 25), font=0, text=name))
@@ -1573,7 +1573,7 @@ class CCcamInfoConfigSwitcher(Screen):
 			files = []
 
 		for file in files:
-			if file.startswith("CCcam_") and file.endswith(".cfg"):
+			if file.startswith("CCcam") and file.endswith(".cfg"):
 				list.append(CCcamConfigListEntry("/var/etc/"+file))
 
 		self["list"].setList(list)
