@@ -494,23 +494,8 @@ msgstr "1 segon"
 msgid "1.0 sec"
 msgstr "1.0 seg."
 
-msgid "1.08Ghz"
-msgstr "1.08GHz"
-
-msgid "1.2GHz"
-msgstr "1.2GHz"
-
-msgid "1.2GHz (default)"
-msgstr "1.2GHz (defecte)"
-
-msgid "1.32Ghz"
-msgstr "1.32GHz"
-
 msgid "1.5 sec"
 msgstr "1.5 seg."
-
-msgid "1.512GHhz"
-msgstr "1.512GHz"
 
 msgid "10 minutes"
 msgstr "10 minuts"
@@ -548,9 +533,6 @@ msgstr "16:9 Letterbox"
 msgid "16:9 always"
 msgstr "Sempre 16:9"
 
-msgid "1GHhz"
-msgstr "1GHz"
-
 msgid "1X"
 msgstr "1x"
 
@@ -571,9 +553,6 @@ msgstr "2.5 seg."
 
 msgid "20 minutes"
 msgstr "20 minuts"
-
-msgid "200Mhz"
-msgstr "200MHz"
 
 msgid "2X"
 msgstr "2x"
@@ -671,9 +650,6 @@ msgstr "6.0 seg."
 msgid "6.5 sec"
 msgstr "6.5 seg."
 
-msgid "600Mhz"
-msgstr "600MHz"
-
 msgid "7 seconds"
 msgstr "7 segons"
 
@@ -682,12 +658,6 @@ msgstr "7.0 seg."
 
 msgid "7.5 sec"
 msgstr "7.5 seg."
-
-msgid "792Mhz"
-msgstr "792MHz"
-
-msgid "792Mhz (default)"
-msgstr "792MHz (defecte)"
 
 msgid "8 seconds"
 msgstr "8 segons"
@@ -698,12 +668,6 @@ msgstr "8.0 seg."
 msgid "8.5 sec"
 msgstr "8.5 seg."
 
-msgid "816Mhz"
-msgstr "816MHz"
-
-msgid "840Mhz"
-msgstr "840MHz"
-
 msgid "9 seconds"
 msgstr "9 segons"
 
@@ -712,12 +676,6 @@ msgstr "9.0 seg."
 
 msgid "9.5 sec"
 msgstr "9.5 seg."
-
-msgid "96Mhz"
-msgstr "96MHz"
-
-msgid "984Mhz"
-msgstr "984MHz"
 
 msgid ": %s"
 msgstr ": %s"
@@ -4003,6 +3961,9 @@ msgstr "Habilitar autorecerca de cable"
 msgid "Enable auto fast scan"
 msgstr "Habilitar autorecerca ràpida"
 
+msgid "Enable auto fast scan for %s"
+msgstr "Habilitar autorecerca ràpida per a %s"
+
 msgid "Enable blinking rec symbol on the LCD Display"
 msgstr "Habilitar intermitencia del símbol de gravació a l'LCD"
 
@@ -6886,9 +6847,6 @@ msgstr "Obrir la llista de pel·lícules"
 msgid "OpenSPA USB Devices"
 msgstr "OpenSPA - Dispositius USB"
 
-msgid "OpenSPA max CPU frequency"
-msgstr "Freq. màxima CPU - normal"
-
 msgid "OpenVPN Setup"
 msgstr "Configuració d'OpenVPN"
 
@@ -7730,6 +7688,9 @@ msgstr "Prioritat"
 msgid "Process"
 msgstr "Processar"
 
+msgid "Processor"
+msgstr "Processador"
+
 msgid "Profile"
 msgstr "Perfil"
 
@@ -8410,6 +8371,9 @@ msgstr "SPDIF"
 msgid "SSID:"
 msgstr "Xarxa (SSID):"
 
+msgid "STARTUP"
+msgstr "Inici"
+
 msgid "STORAGE DEVICE"
 msgstr "Dispositiu d'emmagatzematge"
 
@@ -8421,6 +8385,9 @@ msgstr "Ds"
 
 msgid "Safe mode"
 msgstr "Mode segur"
+
+msgid "Samba Log"
+msgstr "Registre de Samba"
 
 msgid "Samba Setup"
 msgstr "Configurar samba"
@@ -8511,9 +8478,6 @@ msgstr "Desar valors i sortir"
 
 msgid "Scaler sharpness"
 msgstr "Nitidesa de l'escalat"
-
-msgid "Scaling governor"
-msgstr "Governor"
 
 msgid "Scaling mode"
 msgstr "Tipus d'escalat"
@@ -9001,9 +8965,6 @@ msgstr "Informació del canal"
 
 msgid "Services"
 msgstr "Canals"
-
-msgid "Set CPU speed settings"
-msgstr "Ajust de la freq. de la CPU"
 
 msgid "Set Framerate for MiniTV"
 msgstr "Ajusteu el framerate per MiniTV"
@@ -9834,17 +9795,11 @@ msgstr "Anar a repòs després de 75 minuts"
 msgid "Standby in 90 minutes"
 msgstr "Anar a repòs després de 90 minuts"
 
-msgid "Standby max CPU frequency"
-msgstr "Freq. màxima CPU - repòs"
-
 msgid "StandbyLED"
 msgstr "LED de repòs"
 
 msgid "Start"
 msgstr "Iniciar"
-
-msgid "Start Boot Frequency"
-msgstr "Freqüència d'inici"
 
 msgid "Start Instant Record"
 msgstr "Iniciar gravació instantània"
@@ -10303,9 +10258,6 @@ msgstr "Terrestre"
 
 msgid "Terrestrial provider"
 msgstr "Zona geogràfica"
-
-msgid "Test"
-msgstr "Provar"
 
 msgid "Test DiSEqC settings"
 msgstr "Comprovar configuració de DisEqC"
@@ -11691,6 +11643,9 @@ msgstr "Resolució de vídeo"
 msgid "View All"
 msgstr "Veure tots"
 
+msgid "View Audio Info"
+msgstr "Informació de l'àudio"
+
 msgid "View Rass interactive..."
 msgstr "Veure Rass interactiu..."
 
@@ -11980,11 +11935,8 @@ msgstr "Oest"
 msgid "West limit set"
 msgstr "Límit oest configurat"
 
-msgid "Wetek CPU Control"
-msgstr "Control de CPU WeTek"
-
-msgid "Wetek FRQ Setup"
-msgstr "WeTek FRQ"
+msgid "Wetek CPU Frequency Setup"
+msgstr "Ajuste de la frecuencia de CPU"
 
 msgid "What Day of month ?"
 msgstr "Quin dia del mes?"
@@ -12600,6 +12552,13 @@ msgstr ""
 "(mostrades com P.x a la llista - on x >=2) muntades al mateix dispositiu.\n"
 "Utilitzeu el gestor de dispositius per desmuntar els dispositius muntats"
 
+msgid ""
+"You can select with yellow the OnlineFlash Image\n"
+" or select Recovery to create a USB Disk Image for clean Install."
+msgstr ""
+"Podeu seleccionar la instal·lació Online per mitjà del groc\n"
+" o seleccioneu Recovery per crear un disc USB per a una instal·lació neta."
+
 msgid "You cannot delete this!"
 msgstr "No es pot esborrar"
 
@@ -13167,9 +13126,6 @@ msgstr "Confirmat"
 msgid "connected"
 msgstr "Connectat"
 
-msgid "conservative (default)"
-msgstr "Conservative (defecte)"
-
 msgid ""
 "contain a file with the name: \n"
 "\n"
@@ -13495,9 +13451,6 @@ msgstr "salts:"
 msgid "horizontal"
 msgstr "Horitzontal"
 
-msgid "hotplug"
-msgstr "Hotplug"
-
 msgid "http://IP-ADDRESS:8001"
 msgstr "http://adreça_ip:8001"
 
@@ -13533,9 +13486,6 @@ msgstr "inserir marca aquí"
 
 msgid "insert without cutlist editor"
 msgstr "inserir sense l'editor de llistes"
-
-msgid "interactive"
-msgstr "Interactiva"
 
 msgid "invalid data: "
 msgstr "Data no vàlida: "
@@ -13809,9 +13759,6 @@ msgstr "de Dilluns a Divendres"
 msgid "once"
 msgstr "Un cop"
 
-msgid "ondemand"
-msgstr "Ondemand"
-
 msgid "only HD"
 msgstr "Només en HD"
 
@@ -13850,9 +13797,6 @@ msgstr "coincidència parcial"
 
 msgid "pass"
 msgstr "Pas"
-
-msgid "performance"
-msgstr "Performance"
 
 msgid "performing arts"
 msgstr "arts"
@@ -14423,6 +14367,9 @@ msgstr ""
 
 msgid "will take about 3-12 minutes for this system\n"
 msgstr "trigarà entre 3 i 12 minuts en acabar\n"
+
+msgid "will take about 30 minutes for this system\n"
+msgstr "en aquest sistema trigarà uns 30 minuts\n"
 
 msgid "winter sport"
 msgstr "esports d'hivern"

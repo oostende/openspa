@@ -494,23 +494,8 @@ msgstr "1 segundo"
 msgid "1.0 sec"
 msgstr "1.0 seg."
 
-msgid "1.08Ghz"
-msgstr "1.08GHz"
-
-msgid "1.2GHz"
-msgstr "1.2GHz"
-
-msgid "1.2GHz (default)"
-msgstr "1.2GHz (defecto)"
-
-msgid "1.32Ghz"
-msgstr "1.32GHz"
-
 msgid "1.5 sec"
 msgstr "1.5 seg."
-
-msgid "1.512GHhz"
-msgstr "1.512GHz"
 
 msgid "10 minutes"
 msgstr "10 minutos"
@@ -548,9 +533,6 @@ msgstr "16:9 Letterbox"
 msgid "16:9 always"
 msgstr "siempre 16:9"
 
-msgid "1GHhz"
-msgstr "1GHz"
-
 msgid "1X"
 msgstr "1x"
 
@@ -571,9 +553,6 @@ msgstr "2.5 seg."
 
 msgid "20 minutes"
 msgstr "20 minutos"
-
-msgid "200Mhz"
-msgstr "200MHz"
 
 msgid "2X"
 msgstr "2x"
@@ -671,9 +650,6 @@ msgstr "6.0 seg."
 msgid "6.5 sec"
 msgstr "6.5 seg."
 
-msgid "600Mhz"
-msgstr "600MHz"
-
 msgid "7 seconds"
 msgstr "7 segundos"
 
@@ -682,12 +658,6 @@ msgstr "7.0 seg."
 
 msgid "7.5 sec"
 msgstr "7.5 seg."
-
-msgid "792Mhz"
-msgstr "792MHz"
-
-msgid "792Mhz (default)"
-msgstr "792MHz (defecto)"
 
 msgid "8 seconds"
 msgstr "8 segundos"
@@ -698,12 +668,6 @@ msgstr "8.0 seg."
 msgid "8.5 sec"
 msgstr "8.5 seg."
 
-msgid "816Mhz"
-msgstr "816MHz"
-
-msgid "840Mhz"
-msgstr "840MHz"
-
 msgid "9 seconds"
 msgstr "9 segundos"
 
@@ -712,12 +676,6 @@ msgstr "9.0 seg."
 
 msgid "9.5 sec"
 msgstr "9.5 seg."
-
-msgid "96Mhz"
-msgstr "96MHz"
-
-msgid "984Mhz"
-msgstr "984MHz"
 
 msgid ": %s"
 msgstr ": %s"
@@ -4010,6 +3968,9 @@ msgstr "Habilitar autobúsqueda de cable"
 msgid "Enable auto fast scan"
 msgstr "Habilitar autobúsqueda rápida"
 
+msgid "Enable auto fast scan for %s"
+msgstr "Habilitar autobúsqueda rápida para %s"
+
 msgid "Enable blinking rec symbol on the LCD Display"
 msgstr "Habilitar símbolo parpadeante de grabación en el LCD"
 
@@ -6892,9 +6853,6 @@ msgstr "Abrir la lista de películas"
 msgid "OpenSPA USB Devices"
 msgstr "OpenSPA - Dispositivos USB"
 
-msgid "OpenSPA max CPU frequency"
-msgstr "Frec. máxima CPU - normal"
-
 msgid "OpenVPN Setup"
 msgstr "Configuración OpenVPN"
 
@@ -7736,6 +7694,9 @@ msgstr "Prioridad"
 msgid "Process"
 msgstr "Procesar"
 
+msgid "Processor"
+msgstr "Procesador"
+
 msgid "Profile"
 msgstr "Perfil"
 
@@ -8416,6 +8377,9 @@ msgstr "SPDIF"
 msgid "SSID:"
 msgstr "Red (SSID):"
 
+msgid "STARTUP"
+msgstr "Arranque"
+
 msgid "STORAGE DEVICE"
 msgstr "Dispositivo de almacenamiento"
 
@@ -8427,6 +8391,9 @@ msgstr "Sa"
 
 msgid "Safe mode"
 msgstr "Modo seguro"
+
+msgid "Samba Log"
+msgstr "Registro de Samba"
 
 msgid "Samba Setup"
 msgstr "Configurar samba"
@@ -8517,9 +8484,6 @@ msgstr "Guardar valores y salir"
 
 msgid "Scaler sharpness"
 msgstr "Nitidez del escalado"
-
-msgid "Scaling governor"
-msgstr "Governor"
 
 msgid "Scaling mode"
 msgstr "Tipo de escalado"
@@ -9010,9 +8974,6 @@ msgstr "Información del Canal"
 
 msgid "Services"
 msgstr "Canales"
-
-msgid "Set CPU speed settings"
-msgstr "Ajuste de la frec. de la CPU"
 
 msgid "Set Framerate for MiniTV"
 msgstr "Ajustar el framerate para MiniTV"
@@ -9849,17 +9810,11 @@ msgstr "Ir a reposo después de 75 minutos"
 msgid "Standby in 90 minutes"
 msgstr "Ir a reposo después de 90 minutos"
 
-msgid "Standby max CPU frequency"
-msgstr "Frec. máxima CPU - reposo"
-
 msgid "StandbyLED"
 msgstr "LED de reposo"
 
 msgid "Start"
 msgstr "Iniciar"
-
-msgid "Start Boot Frequency"
-msgstr "Frecuencia de arranque"
 
 msgid "Start Instant Record"
 msgstr "Iniciar grabación instantánea"
@@ -10318,9 +10273,6 @@ msgstr "Terrestre"
 
 msgid "Terrestrial provider"
 msgstr "Zona geográfica"
-
-msgid "Test"
-msgstr "Probar"
 
 msgid "Test DiSEqC settings"
 msgstr "Configuración de test DisEqC"
@@ -11711,6 +11663,9 @@ msgstr "Resolución de vídeo"
 msgid "View All"
 msgstr "Ver todos"
 
+msgid "View Audio Info"
+msgstr "Información del audio"
+
 msgid "View Rass interactive..."
 msgstr "Ver Rass interactivo..."
 
@@ -12000,11 +11955,8 @@ msgstr "Oeste"
 msgid "West limit set"
 msgstr "Límite oeste configurado"
 
-msgid "Wetek CPU Control"
-msgstr "Control de CPU WeTek"
-
-msgid "Wetek FRQ Setup"
-msgstr "WeTek FRQ"
+msgid "Wetek CPU Frequency Setup"
+msgstr "Ajuste de la frecuencia de CPU"
 
 msgid "What Day of month ?"
 msgstr "Que dia del mes?"
@@ -12627,6 +12579,13 @@ msgstr ""
 "dispositivo.\n"
 "Utilice el gestor de dispositivos para desmontar los dispositivos montados"
 
+msgid ""
+"You can select with yellow the OnlineFlash Image\n"
+" or select Recovery to create a USB Disk Image for clean Install."
+msgstr ""
+"Puede seleccionar la instalación Online mediante el amarillo\n"
+" o seleccione Recovery para crear un disco USB para una instalación limpia."
+
 msgid "You cannot delete this!"
 msgstr "No se puede borrar"
 
@@ -13197,9 +13156,6 @@ msgstr "Confirmado"
 msgid "connected"
 msgstr "Conectado"
 
-msgid "conservative (default)"
-msgstr "Conservative (defecto)"
-
 msgid ""
 "contain a file with the name: \n"
 "\n"
@@ -13525,9 +13481,6 @@ msgstr "saltos:"
 msgid "horizontal"
 msgstr "Horizontal"
 
-msgid "hotplug"
-msgstr "Hotplug"
-
 msgid "http://IP-ADDRESS:8001"
 msgstr "http://dirección_ip:8001"
 
@@ -13563,9 +13516,6 @@ msgstr "insertar marca aquí"
 
 msgid "insert without cutlist editor"
 msgstr "insertar sin el editor de listas"
-
-msgid "interactive"
-msgstr "Interactiva"
 
 msgid "invalid data: "
 msgstr "Fecha no válida: "
@@ -13839,9 +13789,6 @@ msgstr "de Lunes a Viernes"
 msgid "once"
 msgstr "Una vez"
 
-msgid "ondemand"
-msgstr "Ondemand"
-
 msgid "only HD"
 msgstr "Sólo en HD"
 
@@ -13880,9 +13827,6 @@ msgstr "coincidencia parcial"
 
 msgid "pass"
 msgstr "Paso"
-
-msgid "performance"
-msgstr "Performance"
 
 msgid "performing arts"
 msgstr "artes"
@@ -14451,6 +14395,9 @@ msgstr "tardará entre 1 y 4 minutos en finalizar\n"
 
 msgid "will take about 3-12 minutes for this system\n"
 msgstr "tardará entre 3 y 12 minutos en finalizar\n"
+
+msgid "will take about 30 minutes for this system\n"
+msgstr "en este sistema tardará unos 30 minutos\n"
 
 msgid "winter sport"
 msgstr "deportes de invierno"
