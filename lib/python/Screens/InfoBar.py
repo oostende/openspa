@@ -6,6 +6,7 @@ from enigma import eServiceReference
 import Screens.MovieSelection
 
 from Screens.Screen import Screen
+from Components.Label import Label
 from Screens.MessageBox import MessageBox
 
 profile("LOAD:enigma")
@@ -49,7 +50,14 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 				"showMovies": (self.showMovies, _("Play recorded movies...")),
 				"showRadio": (self.showRadio, _("Show the radio player...")),
 				"showTv": (self.showTv, _("Show the tv player...")),
+				"showPluginBrowser": (self.showPluginBrowser, _("Show the plugins...")),
+				"openTimerList": (self.openTimerList, _("Open Timerlist...")),
 			}, prio=2)
+
+		self["key_red"] = Label()
+		self["key_yellow"] = Label()
+		self["key_blue"] = Label()
+		self["key_green"] = Label()
 
 		self.allowPiP = True
 
@@ -74,6 +82,15 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 		self.current_begin_time=0
 		assert InfoBar.instance is None, "class InfoBar is a singleton class and just one instance of this class is allowed!"
 		InfoBar.instance = self
+
+		self.onShow.append(self.doButtonsCheck)
+
+	def doButtonsCheck(self):
+		if not config.plisettings.Subservice.value:
+			self["key_green"].setText(_("Timers"))
+		else:
+			self["key_green"].setText(_("Subservices"))
+		self["key_blue"].setText(_("Extensions"))
 
 	def __onClose(self):
 		InfoBar.instance = None
@@ -137,6 +154,14 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 
 	def openMoviePlayer(self, ref):
 		self.session.open(MoviePlayer, ref, slist=self.servicelist, lastservice=self.session.nav.getCurrentlyPlayingServiceOrGroup(), infobar=self)
+
+	def showPluginBrowser(self):
+		from Screens.PluginBrowser import PluginBrowser
+		self.session.open(PluginBrowser)
+
+	def openTimerList(self):
+		from Screens.TimerEdit import TimerEditList
+		self.session.open(TimerEditList)
 
 class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBarShowMovies, InfoBarInstantRecord,
 		InfoBarAudioSelection, HelpableScreen, InfoBarNotifications, InfoBarServiceNotifications, InfoBarPVRState,

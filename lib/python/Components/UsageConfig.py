@@ -111,6 +111,9 @@ def InitUsageConfig():
 	config.usage.timeshift_path = ConfigText(default = "/media/hdd/")
 	config.usage.allowed_timeshift_paths = ConfigLocations(default = ["/media/hdd/"])
 
+	config.plisettings = ConfigSubsection()
+	config.plisettings.Subservice = ConfigYesNo(default = True)
+
 	config.oscaminfo = ConfigSubsection()
 	config.oscaminfo.showInExtensions = ConfigYesNo(default=False)
 	config.oscaminfo.userdatafromconf = ConfigYesNo(default = False)
@@ -239,7 +242,7 @@ def InitUsageConfig():
 		("5", "DVB-T/-S/-C"),
 		("127", _("No priority")) ])
 
-	config.usage.remote_fallback_enabled = ConfigYesNo(default = False);
+	config.usage.remote_fallback_enabled = ConfigYesNo(default = False)
 	config.usage.remote_fallback = ConfigText(default = _("http://IP-ADDRESS:8001"), fixed_size = False)
 	config.usage.show_timer_conflict_warning = ConfigYesNo(default = True)
 
