@@ -117,7 +117,7 @@ class IpkuninstallList(Screen):
 		self.ipklist = []
 		self.ipklist1 = []
 		if menuid == 1:
-			cmd = 'opkg list_installed | grep cam > /tmp/ipkdb'
+			cmd = 'opkg list_installed | grep ^cam > /tmp/ipkdb'
 		elif menuid == 2:
 			cmd = 'opkg list_installed | grep enigma2-plugin-drivers > /tmp/ipkdb'
 		elif menuid == 3:
