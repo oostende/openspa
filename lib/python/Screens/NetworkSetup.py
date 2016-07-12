@@ -170,13 +170,13 @@ class NetworkAdapterSelection(Screen, HelpableScreen):
 
 		if num_configured_if < 2 and fileExists("/etc/default_gw"):
 			unlink("/etc/default_gw")
-			
+
 		if fileExists("/etc/default_gw"):
 			fp = file('/etc/default_gw', 'r')
 			result = fp.read()
 			fp.close()
 			default_gw = result
-					
+
 		for x in self.adapters:
 			if x[1] == default_gw:
 				default_int = True
@@ -187,7 +187,7 @@ class NetworkAdapterSelection(Screen, HelpableScreen):
 			else:
 				active_int = False
 			self.list.append(self.buildInterfaceList(x[1],_(x[0]),default_int,active_int ))
-		
+
 		if fileExists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkWizard/networkwizard.xml")):
 			self["key_blue"].setText(_("Network wizard"))
 		self["list"].setList(self.list)
@@ -339,136 +339,6 @@ class NameserverSetup(Screen, ConfigListScreen, HelpableScreen):
 			self.createConfig()
 			self.createSetup()
 
-class IPv6Setup(Screen, ConfigListScreen, HelpableScreen):
-	def __init__(self, session):
-		Screen.__init__(self, session)
-		HelpableScreen.__init__(self)
-		Screen.setTitle(self, _("IPv6 support"))
-
-		self["key_red"] = StaticText(_("Cancel"))
-		self["key_green"] = StaticText(_("Save"))
-		self["key_blue"] = StaticText(_("Restore inetd"))
-
-		self["introduction"] = StaticText(_("Enable or disable Ipv6."))
-
-		self["OkCancelActions"] = HelpableActionMap(self, "OkCancelActions",
-			{
-			"cancel": (self.cancel, _("Exit IPv6 configuration")),
-			"ok": (self.ok, _("Activate IPv6 configuration")),
-			})
-
-		self["ColorActions"] = HelpableActionMap(self, "ColorActions",
-			{
-			"red": (self.cancel, _("Exit IPv6 configuration")),
-			"green": (self.ok, _("Activate IPv6 configuration")),
-			"blue": (self.restoreinetdData, _("Restore inetd.conf")),
-			})
-
-		self["actions"] = NumberActionMap(["SetupActions"],
-		{
-			"ok": self.ok,
-		}, -2)
-
-		self.list = []
-		ConfigListScreen.__init__(self, self.list)
-
-		fp = open('/proc/sys/net/ipv6/conf/all/disable_ipv6', 'r')
-		old_ipv6 = fp.read()
-		fp.close()
-		if int(old_ipv6) == 1:
-			self.ipv6 = False
-		else:
-			self.ipv6 = True
-		self.IPv6ConfigEntry = NoSave(ConfigYesNo(default=self.ipv6 or False))
-		self.createSetup()
-
-	def createSetup(self):
-		self.list = []
-		self.IPv6Entry = getConfigListEntry(_("IPv6 support"), self.IPv6ConfigEntry)
-		self.list.append(self.IPv6Entry)
-		self["config"].list = self.list
-		self["config"].l.setList(self.list)
-
-	def restoreinetdData(self):
-		inetdData  = "# /etc/inetd.conf:  see inetd(music) for further informations.\n"
-		inetdData += "#\n"
-		inetdData += "# Internet server configuration database\n"
-		inetdData += "#\n"
-		inetdData += "# If you want to disable an entry so it isn't touched during\n"
-		inetdData += "# package updates just comment it out with a single '#' character.\n"
-		inetdData += "#\n"
-		inetdData += "# <service_name> <sock_type> <proto> <flags> <user> <server_path> <args>\n"
-		inetdData += "#\n"
-		inetdData += "#:INTERNAL: Internal services\n"
-		inetdData += "#echo	stream	tcp	nowait	root	internal\n"
-		inetdData += "#echo	dgram	udp	wait	root	internal\n"
-		inetdData += "#chargen	stream	tcp	nowait	root	internal\n"
-		inetdData += "#chargen	dgram	udp	wait	root	internal\n"
-		inetdData += "#discard	stream	tcp	nowait	root	internal\n"
-		inetdData += "#discard	dgram	udp	wait	root	internal\n"
-		inetdData += "#daytime	stream	tcp	nowait	root	internal\n"
-		inetdData += "#daytime	dgram	udp	wait	root	internal\n"
-		inetdData += "#time	stream	tcp	nowait	root	internal\n"
-		inetdData += "#time	dgram	udp	wait	root	internal\n"
-		if self.IPv6ConfigEntry.value == True:
-			inetdData += "#ftp	stream	tcp6	nowait	root	/usr/sbin/vsftpd	vsftpd\n"
-		else:
-			inetdData += "#ftp	stream	tcp	nowait	root	/usr/sbin/vsftpd	vsftpd\n"
-		inetdData += "#ftp	stream	tcp	nowait	root	ftpd	ftpd -w /\n"
-		if self.IPv6ConfigEntry.value == True:
-			inetdData += "#telnet	stream	tcp6	nowait	root	/usr/sbin/telnetd	telnetd\n"
-		else:
-			inetdData += "#telnet	stream	tcp	nowait	root	/usr/sbin/telnetd	telnetd\n"
-		if fileExists('/usr/sbin/smbd') and self.IPv6ConfigEntry.value == True:
-			inetdData += "#microsoft-ds	stream	tcp6	nowait	root	/usr/sbin/smbd	smbd\n"
-		elif fileExists('/usr/sbin/smbd') and self.IPv6ConfigEntry.value == False:
-			inetdData += "#microsoft-ds	stream	tcp	nowait	root	/usr/sbin/smbd	smbd\n"
-		else:
-			pass
-		if fileExists('/usr/sbin/nmbd') and self.IPv6ConfigEntry.value == True:
-			inetdData += "#netbios-ns	dgram	udp6	wait	root	/usr/sbin/nmbd	nmbd\n"
-		elif fileExists('/usr/sbin/nmbd') and self.IPv6ConfigEntry.value == False:
-			inetdData += "#netbios-ns	dgram	udp	wait	root	/usr/sbin/nmbd	nmbd\n"
-		else:
-			pass
-		if fileExists('/usr/bin/streamproxy') and self.IPv6ConfigEntry.value == True:
-			inetdData += "#8001	stream	tcp6	nowait	root	/usr/bin/streamproxy	streamproxy\n"
-		elif fileExists('/usr/bin/streamproxy') and self.IPv6ConfigEntry.value == False:
-			inetdData += "#8001	stream	tcp	nowait	root	/usr/bin/streamproxy	streamproxy\n"
-		else:
-			pass
-		if fileExists('/usr/bin/transtreamproxy') and self.IPv6ConfigEntry.value == True:
-			inetdData += "8002	stream	tcp6	nowait	root	/usr/bin/transtreamproxy	transtreamproxy\n"
-		elif fileExists('/usr/bin/transtreamproxy') and self.IPv6ConfigEntry.value == False:
-			inetdData += "8002	stream	tcp	nowait	root	/usr/bin/transtreamproxy	transtreamproxy\n"
-		else:
-			pass
-		fd = file("/etc/inetd.conf", 'w')
-		fd.write(inetdData)
-		fd.close()
-		self.session.open(MessageBox, _("Successfully restored /etc/inetd.conf!"), type = MessageBox.TYPE_INFO,timeout = 10 )
-
-	def ok(self):
-		ipv6 = '/etc/enigma2/ipv6'
-		fp = open('/proc/sys/net/ipv6/conf/all/disable_ipv6', 'w')
-		if self.IPv6ConfigEntry.value == False:
-			fp.write("1")
-			f = open(ipv6,'w')
-			f.write("1")
-			f.close()
-		else:
-			fp.write("0")
-			os.system("rm -R "+ipv6)
-		fp.close()
-		self.restoreinetdData()
-		self.close()
-
-	def run(self):
-		self.ok()
-
-	def cancel(self):
-		self.close()
-
 class AdapterSetup(Screen, ConfigListScreen, HelpableScreen):
 	def __init__(self, session, networkinfo, essid=None):
 		Screen.__init__(self, session)
@@ -564,7 +434,7 @@ class AdapterSetup(Screen, ConfigListScreen, HelpableScreen):
 			self["IP"].setText(_("N/A"))
 		if self.netmaskConfigEntry.getText() is not None:
 			if self.netmaskConfigEntry.getText() == "0.0.0.0":
-					self["Mask"].setText(_("N/A"))
+				self["Mask"].setText(_("N/A"))
 			else:
 				self["Mask"].setText(self.netmaskConfigEntry.getText())
 		else:
@@ -676,7 +546,7 @@ class AdapterSetup(Screen, ConfigListScreen, HelpableScreen):
 				self.list.append(self.gatewayEntry)
 				if self.hasGatewayConfigEntry.getValue():
 					self.list.append(getConfigListEntry(_('Gateway'), self.gatewayConfigEntry))
-			havewol = False	
+			havewol = False
 			if SystemInfo["WakeOnLAN"] and not getBoxType() in ('et10000', 'gb800seplus', 'gb800ueplus', 'gbultrase', 'gbultraue', 'gbipbox', 'gbquad', 'gbx1', 'gbx3'):
 				havewol = True
 			if getBoxType() == 'et10000' and self.iface == 'eth0':
@@ -999,8 +869,6 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 			self.session.open(NetworkAdapterTest,self.iface)
 		if self["menulist"].getCurrent()[1] == 'dns':
 			self.session.open(NameserverSetup)
-		if self["menulist"].getCurrent()[1] == 'ipv6':
-			self.session.open(IPv6Setup)
 		if self["menulist"].getCurrent()[1] == 'scanwlan':
 			try:
 				from Plugins.SystemPlugins.WirelessLan.plugin import WlanScan
@@ -1063,8 +931,6 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 			self["description"].setText(_("Use the network wizard to configure your Network\n" ) + self.oktext )
 		if self["menulist"].getCurrent()[1][0] == 'extendedSetup':
 			self["description"].setText(_(self["menulist"].getCurrent()[1][1]) + self.oktext )
-		if self["menulist"].getCurrent()[1] == 'ipv6':
-			self["description"].setText(_("Enable/Disable IPv6 support of your %s %s.\n" ) % (getMachineBrand(), getMachineName()) + self.oktext )
 		item = self["menulist"].getCurrent()
 		if item:
 			name = str(self["menulist"].getCurrent()[0])
@@ -1081,7 +947,7 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 		self["IFtext"].setText(_("Network:"))
 		self["IF"].setText(iNetwork.getFriendlyAdapterName(self.iface))
 		self["Statustext"].setText(_("Link:"))
-		
+
 		if iNetwork.isWirelessInterface(self.iface):
 			try:
 				from Plugins.SystemPlugins.WirelessLan.Wlan import iStatus
@@ -1123,9 +989,6 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 
 		if fileExists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkWizard/networkwizard.xml")):
 			menu.append((_("Network wizard"), "openwizard"))
-		if getBoxType() not in ('DUMMY') and self.iface == 'eth0':
-			# DISABLE IPv6 SUPPORT 
-			menu.append((_("Enable/Disable IPv6"), "ipv6"))
 
 		return menu
 
@@ -1570,10 +1433,10 @@ class NetworkAdapterTest(Screen):
 			try:
 				from Plugins.SystemPlugins.WirelessLan.Wlan import iStatus
 			except:
-					self["Network"].setForegroundColorNum(1)
-					self["Network"].setText(_("disconnected"))
-					self["NetworkInfo_Check"].setPixmapNum(1)
-					self["NetworkInfo_Check"].show()
+				self["Network"].setForegroundColorNum(1)
+				self["Network"].setText(_("disconnected"))
+				self["NetworkInfo_Check"].setPixmapNum(1)
+				self["NetworkInfo_Check"].show()
 			else:
 				iStatus.getDataForInterface(self.iface,self.getInfoCB)
 		else:
@@ -2518,82 +2381,6 @@ class NetworkSambaLog(Screen):
 			f.close()
 			remove('/tmp/tmp.log')
 		self['infotext'].setText(strview)
-
-class InetdRecovery(Screen, ConfigListScreen):
-	def __init__(self, session):
-		Screen.__init__(self, session)
-		Screen.setTitle(self, _("Inetd recovery"))
-		
-		self["key_red"] = Label(_("Cancel"))
-		self["key_blue"] = Label(_("Recover"))
-
-		self.list = []
-		
-		self.ipv6 = NoSave(ConfigYesNo(default=False))
-		self.list.append(getConfigListEntry(_("IPv6"), self.ipv6))
-		
-		ConfigListScreen.__init__(self, self.list)
-
-		self["OkCancelActions"] = HelpableActionMap(self, "OkCancelActions", {
-			"cancel": (self.close, _("exit inetd recovery"))
-		})
-		self["ColorActions"] = HelpableActionMap(self, "ColorActions", {
-			"red": (self.close, _("exit inetd recovery")),
-			"blue": (self.keyBlue, _("recover inetd")),
-		})
-
-	def keyBlue(self):
-		sockTypetcp = "tcp"
-		sockTypeudp = "udp"
-		if self.ipv6.value:
-			sockTypetcp = "tcp6"
-			sockTypeudp = "udp6"
-			
-		inetdData  = "# /etc/inetd.conf:  see inetd(8) for further informations.\n"
-		inetdData += "#\n"
-		inetdData += "# Internet server configuration database\n"
-		inetdData += "#\n"
-		inetdData += "# If you want to disable an entry so it isn't touched during\n"
-		inetdData += "# package updates just comment it out with a single '#' character.\n"
-		inetdData += "#\n"
-		inetdData += "# <service_name> <sock_type> <proto> <flags> <user> <server_path> <args>\n"
-		inetdData += "#\n"
-		inetdData += "#:INTERNAL: Internal services\n"
-		inetdData += "#echo	stream	" + sockTypetcp + "	nowait	root	internal\n"
-		inetdData += "#echo	dgram	" + sockTypeudp + "	wait	root	internal\n"
-		inetdData += "#chargen	stream	" + sockTypetcp + "	nowait	root	internal\n"
-		inetdData += "#chargen	dgram	" + sockTypeudp + "	wait	root	internal\n"
-		inetdData += "#discard	stream	" + sockTypetcp + "	nowait	root	internal\n"
-		inetdData += "#discard	dgram	" + sockTypeudp + "	wait	root	internal\n"
-		inetdData += "#daytime	stream	" + sockTypetcp + "	nowait	root	internal\n"
-		inetdData += "#daytime	dgram	" + sockTypeudp + "	wait	root	internal\n"
-		inetdData += "#time	stream	tcp	nowait	root	internal\n"
-		inetdData += "#time	dgram	" + sockTypeudp + "	wait	root	internal\n"
-		inetdData += "#ftp	stream	" + sockTypetcp + "	nowait	root	/usr/sbin/vsftpd	vsftpd\n"
-		inetdData += "#ftp	stream	" + sockTypetcp + "	nowait	root	ftpd	ftpd -w /\n"
-		inetdData += "#telnet	stream	" + sockTypetcp + "	nowait	root	/usr/sbin/telnetd	telnetd\n"
-		if fileExists('/usr/sbin/smbd'):
-			inetdData += "#microsoft-ds	stream	" + sockTypetcp + "	nowait	root	/usr/sbin/smbd	smbd\n"
-		if fileExists('/usr/sbin/nmbd'):
-			inetdData += "#netbios-ns	dgram	" + sockTypeudp + "	wait	root	/usr/sbin/nmbd	nmbd\n"
-		if fileExists('/usr/bin/streamproxy'):
-			inetdData += "#8001	stream	" + sockTypetcp + "	nowait	root	/usr/bin/streamproxy	streamproxy\n"
-		if getBoxType() in ('gbquad', 'gbquadplus'):
-			inetdData += "8002	stream	" + sockTypetcp + "	nowait	root	/usr/bin/transtreamproxy	transtreamproxy\n"
-
-		fd = file("/etc/inetd.conf", 'w')
-		fd.write(inetdData)
-		fd.close()
-		self.inetdRestart()
-
-		self.session.open(MessageBox, _("Successfully restored /etc/inetd.conf!"), type = MessageBox.TYPE_INFO,timeout = 10)
-		self.close()
-
-	def inetdRestart(self):
-		if fileExists("/etc/init.d/inetd"):
-			os.system("/etc/init.d/inetd restart")
-		elif fileExists("/etc/init.d/inetd.busybox"):
-			os.system("/etc/init.d/inetd.busybox restart")
 
 class NetworkServicesSummary(Screen):
 	def __init__(self, session, parent):
