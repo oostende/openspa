@@ -1629,6 +1629,102 @@ class NetworkMountsMenu(Screen,HelpableScreen):
 				menu.append((menuEntryName,self.extendedSetup))
 		return menu
 
+class NetworkFtp(Screen):
+	skin = """
+		<screen position="center,center" size="560,310" >
+			<widget name="lab1" position="20,90" size="150,30" font="Regular;20" valign="center" transparent="0"/>
+			<widget name="labactive" position="180,90" size="250,30" font="Regular;20" valign="center" transparent="0"/>
+			<widget name="lab2" position="20,160" size="150,30" font="Regular;20" valign="center" transparent="0"/>
+			<widget name="labstop" position="180,160" size="100,30" font="Regular;20" valign="center" halign="center" backgroundColor="red"/>
+			<widget name="labrun" position="180,160" size="100,30" zPosition="1" font="Regular;20" valign="center"  halign="center" backgroundColor="green"/>
+			<ePixmap pixmap="skin_default/buttons/red.png" position="0,260" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/green.png" position="140,260" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/yellow.png" position="280,260" size="140,40" alphatest="on" />
+			<ePixmap pixmap="skin_default/buttons/blue.png" position="420,260" size="140,40" alphatest="on" />
+			<widget name="key_red" position="0,260" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
+			<widget name="key_green" position="140,260" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
+			<widget name="key_yellow" position="280,260" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
+			<widget name="key_blue" position="420,260" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#18188b" transparent="1" />
+		</screen>"""
+
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		Screen.setTitle(self, _("FTP Setup"))
+		#self.skinName = "NetworkSamba"
+		self.onChangedEntry = [ ]
+		self['lab1'] = Label(_("Autostart:"))
+		self['labactive'] = Label(_(_("Disabled")))
+		self['lab2'] = Label(_("Current Status:"))
+		self['labstop'] = Label(_("Stopped"))
+		self['labrun'] = Label(_("Running"))
+		self['key_green'] = Label(_("Start"))
+		self["key_red"] = Label()
+		self['key_yellow'] = Label(_("Autostart"))
+		self["key_blue"] =  Label()
+		self.Console = Console()
+		self.my_ftp_active = False
+		self.my_ftp_run = False
+		self['actions'] = ActionMap(['WizardActions', 'ColorActions'], {'ok': self.close, 'back': self.close, 'green': self.FtpStartStop, 'yellow': self.activateFtp})
+		self.Console = Console()
+		self.onLayoutFinish.append(self.updateService)
+
+	def createSummary(self):
+		return NetworkServicesSummary
+
+	def FtpStartStop(self):
+		commands = []
+		if not self.my_ftp_run:
+			commands.append('/etc/init.d/vsftpd start')
+		elif self.my_ftp_run:
+			commands.append('/etc/init.d/vsftpd stop')
+		self.Console.eBatch(commands, self.StartStopCallback, debug=True)
+
+	def StartStopCallback(self, result = None, retval = None, extra_args = None):
+		time.sleep(3)
+		self.updateService()
+
+	def activateFtp(self):
+		commands = []
+		if fileExists('/etc/rc2.d/S20vsftpd'):
+			commands.append('update-rc.d -f vsftpd remove')
+		else:
+			commands.append('update-rc.d -f vsftpd defaults')
+		self.Console.eBatch(commands, self.StartStopCallback, debug=True)
+
+	def updateService(self):
+		import process
+		p = process.ProcessList()
+		ftp_process = str(p.named('vsftpd')).strip('[]')
+		self['labrun'].hide()
+		self['labstop'].hide()
+		self['labactive'].setText(_("Disabled"))
+		self.my_ftp_active = False
+		if fileExists('/etc/rc2.d/S20vsftpd'):
+			self['labactive'].setText(_("Enabled"))
+			self['labactive'].show()
+			self.my_ftp_active = True
+
+		self.my_ftp_run = False
+		if ftp_process:
+			self.my_ftp_run = True
+		if self.my_ftp_run:
+			self['labstop'].hide()
+			self['labactive'].show()
+			self['labrun'].show()
+			self['key_green'].setText(_("Stop"))
+			status_summary = self['lab2'].text + ' ' + self['labrun'].text
+		else:
+			self['labrun'].hide()
+			self['labstop'].show()
+			self['labactive'].show()
+			self['key_green'].setText(_("Start"))
+			status_summary = self['lab2'].text + ' ' + self['labstop'].text
+		title = _("FTP Setup")
+		autostartstatus_summary = self['lab1'].text + ' ' + self['labactive'].text
+
+		for cb in self.onChangedEntry:
+			cb(title, status_summary, autostartstatus_summary)
+
 class NetworkOpenvpn(Screen):
 	skin = """
 		<screen position="center,center" size="560,310" >
