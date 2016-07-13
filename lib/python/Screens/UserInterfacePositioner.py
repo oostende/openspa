@@ -177,6 +177,7 @@ class UserInterfacePositioner(Screen, ConfigListScreen):
 		config.osd.dst_width.setValue(720)
 		config.osd.dst_top.setValue(0)
 		config.osd.dst_height.setValue(576)
+		self["config"].l.setList(self.list)
 
 	def setPreviewPosition(self):
 		size_w = getDesktop(0).size().width()
