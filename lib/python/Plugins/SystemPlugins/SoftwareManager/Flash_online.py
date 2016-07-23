@@ -5,7 +5,6 @@ from Components.ActionMap import ActionMap
 from Components.MenuList import MenuList
 from Components.FileList import FileList
 from Components.Task import Task, Job, job_manager, Condition
-from Components.Sources.StaticText import StaticText
 from Components.SystemInfo import SystemInfo
 from Screens.Console import Console
 from Screens.MessageBox import MessageBox
@@ -641,9 +640,9 @@ class DeviceBrowser(Screen, HelpableScreen):
 		HelpableScreen.__init__(self)
 		Screen.setTitle(self, _("Please select medium"))
 
-		self["key_red"] = StaticText(_("Cancel"))
-		self["key_green"] = StaticText()
-		self["message"] = StaticText(message)
+		self["key_red"] = Button(_("Cancel"))
+		self["key_green"] = Button("")
+		self["message"] = Label(message)
 
 		self.filelist = FileList(startdir, showDirectories = showDirectories, showFiles = showFiles, showMountpoints = showMountpoints, matchingPattern = matchingPattern, useServiceRef = useServiceRef, inhibitDirs = inhibitDirs, inhibitMounts = inhibitMounts, isTop = isTop, enableWrapAround = enableWrapAround, additionalExtensions = additionalExtensions)
 		self["filelist"] = self.filelist

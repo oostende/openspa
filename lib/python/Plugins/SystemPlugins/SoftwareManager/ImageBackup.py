@@ -6,8 +6,8 @@
 #################################################################################
 from enigma import getEnigmaVersionString
 from Screens.Screen import Screen
-from Components.Sources.StaticText import StaticText
 from Components.SystemInfo import SystemInfo
+from Components.Button import Button
 from Components.Label import Label
 from Components.ActionMap import ActionMap
 from Components.About import about
@@ -78,14 +78,14 @@ class ImageBackup(Screen):
 		print "[FULL BACKUP] MTDROOTFS = >%s<" %self.MTDROOTFS
 		print "[FULL BACKUP] ROOTFSTYPE = >%s<" %self.ROOTFSTYPE
 
-		self["key_green"] = StaticText("USB")
-		self["key_red"] = StaticText("HDD")
-		self["key_blue"] = StaticText(_("Exit"))
+		self["key_green"] = Button("USB")
+		self["key_red"] = Button("HDD")
+		self["key_blue"] = Button(_("Exit"))
 		if SystemInfo["HaveMultiBoot"]:
-			self["key_yellow"] = StaticText(_("STARTUP"))
+			self["key_yellow"] = Button(_("STARTUP"))
 			self["info-multi"] = Label(_("You can select with yellow the OnlineFlash Image\n or select Recovery to create a USB Disk Image for clean Install."))
 		else:
-			self["key_yellow"] = StaticText("")
+			self["key_yellow"] = Button("")
 			self["info-multi"] = Label(" ")
 
 		self["info-usb"] = Label(_("USB = Do you want to make a back-up on USB?\nThis will take between 4 and 15 minutes depending on the used filesystem and is fully automatic.\nMake sure you first insert an USB flash drive before you select USB."))
