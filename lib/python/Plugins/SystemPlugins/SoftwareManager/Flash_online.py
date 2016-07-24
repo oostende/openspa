@@ -14,6 +14,7 @@ from Screens.Console import Console
 from Screens.HelpMenu import HelpableScreen
 from Screens.TaskView import JobView
 from Tools.Downloader import downloadWithProgress
+from enigma import fbClass
 from bs4 import BeautifulSoup
 import urllib2
 import os
@@ -209,6 +210,8 @@ class doFlashImage(Screen):
 		self.onLayoutFinish.append(self.layoutFinished)
 
 	def quit(self):
+		if self.simulate or not self.List == "STARTUP":
+			fbClass.getInstance().unlock()
 		self.close()
 
 	def blue(self):
@@ -431,6 +434,8 @@ class doFlashImage(Screen):
 				message += "'"
 				cmdlist.append(message)
 				self.session.open(Console, title = text, cmdlist = cmdlist, finishedCallback = self.quit, closeOnSuccess = False)
+				if not self.simulate:
+					fbClass.getInstance().lock()
 				if not self.List == "STARTUP":
 					self.close()
 
