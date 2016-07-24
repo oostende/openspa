@@ -61,6 +61,13 @@ class CutListContextMenu(FixedMenu):
 	SHOW_ENDCUT = 1
 	SHOW_DELETECUT = 2
 
+	skin = """
+		<screen name="Menu" position="center,center" size="380,285" title="Cut">
+			<widget source="menu" render="Listbox" position="10,15" size="360,265" scrollbarMode="showOnDemand">
+				<convert type="StringList" />
+			</widget>
+		</screen>"""
+
 	def __init__(self, session, state, nearmark):
 		menu = [(_("back"), self.close)] #, (None, )]
 
@@ -100,7 +107,6 @@ class CutListContextMenu(FixedMenu):
 			menu.append((_("execute cuts (requires MovieCut plugin)"), self.callMovieCut))
 
 		FixedMenu.__init__(self, session, _("Cut"), menu)
-		self.skinName = "Menu"
 
 	def startCut(self):
 		self.close(self.RET_STARTCUT)
