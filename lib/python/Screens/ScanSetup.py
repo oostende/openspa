@@ -1432,7 +1432,10 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 				self.session.open(MessageBox, _("Nothing to scan!\nPlease setup your tuner settings before you start a service scan."), MessageBox.TYPE_ERROR)
 
 	def startScanCallback(self, answer=True):
-		if answer:
+		self.session.openWithCallback(self.repeat, MessageBox, _('Do you want to search other transponder'), MessageBox.TYPE_YESNO)
+
+	def repeat(self, answer=True):
+		if not answer:
 			self.doCloseRecursive()
 
 	def keyCancel(self):
