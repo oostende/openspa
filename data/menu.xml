@@ -13,6 +13,39 @@
 	<code> .. code .. </code>
 		"exec"s code
 -->
+		<!-- added by mpiero -->
+		<menu weight="0" level="0" text="openSPA Menu" entryID="openspa_menu" configcondition="config.misc.spazeMenuOpenspa.value">
+			<id val="openspa" />
+			<menu level="2" text="spaPANEL" entryID="spaPANEL">
+				<id val="openspa_-20" />
+			</menu>
+			<menu level="2" text="MediaCenter" entryID="MediaCenter">
+				<id val="openspa_-4" />
+			</menu>
+			<menu level="2" text="Customize" entryID="Customize">
+				<id val="openspa_-9" />
+			</menu>
+			<menu level="2" text="AddOns" entryID="AddOns">
+				<id val="openspa_-13" />
+			</menu>
+			<menu level="2" text="Tv Options" entryID="TvOptions">
+				<id val="openspa_-1" />
+			</menu>
+			<menu level="2" text="Help" entryID="MenuHelp">
+				<id val="openspa_-8" />
+			</menu>
+			<!--spaPANEL -20
+				Movies 3 - Direct
+				MediaCenter -4
+				Kodi 44 - Direct
+				Customize -9
+				AddOns -13
+				Tv Options -1
+				Help -8
+				-->
+		</menu>
+		<!--  /added by mpiero -->
+		
 		<item level="1" text="VCR scart" entryID="scart_switch" configcondition="config.usage.show_vcr_scart" requires="ScartSwitch"><code>self.session.scart.VCRSbChanged(3)</code></item>
 
 		<menu level="0" text="Information" entryID="info_screen">
