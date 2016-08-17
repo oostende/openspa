@@ -14445,3 +14445,20 @@ msgstr "Cambiar antes de Stream"
 
 msgid "zapped"
 msgstr "Cambiado"
+
+msgid "Buttons Setup"
+msgstr "Configuración de botones"
+
+msgid "openSPA Menu"
+msgstr "Menú openSPA"
+
+msgid "spaPANEL"
+msgstr "Panel SPA"
+
+msgid "AddOns"
+msgstr "Extras"
+
+msgid "Tv Options"
+msgstr "Opciones TV"
+
+
