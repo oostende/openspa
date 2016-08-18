@@ -14461,4 +14461,5 @@ msgstr "Extras"
 msgid "Tv Options"
 msgstr "Opciones TV"
 
-
+msgid "Do you want to search other transponder"
+msgstr "Quieres buscar otro transpondedor o frecuencia?"
