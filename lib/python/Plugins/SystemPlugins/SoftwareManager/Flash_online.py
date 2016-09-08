@@ -1,4 +1,4 @@
-from Plugins.SystemPlugins.Hotplug.plugin import hotplugNotifier
+﻿from Plugins.SystemPlugins.Hotplug.plugin import hotplugNotifier
 from Components.Button import Button
 from Components.Label import Label
 from Components.ActionMap import ActionMap
@@ -15,7 +15,7 @@ from Screens.HelpMenu import HelpableScreen
 from Screens.TaskView import JobView
 from Tools.Downloader import downloadWithProgress
 from enigma import fbClass
-from bs4 import BeautifulSoup
+# from bs4 import BeautifulSoup
 import urllib2
 import os
 import shutil
@@ -27,7 +27,7 @@ ROOTFSBIN = getMachineRootFile()
 KERNELBIN = getMachineKernelFile()
 
 #############################################################################################################
-urlimage = 'https://openspa.webhop.info/online'
+urlimage = 'https://openspa.webhop.info/'
 imagePath = '/media/hdd/images'
 flashPath = '/media/hdd/images/flash'
 flashTmp = '/media/hdd/images/tmp'
@@ -168,7 +168,7 @@ class FlashOnline(Screen):
 
 class doFlashImage(Screen):
 	skin = """
-	<screen position="center,center" size="560,500" title="Flash On the fly (select a image)">
+	<screen position="center,center" size="860,500" title="Flash On the fly (select a image)">
 		<ePixmap position="0,460"   zPosition="1" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 		<ePixmap position="140,460" zPosition="1" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 		<ePixmap position="280,460" zPosition="1" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
@@ -177,10 +177,11 @@ class doFlashImage(Screen):
 		<widget name="key_green" render="Label" position="140,460" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
 		<widget name="key_yellow" render="Label" position="280,460" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
 		<widget name="key_blue" render="Label" position="420,460" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="imageList" position="10,10" zPosition="1" size="450,450" font="Regular;20" scrollbarMode="showOnDemand" transparent="1" />
+		<widget name="imageList" position="10,10" zPosition="1" size="850,400" font="Regular;20" scrollbarMode="showOnDemand" transparent="1" />
+		<!--<widget name="info" position="10,410" zPosition="4" size="850,50" valign="top" halign="left" font="Regular;20" transparent="1" />-->
 	</screen>"""
 
-	def __init__(self, session, online, list=None, multi=None, devrootfs=None ):
+	def __init__(self, session, online, list=None, multi=None, devrootfs=None,spznew=False ):
 		Screen.__init__(self, session)
 		self.session = session
 
@@ -189,6 +190,7 @@ class doFlashImage(Screen):
 		self["key_red"] = Button(_("Exit"))
 		self["key_blue"] = Button("")
 		self["key_yellow"] = Button("")
+
 		self.filename = None
 		self.imagelist = []
 		self.simulate = False
@@ -198,6 +200,7 @@ class doFlashImage(Screen):
 		self.devrootfs=devrootfs
 		self.imagePath = imagePath
 		self.feedurl = urlimage
+		self.spanew=spznew
 		self["imageList"] = MenuList(self.imagelist)
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"], 
 		{
@@ -262,13 +265,17 @@ class doFlashImage(Screen):
 		if sel == None:
 			print"Nothing to select !!"
 			return
+		sel=sel.split(".zip")[0]+".zip"
 		file_name = self.imagePath + "/" + sel
 		self.filename = file_name
+		
 		self.sel = sel
 		box = self.box()
 		self.hide()
 		if self.Online:
-			url = self.feedurl + "/" + box + "/" + sel
+			url = self.feedurl + "/" + "/" + sel
+			url=url.replace("Descarga de Im&aacute;genes","Descarga de Imágenes")
+
 			print "[Flash Online] Download image: >%s<" % url
 			try:
 				u = urllib2.urlopen(url)
@@ -281,7 +288,7 @@ class doFlashImage(Screen):
 				self.session.openWithCallback(self.ImageDownloadCB, JobView, job, backgroundable = False, afterEventChangeable = False)
 			except urllib2.URLError as e:
 				print "[Flash Online] Download failed !!\n%s" % e
-				self.session.openWithCallback(self.ImageDownloadCB, MessageBox, _("Download Failed !!" + "\n%s" % e), type = MessageBox.TYPE_ERROR)
+				self.session.openWithCallback(self.ImageDownloadCB, MessageBox, _("Download Failed !!" + "\n%s\n%s" % (e,url)), type = MessageBox.TYPE_ERROR)
 				self.close()
 		else:
 			self.session.openWithCallback(self.startInstallLocal, MessageBox, _("Do you want to backup your settings now?"), default=False)
@@ -294,6 +301,7 @@ class doFlashImage(Screen):
 			self.close()
 			return
 		if len(job_manager.failed_jobs) == 0:
+
 			self.flashWithPostFlashActionMode = 'online'
 			self.flashWithPostFlashAction()
 		else:
@@ -301,6 +309,9 @@ class doFlashImage(Screen):
 
 	def flashWithPostFlashAction(self, ret = True):
 		if ret:
+			if self.spanew:
+				self.postFlashActionCallback("wizard")
+				return
 			print "flashWithPostFlashAction"
 			title =_("Please select what to do after flashing the image:\n(In addition, if it exists, a local script will be executed as well at /media/hdd/images/config/myrestore.sh)")
 			list = ((_("Flash and start installation wizard"), "wizard"),
@@ -340,6 +351,7 @@ class doFlashImage(Screen):
 		restoreAllPlugins = False
 		restoreSettingsnoPlugin = False
 		if answer is not None:
+
 			if answer[1] == "restoresettings":
 				restoreSettings   = True
 			if answer[1] == "restoresettingsnoplugin":
@@ -421,6 +433,7 @@ class doFlashImage(Screen):
 						cmdlist.append("umount -fl /newroot")
 				else:
 					cmdlist.append("%s -r -k %s > /dev/null 2>&1" % (ofgwritePath, flashTmp))
+				message = "echo -e '\n"
 				if not self.List == "STARTUP" and SystemInfo["HaveMultiBoot"]:
 					message += _('ofgwrite flashing ready.\n')
 					message += _('please press exit to go back to the menu.\n')
@@ -473,6 +486,8 @@ class doFlashImage(Screen):
 					rootfs = False
 
 	def yellow(self):
+		if self.spanew:
+			return
 		if not self.Online:
 			self.session.openWithCallback(self.DeviceBrowserClosed, DeviceBrowser, None, matchingPattern="^.*\.(zip|bin|jffs2|img)", showDirectories=True, showMountpoints=True, inhibitMounts=["/autofs/sr0/"])
 		else:
@@ -519,13 +534,16 @@ class doFlashImage(Screen):
 
 	def layoutFinished(self):
 		box = self.box()
+		self.setTitle(_("Flash On the Fly")+" ["+box+"]")
 		self.imagelist = []
+
 		if self.Online:
-			self["key_yellow"].setText("Backup&Flash")
+			if not self.spanew:
+				self["key_yellow"].setText("Backup&Flash")
 			self.feedurl = urlimage
 			self["key_blue"].setText("")
-			url = '%s/%s/index.php' % (self.feedurl,box)
-			#url = '%s/index.php?open=%s' % (self.feedurl,box)
+			url = '%s/online/getfirm.php?box=%s' % (self.feedurl,box)
+
 			try:
 				req = urllib2.Request(url)
 				response = urllib2.urlopen(req)
@@ -533,24 +551,28 @@ class doFlashImage(Screen):
 				print "URL ERROR: %s\n%s" % (e,url)
 				self["imageList"].l.setList(self.imagelist)
 				return
-
+			
 			try:
 				the_page = response.read()
 
 			except urllib2.HTTPError as e:
+				
 				print "HTTP download ERROR: %s" % e.code
 				return
 
 			lines = the_page.split('\n')
 			#tt = len(box)
 			l=lines[0]
-			self.feedurl = l.split("<a href='")[1].split(box)[0].split("'>")[0]
-			self.feedurl = BeautifulSoup(self.feedurl).encode('utf-8')
+			self.feedurl = l.split("<a href='")[1].split("openspa-")[0]
+			# self.feedurl = BeautifulSoup(self.feedurl).encode('utf-8')
+			# self.feedurl = self.feedurl.encode('utf-8')
+			# self.feedurl = urlimage+"../"
+
 			for line in lines:
-				if line.find("%s/" % box) > -1:
+				if line.find(".zip") > -1:
 					#t = line.find("<a href='%s/" % box)
 					#self.imagelist.append(line[t+tt+10:t+tt+tt+40])
-					self.imagelist.append(line.split("%s/" % box)[1].split("'>")[0])
+					self.imagelist.append(line.split(">")[1].split("<")[0])
 		else:
 			self["key_blue"].setText(_("Delete"))
 			self["key_yellow"].setText(_("Devices"))
