@@ -55,7 +55,7 @@ class FlashOnline(Screen):
 		<widget name="info-local" position="10,150" zPosition="1" size="450,200" font="Regular;20" halign="left" valign="top" transparent="1" />
 	</screen>"""
 		
-	def __init__(self, session):
+	def __init__(self, session,spznew=False):
 		Screen.__init__(self, session)
 		self.session = session
 		self.selection = 0
@@ -71,7 +71,10 @@ class FlashOnline(Screen):
 		self["key_green"] = Button("Online")
 		self["key_red"] = Button(_("Exit"))
 		self["key_blue"] = Button("Local")
-		self["info-local"] = Label(_("Local = Flash a image from local path /hdd/images"))
+		infolabel=_("Local = Flash a image from local path /hdd/images")
+		if not spznew:
+			infolabel=infolabel+"\n\n\n* "+_("Remember that you can use openSPA updates wizard plugin for install new firms and make a copy of your data")
+		self["info-local"] = Label(infolabel)
 		self["info-online"] = Label(_("Online = Download a image and flash it"))
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"], 
@@ -87,6 +90,7 @@ class FlashOnline(Screen):
 			self.multi = self.read_startup("/boot/" + self.list[self.selection]).split(".",1)[1].split(" ",1)[0]
 			self.multi = self.multi[-1:]
 			print "[Flash Online] MULTI:",self.multi
+		self.spanewfirm=spznew
 
 	def check_hdd(self):
 		if not os.path.exists("/media/hdd"):
@@ -121,13 +125,13 @@ class FlashOnline(Screen):
 
 	def blue(self):
 		if self.check_hdd():
-			self.session.open(doFlashImage, online = False, list=self.list[self.selection], multi=self.multi, devrootfs=self.devrootfs)
+			self.session.open(doFlashImage, online = False, list=self.list[self.selection], multi=self.multi, devrootfs=self.devrootfs,spznew=self.spanewfirm)
 		else:
 			self.close()
 
 	def green(self):
 		if self.check_hdd():
-			self.session.open(doFlashImage, online = True, list=self.list[self.selection], multi=self.multi, devrootfs=self.devrootfs)
+			self.session.open(doFlashImage, online = True, list=self.list[self.selection], multi=self.multi, devrootfs=self.devrootfs,spznew=self.spanewfirm)
 		else:
 			self.close()
 
