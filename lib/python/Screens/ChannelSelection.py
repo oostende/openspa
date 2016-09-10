@@ -1418,18 +1418,20 @@ class ChannelSelectionBase(Screen):
 		except:
 			pass
 		offset = 0
-		if 'userbouquet.' in bouquet.toCompareString():
-			serviceHandler = eServiceCenter.getInstance()
-			servicelist = serviceHandler.list(bouquet)
-			if not servicelist is None:
-				while True:
-					serviceIterator = servicelist.getNext()
-					if not serviceIterator.valid(): #check if end of list
-						break
-					number = serviceIterator.getChannelNum()
-					if number > 0:
-						offset = number - 1
-						break
+		try:
+			if 'userbouquet.' in bouquet.toCompareString():
+				serviceHandler = eServiceCenter.getInstance()
+				servicelist = serviceHandler.list(bouquet)
+				if not servicelist is None:
+					while True:
+						serviceIterator = servicelist.getNext()
+						if not serviceIterator.valid(): #check if end of list
+							break
+						number = serviceIterator.getChannelNum()
+						if number > 0:
+							offset = number - 1
+							break
+		except: pass
 		return offset
 
 	def recallBouquetMode(self):
