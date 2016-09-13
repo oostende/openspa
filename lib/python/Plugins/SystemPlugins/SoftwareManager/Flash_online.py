@@ -10,7 +10,6 @@ from Screens.Console import Console
 from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
 from Screens.Screen import Screen
-from Screens.Console import Console
 from Screens.HelpMenu import HelpableScreen
 from Screens.TaskView import JobView
 from Tools.Downloader import downloadWithProgress
@@ -33,6 +32,13 @@ flashPath = '/media/hdd/images/flash'
 flashTmp = '/media/hdd/images/tmp'
 ofgwritePath = '/usr/bin/ofgwrite'
 #############################################################################################################
+def debugtxt(loque):
+	if loque=="":
+		os.system("echo '' > /etc/debug_flash_online.log")
+		os.system("date >> /etc/debug_flash_online.log")
+		os.system("echo '****************************' >> /etc/debug_flash_online.log")
+	else:
+		os.system("echo '"+loque+"' >> /etc/debug_flash_online.log")
 
 def Freespace(dev):
 	statdev = os.statvfs(dev)
@@ -170,20 +176,32 @@ class FlashOnline(Screen):
 			files = "None"
 		return files
 
+from time import time
+from Components.ScrollLabel import ScrollLabel
 class doFlashImage(Screen):
 	skin = """
-	<screen position="center,center" size="860,500" title="Flash On the fly (select a image)">
-		<ePixmap position="0,460"   zPosition="1" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-		<ePixmap position="140,460" zPosition="1" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-		<ePixmap position="280,460" zPosition="1" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-		<ePixmap position="420,460" zPosition="1" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-		<widget name="key_red" render="Label" position="0,460" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_green" render="Label" position="140,460" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_yellow" render="Label" position="280,460" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_blue" render="Label" position="420,460" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="imageList" position="10,10" zPosition="1" size="850,400" font="Regular;20" scrollbarMode="showOnDemand" transparent="1" />
-		<!--<widget name="info" position="10,410" zPosition="4" size="850,50" valign="top" halign="left" font="Regular;20" transparent="1" />-->
-	</screen>"""
+	<screen name="doFlashImageSPZ" position="50,75" size="1210,570" title="Flash On the fly (select a image)">
+		<ePixmap position="0,525" zPosition="1" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+		<ePixmap position="140,525" zPosition="1" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+		<ePixmap position="280,525" zPosition="1" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+		<ePixmap position="420,525" zPosition="1" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+		<widget name="key_red" borderColor="black" borderWidth="1" render="Label" position="0,525" zPosition="2" size="140,40" valign="center" halign="center" font="Regular; 18" transparent="1" />
+		<widget name="key_green" render="Label" position="140,525" zPosition="2" size="140,40" valign="center" halign="center" font="Regular; 18" transparent="1" borderColor="black" borderWidth="1" />
+		<widget name="key_yellow" render="Label" position="280,525" zPosition="2" size="140,40" valign="center" halign="center" font="Regular; 18" transparent="1" borderColor="black" borderWidth="1" />
+		<widget name="key_blue" render="Label" position="420,525" zPosition="2" size="140,40" valign="center" halign="center" font="Regular; 18" transparent="1" borderColor="black" borderWidth="1" />
+		<widget name="imageList" position="5,10" zPosition="1" size="648,500" font="Regular; 19" scrollbarMode="showOnDemand" transparent="1" />
+		<ePixmap position="976,532" zPosition="1" size="140,40" pixmap="skin_default/buttons/key_info.png" transparent="1" alphatest="on" />
+		<widget name="key_menu" render="Label" position="1017,525" zPosition="2" size="183,40" valign="center" halign="left" font="Regular;21" transparent="1" />
+		<widget name="info" position="676,25" zPosition="4" size="522,468" valign="top" halign="left" font="Regular; 18" transparent="1" />
+	  <eLabel name="borde1" position="662,10" size="1,498" backgroundColor="foreground" zPosition="10" />
+	  <eLabel name="borde4" position="1197,10" size="1,498" backgroundColor="foreground" zPosition="10" />
+		<eLabel name="borde2" position="662,10" size="535,1" backgroundColor="foreground" zPosition="10" />
+		<eLabel name="borde3" position="662,508" size="535,1" backgroundColor="foreground" zPosition="10" />
+		
+	<eLabel name="ch1" position="677,532" size="60,28" text=" [Ch-] " foregroundColor="background" backgroundColor="foreground" font="Regular; 18" halign="center" valign="center" />
+	<eLabel name="ch2" position="752,532" size="60,28" text=" [Ch+] " foregroundColor="background" backgroundColor="foreground" font="Regular; 18" halign="center" valign="center" />
+
+</screen>"""
 
 	def __init__(self, session, online, list=None, multi=None, devrootfs=None,spznew=False ):
 		Screen.__init__(self, session)
@@ -194,7 +212,9 @@ class doFlashImage(Screen):
 		self["key_red"] = Button(_("Exit"))
 		self["key_blue"] = Button("")
 		self["key_yellow"] = Button("")
-
+		self["key_menu"] = Button(_("Changelog"))
+		self["info"] = ScrollLabel(_("Changelog")+":\n------------------------\n"+_("Downloading")+". "+_("Wait")+"...")
+		
 		self.filename = None
 		self.imagelist = []
 		self.simulate = False
@@ -205,17 +225,76 @@ class doFlashImage(Screen):
 		self.imagePath = imagePath
 		self.feedurl = urlimage
 		self.spanew=spznew
+		debugtxt("")
+		debugtxt("box: "+str(self.box()))
+		debugtxt("multi: "+str(multi))
+		debugtxt("from spanewfirms: "+str(spznew))
+		debugtxt("online: "+str(online))
+
+		self.changelog=self.getchangelog()
 		self["imageList"] = MenuList(self.imagelist)
-		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"], 
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions","EPGSelectActions","DirectionActions"], 
 		{
 			"green": self.green,
 			"yellow": self.yellow,
 			"red": self.quit,
 			"blue": self.blue,
 			"cancel": self.quit,
+			"prevBouquet": self.kright,"nextBouquet": self.kleft,
+			"info": self.kmenu,
 		}, -2)
+		self.laconsola=None
 		self.onLayoutFinish.append(self.layoutFinished)
+	def dummy(self):
+		pass
+	def getstamp(self):
+		ts=time()
+		return "&stamp="+str(ts)
 
+	def getchangelog(self):
+		erchange=""
+		newchange=""
+		from Components.Language import language
+		from os import environ
+		lang = language.getLanguage()
+		environ["LANGUAGE"] = lang[:2]
+		debugtxt("Language: "+str(environ["LANGUAGE"]))
+		
+		laurl="https://openspa.info/openspa-team/changelog.php?idioma="+str(environ["LANGUAGE"])+self.getstamp()
+		try:
+			response = urllib2.urlopen(laurl, timeout=10)
+			newchange = response.read()
+		except:
+			pass
+		debugtxt("changelog url: "+str(laurl))
+		if newchange=="":
+			newchange=_("No changelog found. Check internet conection or request support at openspa.info")
+			erchange=_("Changelog")+":\n------------------------\n"+newchange
+		else:
+			erchange=newchange
+
+		self["info"].setText(erchange)
+		
+		# self["info"].lastPage()
+		return erchange
+	def kright(self):
+		self["info"].pageDown()
+	def kleft(self):
+		self["info"].pageUp()
+	def kmenu(self):
+		cmdlist=[]
+		booklist=open("/tmp/changelog.log", "w")
+		booklist.write(self.changelog)
+		booklist.close()
+		message="cat /tmp/changelog.log"
+		cmdlist.append(message)
+		
+		self.laconsola=self.session.open(Console, title = _("Changelog"), cmdlist = cmdlist,finishedCallback = self.consolaArriba,closeOnSuccess = False)
+		
+	def consolaArriba(self):
+		self.laconsola["text"].setText(self.changelog)
+		self.laconsola.setTitle(_("Changelog")+" - "+_("Local file")+": [/tmp/changelog.log]")
+		
 	def quit(self):
 		if self.simulate or not self.List == "STARTUP":
 			fbClass.getInstance().unlock()
@@ -223,7 +302,9 @@ class doFlashImage(Screen):
 
 	def blue(self):
 		if self.Online:
+			self.getchangelog()
 			self.layoutFinished()
+			
 			return
 		sel = self["imageList"].l.getCurrentSelection()
 		if sel == None:
@@ -269,17 +350,24 @@ class doFlashImage(Screen):
 		if sel == None:
 			print"Nothing to select !!"
 			return
-		sel=sel.split(".zip")[0]+".zip"
-		file_name = self.imagePath + "/" + sel
-		self.filename = file_name
 		
-		self.sel = sel
-		box = self.box()
-		self.hide()
 		if self.Online:
-			url = self.feedurl + "/" + "/" + sel
-			url=url.replace("Descarga de Im&aacute;genes","Descarga de Imágenes")
+			if not " ->" in sel:
+				return
+			sel="openspa-"+sel.split(" ->")[0]+".zip"
+			
+			self["info"].setText("["+sel+"]\n"+_("Wait")+"...\n--------------------------\n"+self.changelog)
+			file_name = self.imagePath + "/" + sel
+			self.filename = file_name
 
+			self.hide()
+			self.sel = sel
+			box = self.box()
+			debugtxt("filename: "+str(file_name))
+			debugtxt("selection: "+str(sel))
+			url = self.feedurl + "/" + "/" + sel
+			url=url.replace("Descarga de Im&aacute;genes","Descarga de Imágenes").replace(" ","%20")
+			debugtxt("download url: "+str(url))
 			print "[Flash Online] Download image: >%s<" % url
 			try:
 				u = urllib2.urlopen(url)
@@ -292,9 +380,11 @@ class doFlashImage(Screen):
 				self.session.openWithCallback(self.ImageDownloadCB, JobView, job, backgroundable = False, afterEventChangeable = False)
 			except urllib2.URLError as e:
 				print "[Flash Online] Download failed !!\n%s" % e
+				debugtxt("ERROR DOWNLOAD: "+str(url))
 				self.session.openWithCallback(self.ImageDownloadCB, MessageBox, _("Download Failed !!" + "\n%s\n%s" % (e,url)), type = MessageBox.TYPE_ERROR)
 				self.close()
 		else:
+			self.hide()
 			self.session.openWithCallback(self.startInstallLocal, MessageBox, _("Do you want to backup your settings now?"), default=False)
 
 	def ImageDownloadCB(self, ret):
@@ -355,7 +445,7 @@ class doFlashImage(Screen):
 		restoreAllPlugins = False
 		restoreSettingsnoPlugin = False
 		if answer is not None:
-
+			debugtxt("postflashaction: "+str(answer[1]))
 			if answer[1] == "restoresettings":
 				restoreSettings   = True
 			if answer[1] == "restoresettingsnoplugin":
@@ -413,6 +503,7 @@ class doFlashImage(Screen):
 
 	def Start_Flashing(self):
 		print "Start Flashing"
+		debugtxt("flash start")
 		cmdlist = []
 		if os.path.exists(ofgwritePath):
 			text = _("Flashing: ")
@@ -540,19 +631,26 @@ class doFlashImage(Screen):
 		box = self.box()
 		self.setTitle(_("Flash On the Fly")+" ["+box+"]")
 		self.imagelist = []
-
+		
 		if self.Online:
 			if not self.spanew:
 				self["key_yellow"].setText("Backup&Flash")
 			self.feedurl = urlimage
 			self["key_blue"].setText("")
-			url = '%s/online/getfirm.php?box=%s' % (self.feedurl,box)
+			devx=""
+			if  os.path.exists("/etc/OpenSPAfo.xml"):
+				devx = open("/etc/OpenSPAfo.xml").read().replace("\n","")
 
+			url = '%s/online/getfirm.php?box=%s%s' % (self.feedurl,box,devx)
+			url=url +self.getstamp()
+			debugtxt("list images url: "+str(url))
+			print "URL ONLINE:[%s]" % (url)
 			try:
 				req = urllib2.Request(url)
 				response = urllib2.urlopen(req)
 			except urllib2.URLError as e:
 				print "URL ERROR: %s\n%s" % (e,url)
+				
 				self["imageList"].l.setList(self.imagelist)
 				return
 			
@@ -566,17 +664,24 @@ class doFlashImage(Screen):
 
 			lines = the_page.split('\n')
 			#tt = len(box)
-			l=lines[0]
-			self.feedurl = l.split("<a href='")[1].split("openspa-")[0]
+			try:
+				
+				l=lines[0]
+				self.feedurl = l.split("<a href='")[1].split("openspa-")[0]
+			except:
+				self["info"].setText("BOX: ["+box+"]\n"+_("No images found for this device. More info in openspa.info")+"\n--------------------------\n"+self.changelog)
+				self.imagelist.append("("+_("No images found for")+" "+box+")")
 			# self.feedurl = BeautifulSoup(self.feedurl).encode('utf-8')
 			# self.feedurl = self.feedurl.encode('utf-8')
 			# self.feedurl = urlimage+"../"
-
+			
 			for line in lines:
 				if line.find(".zip") > -1:
 					#t = line.find("<a href='%s/" % box)
 					#self.imagelist.append(line[t+tt+10:t+tt+tt+40])
-					self.imagelist.append(line.split(">")[1].split("<")[0])
+					name=line.split(">")[1].split("<")[0]
+					name=name.replace(" ("," ").replace(" - "," - ").replace(")","").replace("openspa-","").replace(".zip"," ->")
+					self.imagelist.append(name)
 		else:
 			self["key_blue"].setText(_("Delete"))
 			self["key_yellow"].setText(_("Devices"))
