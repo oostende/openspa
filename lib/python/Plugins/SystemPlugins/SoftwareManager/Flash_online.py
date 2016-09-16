@@ -45,6 +45,40 @@ def Freespace(dev):
 	space = (statdev.f_bavail * statdev.f_frsize) / 1024
 	print "[Flash Online] Free space on %s = %i kilobytes" %(dev, space)
 	return space
+	
+class miJobView(JobView):
+	skin = """
+		<screen name="miJobView" position="230,110" size="820,500" title="Donwload">
+		<widget source="job_name" render="Label" position="20,12" size="791,99" font="Regular; 22" />
+		<widget source="job_task" render="Label" position="20,120" size="789,83" font="Regular; 21" />
+		<widget source="job_progress" render="Progress" position="20,259" size="780,12" borderWidth="2" backgroundColor="#002211" borderColor="#99ff00" foregroundColor="#99ff00"/>
+		<widget source="job_progress" render="Label" position="19,227" size="781,32" font="Regular; 22" foregroundColor="foreground" zPosition="2" halign="center" transparent="1">
+			<convert type="ProgressToText" />
+		</widget>
+		<widget source="job_status" render="Label" position="19,298" size="782,26" font="Regular;23" />
+		<widget name="config" position="19,334" size="782,20" />
+		<widget source="cancelable" render="Pixmap" pixmap="skin_default/buttons/red.png" position="8,455" size="140,40" alphatest="on">
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="cancelable" render="FixedLabel" text="Cancel" position="8,455" zPosition="1" size="140,40" font="Regular; 18" halign="center" valign="center" backgroundColor="#9f1313" transparent="1">
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="finished" render="Pixmap" pixmap="skin_default/buttons/green.png" position="374,455" size="140,40" alphatest="on">
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="finished" render="FixedLabel" text="OK" font="Regular; 18" halign="center" valign="center" position="374,455" size="140,40" transparent="1" backgroundColor="#1f771f">
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="backgroundable" render="Pixmap" pixmap="skin_default/buttons/blue.png" position="661,455" size="140,40" alphatest="on">
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="backgroundable" render="FixedLabel" text="Continue in background" font="Regular; 18" halign="center" valign="center" position="661,455" size="140,40" transparent="1" backgroundColor="#18188b">
+			<convert type="ConditionalShowHide" />
+		</widget>
+	</screen>"""
+
+	def __init__(self, session, job, parent=None, cancelable = True, backgroundable = True, afterEventChangeable = True):
+		JobView.__init__(self, session, job, parent, cancelable, backgroundable, afterEventChangeable)
 
 class FlashOnline(Screen):
 	skin = """
@@ -180,7 +214,7 @@ from time import time
 from Components.ScrollLabel import ScrollLabel
 class doFlashImage(Screen):
 	skin = """
-	<screen name="doFlashImageSPZ" position="50,75" size="1210,570" title="Flash On the fly (select a image)">
+	<screen name="doFlashImageSPZ" position="35,75" size="1210,570" title="Flash On the fly (select a image)">
 		<ePixmap position="0,525" zPosition="1" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 		<ePixmap position="140,525" zPosition="1" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 		<ePixmap position="280,525" zPosition="1" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
@@ -217,6 +251,7 @@ class doFlashImage(Screen):
 		
 		self.filename = None
 		self.imagelist = []
+		self.urllist = {}
 		self.simulate = False
 		self.Online = online
 		self.List = list
@@ -354,6 +389,7 @@ class doFlashImage(Screen):
 		if self.Online:
 			if not " ->" in sel:
 				return
+			asel=sel
 			sel="openspa-"+sel.split(" ->")[0]+".zip"
 			
 			self["info"].setText("["+sel+"]\n"+_("Wait")+"...\n--------------------------\n"+self.changelog)
@@ -365,10 +401,44 @@ class doFlashImage(Screen):
 			box = self.box()
 			debugtxt("filename: "+str(file_name))
 			debugtxt("selection: "+str(sel))
-			url = self.feedurl + "/" + "/" + sel
+			# url = self.feedurl + "/" + "/" + sel
+			url = self.urllist[asel] + "/" + sel
 			url=url.replace("Descarga de Im&aacute;genes","Descarga de Imágenes").replace(" ","%20")
 			debugtxt("download url: "+str(url))
 			print "[Flash Online] Download image: >%s<" % url
+
+			if os.path.exists("/etc/OpenSPAfo.xml") and ("beta" in sel.lower()):
+				try:
+					temphid=open("/etc/OpenSPAfo.xml").read().replace("\n","").replace("-","").split("*")
+					lahid=temphid[1]
+					lahid2=temphid[2]
+					authinfo = urllib2.HTTPPasswordMgrWithDefaultRealm()
+					authinfo.add_password(None, url, lahid, lahid2)
+					handler = urllib2.HTTPBasicAuthHandler(authinfo)
+					myopener = urllib2.build_opener(handler)
+					opened = urllib2.install_opener(myopener)
+					debugtxt("download beta url: "+str(url)+" - "+lahid+"-"+lahid2)
+					u = urllib2.urlopen(url)
+					total_size = int(u.info().getheaders("Content-Length")[0])
+					downloaded = 0
+					CHUNK = 256 * 1024
+					print "Downloading: %s" % (total_size)
+					debugtxt("Download size: "+str(total_size))
+					with open(file_name, 'wb') as fp:
+						while True:
+							chunk = u.read(CHUNK)
+							downloaded += len(chunk)
+							debugtxt("Downloading: "+str(downloaded)+" of "+str(total_size))
+							if not chunk: break
+							fp.write(chunk)
+					print "Downloaded: %s Bytes of %s" % (downloaded, total_size)
+					debugtxt("Downloaded: "+str(downloaded)+" of "+str(total_size))
+					self.ImageDownloadCB(False)
+					return
+				except:
+					debugtxt("bad xml file")
+					return
+
 			try:
 				u = urllib2.urlopen(url)
 				f = open(file_name, 'wb')
@@ -377,7 +447,7 @@ class doFlashImage(Screen):
 				job.afterEvent = "close"
 				job_manager.AddJob(job)
 				job_manager.failed_jobs = []
-				self.session.openWithCallback(self.ImageDownloadCB, JobView, job, backgroundable = False, afterEventChangeable = False)
+				self.session.openWithCallback(self.ImageDownloadCB, miJobView, job, backgroundable = False, afterEventChangeable = False)
 			except urllib2.URLError as e:
 				print "[Flash Online] Download failed !!\n%s" % e
 				debugtxt("ERROR DOWNLOAD: "+str(url))
@@ -631,7 +701,7 @@ class doFlashImage(Screen):
 		box = self.box()
 		self.setTitle(_("Flash On the Fly")+" ["+box+"]")
 		self.imagelist = []
-		
+		self.urllist = {}
 		if self.Online:
 			if not self.spanew:
 				self["key_yellow"].setText("Backup&Flash")
@@ -639,7 +709,7 @@ class doFlashImage(Screen):
 			self["key_blue"].setText("")
 			devx=""
 			if  os.path.exists("/etc/OpenSPAfo.xml"):
-				devx = open("/etc/OpenSPAfo.xml").read().replace("\n","")
+				devx = open("/etc/OpenSPAfo.xml").read().replace("\n","").split("*")[0]
 
 			url = '%s/online/getfirm.php?box=%s%s' % (self.feedurl,box,devx)
 			url=url +self.getstamp()
@@ -681,7 +751,9 @@ class doFlashImage(Screen):
 					#self.imagelist.append(line[t+tt+10:t+tt+tt+40])
 					name=line.split(">")[1].split("<")[0]
 					name=name.replace(" ("," ").replace(" - "," - ").replace(")","").replace("openspa-","").replace(".zip"," ->")
+					self.urllist[name]=line.split("<a href='")[1].split("openspa-")[0]
 					self.imagelist.append(name)
+					
 		else:
 			self["key_blue"].setText(_("Delete"))
 			self["key_yellow"].setText(_("Devices"))
@@ -734,9 +806,11 @@ class ImageDownloadTask(Task):
 		self.download.addProgress(self.download_progress)
 		self.download.start().addCallback(self.download_finished).addErrback(self.download_failed)
 		print "[ImageDownloadTask] downloading", self.url, "to", self.path
+		debugtxt("[ImageDownloadTask]: "+str(self.url)+" to "+self.path)
 
 	def abort(self):
 		print "[ImageDownloadTask] aborting", self.url
+		debugtxt("[ImageDownloadTask]: abort")
 		if self.download:
 			self.download.stop()
 		self.aborted = True
@@ -751,12 +825,14 @@ class ImageDownloadTask(Task):
 		self.error_message = error_message
 		if error_message == "" and failure_instance is not None:
 			self.error_message = failure_instance.getErrorMessage()
+		debugtxt("[ImageDownloadTask] ERROR:"+str(self.error_message))
 		Task.processFinished(self, 1)
 
 	def download_finished(self, string=""):
 		if self.aborted:
 			self.finish(aborted = True)
 		else:
+			debugtxt("[ImageDownloadTask] FINISH")
 			Task.processFinished(self, 0)
 
 class DeviceBrowser(Screen, HelpableScreen):
