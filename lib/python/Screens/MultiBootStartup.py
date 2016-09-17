@@ -2,13 +2,12 @@ from Screens.InfoBar import InfoBar
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Components.ActionMap import ActionMap
-from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.Sources.StaticText import StaticText
 from Components import Harddisk
 from os import path, listdir, system
 
-class MultiBootStartup(ConfigListScreen, Screen):
+class MultiBootStartup(Screen):
 
 	skin = """
 	<screen name="MultiBootStartup" position="center,center" size="500,200"  flags="wfNoBorder" title="MultiBoot STARTUP Selector" backgroundColor="transparent">
