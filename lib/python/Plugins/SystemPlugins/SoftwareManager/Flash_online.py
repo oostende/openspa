@@ -13,7 +13,10 @@ from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
 from Screens.TaskView import JobView
 from Tools.Downloader import downloadWithProgress
-from enigma import fbClass
+from enigma import fbClass,getDesktop
+from Plugins.SystemPlugins.DeviceManager.HddSetup import HddSetup
+from Plugins.Extensions.spazeMenu.plugin import esHD
+from Components.Harddisk import harddiskmanager
 # from bs4 import BeautifulSoup
 import urllib2
 import os
@@ -28,10 +31,16 @@ KERNELBIN = getMachineKernelFile()
 #############################################################################################################
 urlimage = 'https://openspa.webhop.info/'
 imagePath = '/media/hdd/images'
-flashPath = '/media/hdd/images/flash'
+flashPath = imagePath + '/flash'
 flashTmp = '/media/hdd/images/tmp'
 ofgwritePath = '/usr/bin/ofgwrite'
 #############################################################################################################
+def esHD():
+	if getDesktop(0).size().width() > 1400:
+		return True
+	else:
+		return False
+
 def debugtxt(loque):
 	if loque=="":
 		os.system("echo '' > /etc/debug_flash_online.log")
@@ -48,52 +57,117 @@ def Freespace(dev):
 	
 class miJobView(JobView):
 	skin = """
-		<screen name="miJobView" position="230,110" size="820,500" title="Donwload">
-		<widget source="job_name" render="Label" position="20,12" size="791,99" font="Regular; 22" />
-		<widget source="job_task" render="Label" position="20,120" size="789,83" font="Regular; 21" />
-		<widget source="job_progress" render="Progress" position="20,259" size="780,12" borderWidth="2" backgroundColor="#002211" borderColor="#99ff00" foregroundColor="#99ff00"/>
-		<widget source="job_progress" render="Label" position="19,227" size="781,32" font="Regular; 22" foregroundColor="foreground" zPosition="2" halign="center" transparent="1">
+		<screen name="miJobView" position="230,140" size="820,380" title="Donwload">
+		<widget source="job_name" render="Label" position="19,22" size="790,50" font="Regular; 20" valign="top" halign="left" transparent="1" />
+		<widget source="job_task" render="Label" position="49,95" size="760,60" font="Regular; 21" valign="top" transparent="1" />
+		<widget source="job_progress" render="Progress" position="20,199" size="780,12" borderWidth="2" backgroundColor="#002211" borderColor="#99ff00" foregroundColor="#99ff00" />
+		<widget source="job_progress" render="Label" position="19,162" size="781,32" font="Regular; 22" foregroundColor="foreground" zPosition="2" halign="center" transparent="1">
 			<convert type="ProgressToText" />
 		</widget>
-		<widget source="job_status" render="Label" position="19,298" size="782,26" font="Regular;23" />
-		<widget name="config" position="19,334" size="782,20" />
-		<widget source="cancelable" render="Pixmap" pixmap="skin_default/buttons/red.png" position="8,455" size="140,40" alphatest="on">
+		<widget source="job_status" render="Label" position="19,223" size="782,26" font="Regular;23" transparent="1" />
+		<widget name="config" position="19,264" size="782,20" transparent="1" />
+		<widget source="cancelable" render="Pixmap" pixmap="skin_default/buttons/red.png" position="8,330" size="140,40" alphatest="on">
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<widget source="cancelable" render="FixedLabel" text="Cancel" position="8,455" zPosition="1" size="140,40" font="Regular; 18" halign="center" valign="center" backgroundColor="#9f1313" transparent="1">
+		<widget source="cancelable" render="FixedLabel" text="Cancel" position="8,330" zPosition="1" size="140,40" font="Regular; 18" halign="center" valign="center" backgroundColor="#9f1313" transparent="1">
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<widget source="finished" render="Pixmap" pixmap="skin_default/buttons/green.png" position="374,455" size="140,40" alphatest="on">
+		<widget source="finished" render="Pixmap" pixmap="skin_default/buttons/green.png" position="374,330" size="140,40" alphatest="on">
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<widget source="finished" render="FixedLabel" text="OK" font="Regular; 18" halign="center" valign="center" position="374,455" size="140,40" transparent="1" backgroundColor="#1f771f">
+		<widget source="finished" render="FixedLabel" text="OK" font="Regular; 18" halign="center" valign="center" position="374,330" size="140,40" transparent="1" backgroundColor="#1f771f">
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<widget source="backgroundable" render="Pixmap" pixmap="skin_default/buttons/blue.png" position="661,455" size="140,40" alphatest="on">
+		<widget source="backgroundable" render="Pixmap" pixmap="skin_default/buttons/blue.png" position="661,330" size="140,40" alphatest="on">
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<widget source="backgroundable" render="FixedLabel" text="Continue in background" font="Regular; 18" halign="center" valign="center" position="661,455" size="140,40" transparent="1" backgroundColor="#18188b">
+		<widget source="backgroundable" render="FixedLabel" text="Continue in background" font="Regular; 18" halign="center" valign="center" position="661,330" size="140,40" transparent="1" backgroundColor="#18188b">
 			<convert type="ConditionalShowHide" />
 		</widget>
-	</screen>"""
+	<eLabel name="flecha" position="19,96" size="85,60" text="&gt;&gt;" font="Regular; 17" valign="top" transparent="1" />
+<eLabel name="" position="19,75" size="790,1" backgroundColor="foreground" />
+</screen>"""
 
 	def __init__(self, session, job, parent=None, cancelable = True, backgroundable = True, afterEventChangeable = True):
 		JobView.__init__(self, session, job, parent, cancelable, backgroundable, afterEventChangeable)
+def chkDevices():
+	global net, mont, mediapath
+	hddmount = False    
+	net = True
+	mont=0
+	index=[]
+	i=0
+	listdev=[]
+	montados =[]
+	for p in harddiskmanager.getMountedPartitions():
+		texto=str(p.description)
+		montado=str(p.mountpoint)
+		montados.append(montado)
+		devi = str(p.device)
+		if os.path.exists('/media/hdd/'):
+			if montado=='/media/hdd/':
+				net = False
+		elif '/media/hdd' in montado:
+			hddmount = True
+		if devi != 'None': 
+			mont=mont+1
+			listdev.append(devi)
+			index.append(i)
+		i=i+1
+	if mont==1:
+		mediapath=montados[index[0]]
+	elif net and mont==0:
+		mediapath="net"
+	elif mont==0 and not net:
+		mediapath = "nothing"
+	elif mont>1:
+		mediapath = "Try device"
+	imagePath = mediapath+"images"
+	return mediapath, imagePath
 
 class FlashOnline(Screen):
-	skin = """
-	<screen position="center,center" size="560,400" title="Flash On the Fly">
-		<ePixmap position="0,360"   zPosition="1" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
-		<ePixmap position="140,360" zPosition="1" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-		<ePixmap position="280,360" zPosition="1" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
-		<ePixmap position="420,360" zPosition="1" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
-		<widget name="key_red" render="Label" position="0,360" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_green" render="Label" position="140,360" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_yellow" render="Label" position="280,360" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="key_blue" render="Label" position="420,360" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
-		<widget name="info-online" position="10,30" zPosition="1" size="450,100" font="Regular;20" halign="left" valign="top" transparent="1" />
-		<widget name="info-local" position="10,150" zPosition="1" size="450,200" font="Regular;20" halign="left" valign="top" transparent="1" />
-	</screen>"""
+	if esHD():
+		skin = """
+		<screen position="center,center" size="840,600" title="Flash On the Fly">
+		<ePixmap position="0,540" zPosition="1" size="210,60" pixmap="skin_default/buttons/red_HD.png" transparent="1" alphatest="on" />
+		<ePixmap position="210,540" zPosition="1" size="210,60" pixmap="skin_default/buttons/green_HD.png" transparent="1" alphatest="on" />
+		<ePixmap position="420,540" zPosition="1" size="210,60" pixmap="skin_default/buttons/yellow_HD.png" transparent="1" alphatest="on" />
+		<ePixmap position="630,540" zPosition="1" size="210,60" pixmap="skin_default/buttons/blue_HD.png" transparent="1" alphatest="on" />
+		<widget name="key_red" render="Label" position="0,540" zPosition="2" size="210,60" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
+		<widget name="key_green" render="Label" position="210,540" zPosition="2" size="210,60" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
+		<widget name="key_yellow" render="Label" position="420,540" zPosition="2" size="210,60" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
+		<widget name="key_blue" render="Label" position="630,540" zPosition="2" size="210,60" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
+		<widget name="info-online" position="15,45" zPosition="1" size="675,150" font="Regular;20" halign="left" valign="top" transparent="1" />
+		<widget name="info-local" position="15,225" zPosition="1" size="675,300" font="Regular;20" halign="left" valign="top" transparent="1" />
+		</screen>"""
+	else:
+		skin = """
+		<screen name="FlashOnline" position="center,center" size="780,520" title="Flash On the Fly" backgroundColor="background">
+		<ePixmap position="0,480" zPosition="1" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+		<ePixmap position="140,480" zPosition="1" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+		<ePixmap position="280,480" zPosition="1" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" name="kye" />
+		<ePixmap position="420,480" zPosition="1" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" />
+		<widget name="key_red" render="Label" position="0,480" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" borderColor="black" borderWidth="1" />
+		<widget name="key_green" render="Label" position="140,480" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" borderColor="black" borderWidth="1" />
+		<widget name="key_yellow" render="Label" position="280,480" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" borderColor="black" borderWidth="1" />
+		<widget name="key_blue" render="Label" position="420,480" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" borderColor="black" borderWidth="1" />
+		<widget name="info-online" position="20,18" zPosition="5" size="740,60" font="Regular;20" halign="left" valign="top" transparent="1" />
+		<widget name="info-local" position="20,120" zPosition="5" size="740,187" font="Regular;20" halign="left" valign="top" transparent="1" />
+			<eLabel name="fondo1" position="10,9" size="760,80" zPosition="2" />
+			<eLabel name="borde1" position="9,8" size="762,82" zPosition="0" backgroundColor="foreground" />
+			<eLabel name="fondo2" position="10,110" size="760,209" zPosition="2" />
+			<eLabel name="borde2" position="9,109" size="762,211" zPosition="0" backgroundColor="foreground" />
+		<widget font="Regular; 22" halign="left" position="8,335" render="Label" size="755,27" source="global.CurrentTime" transparent="1">
+			<convert type="spaSysInfo">Version</convert>
+		</widget>
+    <widget font="Regular; 18" halign="right" position="10,378" render="Label" size="754,28" source="session.RecordState" transparent="1" noWrap="1" borderColor="#000000" borderWidth="1">
+      <convert type="spaSysInfo">MemTotalLong</convert>
+    </widget>
+	    <widget font="Regular; 18" halign="right" position="10,410" render="Label" size="754,61" source="session.CurrentService" transparent="1" valign="top" borderColor="#000000" borderWidth="1">
+      <convert type="spaSysInfo">DiskAllSleep</convert>
+      <!-- Flash -->
+    </widget>
+</screen>"""
 		
 	def __init__(self, session,spznew=False):
 		Screen.__init__(self, session)
@@ -111,12 +185,7 @@ class FlashOnline(Screen):
 		self["key_green"] = Button("Online")
 		self["key_red"] = Button(_("Exit"))
 		self["key_blue"] = Button("Local")
-		infolabel=_("Local = Flash a image from local path /hdd/images")
-		if not spznew:
-			infolabel=infolabel+"\n\n\n* "+_("Remember that you can use openSPA updates wizard plugin for install new firms and make a copy of your data")
-		self["info-local"] = Label(infolabel)
-		self["info-online"] = Label(_("Online = Download a image and flash it"))
-
+		
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"], 
 		{
 			"blue": self.blue,
@@ -131,31 +200,46 @@ class FlashOnline(Screen):
 			self.multi = self.multi[-1:]
 			print "[Flash Online] MULTI:",self.multi
 		self.spanewfirm=spznew
+		mediapath = chkDevices()[0]
+		imagePath = chkDevices()[1]
+		self.mediapath = mediapath
+		self.imagePath = imagePath
+		self.flashPath = self.imagePath + '/flash'
+		global flashTmp
+		flashTmp = self.imagePath + '/tmp'
+		if mont <= 1 :
+			infolabel=_("Local = Flash a image from local path ") + mediapath + _("images")
+		else:
+			infolabel=_("Local = Flash a image from local path device. Try device after pressing blue button")
+		if not spznew:
+			infolabel=infolabel+"\n\n****************************\n\n"+_("Remember that you can use openSPA updates wizard plugin for install new firms and make a copy of your data")
+		self["info-local"] = Label(infolabel)
+		self["info-online"] = Label(_("Online = Download a image and flash it"))
+
 
 	def check_hdd(self):
-		if not os.path.exists("/media/hdd"):
-			self.session.open(MessageBox, _("No /hdd found !!\nPlease make sure you have a HDD mounted.\n\nExit plugin."), type = MessageBox.TYPE_ERROR)
+		
+		if not os.path.exists(self.mediapath):
+			self.session.open(MessageBox, _("No device found !!\nPlease make sure you have a device mounted.\n\nExit plugin."), type = MessageBox.TYPE_ERROR)
 			return False
-		if Freespace('/media/hdd') < 300000:
-			self.session.open(MessageBox, _("Not enough free space on /hdd !!\nYou need at least 300Mb free space.\n\nExit plugin."), type = MessageBox.TYPE_ERROR)
+		if Freespace(self.mediapath) < 300000:
+			self.session.open(MessageBox, _("Not enough free space on device !!\nYou need at least 300Mb free space.\n\nExit plugin."), type = MessageBox.TYPE_ERROR)
 			return False
 		if not os.path.exists(ofgwritePath):
 			self.session.open(MessageBox, _('ofgwrite not found !!\nPlease make sure you have ofgwrite installed in /usr/bin/ofgwrite.\n\nExit plugin.'), type = MessageBox.TYPE_ERROR)
 			return False
-
-		if not os.path.exists(imagePath):
+		if not os.path.exists(self.imagePath):
 			try:
-				os.mkdir(imagePath)
+				os.mkdir(self.imagePath)
 			except:
 				pass
-
-		if os.path.exists(flashPath):
+		if os.path.exists(self.flashPath):
 			try:
-				os.system('rm -rf ' + flashPath)
+				os.system('rm -rf ' + self.flashPath)
 			except:
 				pass
 		try:
-			os.mkdir(flashPath)
+			os.mkdir(self.flashPath)
 		except:
 			pass
 		return True
@@ -164,17 +248,46 @@ class FlashOnline(Screen):
 		self.close()
 
 	def blue(self):
-		if self.check_hdd():
-			self.session.open(doFlashImage, online = False, list=self.list[self.selection], multi=self.multi, devrootfs=self.devrootfs,spznew=self.spanewfirm)
-		else:
-			self.close()
-
+		if mont == 1:
+			if self.check_hdd():
+				self.session.open(doFlashImage, online = False, list=self.list[self.selection], multi=self.multi, devrootfs=self.devrootfs,spznew=self.spanewfirm, mediapath=self.mediapath, imagePath = self.imagePath, flashPath = self.flashPath)
+			else:
+				self.close()
+		elif mont > 1:
+			self.session.openWithCallback(self.gochkblue,getDevices)
+			
 	def green(self):
+		if mont == 1:
+			if self.check_hdd():
+				self.session.open(doFlashImage, online = True, list=self.list[self.selection], multi=self.multi, devrootfs=self.devrootfs,spznew=self.spanewfirm, mediapath=self.mediapath, imagePath = self.imagePath, flashPath = self.flashPath)
+			else:
+				self.close()
+		elif mont > 1:
+			self.session.openWithCallback(self.gochk,getDevices)
+			
+	def gochk(self,mediapath):
+		self.mediapath=mediapath
+		imagePath = mediapath + "images"
+		self.imagePath = imagePath
+		flashPath = imagePath + '/flash'
+		self.flashPath = flashPath
 		if self.check_hdd():
-			self.session.open(doFlashImage, online = True, list=self.list[self.selection], multi=self.multi, devrootfs=self.devrootfs,spznew=self.spanewfirm)
+			self.session.open(doFlashImage, online = True, list=self.list[self.selection], multi=self.multi, devrootfs=self.devrootfs,spznew=self.spanewfirm, mediapath=self.mediapath, imagePath = self.imagePath, flashPath = self.flashPath)
+		else:
+			self.close()
+		
+	def gochkblue(self,mediapath):
+		self.mediapath=mediapath
+		imagePath = mediapath + "images"
+		self.imagePath = imagePath
+		flashPath = imagePath + '/flash'
+		self.flashPath = flashPath
+		if self.check_hdd():
+			self.session.open(doFlashImage, online = False, list=self.list[self.selection], multi=self.multi, devrootfs=self.devrootfs,spznew=self.spanewfirm, mediapath=self.mediapath, imagePath = self.imagePath, flashPath = self.flashPath)
 		else:
 			self.close()
 
+			
 	def yellow(self):
 		if SystemInfo["HaveMultiBoot"]:
 			self.selection = self.selection + 1
@@ -209,12 +322,105 @@ class FlashOnline(Screen):
 		else:
 			files = "None"
 		return files
-
+		
+class getDevices(Screen):
+	if esHD():
+		skin = """
+		<screen name="getDevices" position="center,center" size="840,600" title="Try device">
+			<ePixmap position="0,540" zPosition="1" size="210,60" pixmap="skin_default/buttons/red_HD.png" transparent="1" alphatest="on" />
+			<ePixmap position="210,540" zPosition="1" size="210,60" pixmap="skin_default/buttons/green_HD.png" transparent="1" alphatest="on" />
+			<widget name="key_red" render="Label" position="0,540" zPosition="2" size="210,60" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
+			<widget name="key_green" render="Label" position="210,540" zPosition="2" size="210,60" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
+			<widget name="deviceList" position="13,24" zPosition="1" size="804,253" font="Regular; 19" scrollbarMode="showOnDemand" transparent="1" itemHeight="40" />
+			<widget name="info-label" position="13,325" zPosition="1" size="804,187" font="Regular;20" halign="left" valign="top" transparent="1" />
+			<eLabel name="" position="13,298" size="804,1" backgroundColor="grey" />
+		</screen>"""
+	else:
+		skin = """
+		<screen name="getDevices" position="center,center" size="560,400" title="Try device">
+			<ePixmap position="0,360" zPosition="1" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
+			<ePixmap position="140,360" zPosition="1" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
+			<widget name="key_red" render="Label" position="0,360" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
+			<widget name="key_green" render="Label" position="140,360" zPosition="2" size="140,40" valign="center" halign="center" font="Regular;21" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
+			<widget name="deviceList" position="9,16" zPosition="1" size="536,169" font="Regular; 19" scrollbarMode="showOnDemand" transparent="1" />
+			<widget name="info-label" position="9,217" zPosition="1" size="536,125" font="Regular;20" halign="left" valign="top" transparent="1" />
+			<eLabel name="" position="9,199" size="536,1" backgroundColor="grey" />
+		</screen>"""
+		
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		self.session = session
+		Screen.setTitle(self, _("Try device"))
+		self["key_green"] = Button(_("Check mounts"))
+		self["key_red"] = Button(_("Exit"))
+		infolabel=_("By default /media/hdd is selected.\nSelect /media/usb if you want to change device")
+		self["info-label"] = Label(infolabel)
+		self.devicelist = []
+		self["deviceList"] = MenuList(self.devicelist)
+		
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"], 
+		{
+			"ok": self.ok,
+			"green": self.green,
+			"red": self.quit,
+			"cancel": self.quit,
+		}, -2)
+		self.onLayoutFinish.append(self.getList)
+	
+	def getList(self):
+		self.devicelist = []
+		for p in harddiskmanager.getMountedPartitions():
+			texto=str(p.description)
+			montado=str(p.mountpoint)
+			devi = str(p.device)
+			if devi != 'None':
+				self.devicelist.append(texto + ' - ' + montado)
+		self["deviceList"].l.setList(self.devicelist)
+	
+	def ok(self):
+		sel = self["deviceList"].l.getCurrentSelection()
+		mediapath = sel.split(' - ')[1]
+		self.close(mediapath)
+		
+	def green(self):
+		self.session.openWithCallback(self.back,HddSetup)
+	
+	def back(self):
+		pass
+		
+	def quit(self):
+		for x in self["deviceList"].list:
+			x[1].cancel()
+		self.close('Try device')
+		
 from time import time
 from Components.ScrollLabel import ScrollLabel
 class doFlashImage(Screen):
-	skin = """
-	<screen name="doFlashImageSPZ" position="35,75" size="1210,570" title="Flash On the fly (select a image)">
+	if esHD():
+		skin = """
+		<screen name="doFlashImageSPZ" position="75,112" size="1815,855" title="Flash On the fly (select a image)">
+		<ePixmap position="0,787" zPosition="1" size="210,60" pixmap="skin_default/buttons/red_HD.png" transparent="1" alphatest="on" />
+		<ePixmap position="210,787" zPosition="1" size="210,60" pixmap="skin_default/buttons/green_HD.png" transparent="1" alphatest="on" />
+		<ePixmap position="420,787" zPosition="1" size="210,60" pixmap="skin_default/buttons/yellow_HD.png" transparent="1" alphatest="on" />
+		<ePixmap position="630,787" zPosition="1" size="210,60" pixmap="skin_default/buttons/blue_HD.png" transparent="1" alphatest="on" />
+		<widget name="key_red" borderColor="black" borderWidth="1" render="Label" position="0,787" zPosition="2" size="210,60" valign="center" halign="center" font="Regular; 18" transparent="1" />
+		<widget name="key_green" render="Label" position="210,787" zPosition="2" size="210,60" valign="center" halign="center" font="Regular; 18" transparent="1" borderColor="black" borderWidth="1" />
+		<widget name="key_yellow" render="Label" position="420,787" zPosition="2" size="210,60" valign="center" halign="center" font="Regular; 18" transparent="1" borderColor="black" borderWidth="1" />
+		<widget name="key_blue" render="Label" position="630,787" zPosition="2" size="210,60" valign="center" halign="center" font="Regular; 18" transparent="1" borderColor="black" borderWidth="1" />
+		<widget name="imageList" position="7,15" zPosition="1" size="972,750" font="Regular; 19" scrollbarMode="showOnDemand" transparent="1" itemHeight="40"/>
+		<ePixmap position="1464,798" zPosition="1" size="210,60" pixmap="skin_default/buttons/key_info.png" transparent="1" alphatest="on" />
+		<widget name="key_menu" position="1525,787" zPosition="2" size="274,60" valign="center" halign="left" font="Regular;21" transparent="1" />
+		<widget name="info" position="1014,37" zPosition="4" size="783,702" valign="top" halign="left" font="Regular; 18" transparent="1" />
+		<eLabel name="borde1" position="993,15" size="1,747" backgroundColor="foreground" zPosition="10" />
+		<eLabel name="borde4" position="1795,15" size="1,747" backgroundColor="foreground" zPosition="10" />
+		<eLabel name="borde2" position="993,15" size="802,1" backgroundColor="foreground" zPosition="10" />
+		<eLabel name="borde3" position="993,762" size="802,1" backgroundColor="foreground" zPosition="10" />
+		<eLabel name="ch1" position="1015,798" size="90,42" text=" [Ch-] " foregroundColor="background" backgroundColor="foreground" font="Regular; 18" halign="center" valign="center" />
+		<eLabel name="ch2" position="1128,798" size="90,42" text=" [Ch+] " foregroundColor="background" backgroundColor="foreground" font="Regular; 18" halign="center" valign="center" />
+	</screen>"""
+	else:
+		skin = """
+		<screen name="doFlashImageSPZ" position="50,75" size="1210,570" title="Flash On the fly (select a image)">
 		<ePixmap position="0,525" zPosition="1" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 		<ePixmap position="140,525" zPosition="1" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
 		<ePixmap position="280,525" zPosition="1" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
@@ -223,21 +429,24 @@ class doFlashImage(Screen):
 		<widget name="key_green" render="Label" position="140,525" zPosition="2" size="140,40" valign="center" halign="center" font="Regular; 18" transparent="1" borderColor="black" borderWidth="1" />
 		<widget name="key_yellow" render="Label" position="280,525" zPosition="2" size="140,40" valign="center" halign="center" font="Regular; 18" transparent="1" borderColor="black" borderWidth="1" />
 		<widget name="key_blue" render="Label" position="420,525" zPosition="2" size="140,40" valign="center" halign="center" font="Regular; 18" transparent="1" borderColor="black" borderWidth="1" />
-		<widget name="imageList" position="5,10" zPosition="1" size="648,500" font="Regular; 19" scrollbarMode="showOnDemand" transparent="1" />
+		<widget name="imageList" position="9,41" zPosition="1" size="645,475" font="Regular; 19" scrollbarMode="showOnDemand" transparent="1" />
 		<ePixmap position="976,532" zPosition="1" size="140,40" pixmap="skin_default/buttons/key_info.png" transparent="1" alphatest="on" />
-		<widget name="key_menu" render="Label" position="1017,525" zPosition="2" size="183,40" valign="center" halign="left" font="Regular;21" transparent="1" />
-		<widget name="info" position="676,25" zPosition="4" size="522,468" valign="top" halign="left" font="Regular; 18" transparent="1" />
-	  <eLabel name="borde1" position="662,10" size="1,498" backgroundColor="foreground" zPosition="10" />
-	  <eLabel name="borde4" position="1197,10" size="1,498" backgroundColor="foreground" zPosition="10" />
-		<eLabel name="borde2" position="662,10" size="535,1" backgroundColor="foreground" zPosition="10" />
-		<eLabel name="borde3" position="662,508" size="535,1" backgroundColor="foreground" zPosition="10" />
-		
-	<eLabel name="ch1" position="677,532" size="60,28" text=" [Ch-] " foregroundColor="background" backgroundColor="foreground" font="Regular; 18" halign="center" valign="center" />
-	<eLabel name="ch2" position="752,532" size="60,28" text=" [Ch+] " foregroundColor="background" backgroundColor="foreground" font="Regular; 18" halign="center" valign="center" />
+		<widget name="key_menu" position="1017,525" zPosition="2" size="183,40" valign="center" halign="left" font="Regular;21" transparent="1" />
+		<widget name="info" position="676,30" zPosition="4" size="522,468" valign="top" halign="left" font="Regular; 18" transparent="1" />
+		<eLabel name="borde1" position="662,15" size="1,498" backgroundColor="foreground" zPosition="10" />
+		<eLabel name="borde4" position="1197,15" size="1,498" backgroundColor="foreground" zPosition="10" />
+		<eLabel name="borde2" position="662,15" size="535,1" backgroundColor="foreground" zPosition="10" />
+		<eLabel name="borde3" position="662,513" size="535,1" backgroundColor="foreground" zPosition="10" />
 
+		<eLabel name="ch1" position="677,532" size="60,28" text=" [Ch-] " foregroundColor="background" backgroundColor="foreground" font="Regular; 18" halign="center" valign="center" />
+		<eLabel name="ch2" position="752,532" size="60,28" text=" [Ch+] " foregroundColor="background" backgroundColor="foreground" font="Regular; 18" halign="center" valign="center" />
+		<widget font="Regular; 20" halign="left" position="6,5" render="Label" size="648,24" source="global.CurrentTime" transparent="1">
+			<convert type="spaSysInfo">Version</convert>
+		</widget>
+	<eLabel name="lineasep" position="6,33" size="648,1" backgroundColor="foreground" />
 </screen>"""
 
-	def __init__(self, session, online, list=None, multi=None, devrootfs=None,spznew=False ):
+	def __init__(self, session, online, list=None, multi=None, devrootfs=None,spznew=False, mediapath='/media/hdd/',imagePath = '/media/hdd/images',flashPath = '/media/hdd/images/flash'):
 		Screen.__init__(self, session)
 		self.session = session
 
@@ -257,14 +466,19 @@ class doFlashImage(Screen):
 		self.List = list
 		self.multi=multi
 		self.devrootfs=devrootfs
-		self.imagePath = imagePath
 		self.feedurl = urlimage
 		self.spanew=spznew
+		self.mediapath = mediapath
+		self.imagePath = imagePath
+		self.flashPath = flashPath
+		self.flashTmp = self.imagePath + '/tmp'
 		debugtxt("")
 		debugtxt("box: "+str(self.box()))
 		debugtxt("multi: "+str(multi))
 		debugtxt("from spanewfirms: "+str(spznew))
 		debugtxt("online: "+str(online))
+		debugtxt("mediapath: "+mediapath)
+		debugtxt("imagePath: "+imagePath)
 
 		self.changelog=self.getchangelog()
 		self["imageList"] = MenuList(self.imagelist)
@@ -280,8 +494,10 @@ class doFlashImage(Screen):
 		}, -2)
 		self.laconsola=None
 		self.onLayoutFinish.append(self.layoutFinished)
+	
 	def dummy(self):
 		pass
+
 	def getstamp(self):
 		ts=time()
 		return "&stamp="+str(ts)
@@ -393,15 +609,15 @@ class doFlashImage(Screen):
 			sel="openspa-"+sel.split(" ->")[0]+".zip"
 			
 			self["info"].setText("["+sel+"]\n"+_("Wait")+"...\n--------------------------\n"+self.changelog)
-			file_name = self.imagePath + "/" + sel
-			self.filename = file_name
-
+			self.filename = self.imagePath + "/" + sel
+			#self.filename = file_name
+			
 			self.hide()
 			self.sel = sel
 			box = self.box()
-			debugtxt("filename: "+str(file_name))
+			debugtxt("filename: "+str(self.filename))
 			debugtxt("selection: "+str(sel))
-			# url = self.feedurl + "/" + "/" + sel
+			url = self.feedurl + "/" + "/" + sel
 			url = self.urllist[asel] + "/" + sel
 			url=url.replace("Descarga de Im&aacute;genes","Descarga de Imágenes").replace(" ","%20")
 			debugtxt("download url: "+str(url))
@@ -424,7 +640,7 @@ class doFlashImage(Screen):
 					CHUNK = 256 * 1024
 					print "Downloading: %s" % (total_size)
 					debugtxt("Download size: "+str(total_size))
-					with open(file_name, 'wb') as fp:
+					with open(self.filename, 'wb') as fp:
 						while True:
 							chunk = u.read(CHUNK)
 							downloaded += len(chunk)
@@ -438,12 +654,11 @@ class doFlashImage(Screen):
 				except:
 					debugtxt("bad xml file")
 					return
-
 			try:
 				u = urllib2.urlopen(url)
-				f = open(file_name, 'wb')
+				f = open(self.filename, 'wb')
 				f.close()
-				job = ImageDownloadJob(url, file_name, sel)
+				job = ImageDownloadJob(url, self.filename, sel)
 				job.afterEvent = "close"
 				job_manager.AddJob(job)
 				job_manager.failed_jobs = []
@@ -493,11 +708,11 @@ class doFlashImage(Screen):
 		AllPlugins = False
 		noPlugins = False
 
-		if os.path.exists('/media/hdd/images/config/settings'):
+		if os.path.exists(self.imagePath + '/config/settings'):
 			Settings = True
-		if os.path.exists('/media/hdd/images/config/plugins'):
+		if os.path.exists(self.imagePath + '/config/plugins'):
 			AllPlugins = True
-		if os.path.exists('/media/hdd/images/config/noplugins'):
+		if os.path.exists(self.imagePath + '/config/noplugins'):
 			noPlugins = True
 
 		if 	Settings and noPlugins:
@@ -529,33 +744,33 @@ class doFlashImage(Screen):
 			if answer[1] != "abort":
 				if restoreSettings:
 					try:
-						os.system('mkdir -p /media/hdd/images/config')
-						os.system('touch /media/hdd/images/config/settings')
+						os.system('mkdir -p ' + self.imagePath + '/config')
+						os.system('touch ' + self.imagePath + '/config/settings')
 					except:
 						print "postFlashActionCallback: failed to create /media/hdd/images/config/settings"
 				else:
-					if os.path.exists('/media/hdd/images/config/settings'):
-						os.system('rm -f /media/hdd/images/config/settings')
+					if os.path.exists(self.imagePath + '/config/settings'):
+						os.system('rm -f ' + self.imagePath + '/config/settings')
 				if restoreAllPlugins:
 					try:
-						os.system('mkdir -p /media/hdd/images/config')
-						os.system('touch /media/hdd/images/config/plugins')
+						os.system('mkdir -p ' + self.imagePath + '/config')
+						os.system('touch ' + self.imagePath + '/config/plugins')
 					except:
 						print "postFlashActionCallback: failed to create /media/hdd/images/config/plugins"
 				else:
-					if os.path.exists('/media/hdd/images/config/plugins'):
-						os.system('rm -f /media/hdd/images/config/plugins')
+					if os.path.exists(self.imagePath + '/config/plugins'):
+						os.system('rm -f ' + self.imagePath + '/config/plugins')
 				if restoreSettingsnoPlugin:
 					try:
-						os.system('mkdir -p /media/hdd/images/config')
-						os.system('touch /media/hdd/images/config/noplugins')
+						os.system('mkdir -p ' + self.imagePath + '/config')
+						os.system('touch ' + self.imagePath + '/config/noplugins')
 					except:
 						print "postFlashActionCallback: failed to create /media/hdd/images/config/noplugins"
 				else:
-					if os.path.exists('/media/hdd/images/config/noplugins'):
-						os.system('rm -f /media/hdd/images/config/noplugins')
+					if os.path.exists(self.imagePath + '/config/noplugins'):
+						os.system('rm -f ' + self.imagePath + '/config/noplugins')
 				if self.flashWithPostFlashActionMode == 'online':
-					self.unzip_image(self.filename, flashPath)
+					self.unzip_image(self.filename, self.flashPath)
 				else:
 					self.startInstallLocalCB()
 			else:
@@ -568,7 +783,7 @@ class doFlashImage(Screen):
 		self.session.openWithCallback(self.cmdFinished, Console, title = _("Unzipping files, Please wait ..."), cmdlist = ['unzip ' + filename + ' -o -d ' + path, "sleep 3"], closeOnSuccess = True)
 
 	def cmdFinished(self):
-		self.prepair_flashtmp(flashPath)
+		self.prepair_flashtmp(self.flashPath)
 		self.Start_Flashing()
 
 	def Start_Flashing(self):
@@ -580,9 +795,9 @@ class doFlashImage(Screen):
 			if self.simulate:
 				text += _("Simulate (no write)")
 				if SystemInfo["HaveMultiBoot"]:
-					cmdlist.append("%s -n -r -k -m%s %s > /dev/null 2>&1" % (ofgwritePath, self.multi, flashTmp))
+					cmdlist.append("%s -n -r -k -m%s %s > /dev/null 2>&1" % (ofgwritePath, self.multi, self.flashTmp))
 				else:
-					cmdlist.append("%s -n -r -k %s > /dev/null 2>&1" % (ofgwritePath, flashTmp))
+					cmdlist.append("%s -n -r -k %s > /dev/null 2>&1" % (ofgwritePath, self.flashTmp))
 				self.close()
 				message = "echo -e '\n"
 				message += _('Show only found image and mtd partitions.\n')
@@ -592,12 +807,12 @@ class doFlashImage(Screen):
 				if SystemInfo["HaveMultiBoot"]:
 					if not self.List == "STARTUP":
 						os.system('mkfs.ext4 -F ' + self.devrootfs)
-					cmdlist.append("%s -r -k -m%s %s > /dev/null 2>&1" % (ofgwritePath, self.multi, flashTmp))
+					cmdlist.append("%s -r -k -m%s %s > /dev/null 2>&1" % (ofgwritePath, self.multi, self.flashTmp))
 					if not self.List == "STARTUP":
 						cmdlist.append("umount -fl /oldroot_bind")
 						cmdlist.append("umount -fl /newroot")
 				else:
-					cmdlist.append("%s -r -k %s > /dev/null 2>&1" % (ofgwritePath, flashTmp))
+					cmdlist.append("%s -r -k %s > /dev/null 2>&1" % (ofgwritePath, self.flashTmp))
 				message = "echo -e '\n"
 				if not self.List == "STARTUP" and SystemInfo["HaveMultiBoot"]:
 					message += _('ofgwrite flashing ready.\n')
@@ -618,12 +833,13 @@ class doFlashImage(Screen):
 					self.close()
 
 	def prepair_flashtmp(self, tmpPath):
-		if os.path.exists(flashTmp):
-			flashTmpold = flashTmp + 'old'
-			os.system('mv %s %s' %(flashTmp, flashTmpold))
+		if os.path.exists(self.flashTmp):
+			flashTmpold = self.flashTmp + 'old'
+			os.system('mv %s %s' %(self.flashTmp, flashTmpold))
+			print 'mv %s %s' %(self.flashTmp, flashTmpold)
 			os.system('rm -rf %s' %flashTmpold)
-		if not os.path.exists(flashTmp):
-			os.mkdir(flashTmp)
+		if not os.path.exists(self.flashTmp):
+			os.mkdir(self.flashTmp)
 		kernel = True
 		rootfs = True
 
@@ -631,22 +847,22 @@ class doFlashImage(Screen):
 			for name in files:
 				if name.find('kernel') > -1 and name.endswith('.bin') and kernel:
 					binfile = os.path.join(path, name)
-					dest = flashTmp + '/%s' %KERNELBIN
+					dest = self.flashTmp + '/%s' %KERNELBIN
 					shutil.copyfile(binfile, dest)
 					kernel = False
 				elif name.find('root') > -1 and (name.endswith('.bin') or name.endswith('.jffs2') or name.endswith('.bz2')) and rootfs:
 					binfile = os.path.join(path, name)
-					dest = flashTmp + '/%s' %ROOTFSBIN
+					dest = self.flashTmp + '/%s' %ROOTFSBIN
 					shutil.copyfile(binfile, dest)
 					rootfs = False
 				elif name.find('uImage') > -1 and kernel:
 					binfile = os.path.join(path, name)
-					dest = flashTmp + '/uImage'
+					dest = self.flashTmp + '/uImage'
 					shutil.copyfile(binfile, dest)
 					kernel = False
 				elif name.find('e2jffs2') > -1 and name.endswith('.img') and rootfs:
 					binfile = os.path.join(path, name)
-					dest = flashTmp + '/e2jffs2.img'
+					dest = self.flashTmp + '/e2jffs2.img'
 					shutil.copyfile(binfile, dest)
 					rootfs = False
 
@@ -669,10 +885,10 @@ class doFlashImage(Screen):
 			self.flashWithPostFlashAction()
 
 	def startInstallLocalCB(self, ret = None):
-		if self.sel == str(flashTmp):
+		if self.sel == str(self.flashTmp):
 			self.Start_Flashing()
 		else:
-			self.unzip_image(self.filename, flashPath)
+			self.unzip_image(self.filename, self.flashPath)
 
 	def DeviceBrowserClosed(self, path, filename, binorzip):
 		if path:
@@ -681,9 +897,9 @@ class doFlashImage(Screen):
 			if strPath[-1] == '/':
 				strPath = strPath[:-1]
 			self.imagePath = strPath
-			if os.path.exists(flashTmp):
-				os.system('rm -rf ' + flashTmp)
-			os.mkdir(flashTmp)
+			if os.path.exists(self.flashTmp):
+				os.system('rm -rf ' + self.flashTmp)
+			os.mkdir(self.flashTmp)
 			if binorzip == 0:
 				for files in os.listdir(self.imagePath):
 					if files.endswith(".bin") or files.endswith('.jffs2') or files.endswith('.img'):
@@ -691,17 +907,18 @@ class doFlashImage(Screen):
 						break
 				self.Start_Flashing()
 			elif binorzip == 1:
-				self.unzip_image(strPath + '/' + filename, flashPath)
+				self.unzip_image(strPath + '/' + filename, self.flashPath)
 			else:
 				self.layoutFinished()
 		else:
-			self.imagePath = imagePath
+			self.imagePath = self.imagePath
 
 	def layoutFinished(self):
 		box = self.box()
-		self.setTitle(_("Flash On the Fly")+" ["+box+"]")
+		self.setTitle(_("Flash online from ") + self.mediapath)
 		self.imagelist = []
 		self.urllist = {}
+		
 		if self.Online:
 			if not self.spanew:
 				self["key_yellow"].setText("Backup&Flash")
@@ -758,13 +975,13 @@ class doFlashImage(Screen):
 			self["key_blue"].setText(_("Delete"))
 			self["key_yellow"].setText(_("Devices"))
 			for name in os.listdir(self.imagePath):
-				if name.endswith(".zip"): # and name.find(box) > 1:
+				if name.endswith(".zip"):
 					self.imagelist.append(name)
 			self.imagelist.sort()
-			if os.path.exists(flashTmp):
-				for file in os.listdir(flashTmp):
+			if os.path.exists(self.flashTmp):
+				for file in os.listdir(self.flashTmp):
 					if file.find(".bin") > -1:
-						self.imagelist.insert( 0, str(flashTmp))
+						self.imagelist.insert( 0, str(self.flashTmp))
 						break
 
 		self["imageList"].l.setList(self.imagelist)
