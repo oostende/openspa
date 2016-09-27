@@ -88,7 +88,8 @@ class miJobView(JobView):
 		<eLabel name="flecha" position="19,96" size="85,60" text="&gt;&gt;" font="Regular; 17" valign="top" transparent="1" />
 		<eLabel name="" position="19,75" size="790,1" backgroundColor="foreground" />
 		</screen>"""
-	skin = """
+	else:
+		skin = """
 		<screen name="miJobView" position="230,140" size="820,380" title="Donwload">
 		<widget source="job_name" render="Label" position="19,22" size="790,50" font="Regular; 20" valign="top" halign="left" transparent="1" />
 		<widget source="job_task" render="Label" position="49,95" size="760,60" font="Regular; 21" valign="top" transparent="1" />
@@ -116,9 +117,9 @@ class miJobView(JobView):
 		<widget source="backgroundable" render="FixedLabel" text="Continue in background" font="Regular; 18" halign="center" valign="center" position="661,330" size="140,40" transparent="1" backgroundColor="#18188b">
 			<convert type="ConditionalShowHide" />
 		</widget>
-	<eLabel name="flecha" position="19,96" size="85,60" text="&gt;&gt;" font="Regular; 17" valign="top" transparent="1" />
-<eLabel name="" position="19,75" size="790,1" backgroundColor="foreground" />
-</screen>"""
+		<eLabel name="flecha" position="19,96" size="85,60" text="&gt;&gt;" font="Regular; 17" valign="top" transparent="1" />
+		<eLabel name="" position="19,75" size="790,1" backgroundColor="foreground" />
+		</screen>"""
 
 	def __init__(self, session, job, parent=None, cancelable = True, backgroundable = True, afterEventChangeable = True):
 		JobView.__init__(self, session, job, parent, cancelable, backgroundable, afterEventChangeable)
