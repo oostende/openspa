@@ -62,18 +62,18 @@ class miJobView(JobView):
 		<widget source="job_name" render="Label" position="19,22" size="790,50" font="Regular; 20" valign="top" halign="left" transparent="1" />
 		<widget source="job_task" render="Label" position="49,95" size="760,60" font="Regular; 21" valign="top" transparent="1" />
 		<widget source="job_progress" render="Progress" position="20,199" size="780,12" borderWidth="2" backgroundColor="#002211" borderColor="#99ff00" foregroundColor="#99ff00" />
-		<widget source="job_progress" render="Label" position="19,162" size="781,32" font="Regular; 22" foregroundColor="foreground" zPosition="2" halign="center" transparent="1">
+		<widget source="job_progress" render="Label" position="19,155" size="781,40" font="Regular; 22" foregroundColor="foreground" zPosition="2" halign="center" transparent="1">
 			<convert type="ProgressToText" />
 		</widget>
-		<widget source="job_status" render="Label" position="19,223" size="782,26" font="Regular;23" transparent="1" />
+		<widget source="job_status" render="Label" position="19,223" size="782,45" font="Regular;23" transparent="1" />
 		<widget name="config" position="19,264" size="782,20" transparent="1" />
-		<widget source="cancelable" render="Pixmap" pixmap="skin_default/buttons/red.png" position="8,330" size="140,40" alphatest="on">
+		<widget source="cancelable" render="Pixmap" pixmap="skin_default/buttons/red_HD.png" position="8,330" size="140,40" alphatest="on">
 			<convert type="ConditionalShowHide" />
 		</widget>
 		<widget source="cancelable" render="FixedLabel" text="Cancel" position="8,330" zPosition="1" size="140,40" font="Regular; 18" halign="center" valign="center" backgroundColor="#9f1313" transparent="1">
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<widget source="finished" render="Pixmap" pixmap="skin_default/buttons/green.png" position="374,330" size="140,40" alphatest="on">
+		<widget source="finished" render="Pixmap" pixmap="skin_default/buttons/green_HD.png" position="374,330" size="140,40" alphatest="on">
 			<convert type="ConditionalShowHide" />
 		</widget>
 		<widget source="finished" render="FixedLabel" text="OK" font="Regular; 18" halign="center" valign="center" position="374,330" size="140,40" transparent="1" backgroundColor="#1f771f">
