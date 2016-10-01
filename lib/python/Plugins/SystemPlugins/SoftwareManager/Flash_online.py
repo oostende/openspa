@@ -215,7 +215,7 @@ class FlashOnline(Screen):
       <!-- Flash -->
     </widget>
 </screen>"""
-		
+
 	def __init__(self, session,spznew=False):
 		Screen.__init__(self, session)
 		self.session = session
@@ -263,7 +263,6 @@ class FlashOnline(Screen):
 		self["info-local"] = Label(infolabel)
 		self["info-online"] = Label(_("Online = Download a image and flash it"))
 
-
 	def check_hdd(self):
 		
 		if not os.path.exists(self.mediapath):
@@ -302,7 +301,7 @@ class FlashOnline(Screen):
 				self.close()
 		elif mont > 1:
 			self.session.openWithCallback(self.gochkblue,getDevices)
-			
+
 	def green(self):
 		if mont == 1:
 			if self.check_hdd():
@@ -311,7 +310,7 @@ class FlashOnline(Screen):
 				self.close()
 		elif mont > 1:
 			self.session.openWithCallback(self.gochk,getDevices)
-			
+
 	def gochk(self,mediapath):
 		self.mediapath=mediapath
 		imagePath = mediapath + "images"
@@ -322,7 +321,7 @@ class FlashOnline(Screen):
 			self.session.open(doFlashImage, online = True, list=self.list[self.selection], multi=self.multi, devrootfs=self.devrootfs,spznew=self.spanewfirm, mediapath=self.mediapath, imagePath = self.imagePath, flashPath = self.flashPath)
 		else:
 			self.close()
-		
+
 	def gochkblue(self,mediapath):
 		self.mediapath=mediapath
 		imagePath = mediapath + "images"
@@ -334,7 +333,6 @@ class FlashOnline(Screen):
 		else:
 			self.close()
 
-			
 	def yellow(self):
 		if SystemInfo["HaveMultiBoot"]:
 			self.selection = self.selection + 1
@@ -360,8 +358,11 @@ class FlashOnline(Screen):
 		if SystemInfo["HaveMultiBoot"]:
 			path = PATH
 			for name in os.listdir(path):
-				if os.path.isfile(os.path.join(path, name)):
-					cmdline = self.read_startup("/boot/" + name).split("=",1)[1].split(" ",1)[0]
+				if name != 'bootname' and os.path.isfile(os.path.join(path, name)):
+					try:
+						cmdline = self.read_startup("/boot/" + name).split("=",1)[1].split(" ",1)[0]
+					except IndexError:
+						continue
 					cmdline_startup = self.read_startup("/boot/STARTUP").split("=",1)[1].split(" ",1)[0]
 					if (cmdline != cmdline_startup) and (name != "STARTUP"):
 						files.append(name)
@@ -369,7 +370,7 @@ class FlashOnline(Screen):
 		else:
 			files = "None"
 		return files
-		
+
 class getDevices(Screen):
 	if esHD():
 		skin = """
