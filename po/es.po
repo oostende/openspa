@@ -231,6 +231,9 @@ msgstr " (mayor que cualquier 'auto' de motor)"
 msgid " (lower than any auto)"
 msgstr " (menor que cualquier 'auto')"
 
+msgid " (unknown mode)"
+msgstr " (modo desconocido)"
+
 msgid " - mounted on "
 msgstr " - montado en "
 
@@ -413,6 +416,20 @@ msgstr "* Iniciar YouTube TV"
 msgid "* current animation"
 msgstr "* animación actual"
 
+msgid ""
+"*** boxmode=1 (Standard) ***\n"
+"\n"
+msgstr ""
+"*** Modo=1 (Estándar) ***\n"
+"\n"
+
+msgid ""
+"*** boxmode=12 (Experimental) ***\n"
+"\n"
+msgstr ""
+"*** Modo=12 (Experimental) ***\n"
+"\n"
+
 msgid "*** scanning transponders:"
 msgstr "*** buscando transpondedores:"
 
@@ -497,6 +514,9 @@ msgstr "1 segundo"
 msgid "1.0 sec"
 msgstr "1.0 seg."
 
+msgid "1.2GHz (default)"
+msgstr "1.2GHz (defecto)"
+
 msgid "1.5 sec"
 msgstr "1.5 seg."
 
@@ -556,6 +576,15 @@ msgstr "2.5 seg."
 
 msgid "20 minutes"
 msgstr "20 minutos"
+
+msgid "2048 (default)"
+msgstr "2048 (defecto)"
+
+msgid "2160p50 with PiP (Experimental)"
+msgstr "2160p50 con PiP (Experimental)"
+
+msgid "2160p60 without PiP (Standard)"
+msgstr "2160p60 sin PiP (Estándar)"
 
 msgid "2X"
 msgstr "2x"
@@ -652,6 +681,9 @@ msgstr "6.0 seg."
 
 msgid "6.5 sec"
 msgstr "6.5 seg."
+
+msgid "600MHz (default)"
+msgstr "600MHz (defecto)"
 
 msgid "7 seconds"
 msgstr "7 segundos"
@@ -1039,7 +1071,7 @@ msgid "Add service name to stream information"
 msgstr "Añadir nombre del canal a la información de stream"
 
 msgid "Add timer"
-msgstr "Añadir temporizador"
+msgstr "Añadir temporiz."
 
 msgid "Add title"
 msgstr "Añadir título"
@@ -1205,6 +1237,9 @@ msgstr "También en reposo"
 
 msgid "Alternative"
 msgstr "Alternativo"
+
+msgid "Alternative Image 1 partition for boot repair not found."
+msgstr "No se ha encontrado la partición alternativa de la imagen 1"
 
 msgid "Alternative numbering mode"
 msgstr "Modo alternativo de numeración"
@@ -1883,6 +1918,9 @@ msgstr "Información de shares CCcam"
 msgid "CCcamInstalled"
 msgstr "CCcam instalado"
 
+msgid "CFQ (default)"
+msgstr "CFQ (defecto)"
+
 msgid "CH"
 msgstr "Canal "
 
@@ -1938,6 +1976,12 @@ msgid "Can be used for different fps between external subtitles and video."
 msgstr ""
 "Puede ser utilizado para configurar diferentes fps para los subtítulos y el "
 "vídeo"
+
+msgid "Can not repair file %s"
+msgstr "No se puede reparar %s"
+
+msgid "Can not write file %s"
+msgstr "No se puede escribir el archivo %s"
 
 msgid ""
 "Can't open selected bookmark.\n"
@@ -2050,6 +2094,9 @@ msgstr "Catalán"
 
 msgid "Category Name"
 msgstr "Nombre de categoría"
+
+msgid "Caution, next boot is starts with these settings!"
+msgstr "ATENCIÓN: el próximo arranque será con estos ajustes!"
 
 msgid "Center DVB subtitles"
 msgstr "Centrar los subtítulos DVB"
@@ -2879,6 +2926,9 @@ msgstr "Conectado!"
 msgid "Connected: "
 msgstr "Conectado: "
 
+msgid "Conservative"
+msgstr "Conservador"
+
 msgid "Console"
 msgstr "Consola"
 
@@ -2998,6 +3048,9 @@ msgstr "Menú CronManager"
 
 msgid "Current"
 msgstr "Actual"
+
+msgid "Current Bootsettings: %s (%s)%s"
+msgstr "Ajustes actuales de Boot: %s (%s)%s"
 
 msgid "Current CEC address"
 msgstr "Dirección actual CEC"
@@ -3179,6 +3232,9 @@ msgstr "Entrar Fecha/Hora"
 
 msgid "Deactivate"
 msgstr "Desactivar"
+
+msgid "Deadline"
+msgstr "Límite máx."
 
 msgid "December"
 msgstr "Diciembre"
@@ -3696,6 +3752,12 @@ msgstr "Reproducir el DVD de la unidad?"
 
 msgid "Do you want to preview this DVD before burning?"
 msgstr "Desea previsualizar este DVD antes de grabarlo?"
+
+msgid "Do you want to reboot now with selected image?"
+msgstr "Desea reiniciar ahora con la imagen seleccionada?"
+
+msgid "Do you want to reboot now?"
+msgstr "Desea reiniciar ahora?"
 
 msgid "Do you want to reboot your receiver?"
 msgstr "Desea reiniciar el receptor?"
@@ -4466,8 +4528,14 @@ msgstr "Febrero"
 msgid "File"
 msgstr "Archivo"
 
+msgid "File '/boot/%s' not found - copy to /boot/STARTUP failed!"
+msgstr "Archivo '/boot/%s' no encontrado. No se ha copiado en /boot/STARTUP"
+
 msgid "File appears to be busy.\n"
 msgstr "El archivo parece estar en uso.\n"
+
+msgid "File not found - rename failed!"
+msgstr "Archivo no encontrado - No se ha renombrado"
 
 msgid ""
 "File oscam.conf not found.\n"
@@ -5038,6 +5106,9 @@ msgstr "Nombre del host"
 msgid "Hostname: "
 msgstr "Nombre host: "
 
+msgid "Hotplug"
+msgstr "Hotplug"
+
 msgid "Hour"
 msgstr "Hora"
 
@@ -5061,6 +5132,12 @@ msgstr "Matíz"
 
 msgid "Hungarian"
 msgstr "Húngaro"
+
+msgid "I/O Read ahead"
+msgstr "Lectura previa I/O"
+
+msgid "I/O Scheduler"
+msgstr "Programador I/O"
 
 msgid "IP address"
 msgstr "Dirección IP"
@@ -5348,6 +5425,9 @@ msgstr "Ubicación de grabaciones instantáneas"
 
 msgid "Instant recording..."
 msgstr "Grabación instantánea"
+
+msgid "Interactive (default)"
+msgstr "Interactivo (defecto)"
 
 msgid "Interface:\t/dev/"
 msgstr "Interface:\t/dev/"
@@ -6301,6 +6381,9 @@ msgstr "Nombre"
 msgid "Name :"
 msgstr "Nombre :"
 
+msgid "Name already exists - rename failed!"
+msgstr "Este nombre ya existe - No se ha renombrado"
+
 msgid "Name of the Bouquet"
 msgstr "Nombre del favorito"
 
@@ -6425,6 +6508,9 @@ msgstr "Siguiente"
 
 msgid "Next "
 msgstr "Siguiente"
+
+msgid "Next boot will start from Image 1."
+msgstr "El próximo arranque será desde la imagen 1"
 
 msgid "No"
 msgstr "No"
@@ -6923,6 +7009,9 @@ msgstr "En el mismo servicio"
 msgid "Once per day"
 msgstr "Una vez al dia"
 
+msgid "Ondemand"
+msgstr "A petición"
+
 msgid "One"
 msgstr "Uno"
 
@@ -6982,6 +7071,9 @@ msgstr "Abrir configuración del sinton. "
 
 msgid "Open the movie list"
 msgstr "Abrir la lista de películas"
+
+msgid "OpenSPA Max CPU frequency"
+msgstr "Frec. máxima CPU - normal"
 
 msgid "OpenSPA USB Devices"
 msgstr "OpenSPA - Dispositivos USB"
@@ -7193,6 +7285,9 @@ msgstr "% a la izq."
 
 msgid "Percentage right"
 msgstr "% a la derecha"
+
+msgid "Performance"
+msgstr "Performance"
 
 msgid "Permanently delete all recordings in the trash can?"
 msgstr "Eliminar definitivamente todas las grabaciones de la papelera?"
@@ -8634,6 +8729,9 @@ msgstr "Guardar valores y salir"
 msgid "Scaler sharpness"
 msgstr "Nitidez del escalado"
 
+msgid "Scaling Governor"
+msgstr "Gobernador"
+
 msgid "Scaling mode"
 msgstr "Tipo de escalado"
 
@@ -8821,6 +8919,12 @@ msgstr "Seleccione BOOT:"
 
 msgid "Select Boot"
 msgstr "Sel. BOOT"
+
+msgid "Select Bootoption: %s"
+msgstr "Seleccione opción: %s"
+
+msgid "Select Bootoption: not supported - see info"
+msgstr "Seleccionar opción: no soportada - ver Info"
 
 msgid "Select CAId"
 msgstr "Seleccionar CAId"
@@ -9926,6 +10030,9 @@ msgstr "Reposo / Reiniciar"
 
 msgid "Standby / restart"
 msgstr "Reposo / Reiniciar"
+
+msgid "Standby Max CPU frequency"
+msgstr "Frec. máxima CPU - reposo"
 
 msgid "Standby Toggle"
 msgstr "Encendido/Reposo"
@@ -11366,6 +11473,9 @@ msgstr "Gestor de dispositivos USB"
 msgid "USB stick wizard"
 msgstr "Asistente de lápiz USB"
 
+msgid "Unable to read image number"
+msgstr "No se puede leer el número de imagen"
+
 msgid ""
 "Unattended upgrade in progress\n"
 "Please wait until your receiver reboots\n"
@@ -12144,6 +12254,9 @@ msgstr "Oeste"
 msgid "West limit set"
 msgstr "Límite oeste configurado"
 
+msgid "Wetek CPU Control"
+msgstr "Control de CPU WeTek"
+
 msgid "Wetek CPU Frequency Setup"
 msgstr "Ajuste de la frecuencia de CPU"
 
@@ -12629,11 +12742,17 @@ msgstr ""
 "Error mientras grababa. Disco lleno?\n"
 "%s"
 
+msgid "Write error!"
+msgstr "Error de escritura"
+
 msgid "Write failed!"
 msgstr "Falló la escritura!"
 
 msgid "Write to /tmp/positionersetup.log"
 msgstr "Guardar en /tmp/positionersetup.log"
+
+msgid "Wrong Bootsettings detected!"
+msgstr "Se han detectado ajustes erróneos de boot"
 
 msgid "Wrong parameter format 'set=%s'. Use set=set15 "
 msgstr "Formato de parámetro incorrecto 'set=%s'. Use set=set15"
@@ -12871,6 +12990,19 @@ msgid ""
 msgstr ""
 "El backup ha terminado. Ahora continuaremos explicando el proceso de "
 "actualización."
+
+msgid ""
+"Your box needs Bootloaderversion(s)\n"
+"\n"
+"%s\n"
+"\n"
+"to make compatible with Bootoptions!"
+msgstr ""
+"Este receptor necesita la versión de bootloader\n"
+"\n"
+"%s\n"
+"\n"
+"para ser compatible con las opciones de boot"
 
 msgid ""
 "Your collection exceeds the size of a single layer medium, you will need a "
@@ -13901,6 +14033,9 @@ msgstr "No hay comando, no se inicia"
 msgid "no description available"
 msgstr "no hay descripción disponible"
 
+msgid "no image found"
+msgstr "No se ha encontrado imagen"
+
 msgid "no module found"
 msgstr "módulo no encontrado"
 
@@ -14031,6 +14166,9 @@ msgstr "artes"
 
 msgid "pid:"
 msgstr "pid:"
+
+msgid "placeholder message 2"
+msgstr "Mensaje del marcador 2"
 
 msgid "play as picture in picture"
 msgstr "Ver en ventana PiP"

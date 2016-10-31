@@ -231,6 +231,9 @@ msgstr " (major que qualsevol auto de motor)"
 msgid " (lower than any auto)"
 msgstr " (menor que qualsevol auto)"
 
+msgid " (unknown mode)"
+msgstr " (mode desconegut)"
+
 msgid " - mounted on "
 msgstr " - muntat a "
 
@@ -413,6 +416,20 @@ msgstr "* Iniciar YouTube TV"
 msgid "* current animation"
 msgstr "* animació actual"
 
+msgid ""
+"*** boxmode=1 (Standard) ***\n"
+"\n"
+msgstr ""
+"*** Mode=1 (Estàndard) ***\n"
+"\n"
+
+msgid ""
+"*** boxmode=12 (Experimental) ***\n"
+"\n"
+msgstr ""
+"*** Mode=12 (Experimental) ***\n"
+"\n"
+
 msgid "*** scanning transponders:"
 msgstr "*** cercant transponedors:"
 
@@ -497,6 +514,9 @@ msgstr "1 segon"
 msgid "1.0 sec"
 msgstr "1.0 seg."
 
+msgid "1.2GHz (default)"
+msgstr "1.2GHz (defecte)"
+
 msgid "1.5 sec"
 msgstr "1.5 seg."
 
@@ -556,6 +576,15 @@ msgstr "2.5 seg."
 
 msgid "20 minutes"
 msgstr "20 minuts"
+
+msgid "2048 (default)"
+msgstr "2048 (defecte)"
+
+msgid "2160p50 with PiP (Experimental)"
+msgstr "2160p50 amb PiP (Experimental)"
+
+msgid "2160p60 without PiP (Standard)"
+msgstr "2160p60 sense PiP (Estàndard)"
 
 msgid "2X"
 msgstr "2x"
@@ -652,6 +681,9 @@ msgstr "6.0 seg."
 
 msgid "6.5 sec"
 msgstr "6.5 seg."
+
+msgid "600MHz (default)"
+msgstr "600MHz (defecte)"
 
 msgid "7 seconds"
 msgstr "7 segons"
@@ -1040,7 +1072,7 @@ msgid "Add service name to stream information"
 msgstr "Afegir nom del canal a la informació de stream"
 
 msgid "Add timer"
-msgstr "Afegir temporitzador"
+msgstr "Afegir tempor."
 
 msgid "Add title"
 msgstr "Afegir títol"
@@ -1206,6 +1238,9 @@ msgstr "També en repòs"
 
 msgid "Alternative"
 msgstr "Alternatiu"
+
+msgid "Alternative Image 1 partition for boot repair not found."
+msgstr "No s'ha trobat la partició alternativa de la imatge 1"
 
 msgid "Alternative numbering mode"
 msgstr "Mode alternatiu de numeració"
@@ -1883,6 +1918,9 @@ msgstr "Informació de shares CCcam"
 msgid "CCcamInstalled"
 msgstr "CCcam instal·lada"
 
+msgid "CFQ (default)"
+msgstr "CFQ (defecte)"
+
 msgid "CH"
 msgstr "Canal "
 
@@ -1937,6 +1975,12 @@ msgstr "Cams"
 msgid "Can be used for different fps between external subtitles and video."
 msgstr ""
 "Es pot utilitzar per a configurar diferents fps per als subtítols i el vídeo"
+
+msgid "Can not repair file %s"
+msgstr "No es pot arreglar %s"
+
+msgid "Can not write file %s"
+msgstr "No es pot escriure l'arxiu %s"
 
 msgid ""
 "Can't open selected bookmark.\n"
@@ -2048,6 +2092,9 @@ msgstr "Català"
 
 msgid "Category Name"
 msgstr "Nom de categoria"
+
+msgid "Caution, next boot is starts with these settings!"
+msgstr "ATENCIÓ: el pròxim inici es farà amb aquests ajustaments!"
 
 msgid "Center DVB subtitles"
 msgstr "Centrar els subtítols DVB"
@@ -2868,6 +2915,9 @@ msgstr "Connectat!"
 msgid "Connected: "
 msgstr "Connectat: "
 
+msgid "Conservative"
+msgstr "Conservador"
+
 msgid "Console"
 msgstr "Consola"
 
@@ -2987,6 +3037,9 @@ msgstr "Menú CronManager"
 
 msgid "Current"
 msgstr "Actual"
+
+msgid "Current Bootsettings: %s (%s)%s"
+msgstr "Ajustaments actuals de Boot: %s (%s)%s"
 
 msgid "Current CEC address"
 msgstr "Adreça actual CEC"
@@ -3168,6 +3221,9 @@ msgstr "Entrar Data/Hora"
 
 msgid "Deactivate"
 msgstr "Desactivar"
+
+msgid "Deadline"
+msgstr "Límit màx."
 
 msgid "December"
 msgstr "Desembre"
@@ -3684,6 +3740,12 @@ msgstr "Reproduir el DVD de la unitat?"
 
 msgid "Do you want to preview this DVD before burning?"
 msgstr "Voleu previsualitzar aquest DVD abans d'enregistrar-lo?"
+
+msgid "Do you want to reboot now with selected image?"
+msgstr "Voleu reiniciar ara amb la imatge seleccionada?"
+
+msgid "Do you want to reboot now?"
+msgstr "Voleu reiniciar ara?"
 
 msgid "Do you want to reboot your receiver?"
 msgstr "Voleu reiniciar el receptor?"
@@ -4448,8 +4510,14 @@ msgstr "Febrer"
 msgid "File"
 msgstr "Arxiu"
 
+msgid "File '/boot/%s' not found - copy to /boot/STARTUP failed!"
+msgstr "Arxiu '/boot/%s' no trobat. No s'ha copiat a /boot/STARTUP"
+
 msgid "File appears to be busy.\n"
 msgstr "L'arxiu sembla estar en ús.\n"
+
+msgid "File not found - rename failed!"
+msgstr "Arxiu no trobat - No s'ha reanomenat"
 
 msgid ""
 "File oscam.conf not found.\n"
@@ -5019,6 +5087,9 @@ msgstr "Nom del host"
 msgid "Hostname: "
 msgstr "Nom host: "
 
+msgid "Hotplug"
+msgstr "Hotplug"
+
 msgid "Hour"
 msgstr "Hora"
 
@@ -5042,6 +5113,12 @@ msgstr "Matís"
 
 msgid "Hungarian"
 msgstr "Hongarès"
+
+msgid "I/O Read ahead"
+msgstr "Lectura prèvia I/O"
+
+msgid "I/O Scheduler"
+msgstr "Programador I/O"
 
 msgid "IP address"
 msgstr "Adreça IP"
@@ -5331,6 +5408,9 @@ msgstr "Ubicació de gravacions instantànies"
 
 msgid "Instant recording..."
 msgstr "Gravació instantània"
+
+msgid "Interactive (default)"
+msgstr "Interactiu (defecte)"
 
 msgid "Interface:\t/dev/"
 msgstr "Interface:\t/dev/"
@@ -6283,6 +6363,9 @@ msgstr "Nom"
 msgid "Name :"
 msgstr "Nom :"
 
+msgid "Name already exists - rename failed!"
+msgstr "Aquest nom ja existeix - No s'ha reanomenat"
+
 msgid "Name of the Bouquet"
 msgstr "Nom del favorit"
 
@@ -6407,6 +6490,9 @@ msgstr "Següent"
 
 msgid "Next "
 msgstr "Següent"
+
+msgid "Next boot will start from Image 1."
+msgstr "El pròxim inici es farà des de la imatge 1"
 
 msgid "No"
 msgstr "No"
@@ -6902,6 +6988,9 @@ msgstr "Al mateix canal"
 msgid "Once per day"
 msgstr "Un cop al dia"
 
+msgid "Ondemand"
+msgstr "A petició"
+
 msgid "One"
 msgstr "Un"
 
@@ -6961,6 +7050,9 @@ msgstr "Obrir configuración del sinton. "
 
 msgid "Open the movie list"
 msgstr "Obrir la llista de pel·lícules"
+
+msgid "OpenSPA Max CPU frequency"
+msgstr "Freq. màxima CPU - normal"
 
 msgid "OpenSPA USB Devices"
 msgstr "OpenSPA - Dispositius USB"
@@ -7171,6 +7263,9 @@ msgstr "% a l'esquerra"
 
 msgid "Percentage right"
 msgstr "% a dreta"
+
+msgid "Performance"
+msgstr "Performance"
 
 msgid "Permanently delete all recordings in the trash can?"
 msgstr "Eliminar definitivament totes les gravacions de la paperera?"
@@ -8613,6 +8708,9 @@ msgstr "Desar valors i sortir"
 msgid "Scaler sharpness"
 msgstr "Nitidesa de l'escalat"
 
+msgid "Scaling Governor"
+msgstr "Governador"
+
 msgid "Scaling mode"
 msgstr "Tipus d'escalat"
 
@@ -8799,6 +8897,12 @@ msgstr "Seleccioneu BOOT:"
 msgid "Select Boot"
 msgstr "Sel. BOOT"
 
+msgid "Select Bootoption: %s"
+msgstr "Seleccioneu opció: %s"
+
+msgid "Select Bootoption: not supported - see info"
+msgstr "Seleccionar opció: no suportada - veure Info"
+
 msgid "Select CAId"
 msgstr "Seleccioneu CAId"
 
@@ -8951,7 +9055,7 @@ msgid "Select the movie path"
 msgstr "Seleccioneu la carpeta de les pel·lícules"
 
 msgid "Select the remote RCU"
-msgstr "Selecció del comandament a distancia"
+msgstr "Selecció del comandament a distància"
 
 msgid "Select upgrade source"
 msgstr "Font de l'actualització"
@@ -9895,6 +9999,9 @@ msgstr "Repòs / Reiniciar"
 
 msgid "Standby / restart"
 msgstr "Repòs / Reiniciar"
+
+msgid "Standby Max CPU frequency"
+msgstr "Freq. màxima CPU - reposo"
 
 msgid "Standby Toggle"
 msgstr "Encès/Repòs"
@@ -11332,6 +11439,9 @@ msgstr "Gestor de dispositius USB"
 msgid "USB stick wizard"
 msgstr "Assistent de pendrive USB"
 
+msgid "Unable to read image number"
+msgstr "No es pot llegir el número de imatge"
+
 msgid ""
 "Unattended upgrade in progress\n"
 "Please wait until your receiver reboots\n"
@@ -12108,8 +12218,11 @@ msgstr "Oest"
 msgid "West limit set"
 msgstr "Límit oest configurat"
 
+msgid "Wetek CPU Control"
+msgstr "Control de CPU WeTek"
+
 msgid "Wetek CPU Frequency Setup"
-msgstr "Ajuste de la frecuencia de CPU"
+msgstr "Ajust de la freqüencia de CPU"
 
 msgid "What Day of month ?"
 msgstr "Quin dia del mes?"
@@ -12587,11 +12700,17 @@ msgstr ""
 "Error mentre enregistrava. Disc ple?\n"
 "%s"
 
+msgid "Write error!"
+msgstr "Error d'escriptura"
+
 msgid "Write failed!"
 msgstr "Error en escriure!"
 
 msgid "Write to /tmp/positionersetup.log"
 msgstr "Desar-ho a /tmp/positionersetup.log"
+
+msgid "Wrong Bootsettings detected!"
+msgstr "S'han detectat ajustaments erronis de boot"
 
 msgid "Wrong parameter format 'set=%s'. Use set=set15 "
 msgstr "Format de paràmetre incorrecte 'set=%s'. Utilitzeu set=set15"
@@ -12826,6 +12945,19 @@ msgid ""
 msgstr ""
 "El backup ja ha acabat. Ara es continuarà explicant el procés "
 "d'actualització."
+
+msgid ""
+"Your box needs Bootloaderversion(s)\n"
+"\n"
+"%s\n"
+"\n"
+"to make compatible with Bootoptions!"
+msgstr ""
+"Aquest receptor necessita la versió de bootloader\n"
+"\n"
+"%s\n"
+"\n"
+"per a ser compatible amb les opcions de boot"
 
 msgid ""
 "Your collection exceeds the size of a single layer medium, you will need a "
@@ -13855,6 +13987,9 @@ msgstr "No hi ha ordre, no s'inicia"
 msgid "no description available"
 msgstr "no hi ha descripció disponible"
 
+msgid "no image found"
+msgstr "No s'ha trobat cap imatge"
+
 msgid "no module found"
 msgstr "mòdul no trobat"
 
@@ -13985,6 +14120,9 @@ msgstr "arts"
 
 msgid "pid:"
 msgstr "pid:"
+
+msgid "placeholder message 2"
+msgstr "Misssatge del marcador 2"
 
 msgid "play as picture in picture"
 msgstr "Veure en la finestra PiP"
