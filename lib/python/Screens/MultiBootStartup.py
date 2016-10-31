@@ -42,7 +42,7 @@ class MultiBootStartup(Screen):
 		self["options"] = StaticText()
 		self["description"] = Label()
 
-		self["actions"] = ActionMap(["WizardActions", "SetupActions", "ColorActions"],
+		self["actions"] = ActionMap(["WizardActions", "SetupActions", "EPGSelectActions", "ColorActions"],
 		{
 			"left": self.left,
 			"right": self.right,
