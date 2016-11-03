@@ -239,6 +239,7 @@ class FlashOnline(Screen):
 			"yellow": self.yellow,
 			"green": self.green,
 			"red": self.quit,
+			"ok": self.green,
 			"cancel": self.quit,
 		}, -2)
 
