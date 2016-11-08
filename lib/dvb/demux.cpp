@@ -136,7 +136,7 @@ RESULT eDVBDemux::createTSRecorder(ePtr<iDVBTSRecorder> &recorder, int packetsiz
 RESULT eDVBDemux::getMPEGDecoder(ePtr<iTSMPEGDecoder> &decoder, int index)
 {
 	eDebug("%s() BOXTYPE: %s",__func__,BOXTYPE);
-	if(0 == strcmp(BOXTYPE,"wetekplay") || 0 == strcmp(BOXTYPE,"wetekplayplus"))
+	if(0 == strcmp(BOXTYPE,"wetekplay") || 0 == strcmp(BOXTYPE,"wetekplay2"))
 	{
 		eDebug("%s() wetek detected",__func__);
 		decoder = new eAMLTSMPEGDecoder(this, index);
