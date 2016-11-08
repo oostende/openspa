@@ -2558,7 +2558,7 @@ class InfoBarInstantRecord:
 			self.stopAllCurrentRecordings(list)
 		elif answer[1] in ( "indefinitely" , "manualduration", "manualendtime", "event"):
 			from Components.About import about
-			if len(list) >= 2 and about.getChipSetString() in ('meson-6'):
+			if len(list) >= 2 and about.getChipSetString() in ('meson-6', 'meson-64'):
 				Notifications.AddNotification(MessageBox,_("Sorry only possible to record 2 channels at once"), MessageBox.TYPE_ERROR, timeout=5)
 				return
 			self.startInstantRecording(limitEvent = answer[1] in ("event", "manualendtime") or False)

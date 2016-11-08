@@ -76,6 +76,9 @@ class AVSwitch:
 	elif about.getChipSetString() in ('meson-6'):
 		modes["HDMI"] = ["720p", "1080p", "1080i"]
 		widescreen_modes = {"720p", "1080p", "1080i"}
+	elif about.getChipSetString() in ('meson-64'):
+		modes["HDMI"] = ["720p", "1080p", "2160p", "2160p30", "1080i"]
+		widescreen_modes = {"720p", "1080p", "1080i", "2160p", "2160p30"}
 	else:
 		modes["HDMI"] = ["720p", "1080i", "576p", "576i", "480p", "480i"]
 		widescreen_modes = {"720p", "1080i"}
@@ -310,7 +313,7 @@ class AVSwitch:
 		print "[VideoMode] setting policy: %s" % cfgelement.value
 		arw = "0"
 		try:
-			if about.getChipSetString() in ('meson-6'):
+			if about.getChipSetString() in ('meson-6', 'meson-64'):
 				if cfgelement.value == "panscan" : arw = "11"
 				if cfgelement.value == "letterbox" : arw = "12"
 				if cfgelement.value == "bestfit" : arw = "10"
