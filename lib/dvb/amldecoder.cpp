@@ -222,6 +222,12 @@ RESULT eAMLTSMPEGDecoder::setVideoPID(int vpid, int type)
 				m_codec.video_type = VFORMAT_MPEG4; //maybe?
 				t = "MPEG4 Part2";
 				break;
+#if defined(__aarch64__)
+			case H265_HEVC:
+				m_codec.video_type = VFORMAT_HEVC; //maybe?
+				eDebug("%s() video type: HEVC",__PRETTY_FUNCTION__);
+				break;
+#endif
 		}
 		eDebug("[eAMLTSMPEGDecoder::setVideoPID] vpid=%d, type=%d %s", vpid, type, t.c_str());
 	}
