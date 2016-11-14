@@ -606,6 +606,7 @@ data/display400/Makefile
 data/display400/skin_default/Makefile
 data/display400/openSPA_simple/Makefile
 data/display400/openSPA_classic/Makefile
+data/display400/openSPA_modern/Makefile
 data/display480/Makefile
 data/vfd140/Makefile
 data/vfd255/Makefile

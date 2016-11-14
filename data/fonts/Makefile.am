@@ -37,5 +37,5 @@ dist_install_DATA += hd2.ttf tuxtxt2.ttf
 endif
 
 if HAVE_COLORLCD400
-dist_install_DATA += hd2.ttf tuxtxt2.ttf
+dist_install_DATA += hd2.ttf tuxtxt2.ttf robotobold.ttf robotoregular.ttf
 endif

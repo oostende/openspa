@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <skin>
-
-   <!--vfd_21-->
-   <!--220x176 Gigablue HD QUAD / 800UE
- 255x64 Vu+ Ultimo
- 400x240 internes Grautec-LCD, Gigablue QUADplus-->
+    <!--vfd_21-->
+    <!--220x176 Gigablue HD QUAD / 800UE
+    255x64 Vu+ Ultimo
+    400x240 internes Grautec-LCD, Gigablue QUADplus-->
   <colors>
     <color name="azul" value="#00a3a7ff" />
     <color name="azuloscuro" value="#001e3d4c" />
@@ -14,20 +13,20 @@
     <color name="foreground" value="#00ffffff" />
     <color name="gray" value="#00aaaaaa" />
     <color name="green" value="#0000ff00" />
-	
+
     <color name="naranja" value="#00ffcc00" />
-    <color name="naranja2" value="#00eebb00" />	
-  <color name="rojotm2" value="#00ff6666" />
-  <color name="rojotm" value="#00ee9999" />	
-	<color name="rojooscuro" value="#004c0000" />
+    <color name="naranja2" value="#00eebb00" />
+    <color name="rojotm2" value="#00ff6666" />
+    <color name="rojotm" value="#00ee9999" />
+    <color name="rojooscuro" value="#004c0000" />
     <color name="naranjaoscuro" value="#005f5230" />
     <color name="red" value="#00ff0000" />
-	<color name="rojo_claro" value="#00ff4c4c" />
+    <color name="rojo_claro" value="#00ff4c4c" />
     <color name="silver" value="#00bbbbbb" />
     <color name="transparent" value="#ffffffff" />
     <color name="un999999" value="#00999999" />
-	    <color name="tituloazul" value="#0056c856" />
-		<color name="grisoscuro" value="#00777777" />
+    <color name="tituloazul" value="#0056c856" />
+    <color name="grisoscuro" value="#00777777" />
     <color name="unafafaf" value="#00afafaf" />
     <color name="verde" value="#0033ff66" />
     <color name="verdeoscuro" value="#00446358" />
@@ -37,11 +36,9 @@
   <!--vfd_1-->
   <fonts>
     <font filename="tuxtxt2.ttf" name="Consola" scale="120" />
-    <!--<font filename="hd2.ttf" name="VFD" scale="120" />-->
-	<font filename="/usr/share/enigma2/display/openSPA_modern/fonts/robotobold.ttf" name="VFD" scale="120" />
-	<font filename="/usr/share/enigma2/display/openSPA_modern/fonts/robotobold.ttf" name="Bold1" scale="120" />
-  <font filename="/usr/share/enigma2/display/openSPA_modern/fonts/robotoregular.ttf" name="Fine" scale="120" />
-
+    <font filename="robotobold.ttf" name="VFD" scale="120" />
+    <font filename="robotobold.ttf" name="Bold1" scale="120" />
+    <font filename="robotoregular.ttf" name="Fine" scale="120" />
   </fonts>
  <screen name="NumberZap_summary" position="0,0" size="400,240" backgroundColor="black">
     <widget source="parent.channel_summary" render="Label" position="400,240" size="1,1" noWrap="1" foregroundColor="black" backgroundColor="black" />
