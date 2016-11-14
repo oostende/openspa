@@ -28,6 +28,10 @@ if VUSOLO4K
 dist_install_DATA += analog.ttf MyriadPro-Regular.otf MyriadPro-Semibold.otf MyriadPro-SemiboldIt.otf
 endif
 
+if VUULTIMO4K
+dist_install_DATA += analog.ttf MyriadPro-Regular.otf MyriadPro-Semibold.otf MyriadPro-SemiboldIt.otf
+endif
+
 if HAVE_COLORLCD220
 dist_install_DATA += hd2.ttf tuxtxt2.ttf
 endif
