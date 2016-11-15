@@ -133,6 +133,9 @@ class VideoSetup(Screen, ConfigListScreen):
 		if SystemInfo["havecolorimetry"]:
 			self.list.append(getConfigListEntry(_("HDMI Colorimetry"), config.av.hdmicolorimetry,_("This option allows you can config the Colorimetry for HDR")))
 
+		if SystemInfo["havehdmicolordepth"]:
+			self.list.append(getConfigListEntry(_("HDMI Colordepth"), config.av.hdmicolordepth,_("This option allows you can config the Colordepth for UHD")))
+
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 
