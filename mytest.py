@@ -268,6 +268,9 @@ class Session:
 		else:
 			del self.current_dialog.callback
 
+		## hack for ready eDVBLocalTimeHandler
+		enigma.eDVBLocalTimeHandler.getInstance().syncDVBTime()
+
 		self.popCurrent()
 		if callback is not None:
 			callback(*retval)
