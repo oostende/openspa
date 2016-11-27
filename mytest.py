@@ -18,6 +18,11 @@ enigma.eConsoleAppContainer = eConsoleImpl.eConsoleAppContainer
 boxtype = getBoxType()
 
 from traceback import print_exc
+
+profile("SetupDevices")
+import Components.SetupDevices
+Components.SetupDevices.InitSetupDevices()
+
 profile("SimpleSummary")
 from Screens import InfoBar
 from Screens.SimpleSummary import SimpleSummary
@@ -262,6 +267,9 @@ class Session:
 			del self.current_dialog
 		else:
 			del self.current_dialog.callback
+
+		## hack for ready eDVBLocalTimeHandler
+		enigma.eDVBLocalTimeHandler.getInstance().syncDVBTime()
 
 		self.popCurrent()
 		if callback is not None:
@@ -624,10 +632,6 @@ profile("InputDevice")
 import Components.InputDevice
 Components.InputDevice.InitInputDevices()
 import Components.InputHotplug
-
-profile("SetupDevices")
-import Components.SetupDevices
-Components.SetupDevices.InitSetupDevices()
 
 profile("AVSwitch")
 import Components.AVSwitch
