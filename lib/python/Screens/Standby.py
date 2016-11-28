@@ -81,7 +81,10 @@ class Standby(Screen):
 					self.standbyStopServiceTimer.startLongTimer(5)
 				self.timeHandler = None
 			else:
-				self.timeHandler.m_timeUpdated.get().append(self.stopService)
+				if config.misc.SyncTimeUsing.value == 0:
+					self.timeHandler.m_timeUpdated.get().append(self.stopService)
+				else:
+					self.standbyStopServiceTimer.startLongTimer(5)
 
 		if self.session.pipshown:
 			self.infoBarInstance and hasattr(self.infoBarInstance, "showPiP") and self.infoBarInstance.showPiP()
