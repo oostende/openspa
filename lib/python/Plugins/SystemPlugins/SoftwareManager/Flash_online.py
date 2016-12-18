@@ -15,7 +15,6 @@ from Screens.TaskView import JobView
 from Tools.Downloader import downloadWithProgress
 from enigma import fbClass,getDesktop
 from Plugins.SystemPlugins.DeviceManager.HddSetup import HddSetup
-from Plugins.Extensions.spazeMenu.plugin import esHD
 from Components.Harddisk import harddiskmanager
 # from bs4 import BeautifulSoup
 import urllib2
