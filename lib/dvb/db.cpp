@@ -1095,16 +1095,11 @@ PyObject *eDVBDB::readSatellites(ePyObject sat_list, ePyObject sat_dict, ePyObje
 		Py_INCREF(Py_False);
 		return Py_False;
 	}
-	std::string satellitesFilename = eEnv::resolve("${sysconfdir}/enigma2/satellites.xml").c_str();
-	if (::access(satellitesFilename.c_str(), R_OK) < 0)
+
+	const char* satellitesFilename = "/etc/enigma2/satellites.xml";
+	if (::access(satellitesFilename, R_OK) < 0)
 	{
-		satellitesFilename = eEnv::resolve("${sysconfdir}/tuxbox/satellites.xml").c_str();
-		if (::access(satellitesFilename.c_str(), R_OK) < 0)
-		{
-			eDebug("[eDVBDB] satellites.xml not found");
-			Py_INCREF(Py_False);
-			return Py_False;
-		}
+		satellitesFilename = "/etc/tuxbox/satellites.xml";
 	}
 	xmlDoc *doc = xmlReadFile(satellitesFilename, NULL, 0);
 	if (!doc)
@@ -1491,7 +1486,7 @@ PyObject *eDVBDB::readTerrestrials(ePyObject ter_list, ePyObject tp_dict)
 
 					if (dest)
 					{
-						tmp = strtol((const char*)attr->name, &end_ptr, 10);
+						tmp = strtol((const char*)attr->children->content, &end_ptr, 10);
 						if (!*end_ptr)
 						{
 							*dest = tmp;
