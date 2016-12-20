@@ -129,12 +129,6 @@ class AudioSelection(Screen, ConfigListScreen):
 				self.settings.pcm_multichannel.addNotifier(self.changePCMMultichannel, initial_call = False)
 				conflist.append(getConfigListEntry(_("PCM Multichannel"), self.settings.pcm_multichannel, None))
 
-			if SystemInfo["Canedidchecking"]:
-				edid_bypass_choicelist = [("00000001", _("on")), ("00000000", _("off"))]
-				self.settings.edid_bypass = ConfigSelection(choices = edid_bypass_choicelist, default = config.av.bypass_edid_checking.getValue())
-				self.settings.edid_bypass.addNotifier(self.changeEDIDBypass, initial_call = False)
-				conflist.append(getConfigListEntry(_("Bypass HDMI EDID Check"), self.settings.edid_bypass))
-
 			if n > 0:
 				self.audioChannel = service.audioChannel()
 				if self.audioChannel:
@@ -349,11 +343,6 @@ class AudioSelection(Screen, ConfigListScreen):
 	def enableSubtitle(self, subtitle):
 		if self.infobar.selected_subtitle != subtitle:
 			self.infobar.enableSubtitle(subtitle)
-
-	def changeEDIDBypass(self, edid_bypass):
-		if edid_bypass.getValue():
-			config.av.bypass_edid_checking.value = edid_bypass.getValue()
-		config.av.bypass_edid_checking.save()
 
 	def change3DSurround(self, surround_3d):
 		if surround_3d.getValue():
