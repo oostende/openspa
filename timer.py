@@ -58,7 +58,6 @@ class TimerEntry:
 	def processRepeated(self, findRunningEvent=True, findNextEvent=False):
 		if (self.repeated != 0):
 			now = int(time()) + 1
-
 			if findNextEvent:
 				now = self.end + 120
 			self.findRunningEvent = findRunningEvent
@@ -178,10 +177,12 @@ class Timer:
 		# don't go trough waiting/running/end-states, but sort it
 		# right into the processedTimers.
 		if entry.shouldSkip() or entry.state == TimerEntry.StateEnded or (entry.state == TimerEntry.StateWaiting and entry.disabled):
-			insort(self.processed_timers, entry)
+			if entry not in self.processed_timers:
+				insort(self.processed_timers, entry)
 			entry.state = TimerEntry.StateEnded
 		else:
-			insort(self.timer_list, entry)
+			if entry not in self.timer_list:
+				insort(self.timer_list, entry)
 			if not noRecalc:
 				self.calcNextActivation()
 
@@ -246,7 +247,8 @@ class Timer:
 		print "time changed"
 		timer.timeChanged()
 		if timer.state == TimerEntry.StateEnded:
-			self.processed_timers.remove(timer)
+			if timer in self.processed_timers:
+				self.processed_timers.remove(timer)
 		else:
 			try:
 				self.timer_list.remove(timer)
@@ -283,7 +285,8 @@ class Timer:
 				w.state = TimerEntry.StateWaiting
 				self.addTimerEntry(w)
 			else:
-				insort(self.processed_timers, w)
+				if w not in self.processed_timers:
+					insort(self.processed_timers, w)
 
 		self.stateChanged(w)
 
