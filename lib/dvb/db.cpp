@@ -500,6 +500,7 @@ static ePtr<eDVBFrontendParameters> parseFrontendData(const char* line, int vers
 			atsc.inversion = inversion;
 			atsc.modulation = modulation;
 			atsc.system = system;
+			ePtr<eDVBFrontendParameters> feparm = new eDVBFrontendParameters;
 			feparm->setATSC(atsc);
 			feparm->setFlags(flags);
 			return feparm;
