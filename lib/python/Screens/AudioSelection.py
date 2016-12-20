@@ -670,8 +670,8 @@ class QuickSubtitlesConfigMenu(ConfigListScreen, Screen):
 
 		self["actions"] = NumberActionMap(["SetupActions"],
 		{
-			"cancel": self.finish,
-			"ok": self.finish,
+			"cancel": self.cancel,
+			"ok": self.ok,
 			"1": self.keyNumber,
 			"3": self.keyNumber,
 			"4": self.keyNumber,
@@ -710,7 +710,7 @@ class QuickSubtitlesConfigMenu(ConfigListScreen, Screen):
 			delay += 90000 * 30 # +30sec
 		elif number == 0:
 			delay = 0 # reset to "No delay"
-			
+
 		delay = min(max(delay, minDelay), maxDelay)
 
 		configItem.setValue(str(delay))
@@ -739,5 +739,9 @@ class QuickSubtitlesConfigMenu(ConfigListScreen, Screen):
 			return "%6.3f" % (fps/1000.)
 		return ""
 
-	def finish(self):
+	def cancel(self):
+		self.close()
+
+	def ok(self):
+		config.subtitles.save()
 		self.close()
