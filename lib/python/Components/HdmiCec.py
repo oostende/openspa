@@ -38,9 +38,9 @@ for i in (10, 50, 100, 150, 250, 500, 750, 1000, 1500, 2000):
 config.hdmicec.minimum_send_interval = ConfigSelection(default = "0", choices = [("0", _("Disabled"))] + choicelist)
 
 choicelist = []
-for i in range(5, 65, 5):
-	choicelist.append(("%d" % i, "%d sec" % i))
-config.hdmicec.repeat_wakeup_timer = ConfigSelection(default = "0", choices = [("0", _("Disabled"))] + choicelist)
+for i in [3] + range(5, 65, 5):
+	choicelist.append(("%d" % i, _("%d sec") % i))
+config.hdmicec.repeat_wakeup_timer = ConfigSelection(default = "3", choices = [("0", _("Disabled"))] + choicelist)
 
 class HdmiCec:
 	instance = None
@@ -66,9 +66,8 @@ class HdmiCec:
 			eActionMap.getInstance().bindAction('', -maxint - 1, self.keyEvent)
 			config.hdmicec.volume_forwarding.addNotifier(self.configVolumeForwarding)
 			config.hdmicec.enabled.addNotifier(self.configVolumeForwarding)
-			if config.hdmicec.handle_deepstandby_events.value:
-				if not getFPWasTimerWakeup():
-					self.onLeaveStandby()
+			if config.hdmicec.enabled.value and config.hdmicec.handle_deepstandby_events.value and not getFPWasTimerWakeup():
+			self.onLeaveStandby()
 			dummy = self.checkifPowerupWithoutWakingTv() # initially write 'False' to file, see below
 
 	def getPhysicalAddress(self):
@@ -195,7 +194,7 @@ class HdmiCec:
 
 	def onLeaveStandby(self):
 		self.wakeupMessages()
-		if config.hdmicec.repeat_wakeup_timer.value:
+		if int(config.hdmicec.repeat_wakeup_timer.value):
 			self.repeat.startLongTimer(int(config.hdmicec.repeat_wakeup_timer.value))
 
 	def onEnterStandby(self, configElement):
