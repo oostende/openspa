@@ -711,7 +711,7 @@ void eDVBDB::saveServicelist(const char *file)
 				cab.frequency, cab.symbol_rate, cab.inversion, cab.modulation, cab.fec_inner, flags, cab.system);
 		}
 		else if (!ch.m_frontendParameters->getATSC(atsc))
-+		{
+		{
 			fprintf(f, "\ta %d:%d:%d:%d:%d\n",
 				atsc.frequency, atsc.inversion, atsc.modulation, flags, atsc.system);
 		}
