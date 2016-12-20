@@ -250,6 +250,12 @@ class NimSetup(Screen, ConfigListScreen, ServiceStopScreen):
 			if self.nimConfig.configMode.value == "enabled":
 				self.list.append(getConfigListEntry(_("Terrestrial provider"), self.nimConfig.terrestrial))
 				self.list.append(getConfigListEntry(_("Enable 5V for active antenna"), self.nimConfig.terrestrial_5V))
+		elif self.nim.isCompatible("ATSC"):
+			self.configMode = getConfigListEntry(_("Configuration mode"), self.nimConfig.configMode)
+			self.list.append(self.configMode)
+			if self.nimConfig.configMode.value == "enabled":
+				self.list.append(getConfigListEntry(_("ATSC provider"), self.nimConfig.atsc))
+			self.have_advanced = False
 		else:
 			self.have_advanced = False
 		self["config"].list = self.list
@@ -844,7 +850,7 @@ class NimSelection(Screen):
 						text = _("Advanced")
 					if isFBCLink(x) and nimConfig.configMode.value != "advanced":
 						text += _("\n<This tuner is configured automatically>")
-				elif x.isCompatible("DVB-T") or x.isCompatible("DVB-C"):
+				elif x.isCompatible("DVB-T") or x.isCompatible("DVB-C") or x.isCompatible("ATSC"):
 					if nimConfig.configMode.value == "nothing":
 						text = _("Nothing connected")
 					elif nimConfig.configMode.value == "enabled":

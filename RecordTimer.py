@@ -140,12 +140,12 @@ class RecordTimerEntry(timer.TimerEntry, object):
 		if checkOldTimers == True:
 			if self.begin < time() - 1209600:
 				self.begin = int(time())
-		
+
 		if self.end < self.begin:
 			self.end = self.begin
-		
+
 		assert isinstance(serviceref, ServiceReference)
-		
+
 		if serviceref and serviceref.isRecordable():
 			self.service_ref = serviceref
 		else:
@@ -167,26 +167,13 @@ class RecordTimerEntry(timer.TimerEntry, object):
 		self.autoincrease = False
 		self.autoincreasetime = 3600 * 24 # 1 day
 		self.tags = tags or []
-
-		if descramble == 'notset' and record_ecm == 'notset':
-			if config.recording.ecm_data.value == 'descrambled+ecm':
-				self.descramble = True
-				self.record_ecm = True
-			elif config.recording.ecm_data.value == 'scrambled+ecm':
-				self.descramble = False
-				self.record_ecm = True
-			elif config.recording.ecm_data.value == 'normal':
-				self.descramble = True
-				self.record_ecm = False
-		else:
-			self.descramble = descramble
-			self.record_ecm = record_ecm
-
+		self.descramble = descramble
+		self.record_ecm = record_ecm
+		self.rename_repeat = rename_repeat
 		self.isAutoTimer = isAutoTimer
 		self.conflict_detection = conflict_detection
-		self.rename_repeat = rename_repeat
 		self.setAdvancedPriorityFrontend = None
-		if SystemInfo["DVB-T_priority_tuner_available"] or SystemInfo["DVB-C_priority_tuner_available"] or SystemInfo["DVB-S_priority_tuner_available"]:
+		if SystemInfo["DVB-T_priority_tuner_available"] or SystemInfo["DVB-C_priority_tuner_available"] or SystemInfo["DVB-S_priority_tuner_available"] or SystemInfo["ATSC_priority_tuner_available"]:
 			rec_ref = self.service_ref and self.service_ref.ref
 			str_service = rec_ref and rec_ref.toString()
 			if str_service and '%3a//' not in str_service and not str_service.rsplit(":", 1)[1].startswith("/"):
@@ -195,10 +182,16 @@ class RecordTimerEntry(timer.TimerEntry, object):
 					if SystemInfo["DVB-T_priority_tuner_available"] and config.usage.recording_frontend_priority_dvbt.value != "-2":
 						if config.usage.recording_frontend_priority_dvbt.value != config.usage.frontend_priority.value:
 							self.setAdvancedPriorityFrontend = config.usage.recording_frontend_priority_dvbt.value
+					if SystemInfo["ATSC_priority_tuner_available"] and config.usage.recording_frontend_priority_atsc.value != "-2":
+						if config.usage.recording_frontend_priority_atsc.value != config.usage.frontend_priority.value:
+							self.setAdvancedPriorityFrontend = config.usage.recording_frontend_priority_atsc.value
 				elif type_service == 0xFFFF:
 					if SystemInfo["DVB-C_priority_tuner_available"] and config.usage.recording_frontend_priority_dvbc.value != "-2":
 						if config.usage.recording_frontend_priority_dvbc.value != config.usage.frontend_priority.value:
 							self.setAdvancedPriorityFrontend = config.usage.recording_frontend_priority_dvbc.value
+					if SystemInfo["ATSC_priority_tuner_available"] and config.usage.recording_frontend_priority_atsc.value != "-2":
+						if config.usage.recording_frontend_priority_atsc.value != config.usage.frontend_priority.value:
+							self.setAdvancedPriorityFrontend = config.usage.recording_frontend_priority_atsc.value
 				else:
 					if SystemInfo["DVB-S_priority_tuner_available"] and config.usage.recording_frontend_priority_dvbs.value != "-2":
 						if config.usage.recording_frontend_priority_dvbs.value != config.usage.frontend_priority.value:
@@ -221,7 +214,6 @@ class RecordTimerEntry(timer.TimerEntry, object):
 	def calculateFilename(self, name=None):
 		service_name = self.service_ref.getServiceName()
 		begin_date = strftime("%Y%m%d %H%M", localtime(self.begin))
-
 		name = name or self.name
 		filename = begin_date + " - " + service_name
 		if name:
@@ -589,11 +581,11 @@ class RecordTimerEntry(timer.TimerEntry, object):
 	def getNextActivation(self):
 		if self.state == self.StateEnded:
 			return self.end
-		
+
 		next_state = self.state + 1
-		
-		return {self.StatePrepared: self.start_prepare, 
-				self.StateRunning: self.begin, 
+
+		return {self.StatePrepared: self.start_prepare,
+				self.StateRunning: self.begin,
 				self.StateEnded: self.end }[next_state]
 
 	def failureCB(self, answer):
@@ -614,7 +606,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 		old_prepare = self.start_prepare
 		self.start_prepare = self.begin - self.prepare_time
 		self.backoff = 0
-		
+
 		if int(old_prepare) != int(self.start_prepare):
 			self.log(15, "record time changed, start prepare is now: %s" % ctime(self.start_prepare))
 
@@ -629,7 +621,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 			# displayed only once, even if more timers are failing at the
 			# same time. (which is very likely in case of disk fullness)
 			Notifications.AddPopup(text = _("Write error while recording. Disk full?\n"), type = MessageBox.TYPE_ERROR, timeout = 0, id = "DiskFullMessage")
-			# ok, the recording has been stopped. we need to properly note 
+			# ok, the recording has been stopped. we need to properly note
 			# that in our state, with also keeping the possibility to re-try.
 			# TODO: this has to be done.
 		elif event == iRecordableService.evStart:
@@ -718,9 +710,9 @@ def createTimer(xml):
 class RecordTimer(timer.Timer):
 	def __init__(self):
 		timer.Timer.__init__(self)
-		
+
 		self.Filename = Directories.resolveFilename(Directories.SCOPE_CONFIG, "timers.xml")
-		
+
 		try:
 			self.loadTimer()
 		except IOError:
@@ -758,7 +750,10 @@ class RecordTimer(timer.Timer):
 				self.cleanupDisabled()
 				# Remove old timers as set in config
 				self.cleanupDaily(config.recording.keep_timers.value)
-				insort(self.processed_timers, w)
+				# If we want to keep done timers, re-insert in the active list
+				if config.recording.keep_timers.value > 0 and w not in self.processed_timers:
+					insort(self.processed_timers, w)
+
 		self.stateChanged(w)
 
 	def checkWrongRunningTimers(self):
@@ -826,7 +821,7 @@ class RecordTimer(timer.Timer):
 			#t.set("begin", str(int(timer.begin)))
 			#t.set("end", str(int(timer.end)))
 			#t.set("serviceref", str(timer.service_ref))
-			#t.set("repeated", str(timer.repeated))			
+			#t.set("repeated", str(timer.repeated))
 			#t.set("name", timer.name)
 			#t.set("description", timer.description)
 			#t.set("afterevent", str({
@@ -857,7 +852,7 @@ class RecordTimer(timer.Timer):
 
 		list.append('<?xml version="1.0" ?>\n')
 		list.append('<timers>\n')
-		
+
 		for timer in self.timer_list + self.processed_timers:
 			if timer.dontSave:
 				continue
@@ -903,7 +898,7 @@ class RecordTimer(timer.Timer):
 					list.append('>')
 					list.append(str(stringToXML(msg)))
 					list.append('</log>\n')
-			
+
 			list.append('</timer>\n')
 
 		list.append('</timers>\n')
@@ -1263,7 +1258,7 @@ class RecordTimer(timer.Timer):
 
 	def removeEntry(self, entry):
 		print "[Timer] Remove " + str(entry)
-		
+
 		# avoid re-enqueuing
 		entry.repeated = False
 
@@ -1271,10 +1266,10 @@ class RecordTimer(timer.Timer):
 		# this sets the end time to current time, so timer will be stopped.
 		entry.autoincrease = False
 		entry.abort()
-		
+
 		if entry.state != entry.StateEnded:
 			self.timeChanged(entry)
-		
+
 		print "state: ", entry.state
 		print "in processed: ", entry in self.processed_timers
 		print "in running: ", entry in self.timer_list
@@ -1283,8 +1278,9 @@ class RecordTimer(timer.Timer):
 			for x in self.timer_list:
 				if x.setAutoincreaseEnd():
 					self.timeChanged(x)
-		# now the timer should be in the processed_timers list. remove it from there.
-		self.processed_timers.remove(entry)
+		if entry in self.processed_timers:
+			# now the timer should be in the processed_timers list. remove it from there.
+			self.processed_timers.remove(entry)
 		self.saveTimer()
 
 	def shutdown(self):

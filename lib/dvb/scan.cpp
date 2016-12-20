@@ -560,6 +560,14 @@ void eDVBScan::addChannelToScan(iDVBFrontendParameters *feparm)
 			parm.guard_interval, parm.code_rate_LP, parm.code_rate_HP, parm.bandwidth);
 		break;
 	}
+	case iDVBFrontend::feATSC:
+	{
+		eDVBFrontendParametersATSC parm;
+		feparm->getATSC(parm);
+		SCAN_eDebug("[eDVBScan] try to add atsc %d %d %d %d",
+			parm.frequency, parm.modulation, parm.inversion, parm.system);
+		break;
+	}
 	}
 
 	int found_count=0;
@@ -926,8 +934,17 @@ void eDVBScan::channelDone()
 						m_pmt_in_progress->first);
 					break;
 				}
+				case iDVBFrontend::feATSC:
+				{
+					eDVBFrontendParametersATSC parm;
+					m_ch_current->getATSC(parm);
+					snprintf(sname, 255, "%d SID 0x%02x",
+						parm.frequency/1000,
+						m_pmt_in_progress->first);
+					break;
+				}
 			}
-			SCAN_eDebug("name '%s', provider_name '%s'", sname, pname);
+			SCAN_eDebug("[eDVBScan] name '%s', provider_name '%s'", sname, pname);
 			service->m_service_name = convertDVBUTF8(sname);
 			service->genSortName();
 			service->m_provider_name = convertDVBUTF8(pname);
@@ -960,6 +977,7 @@ void eDVBScan::channelDone()
 				case iDVBFrontend::feSatellite:
 				case iDVBFrontend::feTerrestrial:
 				case iDVBFrontend::feCable:
+				case iDVBFrontend::feATSC:
 				{
 					ePtr<iDVBFrontend> fe;
 					if (!m_channel->getFrontend(fe))
@@ -1070,6 +1088,16 @@ void eDVBScan::insertInto(iDVBChannelList *db, bool backgroundscanresult)
 						clearCable=true;
 						break;
 					}
+					case iDVBFrontend::feATSC:
+					{
+						eDVBFrontendParametersATSC parm;
+						(*it)->getATSC(parm);
+						if (parm.system == eDVBFrontendParametersATSC::System_ATSC)
+							clearTerrestrial = true;
+						else
+							clearCable = true;
+						break;
+					}
 				}
 			}
 		}
@@ -1099,6 +1127,16 @@ void eDVBScan::insertInto(iDVBChannelList *db, bool backgroundscanresult)
 					case iDVBFrontend::feCable:
 					{
 						clearCable=true;
+						break;
+					}
+					case iDVBFrontend::feATSC:
+					{
+						eDVBFrontendParametersATSC parm;
+						(*it)->getATSC(parm);
+						if (parm.system == eDVBFrontendParametersATSC::System_ATSC)
+							clearTerrestrial = true;
+						else
+							clearCable = true;
 						break;
 					}
 				}
@@ -1154,6 +1192,7 @@ void eDVBScan::insertInto(iDVBChannelList *db, bool backgroundscanresult)
 			}
 			case iDVBFrontend::feSatellite: // no update of any transponder parameter yet
 			case iDVBFrontend::feCable:
+			case iDVBFrontend::feATSC:
 				break;
 		}
 
