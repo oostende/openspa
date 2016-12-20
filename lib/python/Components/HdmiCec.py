@@ -67,7 +67,7 @@ class HdmiCec:
 			config.hdmicec.volume_forwarding.addNotifier(self.configVolumeForwarding)
 			config.hdmicec.enabled.addNotifier(self.configVolumeForwarding)
 			if config.hdmicec.enabled.value and config.hdmicec.handle_deepstandby_events.value and not getFPWasTimerWakeup():
-			self.onLeaveStandby()
+				self.onLeaveStandby()
 			dummy = self.checkifPowerupWithoutWakingTv() # initially write 'False' to file, see below
 
 	def getPhysicalAddress(self):
