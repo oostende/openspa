@@ -504,9 +504,12 @@ class Harddisk:
 		self.timer.callback.append(self.runIdle)
 		self.idle_running = True
 		self.hdd_timer = False
-		configsettings = readFile('/etc/enigma2/settings')
-		if "config.usage.hdd_timer" in configsettings:
-			self.hdd_timer = True
+		try:
+			configsettings = readFile('/etc/enigma2/settings')
+			if "config.usage.hdd_timer" in configsettings:
+				self.hdd_timer = True
+		except:
+			self.hdd_timer = False
 		self.setIdleTime(self.max_idle_time) # kick the idle polling loop
 
 	def runIdle(self):
@@ -621,7 +624,7 @@ DEVICEDB = \
 			"/devices/platform/brcm-ehci.0/usb1/1-1/1-1.3/1-1.3.": _("Back, lower USB"),
 			"/devices/platform/brcm-ehci-1.1/usb2/2-1/2-1:1.0/": _("Internal USB"),
 			"/devices/platform/brcm-ohci-1.1/usb4/4-1/4-1:1.0/": _("Internal USB"),
-			"/devices/platform/brcm-ehci.0/usb1/1-1/1-1.4/1-1.4.": _("Internal USB")
+			"/devices/platform/brcm-ehci.0/usb1/1-1/1-1.4/1-1.4.": _("Internal USB"),
 		},
 	"dm7020hd":
 		{
@@ -657,6 +660,40 @@ DEVICEDB = \
 			"/devices/platform/brcm-ehci.0/usb1/1-2/1-2:1.0": _("Upper USB"),
 			"/devices/platform/brcm-ehci.0/usb1/1-1/1-1:1.0": _("Lower USB")
 		},
+	"dm820":
+	{
+			"/devices/platform/ehci-brcm.0/": _("Back, lower USB"),
+			"/devices/platform/ehci-brcm.1/": _("Back, upper USB"),
+			"/devices/platform/ehci-brcm.2/": _("Internal USB"),
+			"/devices/platform/ehci-brcm.3/": _("Internal USB"),
+			"/devices/platform/ohci-brcm.0/": _("Back, lower USB"),
+			"/devices/platform/ohci-brcm.1/": _("Back, upper USB"),
+			"/devices/platform/ohci-brcm.2/": _("Internal USB"),
+			"/devices/platform/ohci-brcm.3/": _("Internal USB"),
+			"/devices/platform/sdhci-brcmstb.0/": _("eMMC"),
+			"/devices/platform/sdhci-brcmstb.1/": _("SD"),
+			"/devices/platform/strict-ahci.0/ata1/": _("SATA"),     # front
+			"/devices/platform/strict-ahci.0/ata2/": _("SATA"),     # back
+	},
+	"dm520":
+	{
+			"/devices/platform/ehci-brcm.0/usb1/1-2/": _("Back, outer USB"),
+			"/devices/platform/ohci-brcm.0/usb2/2-2/": _("Back, outer USB"),
+			"/devices/platform/ehci-brcm.0/usb1/1-1/": _("Back, inner USB"),
+			"/devices/platform/ohci-brcm.0/usb2/2-1/": _("Back, inner USB"),
+	},
+	"dm900":
+	{
+			"/devices/platform/brcmstb-ahci.0/ata1/": _("SATA"),
+			"/devices/rdb.4/f03e0000.sdhci/mmc_host/mmc0/": _("eMMC"),
+			"/devices/rdb.4/f03e0200.sdhci/mmc_host/mmc1/": _("SD"),
+			"/devices/rdb.4/f0470600.ohci_v2/usb6/6-0:1.0/port1/": _("Front USB"),
+			"/devices/rdb.4/f0470300.ehci_v2/usb3/3-0:1.0/port1/": _("Front USB"),
+			"/devices/rdb.4/f0471000.xhci_v2/usb2/2-0:1.0/port1/": _("Front USB"),
+			"/devices/rdb.4/f0470400.ohci_v2/usb5/5-0:1.0/port1/": _("Back USB"),
+			"/devices/rdb.4/f0470500.ehci_v2/usb4/4-0:1.0/port1/": _("Back USB"),
+			"/devices/rdb.4/f0471000.xhci_v2/usb2/2-0:1.0/port2/": _("Back USB"),
+	},
 	"dm800se":
 		{
 			"/devices/pci0000:01/0000:01:00.0/host0/target0:0:0/0:0:0:0": _("SATA"),
@@ -739,6 +776,9 @@ DEVICEDB = \
 			"/devices/platform/ehci-brcm.1/usb2/2-1/2-1:1.0": "Internal USB Slot"
 		}
 	}
+	}
+
+DEVICEDB["dm525"] = DEVICEDB["dm520"]
 
 def addInstallTask(job, package):
 	task = Task.LoggingTask(job, "update packages")
@@ -776,7 +816,7 @@ class HarddiskManager:
 				dev = int(readFile(devpath + "/dev").split(':')[0])
 			else:
 				dev = None
-			if getMachineBuild() in ('vuuno4k', 'vuultimo4k', 'vusolo4k', 'hd51', 'hd52', 'sf4008'):
+			if getMachineBuild() in ('vuuno4k','vuultimo4k','vusolo4k','hd51','hd52','sf4008','dm900','dm7080','dm820'):
 				devlist = [1, 7, 31, 253, 254, 179] # ram, loop, mtdblock, romblock, ramzswap, mmc
 			else:
 				devlist = [1, 7, 31, 253, 254] # ram, loop, mtdblock, romblock, ramzswap
