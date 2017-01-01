@@ -776,7 +776,6 @@ DEVICEDB = \
 			"/devices/platform/ehci-brcm.1/usb2/2-1/2-1:1.0": "Internal USB Slot"
 		}
 	}
-	}
 
 DEVICEDB["dm525"] = DEVICEDB["dm520"]
 
