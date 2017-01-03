@@ -350,7 +350,7 @@ class AudioSelection(Screen, ConfigListScreen):
 		config.av.surround_3d.save()
 
 	def changeAC3Downmix(self, downmix):
-		if downmix_ac3.getValue() == True:
+		if downmix.getValue():
 			config.av.downmix_ac3.setValue(True)
 			if SystemInfo["supportPcmMultichannel"]:
 				config.av.pcm_multichannel.setValue(False)
@@ -370,14 +370,14 @@ class AudioSelection(Screen, ConfigListScreen):
 		self.fillList()
 
 	def changeAACDownmix(self, downmix):
-		if downmix_aac.getValue() == True:
+		if downmix.getValue():
 			config.av.downmix_aac.setValue(True)
 		else:
 			config.av.downmix_aac.setValue(False)
 		config.av.downmix_aac.save()
 
 	def changeDTSDownmix(self, downmix):
-		if downmix.value:
+		if downmix.getValue():
 			config.av.downmix_dts.setValue(True)
 		else:
 			config.av.downmix_dts.setValue(False)
