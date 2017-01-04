@@ -420,6 +420,7 @@ static ePtr<eDVBFrontendParameters> parseFrontendData(const char* line, int vers
 			sat.pilot = pilot;
 			feparm->setDVBS(sat);
 			feparm->setFlags(flags);
+			break;
 		}
 		case 't':
 		{
@@ -456,6 +457,7 @@ static ePtr<eDVBFrontendParameters> parseFrontendData(const char* line, int vers
 			ter.plp_id = plp_id;
 			feparm->setDVBT(ter);
 			feparm->setFlags(flags);
+			break;
 		}
 		case 'c':
 		{
@@ -476,6 +478,7 @@ static ePtr<eDVBFrontendParameters> parseFrontendData(const char* line, int vers
 			cab.system = system;
 			feparm->setDVBC(cab);
 			feparm->setFlags(flags);
+			break;
 		}
 		case 'a':
 		{
@@ -493,6 +496,7 @@ static ePtr<eDVBFrontendParameters> parseFrontendData(const char* line, int vers
 			atsc.system = system;
 			feparm->setATSC(atsc);
 			feparm->setFlags(flags);
+			break;
 		}
 		default:
 			return NULL;
