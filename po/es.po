@@ -4948,6 +4948,12 @@ msgstr "Configuración de HDMI CEC"
 msgid "HDMI CEC setup"
 msgstr "Configuración de HDMI CEC"
 
+msgid "HDMI Colordepth"
+msgstr "Profundidad de color HDMI"
+
+msgid "HDMI Colorimetry"
+msgstr "Colorimetría HDMI"
+
 msgid "HDMI Colorspace"
 msgstr "Espacio de color HDMI"
 
@@ -10830,6 +10836,9 @@ msgstr ""
 
 msgid "This option allows to set the level of dynamic contrast of the picture."
 msgstr "Permite ajustar la cantidad de contraste dinámico de la imagen"
+
+msgid "This option allows you can config the Colordepth for UHD"
+msgstr "Permite configurar la profundidad de color para UHD"
 
 msgid "This option allows you can config the Colorimetry for HDR"
 msgstr "Permite configurar la colorimetria de HDR"
