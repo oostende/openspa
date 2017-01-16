@@ -11,7 +11,7 @@ from enigma import eDVBSatelliteEquipmentControl as secClass, \
 	eDVBSatelliteDiseqcParameters as diseqcParam, \
 	eDVBSatelliteSwitchParameters as switchParam, \
 	eDVBSatelliteRotorParameters as rotorParam, \
-	eDVBResourceManager, eDVBDB, eEnv
+	eDVBResourceManager, eDVBDB, eEnv, iDVBFrontend
 
 from boxbranding import getBoxType
 from time import localtime, mktime
@@ -780,16 +780,7 @@ class NIM(object):
 	slot_id = property(getSlotID)
 
 	def getFriendlyType(self):
-		return {
-			"DVB-S": "DVB-S",
-			"DVB-T": "DVB-T",
-			"DVB-C": "DVB-C",
-			"DVB-S2": "DVB-S2",
-			"DVB-T2": "DVB-T2",
-			"DVB-C2": "DVB-C2",
-			"ATSC": "ATSC",
-			None: _("empty")
-			}[self.getType()]
+		return self.getType() or _("empty")
 
 	friendly_type = property(getFriendlyType)
 
@@ -1908,15 +1899,11 @@ def InitNimManager(nimmgr, update_slots = []):
 		try:
 			nim.cable
 		except:
-			list = [ ]
-			n = 0
-			for x in nimmgr.cablesList:
-				list.append((str(n), x[0]))
-				n += 1
+			list = [(str(n), x[0]) for n, x in enumerate(nimmgr.cablesList)]
 			nim.cable = ConfigSubsection()
 			nim.cable.scan_networkid = ConfigInteger(default = 0, limits = (0, 99999))
 			possible_scan_types = [("bands", _("Frequency bands")), ("steps", _("Frequency steps"))]
-			if n:
+			if list:
 				possible_scan_types.append(("provider", _("Provider")))
 				nim.cable.scan_provider = ConfigSelection(default = "0", choices = list)
 			nim.cable.config_scan_details = ConfigYesNo(default = False)
@@ -1948,11 +1935,7 @@ def InitNimManager(nimmgr, update_slots = []):
 		try:
 			nim.terrestrial
 		except:
-			list = []
-			n = 0
-			for x in nimmgr.terrestrialsList:
-				list.append((str(n), x[0]))
-				n += 1
+			list = [(str(n), x[0]) for n, x in enumerate(nimmgr.terrestrialsList)]
 			nim.terrestrial = ConfigSelection(choices = list)
 			nim.terrestrial_5V = ConfigOnOff()
 
@@ -1964,6 +1947,7 @@ def InitNimManager(nimmgr, update_slots = []):
 			nim.atsc = ConfigSelection(choices = list)
 
 	def tunerTypeChanged(nimmgr, configElement, initial=False):
+		print "dvb_api_version ",iDVBFrontend.dvb_api_version
 		fe_id = configElement.fe_id
 		eDVBResourceManager.getInstance().setFrontendType(nimmgr.nim_slots[fe_id].frontend_id, nimmgr.nim_slots[fe_id].getType())
 		try:
@@ -1976,11 +1960,13 @@ def InitNimManager(nimmgr, update_slots = []):
 					return
 			frontend = raw_channel.getFrontend()
 			is_changed_mode = os.path.exists("/proc/stb/frontend/%d/mode" % fe_id)
-			if not is_changed_mode and frontend.setDeliverySystem(nimmgr.nim_slots[fe_id].getType()):
+			if not is_changed_mode and frontend.setDeliverySystem(nimmgr.nim_slots[fe_id].getType()) and iDVBFrontend.dvb_api_version >= 5:
 				print "[InitNimManager] tunerTypeChanged feid %d to mode %d" % (fe_id, int(configElement.value))
+				print "api >=5 and new style tuner driver"
 				InitNimManager(nimmgr)
 				configElement.save()
 			elif is_changed_mode:
+				print "api <5 or old style tuner driver"
 				cur_type = int(open("/proc/stb/frontend/%d/mode" % (fe_id), "r").read())
 				if cur_type != int(configElement.value):
 					print "[InitNimManager] tunerTypeChanged feid %d from %d to mode %d" % (fe_id, cur_type, int(configElement.value))
