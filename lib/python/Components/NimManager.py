@@ -11,7 +11,7 @@ from enigma import eDVBSatelliteEquipmentControl as secClass, \
 	eDVBSatelliteDiseqcParameters as diseqcParam, \
 	eDVBSatelliteSwitchParameters as switchParam, \
 	eDVBSatelliteRotorParameters as rotorParam, \
-	eDVBResourceManager, eDVBDB, eEnv, iDVBFrontend
+	eDVBResourceManager, eDVBDB, eEnv
 
 from boxbranding import getBoxType
 from time import localtime, mktime
@@ -1090,8 +1090,6 @@ class NimManager:
 				entries[current_slot]["isempty"] = True
 		nimfile.close()
 
-		from os import path
-
 		for id, entry in entries.items():
 			if not (entry.has_key("name") and entry.has_key("type")):
 				entry["name"] =  _("N/A")
@@ -1947,7 +1945,6 @@ def InitNimManager(nimmgr, update_slots = []):
 			nim.atsc = ConfigSelection(choices = list)
 
 	def tunerTypeChanged(nimmgr, configElement, initial=False):
-		print "dvb_api_version ",iDVBFrontend.dvb_api_version
 		fe_id = configElement.fe_id
 		eDVBResourceManager.getInstance().setFrontendType(nimmgr.nim_slots[fe_id].frontend_id, nimmgr.nim_slots[fe_id].getType())
 		try:
@@ -1959,19 +1956,17 @@ def InitNimManager(nimmgr, update_slots = []):
 					print "[InitNimManager] %d: tunerTypeChanged to '%s' failed (BUSY)" %(fe_id, configElement.getText())
 					return
 			frontend = raw_channel.getFrontend()
-			is_changed_mode = os.path.exists("/proc/stb/frontend/%d/mode" % fe_id)
-			if not is_changed_mode and frontend.setDeliverySystem(nimmgr.nim_slots[fe_id].getType()) and iDVBFrontend.dvb_api_version >= 5:
+			is_changed_mode = path.exists("/proc/stb/frontend/%d/mode" % fe_id)
+			if not is_changed_mode and frontend.setDeliverySystem(nimmgr.nim_slots[fe_id].getType()):
 				print "[InitNimManager] tunerTypeChanged feid %d to mode %d" % (fe_id, int(configElement.value))
-				print "api >=5 and new style tuner driver"
 				InitNimManager(nimmgr)
 				configElement.save()
 			elif is_changed_mode:
-				print "api <5 or old style tuner driver"
 				cur_type = int(open("/proc/stb/frontend/%d/mode" % (fe_id), "r").read())
 				if cur_type != int(configElement.value):
 					print "[InitNimManager] tunerTypeChanged feid %d from %d to mode %d" % (fe_id, cur_type, int(configElement.value))
 
-					is_dvb_shutdown_timeout = os.path.exists("/sys/module/dvb_core/parameters/dvb_shutdown_timeout")
+					is_dvb_shutdown_timeout = path.exists("/sys/module/dvb_core/parameters/dvb_shutdown_timeout")
 					if is_dvb_shutdown_timeout:
 						try:
 							oldvalue = open("/sys/module/dvb_core/parameters/dvb_shutdown_timeout", "r").readline()
