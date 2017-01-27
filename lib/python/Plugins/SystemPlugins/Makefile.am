@@ -18,4 +18,8 @@ if HAVE_OSDANIMATION
 SUBDIRS += AnimationSetup
 endif
 
+if WETEKPLAY
+SUBDIRS += WetekFRQ
+endif
+
 install_PYTHON = __init__.py

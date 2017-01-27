@@ -18,3 +18,7 @@ install_PYTHON = \
 	InputDeviceSetup.py DVD.py SoftwareUpdate.py AutoDiseqc.py InstallWizard.py ScreenSaver.py \
 	CCcamInfo.py OScamInfo.py CronTimer.py VideoWizard.py VideoMode.py UserInterfacePositioner.py \
 	WizardUserInterfacePositioner.py SkinSelector.py StreamingClientsInfo.py MultiBootStartup.py
+
+if WETEKPLAY
+install_PYTHON += WizardSDCardUse.py
+endif

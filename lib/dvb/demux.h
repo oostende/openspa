@@ -46,8 +46,12 @@ private:
 	friend class eDVBTSRecorder;
 	friend class eDVBCAService;
 	friend class eTSMPEGDecoder;
+#ifdef HAVE_AMLOGIC
+	int m_pvr_fd;
+	friend class eAMLTSMPEGDecoder;
+#endif
 	Signal1<void, int> m_event;
-	
+
 	int openDemux(void);
 };
 
