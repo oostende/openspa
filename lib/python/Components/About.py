@@ -56,7 +56,7 @@ def getDriverInstalledDate():
 		return _("unknown")
 
 def getChipSetString():
-	if getMachineBuild() in ('dm7080','dm820'):
+	if getMachineBuild() in ('dm7080', 'dm820'):
 		return "7435"
 	elif getMachineBuild() in ('dm520'):
 		return "73625"
@@ -91,7 +91,7 @@ def getPythonVersionString():
 		return _("unknown")
 
 def getCPUString():
-	if getMachineBuild() in ('vuuno4k', 'vuultimo4k','vusolo4k', 'hd51', 'hd52', 'sf4008', 'dm900', 'gb7252', 'dags7252'):
+	if getMachineBuild() in ('vuuno4k', 'vuultimo4k', 'vusolo4k', 'hd51', 'hd52', 'sf4008', 'dm900', 'gb7252', 'dags7252'):
 		return "Broadcom"
 	elif getMachineBuild() in ('wetekplay', 'wetekplay2', 'odroidc2'):
 		return "AMLogic"
@@ -114,7 +114,9 @@ def getCPUString():
 			return _("unavailable")
 
 def getCPUSpeedString():
-	if getMachineBuild() in ('vusolo4k', 'wetekplay'):
+	if getMachineBuild() in ('wetekplay'):
+		return "1,2 GHz"
+	elif getMachineBuild() in ('vusolo4k'):
 		return "1,5 GHz"
 	elif getMachineBuild() in ('vuuno4k','vuultimo4k','dm900', 'gb7252', 'dags7252'):
 		return "1,7 GHz"
