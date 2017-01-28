@@ -459,6 +459,7 @@ def applyAllAttributes(guiObject, desktop, attributes, scale):
 def loadSingleSkinData(desktop, skin, path_prefix):
 	"""loads skin data like colors, windowstyle etc."""
 	assert skin.tag == "skin", "root element in skin must be 'skin'!"
+				
 	for c in skin.findall("output"):
 		id = c.attrib.get('id')
 		if id:
@@ -512,6 +513,22 @@ def loadSingleSkinData(desktop, skin, path_prefix):
 			else:
 				raise SkinError("need color and name, got %s %s" % (name, color))
 
+	#mpiero regularHD compatibility check resolution and RegularHD font exist
+	spaRegularHD=0
+	for c in skin.findall("output"):
+		if str(c.attrib.get('id'))=="0":
+			for res in c.findall("resolution"):
+				xres = res.attrib.get("xres")
+				if xres and int(xres)>1400:
+					spaRegularHD=1
+	if spaRegularHD==1:
+		for c in skin.findall("fonts"):
+			for font in c.findall("font"):
+				if font.attrib.get("name")=="RegularHD":
+					spaRegularHD=2
+					break
+			if spaRegularHD==2: break
+
 	for c in skin.findall("fonts"):
 		for font in c.findall("font"):
 			get_attr = font.attrib.get
@@ -533,6 +550,10 @@ def loadSingleSkinData(desktop, skin, path_prefix):
 				skin_path = resolveFilename(SCOPE_CURRENT_SKIN, filename)
 				if fileExists(skin_path):
 					resolved_font = skin_path
+
+			#mpiero regularHD compatibility add font RegularHD for plugins in external skin
+			if name=="Regular" and spaRegularHD==1: addFont(resolved_font, "RegularHD", 150, False, render) 
+
 			addFont(resolved_font, name, scale, is_replacement, render)
 			#print "Font: ", resolved_font, name, scale, is_replacement
 		for alias in c.findall("alias"):
