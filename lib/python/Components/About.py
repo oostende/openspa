@@ -93,6 +93,8 @@ def getPythonVersionString():
 def getCPUString():
 	if getMachineBuild() in ('vuuno4k', 'vuultimo4k','vusolo4k', 'hd51', 'hd52', 'sf4008', 'dm900', 'gb7252', 'dags7252'):
 		return "Broadcom"
+	elif getMachineBuild() in ('wetekplay', 'wetekplay2', 'odroidc2'):
+		return "AMLogic"
 	else:
 		try:
 			system="unknown"
@@ -112,7 +114,7 @@ def getCPUString():
 			return _("unavailable")
 
 def getCPUSpeedString():
-	if getMachineBuild() in ('vusolo4k'):
+	if getMachineBuild() in ('vusolo4k', 'wetekplay'):
 		return "1,5 GHz"
 	elif getMachineBuild() in ('vuuno4k','vuultimo4k','dm900', 'gb7252', 'dags7252'):
 		return "1,7 GHz"
