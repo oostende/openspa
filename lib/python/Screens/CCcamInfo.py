@@ -45,6 +45,12 @@ def fhd(num, factor=1.5):
 	else: prod=num
 	return int(round(prod))
 
+def fontHD(nombre):
+	if esHD():
+		fuente = nombre+"HD"
+	else:
+		fuente = nombre
+	return fuente
 def _parse(url):
 	url = url.strip()
 	parsed = urlparse(url)
@@ -226,29 +232,29 @@ class CCcamList(MenuList):
 	def __init__(self, list):
 		MenuList.__init__(self, list, False, eListboxPythonMultiContent)
 		self.l.setItemHeight(fhd(25,2))
-		self.l.setFont(0, gFont("Regular", 20))
-		self.l.setFont(1, gFont("Regular", fhd(32,0.7)))
+		self.l.setFont(0, gFont(fontHD("Regular"), 20))
+		self.l.setFont(1, gFont(fontHD("Regular"), fhd(32,0.7)))
 
 class CCcamShareList(MenuList):
 	def __init__(self, list):
 		MenuList.__init__(self, list, False, eListboxPythonMultiContent)
 		self.l.setItemHeight(fhd(60))
-		self.l.setFont(0, gFont("Regular", 18))
-		self.l.setFont(1, gFont("Regular", fhd(32,0.7)))
+		self.l.setFont(0, gFont(fontHD("Regular"), 18))
+		self.l.setFont(1, gFont(fontHD("Regular"), fhd(32,0.7)))
 
 class CCcamConfigList(MenuList):
 	def __init__(self, list):
 		MenuList.__init__(self, list, False, eListboxPythonMultiContent)
 		self.l.setItemHeight(fhd(30))
-		self.l.setFont(0, gFont("Regular", 20))
-		self.l.setFont(1, gFont("Regular", fhd(32,0.7)))
+		self.l.setFont(0, gFont(fontHD("Regular"), 20))
+		self.l.setFont(1, gFont(fontHD("Regular"), fhd(32,0.7)))
 
 class CCcamShareViewList(MenuList):
 	def __init__(self, list):
 		MenuList.__init__(self, list, False, eListboxPythonMultiContent)
 		self.l.setItemHeight(fhd(20))
-		self.l.setFont(0, gFont("Regular", 18))
-		self.l.setFont(1, gFont("Regular", fhd(32,0.7)))
+		self.l.setFont(0, gFont(fontHD("Regular"), 18))
+		self.l.setFont(1, gFont(fontHD("Regular"), fhd(32,0.7)))
 
 def CCcamListEntry(name, idx):
 	screenwidth = getDesktop(0).size().width()

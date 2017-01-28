@@ -41,6 +41,13 @@ def fhd(num, factor=1.5):
 	else: prod=num
 	return int(round(prod))
 
+def fontHD(nombre):
+	if esHD():
+		fuente = nombre+"HD"
+	else:
+		fuente = nombre
+	return fuente
+
 class OscamInfo:
 	def __init__(self):
 		pass
@@ -367,16 +374,16 @@ class oscMenuList(MenuList):
 	def __init__(self, list, itemH = 25):
 		MenuList.__init__(self, list, False, eListboxPythonMultiContent)
 		self.l.setItemHeight(fhd(itemH,1.8))
-		self.l.setFont(0, gFont("Regular", 18))
-		self.l.setFont(1, gFont("Regular", 16))
-		self.clientFont = gFont("Regular", 14)
+		self.l.setFont(0, gFont(fontHD("Regular"), 18))
+		self.l.setFont(1, gFont(fontHD("Regular"), 16))
+		self.clientFont = gFont(fontHD("Regular"), 14)
 		self.l.setFont(2, self.clientFont)
-		self.l.setFont(3, gFont("Regular", 12))
-		self.l.setFont(4, gFont("Regular", fhd(28,0.7)))
-		self.l.setFont(5, gFont("Regular", 28))
-		self.clientFont1080 = gFont("Regular", 24)
+		self.l.setFont(3, gFont(fontHD("Regular"), 12))
+		self.l.setFont(4, gFont(fontHD("Regular"), fhd(28,0.7)))
+		self.l.setFont(5, gFont(fontHD("Regular"), 28))
+		self.clientFont1080 = gFont(fontHD("Regular"), 24)
 		self.l.setFont(6, self.clientFont1080)
-		self.l.setFont(7, gFont("Regular", 24))
+		self.l.setFont(7, gFont(fontHD("Regular"), 24))
 
 class OscamInfoMenu(Screen):
 	def __init__(self, session):
@@ -626,12 +633,22 @@ class oscInfo(Screen, OscamInfo):
 		button_width = int(sizeH / 4)
 		for k, v in enumerate(["red", "green", "yellow", "blue"]):
 			xpos = k * button_width
-			self.skin += """<ePixmap name="%s" position="%d,%d" size="35,25" pixmap="/usr/share/enigma2/skin_default/buttons/key_%s.png" zPosition="1" transparent="1" alphatest="on" />""" % (v, xpos, ypos, v)
-			self.skin += """<widget source="key_%s" render="Label" position="%d,%d" size="%d,%d" font="Regular;16" zPosition="1" valign="center" transparent="1" />""" % (v, xpos + 40, ypos2, button_width, fhd(20))
-		self.skin +="""<ePixmap name="divh" position="0,37" size="%d,2" pixmap="/usr/share/enigma2/skin_default/div-h.png" transparent="1" alphatest="on" />""" % sizeH
-		self.skin +="""<widget name="output" position="10,45" size="%d,%d" zPosition="1" scrollbarMode="showOnDemand" />""" % ( self.sizeLH, ysize)
-#		self.skin +="""<widget name="path" zPosition="10" position="10,45" size="%d,%d" zPosition="1" scrollbarMode="showOnDemand" />""" % ( self.sizeLH, ysize)
-		self.skin += """</screen>"""
+			if esHD():
+				self.skin += """<ePixmap name="%s" position="%d,%d" size="53,38" pixmap="/usr/share/enigma2/skin_default/buttons/key_%s.png" zPosition="1" transparent="1" alphatest="on" />""" % (v, xpos, ypos, v)
+				self.skin += """<widget source="key_%s" render="Label" position="%d,%d" size="%d,%d" font="RegularHD;16" zPosition="1" valign="center" transparent="1" />""" % (v, xpos + 40, ypos2, button_width, fhd(20))
+			else:
+				self.skin += """<ePixmap name="%s" position="%d,%d" size="35,25" pixmap="/usr/share/enigma2/skin_default/buttons/key_%s.png" zPosition="1" transparent="1" alphatest="on" />""" % (v, xpos, ypos, v)
+				self.skin += """<widget source="key_%s" render="Label" position="%d,%d" size="%d,%d" font="Regular;16" zPosition="1" valign="center" transparent="1" />""" % (v, xpos + 40, ypos2, button_width, fhd(20))
+		if esHD():
+			self.skin +="""<ePixmap name="divh" position="0,56" size="%d,3" pixmap="/usr/share/enigma2/skin_default/div-h.png" transparent="1" alphatest="on" />""" % sizeH
+			self.skin +="""<widget name="output" position="15,68" size="%d,%d" zPosition="1" scrollbarMode="showOnDemand" />""" % ( self.sizeLH, ysize)
+#			self.skin +="""<widget name="path" zPosition="10" position="10,45" size="%d,%d" zPosition="1" scrollbarMode="showOnDemand" />""" % ( self.sizeLH, ysize)
+			self.skin += """</screen>"""
+		else:
+			self.skin +="""<ePixmap name="divh" position="0,37" size="%d,2" pixmap="/usr/share/enigma2/skin_default/div-h.png" transparent="1" alphatest="on" />""" % sizeH
+			self.skin +="""<widget name="output" position="10,45" size="%d,%d" zPosition="1" scrollbarMode="showOnDemand" />""" % ( self.sizeLH, ysize)
+#			self.skin +="""<widget name="path" zPosition="10" position="10,45" size="%d,%d" zPosition="1" scrollbarMode="showOnDemand" />""" % ( self.sizeLH, ysize)
+			self.skin += """</screen>"""
 		Screen.__init__(self, session)
 		self.mlist = oscMenuList([])
 		self["output"] = self.mlist
