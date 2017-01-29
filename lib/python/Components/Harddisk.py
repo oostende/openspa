@@ -661,7 +661,7 @@ DEVICEDB = \
 			"/devices/platform/brcm-ehci.0/usb1/1-1/1-1:1.0": _("Lower USB")
 		},
 	"dm820":
-	{
+		{
 			"/devices/platform/ehci-brcm.0/": _("Back, lower USB"),
 			"/devices/platform/ehci-brcm.1/": _("Back, upper USB"),
 			"/devices/platform/ehci-brcm.2/": _("Internal USB"),
@@ -674,16 +674,16 @@ DEVICEDB = \
 			"/devices/platform/sdhci-brcmstb.1/": _("SD"),
 			"/devices/platform/strict-ahci.0/ata1/": _("SATA"),     # front
 			"/devices/platform/strict-ahci.0/ata2/": _("SATA"),     # back
-	},
+		},
 	"dm520":
-	{
+		{
 			"/devices/platform/ehci-brcm.0/usb1/1-2/": _("Back, outer USB"),
 			"/devices/platform/ohci-brcm.0/usb2/2-2/": _("Back, outer USB"),
 			"/devices/platform/ehci-brcm.0/usb1/1-1/": _("Back, inner USB"),
 			"/devices/platform/ohci-brcm.0/usb2/2-1/": _("Back, inner USB"),
-	},
+		},
 	"dm900":
-	{
+		{
 			"/devices/platform/brcmstb-ahci.0/ata1/": _("SATA"),
 			"/devices/rdb.4/f03e0000.sdhci/mmc_host/mmc0/": _("eMMC"),
 			"/devices/rdb.4/f03e0200.sdhci/mmc_host/mmc1/": _("SD"),
@@ -693,7 +693,7 @@ DEVICEDB = \
 			"/devices/rdb.4/f0470400.ohci_v2/usb5/5-0:1.0/port1/": _("Back USB"),
 			"/devices/rdb.4/f0470500.ehci_v2/usb4/4-0:1.0/port1/": _("Back USB"),
 			"/devices/rdb.4/f0471000.xhci_v2/usb2/2-0:1.0/port2/": _("Back USB"),
-	},
+		},
 	"dm800se":
 		{
 			"/devices/pci0000:01/0000:01:00.0/host0/target0:0:0/0:0:0:0": _("SATA"),
@@ -741,7 +741,27 @@ DEVICEDB = \
 			"/devices/platform/ehci-brcm.0/usb1/1-2/1-2:1.0": "Front USB Slot",
 			"/devices/platform/ehci-brcm.0/usb1/1-1/1-1:1.0": "Back USB Slot"
 		},
+	"gbultraueh":
+		{
+			"/devices/platform/ehci-brcm.0/usb1/1-2/1-2:1.0": "Front USB Slot",
+			"/devices/platform/ehci-brcm.0/usb1/1-1/1-1:1.0": "Back USB Slot"
+		},
 	"gbx1":
+		{
+			"/devices/platform/ehci-brcm.0/usb1/1-1/1-1:1.0": "Back USB Slot (LAN-Port)",
+			"/devices/platform/ehci-brcm.0/usb1/1-2/1-2:1.0": "Back USB Slot"
+		},
+	"gbx2":
+		{
+			"/devices/platform/ehci-brcm.0/usb1/1-1/1-1:1.0": "Back USB Slot (LAN-Port)",
+			"/devices/platform/ehci-brcm.0/usb1/1-2/1-2:1.0": "Back USB Slot"
+		},
+	"gbx3":
+		{
+			"/devices/platform/ehci-brcm.0/usb1/1-1/1-1:1.0": "Back USB Slot (LAN-Port)",
+			"/devices/platform/ehci-brcm.0/usb1/1-2/1-2:1.0": "Back USB Slot"
+		},
+	"gbx3h":
 		{
 			"/devices/platform/ehci-brcm.0/usb1/1-1/1-1:1.0": "Back USB Slot (LAN-Port)",
 			"/devices/platform/ehci-brcm.0/usb1/1-2/1-2:1.0": "Back USB Slot"
