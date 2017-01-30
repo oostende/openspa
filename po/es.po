@@ -3001,6 +3001,9 @@ msgstr "No se puede grabar: '%s' no es válido"
 msgid "Could not save configfile %s!"
 msgstr "No se puede guardar archivo %s"
 
+msgid "Cover dashed flickering line for this service"
+msgstr "Cubrir linea parpadeante para este servicio"
+
 msgid "Create"
 msgstr "Crear"
 
@@ -4005,6 +4008,9 @@ msgstr "Controlador 'neutrino' para la selección de canales"
 
 msgid "Enable 5V for active antenna"
 msgstr "Activar 5V para la antena activa"
+
+msgid "Enable access from VPNs"
+msgstr "Habilitar acceso desde VPN"
 
 msgid "Enable Authentication for streaming"
 msgstr "Habilitar autenticación para streaming"
@@ -11497,6 +11503,9 @@ msgstr ""
 msgid "Uncommitted DiSEqC command"
 msgstr "Comando DiSEqC no enviado"
 
+msgid "Uncover dashed flickering line for this service"
+msgstr "Descubrir linea parpadeante para este servicio"
+
 msgid "Undetermined"
 msgstr "(Sin Determinar)"
 
@@ -12734,6 +12743,9 @@ msgid ""
 msgstr ""
 "Con este descargo, OpenSPA informa que estamos trabajando en 'nightly "
 "builds' y que es posible que después de actualizar el receptor "
+
+msgid "Without auth only local access is allowed!"
+msgstr "Sin autenticación solo se permite acceso local!"
 
 msgid "Without popup"
 msgstr "Sin ventana emergente"
