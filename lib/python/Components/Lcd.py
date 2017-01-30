@@ -99,6 +99,9 @@ class LCD:
 	def setFlipped(self, value):
 		eDBoxLCD.getInstance().setFlipped(value)
 
+	def setScreenShot(self, value):
+		eDBoxLCD.getInstance().setDump(value)
+
 	def isOled(self):
 		return eDBoxLCD.getInstance().isOled()
 
@@ -179,6 +182,7 @@ def InitLcd():
 	SystemInfo["LCDMiniTV"] = can_lcdmodechecking
 
 	if detected:
+		ilcd = LCD()
 		if can_lcdmodechecking:
 			def setLCDModeMinitTV(configElement):
 				try:
@@ -197,6 +201,9 @@ def InitLcd():
 			def setLCDModePiP(configElement):
 				pass
 
+			def setLCDScreenshot(configElement):
+				ilcd.setScreenShot(configElement.value);
+
 			config.lcd.modepip = ConfigSelection(choices={
 					"0": _("off"),
 					"5": _("PIP"),
@@ -206,6 +213,9 @@ def InitLcd():
 				config.lcd.modepip.addNotifier(setLCDModePiP)
 			else:
 				config.lcd.modepip = ConfigNothing()
+
+			config.lcd.screenshot = ConfigYesNo(default=False)
+			config.lcd.screenshot.addNotifier(setLCDScreenshot)
 
 			config.lcd.modeminitv = ConfigSelection(choices={
 					"0": _("normal"),
@@ -218,6 +228,7 @@ def InitLcd():
 			config.lcd.fpsminitv.addNotifier(setMiniTVFPS)
 		else:
 			config.lcd.modeminitv = ConfigNothing()
+			config.lcd.screenshot = ConfigNothing()
 			config.lcd.fpsminitv = ConfigNothing()
 
 		config.lcd.scroll_speed = ConfigSelection(default = "300", choices = [
@@ -269,8 +280,6 @@ def InitLcd():
 			ilcd.setLEDBlinkingTime(configElement.value)
 
 		standby_default = 5
-
-		ilcd = LCD()
 
 		if not ilcd.isOled():
 			config.lcd.contrast = ConfigSlider(default=5, limits=(0, 20))
