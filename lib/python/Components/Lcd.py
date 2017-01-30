@@ -121,8 +121,8 @@ class LCD:
 			f.write(value)
 			f.close()
 
-	def setEt8500(self, value):
-		print 'setLCDet8500',value
+	def setfblcddisplay(self, value):
+		print 'setfblcddisplay',value
 		f = open("/proc/stb/fb/sd_detach", "w")
 		f.write(value)
 		f.close()
@@ -250,8 +250,8 @@ def InitLcd():
 		def setLCDpower(configElement):
 			ilcd.setPower(configElement.value);
 
-		def setLCD8500(configElement):
-			ilcd.setEt8500(configElement.value);
+		def setfblcddisplay(configElement):
+			ilcd.setfblcddisplay(configElement.value);
 
 		def setLCDrepeat(configElement):
 			ilcd.setRepeat(configElement.value)
@@ -325,10 +325,10 @@ def InitLcd():
 			config.lcd.power = ConfigNothing()
 
 		if fileExists("/proc/stb/fb/sd_detach"):
-			config.lcd.et8500 = ConfigSelection([("1", _("No")), ("0", _("Yes"))], "0")
-			config.lcd.et8500.addNotifier(setLCD8500);
+			config.lcd.fblcddisplay = ConfigSelection([("1", _("No")), ("0", _("Yes"))], "1")
+			config.lcd.fblcddisplay.addNotifier(setfblcddisplay);
 		else:
-			config.lcd.et8500 = ConfigNothing()
+			config.lcd.fblcddisplay = ConfigNothing()
 
 		if getBoxType() == 'vuultimo':
 			config.lcd.ledblinkingtime = ConfigSlider(default = 5, increment = 1, limits = (0,15))
@@ -364,7 +364,7 @@ def InitLcd():
 		config.lcd.standby.apply = lambda : doNothing()
 		config.lcd.mode = ConfigNothing()
 		config.lcd.power = ConfigNothing()
-		config.lcd.et8500 = ConfigNothing()
+		config.lcd.fblcddisplay = ConfigNothing()
 		config.lcd.repeat = ConfigNothing()
 		config.lcd.scrollspeed = ConfigNothing()
 		config.lcd.scroll_speed = ConfigSelection(default = "300", choices = [
