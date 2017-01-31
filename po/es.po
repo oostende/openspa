@@ -2742,7 +2742,7 @@ msgid "Configure the secondary EPG language."
 msgstr "Segundo idioma de la EPG."
 
 msgid "Configure the sharpness of the video scaling."
-msgstr "Nitidez del escalado de vídeo."
+msgstr "Nitidez escala"
 
 msgid "Configure the skip time interval for the '1'/'3' buttons."
 msgstr "Configuración del salto de tiempo para las teclas '1'/'3'"
