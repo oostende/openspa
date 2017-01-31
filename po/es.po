@@ -8739,7 +8739,7 @@ msgid "Save values and close screen"
 msgstr "Guardar valores y salir"
 
 msgid "Scaler sharpness"
-msgstr "Nitidez del escalado"
+msgstr "Nitidez"
 
 msgid "Scaling Governor"
 msgstr "Gobernador"
