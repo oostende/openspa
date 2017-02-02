@@ -304,9 +304,9 @@ private:
 	int m_buffer_size;
 	int m_ignore_buffering_messages;
 	bool m_is_live;
+	bool m_subtitles_paused;
 	bool m_use_prefillbuffer;
 	bool m_paused;
-	bool m_seek_paused;
 	/* cuesheet load check */
 	bool m_cuesheet_loaded;
 	/* servicemMP3 chapter TOC support CVR */
@@ -315,6 +315,7 @@ private:
 	/* last used seek position gst-1 only */
 	gint64 m_last_seek_pos;
 	gint64 m_last_play_pos;
+	gint64 m_media_lenght;
 #endif
 	bufferInfo m_bufferInfo;
 	errorInfo m_errorInfo;
