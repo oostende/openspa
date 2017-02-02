@@ -26,6 +26,7 @@ public:
 	RESULT list(const eServiceReference &, ePtr<iListableService> &ptr);
 	RESULT info(const eServiceReference &, ePtr<iStaticServiceInformation> &ptr);
 	RESULT offlineOperations(const eServiceReference &, ePtr<iServiceOfflineOperations> &ptr);
+	gint m_eServicemp3_counter;
 private:
 	ePtr<eStaticServiceMP3Info> m_service_info;
 };
@@ -237,10 +238,11 @@ public:
 	{
 		audiotype_t audiotype;
 		containertype_t containertype;
+		bool is_audio;
 		bool is_video;
 		bool is_streaming;
 		sourceStream()
-			:audiotype(atUnknown), containertype(ctNone), is_video(FALSE), is_streaming(FALSE)
+			:audiotype(atUnknown), containertype(ctNone), is_audio(FALSE), is_video(FALSE), is_streaming(FALSE)
 		{
 		}
 	};
@@ -324,7 +326,7 @@ private:
 		stIdle, stRunning, stStopped,
 	};
 	int m_state;
-	GstElement *m_gst_playbin, *audioSink, *videoSink;
+	GstElement *m_gst_playbin;
 	GstTagList *m_stream_tags;
 
 	eFixedMessagePump<ePtr<GstMessageContainer> > m_pump;
@@ -372,7 +374,7 @@ private:
 	void pullSubtitle(GstBuffer *buffer);
 	void sourceTimeout();
 	sourceStream m_sourceinfo;
-	gulong m_subs_to_pull_handler_id;
+	gulong m_subs_to_pull_handler_id, m_notify_source_handler_id, m_notify_element_added_handler_id;
 
 	RESULT seekToImpl(pts_t to);
 
