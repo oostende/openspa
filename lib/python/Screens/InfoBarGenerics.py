@@ -275,7 +275,7 @@ class InfoBarShowHide(InfoBarScreenSaver):
 
 	def doDimming(self):
 		if config.usage.show_infobar_do_dimming.value:
-			self.dimmed = int(int(self.dimmed) - 1)
+			self.dimmed -= 1
 		else:
 			self.dimmed = 0
 		self.DimmingTimer.stop()
@@ -353,21 +353,19 @@ class InfoBarShowHide(InfoBarScreenSaver):
 		self.DimmingTimer = eTimer()
 		self.DimmingTimer.callback.append(self.doDimming)
 		self.DimmingTimer.start(70, True)
-		self.dimmed = config.usage.show_infobar_dimming_speed.value
+		self.dimmed = int(config.usage.show_infobar_dimming_speed.value)
 
 	def doHide(self):
 		if self.__state != self.STATE_HIDDEN:
 			if self.dimmed > 0:
-				#self.doWriteAlpha((int(config.av.osd_alpha.value) * int(self.dimmed) / int(config.usage.show_infobar_dimming_speed.value)))
-				self.doWriteAlpha(int(int(config.av.osd_alpha.value) * int(self.dimmed) / int(config.usage.show_infobar_dimming_speed.value)))
+				self.doWriteAlpha(config.av.osd_alpha.value * self.dimmed / int(config.usage.show_infobar_dimming_speed.value))
 				self.DimmingTimer.start(5, True)
 			else:
 				self.DimmingTimer.stop()
 				self.hide()
 		elif self.__state == self.STATE_HIDDEN and self.secondInfoBarScreen and self.secondInfoBarScreen.shown:
 			if self.dimmed > 0:
-				#self.doWriteAlpha((int(config.av.osd_alpha.value) * int(self.dimmed) / int(config.usage.show_infobar_dimming_speed.value)))
-				self.doWriteAlpha(int(int(config.av.osd_alpha.value) * int(self.dimmed) / int(config.usage.show_infobar_dimming_speed.value)))
+				self.doWriteAlpha(config.av.osd_alpha.value * self.dimmed / int(config.usage.show_infobar_dimming_speed.value))
 				self.DimmingTimer.start(5, True)
 			else:
 				self.DimmingTimer.stop()
