@@ -24,7 +24,7 @@
 #include <time.h>
 #include <sys/time.h>
 
-#define HTTP_TIMEOUT 15
+#define HTTP_TIMEOUT 10
 
 /*
  * UNUSED variable from service reference is now used as buffer flag for gstreamer
@@ -696,17 +696,30 @@ eServiceMP3::eServiceMP3(eServiceReference ref):
 				g_object_set(dvb_audiosink, "e2-sync", TRUE, NULL);
 				g_object_set(dvb_audiosink, "e2-async", TRUE, NULL);
 			}
+			else if(m_sourceinfo.is_streaming)
+			{
+				g_object_set(dvb_audiosink, "e2-sync", TRUE, NULL);
+				g_object_set(dvb_audiosink, "e2-async", FALSE, NULL);
+			}
 			else
 			{
-				g_object_set(dvb_audiosink, "e2-sync", FALSE, NULL);
-				g_object_set(dvb_audiosink, "e2-async", FALSE, NULL);
+				g_object_set(dvb_audiosink, "e2-sync", TRUE, NULL);
+				g_object_set(dvb_audiosink, "e2-async", TRUE, NULL);
 			}
 			g_object_set(m_gst_playbin, "audio-sink", dvb_audiosink, NULL);
 		}
 		if(dvb_videosink && !m_sourceinfo.is_audio)
 		{
-			g_object_set(dvb_videosink, "e2-sync", FALSE, NULL);
-			g_object_set(dvb_videosink, "e2-async", FALSE, NULL);
+			if(m_sourceinfo.is_streaming)
+			{
+				g_object_set(dvb_videosink, "e2-sync", FALSE, NULL);
+				g_object_set(dvb_videosink, "e2-async", TRUE, NULL);
+			}
+			else
+			{
+				g_object_set(dvb_videosink, "e2-sync", FALSE, NULL);
+				g_object_set(dvb_videosink, "e2-async", FALSE, NULL);
+			}
 			g_object_set(m_gst_playbin, "video-sink", dvb_videosink, NULL);
 		}
 		/*
@@ -1041,7 +1054,7 @@ RESULT eServiceMP3::seekToImpl(pts_t to)
 		GST_SEEK_TYPE_NONE, GST_CLOCK_TIME_NONE))
 #else
 	m_last_seek_pos = to * 11111LL;
-	if (!gst_element_seek (m_gst_playbin, m_currentTrickRatio, GST_FORMAT_TIME, (GstSeekFlags)(GST_SEEK_FLAG_FLUSH | GST_SEEK_FLAG_KEY_UNIT),
+	if (!gst_element_seek (m_gst_playbin, m_currentTrickRatio, GST_FORMAT_TIME, (GstSeekFlags)(GST_SEEK_FLAG_FLUSH | GST_SEEK_FLAG_KEY_UNIT | GST_SEEK_FLAG_SNAP_BEFORE),
 		GST_SEEK_TYPE_SET, m_last_seek_pos,
 		GST_SEEK_TYPE_NONE, GST_CLOCK_TIME_NONE))
 #endif
@@ -1054,6 +1067,8 @@ RESULT eServiceMP3::seekToImpl(pts_t to)
 	{
 		m_event((iPlayableService*)this, evUpdatedInfo);
 	}
+
+	eDebug("[eServiceMP3] seekToImpl(pts_t to) DONE");
 	return 0;
 }
 
@@ -1320,7 +1335,7 @@ RESULT eServiceMP3::getPlayPosition(pts_t &pts)
 	if ((pos = get_pts_pcrscr()) > 0)
 		pos *= 11111LL;
 #else
-	if ((dvb_audiosink || dvb_videosink) && !m_paused)
+	if ((dvb_audiosink || dvb_videosink) && !m_paused && !m_sourceinfo.is_streaming)
 	{
 		if (m_sourceinfo.is_audio)
 		{
@@ -1330,9 +1345,9 @@ RESULT eServiceMP3::getPlayPosition(pts_t &pts)
 		}
 		else
 		{
-			g_signal_emit_by_name(dvb_audiosink, "get-decoder-time", &pos);
+			g_signal_emit_by_name(dvb_videosink, "get-decoder-time", &pos);
 			if (!GST_CLOCK_TIME_IS_VALID(pos) || 0)
-				g_signal_emit_by_name(dvb_videosink, "get-decoder-time", &pos);
+				 g_signal_emit_by_name(dvb_audiosink, "get-decoder-time", &pos);
 			if(!GST_CLOCK_TIME_IS_VALID(pos))
 				return -1;
 		}
@@ -1983,49 +1998,11 @@ void eServiceMP3::gstBusCall(GstMessage *msg)
 				case GST_STATE_CHANGE_PAUSED_TO_PLAYING:
 				{
 					m_paused = false;
-					if (m_currentAudioStream < 0)
-					{
-						int autoaudio = 0;
-						int autoaudio_level = 5;
-						std::string configvalue;
-						std::vector<std::string> autoaudio_languages;
-						configvalue = eConfigManager::getConfigValue("config.autolanguage.audio_autoselect1");
-						if (configvalue != "" && configvalue != "None")
-							autoaudio_languages.push_back(configvalue);
-						configvalue = eConfigManager::getConfigValue("config.autolanguage.audio_autoselect2");
-						if (configvalue != "" && configvalue != "None")
-							autoaudio_languages.push_back(configvalue);
-						configvalue = eConfigManager::getConfigValue("config.autolanguage.audio_autoselect3");
-						if (configvalue != "" && configvalue != "None")
-							autoaudio_languages.push_back(configvalue);
-						configvalue = eConfigManager::getConfigValue("config.autolanguage.audio_autoselect4");
-						if (configvalue != "" && configvalue != "None")
-							autoaudio_languages.push_back(configvalue);
-						for (int i = 0; i < m_audioStreams.size(); i++)
-						{
-							if (!m_audioStreams[i].language_code.empty())
-							{
-								int x = 1;
-								for (std::vector<std::string>::iterator it = autoaudio_languages.begin(); x < autoaudio_level && it != autoaudio_languages.end(); x++, it++)
-								{
-									if ((*it).find(m_audioStreams[i].language_code) != std::string::npos)
-									{
-										autoaudio = i;
-										autoaudio_level = x;
-										break;
-									}
-								}
-							}
-						}
-
-						if (autoaudio)
-							selectTrack(autoaudio);
-					}
 					m_event((iPlayableService*)this, evGstreamerPlayStarted);
 				}	break;
 				case GST_STATE_CHANGE_PLAYING_TO_PAUSED:
 				{
-					m_first_paused = false
+					m_first_paused = false;
 					m_paused = true;
 				}	break;
 				case GST_STATE_CHANGE_PAUSED_TO_READY:
