@@ -492,7 +492,7 @@ eServiceMP3::eServiceMP3(eServiceReference ref):
 	m_subtitle_sync_timer = eTimer::create(eApp);
 	m_stream_tags = 0;
 	m_currentAudioStream = -1;
-	m_currentSubtitleStream = -2;
+	m_currentSubtitleStream = -1;
 	m_cachedSubtitleStream = 0; /* report the first subtitle stream to be 'cached'. TODO: use an actual cache. */
 	m_subtitle_widget = 0;
 	m_currentTrickRatio = 1.0;
@@ -747,9 +747,10 @@ eServiceMP3::eServiceMP3(eServiceReference ref):
 			g_object_set (dvb_subsink, "caps", gst_caps_from_string("text/plain; text/x-plain; text/x-raw; text/x-pango-markup; video/x-dvd-subpicture; subpicture/x-pgs"), NULL);
 #else
 			g_object_set (dvb_subsink, "caps", gst_caps_from_string("text/plain; text/x-plain; text/x-raw; text/x-pango-markup; subpicture/x-dvd; subpicture/x-pgs"), NULL);
+			g_object_set (dvb_subsink, "sync", TRUE, NULL);
 #endif
 			g_object_set (m_gst_playbin, "text-sink", dvb_subsink, NULL);
-			g_object_set (m_gst_playbin, "current-text", m_currentSubtitleStream + 1, NULL);
+			g_object_set (m_gst_playbin, "current-text", m_currentSubtitleStream, NULL);
 		}
 		GstBus *bus = gst_pipeline_get_bus(GST_PIPELINE (m_gst_playbin));
 #if GST_VERSION_MAJOR < 1
@@ -929,7 +930,6 @@ RESULT eServiceMP3::stop()
 		/* it's usseles to save last 20 seconds */
 		if( pts <= (m_media_lenght - 1800000LL))
 			m_last_play_pos = pts;
-		eDebug("[serviceMP3] tempo cvr last playpostion = %" G_GINT64_FORMAT, m_last_play_pos);
 	}
 	eDebug("[serviceMP3] tempo cvr last playpostion = %" G_GINT64_FORMAT " media_lenght = %" G_GINT64_FORMAT, m_last_play_pos, m_media_lenght);
 #endif
@@ -961,11 +961,6 @@ RESULT eServiceMP3::stop()
 		gst_element_state_change_return_get_name(ret));
 
 	return 0;
-}
-
-RESULT eServiceMP3::setTarget(int target)
-{
-	return -1;
 }
 
 RESULT eServiceMP3::pause(ePtr<iPauseableService> &ptr)
@@ -2036,8 +2031,6 @@ void eServiceMP3::gstBusCall(GstMessage *msg)
 						 * So as soon as gstreamer has been fixed to keep sync in sparse streams, sync needs to be re-enabled.
 						 */
 						g_object_set (dvb_subsink, "sync", FALSE, NULL);
-#else
-						g_object_set (dvb_subsink, "sync", TRUE, NULL);
 #endif
 
 #if 0
@@ -3032,20 +3025,13 @@ RESULT eServiceMP3::enableSubtitles(iSubtitleUser *user, struct SubtitleTrack &t
 
 		eDebug ("[eServiceMP3] eServiceMP3::switched to subtitle stream %i", m_currentSubtitleStream);
 
-#ifdef GSTREAMER_SUBTITLE_SYNC_MODE_BUG
+//#ifdef GSTREAMER_SUBTITLE_SYNC_MODE_BUG
 		/*
 		 * when we're running the subsink in sync=false mode,
 		 * we have to force a seek, before the new subtitle stream will start
 		 */
 		seekRelative(-1, 90000);
-#else
-		if(previous_track != -2)
-		{
-			pts_t ppos = 0;
-			if (getPlayPosition(ppos) >= 0)
-				seekTo(ppos);
-		}
-#endif
+
 	}
 	return 0;
 }
