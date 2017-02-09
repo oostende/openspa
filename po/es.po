@@ -14808,3 +14808,9 @@ msgstr "Cambiar antes de Stream"
 
 msgid "zapped"
 msgstr "Cambiado"
+
+msgid "Date/Time Format in Standby"
+msgstr "Formato de Fecha/Hora en reposo"
+
+msgid "Set de Date/Time Format in VFD in standby mode (A = Alternate data every 15sg)."
+msgstr "Configura el formato de Fecha/Hora en reposo en el display (A = Alterna los datos cada 15sg)."
