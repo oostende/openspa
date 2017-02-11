@@ -1,7 +1,7 @@
 from MenuList import MenuList
 
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
-from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
+from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaBlend
 
 from enigma import eListboxPythonMultiContent, gFont, BT_SCALE, BT_KEEP_ASPECT_RATIO
 from Tools.LoadPixmap import LoadPixmap
@@ -19,7 +19,7 @@ def PluginEntryComponent(plugin, width=440):
 		plugin,
 		MultiContentEntryText(pos=(nx, ny), size=(width-nx, nh), font=0, text=plugin.name),
 		MultiContentEntryText(pos=(nx, dy), size=(width-dx, dh), font=1, text=plugin.description),
-		MultiContentEntryPixmapAlphaTest(pos=(ix, iy), size=(iw, ih), png = png, flags = BT_SCALE | BT_KEEP_ASPECT_RATIO)
+		MultiContentEntryPixmapAlphaBlend(pos=(ix, iy), size=(iw, ih), png = png, flags = BT_SCALE | BT_KEEP_ASPECT_RATIO)
 	]
 
 def PluginCategoryComponent(name, png, width=440):
@@ -28,7 +28,7 @@ def PluginCategoryComponent(name, png, width=440):
 	return [
 		name,
 		MultiContentEntryText(pos=(x, y), size=(width-x, h), font=0, text=name),
-		MultiContentEntryPixmapAlphaTest(pos=(ix, iy), size=(iw, ih), png = png)
+		MultiContentEntryPixmapAlphaBlend(pos=(ix, iy), size=(iw, ih), png = png)
 	]
 
 def PluginDownloadComponent(plugin, name, version=None, width=440):
@@ -50,7 +50,7 @@ def PluginDownloadComponent(plugin, name, version=None, width=440):
 		plugin,
 		MultiContentEntryText(pos=(x, y), size=(width-x, h), font=0, text=name),
 		MultiContentEntryText(pos=(dx, dy), size=(width-dx, dh), font=1, text=plugin.description),
-		MultiContentEntryPixmapAlphaTest(pos=(ix, iy), size=(iw, ih), png = png)
+		MultiContentEntryPixmapAlphaBlend(pos=(ix, iy), size=(iw, ih), png = png)
 	]
 
 
