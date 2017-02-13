@@ -321,7 +321,7 @@ def InitLcd():
 				("A%H:%M %a %d/%m/%y",str(ntime.strftime(_("%H:%M <A> %a %d/%m/%y"))))])
 			config.usage.lcd_dateformat.addNotifier(setDateFormat)
 		#16 digit
-		elif getBoxType() in ('sf3038', 'sf4008','hd51'):
+		elif getBoxType() in ('sf3038', 'sf4008','mutant51'):
 			config.usage.lcd_dateformat = ConfigSelection(default="%H:%M %d/%m/%Y", choices = [
 				("OFF","Off"),
 				("%H:%M",str(ntime.strftime(_("%H:%M")))),
