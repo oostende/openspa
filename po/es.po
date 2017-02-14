@@ -3002,7 +3002,7 @@ msgid "Could not save configfile %s!"
 msgstr "No se puede guardar archivo %s"
 
 msgid "Cover dashed flickering line for this service"
-msgstr "Cubrir linea discontinua para este servicio"
+msgstr "Fijar parpadeo en los bordes para este servicio"
 
 msgid "Create"
 msgstr "Crear"
@@ -11507,7 +11507,7 @@ msgid "Uncommitted DiSEqC command"
 msgstr "Comando DiSEqC no enviado"
 
 msgid "Uncover dashed flickering line for this service"
-msgstr "Descubrir linea discontínua para este servicio"
+msgstr "Desactivar parpadeo en los bordes para este servicio"
 
 msgid "Undetermined"
 msgstr "(Sin Determinar)"
