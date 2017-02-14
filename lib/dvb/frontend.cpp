@@ -86,6 +86,22 @@ void eDVBDiseqcCommand::setCommandString(const char *str)
 	len = slen/2;
 }
 
+void eDVBFrontendParametersSatellite::set(const S2SatelliteDeliverySystemDescriptor &descriptor)
+{
+	if(descriptor.getScramblingSequenceSelector())
+	{
+		is_id = descriptor.getInputStreamIdentifier();
+		pls_mode = eDVBFrontendParametersSatellite::PLS_Root;
+		pls_code = descriptor.getScramblingSequenceIndex();
+	}
+	else
+	{
+		is_id = NO_STREAM_ID_FILTER;
+		pls_mode = eDVBFrontendParametersSatellite::PLS_Root;
+		pls_code = 0;
+	}
+}
+
 void eDVBFrontendParametersSatellite::set(const SatelliteDeliverySystemDescriptor &descriptor)
 {
 	frequency    = descriptor.getFrequency() * 10;
@@ -2195,7 +2211,6 @@ void eDVBFrontend::setFrontend(bool recvEvents)
 			{
 				p[cmdseq.num].cmd = DTV_ROLLOFF, p[cmdseq.num].u.data = rolloff, cmdseq.num++;
 				p[cmdseq.num].cmd = DTV_PILOT, p[cmdseq.num].u.data = pilot, cmdseq.num++;
-				p[cmdseq.num].cmd = DTV_STREAM_ID, p[cmdseq.num].u.data = parm.is_id | (parm.pls_code << 8) | (parm.pls_mode << 26), cmdseq.num++;
 			}
 		}
 		else if (type == iDVBFrontend::feCable)
@@ -2385,7 +2400,7 @@ void eDVBFrontend::setFrontend(bool recvEvents)
 				if (m_dvbversion >= DVB_VERSION(5, 3))
 				{
 #if defined DTV_STREAM_ID
-					p[cmdseq.num].cmd = DTV_STREAM_ID, p[cmdseq.num].u.data = parm.plp_id, cmdseq.num++;
+					p[cmdseq.num].cmd = DTV_STREAM_ID, p[cmdseq.num].u.data = parm.is_id | (parm.pls_code << 8) | (parm.pls_mode << 26), cmdseq.num++;
 #elif defined DTV_DVBT2_PLP_ID
 					p[cmdseq.num].cmd = DTV_DVBT2_PLP_ID, p[cmdseq.num].u.data = parm.plp_id, cmdseq.num++;
 #endif
@@ -2432,6 +2447,79 @@ void eDVBFrontend::setFrontend(bool recvEvents)
 			}
 			cmdseq.num++;
 		}
+//>>> adenin multistream patch for gb
+		if(!strcmp(m_description, "GIGA DVB-S2 NIM (SP2246T)"))
+		{
+			if (type == iDVBFrontend::feSatellite)
+			{
+				int plasmid = ::open("/dev/plasmid", O_RDWR);
+				if (plasmid > 0)
+				{
+					typedef struct _ioctl_stream
+					{
+						uint32_t	tuner;	//[0..1]
+						uint32_t	cnt;	//[1..128]
+						uint8_t 	*data;
+					}_ioctl_stream;
+					#define SET_MIS_I2C	_IOWR('p', 0x40, _ioctl_stream *)
+					_ioctl_stream d;
+					eDVBFrontendParametersSatellite parm;
+					oparm.getDVBS(parm);
+					uint32_t value = parm.pls_code | (parm.pls_mode & 0x3 << 18);
+					uint8_t seq[6];
+					if ((parm.is_id != NO_STREAM_ID_FILTER) && (parm.system == eDVBFrontendParametersSatellite::System_DVB_S2))
+					{
+						seq[0] = (value >> 16) & 0xFF;
+						seq[1] = (value >> 8) & 0xFF;
+						seq[2] = value & 0xFF;
+						seq[3] = parm.is_id & 0xFF;
+						seq[4] = 0xFF;
+						seq[5] = 0x20;
+					}
+					else
+					{
+						seq[0] = 0;
+						seq[1] = 0;
+						seq[2] = 1;
+						seq[3] = 1;
+						seq[4] = 0xff;
+						seq[5] = 0x00;
+					}
+					int pnp_offset = 0;
+					int fd = open("/proc/stb/info/model", O_RDONLY);
+					char tmp[16];
+					int rd = fd >= 0 ? read(fd, tmp, sizeof(tmp)) : 0;
+					if (fd >= 0)
+						close(fd);
+					if (rd)
+					{
+						if (!strncmp(tmp, "gb800seplus\n",rd))
+							pnp_offset = 1;
+						else if (!strncmp(tmp, "gb800se\n",rd))
+							pnp_offset = 1;
+						else if (!strncmp(tmp, "gbultraue\n",rd))
+							pnp_offset = 1;
+						else if (!strncmp(tmp, "gbx3\n",rd))
+							pnp_offset = 1;
+						else if (!strncmp(tmp, "gbquadplus\n",rd))
+							pnp_offset = 2;
+						else if (!strncmp(tmp, "gbquad\n",rd))
+							pnp_offset = 2;
+						else
+							eDebug("[determine i2c-channel]Box not listed: %s", tmp);
+					}
+					int i2c_channel = m_slotid - pnp_offset;
+					d.tuner = i2c_channel;
+					d.data = seq;
+					d.cnt = sizeof(seq);
+					if (ioctl(plasmid, SET_MIS_I2C, &d) == -1)
+						eDebug("plasmid ioctl failed: %m");
+				}
+				if (plasmid > 0)
+					::close(plasmid);
+			}
+		}
+//<<< adenin multistream patch for gb
 		p[cmdseq.num].cmd = DTV_TUNE, cmdseq.num++;
 		if (ioctl(m_fd, FE_SET_PROPERTY, &cmdseq) == -1)
 		{
@@ -2839,21 +2927,10 @@ int eDVBFrontend::isCompatibleWith(ePtr<iDVBFrontendParameters> &feparm)
 		{
 			return 0;
 		}
-		bool multistream = (parm.is_id != NO_STREAM_ID_FILTER || (parm.pls_code & 0x3FFFF) != 1 ||
-					(parm.pls_mode & 3) != eDVBFrontendParametersSatellite::PLS_Root);
-		if (parm.system == eDVBFrontendParametersSatellite::System_DVB_S2 && multistream && !is_multistream())
-		{
-			return 0;
-		}
 		score = m_sec ? m_sec->canTune(parm, this, 1 << m_slotid) : 0;
 		if (score > 1 && parm.system == eDVBFrontendParametersSatellite::System_DVB_S && can_handle_dvbs2)
 		{
 			/* prefer to use an S tuner, try to keep S2 free for S2 transponders */
-			score--;
-		}
-		if (score > 1 && is_multistream() && !multistream)
-		{
-			/* prefer to use a non multistream tuner, try to keep multistream tuners free for multistream transponders */
 			score--;
 		}
 	}
@@ -3157,7 +3234,16 @@ eDVBRegisteredFrontend *eDVBFrontend::getLast(eDVBRegisteredFrontend *fe)
 
 bool eDVBFrontend::is_multistream()
 {
+//#if DVB_API_VERSION > 5 || DVB_API_VERSION == 5 && DVB_API_VERSION_MINOR >= 8
+#if DVB_API_VERSION >= 5
+	if(!strcmp(m_description, "TBS-5925"))
+		return true;
+	if(!strcmp(m_description, "GIGA DVB-S2 NIM (SP2246T)"))
+		return true;
 	return fe_info.caps & FE_CAN_MULTISTREAM;
+#else //if DVB_API_VERSION < 5
+	return 0;
+#endif
 }
 
 std::string eDVBFrontend::getCapabilities()
@@ -3204,7 +3290,10 @@ std::string eDVBFrontend::getCapabilities()
 	if (fe_info.caps &  FE_CAN_8VSB)			ss << " FE_CAN_8VSB";
 	if (fe_info.caps &  FE_CAN_16VSB)			ss << " FE_CAN_16VSB";
 	if (fe_info.caps &  FE_HAS_EXTENDED_CAPS)		ss << " FE_HAS_EXTENDED_CAPS";
+//#if DVB_API_VERSION > 5 || DVB_API_VERSION == 5 && DVB_API_VERSION_MINOR >= 8
+#if DVB_API_VERSION >= 5
 	if (fe_info.caps &  FE_CAN_MULTISTREAM)			ss << " FE_CAN_MULTISTREAM";
+#endif
 	if (fe_info.caps &  FE_CAN_TURBO_FEC)			ss << " FE_CAN_TURBO_FEC";
 	if (fe_info.caps &  FE_CAN_2G_MODULATION)		ss << " FE_CAN_2G_MODULATION";
 	if (fe_info.caps &  FE_NEEDS_BENDING)			ss << " FE_NEEDS_BENDING";
