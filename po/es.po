@@ -14817,3 +14817,93 @@ msgstr "Formato de Fecha/Hora en reposo"
 
 msgid "Set de Date/Time Format in VFD in standby mode (A = Alternate data every 15sg)."
 msgstr "Configura el formato de Fecha/Hora en reposo en el display (A = Alterna los datos cada 15sg)."
+
+msgid "Teletext font and resolution"
+msgstr "Fuente y resolución Teletexto"
+
+msgid "Configure the display resolution and the font used for teletext."
+msgstr "Configurar la resolución de pantalla y la fuente usada por el teletexto."
+
+msgid "Teletext UseTTF (0=fixed font, 1=TrueType)"
+msgstr "Teletexto UseTTF (0=Fija, 1=TrueType)"
+
+msgid "Configure whether a fixed font or a scalable TrueType font is used for teletext."
+msgstr "Configurar si se utiliza una fuente fija o una fuente TrueType escalable para el teletexto."
+
+msgid "Teletext TTFBold (0=normal, 1=bold)"
+msgstr "Teletexto TTFBold (0=Normal, 1=Negrita)"
+
+msgid "Configure whether a bold TrueType font is used for teletext."
+msgstr "Configurar si se utiliza una fuente TrueType en negrita para el teletexto."
+
+msgid "Teletext TTFScreenResX (screen X resolution)"
+msgstr "Teletexto TTFScreenResX (Resolución pantalla X)"
+
+msgid "Configure the screen resolution for teletext (Not all skins support full-HD teletext)."
+msgstr "Configurar la resolución de pantalla para el teletexto (No todos los skins admiten teletexto FullHD)."
+
+msgid "Teletext StartX (left border)"
+msgstr "Teletexto StartX (Borde izquierdo)"
+
+msgid "Configure the start coordinate in x of the teletext display area."
+msgstr "Configurar la coordenada de inicio en x del área de visualización del teletexto."
+
+msgid "Teletext EndX (right border)"
+msgstr "Teletexto EndX (Borde derecho)"
+
+msgid "Configure the end coordinate in x of the teletext display area."
+msgstr "Configurar la coordenada final en x del área de visualización del teletexto."
+
+msgid "Teletext StartY (lower border)"
+msgstr "Teletexto StartY (Borde inferior)"
+
+msgid "Configure the start coordinate in y of the teletext display area."
+msgstr "Configurar la coordenada de inicio en y del área de visualización del teletexto."
+
+msgid "Teletext EndY (upper border)"
+msgstr "Teletexto EndY (Borde superior)"
+
+msgid "Configure the end coordinate in y of the teletext display area."
+msgstr "Configurar la coordenada final en y del área de visualización del teletexto."
+
+msgid "Teletext TTFShiftY (vertical letter position)"
+msgstr "Teletexto TTFShiftY (Posición vertical letra)"
+
+msgid "Adjust the vertical position of the letters used for teletext."
+msgstr "Ajustar la posición vertical de las letras utilizadas para el teletex"
+
+msgid "Teletext TTFShiftX (horizontal letter position)"
+msgstr "Teletexto TTFShiftX (Posición horizontal letra)"
+
+msgid "Adjust the horizontal position of the letters used for teletext."
+msgstr "Ajustar la posición horizontal de las letras utilizadas para el teletexto."
+
+msgid "Teletext TTFWidthFactor16 (TrueType letter width)"
+msgstr "Teletexto TTFWidthFactor16 (Ancho letra TrueType)"
+
+msgid "Configure the width of the TrueType font letters used for teletext."
+msgstr "Configurar el ancho de las letras de la fuente TrueType utilizadas para el teletexto."
+
+msgid "Teletext TTFHeightFactor16 (TrueType letter height)"
+msgstr "Teletexto TTFHeightFactor16 (Alto letra TrueType)"
+
+msgid "Configure the height of the TrueType font letters used for teletext."
+msgstr "Configurar la altura de las letras de la fuente TrueType utilizadas para el teletexto."
+
+msgid "Teletext CleanAlgo (resolution reset algorithm)"
+msgstr "Teletexto CleanAlgo (Algoritmo de restablecimiento de resolución)"
+
+msgid "Select the method of restoring screen resolution and framebuffer when leaving teletext."
+msgstr "Seleccionar el método de restauración de la resolución de pantalla y framebuffer al salir del teletexto."
+
+msgid "Fixed X11 font (SD)"
+msgstr "Fijar fuente X11 (SD)"
+
+msgid "TrueType font (SD)"
+msgstr "Fuente TrueType (SD)"
+
+msgid "TrueType font (HD)"
+msgstr "Fuente TrueType (HD)"
+
+msgid "TrueType font (full-HD)"
+msgstr "Fuente TrueType (FullHD)"
