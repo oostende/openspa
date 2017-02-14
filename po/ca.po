@@ -2990,6 +2990,9 @@ msgstr "No es pot enregistrar: '%s' no es vàlid"
 msgid "Could not save configfile %s!"
 msgstr "No es pot desar l'arxiu %s"
 
+msgid "Cover dashed flickering line for this service"
+msgstr "Cobrir línia discontínua per aquest servei"
+
 msgid "Create"
 msgstr "Crear"
 
@@ -5056,6 +5059,9 @@ msgstr "Alta resolució"
 
 msgid "High bitrate support"
 msgstr "Suport de bitrate alt"
+
+msgid "HistoryZap List"
+msgstr "Llista història de zàping"
 
 msgid "Hold screen"
 msgstr "Congelar imatge"
@@ -14616,6 +14622,9 @@ msgstr "no disponible"
 
 msgid "unconfirmed"
 msgstr "no confirmat"
+
+msgid "Uncover dashed flickering line for this service"
+msgstr "Descobrir línia discontínua per aquest servei"
 
 msgid "undefined"
 msgstr "no definit"

@@ -3002,7 +3002,7 @@ msgid "Could not save configfile %s!"
 msgstr "No se puede guardar archivo %s"
 
 msgid "Cover dashed flickering line for this service"
-msgstr "Cubrir linea parpadeante para este servicio"
+msgstr "Cubrir linea discontinua para este servicio"
 
 msgid "Create"
 msgstr "Crear"
@@ -5087,6 +5087,9 @@ msgstr "Alta resolución"
 
 msgid "High bitrate support"
 msgstr "Soporte de bitrate alto"
+
+msgid "HistoryZap List"
+msgstr "Lista histórico de zapeo"
 
 msgid "Hold screen"
 msgstr "Congelar imagen"
@@ -11504,7 +11507,7 @@ msgid "Uncommitted DiSEqC command"
 msgstr "Comando DiSEqC no enviado"
 
 msgid "Uncover dashed flickering line for this service"
-msgstr "Descubrir linea parpadeante para este servicio"
+msgstr "Descubrir linea discontínua para este servicio"
 
 msgid "Undetermined"
 msgstr "(Sin Determinar)"
