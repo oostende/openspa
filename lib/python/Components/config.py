@@ -125,12 +125,12 @@ class ConfigElement(object):
 				except:
 					x(self)
 
-	def addNotifier(self, notifier, initial_call = True, immediate_feedback = True, extra_args=None):
+	def addNotifier(self, notifier, initial_call = True, immediate_feedback = True, call_on_save_or_cancel = False, extra_args=None):
 		if not extra_args: extra_args = []
 		assert callable(notifier), "notifiers must be callable"
 		try:
 			self.extra_args[notifier] = extra_args
-		except: pass	
+		except: pass
 		if immediate_feedback:
 			self.notifiers.append(notifier)
 		else:
