@@ -709,7 +709,7 @@ eServiceMP3::eServiceMP3(eServiceReference ref):
 		if(dvb_videosink && !m_sourceinfo.is_audio)
 		{
 			g_object_set(dvb_videosink, "e2-sync", FALSE, NULL);
-			g_object_set(dvb_videosink, "e2-async", TRUE, NULL);
+			g_object_set(dvb_videosink, "e2-async", FALSE, NULL);
 			g_object_set(m_gst_playbin, "video-sink", dvb_videosink, NULL);
 		}
 		/*
@@ -1404,19 +1404,20 @@ RESULT eServiceMP3::getPlayPosition(pts_t &pts)
 		}
 		else
 		{
-			/* most stb's work better when pts is taken by audio by some video must be taken cause audio is 0 or invalid */
-			/* avoid taking the audio play position if audio sink is in state NULL */
-			if(!m_audiosink_not_running)
+			/* most stb's work better when pts is taken by audio by some video must be taken cause audio is 0 or invalid
+			 * unfortunately it then brings problems on subtitle show time, so keep video first.
+			 * avoid taking the audio play position if audio sink is in state NULL */
+			if(m_audiosink_not_running)
 			{
 				g_signal_emit_by_name(dvb_videosink, "get-decoder-time", &pos);
-				if (!GST_CLOCK_TIME_IS_VALID(pos) || 0)
-				 	g_signal_emit_by_name(dvb_audiosink, "get-decoder-time", &pos);
 				if(!GST_CLOCK_TIME_IS_VALID(pos))
 					return -1;
 			}
 			else
 			{
 				g_signal_emit_by_name(dvb_videosink, "get-decoder-time", &pos);
+				if (!GST_CLOCK_TIME_IS_VALID(pos) || 0)
+				 	g_signal_emit_by_name(dvb_audiosink, "get-decoder-time", &pos);
 				if(!GST_CLOCK_TIME_IS_VALID(pos))
 					return -1;
 			}
@@ -1857,11 +1858,14 @@ RESULT eServiceMP3::selectTrack(unsigned int i)
 	if (getPlayPosition(ppos) >= 0)
 	{
 		validposition = true;
+/* this is not good if we change track improvement works on this are started for gst-1x*/
+#if GST_VERSION_MAJOR < 1
 		ppos -= 90000;
+#endif
 		if (ppos < 0)
 			ppos = 0;
 	}
-#if GST_VERSION_MAJOR < 0
+#if GST_VERSION_MAJOR < 1
 	if (validposition)
 	{
 		//flush
