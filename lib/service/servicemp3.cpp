@@ -709,7 +709,7 @@ eServiceMP3::eServiceMP3(eServiceReference ref):
 		if(dvb_videosink && !m_sourceinfo.is_audio)
 		{
 			g_object_set(dvb_videosink, "e2-sync", FALSE, NULL);
-			g_object_set(dvb_videosink, "e2-async", FALSE, NULL);
+			g_object_set(dvb_videosink, "e2-async", TRUE, NULL);
 			g_object_set(m_gst_playbin, "video-sink", dvb_videosink, NULL);
 		}
 		/*
@@ -1093,11 +1093,11 @@ RESULT eServiceMP3::seekToImpl(pts_t to)
 		/* make sure that the seek was fully completed on all elements
 	 	* before proceeding further, this will happen when async_done is received
 	 	*/
-		gst_element_get_state(m_gst_playbin, NULL, NULL, 1LL * GST_SECOND);
-		/*eDebug("[eServiceMP3] after seek state:%s pending:%s ret:%s",
+		gst_element_get_state(m_gst_playbin, NULL, NULL, 2LL * GST_SECOND);
+		eDebug("[eServiceMP3] after seek state:%s pending:%s ret:%s",
 			gst_element_state_get_name(state),
 			gst_element_state_get_name(pending),
-			gst_element_state_change_return_get_name(ret));*/
+			gst_element_state_change_return_get_name(ret));
 	}
 #endif
 	eDebug("[eServiceMP3] seekToImpl(pts_t to) DONE");
@@ -1137,7 +1137,7 @@ RESULT eServiceMP3::trickSeek(gdouble ratio)
 		/* pipeline sometimes block due to audio track issue off gstreamer.
 		If the pipeline is blocked up on pending state change to paused ,
         	this issue is solved by seek to playposition*/
-		ret = gst_element_get_state(m_gst_playbin, &state, &pending, 1LL * GST_SECOND);
+		ret = gst_element_get_state(m_gst_playbin, &state, &pending, 2LL * GST_SECOND);
 		if (state == GST_STATE_PLAYING && pending == GST_STATE_PAUSED)
 		{
 			if (pos_ret >= 0)
