@@ -1066,6 +1066,8 @@ RESULT eServiceMP3::getLength(pts_t &pts)
 RESULT eServiceMP3::seekToImpl(pts_t to)
 {
 	eDebug("[eServiceMP3] seekToImpl(pts_t to)");
+	GstStateChangeReturn ret;
+	GstState state, pending;
 		/* convert pts to nanoseconds */
 #if GST_VERSION_MAJOR < 1
 	gint64 time_nanoseconds = to * 11111LL;
