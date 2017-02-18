@@ -168,8 +168,6 @@ class CableScanScreen(ConfigListScreen, Screen):
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 
-		self.finished_cb = None
-
 		self["introduction"] = Label(_("Configure your network settings, and press OK to start the scan"))
 
 	def keySave(self):
