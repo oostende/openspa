@@ -77,6 +77,7 @@ void DumpUnfreed()
 #endif
 
 int debugLvl = lvlDebug;
+static bool debugTime = false;
 
 static pthread_mutex_t DebugLock = PTHREAD_ADAPTIVE_MUTEX_INITIALIZER_NP;
 #define RINGBUFFER_SIZE 16384
@@ -102,7 +103,7 @@ static void logOutput(const char *data, unsigned int len)
 	}
 }
 
-const std::string getLogBuffer()
+void retrieveLogBuffer(const char **p1, unsigned int *s1, const char **p2, unsigned int *s2)
 {
 	unsigned int begin = ringbuffer_head;
 	while (ringbuffer[begin] == 0)
@@ -111,14 +112,25 @@ const std::string getLogBuffer()
 		if (begin == RINGBUFFER_SIZE)
 			begin = 0;
 		if (begin == ringbuffer_head)
-			return "";
+			return;
 	}
 
 	if (begin < ringbuffer_head)
-		return std::string(ringbuffer + begin, ringbuffer_head - begin);
+	{
+		*p1 = ringbuffer + begin;
+		*s1 = ringbuffer_head - begin;
+		*p2 = NULL;
+		*s2 = NULL;
+	}
 	else
-		return std::string(ringbuffer + begin, RINGBUFFER_SIZE - begin) + std::string(ringbuffer, ringbuffer_head);
+	{
+		*p1 = ringbuffer + begin;
+		*s1 = RINGBUFFER_SIZE - begin;
+		*p2 = ringbuffer;
+		*s2 = ringbuffer_head;
+	}
 }
+
 
 extern void bsodFatal(const char *component);
 
@@ -130,7 +142,7 @@ void eDebugImpl(int flags, const char* fmt, ...)
 	int pos = 0;
 	struct timespec tp;
 
-	if (! (flags & _DBGFLG_NOTIME)) {
+	if (debugTime && !(flags & _DBGFLG_NOTIME)) {
 		clock_gettime(CLOCK_MONOTONIC, &tp);
 		pos = snprintf(buf, eDEBUG_BUFLEN, "<%6lu.%03lu> ", tp.tv_sec, tp.tv_nsec/1000000);
 	}
@@ -150,7 +162,7 @@ void eDebugImpl(int flags, const char* fmt, ...)
 		// pos still contains size of timestring
 		// +2 for \0 and optional newline
 		buf = new char[pos + vsize + 2];
-		if (! (flags & _DBGFLG_NOTIME))
+		if (debugTime && !(flags & _DBGFLG_NOTIME))
 			pos = snprintf(buf, pos + vsize, "<%6lu.%03lu> ", tp.tv_sec, tp.tv_nsec/1000000);
 		va_start(ap, fmt);
 		vsize = vsnprintf(buf + pos, vsize + 1, fmt, ap);
@@ -175,11 +187,15 @@ void eDebugImpl(int flags, const char* fmt, ...)
 		bsodFatal("enigma2");
 }
 
-void ePythonOutput(const char *string)
+void ePythonOutput(const char *string, int lvl)
 {
 #ifdef DEBUG
-	// Only show message when the debug level is at least "warning"
-	if (debugLvl >= lvlWarning)
+	if (debugLvl >= lvl)
 		eDebugImpl(_DBGFLG_NONEWLINE, "%s", string);
 #endif
+}
+
+void setDebugTime(bool enable)
+{
+	debugTime = enable;
 }
