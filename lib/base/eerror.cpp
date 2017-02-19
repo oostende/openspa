@@ -103,7 +103,7 @@ static void logOutput(const char *data, unsigned int len)
 	}
 }
 
-void retrieveLogBuffer(const char **p1, unsigned int *s1, const char **p2, unsigned int *s2)
+const std::string getLogBuffer()
 {
 	unsigned int begin = ringbuffer_head;
 	while (ringbuffer[begin] == 0)
@@ -112,23 +112,13 @@ void retrieveLogBuffer(const char **p1, unsigned int *s1, const char **p2, unsig
 		if (begin == RINGBUFFER_SIZE)
 			begin = 0;
 		if (begin == ringbuffer_head)
-			return;
+			return "";
 	}
 
 	if (begin < ringbuffer_head)
-	{
-		*p1 = ringbuffer + begin;
-		*s1 = ringbuffer_head - begin;
-		*p2 = NULL;
-		*s2 = NULL;
-	}
+		return std::string(ringbuffer + begin, ringbuffer_head - begin);
 	else
-	{
-		*p1 = ringbuffer + begin;
-		*s1 = RINGBUFFER_SIZE - begin;
-		*p2 = ringbuffer;
-		*s2 = ringbuffer_head;
-	}
+		return std::string(ringbuffer + begin, RINGBUFFER_SIZE - begin) + std::string(ringbuffer, ringbuffer_head);
 }
 
 
