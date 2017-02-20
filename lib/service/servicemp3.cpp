@@ -1066,8 +1066,6 @@ RESULT eServiceMP3::getLength(pts_t &pts)
 RESULT eServiceMP3::seekToImpl(pts_t to)
 {
 	eDebug("[eServiceMP3] seekToImpl(pts_t to)");
-	GstStateChangeReturn ret;
-	GstState state, pending;
 		/* convert pts to nanoseconds */
 #if GST_VERSION_MAJOR < 1
 	gint64 time_nanoseconds = to * 11111LL;
@@ -1089,19 +1087,6 @@ RESULT eServiceMP3::seekToImpl(pts_t to)
 	{
 		m_event((iPlayableService*)this, evUpdatedInfo);
 	}
-#if GST_VERSION_MAJOR >= 1
-	else
-	{
-		/* make sure that the seek was fully completed on all elements
-	 	* before proceeding further, this will happen when async_done is received
-	 	*/
-		gst_element_get_state(m_gst_playbin, NULL, NULL, 2LL * GST_SECOND);
-		eDebug("[eServiceMP3] after seek state:%s pending:%s ret:%s",
-			gst_element_state_get_name(state),
-			gst_element_state_get_name(pending),
-			gst_element_state_change_return_get_name(ret));
-	}
-#endif
 	eDebug("[eServiceMP3] seekToImpl(pts_t to) DONE");
 	return 0;
 }
@@ -1233,8 +1218,6 @@ seek_unpause:
 			gst_element_seek(m_gst_playbin, ratio, GST_FORMAT_TIME,
 				(GstSeekFlags)(GST_SEEK_FLAG_FLUSH | GST_SEEK_FLAG_TRICKMODE | GST_SEEK_FLAG_TRICKMODE_NO_AUDIO),
 				GST_SEEK_TYPE_SET, pos, GST_SEEK_TYPE_SET, -1);
-			/* playbin needs sometimes a bit of time to have all elements in line at same render position msg async issued if ok */
-			//ret = gst_element_get_state(m_gst_playbin, &state, &pending, 3 * GST_SECOND);
 #else
 			gst_element_seek(m_gst_playbin, ratio, GST_FORMAT_TIME, (GstSeekFlags)(GST_SEEK_FLAG_FLUSH | GST_SEEK_FLAG_SKIP), GST_SEEK_TYPE_SET, pos, GST_SEEK_TYPE_SET, -1);
 #endif
@@ -1246,7 +1229,6 @@ seek_unpause:
 			gst_element_seek(m_gst_playbin, ratio, GST_FORMAT_TIME,
 				(GstSeekFlags)(GST_SEEK_FLAG_FLUSH | GST_SEEK_FLAG_TRICKMODE | GST_SEEK_FLAG_TRICKMODE_NO_AUDIO),
 				GST_SEEK_TYPE_SET, 0, GST_SEEK_TYPE_SET, pos);
-			//ret = gst_element_get_state(m_gst_playbin, &state, &pending, 3 * GST_SECOND);
 #else
 			gst_element_seek(m_gst_playbin, ratio, GST_FORMAT_TIME, (GstSeekFlags)(GST_SEEK_FLAG_FLUSH | GST_SEEK_FLAG_SKIP), GST_SEEK_TYPE_SET, 0, GST_SEEK_TYPE_SET, pos);
 #endif
@@ -1406,20 +1388,19 @@ RESULT eServiceMP3::getPlayPosition(pts_t &pts)
 		}
 		else
 		{
-			/* most stb's work better when pts is taken by audio by some video must be taken cause audio is 0 or invalid
-			 * unfortunately it then brings problems on subtitle show time, so keep video first.
-			 * avoid taking the audio play position if audio sink is in state NULL */
-			if(m_audiosink_not_running)
+			/* most stb's work better when pts is taken by audio by some video must be taken cause audio is 0 or invalid */
+			/* avoid taking the audio play position if audio sink is in state NULL */
+			if(!m_audiosink_not_running)
 			{
 				g_signal_emit_by_name(dvb_videosink, "get-decoder-time", &pos);
+				if (!GST_CLOCK_TIME_IS_VALID(pos) || 0)
+				 	g_signal_emit_by_name(dvb_audiosink, "get-decoder-time", &pos);
 				if(!GST_CLOCK_TIME_IS_VALID(pos))
 					return -1;
 			}
 			else
 			{
 				g_signal_emit_by_name(dvb_videosink, "get-decoder-time", &pos);
-				if (!GST_CLOCK_TIME_IS_VALID(pos) || 0)
-				 	g_signal_emit_by_name(dvb_audiosink, "get-decoder-time", &pos);
 				if(!GST_CLOCK_TIME_IS_VALID(pos))
 					return -1;
 			}
@@ -1860,14 +1841,11 @@ RESULT eServiceMP3::selectTrack(unsigned int i)
 	if (getPlayPosition(ppos) >= 0)
 	{
 		validposition = true;
-/* this is not good if we change track improvement works on this are started for gst-1x*/
-#if GST_VERSION_MAJOR < 1
 		ppos -= 90000;
-#endif
 		if (ppos < 0)
 			ppos = 0;
 	}
-#if GST_VERSION_MAJOR < 1
+#if GST_VERSION_MAJOR < 0
 	if (validposition)
 	{
 		//flush
@@ -2171,7 +2149,7 @@ void eServiceMP3::gstBusCall(GstMessage *msg)
 				eWarning("[eServiceMP3] Gstreamer warning : %s (%i) from %s" , warn->message, warn->code, sourceName);
 				if(dvb_subsink)
 				{
-					if (!gst_element_seek (dvb_subsink, m_currentTrickRatio, GST_FORMAT_TIME, (GstSeekFlags)(GST_SEEK_FLAG_FLUSH | GST_SEEK_FLAG_KEY_UNIT),
+					if (!gst_element_seek (dvb_subsink, m_currentTrickRatio, GST_FORMAT_TIME, (GstSeekFlags)(GST_SEEK_FLAG_FLUSH | GST_SEEK_FLAG_ACCURATE),
 						GST_SEEK_TYPE_SET, m_last_seek_pos,
 						GST_SEEK_TYPE_NONE, GST_CLOCK_TIME_NONE))
 					{
