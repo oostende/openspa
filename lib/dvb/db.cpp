@@ -411,7 +411,7 @@ static ePtr<eDVBFrontendParameters> parseFrontendData(char* line, int version)
 				rolloff=eDVBFrontendParametersSatellite::RollOff_alpha_0_35,
 				pilot=eDVBFrontendParametersSatellite::Pilot_Unknown,
 				is_id = NO_STREAM_ID_FILTER,
-				pls_code = 1,
+				pls_code = 0,
 				pls_mode = eDVBFrontendParametersSatellite::PLS_Root;
 
 			sscanf(line+2, "%d:%d:%d:%d:%d:%d:%d:%d:%d:%d:%d:%d:%d:%d",
