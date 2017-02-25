@@ -213,6 +213,7 @@ public:
 	void AmlSwitchAudio(int index);
 	unsigned int get_pts_pcrscr(void);
 #endif
+
 	struct audioStream
 	{
 		GstPad* pad;
@@ -238,11 +239,12 @@ public:
 	{
 		audiotype_t audiotype;
 		containertype_t containertype;
-		bool is_audio;
-		bool is_video;
-		bool is_streaming;
+		gboolean is_audio;
+		gboolean is_video;
+		gboolean is_streaming;
+		gboolean is_hls;
 		sourceStream()
-			:audiotype(atUnknown), containertype(ctNone), is_audio(FALSE), is_video(FALSE), is_streaming(FALSE)
+			:audiotype(atUnknown), containertype(ctNone), is_audio(FALSE), is_video(FALSE), is_streaming(FALSE), is_hls(FALSE)
 		{
 		}
 	};
@@ -304,16 +306,19 @@ private:
 	int m_buffer_size;
 	int m_ignore_buffering_messages;
 	bool m_is_live;
+	bool m_subtitles_paused;
 	bool m_use_prefillbuffer;
 	bool m_paused;
-	bool m_seek_paused;
+	bool m_first_paused;
 	/* cuesheet load check */
 	bool m_cuesheet_loaded;
+	bool m_audiosink_not_running;
 	/* servicemMP3 chapter TOC support CVR */
 #if GST_VERSION_MAJOR >= 1
 	bool m_use_chapter_entries;
 	/* last used seek position gst-1 only */
 	gint64 m_last_seek_pos;
+	gint64 m_media_lenght;
 	gint64 m_last_play_pos;
 #endif
 	bufferInfo m_bufferInfo;
