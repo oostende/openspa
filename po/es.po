@@ -4096,6 +4096,9 @@ msgstr "Habilitar reenvio a receptor remoto"
 msgid "Enable freesat EPG"
 msgstr "Activar EPG freesat"
 
+msgid "Enable infobar fade-out"
+msgstr "Habilitar desvanecimiento infobar"
+
 msgid "Enable multiple bouquets"
 msgstr "Habilitar múltiples listas"
 
@@ -5321,7 +5324,10 @@ msgstr "Recuperar Inetd"
 msgid "Info"
 msgstr "Info"
 
-msgid "Info bar timeout"
+msgid "Infobar fade-out speed"
+msgstr "Velocidad desvanecimiento de la infobar"
+
+msgid "Infobar timeout"
 msgstr "Tiempo de visualización de la infobar"
 
 msgid "Infobar frontend data source"
