@@ -411,13 +411,14 @@ static ePtr<eDVBFrontendParameters> parseFrontendData(char* line, int version)
 				rolloff=eDVBFrontendParametersSatellite::RollOff_alpha_0_35,
 				pilot=eDVBFrontendParametersSatellite::Pilot_Unknown,
 				is_id = NO_STREAM_ID_FILTER,
-				pls_code = 0,
-				pls_mode = eDVBFrontendParametersSatellite::PLS_Root;
+				pls_mode = eDVBFrontendParametersSatellite::PLS_Root,
+				pls_code = 0;
 
 			sscanf(line+2, "%d:%d:%d:%d:%d:%d:%d:%d:%d:%d:%d:%d:%d:%d",
 				&frequency, &symbol_rate, &polarisation, &fec, &orbital_position,
 				&inversion, &flags, &system, &modulation, &rolloff, &pilot,
 				&is_id, &pls_code, &pls_mode);
+
 			sat.frequency = frequency;
 			sat.symbol_rate = symbol_rate;
 			sat.polarisation = polarisation;
@@ -1308,8 +1309,8 @@ PyObject *eDVBDB::readSatellites(ePyObject sat_list, ePyObject sat_dict, ePyObje
 				pilot = eDVBFrontendParametersSatellite::Pilot_Unknown;
 				rolloff = eDVBFrontendParametersSatellite::RollOff_alpha_0_35;
 				is_id = NO_STREAM_ID_FILTER;
-				pls_code = 0;
 				pls_mode = eDVBFrontendParametersSatellite::PLS_Root;
+				pls_code = 0;
 				tsid = -1;
 				onid = -1;
 
