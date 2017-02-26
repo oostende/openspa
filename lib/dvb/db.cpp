@@ -428,6 +428,9 @@ static ePtr<eDVBFrontendParameters> parseFrontendData(char* line, int version)
 			sat.modulation = modulation;
 			sat.rolloff = rolloff;
 			sat.pilot = pilot;
+			sat.is_id = is_id;
+			sat.pls_mode = pls_mode & 3;
+			sat.pls_code = pls_code & 0x3FFFF;
 			// Process optional features
 			while (options) {
 				char * next = strchr(options, ',');
@@ -440,13 +443,8 @@ static ePtr<eDVBFrontendParameters> parseFrontendData(char* line, int version)
 				//	sat.parm3 = parm3;
 				//}
 				//else ...
-				if (strncmp(options, "MIS/PLS:", 8) == 0)
-					sscanf(options+8, "%d:%d:%d", &is_id, &pls_code, &pls_mode);
 				options = next;
 			}
-			sat.is_id = is_id;
-			sat.pls_mode = pls_mode & 3;
-			sat.pls_code = pls_code & 0x3FFFF;
 			feparm->setDVBS(sat);
 			feparm->setFlags(flags);
 			break;
@@ -760,17 +758,14 @@ void eDVBDB::saveServicelist(const char *file)
 			if (sat.system == eDVBFrontendParametersSatellite::System_DVB_S2)
 			{
 				fprintf(f, ":%d:%d:%d:%d", sat.system, sat.modulation, sat.rolloff, sat.pilot);
-				if (g)
-					fprintf(g, ":%d:%d:%d:%d", sat.system, sat.modulation, sat.rolloff, sat.pilot);
-
 				if (sat.is_id != NO_STREAM_ID_FILTER ||
 					(sat.pls_code & 0x3FFFF) != 0 ||
 					(sat.pls_mode & 3) != eDVBFrontendParametersSatellite::PLS_Root)
 				{
 					fprintf(f, ":%d:%d:%d", sat.is_id, sat.pls_code & 0x3FFFF, sat.pls_mode & 3);
-					if (g)
-						fprintf(g, ",MIS/PLS:%d:%d:%d", sat.is_id, sat.pls_code & 0x3FFFF, sat.pls_mode & 3);
 				}
+				if (g)
+					fprintf(g, ":%d:%d:%d:%d", sat.system, sat.modulation, sat.rolloff, sat.pilot);
 			}
 			fprintf(f, "\n");
 			if (g)
