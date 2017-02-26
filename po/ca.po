@@ -4075,6 +4075,9 @@ msgstr "Habilitar reenviar al receptor remot"
 msgid "Enable freesat EPG"
 msgstr "Activar EPG freesat"
 
+msgid "Enable infobar fade-out"
+msgstr "Habilitar esvaniment infobar"
+
 msgid "Enable multiple bouquets"
 msgstr "Habilitar múltiples llistes"
 
@@ -5297,6 +5300,9 @@ msgstr "Info"
 
 msgid "Info bar timeout"
 msgstr "Temps de visualització de la infobar"
+
+msgid "Infobar fade-out speed"
+msgstr "Velocitat esvaniment de la infobar"
 
 msgid "Infobar frontend data source"
 msgstr "Dades de frontend a la infobar"
@@ -14747,3 +14753,5 @@ msgstr "Canviar abans d'Stream"
 
 msgid "zapped"
 msgstr "Canviat"
+
+
