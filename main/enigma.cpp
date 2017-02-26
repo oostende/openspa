@@ -37,6 +37,9 @@
 
 #include <gst/gst.h>
 
+#include <lib/base/eerroroutput.h>
+ePtr<eErrorOutput> m_erroroutput;
+
 #ifdef OBJECT_DEBUG
 int object_total_remaining;
 
@@ -187,16 +190,23 @@ int main(int argc, char **argv)
 
 	gst_init(&argc, &argv);
 
+	for (int i = 0; i < argc; i++)
+	{
+		if (!(strcmp(argv[i], "--debug-no-color")) or !(strcmp(argv[i], "--nc")))
+		{
+			logOutputColors = 0;
+		}
+	}
+
+	m_erroroutput = new eErrorOutput();
+	m_erroroutput->run();
+
 	// set pythonpath if unset
 	setenv("PYTHONPATH", eEnv::resolve("${libdir}/enigma2/python").c_str(), 0);
 	printf("PYTHONPATH: %s\n", getenv("PYTHONPATH"));
 	printf("DVB_API_VERSION %d DVB_API_VERSION_MINOR %d\n", DVB_API_VERSION, DVB_API_VERSION_MINOR);
 
-	// get enigma2 debug level
-	debugLvl = getenv("ENIGMA_DEBUG_LVL") ? atoi(getenv("ENIGMA_DEBUG_LVL")) : 4;
-	if (debugLvl < 0)
-		debugLvl = 0;
-	printf("ENIGMA2_DEBUG settings: Level=%d\n", debugLvl);
+	bsodLogInit();
 
 	ePython python;
 	eMain main;
@@ -310,6 +320,7 @@ int main(int argc, char **argv)
 		p.flush();
 	}
 
+	m_erroroutput = NULL;
 	return exit_code;
 }
 
