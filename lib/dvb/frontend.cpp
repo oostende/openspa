@@ -3249,8 +3249,6 @@ bool eDVBFrontend::is_multistream()
 {
 //#if DVB_API_VERSION > 5 || DVB_API_VERSION == 5 && DVB_API_VERSION_MINOR >= 8
 #if DVB_API_VERSION >= 5
-	if(!strcmp(m_description, "Si21662"))
-		return true;
 	if(!strcmp(m_description, "TBS-5925"))
 		return true;
 	if(!strcmp(m_description, "GIGA DVB-S2 NIM (SP2246T)"))
