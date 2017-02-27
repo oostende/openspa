@@ -166,7 +166,7 @@ def standbyCounterChanged(configElement):
 	config.lcd.ledbrightnessdeepstandby.apply()
 
 def InitLcd():
-	if getBoxType() in ('wetekplay', 'wetekplay2', 'nanoc', 'nano', 'amikomini', 'dynaspark', 'amiko8900', 'sognorevolution', 'arguspingulux', 'arguspinguluxmini', 'arguspinguluxplus', 'sparkreloaded', 'sabsolo', 'sparklx', 'gis8120', 'gb800se', 'gb800solo', 'gb800seplus', 'gbultrase', 'gbipbox', 'tmsingle', 'tmnano2super', 'iqonios300hd', 'iqonios300hdv2', 'optimussos1plus', 'optimussos1', 'vusolo', 'et4x00', 'et5x00', 'et6x00', 'et7000', 'et7x00mini', 'mixosf7', 'mixoslumi', 'gbx1', 'gbx3', 'xpeedlxcs2', 'xpeedlxcc', 'zgemmai55'):
+	if getBoxType() in ('wetekplay', 'wetekplay2', 'nanoc', 'nano', 'amikomini', 'dynaspark', 'amiko8900', 'sognorevolution', 'arguspingulux', 'arguspinguluxmini', 'arguspinguluxplus', 'sparkreloaded', 'sabsolo', 'sparklx', 'gis8120', 'gb800se', 'gb800solo', 'gb800seplus', 'gbultrase', 'gbipbox', 'tmsingle', 'tmnano2super', 'iqonios300hd', 'iqonios300hdv2', 'optimussos1plus', 'optimussos1', 'vusolo', 'et4x00', 'et5x00', 'et6x00', 'et7000', 'et7x00mini', 'mixosf7', 'mixoslumi', 'gbx1', 'gbx3', 'xpeedlxcs2', 'xpeedlxcc', 'zgemmai55', 'sf98'):
 		detected = False
 	else:
 		detected = eDBoxLCD.getInstance().detected()
@@ -321,7 +321,7 @@ def InitLcd():
 				("A%H:%M %a %d/%m/%y",str(ntime.strftime(_("%H:%M <A> %a %d/%m/%y"))))])
 			config.usage.lcd_dateformat.addNotifier(setDateFormat)
 		#16 digit
-		elif getBoxType() in ('sf3038', 'sf4008','mutant51'):
+		elif getBoxType() in ('sf3038', 'sf4008', 'mutant51'):
 			config.usage.lcd_dateformat = ConfigSelection(default="%H:%M %d/%m/%Y", choices = [
 				("OFF","Off"),
 				("%H:%M",str(ntime.strftime(_("%H:%M")))),
