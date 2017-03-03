@@ -409,15 +409,11 @@ static ePtr<eDVBFrontendParameters> parseFrontendData(char* line, int version)
 				system=eDVBFrontendParametersSatellite::System_DVB_S,
 				modulation=eDVBFrontendParametersSatellite::Modulation_QPSK,
 				rolloff=eDVBFrontendParametersSatellite::RollOff_alpha_0_35,
-				pilot=eDVBFrontendParametersSatellite::Pilot_Unknown,
-				is_id = NO_STREAM_ID_FILTER,
-				pls_mode = eDVBFrontendParametersSatellite::PLS_Root,
-				pls_code = 0;
+				pilot=eDVBFrontendParametersSatellite::Pilot_Unknown;
 
-			sscanf(line+2, "%d:%d:%d:%d:%d:%d:%d:%d:%d:%d:%d:%d:%d:%d",
+			sscanf(line+2, "%d:%d:%d:%d:%d:%d:%d:%d:%d:%d:%d",
 				&frequency, &symbol_rate, &polarisation, &fec, &orbital_position,
-				&inversion, &flags, &system, &modulation, &rolloff, &pilot,
-				&is_id, &pls_code, &pls_mode);
+				&inversion, &flags, &system, &modulation, &rolloff, &pilot);
 
 			sat.frequency = frequency;
 			sat.symbol_rate = symbol_rate;
@@ -721,7 +717,7 @@ void eDVBDB::saveServicelist(const char *file)
 		fprintf(g, "eDVB services /5/\n");
 		fprintf(g, "# Transponders: t:dvb_namespace:transport_stream_id:original_network_id,FEPARMS\n");
 		fprintf(g, "#     DVBS  FEPARMS:   s:frequency:symbol_rate:polarisation:fec:orbital_position:inversion:flags\n");
-		fprintf(g, "#     DVBS2 FEPARMS:   s:frequency:symbol_rate:polarisation:fec:orbital_position:inversion:flags:system:modulation:rolloff:pilot[,MIS/PLS:is_id:pls_code:pls_mode]\n");
+		fprintf(g, "#     DVBS2 FEPARMS:   s:frequency:symbol_rate:polarisation:fec:orbital_position:inversion:flags:system:modulation:rolloff:pilot\n");
 		fprintf(g, "#     DVBT  FEPARMS:   t:frequency:bandwidth:code_rate_HP:code_rate_LP:modulation:transmission_mode:guard_interval:hierarchy:inversion:flags:system:plp_id\n");
 		fprintf(g, "#     DVBC  FEPARMS:   c:frequency:symbol_rate:inversion:modulation:fec_inner:flags:system\n");
 		fprintf(g, "# Services    : s:service_id:dvb_namespace:transport_stream_id:original_network_id:service_type:0,\"service_name\"[,p:provider_name][,c:cached_pid]*[,C:cached_capid]*[,f:flags]\n");
@@ -757,19 +753,8 @@ void eDVBDB::saveServicelist(const char *file)
 					sat.inversion, flags);
 
 			if (sat.system == eDVBFrontendParametersSatellite::System_DVB_S2)
-			{
-				fprintf(f, ":%d:%d:%d:%d", sat.system, sat.modulation, sat.rolloff, sat.pilot);
-				if (sat.is_id != NO_STREAM_ID_FILTER ||
-					(sat.pls_code & 0x3FFFF) != 0 ||
-					(sat.pls_mode & 3) != eDVBFrontendParametersSatellite::PLS_Root)
-				{
-					fprintf(f, ":%d:%d:%d", sat.is_id, sat.pls_code & 0x3FFFF, sat.pls_mode & 3);
-				}
-				if (g)
-					fprintf(g, ":%d:%d:%d:%d", sat.system, sat.modulation, sat.rolloff, sat.pilot);
-			}
-			fprintf(f, "\n");
-			if (g)
+				fprintf(f, "\n");
+  			if (g)
 				fprintf(g, "\n");
 		}
 		else if (!ch.m_frontendParameters->getDVBT(ter))
@@ -1245,7 +1230,7 @@ PyObject *eDVBDB::readSatellites(ePyObject sat_list, ePyObject sat_dict, ePyObje
 	}
 
 	int tmp, *dest = NULL,
-		modulation, system, freq, sr, pol, fec, inv, pilot, rolloff, is_id, pls_code, pls_mode, tsid, onid;
+		modulation, system, freq, sr, pol, fec, inv, pilot, rolloff, tsid, onid;
 	char *end_ptr;
 	xmlNode *root_element = xmlDocGetRootElement(doc);
 	xmlNode *satellite = root_element ? root_element->children : NULL;
@@ -1308,9 +1293,6 @@ PyObject *eDVBDB::readSatellites(ePyObject sat_list, ePyObject sat_dict, ePyObje
 				inv = eDVBFrontendParametersSatellite::Inversion_Unknown;
 				pilot = eDVBFrontendParametersSatellite::Pilot_Unknown;
 				rolloff = eDVBFrontendParametersSatellite::RollOff_alpha_0_35;
-				is_id = NO_STREAM_ID_FILTER;
-				pls_mode = eDVBFrontendParametersSatellite::PLS_Root;
-				pls_code = 0;
 				tsid = -1;
 				onid = -1;
 
@@ -1326,9 +1308,6 @@ PyObject *eDVBDB::readSatellites(ePyObject sat_list, ePyObject sat_dict, ePyObje
 					else if (name == "inversion") dest = &inv;
 					else if (name == "rolloff") dest = &rolloff;
 					else if (name == "pilot") dest = &pilot;
-					else if (name == "is_id") dest = &is_id;
-					else if (name == "pls_code") dest = &pls_code;
-					else if (name == "pls_mode") dest = &pls_mode;
 					else if (name == "tsid") dest = &tsid;
 					else if (name == "onid") dest = &onid;
 					else continue;
